@@ -101,10 +101,6 @@ create table MatrizRiesgos (
 );
 
 
-
-
-
-
 drop table MatrizRiesgos;
 drop table SubCategoriaTipoAmenaza;
 drop table CategoriaTipoAmenaza;
