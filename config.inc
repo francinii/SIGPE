@@ -10,7 +10,7 @@
  */
 
 $cds_domain = "http://localhost";
-$cds_locate = "/base/"; 
+$cds_locate = "/SIGPE/"; 
 
 $ldap_status = 1;
 $ldap_server[0] = "10.0.2.53";
@@ -25,9 +25,9 @@ $ldap_dn = "dc=una,dc=ac,dc=cr";
 
 $page_cant = 10;
 
-$page_title = "BASE";
+$page_title = "SIGPE";
 
-$footer_title= "Sistema BASE para la creacion de otros sistemas<br/>USTDS";
+$footer_title= "Sistema gestor de planes de emergencia<br/>USTDS";
 
 $act1 = 1; //Ver
 $act2 = 2; //Listar
