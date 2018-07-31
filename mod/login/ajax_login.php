@@ -34,7 +34,6 @@ if ($ldap_status == 1) {
         }
     }
 } else {
-    $prueba= md5($pass);
     $sql = "SELECT checklogin('" . $user . "','" . md5($pass) . "') as li_out;";
     $sqlout = seleccion($sql);
     $out = $sqlout[0]['li_out'];
