@@ -8,15 +8,8 @@
  * Created: 26/07/2018
  */
 
-create table InformacionFija (
-    idInformacionFija int NOT NULL AUTO_INCREMENT,  
-    descripcion text,
-    titulo varchar(150),
-    PRIMARY KEY(idInformacionFija)   
-);
 create table ZonaTrabajo(
 id int  NOT NULL AUTO_INCREMENT,
-FKIdInformacionFija int,
 nombreZonaTrabajo varchar(150),
 revisadoPor varchar(150),
 codigoZonaTrabajo varchar(150),
@@ -59,55 +52,84 @@ elementosConstructivosAlcantarilladoPluvial varchar(150),
 elementosConstructivosSistemaElectrico varchar(150),
 elementosConstructivosSistemaTelefonico varchar(150),
 elementosConstructivosOtros varchar(150),
-PRIMARY KEY(id),
-FOREIGN KEY (FKIdInformacionFija) REFERENCES InformacionFija(idInformacionFija)
+PRIMARY KEY(id)
 );
+
+create table OrigenAmenaza(
+    idOrigen int,
+    descripcion varchar(150),
+    PRIMARY KEY(idOrigen)
+);
+
+
 create table TipoAmenaza (
     idTipoAmenaza int NOT NULL AUTO_INCREMENT,  
     descripcion varchar(150),
-    PRIMARY KEY(idTipoAmenaza)
+    FkidOrigen int,
+    PRIMARY KEY(idTipoAmenaza),
+    FOREIGN KEY(FKidOrigen) REFERENCES OrigenAmenaza(idOrigen)
 );
-
 
 create table CategoriaTipoAmenaza (
     idCategoriaTipoAmenaza int NOT NULL AUTO_INCREMENT,  
     FKidTipoAmenaza int,
-    descripcion varchar(150),
-    PRIMARY KEY(idCategoriaTipoAmenaza), 
-    FOREIGN KEY(FKidTipoAmenaza) REFERENCES TipoAmenaza(idTipoAmenaza)
-);
-
-create table SubCategoriaTipoAmenaza (
-    idSubCategoriaTipoAmenaza int NOT NULL AUTO_INCREMENT,  
-    FKidCategoriaTipoAmenaza int,
-    descripcion varchar(150),
-    PRIMARY KEY(idSubCategoriaTipoAmenaza), 
-    FOREIGN KEY(FKidCategoriaTipoAmenaza) REFERENCES CategoriaTipoAmenaza(idCategoriaTipoAmenaza)
-);
-
-
-create table MatrizRiesgos (
-    idMatrizRiesgos int NOT NULL AUTO_INCREMENT,  
-    FKsubCategoriaTipoAmenaza int,
-    FKzonaTrabajo int,
+    FKidZonaTrabajo int,
     descripcion varchar(150),
     fuente varchar(150),
     probabilidad int,
     gravedad int,
     consecuenciaAmenaza int,
-    PRIMARY KEY(idMatrizRiesgos), 
-    FOREIGN KEY(FKsubCategoriaTipoAmenaza) REFERENCES SubCategoriaTipoAmenaza(idSubCategoriaTipoAmenaza),
-    FOREIGN KEY (FKzonaTrabajo) REFERENCES ZonaTrabajo(id)
+    PRIMARY KEY(idCategoriaTipoAmenaza), 
+    FOREIGN KEY(FKidTipoAmenaza) REFERENCES TipoAmenaza(idTipoAmenaza),
+    FOREIGN KEY (FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
+);
+
+
+create table Capitulo(
+idCapitulo int,
+descripcion text,
+titulo varchar(150),
+orden varchar(150),
+ PRIMARY KEY(idCapitulo) 
+);
+
+create table SubCapitulo(
+idSubCapitulo int,
+descripcion text,
+titulo varchar(150),
+FKidCapitulo int,
+orden int,
+PRIMARY KEY(idSubCapitulo),
+FOREIGN KEY (FKidCapitulo) REFERENCES Capitulo(idCapitulo)
+);
+
+create table Formulario(
+idFormulario int,
+descripcion text,
+FKidSubcapitulos int,
+PRIMARY KEY(idFormulario),
+FOREIGN KEY (FKidSubcapitulos) REFERENCES SubCapitulo(idSubCapitulo)
+);
+
+
+create table TipoPoblacion(
+idTipoPoblacion int,
+FKidZonaTrabajo int,
+tipoPoblacion varchar(150),
+descripcion varchar(150),
+total int,
+representacionDe varchar(150),
+PRIMARY KEY(idTipoPoblacion),
+FOREIGN KEY (FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 );
 
 
 
-
-
-
-drop table MatrizRiesgos;
-drop table SubCategoriaTipoAmenaza;
+drop table TipoPoblacion;
+drop table Formulario;
+drop table SubCapitulo;
+drop table Capitulo;
 drop table CategoriaTipoAmenaza;
 drop table TipoAmenaza;
+drop table OrigenAmenaza;
 drop table ZonaTrabajo;
-drop table InformacionFija;
