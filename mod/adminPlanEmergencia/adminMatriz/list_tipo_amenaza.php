@@ -19,7 +19,7 @@ $user_rol = $mySessionController->getVar("rol");
 $sAjaxSource = $mySessionController->getVar('cds_domain') . $mySessionController->getVar('cds_locate') . 'mod/admin/users/ajax_list_user.php';
 ?>
 <!--  ****** Titulo ***** -->
-<div class="well well-sm"><h1><?= $vocab["list_origen_tipo_amenaza_title"] ?></h1></div>
+<div class="well well-sm"><h1><?= $vocab["list_tipo_amenaza_title"] ?></h1></div>
 <script type="text/javascript" charset="utf-8">
     var asInitVals = new Array();   //Se utiliza para almacenar la llave del filtro para cada columna.
     jQuery(document).ready(function () {
@@ -74,8 +74,8 @@ $sAjaxSource = $mySessionController->getVar('cds_domain') . $mySessionController
     <table id="lista_usuarios" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable" >
         <thead>
             <tr>
-                <th width="10%"><?= $vocab["plan_emergencia_id"] ?></th>
-                <th width="50%"><?= $vocab["plan_emergencia_origen_amenaza"] ?></th>              
+                <th width="10%"><?= $vocab["list_tipo_amenaza_id"] ?></th>
+                <th width="50%"><?= $vocab["list_tipo_amenaza_descripcion"] ?></th>              
                 <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
                 <th width="5%"><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
                 <?php } ?>
@@ -94,10 +94,9 @@ $sAjaxSource = $mySessionController->getVar('cds_domain') . $mySessionController
         </tbody>
         <tfoot>
             <tr>
-                <th><?= $vocab["user_id"] ?></th>
+                <th><?= $vocab["list_tipo_amenaza_id"] ?></th>
                 <th><input type="text" name="nombre_search" id="nombre_search" value="<?= $vocab["symbol_name"] ?>" class="search_init" /></th>
-                <th><?= $vocab["rols_level"] ?></th>
-                <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
+               <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
                     <th><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
                 <?php } ?>
                 <?php if (check_permiso($mod3, $act4, $user_rol)) { ?>
@@ -112,7 +111,7 @@ $sAjaxSource = $mySessionController->getVar('cds_domain') . $mySessionController
     <?php /*     * ***************************************************************************************** */ ?>
     <br/>
     <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
-    <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/admin/users/new_user.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["user_title"] ?></a></div>
+    <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/admin/users/new_user.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["tipo_amenaza_title"] ?></a></div>
     <?php } ?>
 </div>
 
