@@ -23,6 +23,9 @@
 <script language="JavaScript" type="text/javascript" src="inc/js/roll.js"></script>
 <script language="JavaScript" type="text/javascript"  src="inc/js/user.js"></script>
 
+<!-- adminCapitulos -->
+
+
 <!-- Bootstrap + Font-Awesome + Estilo -->
 <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <link href="lib/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
