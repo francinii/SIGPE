@@ -42,7 +42,7 @@ require 'functions.php';
                                         <?php } ?>
                                     </ul>
                                 </li>
-                            <?php } ?>
+                            <?php } ?>                                
                             <!-- ROLES -->
                             <?php if (check_permiso($mod2, $act1, $user_rol)) { ?>
                                 <li class="dropdown-submenu">
@@ -67,6 +67,48 @@ require 'functions.php';
                                         <?php } ?>
                                         <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
                                             <li><a onclick="javascript:OpcionMenu('mod/admin/users/new_user.php?', '');"><span><i class="fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?></span></a></li>
+                                        <?php } ?>
+                                    </ul>
+                                <?php } ?>
+                        </ul>
+                    </li>
+                <?php } ?>
+                    <!-- ADMINISTRACION Planes DE EMERGENCIA-->
+                <?php if (check_permiso($mod1, $act1, $user_rol)) { ?>
+                    <li class="dropdown">
+                        <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#"><span><i class="fa fa-gears fa-inverse"></i> <?= $vocab["menu_admin_planes_emergencia"] ?></span> <span class="caret"></span></a>
+                        <ul class="dropdown-menu"> 
+                            <!-- ADMINISTRAR ZONAS DE TRABAJO -->
+                            <?php if (check_permiso($mod1, $act1, $user_rol)) { ?>
+                                <li class="dropdown-submenu">
+                                    <a href="#"><span><i class="fa fa-puzzle-piece text-danger"></i> <?= $vocab["menu_admin_zona_trabajo"] ?></span></a>
+                                </li>
+                            <?php } ?> 
+                            <!-- ADMINISTRAR CAPITULOS -->
+                            <?php if (check_permiso($mod1, $act1, $user_rol)) { ?>
+                                <li class="dropdown-submenu">
+                                    <a href="#"><span><i class="fa fa-puzzle-piece text-danger"></i> <?= $vocab["menu_admin_capitulos"] ?></span></a>
+                                </li>
+                            <?php } ?>                                
+                            <!-- ADMINISTRAR  SUBCAPITULOS-->
+                            <?php if (check_permiso($mod2, $act1, $user_rol)) { ?>
+                                <li class="dropdown-submenu">
+                                    <a href="#"><span><i class="fa fa-sitemap text-warning"></i> <?= $vocab["menu_admin_subcapitulos"] ?></span></a>
+                                </li>
+                            <?php } ?>
+                            <!-- ADMINISTRAR MATRIZ DE RIESGOS -->
+                            <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
+                                <li class="dropdown-submenu">
+                                    <a href="#"><span><i class="fa fa-users text-primary"></i> <?= $vocab["menu_matriz_riesgos"] ?></span></span></a>
+                                    <ul class="dropdown-menu">
+                                        <?php if (check_permiso($mod3, $act2, $user_rol)) { ?>
+                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/list_origen_tipo_amenaza.php?', '');"><span> <i class="fa fa-list text-primary"></i>  <?= $vocab["menu_admin_origen_amenaza"] ?></span></a></li>
+                                        <?php } ?>
+                                        <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
+                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/list_origen_tipo_amenaza.php?', '');"><span><i class="fa fa-plus text-success"></i> <?= $vocab["menu_admin_tipo_amenaza"] ?></span></a></li>
+                                        <?php } ?>
+                                        <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
+                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/list_origen_tipo_amenaza.php?', '');"><span><i class="fa fa-plus text-success"></i> <?= $vocab["menu_admin_categoria_amenaza"] ?></span></a></li>
                                         <?php } ?>
                                     </ul>
                                 <?php } ?>
