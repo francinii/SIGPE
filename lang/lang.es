@@ -130,10 +130,16 @@ $vocab["list_capitulo_order"]       = "orden";
 
 
 $vocab["capitulo_capitulo"]         = "Capitulo";
+$vocab["capitulo_capitulo_Desc"]    = "Capitulos del reporte";
 $vocab["capitulo_title"]            = "Titulo";
 $vocab["capitulo_title_Desc"]       = "Titulo del capitulo";
 $vocab["capitulo_id"]               = "Id";
 $vocab["capitulo_id_Desc"]          = "Id del capitulo";
 $vocab["capitulo_Descripcion"]      = "Descripción del capitulo";
 
+//***************************** Modulo administrar subcapitulos ******************************//
+$vocab["subcapitulo_subcapitulo"]         = "Subcapitulo";
+$vocab["subcapitulo_subcapitulo_Desc"]    = "Subcapitulos pertenecientes a un capitulo del reporte";
+$vocab["subcapitulo_title"]               = "Titulo";
+$vocab["subcapitulo_capitulo"]            = "Capitulo";
 ?>

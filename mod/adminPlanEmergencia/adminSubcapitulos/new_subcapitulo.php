@@ -6,8 +6,8 @@ $user_rol = $mySessionController->getVar("rol");
 ?>
 <div class="container">
     <div class="well well-sm">
-        <h2><?= $vocab["capitulo_capitulo"] ?></h2>
-        <p><?= $vocab["capitulo_capitulo_Desc"] ?></p>
+        <h2><?= $vocab["subcapitulo_subcapitulo"] ?></h2>
+        <p><?= $vocab["subcapitulo_subcapitulo_Desc"] ?></p>
     </div>
     <div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
         <form method="post" action="">            
