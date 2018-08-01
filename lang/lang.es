@@ -115,11 +115,21 @@ $vocab["list_tipo_amenaza_title"]               = "Tipo de amenaza";
 $vocab["list_tipo_amenaza_id"]                  = "Id";
 $vocab["list_tipo_amenaza_descripcion"]         = "Tipo de amenaza";
 
-$vocab["categoria_amenaza_title"]                  = "Categoria";
+$vocab["categoria_amenaza_title"]               = "Categoria";
 $vocab["list_categoria_amenaza_title"]          = "Categor&iacute;a de amenaza";
 $vocab["list_categoria_amenaza_id"]             = "Id";
 $vocab["list_categoria_amenaza_descripcion"]    = "Categor&iacute;a de la amenaza";
 
+//***************************** Modulo zona de trabajo******************************//
+$vocab["zona_trabajo_title"]               = "Zona de trabajo";
+$vocab["list_zona_trabajo_title"]          = "Zona de trabajo";
+$vocab["list_zona_trabajo_id"]             = "Id";
+$vocab["list_zona_trabajo_descripcion"]    = "Zona de trabajo";
+
+$vocab["zona_trabajo_title_Desc"]       = "Titulo de la zona de trabajo";
+$vocab["zona_trabajo_id"]               = "Id";
+$vocab["zona_trabajo_id_Desc"]          = "Id del capitulo";
+$vocab["zona_trabajo_Descripcion"]      = "Descripción del capitulo";
 
 //***************************** Modulo administrar capitulos ******************************//
 $vocab["list_capitulo"]             = "Lista de capitulos";
