@@ -90,10 +90,10 @@ require 'functions.php';
                                     <a href="#"><span><i class="fa fa-puzzle-piece text-danger"></i> <?= $vocab["menu_admin_capitulos"] ?></span></a>
                                     <ul class="dropdown-menu">
                                         <?php if (check_permiso($mod3, $act2, $user_rol)) { ?>
-                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/list_capitulos.php?', '');"><span> <i class="fa fa-list text-primary"></i>  <?= $vocab["list_capitulo"] ?></span></a></li>
+                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/list_capitulos.php?', '');"><span> <i class="fa fa-list text-primary"></i>  <?= $vocab["menu_list"] ?></span></a></li>
                                         <?php } ?>
                                         <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
-                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/list_origen_tipo_amenaza.php?', '');"><span><i class="fa fa-plus text-success"></i> <?= $vocab["add_capitulo"] ?></span></a></li>
+                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/new_capitulo.php?', '');"><span><i class="fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?></span></a></li>
                                         <?php } ?>                                        
                                     </ul>
                                 </li>

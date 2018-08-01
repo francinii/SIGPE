@@ -69,6 +69,7 @@ $vocab["symbol_page_of"]           = "de";
 $vocab["symbol_select"]            = "Seleccione";
 $vocab["symbol_loading"]           = "Cargando";
 
+
 //***************************** Modulo permits *******************************//
 $vocab["permits_title"]            = "Modulo";
 $vocab["permits_title_desc"]       = "Informaci&oacute;n general de un modulo";
@@ -121,6 +122,18 @@ $vocab["list_categoria_amenaza_descripcion"]    = "Categor&iacute;a de la amenaz
 
 
 //***************************** Modulo administrar capitulos ******************************//
-$vocab["list_capitulo"]         = "Lista de capitulos";
-$vocab["add_capitulo"]          = "Agregar nuevo capitulos";
+$vocab["list_capitulo"]             = "Lista de capitulos";
+$vocab["add_capitulo"]              = "Agregar nuevo capitulos";
+$vocab["list_capitulo_title"]       = "Titulo";
+$vocab["list_capitulo_id"]          = "Id";
+$vocab["list_capitulo_order"]       = "orden";
+
+
+$vocab["capitulo_capitulo"]         = "Capitulo";
+$vocab["capitulo_title"]            = "Titulo";
+$vocab["capitulo_title_Desc"]       = "Titulo del capitulo";
+$vocab["capitulo_id"]               = "Id";
+$vocab["capitulo_id_Desc"]          = "Id del capitulo";
+$vocab["capitulo_Descripcion"]      = "Descripción del capitulo";
+
 ?>
