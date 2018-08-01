@@ -34,6 +34,16 @@ $vocab["menu_logout"]               = "Salir";
 $vocab["menu_perfil"]               = "Perfil";
 $vocab["menu_continue"]             = "Continuar";
 $vocab["menu_pram"]                 = "Parametros";
+
+$vocab["menu_admin_planes_emergencia"] = "Administraci&oacute;n planes de emergencia";
+$vocab["menu_matriz_riesgos"]          = "Matriz de riesgos";
+$vocab["menu_admin_origen_amenaza"]    = "Origen de la amenaza";
+$vocab["menu_admin_tipo_amenaza"]      = "Tipo de amenaza";
+$vocab["menu_admin_categoria_amenaza"] = "Categor&iacute;a de amenaza";
+$vocab["menu_admin_capitulos"]         = "Cap&iacute;tulos";
+$vocab["menu_admin_subcapitulos"]      = "Subcap&iacute;tulos";
+$vocab["menu_admin_zona_trabajo"]      = "Zonas de trabajo";
+
 //***************************** Home *****************************************//
 $vocab["home_title"]               = "Simbolog&iacute;a";
 $vocab["home_title_desc"]          = "Simbolog&iacute;a del sistema";
@@ -91,5 +101,12 @@ $vocab["user_tel"]              = "Tel&eacute;fono de contacto";
 $vocab["user_tel_desc"]         = "Ingese el numero de telefono";
 $vocab["user_perfil_desc"]      = "Información de usuario personal";
 
+
+//***************************** Modulo planes de emergencia ******************************//
+$vocab["list_origen_tipo_amenaza_title"]            = "Lista de or&iacute;genes de amenazas ;";
+$vocab["plan_emergencia_id"]            = "Id";
+$vocab["plan_emergencia_origen_amenaza"]       = "Origen de la amenaza";
+$vocab["plan_emergencia_tipo_amenaza"]       = "Tipo de amenaza";
+$vocab["plan_emergencia_categoria_amenaza"]       = "Categor&iacute;a de amenaza";
 
 ?>
