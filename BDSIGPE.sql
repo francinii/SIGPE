@@ -56,7 +56,7 @@ PRIMARY KEY(id)
 );
 
 create table OrigenAmenaza(
-    idOrigen int,
+    idOrigen int NOT NULL AUTO_INCREMENT,
     descripcion varchar(150),
     PRIMARY KEY(idOrigen)
 );
@@ -86,15 +86,15 @@ create table CategoriaTipoAmenaza (
 
 
 create table Capitulo(
-idCapitulo int,
+idCapitulo int NOT NULL AUTO_INCREMENT,
 descripcion text,
 titulo varchar(150),
-orden varchar(150),
+orden int,
  PRIMARY KEY(idCapitulo) 
 );
 
 create table SubCapitulo(
-idSubCapitulo int,
+idSubCapitulo int NOT NULL AUTO_INCREMENT,
 descripcion text,
 titulo varchar(150),
 FKidCapitulo int,
@@ -104,7 +104,7 @@ FOREIGN KEY (FKidCapitulo) REFERENCES Capitulo(idCapitulo)
 );
 
 create table Formulario(
-idFormulario int,
+idFormulario int NOT NULL AUTO_INCREMENT,
 descripcion text,
 FKidSubcapitulos int,
 PRIMARY KEY(idFormulario),
@@ -113,7 +113,7 @@ FOREIGN KEY (FKidSubcapitulos) REFERENCES SubCapitulo(idSubCapitulo)
 
 
 create table TipoPoblacion(
-idTipoPoblacion int,
+idTipoPoblacion int NOT NULL AUTO_INCREMENT,
 FKidZonaTrabajo int,
 tipoPoblacion varchar(150),
 descripcion varchar(150),
