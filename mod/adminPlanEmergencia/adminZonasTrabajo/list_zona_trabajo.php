@@ -1,75 +1,62 @@
 <?php
-/** Develop Info
- * IMPORTANTE !!!
- *    Utilice este archivo como ejemplo para crear las tablas de nuevos modulos.
- * 
- * Este archivo genera una tabla utilizando la libreria DataTables,
- * para esto necesitamos 3 componentes principales:
- *  1. El origen de los datos: es otro archivo php que nos traer un JSON con los
- *      datos para mostrar, Data Tables controla la paginación, navegación, busqueda
- *      y el orden.  Para más información 
- *  2. La inicialización de la tabla
- *  3. La estructura de la tabla en HTML
- * 
+/**
+ * Lista los roles del sistema, no utilizar este tipo de tablas para los modulos
  */
 include("../../login/check.php");
 include("../../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
-$sAjaxSource = $mySessionController->getVar('cds_domain') . $mySessionController->getVar('cds_locate') . 'mod/admin/users/ajax_list_user.php';
+
+/* * *************************************************************************************** */
+//Informacion requerida obtenida de la sesion
+$ip = $mySessionController->getVar("cds_domain");
+$ip .= $mySessionController->getVar("cds_locate");
+
+$page_cant = $mySessionController->getVar("page_cant");
+
+//
+$sql = "SELECT COUNT(id) AS cant
+        FROM ZonaTrabajo";
+
+$find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
+if ($find_key != "") {
+    $sql.=" WHERE roll_name LIKE  '%" . $find_key . "%'";
+}
+$sql.=";";
+$res_cant = seleccion($sql);
+
+$cant_pagi = ceil((int) $res_cant[0]['cant'] / (int) $page_cant);
+$page = (isset($_GET["page"])) ? $_GET["page"] : "1";
+if (!$page) {
+    $start = 0;
+    $page = 1;
+} else {
+    $start = (isset($_GET["start"])) ? $_GET["start"] : "0";
+}
+
+/* * ********************************************************************************************** */
+$sql = "SELECT  id, nombreZonaTrabajo FROM ZonaTrabajo";
+
+$find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
+if ($find_key != "") {
+    $sql.="  WHERE roll_name LIKE '%" . $find_key . "%'";
+}
+
+$order_key = (isset($_GET['order_key'])) ? $_GET['order_key'] : '';
+if ($order_key != "") {
+    $sql.=" ORDER BY " . $order_key;
+} else {
+    $sql.=" ORDER BY id";
+}
+
+$sql.=" limit " . (int) $start . "," . (int) $page_cant . ";";
+$res = seleccion($sql);
+
+
+
 ?>
 <!--  ****** Titulo ***** -->
 <div class="well well-sm"><h1><?= $vocab["list_zona_trabajo_title"] ?></h1></div>
-<script type="text/javascript" charset="utf-8">
-    var asInitVals = new Array();   //Se utiliza para almacenar la llave del filtro para cada columna.
-    jQuery(document).ready(function () {
-        var oTable = jQuery('#lista_usuarios').dataTable({
-        //"sPaginationType": "full_numbers",
-        "bProcessing": true,
-                "bServerSide": true,
-                "aaSorting": [[1, 'asc']],
-                "aoColumns": [
-                {"bSortable": true},
-                        null,
-                        null
-<?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
-                    , {"bSortable": false}
-<?php } ?>
-<?php if (check_permiso($mod3, $act4, $user_rol)) { ?>
-                    , {"bSortable": false}
-<?php } ?>
-<?php if (check_permiso($mod3, $act5, $user_rol)) { ?>
-                    , {"bSortable": false}
-<?php } ?>
-                ],
-                "sAjaxSource"
-                : "<?php echo $sAjaxSource; ?>"
-    });
-    jQuery("tfoot input").keyup(function () {
-        /* Filter on the column (the index) of this element */
-        oTable.fnFilter(this.value, jQuery("tfoot input").index(this) + 1);
-    });
-    jQuery("tfoot input").each(function (i) {
-        asInitVals[i] = this.value;
-    });
-
-    jQuery("tfoot input").focus(function () {
-        if (this.className == "search_init")
-        {
-            this.className = "";
-            this.value = "";
-        }
-    });
-    jQuery("tfoot input").blur(function (i) {
-        if (this.value == "")
-        {
-            this.className = "search_init";
-            this.value = asInitVals[jQuery("tfoot input").index(this)];
-        }
-    });
-    });</script>
-<!-- div original anterior a integración bootstrap3 
-<div style=" width: 800px; margin: 0 auto;"  class="ex_highlight_row"> -->
 <div class="dataTables_wrapper form-inline dt-bootstrap">
     <table id="lista_usuarios" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable" >
         <thead>
@@ -88,9 +75,59 @@ $sAjaxSource = $mySessionController->getVar('cds_domain') . $mySessionController
             </tr>
         </thead>
         <tbody>
-            <tr>
-             <td colspan="6" class="dataTables_empty"><?= $vocab["symbol_loading"] ?>
-            </tr>
+             <?php
+                if (count($res) > 0) {
+                    for ($i = 0; $i < count($res); $i++) {
+                        ?>
+                        <tr id="fila<?= $i ?>"  align='center'>
+                            <td><?= $res[$i]['id'] ?></td>
+                            <td><?= $res[$i]['nombreZonaTrabajo'] ?></td>
+                            <?php if (check_permiso($act2, $act1, $user_rol)) { ?>
+                                <td>
+                                    <?php if ($res[$i]['id_roll'] != 1) { ?>
+                                        <a class="puntero" onClick="javascript:OpcionMenu('mod/admin/rolls/edit_roll.php?', 'id_roll=<?= $res[$i]["id_roll"] ?>&view_mode=0');">
+                                        <?php } else { ?>
+                                            <a style="cursor: not-allowed; ">
+                                        <?php }?>
+                                        <div class="text-center"><i class="fa fa-eye text-primary" title="<?= $vocab["symbol_view"] ?>"></i></div>
+                                        <?php if ($res[$i]['id_roll'] != 1) { ?>
+                                        </a>
+                                    <?php } ?>
+                                </td>
+                            <?php } ?>
+                            <?php if (check_permiso($act2, $act4, $user_rol)) { ?>
+                                <td>
+                                    <?php if ($res[$i]['id_roll'] != 1) { ?>
+                                        <a class="puntero"  onClick="javascript:OpcionMenu('mod/admin/rolls/edit_roll.php?', 'id_roll=<?= $res[$i]["id_roll"] ?>&view_mode=1');">
+                                        <?php } else { ?>
+                                            <a style="cursor: not-allowed; ">
+                                        <?php }?>
+                                        <div class="text-center"><i class="fa fa-pencil text-success" title="<?= $vocab["symbol_edit"] ?>"></i></div>
+                                        <?php if ($res[$i]['id_roll'] != 1) { ?>
+                                        </a>
+                                    <?php } ?>
+                                </td>
+                            <?php } ?>
+                            <?php if (check_permiso($act2, $act5, $user_rol)) { ?>
+                                <td>
+                                    <?php if ($res[$i]['id_roll'] != 1) { ?>
+                                        <a class="puntero" onClick="javascript:delete_roll(<?= $res[$i]['id_roll'] ?>);">
+                                        <?php } else { ?>
+                                            <a style="cursor: not-allowed; ">
+                                        <?php }?>
+                                        <div class="text-center"><i class="fa fa-close text-danger" title="<?= $vocab["symbol_delete"] ?>"></i></div>
+                                        <?php if ($res[$i]['id_roll'] != 1) { ?>
+                                        </a>
+                                    <?php } ?>
+                                </td>
+                            <?php } ?>
+                        </tr>
+                    <?php } ?>
+                <?php } else { ?>
+                    <tr id="fila0" align='center'>
+                        <td colspan="4"><?= $vocab["symbol_no_data"] ?></td>
+                    </tr>   
+                <?php } ?>
         </tbody>
         <tfoot>
             <tr>

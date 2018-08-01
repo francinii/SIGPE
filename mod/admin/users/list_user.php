@@ -16,7 +16,7 @@ include("../../login/check.php");
 include("../../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
-$sAjaxSource = $mySessionController->getVar('cds_domain') . $mySessionController->getVar('cds_locate') . 'mod/admin/users/ajax_list_user.php';
+$sAjaxSource = $mySessionController->getVar('cds_domain') . $mySessionController->getVar('cds_locate') . 'mod/adminPlanEmergencia/adminZonasTrabajo/ajax_list_zona_trabajo.php';
 ?>
 <!--  ****** Titulo ***** -->
 <div class="well well-sm"><h1><?= $vocab["user_list_title"] ?></h1></div>
