@@ -102,11 +102,21 @@ $vocab["user_tel_desc"]         = "Ingese el numero de telefono";
 $vocab["user_perfil_desc"]      = "Información de usuario personal";
 
 
-//***************************** Modulo planes de emergencia ******************************//
-$vocab["list_origen_tipo_amenaza_title"]            = "Lista de or&iacute;genes de amenazas ;";
-$vocab["plan_emergencia_id"]            = "Id";
-$vocab["plan_emergencia_origen_amenaza"]       = "Origen de la amenaza";
-$vocab["plan_emergencia_tipo_amenaza"]       = "Tipo de amenaza";
-$vocab["plan_emergencia_categoria_amenaza"]       = "Categor&iacute;a de amenaza";
+//***************************** Modulo matriz de riesgos******************************//
+$vocab["origen_amenaza_title"]                  = "Origen";
+$vocab["list_origen_amenaza_title"]             = "Or&iacute;gen de la amenaza";
+$vocab["list_origen_amenaza_id"]                = "Id";
+$vocab["list_origen_amenaza_descripcion"]       = "Or&iacute;gen de la amenaza";
+
+$vocab["tipo_amenaza_title"]                    = "Tipo";
+$vocab["list_tipo_amenaza_title"]               = "Tipo de amenaza";
+$vocab["list_tipo_amenaza_id"]                  = "Id";
+$vocab["list_tipo_amenaza_descripcion"]         = "Tipo de amenaza";
+
+$vocab["categoria_amenaza_title"]                  = "Categoria";
+$vocab["list_categoria_amenaza_title"]          = "Categor&iacute;a de amenaza";
+$vocab["list_categoria_amenaza_id"]             = "Id";
+$vocab["list_categoria_amenaza_descripcion"]    = "Categor&iacute;a de la amenaza";
+
 
 ?>
