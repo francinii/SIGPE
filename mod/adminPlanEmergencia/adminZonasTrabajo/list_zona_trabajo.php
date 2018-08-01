@@ -19,7 +19,7 @@ $user_rol = $mySessionController->getVar("rol");
 $sAjaxSource = $mySessionController->getVar('cds_domain') . $mySessionController->getVar('cds_locate') . 'mod/admin/users/ajax_list_user.php';
 ?>
 <!--  ****** Titulo ***** -->
-<div class="well well-sm"><h1><?= $vocab["list_tipo_amenaza_title"] ?></h1></div>
+<div class="well well-sm"><h1><?= $vocab["list_zona_trabajo_title"] ?></h1></div>
 <script type="text/javascript" charset="utf-8">
     var asInitVals = new Array();   //Se utiliza para almacenar la llave del filtro para cada columna.
     jQuery(document).ready(function () {
@@ -42,7 +42,7 @@ $sAjaxSource = $mySessionController->getVar('cds_domain') . $mySessionController
                     , {"bSortable": false}
 <?php } ?>
                 ],
-        "sAjaxSource"
+                "sAjaxSource"
                 : "<?php echo $sAjaxSource; ?>"
     });
     jQuery("tfoot input").keyup(function () {
@@ -61,34 +61,23 @@ $sAjaxSource = $mySessionController->getVar('cds_domain') . $mySessionController
         }
     });
     jQuery("tfoot input").blur(function (i) {
-    if (this.value == "")
-    {
-    this.className = "search_init";
+        if (this.value == "")
+        {
+            this.className = "search_init";
             this.value = asInitVals[jQuery("tfoot input").index(this)];
-    }
+        }
     });
-    }
-    );</script>
+    });</script>
 <!-- div original anterior a integración bootstrap3 
 <div style=" width: 800px; margin: 0 auto;"  class="ex_highlight_row"> -->
-<div class="row">
-    <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4"></div>
-    <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4">
-        <select class="form-control">
-            <option>Mustard</option>
-            <option>Ketchup</option>
-            <option>Relish</option>
-        </select>
-    </div>
-</div>
 <div class="dataTables_wrapper form-inline dt-bootstrap">
     <table id="lista_usuarios" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable" >
         <thead>
             <tr>
-                <th width="10%"><?= $vocab["list_tipo_amenaza_id"] ?></th>
-                <th width="50%"><?= $vocab["list_tipo_amenaza_descripcion"] ?></th>              
+                <th width="10%"><?= $vocab["list_zona_trabajo_id"] ?></th>
+                <th width="50%"><?= $vocab["list_zona_trabajo_descripcion"] ?></th>              
                 <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
-                    <th width="5%"><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
+                <th width="5%"><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
                 <?php } ?>
                 <?php if (check_permiso($mod3, $act4, $user_rol)) { ?>
                     <th width="5%"><div class="text-center"><i class="fa fa-pencil fa-2x text-success puntero" title="<?= $vocab["symbol_edit"] ?>"></i></div></th>
@@ -100,14 +89,14 @@ $sAjaxSource = $mySessionController->getVar('cds_domain') . $mySessionController
         </thead>
         <tbody>
             <tr>
-                <td colspan="6" class="dataTables_empty"><?= $vocab["symbol_loading"] ?>
+             <td colspan="6" class="dataTables_empty"><?= $vocab["symbol_loading"] ?>
             </tr>
         </tbody>
         <tfoot>
             <tr>
-                <th><?= $vocab["list_tipo_amenaza_id"] ?></th>
+                <th><?= $vocab["list_zona_trabajo_id"] ?></th>
                 <th><input type="text" name="nombre_search" id="nombre_search" value="<?= $vocab["symbol_name"] ?>" class="search_init" /></th>
-                <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
+               <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
                     <th><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
                 <?php } ?>
                 <?php if (check_permiso($mod3, $act4, $user_rol)) { ?>
@@ -122,7 +111,7 @@ $sAjaxSource = $mySessionController->getVar('cds_domain') . $mySessionController
     <?php /*     * ***************************************************************************************** */ ?>
     <br/>
     <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
-        <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/admin/users/new_user.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["tipo_amenaza_title"] ?></a></div>
+    <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/admin/users/new_user.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["zona_trabajo_title"] ?></a></div>
     <?php } ?>
 </div>
 

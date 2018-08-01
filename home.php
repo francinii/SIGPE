@@ -46,7 +46,7 @@ $vocab = $mySessionController->getVar("vocab");
                     <label for="timepicker1">Elemento input type text con time picker</label>
                     <input id="timepicker1" name="timepicker" class="form-control timepicker" type="text"/>
                     <p class="help-block">ayuda</p>
-                    <script> 
+                    <script>
                         jQuery('.timepicker').wickedpicker();
                     </script>
                 </div>
@@ -186,6 +186,15 @@ $vocab = $mySessionController->getVar("vocab");
                     <input id="" name="" class="form-control" type="search" placeholder="propiedad placeholder" title="propiedad title"/>
                     <p class="help-block">Es como un text solo que se usa cuando se hace un buscar en el sitio solo</p>
                 </div>
+                <div class="form-group">
+                <select class="form-control">
+                    <option>Mustard</option>
+                    <option>Ketchup</option>
+                    <option>Relish</option>
+                </select>
+                </div>
+
+
             </form>
         </div>
     </div>

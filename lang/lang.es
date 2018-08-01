@@ -118,5 +118,11 @@ $vocab["list_categoria_amenaza_title"]          = "Categor&iacute;a de amenaza";
 $vocab["list_categoria_amenaza_id"]             = "Id";
 $vocab["list_categoria_amenaza_descripcion"]    = "Categor&iacute;a de la amenaza";
 
+//***************************** Modulo zona de trabajo******************************//
+$vocab["zona_trabajo_title"]                  = "Zona de trabajo";
+$vocab["list_zona_trabajo_title"]          = "Zona de trabajo";
+$vocab["list_zona_trabajo_id"]             = "Id";
+$vocab["list_zona_trabajo_descripcion"]    = "Categor&iacute;a de la amenaza";
+
 
 ?>

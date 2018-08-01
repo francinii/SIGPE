@@ -70,6 +70,16 @@ $sAjaxSource = $mySessionController->getVar('cds_domain') . $mySessionController
     });</script>
 <!-- div original anterior a integración bootstrap3 
 <div style=" width: 800px; margin: 0 auto;"  class="ex_highlight_row"> -->
+<div class="row">
+    <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4"></div>
+    <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <select class="form-control">
+            <option>Mustard</option>
+            <option>Ketchup</option>
+            <option>Relish</option>
+        </select>
+    </div>
+</div>
 <div class="dataTables_wrapper form-inline dt-bootstrap">
     <table id="lista_usuarios" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable" >
         <thead>
