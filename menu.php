@@ -110,6 +110,25 @@ require 'functions.php';
                             <?php if (check_permiso($mod2, $act1, $user_rol)) { ?>
                                 <li class="dropdown-submenu">
                                     <a href="#"><span><i class="fa fa-sitemap text-warning"></i> <?= $vocab["menu_admin_subcapitulos"] ?></span></a>
+                                <ul class="dropdown-menu">
+                                        <?php if (check_permiso($mod3, $act2, $user_rol)) { ?>
+                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminSubcapitulos/list_subcapitulos.php?', '');"><span> <i class="fa fa-list text-primary"></i>  <?= $vocab["menu_list"] ?></span></a></li>
+                                        <?php } ?>
+                                        <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
+                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminSubcapitulos/new_subcapitulo.php?', '');"><span><i class="fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?></span></a></li>
+                                        <?php } ?>                                        
+                                    </ul>
+                                </li>
+                            <?php } ?>
+                                <!-- ADMINISTRAR  formulario-->
+                            <?php if (check_permiso($mod2, $act1, $user_rol)) { ?>
+                                <li class="dropdown-submenu">
+                                    <a href="#"><span><i class="fa fa-sitemap text-warning"></i> <?= $vocab["menu_admin_formulario"] ?></span></a>
+                                <ul class="dropdown-menu">
+                                        <?php if (check_permiso($mod3, $act2, $user_rol)) { ?>
+                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminFormularios/adminFormularios.php?', '');"><span> <i class="fa fa-list text-primary"></i>  <?= $vocab["formulario_admin"] ?></span></a></li>
+                                        <?php } ?>                                                                             
+                                    </ul>
                                 </li>
                             <?php } ?>
                             <!-- ADMINISTRAR MATRIZ DE RIESGOS -->

@@ -43,6 +43,7 @@ $vocab["menu_admin_categoria_amenaza"] = "Categor&iacute;a de amenaza";
 $vocab["menu_admin_capitulos"]         = "Cap&iacute;tulos";
 $vocab["menu_admin_subcapitulos"]      = "Subcap&iacute;tulos";
 $vocab["menu_admin_zona_trabajo"]      = "Zonas de trabajo";
+$vocab["menu_admin_formulario"]        = "Formulario";
 
 //***************************** Home *****************************************//
 $vocab["home_title"]               = "Simbolog&iacute;a";
@@ -133,17 +134,41 @@ $vocab["zona_trabajo_Descripcion"]      = "Descripción del capitulo";
 
 //***************************** Modulo administrar capitulos ******************************//
 $vocab["list_capitulo"]             = "Lista de capitulos";
-$vocab["add_capitulo"]              = "Agregar nuevo capitulos";
+$vocab["add_capitulo"]              = "capitulos";
 $vocab["list_capitulo_title"]       = "Titulo";
 $vocab["list_capitulo_id"]          = "Id";
 $vocab["list_capitulo_order"]       = "orden";
 
 
 $vocab["capitulo_capitulo"]         = "Capitulo";
+$vocab["capitulo_capitulo_Desc"]    = "Capitulos del reporte";
 $vocab["capitulo_title"]            = "Titulo";
 $vocab["capitulo_title_Desc"]       = "Titulo del capitulo";
 $vocab["capitulo_id"]               = "Id";
 $vocab["capitulo_id_Desc"]          = "Id del capitulo";
 $vocab["capitulo_Descripcion"]      = "Descripción del capitulo";
 
+//***************************** Modulo administrar subcapitulos ******************************//
+$vocab["list_subcapitulo"]                = "Lista de subcapitulos";
+$vocab["add_subcapitulo"]                 = "subcapitulos";
+$vocab["list_subcapitulo_title"]          = "Titulo";
+$vocab["list_subcapitulo_id"]             = "Id";
+$vocab["list_subcapitulo_order"]          = "orden";
+$vocab["list_subcapitulo_Descripcion"]    = "Descripcion";
+
+$vocab["subcapitulo_subcapitulo"]         = "Subcapitulo";
+$vocab["subcapitulo_subcapitulo_Desc"]    = "Subcapitulos pertenecientes a un capitulo del reporte";
+$vocab["subcapitulo_title"]               = "Titulo";
+$vocab["subcapitulo_title_Desc"]          = "Titulo del subcapitulo";
+$vocab["subcapitulo_capitulo"]            = "Capitulo";
+$vocab["subcapitulo_capitulo_Desc"]       = "Capitulo al que pertenece";
+$vocab["subcapitulo_Descripcion"]         = "Descripción del subcapitulo";
+
+//***************************** Modulo administrar formulario ******************************//
+$vocab["formulario_admin"]             = "Administrar formularios";
+$vocab["formulario_admin_Desc"]        = "Colocar la información de los formularios en un subcapitulo";
+$vocab["list_formulario"]              = "Lista de formularios";
+$vocab["formulario_id"]                = "id";
+$vocab["formulario_formulario"]        = "Formulario";
+$vocab["formulario_subcapitulo"]        = "subcapitulo";
 ?>

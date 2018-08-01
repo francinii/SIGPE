@@ -7,7 +7,7 @@ $user_rol = $mySessionController->getVar("rol");
 <div class="container">
     <div class="well well-sm">
         <h2><?= $vocab["capitulo_capitulo"] ?></h2>
-        <p><?= $vocab["user_title_desc"] ?></p>
+        <p><?= $vocab["capitulo_capitulo_Desc"] ?></p>
     </div>
     <div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
         <form method="post" action="">            
@@ -30,3 +30,6 @@ $user_rol = $mySessionController->getVar("rol");
         </form>
     </div>
 </div>
+<script>
+CrearEditorCapitulos();
+</script>
