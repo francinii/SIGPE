@@ -69,6 +69,7 @@ $vocab["symbol_page_of"]           = "de";
 $vocab["symbol_select"]            = "Seleccione";
 $vocab["symbol_loading"]           = "Cargando";
 
+
 //***************************** Modulo permits *******************************//
 $vocab["permits_title"]            = "Modulo";
 $vocab["permits_title_desc"]       = "Informaci&oacute;n general de un modulo";
@@ -87,6 +88,7 @@ $vocab["rols_action_desc"]         = "Opciones del modulo";
 $vocab["rols_list_title"]          = "Lista de Roles";
 $vocab["rols_list_title_desc"]     = "Nombre del rol a buscar";
 $vocab["rols_for_user"]            = "Seleccione el rol del usuario";
+$vocab["rols_level"]               = "Rol";//agregado
 
 //***************************** Modulo usuarios ******************************//
 $vocab["user_title"]            = "Usuarios";
@@ -124,5 +126,20 @@ $vocab["list_zona_trabajo_title"]          = "Zona de trabajo";
 $vocab["list_zona_trabajo_id"]             = "Id";
 $vocab["list_zona_trabajo_descripcion"]    = "Categor&iacute;a de la amenaza";
 
+
+//***************************** Modulo administrar capitulos ******************************//
+$vocab["list_capitulo"]             = "Lista de capitulos";
+$vocab["add_capitulo"]              = "Agregar nuevo capitulos";
+$vocab["list_capitulo_title"]       = "Titulo";
+$vocab["list_capitulo_id"]          = "Id";
+$vocab["list_capitulo_order"]       = "orden";
+
+
+$vocab["capitulo_capitulo"]         = "Capitulo";
+$vocab["capitulo_title"]            = "Titulo";
+$vocab["capitulo_title_Desc"]       = "Titulo del capitulo";
+$vocab["capitulo_id"]               = "Id";
+$vocab["capitulo_id_Desc"]          = "Id del capitulo";
+$vocab["capitulo_Descripcion"]      = "Descripción del capitulo";
 
 ?>
