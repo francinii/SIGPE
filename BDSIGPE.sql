@@ -10,6 +10,7 @@
 
 create table ZonaTrabajo(
 id int  NOT NULL AUTO_INCREMENT,
+isActivo int,
 nombreZonaTrabajo varchar(150),
 revisadoPor varchar(150),
 codigoZonaTrabajo varchar(150),
@@ -58,6 +59,7 @@ PRIMARY KEY(id)
 create table OrigenAmenaza(
     idOrigen int NOT NULL AUTO_INCREMENT,
     descripcion varchar(150),
+    isActivo int,
     PRIMARY KEY(idOrigen)
 );
 
@@ -65,6 +67,7 @@ create table OrigenAmenaza(
 create table TipoAmenaza (
     idTipoAmenaza int NOT NULL AUTO_INCREMENT,  
     descripcion varchar(150),
+    isActivo int,
     FkidOrigen int,
     PRIMARY KEY(idTipoAmenaza),
     FOREIGN KEY(FKidOrigen) REFERENCES OrigenAmenaza(idOrigen)
@@ -74,6 +77,7 @@ create table CategoriaTipoAmenaza (
     idCategoriaTipoAmenaza int NOT NULL AUTO_INCREMENT,  
     FKidTipoAmenaza int,
     FKidZonaTrabajo int,
+    isActivo int,
     descripcion varchar(150),
     fuente varchar(150),
     probabilidad int,
@@ -88,6 +92,7 @@ create table CategoriaTipoAmenaza (
 create table Capitulo(
 idCapitulo int NOT NULL AUTO_INCREMENT,
 descripcion text,
+isActivo int,
 titulo varchar(150),
 orden int,
  PRIMARY KEY(idCapitulo) 
@@ -97,6 +102,7 @@ create table SubCapitulo(
 idSubCapitulo int NOT NULL AUTO_INCREMENT,
 descripcion text,
 titulo varchar(150),
+isActivo int,
 FKidCapitulo int,
 orden int,
 PRIMARY KEY(idSubCapitulo),
