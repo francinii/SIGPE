@@ -87,6 +87,7 @@ $vocab["rols_action_desc"]         = "Opciones del modulo";
 $vocab["rols_list_title"]          = "Lista de Roles";
 $vocab["rols_list_title_desc"]     = "Nombre del rol a buscar";
 $vocab["rols_for_user"]            = "Seleccione el rol del usuario";
+$vocab["rols_level"]               = "Rol";//agregado
 
 //***************************** Modulo usuarios ******************************//
 $vocab["user_title"]            = "Usuarios";
@@ -109,4 +110,7 @@ $vocab["plan_emergencia_origen_amenaza"]       = "Origen de la amenaza";
 $vocab["plan_emergencia_tipo_amenaza"]       = "Tipo de amenaza";
 $vocab["plan_emergencia_categoria_amenaza"]       = "Categor&iacute;a de amenaza";
 
+//***************************** Modulo administrar capitulos ******************************//
+$vocab["list_capitulo"]         = "Lista de capitulos";
+$vocab["add_capitulo"]          = "Agregar nuevo capitulos";
 ?>

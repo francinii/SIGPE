@@ -27,7 +27,7 @@ require 'functions.php';
                         <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#"><span><i class="fa fa-gears fa-inverse"></i> <?= $vocab["menu_admin"] ?></span> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <?php if (check_permiso($mod1, $act4, $user_rol)) { ?>
-                            <li><a onclick="javascript:OpcionMenu('mod/admin/param/edit_param.php?', '');"><span><i class="fa fa-gg text-warning"></i> <?= $vocab["menu_pram"] ?></span></a></li>
+                                <li><a onclick="javascript:OpcionMenu('mod/admin/param/edit_param.php?', '');"><span><i class="fa fa-gg text-warning"></i> <?= $vocab["menu_pram"] ?></span></a></li>
                             <?php } ?> 
                             <!-- MODULOS -->
                             <?php if (check_permiso($mod1, $act1, $user_rol)) { ?>
@@ -73,7 +73,7 @@ require 'functions.php';
                         </ul>
                     </li>
                 <?php } ?>
-                    <!-- ADMINISTRACION Planes DE EMERGENCIA-->
+                <!-- ADMINISTRACION Planes DE EMERGENCIA-->
                 <?php if (check_permiso($mod1, $act1, $user_rol)) { ?>
                     <li class="dropdown">
                         <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#"><span><i class="fa fa-gears fa-inverse"></i> <?= $vocab["menu_admin_planes_emergencia"] ?></span> <span class="caret"></span></a>
@@ -88,6 +88,14 @@ require 'functions.php';
                             <?php if (check_permiso($mod1, $act1, $user_rol)) { ?>
                                 <li class="dropdown-submenu">
                                     <a href="#"><span><i class="fa fa-puzzle-piece text-danger"></i> <?= $vocab["menu_admin_capitulos"] ?></span></a>
+                                    <ul class="dropdown-menu">
+                                        <?php if (check_permiso($mod3, $act2, $user_rol)) { ?>
+                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/list_capitulos.php?', '');"><span> <i class="fa fa-list text-primary"></i>  <?= $vocab["list_capitulo"] ?></span></a></li>
+                                        <?php } ?>
+                                        <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
+                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/list_origen_tipo_amenaza.php?', '');"><span><i class="fa fa-plus text-success"></i> <?= $vocab["add_capitulo"] ?></span></a></li>
+                                        <?php } ?>                                        
+                                    </ul>
                                 </li>
                             <?php } ?>                                
                             <!-- ADMINISTRAR  SUBCAPITULOS-->
