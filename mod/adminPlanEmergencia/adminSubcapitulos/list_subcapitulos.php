@@ -51,10 +51,7 @@ $start = "0";
 // select para llenar el combo
 $sql = "SELECT  id,titulo FROM capitulo";
 
-$find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
-if ($find_key != "") {
-    $sql .= "  WHERE titulo LIKE '%" . $find_key . "%'";
-}
+
 $order_key = (isset($_GET['order_key'])) ? $_GET['order_key'] : 'orden';
 if ($order_key != "") {
     $sql .= " ORDER BY " . $order_key;
@@ -75,7 +72,7 @@ $find_key =$_GET['find_key'];
     $comb[0]['id'];
 }
 if ($find_key != "") {    
-    $sql .= "  WHERE FKidCapitulo =" . $find_key . "%";
+    $sql .= "  WHERE FKidCapitulo =" . $find_key . "";
 }
 $order_key = (isset($_GET['order_key'])) ? $_GET['order_key'] : '';
 if ($order_key != "") {
@@ -98,16 +95,22 @@ $res = seleccion($sql);
     <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <div class="form-group">
-            <label class="control-label col-sm-2" for="list_subcapitulo_capitulo"><?= $vocab["subcapitulo_capitulo"] ?></label>
+            <label class="control-label col-sm-2" for="select_capitulos"><?= $vocab["subcapitulo_capitulo"] ?></label>
             <div class="col-sm-10">
-                <select id="list_subcapitulo_capitulo" class="form-control" onchange="javascript: var find_key=$('#list_subcapitulo_capitulo').value; OpcionMenu('mod/adminPlanEmergencia/adminSubcapitulos/list_subcapitulo.php?', 'find_key='+find_key)>
+                <select id="select_capitulos" name="select_capitulos" class="form-control" onchange="javascript: cambiarSubcapitulos();">
                  <?php
                     
                  if (count($comb) > 0) {
                      for ($i = 0; $i < count($comb); $i++) {
+                         if($comb[$i]['id']==$find_key){                       
+                            ?>
+                    <option value='<?= $comb[$i]['id'] ?>' selected><?= $comb[$i]['titulo'] ?></option>
+                             <?php
+                         }else{
                         ?>
-                    <option value="<?= $comb[$i]['id'] ?>"><?= $comb[$i]['titulo'] ?></option>
+                    <option value='<?= $comb[$i]['id'] ?>'><?= $comb[$i]['titulo'] ?></option>
                  <?php
+                         }
                      }
                 }
                  ?>
