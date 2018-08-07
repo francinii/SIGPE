@@ -165,3 +165,42 @@ drop table CategoriaTipoAmenaza;
 drop table TipoAmenaza;
 drop table OrigenAmenaza;
 drop table ZonaTrabajo;
+
+
+
+
+------------------Procedimientos almacenados----------------------------------
+-- ----------------------------
+-- Procedure structure for insert_user
+-- ----------------------------
+
+
+DROP PROCEDURE IF EXISTS `insert_origen_amenaza`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_origen_amenaza`(IN `p_nombre` varchar(150),IN `p_activo` int, OUT `res` TINYINT  UNSIGNED)
+BEGIN
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;
+            START TRANSACTION;
+                    INSERT INTO `OrigenAmenaza`(descripcion,isActivo) VALUES (p_nombre, p_pass, p_activo);
+            COMMIT;
+            -- SUCCESS
+            SET res = 0;
+            -- Existe usuario
+END
+;;
+DELIMITER ;
+
+
+

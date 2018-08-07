@@ -55,23 +55,13 @@ $res = seleccion($sql);
 <div class="well well-sm"><h1><?= $vocab["list_tipo_amenaza_title"] ?></h1></div>
 <!-- div original anterior a integración bootstrap3 
 <div style=" width: 800px; margin: 0 auto;"  class="ex_highlight_row"> -->
-<div class="row">
-    <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4"></div>
-    <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4">
-        <select class="form-control">
-            <option>Mustard</option>
-            <option>Ketchup</option>
-            <option>Relish</option>
-        </select>
-    </div>
-</div>
 <div class="dataTables_wrapper form-inline dt-bootstrap">
     <table id="lista_usuarios" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable" >
         <thead>
             <tr>
                 <th width="10%"><?= $vocab["list_tipo_amenaza_id"] ?></th>
                 <th width="50%"><?= $vocab["list_tipo_amenaza_descripcion"] ?></th>   
-                <th width="5%"><?= $vocab["list_tipo_amenaza_isActivo"] ?></th>
+                <th width="5%"><?= $vocab["isActivo"] ?></th>
                 <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
                     <th width="5%"><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
                 <?php } ?>
@@ -115,7 +105,7 @@ $res = seleccion($sql);
             <tr>
                 <th><?= $vocab["list_tipo_amenaza_id"] ?></th>
                 <th width="50%"><?= $vocab["list_tipo_amenaza_descripcion"] ?></th>   
-                <th width="50%"><?= $vocab["list_tipo_amenaza_isActivo"] ?></th>                
+                <th width="50%"><?= $vocab["isActivo"] ?></th>                
                 <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
                     <th><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
                 <?php } ?>
@@ -131,7 +121,7 @@ $res = seleccion($sql);
     <?php /*     * ***************************************************************************************** */ ?>
     <br/>
     <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
-        <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/admin/users/new_user.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["tipo_amenaza_title"] ?></a></div>
-    <?php } ?>
+         <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminTipoAmenaza/new_tipo_amenaza.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["origen_amenaza_title"] ?></a></div>
+     <?php } ?>
 </div>
 
