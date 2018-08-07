@@ -57,91 +57,83 @@ PRIMARY KEY(id)
 );
 
 create table OrigenAmenaza(
-    idOrigen int NOT NULL AUTO_INCREMENT,
+    id int NOT NULL AUTO_INCREMENT,
     descripcion varchar(150),
     isActivo int,
-    PRIMARY KEY(idOrigen)
+    PRIMARY KEY(id)
 );
 
 
 create table TipoAmenaza (
-    idTipoAmenaza int NOT NULL AUTO_INCREMENT,  
+    id int NOT NULL AUTO_INCREMENT,  
     descripcion varchar(150),
     isActivo int,
     FkidOrigen int,
-    PRIMARY KEY(idTipoAmenaza),
-    FOREIGN KEY(FKidOrigen) REFERENCES OrigenAmenaza(idOrigen)
+    PRIMARY KEY(id),
+    FOREIGN KEY(FKidOrigen) REFERENCES OrigenAmenaza(id)
 );
 
 create table CategoriaTipoAmenaza (
-    idCategoriaTipoAmenaza int NOT NULL AUTO_INCREMENT,  
-    FKidTipoAmenaza int,
-    FKidZonaTrabajo int,
+    id int NOT NULL AUTO_INCREMENT, 
+    FKidTipoAmenaza int,   
     isActivo int,
-    descripcion varchar(150),
-    fuente varchar(150),
+    descripcion varchar(150),    
+    PRIMARY KEY(id), 
+    FOREIGN KEY(FKidTipoAmenaza) REFERENCES TipoAmenaza(id)
+);
+
+create table Matriz (
+    id int NOT NULL AUTO_INCREMENT,  
+    FKidCategoriaTipoAmenaza int,
+    FKidZonaTrabajo int,
+    fuente text,
     probabilidad int,
     gravedad int,
     consecuenciaAmenaza int,
-    PRIMARY KEY(idCategoriaTipoAmenaza), 
-    FOREIGN KEY(FKidTipoAmenaza) REFERENCES TipoAmenaza(idTipoAmenaza),
-    FOREIGN KEY (FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
+    PRIMARY KEY(id), 
+    FOREIGN KEY(FKidCategoriaTipoAmenaza) REFERENCES CategoriaTipoAmenaza(id),
+    FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 );
 
-
 create table Capitulo(
-idCapitulo int NOT NULL AUTO_INCREMENT,
+id int NOT NULL AUTO_INCREMENT,
 descripcion text,
 isActivo int,
 titulo varchar(150),
 orden int,
- PRIMARY KEY(idCapitulo) 
+ PRIMARY KEY(id) 
 );
 
 create table SubCapitulo(
-idSubCapitulo int NOT NULL AUTO_INCREMENT,
+id int NOT NULL AUTO_INCREMENT,
 descripcion text,
 titulo varchar(150),
 isActivo int,
 FKidCapitulo int,
 orden int,
-PRIMARY KEY(idSubCapitulo),
-FOREIGN KEY (FKidCapitulo) REFERENCES Capitulo(idCapitulo)
+PRIMARY KEY(id),
+FOREIGN KEY (FKidCapitulo) REFERENCES Capitulo(id)
 );
 
 create table Formulario(
-idFormulario int NOT NULL AUTO_INCREMENT,
+id int NOT NULL AUTO_INCREMENT,
 descripcion text,
 FKidSubcapitulos int,
-PRIMARY KEY(idFormulario),
-FOREIGN KEY (FKidSubcapitulos) REFERENCES SubCapitulo(idSubCapitulo)
+PRIMARY KEY(id),
+FOREIGN KEY (FKidSubcapitulos) REFERENCES SubCapitulo(id)
 );
 
 
 create table TipoPoblacion(
-idTipoPoblacion int NOT NULL AUTO_INCREMENT,
+id int NOT NULL AUTO_INCREMENT,
 FKidZonaTrabajo int,
 tipoPoblacion varchar(150),
 descripcion varchar(150),
 total int,
 representacionDe varchar(150),
-PRIMARY KEY(idTipoPoblacion),
+PRIMARY KEY(id),
 FOREIGN KEY (FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 );
-
-
-
-drop table TipoPoblacion;
-drop table Formulario;
-drop table SubCapitulo;
-drop table Capitulo;
-drop table CategoriaTipoAmenaza;
-drop table TipoAmenaza;
-drop table OrigenAmenaza;
-drop table ZonaTrabajo;
-
-
-
 
 
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` ( `nombreZonaTrabajo`, `revisadoPor`, `codigoZonaTrabajo`, `actividad`, `direcion`, `personaContactoGeneral`, `numeroTelefono`, `numeroFax`, `notificaciones`, `categoriNFPA`, `usoInstalaciones`, `horarioJornada`, `seguridadInstitucional`, `servicioConsegeria`, `personalAdministrativo`, `presenciaEstudiantil`, `tipoPoblacion`, `tipoPoblacionPersonalAcademico`, `tipoPoblacionEstudiantes`, `instalacionesDensidadOcupacion`, `instalacionesAreaConstruccion`, `instalacionesInstalaciones`, `instalacionesCaracteristicasZona`, `instalacionesTopografia`, `instalacionesNivelTerreno`, `instalacionesColindates`, `elementosConstructivosTipoConstruccion`, `elementosConstructivosAntiguedad`, `elementosConstructivosCimientos`, `elementosConstructivosEstructura`, `elementosConstructivosParedes`, `elementosConstructivosEntrepiso`, `elementosConstructivosTecho`, `elementosConstructivosCielos`, `elementosConstructivosPisos`, `elementosConstructivosAreaParqueo`, `elementosConstructivosSistemaAguaPotable`, `elementosConstructivosAlcantarilladoSanitario`, `elementosConstructivosAlcantarilladoPluvial`, `elementosConstructivosSistemaElectrico`, `elementosConstructivosSistemaTelefonico`, `elementosConstructivosOtros`) VALUES ('Limon', 'Fran', 'Fran', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
@@ -150,8 +142,26 @@ INSERT INTO `BDSIGPE`.`ZonaTrabajo` ( `nombreZonaTrabajo`, `revisadoPor`, `codig
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` ( `nombreZonaTrabajo`, `revisadoPor`, `codigoZonaTrabajo`, `actividad`, `direcion`, `personaContactoGeneral`, `numeroTelefono`, `numeroFax`, `notificaciones`, `categoriNFPA`, `usoInstalaciones`, `horarioJornada`, `seguridadInstitucional`, `servicioConsegeria`, `personalAdministrativo`, `presenciaEstudiantil`, `tipoPoblacion`, `tipoPoblacionPersonalAcademico`, `tipoPoblacionEstudiantes`, `instalacionesDensidadOcupacion`, `instalacionesAreaConstruccion`, `instalacionesInstalaciones`, `instalacionesCaracteristicasZona`, `instalacionesTopografia`, `instalacionesNivelTerreno`, `instalacionesColindates`, `elementosConstructivosTipoConstruccion`, `elementosConstructivosAntiguedad`, `elementosConstructivosCimientos`, `elementosConstructivosEstructura`, `elementosConstructivosParedes`, `elementosConstructivosEntrepiso`, `elementosConstructivosTecho`, `elementosConstructivosCielos`, `elementosConstructivosPisos`, `elementosConstructivosAreaParqueo`, `elementosConstructivosSistemaAguaPotable`, `elementosConstructivosAlcantarilladoSanitario`, `elementosConstructivosAlcantarilladoPluvial`, `elementosConstructivosSistemaElectrico`, `elementosConstructivosSistemaTelefonico`, `elementosConstructivosOtros`) VALUES ( 'Limon', 'Fran', 'Fran', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` ( `nombreZonaTrabajo`, `revisadoPor`, `codigoZonaTrabajo`, `actividad`, `direcion`, `personaContactoGeneral`, `numeroTelefono`, `numeroFax`, `notificaciones`, `categoriNFPA`, `usoInstalaciones`, `horarioJornada`, `seguridadInstitucional`, `servicioConsegeria`, `personalAdministrativo`, `presenciaEstudiantil`, `tipoPoblacion`, `tipoPoblacionPersonalAcademico`, `tipoPoblacionEstudiantes`, `instalacionesDensidadOcupacion`, `instalacionesAreaConstruccion`, `instalacionesInstalaciones`, `instalacionesCaracteristicasZona`, `instalacionesTopografia`, `instalacionesNivelTerreno`, `instalacionesColindates`, `elementosConstructivosTipoConstruccion`, `elementosConstructivosAntiguedad`, `elementosConstructivosCimientos`, `elementosConstructivosEstructura`, `elementosConstructivosParedes`, `elementosConstructivosEntrepiso`, `elementosConstructivosTecho`, `elementosConstructivosCielos`, `elementosConstructivosPisos`, `elementosConstructivosAreaParqueo`, `elementosConstructivosSistemaAguaPotable`, `elementosConstructivosAlcantarilladoSanitario`, `elementosConstructivosAlcantarilladoPluvial`, `elementosConstructivosSistemaElectrico`, `elementosConstructivosSistemaTelefonico`, `elementosConstructivosOtros`) VALUES ( 'Limon', 'Fran', 'Fran', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
 
-INSERT INTO `BDSIGPE`.`OrigenAmenaza` (`descripcion`) VALUES ('Natural');
-INSERT INTO `BDSIGPE`.`OrigenAmenaza` (`descripcion`) VALUES ('Sub-Natural');
-INSERT INTO `BDSIGPE`.`OrigenAmenaza` (`descripcion`) VALUES ('Antropica');
+INSERT INTO `BDSIGPE`.`OrigenAmenaza` (`descripcion`,`isActivo`) VALUES ('Natural',1);
+INSERT INTO `BDSIGPE`.`OrigenAmenaza` (`descripcion`,`isActivo`) VALUES ('Socio-Natural',1);
+INSERT INTO `BDSIGPE`.`OrigenAmenaza` (`descripcion`,`isActivo`) VALUES ('Antrópica',1);
 
 
+INSERT INTO `BDSIGPE`.`TipoAmenaza` (`descripcion`,`isActivo`,FkidOrigen) VALUES ('Geodinámica interna',1,1);
+INSERT INTO `BDSIGPE`.`TipoAmenaza` (`descripcion`,`isActivo`,FkidOrigen) VALUES ('Hidrometereológicas',1,1);
+INSERT INTO `BDSIGPE`.`TipoAmenaza` (`descripcion`,`isActivo`,FkidOrigen) VALUES ('Geodinamica externa',1,1);
+INSERT INTO `BDSIGPE`.`TipoAmenaza` (`descripcion`,`isActivo`,FkidOrigen) VALUES ('Biológicas',1,1);
+INSERT INTO `BDSIGPE`.`TipoAmenaza` (`descripcion`,`isActivo`,FkidOrigen) VALUES ('Socio-natural',1,2);
+INSERT INTO `BDSIGPE`.`TipoAmenaza` (`descripcion`,`isActivo`,FkidOrigen) VALUES ('Antrópica',1,3);
+
+
+
+ 
+drop table TipoPoblacion;
+drop table Formulario;
+drop table SubCapitulo;
+drop table Capitulo;
+drop table CategoriaTipoAmenaza;
+drop table TipoAmenaza;
+drop table OrigenAmenaza;
+drop table ZonaTrabajo;

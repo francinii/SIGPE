@@ -15,7 +15,7 @@ $ip .= $mySessionController->getVar("cds_locate");
 $page_cant = $mySessionController->getVar("page_cant");
 
 //
-$sql = "SELECT COUNT(idCapitulo) AS cant
+$sql = "SELECT COUNT(id) AS cant
         FROM capitulo";
 
 $find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
@@ -35,7 +35,7 @@ if (!$page) {
 }
 
 /* * ********************************************************************************************** */
-$sql = "SELECT  idCapitulo, orden,titulo
+$sql = "SELECT  id, orden,titulo
         FROM capitulo";
 
 $find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
@@ -47,7 +47,7 @@ $order_key = (isset($_GET['order_key'])) ? $_GET['order_key'] : '';
 if ($order_key != "") {
     $sql.=" ORDER BY " . $order_key;
 } else {
-    $sql.=" ORDER BY idCapitulo";
+    $sql.=" ORDER BY id";
 }
 
 $sql.=" limit " . (int) $start . "," . (int) $page_cant . ";";
@@ -83,44 +83,44 @@ $res = seleccion($sql);
                     for ($i = 0; $i < count($res); $i++) {
                         ?>
                         <tr id="fila<?= $i ?>"  align='center'>
-                            <td><?= $res[$i]['idCapitulo'] ?></td>
+                            <td><?= $res[$i]['id'] ?></td>
                             <td><?= $res[$i]['orden'] ?></td>
                             <td><?= $res[$i]['titulo'] ?></td>
                             <?php if (check_permiso($act2, $act1, $user_rol)) { ?>
                                 <td>
-                                    <?php if ($res[$i]['idCapitulo'] != 1) { ?>
-                                        <a class="puntero" onClick="javascript:OpcionMenu('mod/admin/rolls/edit_roll.php?', 'id_roll=<?= $res[$i]["idCapitulo"] ?>&view_mode=0');">
+                                    <?php if ($res[$i]['id'] != 1) { ?>
+                                        <a class="puntero" onClick="javascript:OpcionMenu('mod/admin/rolls/edit_roll.php?', 'id_roll=<?= $res[$i]["id"] ?>&view_mode=0');">
                                         <?php } else { ?>
                                             <a style="cursor: not-allowed; ">
                                         <?php }?>
                                         <div class="text-center"><i class="fa fa-eye text-primary" title="<?= $vocab["symbol_view"] ?>"></i></div>
-                                        <?php if ($res[$i]['idCapitulo'] != 1) { ?>
+                                        <?php if ($res[$i]['id'] != 1) { ?>
                                         </a>
                                     <?php } ?>
                                 </td>
                             <?php } ?>
                             <?php if (check_permiso($act2, $act4, $user_rol)) { ?>
                                 <td>
-                                    <?php if ($res[$i]['idCapitulo'] != 1) { ?>
+                                    <?php if ($res[$i]['id'] != 1) { ?>
                                         <a class="puntero" " onClick="javascript:OpcionMenu('mod/admin/rolls/edit_roll.php?', 'id_roll=<?= $res[$i]["id_roll"] ?>&view_mode=1');">
                                         <?php } else { ?>
                                             <a style="cursor: not-allowed; ">
                                         <?php }?>
                                         <div class="text-center"><i class="fa fa-pencil text-success" title="<?= $vocab["symbol_edit"] ?>"></i></div>
-                                        <?php if ($res[$i]['idCapitulo'] != 1) { ?>
+                                        <?php if ($res[$i]['id'] != 1) { ?>
                                         </a>
                                     <?php } ?>
                                 </td>
                             <?php } ?>
                             <?php if (check_permiso($act2, $act5, $user_rol)) { ?>
                                 <td>
-                                    <?php if ($res[$i]['idCapitulo'] != 1) { ?>
-                                        <a class="puntero"  onClick="javascript:delete_roll(<?= $res[$i]['idCapitulo'] ?>);">
+                                    <?php if ($res[$i]['id'] != 1) { ?>
+                                        <a class="puntero"  onClick="javascript:delete_roll(<?= $res[$i]['id'] ?>);">
                                         <?php } else { ?>
                                             <a style="cursor: not-allowed; ">
                                         <?php }?>
                                         <div class="text-center"><i class="fa fa-close text-danger" title="<?= $vocab["symbol_delete"] ?>"></i></div>
-                                        <?php if ($res[$i]['idCapitulo'] != 1) { ?>
+                                        <?php if ($res[$i]['id'] != 1) { ?>
                                         </a>
                                     <?php } ?>
                                 </td>
