@@ -35,7 +35,7 @@ if (!$page) {
 }
 
 /* * ********************************************************************************************** */
-$sql = "SELECT  idCapitulo, orden,titulo
+$sql = "SELECT  id, orden,titulo
         FROM capitulo";
 
 $find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
@@ -47,7 +47,7 @@ $order_key = (isset($_GET['order_key'])) ? $_GET['order_key'] : '';
 if ($order_key != "") {
     $sql.=" ORDER BY " . $order_key;
 } else {
-    $sql.=" ORDER BY idCapitulo";
+    $sql.=" ORDER BY id";
 }
 
 $sql.=" limit " . (int) $start . "," . (int) $page_cant . ";";
@@ -83,7 +83,7 @@ $res = seleccion($sql);
                     for ($i = 0; $i < count($res); $i++) {
                         ?>
                         <tr id="fila<?= $i ?>"  align='center'>
-                            <td><?= $res[$i]['idCapitulo'] ?></td>
+                            <td><?= $res[$i]['id'] ?></td>
                             <td><?= $res[$i]['orden'] ?></td>
                             <td><?= $res[$i]['titulo'] ?></td>
                             <?php if (check_permiso($act2, $act1, $user_rol)) { ?>

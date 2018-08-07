@@ -20,9 +20,9 @@ $sql = "SELECT COUNT(id) AS cant
 
 $find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
 if ($find_key != "") {
-    $sql.=" WHERE roll_name LIKE  '%" . $find_key . "%'";
+    $sql .= " WHERE roll_name LIKE  '%" . $find_key . "%'";
 }
-$sql.=";";
+$sql .= ";";
 $res_cant = seleccion($sql);
 
 $cant_pagi = ceil((int) $res_cant[0]['cant'] / (int) $page_cant);
@@ -39,20 +39,18 @@ $sql = "SELECT  id, nombreZonaTrabajo FROM ZonaTrabajo";
 
 $find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
 if ($find_key != "") {
-    $sql.="  WHERE roll_name LIKE '%" . $find_key . "%'";
+    $sql .= "  WHERE nombreZonaTrabajo LIKE '%" . $find_key . "%'";
 }
 
 $order_key = (isset($_GET['order_key'])) ? $_GET['order_key'] : '';
 if ($order_key != "") {
-    $sql.=" ORDER BY " . $order_key;
+    $sql .= " ORDER BY " . $order_key;
 } else {
-    $sql.=" ORDER BY id";
+    $sql .= " ORDER BY id";
 }
 
-$sql.=" limit " . (int) $start . "," . (int) $page_cant . ";";
+$sql .= " limit " . (int) $start . "," . (int) $page_cant . ";";
 $res = seleccion($sql);
-
-
 
 ?>
 <!--  ****** Titulo ***** -->
@@ -64,7 +62,7 @@ $res = seleccion($sql);
                 <th width="10%"><?= $vocab["list_zona_trabajo_id"] ?></th>
                 <th width="50%"><?= $vocab["list_zona_trabajo_descripcion"] ?></th>              
                 <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
-                <th width="5%"><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
+                    <th width="5%"><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
                 <?php } ?>
                 <?php if (check_permiso($mod3, $act4, $user_rol)) { ?>
                     <th width="5%"><div class="text-center"><i class="fa fa-pencil fa-2x text-success puntero" title="<?= $vocab["symbol_edit"] ?>"></i></div></th>
@@ -75,65 +73,37 @@ $res = seleccion($sql);
             </tr>
         </thead>
         <tbody>
-             <?php
-                if (count($res) > 0) {
-                    for ($i = 0; $i < count($res); $i++) {
-                        ?>
-                        <tr id="fila<?= $i ?>"  align='center'>
+            <?php
+            if (count($res) > 0) {
+                for ($i = 0; $i < count($res); $i++) {
+                    ?>
+                    <tr id="fila<?= $i ?>"  align='center'>                        
+                        <?php if (check_permiso($act2, $act1, $user_rol)) { ?>
                             <td><?= $res[$i]['id'] ?></td>
-                            <td><?= $res[$i]['nombreZonaTrabajo'] ?></td>
-                            <?php if (check_permiso($act2, $act1, $user_rol)) { ?>
-                                <td>
-                                    <?php if ($res[$i]['id_roll'] != 1) { ?>
-                                        <a class="puntero" onClick="javascript:OpcionMenu('mod/admin/rolls/edit_roll.php?', 'id_roll=<?= $res[$i]["id_roll"] ?>&view_mode=0');">
-                                        <?php } else { ?>
-                                            <a style="cursor: not-allowed; ">
-                                        <?php }?>
-                                        <div class="text-center"><i class="fa fa-eye text-primary" title="<?= $vocab["symbol_view"] ?>"></i></div>
-                                        <?php if ($res[$i]['id_roll'] != 1) { ?>
-                                        </a>
-                                    <?php } ?>
-                                </td>
+                        <td><?= $res[$i]['nombreZonaTrabajo'] ?></td>
+                            <?php if (check_permiso($mod1, $act1, $user_rol)) { ?>
                             <?php } ?>
-                            <?php if (check_permiso($act2, $act4, $user_rol)) { ?>
-                                <td>
-                                    <?php if ($res[$i]['id_roll'] != 1) { ?>
-                                        <a class="puntero"  onClick="javascript:OpcionMenu('mod/admin/rolls/edit_roll.php?', 'id_roll=<?= $res[$i]["id_roll"] ?>&view_mode=1');">
-                                        <?php } else { ?>
-                                            <a style="cursor: not-allowed; ">
-                                        <?php }?>
-                                        <div class="text-center"><i class="fa fa-pencil text-success" title="<?= $vocab["symbol_edit"] ?>"></i></div>
-                                        <?php if ($res[$i]['id_roll'] != 1) { ?>
-                                        </a>
-                                    <?php } ?>
-                                </td>
-                            <?php } ?>
-                            <?php if (check_permiso($act2, $act5, $user_rol)) { ?>
-                                <td>
-                                    <?php if ($res[$i]['id_roll'] != 1) { ?>
-                                        <a class="puntero" onClick="javascript:delete_roll(<?= $res[$i]['id_roll'] ?>);">
-                                        <?php } else { ?>
-                                            <a style="cursor: not-allowed; ">
-                                        <?php }?>
-                                        <div class="text-center"><i class="fa fa-close text-danger" title="<?= $vocab["symbol_delete"] ?>"></i></div>
-                                        <?php if ($res[$i]['id_roll'] != 1) { ?>
-                                        </a>
-                                    <?php } ?>
-                                </td>
-                            <?php } ?>
-                        </tr>
-                    <?php } ?>
-                <?php } else { ?>
-                    <tr id="fila0" align='center'>
-                        <td colspan="4"><?= $vocab["symbol_no_data"] ?></td>
-                    </tr>   
-                <?php } ?>
+                            <td><a class="puntero" onClick="javascript:OpcionMenu('mod/admin/permits/edit_mod.php?', 'id=<?= $res[$i]["id"] ?>&view_mode=0');"><div class="text-center"><i class="fa fa-eye text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></a></td>
+                        <?php } ?>
+                        <?php if (check_permiso($mod1, $act4, $user_rol)) { ?>
+                            <td><a class="puntero" onClick="javascript:OpcionMenu('mod/admin/permits/edit_mod.php?', 'id=<?= $res[$i]["id"] ?>&view_mode=1');"><div class="text-center"><i class="fa fa-pencil text-success puntero" title="<?= $vocab["symbol_edit"] ?>"></i></div></a></td>
+                        <?php } ?>
+                        <?php if (check_permiso($mod1, $act5, $user_rol)) { ?>
+                            <td><a class="puntero" onClick="javascript:delete_mod(<?= $res[$i]['id'] ?>);"><div class="text-center"><i class="fa fa-close text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></a></td>
+                        <?php } ?>
+                    </tr>  
+                <?php } ?>                 
+            <?php } else { ?>
+                <tr id="fila0" align='center'>
+                    <td colspan="4"><?= $vocab["symbol_no_data"] ?></td>
+                </tr>   
+            <?php } ?>
         </tbody>
         <tfoot>
             <tr>
                 <th><?= $vocab["list_zona_trabajo_id"] ?></th>
                 <th><input type="text" name="nombre_search" id="nombre_search" value="<?= $vocab["symbol_name"] ?>" class="search_init" /></th>
-               <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
+                <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
                     <th><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
                 <?php } ?>
                 <?php if (check_permiso($mod3, $act4, $user_rol)) { ?>
@@ -148,7 +118,7 @@ $res = seleccion($sql);
     <?php /*     * ***************************************************************************************** */ ?>
     <br/>
     <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
-    <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonasTrabajo/new_zona_trabajo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["zona_trabajo_title"] ?></a></div>
+        <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonasTrabajo/new_zona_trabajo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["zona_trabajo_title"] ?></a></div>
     <?php } ?>
 </div>
 
