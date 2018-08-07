@@ -15,26 +15,27 @@ $ip .= $mySessionController->getVar("cds_locate");
 $page_cant = $mySessionController->getVar("page_cant");
 
 // para realizar la busqueda
-$sql = "SELECT COUNT(idCapitulo) AS cant
-        FROM capitulo";
-
-$find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
-if ($find_key != "") {
-    $sql.=" WHERE titulo LIKE  '%" . $find_key . "%'";
-}
-$sql.=";";
-$res_cant = seleccion($sql);
-
-$cant_pagi = ceil((int) $res_cant[0]['cant'] / (int) $page_cant);
-$page = (isset($_GET["page"])) ? $_GET["page"] : "1";
-if (!$page) {
-    $start = 0;
-    $page = 1;
-} else {
-    $start = (isset($_GET["start"])) ? $_GET["start"] : "0";
-}
+//$sql = "SELECT COUNT(idCapitulo) AS cant
+//        FROM capitulo";
+//
+//$find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
+//if ($find_key != "") {
+//    $sql.=" WHERE titulo LIKE  '%" . $find_key . "%'";
+//}
+//$sql.=";";
+//$res_cant = seleccion($sql);
+//
+//$cant_pagi = ceil((int) $res_cant[0]['cant'] / (int) $page_cant);
+//$page = (isset($_GET["page"])) ? $_GET["page"] : "1";
+//if (!$page) {
+//    $start = 0;
+//    $page = 1;
+//} else {
+//    $start = (isset($_GET["start"])) ? $_GET["start"] : "0";
+//}
 
 /* * ********************************************************************************************** */
+$start="0";
 $sql = "SELECT  id, orden,titulo
         FROM capitulo";
 
@@ -94,26 +95,18 @@ $res = seleccion($sql);
                                 </td>
                             <?php } ?>
                             <?php if (check_permiso($act2, $act4, $user_rol)) { ?>
-                                <td>
-                           
-                                        <a class="puntero"  onClick="javascript:OpcionMenu('mod/admin/rolls/edit_roll.php?', 'id_roll=<?= $res[$i]["idCapitulo"] ?>&view_mode=1');">
-                                      
-                                        <div class="text-center"><i class="fa fa-pencil text-success" title="<?= $vocab["symbol_edit"] ?>"></i></div>
-                                    
+                                <td>                           
+                                        <a class="puntero"  onClick="javascript:OpcionMenu('mod/admin/rolls/edit_roll.php?', 'id_roll=<?= $res[$i]["idCapitulo"] ?>&view_mode=1');">                                      
+                                        <div class="text-center"><i class="fa fa-pencil text-success" title="<?= $vocab["symbol_edit"] ?>"></i></div>                                    
                                         </a>
                                   
                                 </td>
                             <?php } ?>
                             <?php if (check_permiso($act2, $act5, $user_rol)) { ?>
-                                <td>
-               
-                                        <a class="puntero"  onClick="javascript:delete_roll(<?= $res[$i]['idCapitulo'] ?>);">
-                                    
-                                         
-                                        <div class="text-center"><i class="fa fa-close text-danger" title="<?= $vocab["symbol_delete"] ?>"></i></div>
-                                       
-                                        </a>
-                             
+                                <td>              
+                                        <a class="puntero"  onClick="javascript:delete_roll(<?= $res[$i]['idCapitulo'] ?>);">                                 
+                                        <div class="text-center"><i class="fa fa-close text-danger" title="<?= $vocab["symbol_delete"] ?>"></i></div>                                       
+                                        </a>                             
                                 </td>
                             <?php } ?>
                         </tr>
