@@ -23,12 +23,11 @@
 <script language="JavaScript" type="text/javascript" src="inc/js/roll.js"></script>
 <script language="JavaScript" type="text/javascript"  src="inc/js/user.js"></script>
 
-<!-- adminCapitulos -->
+<!-- adminCapitulos danny -->
 
 <script type="text/javascript" src="lib/ckeditor/ckeditor.js"></script>
 <script language="JavaScript" type="text/javascript" src="inc/js/adminCapitulos.js"></script>
 <script language="JavaScript" type="text/javascript" src="inc/js/adminSubcapitulo.js"></script>
-
 
 
 
@@ -50,3 +49,4 @@
 <link href="inc/css/estilo.css" rel="stylesheet" type="text/css"/>
 
 <?php require_once 'config.inc';?>
+
