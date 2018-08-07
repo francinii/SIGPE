@@ -61,7 +61,7 @@ $res = seleccion($sql);
             <tr>
                 <th width="10%"><?= $vocab["list_origen_amenaza_id"] ?></th>
                 <th width="50%"><?= $vocab["list_origen_amenaza_descripcion"] ?></th> 
-                <th width="5%"><?= $vocab["list_origen_amenaza_isActivo"] ?></th>
+                <th width="5%"><?= $vocab["isActivo"] ?></th>
                 <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
                     <th width="5%"><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
                 <?php } ?>
@@ -105,7 +105,7 @@ $res = seleccion($sql);
             <tr>
                 <th><?= $vocab["list_origen_amenaza_id"] ?></th>
                 <th><?= $vocab["list_origen_amenaza_descripcion"] ?></th> 
-                <th><?= $vocab["list_origen_amenaza_isActivo"] ?></th>                
+                <th><?= $vocab["isActivo"] ?></th>                
                 <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
                     <th><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
                 <?php } ?>

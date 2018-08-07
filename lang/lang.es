@@ -106,26 +106,37 @@ $vocab["user_perfil_desc"]      = "Información de usuario personal";
 
 
 //***************************** Modulo matriz de riesgos******************************//
-$vocab["origen_amenaza_title"]                  = "Origen";
+$vocab["isActivo"]          = "Activo";
+$vocab["isInactivo"]          = "Inactivo";
+
+$vocab["origen_amenaza_title"]                  = "Origen de la amenaza";
 $vocab["list_origen_amenaza_title"]             = "Or&iacute;gen de la amenaza";
 $vocab["list_origen_amenaza_id"]                = "Id";
-$vocab["list_origen_amenaza_descripcion"]       = "Informaci&iacute; del origen de la amenaza";
-$vocab["list_origen_amenaza_isActivo"]          = "Activo";
+$vocab["list_origen_amenaza_descripcion"]       = "Origen de la amenaza";
+$vocab["list_origen_amenaza_isActivo"]          = "Activar origen de la amenaza";
+$vocab["desc_origen_isActivo"]                 = "Active o desactive el origen";
 $vocab["nombre_origen_amenaza"]                 = "Nombre del origen de la amenaza";
-$vocab["nombre_desc_origen_amenaza"]                 = "Escriba el nombre de la nueva amenaza";
+$vocab["nombre_desc_origen_amenaza"]            = "Escriba el nombre de la nueva amenaza";
 
-
-$vocab["tipo_amenaza_title"]                    = "Tipo";
+$vocab["tipo_amenaza_title"]                    = "Tipo de la amenaza";
 $vocab["list_tipo_amenaza_title"]               = "Tipo de amenaza";
 $vocab["list_tipo_amenaza_id"]                  = "Id";
-$vocab["list_tipo_amenaza_descripcion"]         = "Informaci&iacute; del tipo de amenaza";
-$vocab["list_tipo_amenaza_isActivo"]            = "Activo";
+$vocab["list_tipo_amenaza_descripcion"]         = "Tipo de amenaza";
+$vocab["list_tipo_amenaza_isActivo"]          = "Activar tipo de amenaza";
+$vocab["desc_tipo_isActivo"]                  = "Active o desactive el tipo de amenaza";
+$vocab["nombre_tipo_amenaza"]                 = "Nombre del tipo de amenaza";
+$vocab["nombre_desc_tipo_amenaza"]            = "Escriba el nombre del nuevo tipo de amenaza";
+
+
 
 $vocab["categoria_amenaza_title"]               = "Categoria";
 $vocab["list_categoria_amenaza_title"]          = "Categor&iacute;a de amenaza";
 $vocab["list_categoria_amenaza_id"]             = "Id";
 $vocab["list_categoria_amenaza_descripcion"]    = "Informaci&iacute; de la categoria de amenaza";
-$vocab["list_categoria_amenaza_isActivo"]            = "Activo";
+$vocab["list_categoria_amenaza_isActivo"]          = "Activar categoria de amenaza";
+$vocab["desc_categoria_isActivo"]                  = "Active o desactive la categoria de amenaza";
+$vocab["nombre_categoria_amenaza"]                 = "Nombre de la categoria de amenaza";
+$vocab["nombre_desc_categoria_amenaza"]            = "Escriba el nombre de la nueva categoria de amenaza";
 //***************************** Modulo zona de trabajo******************************//
 $vocab["zona_trabajo_title"]               = "Zona de trabajo";
 $vocab["list_zona_trabajo_title"]          = "Zona de trabajo";
