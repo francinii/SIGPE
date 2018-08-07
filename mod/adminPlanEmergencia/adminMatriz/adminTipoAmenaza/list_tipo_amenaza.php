@@ -2,8 +2,8 @@
 /**
  * Lista los roles del sistema, no utilizar este tipo de tablas para los modulos
  */
-include("../../login/check.php");
-include("../../../functions.php");
+include("../../../login/check.php");
+include("../../../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
 
