@@ -63,7 +63,10 @@ $res = seleccion($sql);
         <thead>
             <tr>
                 <th width="10%"><?= $vocab["list_capitulo_id"] ?></th>
-                <th width="50%"><?= $vocab["list_capitulo_order"] ?></th>
+                  <th width="10%"><?= $vocab["list_capitulo_order"] ?></th>
+                <th width="10%">
+                <a class="btn btn-success" name="submit" onclick="javascript:ordenarCapitulos();"><?= $vocab["list_capitulo_ordenar"] ?></a>
+                </th>
                 <th width="50%"><?= $vocab["list_capitulo_title"] ?></th> 
                 <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
                     <th width="5%"><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
@@ -84,6 +87,7 @@ $res = seleccion($sql);
                     <tr id="fila<?= $i ?>"  align='center'>
                         <td><?= $res[$i]['id'] ?></td>
                         <td><?= $res[$i]['orden'] ?></td>
+                        <td><a href="#" class="up"><span class="glyphicon glyphicon-triangle-top"></span></a> <a href="#" class="down">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-triangle-bottom"></span></a></td>
                         <td><?= $res[$i]['titulo'] ?></td>
                         <?php if (check_permiso($act2, $act1, $user_rol)) { ?>
                             <td>                      
@@ -117,8 +121,9 @@ $res = seleccion($sql);
         </tbody>
         <tfoot>
             <tr>
-                <th><?= $vocab["list_capitulo_id"] ?></th>
-                <th width="50%"><?= $vocab["list_capitulo_order"] ?></th>
+              <th width="10%"><?= $vocab["list_capitulo_id"] ?></th>
+                  <th width="10%"><?= $vocab["list_capitulo_order"] ?></th>
+                <th width="10%"><?= $vocab["list_capitulo_ordenar"] ?></th>
                 <th width="50%"><?= $vocab["list_capitulo_title"] ?></th> 
                 <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
                     <th><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
@@ -139,5 +144,11 @@ $res = seleccion($sql);
     <?php } ?>   
 
 </div>
+
+<script>
+    
+flechasCapitulos();
+
+</script>
 
 

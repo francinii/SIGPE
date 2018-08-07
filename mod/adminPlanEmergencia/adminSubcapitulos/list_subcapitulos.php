@@ -65,11 +65,11 @@ $comb = seleccion($sql);
 // select lista
 $sql = "SELECT  id, orden,titulo
         FROM subcapitulo";
-$find_key='';
+$find_key='0';
 if ((isset($_GET['find_key'])) ){
 $find_key =$_GET['find_key']; 
 }else if (count($comb) > 0){
-    $comb[0]['id'];
+   $find_key = $comb[0]['id'];
 }
 if ($find_key != "") {    
     $sql .= "  WHERE FKidCapitulo =" . $find_key . "";
@@ -127,7 +127,9 @@ $res = seleccion($sql);
         <thead>
             <tr>
                 <th width="10%"><?= $vocab["list_subcapitulo_id"] ?></th>
-                <th width="10%"><?= $vocab["list_subcapitulo_order"] ?></th>
+                <th width="10%">
+                <a class="btn btn-success" name="submit" onclick="javascript:ordenarCapitulos()"><?= $vocab["list_subcapitulo_order"] ?></a>
+                </th>
                 <th width="50%"><?= $vocab["list_subcapitulo_title"] ?></th>
                
                 <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
@@ -201,6 +203,6 @@ $res = seleccion($sql);
     <?php /*     * ***************************************************************************************** */ ?>
     <br/>
     <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
-        <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/new_capitulo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["add_subcapitulo"] ?></a></div>
+        <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminSubcapitulos/new_subcapitulo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["add_subcapitulo"] ?></a></div>
     <?php } ?>
 </div>

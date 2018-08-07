@@ -154,7 +154,7 @@ $vocab["add_capitulo"]              = "capitulos";
 $vocab["list_capitulo_title"]       = "Titulo";
 $vocab["list_capitulo_id"]          = "Id";
 $vocab["list_capitulo_order"]       = "orden";
-
+$vocab["list_capitulo_ordenar"]       = "ordenar";
 
 $vocab["capitulo_capitulo"]         = "Capitulo";
 $vocab["capitulo_capitulo_Desc"]    = "Capitulos del reporte";
