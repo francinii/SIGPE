@@ -1,15 +1,23 @@
 /**
- *  Valida la información del origen de la amenaza
+ *  Valida la información del categoria de la amenaza
  * @returns {boolean}
  */
-function validate_origen_amenaza() {
+function validate_categoria_amenaza() {
     var nombre = document.getElementById('nombre');
     if (nombre.value == "") {
-        jAlert("Ingrese el nombre del origen de la amenaza", "Dato Requerido");
+        jAlert("Ingrese el nombre del categoria de la amenaza", "Dato Requerido");
         nombre.setAttribute("style", "background-color:#EDF0FF");
         nombre.focus();
         return false;
-    } 
+    }
+    var select_tipo = document.getElementById('select_tipo').value;
+    if (select_tipo == "") {
+        jAlert("Seleccione un tipo de amenaza", "Dato Requerido");
+        select_tipo.setAttribute("style", "background-color:#EDF0FF");
+        select_tipo.focus();
+        return false;
+    }
+
 
     return true;
 }
@@ -19,37 +27,42 @@ function validate_origen_amenaza() {
  * @param {int} status verifica si se usa LDAP 0 = No, 1 =Si
  * @returns {undefined} redirecciona a la lista de usuarios
  */
-function new_origen_amenaza() {
-    if (validate_origen_amenaza()) {
+function new_categoria_amenaza() {
+    if (validate_categoria_amenaza()) {
         var loading = document.getElementById('loading_container');
         loading.innerHTML = cargando_bar;
         //Obtener Valores
         var nombre = document.getElementById('nombre').value;
         var activo = 0;
-        if(document.getElementById('inlineCheckbox1').checked) activo = 1;
-        else activo = 0;
+        if (document.getElementById('inlineCheckbox1').checked)
+            activo = 1;
+        else
+            activo = 0;        
         
+        var select_tipo = document.getElementById('select_tipo').value;
+            alert(select_tipo);
         var ajax = NuevoAjax();
         var _values_send =
                 'nombre=' + nombre +
-                '&inlineCheckbox=' + activo;
-        var _URL_ = "mod/adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/ajax_new_origen_amenaza.php?";
+                '&inlineCheckbox=' + activo +
+                '&select_tipo=' + activo;
+        var _URL_ = "mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/ajax_new_categoria_amenaza.php?";
         //alert(_URL_ + _values_send); //DEBUG
         ajax.open("GET", _URL_ + _values_send, true);
-        ajax.onreadystatechange = function() {
+        ajax.onreadystatechange = function () {
             if (ajax.readyState == 1) {
-             
+
                 //Nada
             } else if (ajax.readyState == 4) {
                 var response = ajax.responseText;
                 //alert(response); //DEBUG
                 if (response == 0) {
                     jAlert("Origen añadido con exito", "Exito");
-                    OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/list_origen_amenaza.php?', '');
+                    OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/list_categoria_amenaza.php?', '');
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else if (response == 3) {
-                    jAlert("El origen ya existe.\n Consulte a la USTDS", "Usuario ya existe");
+                    jAlert("El categoria ya existe.\n Consulte a la USTDS", "Usuario ya existe");
                 } else {
                     jAlert("Ocurrio un error inesperado.\n Consulte a la USTDS", "Error inesperado");
                 }
@@ -62,7 +75,7 @@ function new_origen_amenaza() {
 /**
  * Actualiza la informacion del usuario
  * @param {string} id_user identificador del usuario que se actualiza
-lñp * @returns {undefined} N/A
+ lñp * @returns {undefined} N/A
  */
 //function update_user(id_user){
 //    if (validate_user(1)) {
@@ -73,7 +86,7 @@ lñp * @returns {undefined} N/A
 //        var nombre = document.getElementById('nombre_txt').value;
 //        var email = document.getElementById('correo_txt').value;
 //        var telefono = document.getElementById('telefono_txt').value;
-//        var id_origen_tel = document.getElementById('origen_tel').value;
+//        var id_tipo_tel = document.getElementById('tipo_tel').value;
 //        var id_roll = document.getElementById('rol_slc').value;
 //        //Preparacion  llamada AJAX 
 //        var ajax = NuevoAjax();
@@ -82,7 +95,7 @@ lñp * @returns {undefined} N/A
 //                '&nombre=' + nombre +
 //                '&email=' + email +
 //                '&telefono=' + telefono +
-//                '&id_origen_tel=' + id_origen_tel +
+//                '&id_tipo_tel=' + id_tipo_tel +
 //                '&id_roll=' + id_roll;
 //        var _URL_ = "mod/admin/users/ajax_upd_user.php?";
 //        //alert(_URL_ + _values_send); //DEBUG

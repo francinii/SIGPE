@@ -5,7 +5,9 @@ include("../../../../inc/db/db.php");
 
 $nombre = $_GET['nombre'];
 $activo = $_GET['inlineCheckbox'];
-$sql_a = "CALL insert_origen_amenaza('$nombre','$activo',@res);";
+$tipoAmenaza = $_GET['select_tipo']; //fk a la tabla de tipos de amenaza
+
+$sql_a = "CALL insert_categoria_amenaza('$tipoAmenaza','$activo','$nombre',@res);";
 $sql_b = "SELECT @res as res;";
 //echo $sql_a.$sql_b;
 $res = transaccion_verificada($sql_a, $sql_b);

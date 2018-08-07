@@ -33,7 +33,7 @@
 
 <!-- adminitrar Origenes de amenazas -->
 <script language="JavaScript" type="text/javascript"  src="inc/js/origenAmenaza.js"></script>
-
+<script language="JavaScript" type="text/javascript"  src="inc/js/categoriaAmenaza.js"></script>
 
 
 <!-- Bootstrap + Font-Awesome + Estilo -->
