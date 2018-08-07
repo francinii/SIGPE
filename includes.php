@@ -27,6 +27,7 @@
 
 <script type="text/javascript" src="lib/ckeditor/ckeditor.js"></script>
 <script language="JavaScript" type="text/javascript" src="inc/js/adminCapitulos.js"></script>
+<script language="JavaScript" type="text/javascript" src="inc/js/adminSubcapitulo.js"></script>
 
 
 <!-- Bootstrap + Font-Awesome + Estilo -->

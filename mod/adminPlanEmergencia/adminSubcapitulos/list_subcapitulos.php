@@ -16,58 +16,81 @@ include("../../login/check.php");
 include("../../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
-$sAjaxSource = $mySessionController->getVar('cds_domain') . $mySessionController->getVar('cds_locate') . 'mod/admin/users/ajax_list_user.php';
-?>
-<!--  ****** Titulo ***** -->
-<div class="well well-sm"><h1><?= $vocab["list_subcapitulo"] ?></h1></div>
-<script type="text/javascript" charset="utf-8">
-    var asInitVals = new Array();   //Se utiliza para almacenar la llave del filtro para cada columna.
-    jQuery(document).ready(function () {
-//        var oTable = jQuery('#lista_usuarios').dataTable({
-//        //"sPaginationType": "full_numbers",
-//        "bProcessing": true,
-//                "bServerSide": true,
-//                "aaSorting": [[1, 'asc']],
-//                "aoColumns": [
-//                {"bSortable": true},
-//                        null,
-//                        null
-//<?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
-    //                    , {"bSortable": false}
-    //<?php } ?>
-//<?php if (check_permiso($mod3, $act4, $user_rol)) { ?>
-    //                    , {"bSortable": false}
-    //<?php } ?>
-//<?php if (check_permiso($mod3, $act5, $user_rol)) { ?>
-    //                    , {"bSortable": false}
-    //<?php } ?>
-//                ],
-//                "sAjaxSource"
-//                : "<?php //echo $sAjaxSource;  ?>"
-//    });
-        jQuery("tfoot input").keyup(function () {
-            /* Filter on the column (the index) of this element */
-            oTable.fnFilter(this.value, jQuery("tfoot input").index(this) + 1);
-        });
-        jQuery("tfoot input").each(function (i) {
-            asInitVals[i] = this.value;
-        });
 
-        jQuery("tfoot input").focus(function () {
-            if (this.className == "search_init")
-            {
-                this.className = "";
-                this.value = "";
-            }
-        });
-        jQuery("tfoot input").blur(function (i) {
-            if (this.value == "")
-            {
-                this.className = "search_init";
-                this.value = asInitVals[jQuery("tfoot input").index(this)];
-            }
-        });
-    });</script>
+/* * *************************************************************************************** */
+//Informacion requerida obtenida de la sesion
+$ip = $mySessionController->getVar("cds_domain");
+$ip .= $mySessionController->getVar("cds_locate");
+
+$page_cant = $mySessionController->getVar("page_cant");
+
+// para realizar la busqueda
+//$sql = "SELECT COUNT(idCapitulo) AS cant
+//        FROM capitulo";
+//
+//$find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
+//if ($find_key != "") {
+//    $sql.=" WHERE titulo LIKE  '%" . $find_key . "%'";
+//}
+//$sql.=";";
+//$res_cant = seleccion($sql);
+//
+//$cant_pagi = ceil((int) $res_cant[0]['cant'] / (int) $page_cant);
+//$page = (isset($_GET["page"])) ? $_GET["page"] : "1";
+//if (!$page) {
+//    $start = 0;
+//    $page = 1;
+//} else {
+//    $start = (isset($_GET["start"])) ? $_GET["start"] : "0";
+//}
+
+/* * ********************************************************************************************** */
+$start = "0";
+
+
+// select para llenar el combo
+$sql = "SELECT  id,titulo FROM capitulo";
+
+$find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
+if ($find_key != "") {
+    $sql .= "  WHERE titulo LIKE '%" . $find_key . "%'";
+}
+$order_key = (isset($_GET['order_key'])) ? $_GET['order_key'] : 'orden';
+if ($order_key != "") {
+    $sql .= " ORDER BY " . $order_key;
+} else {
+    $sql .= " ORDER BY id";
+}
+
+$sql .= " limit " . (int) $start . "," . (int) $page_cant . ";";
+$comb = seleccion($sql);
+
+// select lista
+$sql = "SELECT  id, orden,titulo
+        FROM subcapitulo";
+$find_key='';
+if ((isset($_GET['find_key'])) ){
+$find_key =$_GET['find_key']; 
+}else if (count($comb) > 0){
+    $comb[0]['id'];
+}
+if ($find_key != "") {    
+    $sql .= "  WHERE FKidCapitulo =" . $find_key . "%";
+}
+$order_key = (isset($_GET['order_key'])) ? $_GET['order_key'] : '';
+if ($order_key != "") {
+    $sql .= " ORDER BY " . $order_key;
+} else {
+    $sql .= " ORDER BY id";
+}
+
+$sql .= " limit " . (int) $start . "," . (int) $page_cant . ";";
+$res = seleccion($sql);
+
+?>
+<!--***** Titulo ***** -->
+<div class="well well-sm"><h1><?= $vocab["list_subcapitulo"] ?></h1></div>
+
 <!-- div original anterior a integración bootstrap3 
 <div style=" width: 800px; margin: 0 auto;"  class="ex_highlight_row"> -->
 
@@ -77,10 +100,18 @@ $sAjaxSource = $mySessionController->getVar('cds_domain') . $mySessionController
         <div class="form-group">
             <label class="control-label col-sm-2" for="list_subcapitulo_capitulo"><?= $vocab["subcapitulo_capitulo"] ?></label>
             <div class="col-sm-10">
-                <select id="list_subcapitulo_capitulo" class="form-control">
-                    <option>Mustard</option>
-                    <option>Ketchup</option>
-                    <option>Relish</option>
+                <select id="list_subcapitulo_capitulo" class="form-control" onchange="javascript: var find_key=$('#list_subcapitulo_capitulo').value; OpcionMenu('mod/adminPlanEmergencia/adminSubcapitulos/list_subcapitulo.php?', 'find_key='+find_key)>
+                 <?php
+                    
+                 if (count($comb) > 0) {
+                     for ($i = 0; $i < count($comb); $i++) {
+                        ?>
+                    <option value="<?= $comb[$i]['id'] ?>"><?= $comb[$i]['titulo'] ?></option>
+                 <?php
+                     }
+                }
+                 ?>
+                   
                 </select>
             </div>
         </div>
@@ -95,7 +126,7 @@ $sAjaxSource = $mySessionController->getVar('cds_domain') . $mySessionController
                 <th width="10%"><?= $vocab["list_subcapitulo_id"] ?></th>
                 <th width="10%"><?= $vocab["list_subcapitulo_order"] ?></th>
                 <th width="50%"><?= $vocab["list_subcapitulo_title"] ?></th>
-                <th width="50%"><?= $vocab["list_subcapitulo_Descripcion"] ?></th> 
+               
                 <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
                     <th width="5%"><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
                 <?php } ?>
@@ -108,16 +139,50 @@ $sAjaxSource = $mySessionController->getVar('cds_domain') . $mySessionController
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td colspan="6" class="dataTables_empty"><?= $vocab["symbol_no_data"] ?>
-            </tr>
+            <?php
+            if (count($res) > 0) {
+                for ($i = 0; $i < count($res); $i++) {
+                    ?>
+                    <tr id="fila<?= $i ?>"  align='center'>
+                        <td><?= $res[$i]['id'] ?></td>
+                        <td><?= $res[$i]['orden'] ?></td>
+                        <td><?= $res[$i]['titulo'] ?></td>
+                        <?php if (check_permiso($act2, $act1, $user_rol)) { ?>
+                            <td>                      
+                                <a class="puntero" onClick="javascript:OpcionMenu('mod/admin/rolls/edit_roll.php?', 'id_roll=<?= $res[$i]["id"] ?>&view_mode=0');">                                     
+                                    <div class="text-center"><i class="fa fa-eye text-primary" title="<?= $vocab["symbol_view"] ?>"></i></div>                                  
+                                </a>                                  
+                            </td>
+                        <?php } ?>
+                        <?php if (check_permiso($act2, $act4, $user_rol)) { ?>
+                            <td>                           
+                                <a class="puntero"  onClick="javascript:OpcionMenu('mod/admin/rolls/edit_roll.php?', 'id_roll=<?= $res[$i]["id"] ?>&view_mode=1');">                                      
+                                    <div class="text-center"><i class="fa fa-pencil text-success" title="<?= $vocab["symbol_edit"] ?>"></i></div>                                    
+                                </a>
+
+                            </td>
+                        <?php } ?>
+                        <?php if (check_permiso($act2, $act5, $user_rol)) { ?>
+                            <td>              
+                                <a class="puntero"  onClick="javascript:delete_roll(<?= $res[$i]['id'] ?>);">                                 
+                                    <div class="text-center"><i class="fa fa-close text-danger" title="<?= $vocab["symbol_delete"] ?>"></i></div>                                       
+                                </a>                             
+                            </td>
+                        <?php } ?>
+                    </tr>
+                <?php } ?>
+            <?php } else { ?>
+                <tr id="fila0" align='center'>
+                    <td colspan="4"><?= $vocab["symbol_no_data"] ?></td>
+                </tr>   
+            <?php } ?>
         </tbody>
         <tfoot>
             <tr>
                 <th><?= $vocab["list_capitulo_id"] ?></th>
                 <th><input type="text" name="nombre_search" id="nombre_search" value="<?= $vocab["symbol_name"] ?>" class="search_init" /></th>
                 <th width="50%"><?= $vocab["list_capitulo_title"] ?></th> 
-                <th width="50%"><?= $vocab["list_subcapitulo_Descripcion"] ?></th> 
+               
                 <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
                     <th><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
                 <?php } ?>
