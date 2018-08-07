@@ -14,7 +14,7 @@ $ip .= $mySessionController->getVar("cds_locate");
 
 $page_cant = $mySessionController->getVar("page_cant");
 
-//
+// para realizar la busqueda
 $sql = "SELECT COUNT(idCapitulo) AS cant
         FROM capitulo";
 
@@ -87,42 +87,33 @@ $res = seleccion($sql);
                             <td><?= $res[$i]['orden'] ?></td>
                             <td><?= $res[$i]['titulo'] ?></td>
                             <?php if (check_permiso($act2, $act1, $user_rol)) { ?>
-                                <td>
-                                    <?php if ($res[$i]['idCapitulo'] != 1) { ?>
-                                        <a class="puntero" onClick="javascript:OpcionMenu('mod/admin/rolls/edit_roll.php?', 'id_roll=<?= $res[$i]["idCapitulo"] ?>&view_mode=0');">
-                                        <?php } else { ?>
-                                            <a style="cursor: not-allowed; ">
-                                        <?php }?>
-                                        <div class="text-center"><i class="fa fa-eye text-primary" title="<?= $vocab["symbol_view"] ?>"></i></div>
-                                        <?php if ($res[$i]['idCapitulo'] != 1) { ?>
-                                        </a>
-                                    <?php } ?>
+                                <td>                      
+                                        <a class="puntero" onClick="javascript:OpcionMenu('mod/admin/rolls/edit_roll.php?', 'id_roll=<?= $res[$i]["idCapitulo"] ?>&view_mode=0');">                                     
+                                       <div class="text-center"><i class="fa fa-eye text-primary" title="<?= $vocab["symbol_view"] ?>"></i></div>                                  
+                                        </a>                                  
                                 </td>
                             <?php } ?>
                             <?php if (check_permiso($act2, $act4, $user_rol)) { ?>
                                 <td>
-                                    <?php if ($res[$i]['idCapitulo'] != 1) { ?>
-                                        <a class="puntero" " onClick="javascript:OpcionMenu('mod/admin/rolls/edit_roll.php?', 'id_roll=<?= $res[$i]["id_roll"] ?>&view_mode=1');">
-                                        <?php } else { ?>
-                                            <a style="cursor: not-allowed; ">
-                                        <?php }?>
+                           
+                                        <a class="puntero"  onClick="javascript:OpcionMenu('mod/admin/rolls/edit_roll.php?', 'id_roll=<?= $res[$i]["idCapitulo"] ?>&view_mode=1');">
+                                      
                                         <div class="text-center"><i class="fa fa-pencil text-success" title="<?= $vocab["symbol_edit"] ?>"></i></div>
-                                        <?php if ($res[$i]['idCapitulo'] != 1) { ?>
+                                    
                                         </a>
-                                    <?php } ?>
+                                  
                                 </td>
                             <?php } ?>
                             <?php if (check_permiso($act2, $act5, $user_rol)) { ?>
                                 <td>
-                                    <?php if ($res[$i]['idCapitulo'] != 1) { ?>
+               
                                         <a class="puntero"  onClick="javascript:delete_roll(<?= $res[$i]['idCapitulo'] ?>);">
-                                        <?php } else { ?>
-                                            <a style="cursor: not-allowed; ">
-                                        <?php }?>
+                                    
+                                         
                                         <div class="text-center"><i class="fa fa-close text-danger" title="<?= $vocab["symbol_delete"] ?>"></i></div>
-                                        <?php if ($res[$i]['idCapitulo'] != 1) { ?>
+                                       
                                         </a>
-                                    <?php } ?>
+                             
                                 </td>
                             <?php } ?>
                         </tr>
