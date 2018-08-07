@@ -9,7 +9,7 @@ $user_rol = $mySessionController->getVar("rol");
         <h2><?= $vocab["capitulo_capitulo"] ?></h2>
         <p><?= $vocab["capitulo_capitulo_Desc"] ?></p>
     </div>
-    <div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
+    <div class="col-lg-8 col-md-8 col-sm-11 col-xs-12">
         <form method="post" action="">            
             <div class="form-group">
                 <label  for="capitulo_title"><?= $vocab["capitulo_title"] ?></label>
@@ -25,7 +25,6 @@ $user_rol = $mySessionController->getVar("rol");
                 <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
                     <div class="text-center"><a class="btn btn-success"  name="submit" onclick="new_user(1);"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] . " " . $vocab["capitulo_capitulo"] ?>  </a></div>
                 <?php } ?>
-
             
         </form>
     </div>

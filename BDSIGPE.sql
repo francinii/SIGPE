@@ -155,6 +155,42 @@ INSERT INTO `BDSIGPE`.`TipoAmenaza` (`descripcion`,`isActivo`,FkidOrigen) VALUES
 INSERT INTO `BDSIGPE`.`TipoAmenaza` (`descripcion`,`isActivo`,FkidOrigen) VALUES ('Antrópica',1,3);
 
 
+INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'PRESENTACIÓN',1);
+INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'Descripción del plan',2);
+INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'Documentos de referencia',3);
+INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'INFORMACIÓN GENERAL DE LA ORGANIZACIÓN',4);
+INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'VALORACIÓN DEL RIESGO',5);
+INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'POLÍTICA DE GESTIÓN DE RIESGOS',6);
+INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'ORGANIZACIÓN PARA LOS PREPARATIVOS Y RESPUESTA',7);
+INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'PLAN DE ACCIÓN',8);
+INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'MECANISMOS DE ACTIVACIÓN',9);
+INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'PROCEDIMIENTOS OPERATIVOS DE RESPUESTA',10);
+INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'EVALUACIÓN DEL PLAN DE PREPARATIVOS Y RESPUESTA',11);
+INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'DEFINICIONES Y TÉRMINOS',12);
+INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'ANEXO',13);
+
+
+INSERT INTO `subcapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, `orden`) VALUES ('<p>Es la condición o resultado cuantificable que debe ser alcanzado y mantenido, con la aplicación<br/>
+del procedimiento y que refleja el valor o beneficio que obtiene el usuario. El propósito debe<br/>
+redactarse en forma breve y concisa; especificará los resultados o condiciones que se desean<br/>
+lograr, iniciará con un verbo en infinitivo y, en lo posible, se evitará utilizar gerundios y adjetivos<br/>
+calificativos. El propósito debe quedar escrito en prosa, únicamente para la redacción de<br/>
+este se facilita la siguiente tabla, que no deberá incorporarse en el manual respectivo:</p>','Propósito',1,1,1);
+INSERT INTO `subcapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, `orden`) VALUES ('<p>En este apartado se describe brevemente el área o campo de aplicación del procedimiento;<br/>
+es decir, a quiénes afecta o qué límites o influencia tiene, representa la esfera de acción<br />
+que cubren los procedimientos.</p>','Alcance',1,1,2);
+INSERT INTO `subcapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, `orden`) VALUES ('<p>Aqu&iacute; se registra el compendio de normas aplicables al procedimiento, conforme a la secuencia<br />
+l&oacute;gica de las etapas del mismo. Es decir aquellas disposiciones internas que:</p>
+
+<p>&nbsp;&nbsp; a) Tienen como prop&oacute;sito regular la interacci&oacute;n entre los individuos en una</p>
+<p>&nbsp;&nbsp; organizaci&oacute;n y las actividades de una unidad responsable.</p>
+<p>&nbsp;&nbsp; b) Marcan responsabilidades y l&iacute;mites generales y espec&iacute;ficos, dentro de los cuales<br />
+&nbsp;&nbsp; se realizan leg&iacute;timamente las actividades en distintas &aacute;reas de acci&oacute;n.<br />
+&nbsp;&nbsp; c) Se aplican a todas las situaciones similares.<br />
+&nbsp;&nbsp; d) Dan orientaciones claras hacia donde deben dirigirse todas las actividades de un<br />
+&nbsp;&nbsp; mismo tipo.<br />
+&nbsp;&nbsp; e) Facilitan la toma de decisiones en actividades rutinarias.<br />
+&nbsp;&nbsp; f) Describen lo que la direcci&oacute;n desea que se haga en cada situaci&oacute;n definida.</p>','Marco normativo',1,1,3);
 
  
 drop table TipoPoblacion;

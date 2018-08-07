@@ -9,7 +9,7 @@ $user_rol = $mySessionController->getVar("rol");
         <h2><?= $vocab["subcapitulo_subcapitulo"] ?></h2>
         <p><?= $vocab["subcapitulo_subcapitulo_Desc"] ?></p>
     </div>
-    <div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
+    <div class="col-lg-8 col-md-8 col-sm-11 col-xs-12">
         <form method="post" action="">            
             <div class="form-group">
                 <label  for="capitulo_title"><?= $vocab["capitulo_title"] ?></label>
@@ -27,8 +27,8 @@ $user_rol = $mySessionController->getVar("rol");
                 <p class="help-block"><small><?= $vocab["subcapitulo_capitulo_Desc"] ?></small></p> 
             </div>
             <div class="form-group">
-                <label  for="capitulo_Descripcion"><?= $vocab["symbol_desc"] ?> </label>                
-                <textarea class="ckeditor form-control" id="capitulo_Descripcion" name="capitulo_Descripcion" ></textarea>
+                <label  for="Subcapitulo_Descripcion"><?= $vocab["symbol_desc"] ?> </label>                
+                <textarea class="ckeditor form-control" id="Subcapitulo_Descripcion" name="Subcapitulo_Descripcion" ></textarea>
                 <p class="help-block"><small><?= $vocab["subcapitulo_Descripcion"] ?></small></p> 
             </div>            
 
@@ -41,5 +41,5 @@ $user_rol = $mySessionController->getVar("rol");
     </div>
 </div>
 <script>
-    CrearEditorCapitulos();
+    CrearEditorSubcapitulos();
 </script>
