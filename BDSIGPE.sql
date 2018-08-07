@@ -207,7 +207,7 @@ drop table ZonaTrabajo;
 
 ------------------Procedimientos almacenados----------------------------------
 -- ----------------------------
--- Procedure structure for insert_user
+-- Proceso insertar origen de amenaza
 -- ----------------------------
 
 
@@ -239,4 +239,32 @@ END
 DELIMITER ;
 
 
+-- ----------------------------
+-- Proceso insertar categoria de amenaza
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `insert_categoria_amenaza`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_categoria_amenaza`(IN `p_nombre` varchar(150),IN `p_activo` int, IN  `p_fkTipoAmenaza` int,  OUT `res` TINYINT  UNSIGNED)
+BEGIN
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
 
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;
+            START TRANSACTION;
+                    INSERT INTO `CategoriaTipoAmenaza`(FKidTipoAmenaza,isActivo,descripcion) VALUES (p_fkTipoAmenaza, p_activo,p_nombre);
+            COMMIT;
+            -- SUCCESS
+            SET res = 0;
+            -- Existe usuario
+END
+;;
+DELIMITER ;
