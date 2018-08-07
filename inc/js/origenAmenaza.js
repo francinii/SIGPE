@@ -2,7 +2,7 @@
  *  Valida la información del origen de la amenaza
  * @returns {boolean}
  */
-function validate_user(status) {
+function validate_origen_amenaza() {
     var nombre = document.getElementById('nombre');
     if (nombre.value == "") {
         jAlert("Ingrese el nombre del origen de la amenaza", "Dato Requerido");
@@ -19,32 +19,33 @@ function validate_user(status) {
  * @param {int} status verifica si se usa LDAP 0 = No, 1 =Si
  * @returns {undefined} redirecciona a la lista de usuarios
  */
-function new_origen_amenaza(status) {
-    if (validate_user(status)) {
+function new_origen_amenaza() {
+    if (validate_origen_amenaza()) {
         var loading = document.getElementById('loading_container');
         loading.innerHTML = cargando_bar;
         //Obtener Valores
         var nombre = document.getElementById('nombre').value;
-        var activo =0;
+        var activo = 0;
         if(document.getElementById('inlineCheckbox1').checked) activo = 1;
         else activo = 0;
         
         var ajax = NuevoAjax();
         var _values_send =
                 'nombre=' + nombre +
-                '&activo=' + activo;
-        var _URL_ = "mod/adminCategoriaAmenaza/adminOrigenAmenaza/ajax_new_origenAmenaza.php?";
+                '&inlineCheckbox=' + activo;
+        var _URL_ = "mod/adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/ajax_new_origen_amenaza.php?";
         //alert(_URL_ + _values_send); //DEBUG
         ajax.open("GET", _URL_ + _values_send, true);
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 1) {
+             
                 //Nada
             } else if (ajax.readyState == 4) {
                 var response = ajax.responseText;
                 //alert(response); //DEBUG
                 if (response == 0) {
                     jAlert("Origen añadido con exito", "Exito");
-                    OpcionMenu('mod/adminCategoriaAmenaza/adminOrigenAmenaza/list_origenAmenaza.php?', '');
+                    OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/list_origen_amenaza.php?', '');
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else if (response == 3) {

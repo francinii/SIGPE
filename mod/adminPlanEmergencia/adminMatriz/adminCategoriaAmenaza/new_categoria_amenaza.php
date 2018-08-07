@@ -3,6 +3,12 @@ include("../../../login/check.php");
 include("../../../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
+
+
+$sql = "SELECT id, descripcion FROM TipoAmenaza";
+
+$res = seleccion($sql);
+$res_cant = count($res);
 ?>
 <div class="container">
     <div class="well well-sm">
@@ -12,16 +18,16 @@ $user_rol = $mySessionController->getVar("rol");
     <div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
         <form method="post" action="">
             <div class="form-group">
-                <label  for="id_user"><?= $vocab["nombre_categoria_amenaza"] ?> </label>
-                <input id="id_user" name="id_user" class="form-control" type="text" placeholder="<?= $vocab["nombre_categoria_amenaza"] ?>" onchange="javascrip:onchange_cedula();" onblur="javascrip:onchange_cedula();" /> 
+                <label  for="nombre"><?= $vocab["nombre_categoria_amenaza"] ?> </label>
+                <input id="nombre" name="nombre" class="form-control" type="text" placeholder="<?= $vocab["nombre_categoria_amenaza"] ?>" onchange="javascrip:onchange_cedula();" onblur="javascrip:onchange_cedula();" /> 
                 <p class="help-block"><small><?= $vocab["nombre_desc_categoria_amenaza"] ?></small></p> 
             </div>
             <div class="form-group">
-                <label  for="id_user"><?= $vocab["nombre_categoria_amenaza"] ?> </label>
-                <select class="form-control">
-                    <option>Mustard</option>
-                    <option>Ketchup</option>
-                    <option>Relish</option>
+                <label  for="select_origen"><?= $vocab["nombre_categoria_amenaza"] ?> </label>
+                <select id="select_origen" class="form-control">
+                    <?php for ($i = 0; $i < $res_cant; $i++) { ?>
+                        <option value = " <?= $categoria[$i]['id']; ?>"> <?= $categoria[$i]['descripcion']; ?></option>
+                    <?php } ?>
                 </select>
             </div>
             <div class="form-group">

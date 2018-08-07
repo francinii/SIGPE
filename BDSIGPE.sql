@@ -193,7 +193,7 @@ BEGIN
     ROLLBACK;
 	END;
             START TRANSACTION;
-                    INSERT INTO `OrigenAmenaza`(descripcion,isActivo) VALUES (p_nombre, p_pass, p_activo);
+                    INSERT INTO `OrigenAmenaza`(descripcion,isActivo) VALUES (p_nombre, p_activo);
             COMMIT;
             -- SUCCESS
             SET res = 0;

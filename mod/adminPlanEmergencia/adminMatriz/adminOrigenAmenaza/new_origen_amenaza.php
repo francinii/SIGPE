@@ -13,7 +13,7 @@ $user_rol = $mySessionController->getVar("rol");
         <form method="post" action="">
             <div class="form-group">
                 <label  for="nombre"><?= $vocab["nombre_origen_amenaza"] ?> </label>
-                <input id="nombre" name="nombre" class="form-control" type="text" placeholder="<?= $vocab["nombre_origen_amenaza"] ?>" onchange="javascrip:onchange_cedula();" onblur="javascrip:onchange_cedula();" /> 
+                <input id="nombre" name="nombre" class="form-control" type="text" placeholder="<?= $vocab["nombre_origen_amenaza"] ?>" /> 
                 <p class="help-block"><small><?= $vocab["nombre_desc_origen_amenaza"] ?></small></p> 
             </div>
             <div class="form-group">
@@ -30,8 +30,7 @@ $user_rol = $mySessionController->getVar("rol");
                 </div>  
                 <p class="help-block"><small><?= $vocab["desc_origen_isActivo"] ?></small></p> 
             </div>  
-            <a class="btn btn-success" name="submit" onclick="new_origen_amenaza(1);"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?>  <?= $vocab["origen_amenaza_title"] ?>  </a>
-    </div>
-</form>
-</div>
-</div>
+            <a class="btn btn-success" name="submit" onclick="new_origen_amenaza();"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?>  <?= $vocab["origen_amenaza_title"] ?>  </a>
+
+        </form>
+    </div></div>
