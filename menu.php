@@ -137,13 +137,13 @@ require 'functions.php';
                                     <a href="#"><span><i class="fa fa-users text-primary"></i> <?= $vocab["menu_matriz_riesgos"] ?></span></span></a>
                                     <ul class="dropdown-menu">
                                         <?php if (check_permiso($mod3, $act2, $user_rol)) { ?>
-                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/list_origen_amenaza.php?', '');"><span> <i class="fa fa-list text-primary"></i>  <?= $vocab["menu_admin_origen_amenaza"] ?></span></a></li>
+                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/list_origen_amenaza.php?', '');"><span> <i class="fa fa-list text-primary"></i>  <?= $vocab["menu_admin_origen_amenaza"] ?></span></a></li>
                                         <?php } ?>
                                         <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
-                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/list_tipo_amenaza.php?', '');"><span><i class="fa fa-plus text-success"></i> <?= $vocab["menu_admin_tipo_amenaza"] ?></span></a></li>
+                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminTipoAmenaza/list_tipo_amenaza.php?', '');"><span><i class="fa fa-plus text-success"></i> <?= $vocab["menu_admin_tipo_amenaza"] ?></span></a></li>
                                         <?php } ?>
                                         <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
-                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/list_categoria_amenaza.php?', '');"><span><i class="fa fa-plus text-success"></i> <?= $vocab["menu_admin_categoria_amenaza"] ?></span></a></li>
+                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/list_categoria_amenaza.php?', '');"><span><i class="fa fa-plus text-success"></i> <?= $vocab["menu_admin_categoria_amenaza"] ?></span></a></li>
                                         <?php } ?>
                                     </ul>
                                 <?php } ?>

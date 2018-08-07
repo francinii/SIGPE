@@ -2,8 +2,8 @@
 /**
  * Lista los roles del sistema, no utilizar este tipo de tablas para los modulos
  */
-include("../../login/check.php");
-include("../../../functions.php");
+include("../../../login/check.php");
+include("../../../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
 
@@ -15,11 +15,12 @@ $ip .= $mySessionController->getVar("cds_locate");
 $page_cant = $mySessionController->getVar("page_cant");
 
 //
-$sql = "SELECT COUNT(id) AS cant FROM CategoriaTipoAmenaza";
+$sql = "SELECT COUNT(id) AS cant
+        FROM ZonaTrabajo";
 
 $find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
 if ($find_key != "") {
-    $sql .= " WHERE descripcion LIKE  '%" . $find_key . "%'";
+    $sql .= " WHERE roll_name LIKE  '%" . $find_key . "%'";
 }
 $sql .= ";";
 $res_cant = seleccion($sql);
@@ -34,7 +35,7 @@ if (!$page) {
 }
 
 /* * ********************************************************************************************** */
-$sql = "SELECT  id, descripcion, isActivo FROM CategoriaTipoAmenaza";
+$sql = "SELECT  id, descripcion, isActivo FROM OrigenAmenaza";
 
 $find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
 if ($find_key != "") {
@@ -50,30 +51,19 @@ if ($order_key != "") {
 
 $sql .= " limit " . (int) $start . "," . (int) $page_cant . ";";
 $res = seleccion($sql);
+
 ?>
 <!--  ****** Titulo ***** -->
-<div class="well well-sm"><h1><?= $vocab["list_categoria_amenaza_title"] ?></h1></div>
-<!-- div original anterior a integración bootstrap3 
-<div style=" width: 800px; margin: 0 auto;"  class="ex_highlight_row"> -->
-<div class="row">
-    <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4"></div>
-    <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4">
-        <select class="form-control">
-            <option>Mustard</option>
-            <option>Ketchup</option>
-            <option>Relish</option>
-        </select>
-    </div>
-</div>
+<div class="well well-sm"><h1><?= $vocab["list_origen_amenaza_title"] ?></h1></div>
 <div class="dataTables_wrapper form-inline dt-bootstrap">
     <table id="lista_usuarios" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable" >
         <thead>
             <tr>
-                <th width="10%"><?= $vocab["list_categoria_amenaza_id"] ?></th>
-                <th width="50%"><?= $vocab["list_categoria_amenaza_descripcion"] ?></th>    
-                <th width="5%"><?= $vocab["list_tipo_amenaza_isActivo"] ?></th>
+                <th width="10%"><?= $vocab["list_origen_amenaza_id"] ?></th>
+                <th width="50%"><?= $vocab["list_origen_amenaza_descripcion"] ?></th> 
+                <th width="5%"><?= $vocab["list_origen_amenaza_isActivo"] ?></th>
                 <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
-                <th width="5%"><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
+                    <th width="5%"><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
                 <?php } ?>
                 <?php if (check_permiso($mod3, $act4, $user_rol)) { ?>
                     <th width="5%"><div class="text-center"><i class="fa fa-pencil fa-2x text-success puntero" title="<?= $vocab["symbol_edit"] ?>"></i></div></th>
@@ -83,7 +73,7 @@ $res = seleccion($sql);
                 <?php } ?>
             </tr>
         </thead>
-          <tbody>
+        <tbody>
             <?php
             if (count($res) > 0) {
                 for ($i = 0; $i < count($res); $i++) {
@@ -113,10 +103,10 @@ $res = seleccion($sql);
         </tbody>
         <tfoot>
             <tr>
-                <th><?= $vocab["list_categoria_amenaza_id"] ?></th>
-                <th><?= $vocab["list_categoria_amenaza_descripcion"] ?></th>    
-                <th><?= $vocab["list_tipo_amenaza_isActivo"] ?></th>
-               <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
+                <th><?= $vocab["list_origen_amenaza_id"] ?></th>
+                <th><?= $vocab["list_origen_amenaza_descripcion"] ?></th> 
+                <th><?= $vocab["list_origen_amenaza_isActivo"] ?></th>                
+                <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
                     <th><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
                 <?php } ?>
                 <?php if (check_permiso($mod3, $act4, $user_rol)) { ?>
@@ -131,7 +121,7 @@ $res = seleccion($sql);
     <?php /*     * ***************************************************************************************** */ ?>
     <br/>
     <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
-    <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/admin/users/new_user.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["categoria_amenaza_title"] ?></a></div>
+        <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/new_origen_amenaza.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["origen_amenaza_title"] ?></a></div>
     <?php } ?>
 </div>
 
