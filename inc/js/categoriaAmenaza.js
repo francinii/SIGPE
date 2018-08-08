@@ -10,11 +10,11 @@ function validate_categoria_amenaza() {
         nombre.focus();
         return false;
     }
-    var select_tipo = document.getElementById('select_tipo').value;
-    if (select_tipo == "") {
-        jAlert("Seleccione un tipo de amenaza", "Dato Requerido");
-        select_tipo.setAttribute("style", "background-color:#EDF0FF");
-        select_tipo.focus();
+    var select_categoria = document.getElementById('select_categoria').value;
+    if (select_categoria == "") {
+        jAlert("Seleccione un categoria de amenaza", "Dato Requerido");
+        select_categoria.setAttribute("style", "background-color:#EDF0FF");
+        select_categoria.focus();
         return false;
     }
 
@@ -37,15 +37,15 @@ function new_categoria_amenaza() {
         if (document.getElementById('inlineCheckbox1').checked)
             activo = 1;
         else
-            activo = 0;    
-        
+            activo = 0;
 
-        var select_tipo = document.getElementById('select_tipo').value;
+
+        var select_categoria = document.getElementById('select_categoria').value;
         var ajax = NuevoAjax();
         var _values_send =
                 'nombre=' + nombre +
                 '&inlineCheckbox=' + activo +
-                '&select_tipo=' + select_tipo;
+                '&select_categoria=' + select_categoria;
         var _URL_ = "mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/ajax_new_categoria_amenaza.php?";
         //alert(_URL_ + _values_send); //DEBUG
         ajax.open("GET", _URL_ + _values_send, true);
@@ -74,9 +74,51 @@ function new_categoria_amenaza() {
 }
 
 
-function cambiarTipoAmenaza(){
-    var find_key = document.getElementById("select_tipo_amenaza").value;
-    OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/list_categoria_amenaza.php?', 'find_key='+find_key);
+function cambiarTipoAmenaza() {
+    var find_key = document.getElementById("select_categoria_amenaza").value;
+    OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/list_categoria_amenaza.php?', 'find_key=' + find_key);
+}
+
+
+function delete_categoria_action(id) {
+    var page = document.getElementById('container');
+    page.innerHTML = cargando;
+    var ajax = NuevoAjax();
+    //Preparacion  llamada AJAX
+    var _values_send = 'id=' + id;
+    var _URL_ = "mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/ajax_del_categoria_amenaza.php?";
+    //alert(_URL_ + _values_send); //DEBUG
+    ajax.open("GET", _URL_ + "&" + _values_send, true);
+    ajax.onreadystatechange = function () {
+        if (ajax.readyState == 1) {
+            page.innerHTML = cargando;
+        } else if (ajax.readyState == 4) {
+            var response = ajax.responseText;
+            //alert(response); //DEBUG
+            if (response == 0) {
+                jAlert('La categoria de amenaza se a eliminado correctamente!', 'Exito');
+            } else if (response == 1 || response == 2) {
+                jAlert('Ha ocurrido un error en la Base de Datos Intentelo Nuevamente\n Si el problema continua comuniquese con la USTDS', 'Error');
+            } else {
+                jAlert('Ha ocurrido un error inesperado intentelo más tarde!', 'Error');
+            }
+            OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/list_categoria_amenaza.php?', '');
+        }
+    };
+    page.innerHTML = '';
+    ajax.send(null);
+}
+
+/**
+ * 
+ * @param {type} id_categoria_amenaza
+ * @returns {undefined}
+ */function delete_categoria_amenaza(id_categoria_amenaza) {
+    jConfirm("Desea eliminar la categoria:" + id_categoria_amenaza, "Eliminar categoria de amenaza", function (r) {
+        if (r) {
+            delete_categoria_action(id_categoria_amenaza);
+        }
+    });
 }
 
 /**
@@ -93,7 +135,7 @@ function cambiarTipoAmenaza(){
 //        var nombre = document.getElementById('nombre_txt').value;
 //        var email = document.getElementById('correo_txt').value;
 //        var telefono = document.getElementById('telefono_txt').value;
-//        var id_tipo_tel = document.getElementById('tipo_tel').value;
+//        var id_categoria_tel = document.getElementById('categoria_tel').value;
 //        var id_roll = document.getElementById('rol_slc').value;
 //        //Preparacion  llamada AJAX 
 //        var ajax = NuevoAjax();
@@ -102,7 +144,7 @@ function cambiarTipoAmenaza(){
 //                '&nombre=' + nombre +
 //                '&email=' + email +
 //                '&telefono=' + telefono +
-//                '&id_tipo_tel=' + id_tipo_tel +
+//                '&id_categoria_tel=' + id_categoria_tel +
 //                '&id_roll=' + id_roll;
 //        var _URL_ = "mod/admin/users/ajax_upd_user.php?";
 //        //alert(_URL_ + _values_send); //DEBUG

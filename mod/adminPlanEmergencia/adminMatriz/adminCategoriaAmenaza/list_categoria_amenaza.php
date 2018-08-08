@@ -133,7 +133,7 @@ $res = seleccion($sql);
                             <td><a class="puntero" onClick="javascript:OpcionMenu('mod/admin/permits/edit_mod.php?', 'id=<?= $res[$i]["id"] ?>&view_mode=1');"><div class="text-center"><i class="fa fa-pencil text-success puntero" title="<?= $vocab["symbol_edit"] ?>"></i></div></a></td>
                         <?php } ?>
                         <?php if (check_permiso($mod1, $act5, $user_rol)) { ?>
-                            <td><a class="puntero" onClick="javascript:delete_mod(<?= $res[$i]['id'] ?>);"><div class="text-center"><i class="fa fa-close text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></a></td>
+                            <td><a class="puntero" onClick="javascript:delete_categoria_amenaza(<?= $res[$i]['id'] ?>);"><div class="text-center"><i class="fa fa-close text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></a></td>
                         <?php } ?>
                     </tr>  
                 <?php } ?>                 
