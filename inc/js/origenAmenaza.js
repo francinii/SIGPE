@@ -105,6 +105,61 @@ function delete_origen_action(id) {
 
 
 
+
+function active_origen_action(id,activo) {
+    var page = document.getElementById('container');
+    page.innerHTML = cargando;
+    var ajax = NuevoAjax();
+    //Preparacion  llamada AJAX
+    var _values_send = 'id=' + id +
+            '&activo='+activo;
+    var _URL_ = "mod/adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/ajax_active_origen_amenaza.php?";
+    //alert(_URL_ + _values_send); //DEBUG
+    ajax.open("GET", _URL_ + "&" + _values_send, true);
+    ajax.onreadystatechange = function () {
+        if (ajax.readyState == 1) {
+            page.innerHTML = cargando;
+        } else if (ajax.readyState == 4) {
+            var response = ajax.responseText;
+            //alert(response); //DEBUG
+            if (response == 1) {
+                jAlert('El estado ha sido actualizado!', 'Exito');
+            } else if (response == 0) {
+                jAlert('Ha ocurrido un error en la Base de Datos Intentelo Nuevamente\n Si el problema continua comuniquese con la USTDS', 'Error');
+            } else {
+                jAlert('Ha ocurrido un error inesperado intentelo más tarde!', 'Error');
+            }
+            OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/list_origen_amenaza.php?', '');
+        }
+    };
+    page.innerHTML = '';
+    ajax.send(null);
+}
+
+/**
+ * 
+ * @param {type} id_origen_amenaza
+ * @param {type} activo
+ * @returns {undefined}
+ */function active_origen_amenaza(id_origen_amenaza, activo) {
+    var estado;
+    if (activo == 1) {
+        estado = "desactivar ";
+        activo =0;
+    } else {
+        estado = "activar ";
+        activo =1;
+    }
+    jConfirm("Desea " + estado + " el origen: " + id_origen_amenaza, "Cambiar estado de actividad", function (r) {
+        if (r) {
+            active_origen_action(id_origen_amenaza, activo);
+        }
+    });
+}
+
+
+
+
 /**
  * Actualiza la informacion del usuario
  * @param {string} id_user identificador del usuario que se actualiza
