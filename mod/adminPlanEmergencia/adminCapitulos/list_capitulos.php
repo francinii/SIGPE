@@ -12,27 +12,8 @@ $user_rol = $mySessionController->getVar("rol");
 $ip = $mySessionController->getVar("cds_domain");
 $ip .= $mySessionController->getVar("cds_locate");
 
-$page_cant = $mySessionController->getVar("page_cant");
 
-// para realizar la busqueda
-//$sql = "SELECT COUNT(idCapitulo) AS cant
-//        FROM capitulo";
-//
-//$find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
-//if ($find_key != "") {
-//    $sql.=" WHERE titulo LIKE  '%" . $find_key . "%'";
-//}
-//$sql.=";";
-//$res_cant = seleccion($sql);
-//
-//$cant_pagi = ceil((int) $res_cant[0]['cant'] / (int) $page_cant);
-//$page = (isset($_GET["page"])) ? $_GET["page"] : "1";
-//if (!$page) {
-//    $start = 0;
-//    $page = 1;
-//} else {
-//    $start = (isset($_GET["start"])) ? $_GET["start"] : "0";
-//}
+
 
 /* * ********************************************************************************************** */
 $start = "0";
@@ -44,14 +25,12 @@ if ($find_key != "") {
     $sql .= "  WHERE titulo LIKE '%" . $find_key . "%'";
 }
 
-$order_key = (isset($_GET['order_key'])) ? $_GET['order_key'] : '';
+$order_key = (isset($_GET['order_key'])) ? $_GET['order_key'] : 'orden';
 if ($order_key != "") {
     $sql .= " ORDER BY " . $order_key;
 } else {
     $sql .= " ORDER BY id";
 }
-
-$sql .= " limit " . (int) $start . "," . (int) $page_cant . ";";
 $res = seleccion($sql);
 ?>
 <!--  ****** Titulo ***** -->
@@ -59,14 +38,11 @@ $res = seleccion($sql);
 <!-- div original anterior a integración bootstrap3 
 <div style=" width: 800px; margin: 0 auto;"  class="ex_highlight_row"> -->
 <div class="dataTables_wrapper form-inline dt-bootstrap">
-    <table id="lista_usuarios" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered " >
+    <table id="lista_usuarios" cellpadding="0" cellspacing="0" border="0" class="table  table-bordered " >
         <thead>
             <tr>
                 <th width="10%"><?= $vocab["list_capitulo_id"] ?></th>
-                  <th width="10%"><?= $vocab["list_capitulo_order"] ?></th>
-                <th width="10%">
-                <a class="btn btn-success" name="submit" onclick="javascript:ordenarCapitulos();"><?= $vocab["list_capitulo_ordenar"] ?></a>
-                </th>
+                  <th width="10%"><?= $vocab["list_capitulo_orden"] ?></th>                
                 <th width="50%"><?= $vocab["list_capitulo_title"] ?></th> 
                 <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
                     <th width="5%"><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
@@ -85,9 +61,8 @@ $res = seleccion($sql);
                 for ($i = 0; $i < count($res); $i++) {
                     ?>
                     <tr id="fila<?= $i ?>"  align='center'>
-                        <td><?= $res[$i]['id'] ?></td>
-                        <td><?= $res[$i]['orden'] ?></td>
-                        <td><a href="#" class="up"><span class="glyphicon glyphicon-triangle-top"></span></a> <a href="#" class="down">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-triangle-bottom"></span></a></td>
+                        <td><?= $res[$i]['id'] ?></td>                        
+                        <td><a href="#" class="up "><span class="glyphicon glyphicon-triangle-top"></span></a> <a href="#" class="down">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-triangle-bottom"></span></a></td>
                         <td><?= $res[$i]['titulo'] ?></td>
                         <?php if (check_permiso($act2, $act1, $user_rol)) { ?>
                             <td>                      
@@ -122,8 +97,9 @@ $res = seleccion($sql);
         <tfoot>
             <tr>
               <th width="10%"><?= $vocab["list_capitulo_id"] ?></th>
-                  <th width="10%"><?= $vocab["list_capitulo_order"] ?></th>
-                <th width="10%"><?= $vocab["list_capitulo_ordenar"] ?></th>
+                  <th width="10%">
+                <a class="btn btn-success" name="submit" onclick="javascript:ordenarCapitulos();"><?= $vocab["symbol_add"] ?> <?= $vocab["list_capitulo_orden"] ?></a>
+                </th>              
                 <th width="50%"><?= $vocab["list_capitulo_title"] ?></th> 
                 <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
                     <th><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>

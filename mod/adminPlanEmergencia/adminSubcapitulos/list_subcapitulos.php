@@ -22,7 +22,6 @@ $user_rol = $mySessionController->getVar("rol");
 $ip = $mySessionController->getVar("cds_domain");
 $ip .= $mySessionController->getVar("cds_locate");
 
-$page_cant = $mySessionController->getVar("page_cant");
 
 // para realizar la busqueda
 //$sql = "SELECT COUNT(idCapitulo) AS cant
@@ -59,7 +58,7 @@ if ($order_key != "") {
     $sql .= " ORDER BY id";
 }
 
-$sql .= " limit " . (int) $start . "," . (int) $page_cant . ";";
+
 $comb = seleccion($sql);
 
 // select lista
@@ -80,8 +79,6 @@ if ($order_key != "") {
 } else {
     $sql .= " ORDER BY id";
 }
-
-$sql .= " limit " . (int) $start . "," . (int) $page_cant . ";";
 $res = seleccion($sql);
 
 ?>
@@ -123,13 +120,11 @@ $res = seleccion($sql);
     </div>
 </div>
 <div class="dataTables_wrapper form-inline dt-bootstrap">
-    <table id="lista_usuarios" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable" >
+    <table id="lista_usuarios" cellpadding="0" cellspacing="0" border="0" class="table table-bordered " >
         <thead>
             <tr>
                 <th width="10%"><?= $vocab["list_subcapitulo_id"] ?></th>
-                <th width="10%">
-                <a class="btn btn-success" name="submit" onclick="javascript:ordenarCapitulos()"><?= $vocab["list_subcapitulo_order"] ?></a>
-                </th>
+                <th width="10%"><?= $vocab["list_subcapitulo_orden"] ?></th> 
                 <th width="50%"><?= $vocab["list_subcapitulo_title"] ?></th>
                
                 <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
@@ -150,7 +145,8 @@ $res = seleccion($sql);
                     ?>
                     <tr id="fila<?= $i ?>"  align='center'>
                         <td><?= $res[$i]['id'] ?></td>
-                        <td><?= $res[$i]['orden'] ?></td>
+                        <td><a href="#" class="up "><span class="glyphicon glyphicon-triangle-top"></span></a> <a href="#" class="down">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-triangle-bottom"></span></a></td>
+
                         <td><?= $res[$i]['titulo'] ?></td>
                         <?php if (check_permiso($act2, $act1, $user_rol)) { ?>
                             <td>                      
@@ -185,7 +181,9 @@ $res = seleccion($sql);
         <tfoot>
             <tr>
                 <th><?= $vocab["list_capitulo_id"] ?></th>
-                <th><input type="text" name="nombre_search" id="nombre_search" value="<?= $vocab["symbol_name"] ?>" class="search_init" /></th>
+                <th width="10%">
+                <a class="btn btn-success" name="submit" onclick="javascript:ordenarSubCapitulos();"><?= $vocab["symbol_add"] ?> <?= $vocab["list_capitulo_orden"] ?></a>
+                </th>
                 <th width="50%"><?= $vocab["list_capitulo_title"] ?></th> 
                
                 <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
@@ -206,3 +204,8 @@ $res = seleccion($sql);
         <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminSubcapitulos/new_subcapitulo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["add_subcapitulo"] ?></a></div>
     <?php } ?>
 </div>
+<script>
+    
+flechasSubCapitulos();
+
+</script>

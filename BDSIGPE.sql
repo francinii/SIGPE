@@ -295,3 +295,79 @@ BEGIN
 END
 ;;
 DELIMITER ;
+
+-- ----------------------------
+-- Proceso insertar capitulo
+-- ----------------------------
+
+
+DROP PROCEDURE IF EXISTS `insert_capitulo`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_capitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_descripcion` text,  OUT `res` TINYINT  UNSIGNED)
+BEGIN
+declare orden Integer;
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+      
+        
+	BEGIN
+  
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;  
+    ROLLBACK;
+	END;          
+            select count(id) into orden from capitulo;
+            SET orden = orden +1;
+            START TRANSACTION;
+                     
+                    INSERT INTO `capitulo`(descripcion,isActivo,titulo,orden) VALUES (p_descripcion, p_activo,p_titulo,orden);
+            COMMIT;
+            -- SUCCESS
+            SET res = 0;
+            -- Existe usuario
+END
+;;
+DELIMITER ;
+--CALL insert_capitulo('micapitulo',1,'$nombre',@res);
+
+
+-- ----------------------------
+-- Proceso insertar categoria de amenaza
+-- ----------------------------
+
+DROP PROCEDURE IF EXISTS `insert_subcapitulo`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_subcapitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_fkcapitulo` int,IN  `p_descripcion` text,  OUT `res` TINYINT  UNSIGNED)
+BEGIN
+declare orden Integer;
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;
+            select count(id) into orden from subcapitulo where FKidCapitulo=p_fkcapitulo;
+            SET orden = orden +1;
+            START TRANSACTION;
+                    INSERT INTO `subcapitulo`(descripcion, titulo, isActivo, FKidCapitulo, orden) VALUES (p_descripcion, p_titulo,p_activo,p_fkcapitulo,orden);
+            COMMIT;
+            -- SUCCESS
+            SET res = 0;
+            -- Existe usuario
+END
+;;
+DELIMITER ;
+CALL insert_subcapitulo('micapitulo',1,2'nombre',@res);

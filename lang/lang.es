@@ -153,7 +153,7 @@ $vocab["list_capitulo"]             = "Lista de capitulos";
 $vocab["add_capitulo"]              = "capitulos";
 $vocab["list_capitulo_title"]       = "Titulo";
 $vocab["list_capitulo_id"]          = "Id";
-$vocab["list_capitulo_order"]       = "orden";
+$vocab["list_capitulo_orden"]       = "orden";
 $vocab["list_capitulo_ordenar"]       = "ordenar";
 
 $vocab["capitulo_capitulo"]         = "Capitulo";
@@ -169,7 +169,7 @@ $vocab["list_subcapitulo"]                = "Lista de subcapitulos";
 $vocab["add_subcapitulo"]                 = "subcapitulos";
 $vocab["list_subcapitulo_title"]          = "Titulo";
 $vocab["list_subcapitulo_id"]             = "Id";
-$vocab["list_subcapitulo_order"]          = "orden";
+$vocab["list_subcapitulo_orden"]          = "orden";
 $vocab["list_subcapitulo_Descripcion"]    = "Descripcion";
 
 $vocab["subcapitulo_subcapitulo"]         = "Subcapitulo";
