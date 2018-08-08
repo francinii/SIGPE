@@ -305,12 +305,9 @@ DROP PROCEDURE IF EXISTS `insert_capitulo`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_capitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_descripcion` text,  OUT `res` TINYINT  UNSIGNED)
 BEGIN
-declare orden Integer;
-	DECLARE EXIT HANDLER FOR SQLEXCEPTION
-      
-        
-	BEGIN
-  
+declare ordenar Integer;
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION     
+	BEGIN  
 		-- ERROR
     SET res = 1;
     ROLLBACK;
@@ -322,11 +319,15 @@ declare orden Integer;
     SET res = 2;  
     ROLLBACK;
 	END;          
-            select count(id) into orden from capitulo;
-            SET orden = orden +1;
+            select MAX(`orden`) into ordenar from capitulo;
+            IF (ISNULL(ordenar)) THEN
+                SET ordenar = 1;
+            ELSE
+                SET ordenar = ordenar +1;   
+            END IF;           
             START TRANSACTION;
                      
-                    INSERT INTO `capitulo`(descripcion,isActivo,titulo,orden) VALUES (p_descripcion, p_activo,p_titulo,orden);
+                    INSERT INTO `capitulo`(descripcion,isActivo,titulo,orden) VALUES (p_descripcion, p_activo,p_titulo,ordenar);
             COMMIT;
             -- SUCCESS
             SET res = 0;
@@ -338,14 +339,14 @@ DELIMITER ;
 
 
 -- ----------------------------
--- Proceso insertar categoria de amenaza
+-- Proceso insertar subcapitulos
 -- ----------------------------
 
 DROP PROCEDURE IF EXISTS `insert_subcapitulo`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_subcapitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_fkcapitulo` int,IN  `p_descripcion` text,  OUT `res` TINYINT  UNSIGNED)
 BEGIN
-declare orden Integer;
+declare ordenar Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 		-- ERROR
@@ -359,10 +360,14 @@ declare orden Integer;
     SET res = 2;
     ROLLBACK;
 	END;
-            select count(id) into orden from subcapitulo where FKidCapitulo=p_fkcapitulo;
-            SET orden = orden +1;
+            select MAX(orden) into ordenar from subcapitulo where FKidCapitulo=p_fkcapitulo;
+             IF (ISNULL(ordenar)) THEN
+                SET ordenar=1;
+            ELSE
+                SET ordenar= ordenar +1;   
+            END IF;  
             START TRANSACTION;
-                    INSERT INTO `subcapitulo`(descripcion, titulo, isActivo, FKidCapitulo, orden) VALUES (p_descripcion, p_titulo,p_activo,p_fkcapitulo,orden);
+                    INSERT INTO `subcapitulo`(descripcion, titulo, isActivo, FKidCapitulo, orden) VALUES (p_descripcion, p_titulo,p_activo,p_fkcapitulo,ordenar);
             COMMIT;
             -- SUCCESS
             SET res = 0;
@@ -370,4 +375,93 @@ declare orden Integer;
 END
 ;;
 DELIMITER ;
-CALL insert_subcapitulo('micapitulo',1,2'nombre',@res);
+--CALL insert_subcapitulo('micapitulo',1,2'nombre',@res);
+
+
+
+
+
+-- ----------------------------
+-- Proceso actualizar capitulos
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `update_capitulo`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_capitulo`(IN `p_id` int,IN `p_titulo` varchar(150), IN  `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
+BEGIN
+        
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;
+            START TRANSACTION;
+                   UPDATE `capitulo` SET `descripcion`= p_descripcion ,`titulo`=p_titulo WHERE `id`=p_id;
+            COMMIT;
+            -- SUCCESS
+            SET res = 0;
+            -- Existe usuario
+END
+;;
+DELIMITER ;
+
+-- CALL update_capitulo(1,'PRESENTACIÓN','nombre',@res);
+
+
+-- ----------------------------
+-- Proceso actualizar subcapitulos
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `update_subcapitulo`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_subcapitulo`(IN `p_id` int,IN `p_titulo` varchar(150),IN `p_fkcapitulo` int, IN  `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
+BEGIN   
+        declare ordenar Integer;
+        declare FKAntigua Integer;
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;
+            select FKidCapitulo into FKAntigua from subcapitulo WHERE `id`=p_id;
+            IF(FKAntigua = p_fkcapitulo) THEN
+                  START TRANSACTION;
+                   UPDATE `subcapitulo` SET `descripcion`= p_descripcion ,`titulo`=p_titulo, `FKidCapitulo`=p_fkcapitulo WHERE `id`=p_id;
+                 COMMIT;
+                -- SUCCESS
+                SET res = 0;
+            ELSE
+                select MAX(orden) into ordenar from subcapitulo where FKidCapitulo=p_fkcapitulo;
+                IF (ISNULL(ordenar)) THEN
+                  SET ordenar=1;
+                ELSE
+                  SET ordenar= ordenar +1;   
+                END IF;
+                START TRANSACTION;
+                   UPDATE `subcapitulo` SET `descripcion`= p_descripcion ,`titulo`=p_titulo, `FKidCapitulo`=p_fkcapitulo,`orden`=ordenar WHERE `id`=p_id;
+                 COMMIT;
+                 -- SUCCESS
+               SET res = 0;
+               -- Existe usuario
+            END IF;
+END
+;;
+DELIMITER ;
+
+-- CALL update_subcapitulo(1,'PRESENTACIÓN','nombre',1,@res);
+
+

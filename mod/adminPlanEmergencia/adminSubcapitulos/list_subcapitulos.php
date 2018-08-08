@@ -150,14 +150,14 @@ $res = seleccion($sql);
                         <td><?= $res[$i]['titulo'] ?></td>
                         <?php if (check_permiso($act2, $act1, $user_rol)) { ?>
                             <td>                      
-                                <a class="puntero" onClick="javascript:OpcionMenu('mod/admin/rolls/edit_roll.php?', 'id_roll=<?= $res[$i]["id"] ?>&view_mode=0');">                                     
+                                <a class="puntero" onClick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminSubcapitulos/edit_subcapitulo.php?', 'id_subcap=<?= $res[$i]["id"] ?>&view_mode=0');">                                     
                                     <div class="text-center"><i class="fa fa-eye text-primary" title="<?= $vocab["symbol_view"] ?>"></i></div>                                  
                                 </a>                                  
                             </td>
                         <?php } ?>
                         <?php if (check_permiso($act2, $act4, $user_rol)) { ?>
                             <td>                           
-                                <a class="puntero"  onClick="javascript:OpcionMenu('mod/admin/rolls/edit_roll.php?', 'id_roll=<?= $res[$i]["id"] ?>&view_mode=1');">                                      
+                                <a class="puntero"  onClick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminSubcapitulos/edit_subcapitulo.php?', 'id_subcap=<?= $res[$i]["id"] ?>&view_mode=1');">                                      
                                     <div class="text-center"><i class="fa fa-pencil text-success" title="<?= $vocab["symbol_edit"] ?>"></i></div>                                    
                                 </a>
 
@@ -182,7 +182,7 @@ $res = seleccion($sql);
             <tr>
                 <th><?= $vocab["list_capitulo_id"] ?></th>
                 <th width="10%">
-                <a class="btn btn-success" name="submit" onclick="javascript:ordenarSubCapitulos();"><?= $vocab["symbol_add"] ?> <?= $vocab["list_capitulo_orden"] ?></a>
+                <a class="btn btn-success" name="submit" onclick="javascript:ordenarSubCapitulos();"><?= $vocab["symbol_save"] ?> <?= $vocab["list_capitulo_orden"] ?></a>
                 </th>
                 <th width="50%"><?= $vocab["list_capitulo_title"] ?></th> 
                

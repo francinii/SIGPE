@@ -20,7 +20,9 @@ function flechasCapitulos() {
 
 }
 function ordenarCapitulos() {
-
+var lista= new array();
+var fila = jQuery("#fila1");
+var hijo = fila.children().children();
 
 }
 
@@ -76,7 +78,7 @@ function new_capitulo() {
                 var response = ajax.responseText;
                 //alert(response); //DEBUG
                 if (response == 0) {
-                    jAlert("Origen añadido con exito", "Exito");
+                    jAlert("Capitulo añadido con exito", "Exito");
                     OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/list_capitulos.php?', '');
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
@@ -94,18 +96,17 @@ function new_capitulo() {
 
 //*****+*+ editar y ver capitulo********+
 
-function update_capitulo(){
+function update_capitulo(id){
      if (validate_capitulo()) {
         var loading = document.getElementById('loading_container');
         loading.innerHTML = cargando_bar;
         //Obtener Valores
-        var titulo = document.getElementById('capitulo_title').value;
-        var activo = 1;       
+        var titulo = document.getElementById('capitulo_title').value;          
         var descripcion = CKEDITOR.instances['capitulo_Descripcion'].getData();
         var ajax = NuevoAjax();
         var _values_send =
-                'titulo=' + titulo +
-                '&inlineCheckbox=' + activo +
+                'id=' + id +
+                '&titulo=' + titulo +              
                 '&descripcion=' + descripcion;
         var _URL_ = "mod/adminPlanEmergencia/adminCapitulos/ajax_edit_capitulo.php?";
         //alert(_URL_ + _values_send); //DEBUG
@@ -118,7 +119,7 @@ function update_capitulo(){
                 var response = ajax.responseText;
                 //alert(response); //DEBUG
                 if (response == 0) {
-                    jAlert("Origen actualizado con exito", "Exito");
+                    jAlert("Capitulo actualizado con exito", "Exito");
                     OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/list_capitulos.php?', '');
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
