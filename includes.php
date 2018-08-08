@@ -31,6 +31,7 @@
 
 
 
+
 <!-- adminitrar Origenes de amenazas -->
 <script language="JavaScript" type="text/javascript"  src="inc/js/origenAmenaza.js"></script>
 <script language="JavaScript" type="text/javascript"  src="inc/js/categoriaAmenaza.js"></script>
@@ -47,6 +48,10 @@
 <script src="lib/wickedpicker/wickedpicker.js" language="JavaScript" type="text/javascript"></script>
 <link href="lib/wickedpicker/wickedpicker.css" rel="stylesheet" type="text/css"/>
 <link href="inc/css/estilo.css" rel="stylesheet" type="text/css"/>
+
+
+<!--estilo capitulos-->
+<link href="inc/css/capitulos.css" rel="stylesheet" type="text/css"/>
 
 <?php require_once 'config.inc';?>
 
