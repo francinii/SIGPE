@@ -71,7 +71,7 @@ $find_key =$_GET['find_key'];
    $find_key = $comb[0]['id'];
 }
 if ($find_key != "") {    
-    $sql .= "  WHERE FKidCapitulo =" . $find_key . "";
+    $sql .= "  WHERE FKidCapitulo =" . $find_key;
 }
 $order_key = (isset($_GET['order_key'])) ? $_GET['order_key'] : '';
 if ($order_key != "") {
