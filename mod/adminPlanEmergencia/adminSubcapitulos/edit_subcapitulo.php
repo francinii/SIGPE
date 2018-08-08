@@ -4,13 +4,13 @@ include("../../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
 
-$sql = "SELECT id, titulo FROM capitulo";
+$sql = "SELECT id, titulo FROM Capitulo";
 $comb = seleccion($sql);
 
 $view_mode = $_GET['view_mode'];
 $id_subcap= $_GET['id_subcap'];
 $sql = "SELECT  id, descripcion,titulo,FKidCapitulo
-        FROM subcapitulo  WHERE id =" . $id_subcap;
+        FROM Subcapitulo  WHERE id =" . $id_subcap;
 $res = seleccion($sql);
 
 $find_key =$res[0]['FKidCapitulo']; 

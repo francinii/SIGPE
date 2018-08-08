@@ -8,7 +8,7 @@ $user_rol = $mySessionController->getVar("rol");
 $view_mode = $_GET['view_mode'];
 $id_cap= $_GET['id_cap'];
 $sql = "SELECT  id, descripcion,titulo
-        FROM capitulo  WHERE id =" . $id_cap;
+        FROM Capitulo  WHERE id =" . $id_cap;
 $res = seleccion($sql);
 
 ?>
