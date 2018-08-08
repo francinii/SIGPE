@@ -9,7 +9,7 @@ function validate_origen_amenaza() {
         nombre.setAttribute("style", "background-color:#EDF0FF");
         nombre.focus();
         return false;
-    } 
+    }
 
     return true;
 }
@@ -26,9 +26,11 @@ function new_origen_amenaza() {
         //Obtener Valores
         var nombre = document.getElementById('nombre').value;
         var activo = 0;
-        if(document.getElementById('inlineCheckbox1').checked) activo = 1;
-        else activo = 0;
-        
+        if (document.getElementById('inlineCheckbox1').checked)
+            activo = 1;
+        else
+            activo = 0;
+
         var ajax = NuevoAjax();
         var _values_send =
                 'nombre=' + nombre +
@@ -36,9 +38,9 @@ function new_origen_amenaza() {
         var _URL_ = "mod/adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/ajax_new_origen_amenaza.php?";
         //alert(_URL_ + _values_send); //DEBUG
         ajax.open("GET", _URL_ + _values_send, true);
-        ajax.onreadystatechange = function() {
+        ajax.onreadystatechange = function () {
             if (ajax.readyState == 1) {
-             
+
                 //Nada
             } else if (ajax.readyState == 4) {
                 var response = ajax.responseText;
@@ -59,10 +61,54 @@ function new_origen_amenaza() {
         loading.innerHTML = "";
     }
 }
+
+function delete_origen_action(id) {
+    var page = document.getElementById('container');
+    page.innerHTML = cargando;
+    var ajax = NuevoAjax();
+    //Preparacion  llamada AJAX
+    var _values_send = 'id=' + id;
+    var _URL_ = "mod/adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/ajax_del_origen_amenaza.php?";
+    //alert(_URL_ + _values_send); //DEBUG
+    ajax.open("GET", _URL_ + "&" + _values_send, true);
+    ajax.onreadystatechange = function () {
+        if (ajax.readyState == 1) {
+            page.innerHTML = cargando;
+        } else if (ajax.readyState == 4) {
+            var response = ajax.responseText;
+            //alert(response); //DEBUG
+            if (response == 0) {
+                jAlert('El origen de amenaza se a eliminado correctamente!', 'Exito');
+            } else if (response == 1 || response == 2) {
+                jAlert('Ha ocurrido un error en la Base de Datos Intentelo Nuevamente\n Si el problema continua comuniquese con la USTDS', 'Error');
+            } else {
+                jAlert('Ha ocurrido un error inesperado intentelo más tarde!', 'Error');
+            }
+            OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/list_origen_amenaza.php?', '');
+        }
+    };
+    page.innerHTML = '';
+    ajax.send(null);
+}
+
+/**
+ * 
+ * @param {type} id_origen_amenaza
+ * @returns {undefined}
+ */function delete_origen_amenaza(id_origen_amenaza) {
+    jConfirm("Desea eliminar el origen:" + id_origen_amenaza, "Eliminar origen de amenaza", function (r) {
+        if (r) {
+            delete_origen_action(id_origen_amenaza);
+        }
+    });
+}
+
+
+
 /**
  * Actualiza la informacion del usuario
  * @param {string} id_user identificador del usuario que se actualiza
-lñp * @returns {undefined} N/A
+ lñp * @returns {undefined} N/A
  */
 //function update_user(id_user){
 //    if (validate_user(1)) {
@@ -122,51 +168,11 @@ lñp * @returns {undefined} N/A
 //function edit_user(id) {
 //    OpcionMenu('mod/admin/users/edit_user.php?', 'id_user=' + id + '&view_mode=1');
 //}
-///**
-// * 
-// * @param {type} id_user
-// * @returns {undefined}
-// */
-//function delete_user_action(id_user) {
-//    var page = document.getElementById('container');
-//    page.innerHTML = cargando;
-//    var ajax = NuevoAjax();
-//    //Preparacion  llamada AJAX
-//    var _values_send = 'id_user=' + id_user;
-//    var _URL_ = "mod/admin/users/ajax_del_user.php?";
-//    //alert(_URL_ + _values_send); //DEBUG
-//    ajax.open("GET", _URL_ + "&" + _values_send, true);
-//    ajax.onreadystatechange = function() {
-//        if (ajax.readyState == 1) {
-//            page.innerHTML = cargando;
-//        } else if (ajax.readyState == 4) {
-//            var response = ajax.responseText;
-//            //alert(response); //DEBUG
-//            if (response == 0) {
-//                jAlert('El usuario se a eliminado correctamente!', 'Exito');
-//                OpcionMenu('mod/admin/users/list_user.php?', '');
-//            } else if (response == 1 || response == 2) {
-//                jAlert('Ha ocurrido un error en la Base de Datos Intentelo Nuevamente\n Si el problema continua comuniquese con la USTDS', 'Error');
-//                OpcionMenu('mod/admin/users/list_user.php?', '');
-//            } else {
-//                jAlert('Ha ocurrido un error inesperado intentelo más tarde!', 'Error');
-//                OpcionMenu('mod/admin/users/list_user.php?', '');
-//            }
-//        }
-//    };
-//    page.innerHTML = '';
-//    ajax.send(null);
-//}
-///**
-// * 
-// * @param {type} id_user
-// * @returns {undefined}
-// */
-//function delete_user(id_user) {
-//    jConfirm("Desea eliminar el usuario cédula:" + id_user, "Eliminar Usuario", function(r) {
-//        if (r) {
-//            delete_user_action(id_user);
-//        }
-//    });
-//}
-//
+/**
+ * 
+ * @param {type} id_user
+ * @returns {undefined}
+ */
+
+
+

@@ -236,8 +236,6 @@ drop table ZonaTrabajo;
 -- ----------------------------
 -- Proceso insertar origen de amenaza
 -- ----------------------------
-
-
 DROP PROCEDURE IF EXISTS `insert_origen_amenaza`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_origen_amenaza`(IN `p_nombre` varchar(150),IN `p_activo` int, OUT `res` TINYINT  UNSIGNED)
@@ -296,6 +294,195 @@ END
 ;;
 DELIMITER ;
 
+
+
+-- ----------------------------
+-- Proceso insertar tipo de amenaza
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `insert_tipo_amenaza`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_tipo_amenaza`(IN `p_nombre` varchar(150),IN `p_activo` int, IN  `p_fkOrigenAmenaza` int,  OUT `res` TINYINT  UNSIGNED)
+BEGIN
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;
+            START TRANSACTION;
+                    INSERT INTO `TipoAmenaza`(descripcion,isActivo,FkidOrigen) VALUES (p_nombre, p_activo,p_fkOrigenAmenaza);
+            COMMIT;
+            -- SUCCESS
+            SET res = 0;
+            -- Existe usuario
+END
+;;
+DELIMITER ;
+
+
+
+-- ----------------------------
+-- Proceso eliminar origen de amenaza
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `delete_origen_amenaza`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_origen_amenaza`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
+BEGIN
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;
+
+	START TRANSACTION ;
+		DELETE FROM OrigenAmenaza WHERE id=p_id;
+	
+	COMMIT;
+	-- SUCCESS
+	SET res = 0;
+END
+;;
+DELIMITER;
+
+
+-- ----------------------------
+-- Proceso eliminar tipo de amenaza
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `delete_tipo_amenaza`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_tipo_amenaza`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
+BEGIN
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;
+
+	START TRANSACTION ;
+		DELETE FROM TipoAmenaza WHERE id=p_id;
+	
+	COMMIT;
+	-- SUCCESS
+	SET res = 0;
+END
+;;
+DELIMITER ;
+
+
+
+-- ----------------------------
+-- Proceso eliminar categoria de amenaza
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `delete_categoria_amenaza`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_categoria_amenaza`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
+BEGIN
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;
+
+	START TRANSACTION ;
+		DELETE FROM CategoriaTipoAmenaza WHERE id=p_id;
+	
+	COMMIT;
+	-- SUCCESS
+	SET res = 0;
+END
+;;
+DELIMITER ;
+
+
+-- ----------------------------
+-- Proceso activar tipo de amenaza
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `active_tipo_amenaza`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `active_tipo_amenaza`(IN `p_id` int,IN `p_activo` int,OUT `respuesta` int)
+BEGIN
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET respuesta=0;
+    START TRANSACTION;
+        UPDATE TipoAmenaza SET  isActivo = p_activo WHERE id=p_id;
+        SELECT ROW_COUNT() INTO respuesta;
+    IF (respuesta=1) THEN
+    COMMIT;
+    ELSE
+    ROLLBACK;
+    SET respuesta=0;
+END IF;
+END
+
+
+-- ----------------------------
+-- Proceso activar categoria de amenaza
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `active_categoria_amenaza`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `active_categoria_amenaza`(IN `p_id` int,IN `p_activo` int,OUT `respuesta` int)
+BEGIN
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET respuesta=0;
+    START TRANSACTION;
+        UPDATE CategoriaTipoAmenaza SET  isActivo = p_activo WHERE id=p_id;
+        SELECT ROW_COUNT() INTO respuesta;
+    IF (respuesta=1) THEN
+    COMMIT;
+    ELSE
+    ROLLBACK;
+    SET respuesta=0;
+END IF;
+END
+
+
+-- ----------------------------
+-- Proceso activar origen de amenaza
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `active_origen_amenaza`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `active_origen_amenaza`(IN `p_id` int,IN `p_activo` int,OUT `respuesta` int)
+BEGIN
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET respuesta=0;
+    START TRANSACTION;
+        UPDATE OrigenAmenaza SET  isActivo = p_activo WHERE id=p_id;
+        SELECT ROW_COUNT() INTO respuesta;
+    IF (respuesta=1) THEN
+    COMMIT;
+    ELSE
+    ROLLBACK;
+    SET respuesta=0;
+END IF;
+END
 -- ----------------------------
 -- Proceso insertar capitulo
 -- ----------------------------

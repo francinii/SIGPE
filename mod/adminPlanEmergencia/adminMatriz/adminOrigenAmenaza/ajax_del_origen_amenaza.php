@@ -3,13 +3,11 @@
 include("../../../login/check.php");
 include("../../../../inc/db/db.php");
 
-$nombre = $_GET['nombre'];
-$activo = $_GET['inlineCheckbox'];
-$tipoAmenaza = $_GET['select_tipo'];
-
-$sql_a = "CALL insert_categoria_amenaza('$nombre','$activo','$tipoAmenaza',@res);";
+$id = $_GET['id'];
+$sql_a = "CALL delete_origen_amenaza('$id',@res);";
 $sql_b = "SELECT @res as res;";
 //echo $sql_a.$sql_b;
 $res = transaccion_verificada($sql_a, $sql_b);
+
 echo $res[0]['res'];
 ?>

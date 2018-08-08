@@ -15,38 +15,48 @@ $ip .= $mySessionController->getVar("cds_locate");
 $page_cant = $mySessionController->getVar("page_cant");
 
 //
-$sql = "SELECT COUNT(id) AS cant FROM CategoriaTipoAmenaza";
+//$sql = "SELECT COUNT(id) AS cant FROM CategoriaTipoAmenaza";
+//
+//$find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
+//if ($find_key != "") {
+//    $sql .= " WHERE descripcion LIKE  '%" . $find_key . "%'";
+//}
+//$sql .= ";";
+//$res_cant = seleccion($sql);
+//
+//$cant_pagi = ceil((int) $res_cant[0]['cant'] / (int) $page_cant);
+//$page = (isset($_GET["page"])) ? $_GET["page"] : "1";
+//if (!$page) {
+//    $start = 0;
+//    $page = 1;
+//} else {
+//    $start = (isset($_GET["start"])) ? $_GET["start"] : "0";
+//}
 
-$find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
-if ($find_key != "") {
-    $sql .= " WHERE descripcion LIKE  '%" . $find_key . "%'";
-}
-$sql .= ";";
-$res_cant = seleccion($sql);
 
-$cant_pagi = ceil((int) $res_cant[0]['cant'] / (int) $page_cant);
-$page = (isset($_GET["page"])) ? $_GET["page"] : "1";
-if (!$page) {
-    $start = 0;
-    $page = 1;
-} else {
-    $start = (isset($_GET["start"])) ? $_GET["start"] : "0";
-}
+/* * ********************************************************************************************** */
+$sql = "SELECT id,descripcion FROM TipoAmenaza";
+$comb = seleccion($sql);
+
 
 /* * ********************************************************************************************** */
 $sql = "SELECT  id, descripcion, isActivo FROM CategoriaTipoAmenaza";
 
-$find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
+$find_key = '';
+if ((isset($_GET['find_key']))) {
+    $find_key = $_GET['find_key'];
+} else if (count($comb) > 0) {
+    $comb[0]['id'];
+}
 if ($find_key != "") {
-    $sql .= "  WHERE descripcion LIKE '%" . $find_key . "%'";
+    $sql .= "  WHERE FKidTipoAmenaza =" . $find_key . "";
 }
-
-$order_key = (isset($_GET['order_key'])) ? $_GET['order_key'] : '';
-if ($order_key != "") {
-    $sql .= " ORDER BY " . $order_key;
-} else {
-    $sql .= " ORDER BY id";
-}
+//$order_key = (isset($_GET['order_key'])) ? $_GET['order_key'] : '';
+//if ($order_key != "") {
+//    $sql .= " ORDER BY " . $order_key;
+//} else {
+//    $sql .= " ORDER BY id";
+//}
 
 $sql .= " limit " . (int) $start . "," . (int) $page_cant . ";";
 $res = seleccion($sql);
@@ -56,13 +66,33 @@ $res = seleccion($sql);
 <!-- div original anterior a integración bootstrap3 
 <div style=" width: 800px; margin: 0 auto;"  class="ex_highlight_row"> -->
 <div class="row">
-    <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4"></div>
-    <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4">
-        <select class="form-control">
-            <option>Mustard</option>
-            <option>Ketchup</option>
-            <option>Relish</option>
-        </select>
+    <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="select_tipo_amenaza"><?= $vocab["subcapitulo_capitulo"] ?></label>
+            <div class="col-sm-10">
+                <select id="select_tipo_amenaza" name="select_tipo_amenaza" class="form-control" onchange="javascript: cambiarTipoAmenaza();">
+                    <?php
+                    if (count($comb) > 0) {
+                        for ($i = 0; $i < count($comb); $i++) {
+                            if ($comb[$i]['id'] == $find_key) {
+                                ?>
+                                <option value='<?= $comb[$i]['id'] ?>' selected><?= $comb[$i]['descripcion'] ?></option>
+                                <?php
+                            } else {
+                                ?>
+                                <option value='<?= $comb[$i]['id'] ?>'><?= $comb[$i]['descripcion'] ?></option>
+                                <?php
+                            }
+                        }
+                    }
+                    ?>
+
+                </select>
+            </div>
+        </div>
+
+
     </div>
 </div>
 <div class="dataTables_wrapper form-inline dt-bootstrap">
@@ -73,7 +103,7 @@ $res = seleccion($sql);
                 <th width="50%"><?= $vocab["list_categoria_amenaza_descripcion"] ?></th>    
                 <th width="5%"><?= $vocab["list_tipo_amenaza_isActivo"] ?></th>
                 <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
-                <th width="5%"><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
+                    <th width="5%"><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
                 <?php } ?>
                 <?php if (check_permiso($mod3, $act4, $user_rol)) { ?>
                     <th width="5%"><div class="text-center"><i class="fa fa-pencil fa-2x text-success puntero" title="<?= $vocab["symbol_edit"] ?>"></i></div></th>
@@ -83,7 +113,7 @@ $res = seleccion($sql);
                 <?php } ?>
             </tr>
         </thead>
-          <tbody>
+        <tbody>
             <?php
             if (count($res) > 0) {
                 for ($i = 0; $i < count($res); $i++) {
@@ -91,17 +121,19 @@ $res = seleccion($sql);
                     <tr id="fila<?= $i ?>"  align='center'>                        
                         <?php if (check_permiso($act2, $act1, $user_rol)) { ?>
                             <td><?= $res[$i]['id'] ?></td>
-                            <td><?= $res[$i]['descripcion'] ?></td>
-                            <td><?= $res[$i]['isActivo'] ?></td>
-                            <?php if (check_permiso($mod1, $act1, $user_rol)) { ?>
-                            <?php } ?>
+                            <td><?= $res[$i]['descripcion'] ?></td>                           
+                            <?php
+                            $active = ($res[$i]['isActivo'] == 1) ? "text-success" : "text-danger";
+                            $title = ($res[$i]['isActivo'] == 1) ? $vocab["isActivo"] : $vocab["isInactivo"];
+                            ?>
+                            <td><i title =" <?= $title ?>" class="fa fa-circle  <?= $active ?> puntero "></i></td>               
                             <td><a class="puntero" onClick="javascript:OpcionMenu('mod/admin/permits/edit_mod.php?', 'id=<?= $res[$i]["id"] ?>&view_mode=0');"><div class="text-center"><i class="fa fa-eye text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></a></td>
                         <?php } ?>
                         <?php if (check_permiso($mod1, $act4, $user_rol)) { ?>
                             <td><a class="puntero" onClick="javascript:OpcionMenu('mod/admin/permits/edit_mod.php?', 'id=<?= $res[$i]["id"] ?>&view_mode=1');"><div class="text-center"><i class="fa fa-pencil text-success puntero" title="<?= $vocab["symbol_edit"] ?>"></i></div></a></td>
                         <?php } ?>
                         <?php if (check_permiso($mod1, $act5, $user_rol)) { ?>
-                            <td><a class="puntero" onClick="javascript:delete_mod(<?= $res[$i]['id'] ?>);"><div class="text-center"><i class="fa fa-close text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></a></td>
+                            <td><a class="puntero" onClick="javascript:delete_categoria_amenaza(<?= $res[$i]['id'] ?>);"><div class="text-center"><i class="fa fa-close text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></a></td>
                         <?php } ?>
                     </tr>  
                 <?php } ?>                 
@@ -116,7 +148,7 @@ $res = seleccion($sql);
                 <th><?= $vocab["list_categoria_amenaza_id"] ?></th>
                 <th><?= $vocab["list_categoria_amenaza_descripcion"] ?></th>    
                 <th><?= $vocab["list_tipo_amenaza_isActivo"] ?></th>
-               <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
+                <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
                     <th><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
                 <?php } ?>
                 <?php if (check_permiso($mod3, $act4, $user_rol)) { ?>
@@ -131,7 +163,7 @@ $res = seleccion($sql);
     <?php /*     * ***************************************************************************************** */ ?>
     <br/>
     <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
-          <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/new_categoria_amenaza.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["categoria_amenaza_title"] ?></a></div>
+        <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/new_categoria_amenaza.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["categoria_amenaza_title"] ?></a></div>
     <?php } ?>
 </div>
 

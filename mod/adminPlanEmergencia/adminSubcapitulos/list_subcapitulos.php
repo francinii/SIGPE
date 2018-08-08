@@ -48,7 +48,7 @@ $start = "0";
 
 
 // select para llenar el combo
-$sql = "SELECT  id,titulo FROM capitulo";
+$sql = "SELECT id,titulo FROM capitulo";
 
 
 $order_key = (isset($_GET['order_key'])) ? $_GET['order_key'] : 'orden';
@@ -204,8 +204,10 @@ $res = seleccion($sql);
         <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminSubcapitulos/new_subcapitulo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["add_subcapitulo"] ?></a></div>
     <?php } ?>
 </div>
+
 <script>
     
 flechasSubCapitulos();
 
 </script>
+
