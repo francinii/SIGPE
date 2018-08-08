@@ -156,18 +156,16 @@ INSERT INTO `BDSIGPE`.`TipoAmenaza` (`descripcion`,`isActivo`,FkidOrigen) VALUES
 
 
 INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'PRESENTACIÓN',1);
-INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'Descripción del plan',2);
-INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'Documentos de referencia',3);
-INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'INFORMACIÓN GENERAL DE LA ORGANIZACIÓN',4);
-INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'VALORACIÓN DEL RIESGO',5);
-INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'POLÍTICA DE GESTIÓN DE RIESGOS',6);
-INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'ORGANIZACIÓN PARA LOS PREPARATIVOS Y RESPUESTA',7);
-INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'PLAN DE ACCIÓN',8);
-INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'MECANISMOS DE ACTIVACIÓN',9);
-INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'PROCEDIMIENTOS OPERATIVOS DE RESPUESTA',10);
-INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'EVALUACIÓN DEL PLAN DE PREPARATIVOS Y RESPUESTA',11);
-INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'DEFINICIONES Y TÉRMINOS',12);
-INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'ANEXO',13);
+INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'INFORMACIÓN GENERAL DE LA ORGANIZACIÓN',2);
+INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'VALORACIÓN DEL RIESGO',3);
+INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'POLÍTICA DE GESTIÓN DE RIESGOS',4);
+INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'ORGANIZACIÓN PARA LOS PREPARATIVOS Y RESPUESTA',5);
+INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'PLAN DE ACCIÓN',6);
+INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'MECANISMOS DE ACTIVACIÓN',7);
+INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'PROCEDIMIENTOS OPERATIVOS DE RESPUESTA',8);
+INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'EVALUACIÓN DEL PLAN DE PREPARATIVOS Y RESPUESTA',9);
+INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'DEFINICIONES Y TÉRMINOS',10);
+INSERT INTO `capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'ANEXO',11);
 
 
 INSERT INTO `subcapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, `orden`) VALUES ('<p>Es la condición o resultado cuantificable que debe ser alcanzado y mantenido, con la aplicación<br/>
@@ -191,17 +189,46 @@ l&oacute;gica de las etapas del mismo. Es decir aquellas disposiciones internas 
 &nbsp;&nbsp; mismo tipo.<br />
 &nbsp;&nbsp; e) Facilitan la toma de decisiones en actividades rutinarias.<br />
 &nbsp;&nbsp; f) Describen lo que la direcci&oacute;n desea que se haga en cada situaci&oacute;n definida.</p>','Marco normativo',1,1,3);
+INSERT INTO `subcapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, `orden`) VALUES ('<p>a) Secuencia de etapas
+i. Son las partes en que se divide el procedimiento, y cada una de ellas integra
+un conjunto afín de actividades.
+ii. La redacción de la etapa, iniciará con un verbo conjugado en el tiempo
+presente de la tercera persona del singular.
+b) Descripción de las actividades
+i. Es la descripción detallada de las actividades; de manera tal que permita al
+personal comprenderlas, seguirlas y aplicarlas, aun cuando sea de recién
+ingreso al área.
+ii. El número con que se registrará cada actividad, estará compuesto por el dígito
+de la etapa correspondiente, seguido de un punto, y a la derecha de éste, del
+número consecutivo respectivo.
+iii. La redacción de la actividad, iniciará con un verbo conjugado en el tiempo
+presente de la tercera persona del singular.
+iv. Deberá considerarse en la redacción de las actividades, los elementos
+necesarios para su realización; así como los productos que se generen.
+c) Responsable
+i. Se refiere a los órganos o cargos de la estructura autorizada responsables de
+la ejecución y cumplimiento de las actividades del procedimiento.
+ii. En el caso del personal operativo habrá de señalarse el nombre del puesto por
+funciones reales desempeñadas: analista, secretaria, mensajero, etcétera; y
+no por el nombre de la plaza: coordinador de técnicos, secretaria ejecutiva,
+entre otros.
 
+En la descripción se utilizará la siguiente forma:</p>','Descripción del plan',1,1,4);
+INSERT INTO `subcapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, `orden`) VALUES ('<p>Anotar qué documentos no normativos se requieren al utilizar el procedimiento, para tener
+un mejor entendimiento o completar su ejecución no incluidos en los puntos anteriores.</p>','Documentos de referencia',1,1,5);
  
+
+
+
 drop table TipoPoblacion;
 drop table Formulario;
 drop table SubCapitulo;
 drop table Capitulo;
+drop table Matriz;
 drop table CategoriaTipoAmenaza;
 drop table TipoAmenaza;
 drop table OrigenAmenaza;
 drop table ZonaTrabajo;
-
 
 
 
