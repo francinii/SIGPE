@@ -7,7 +7,7 @@ $nombre = $_GET['nombre'];
 $activo = $_GET['inlineCheckbox'];
 $tipoAmenaza = $_GET['select_tipo']; //fk a la tabla de tipos de amenaza
 
-$sql_a = "CALL insert_categoria_amenaza('$nombre','$activo','$tipoAmenaza',@res);";
+$sql_a = "CALL insert_tipo_amenaza('$nombre','$activo','$tipoAmenaza',@res);";
 $sql_b = "SELECT @res as res;";
 //echo $sql_a.$sql_b;
 $res = transaccion_verificada($sql_a, $sql_b);

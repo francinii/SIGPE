@@ -51,7 +51,6 @@ if ($order_key != "") {
 
 $sql .= " limit " . (int) $start . "," . (int) $page_cant . ";";
 $res = seleccion($sql);
-
 ?>
 <!--  ****** Titulo ***** -->
 <div class="well well-sm"><h1><?= $vocab["list_origen_amenaza_title"] ?></h1></div>
@@ -81,10 +80,13 @@ $res = seleccion($sql);
                     <tr id="fila<?= $i ?>"  align='center'>                        
                         <?php if (check_permiso($act2, $act1, $user_rol)) { ?>
                             <td><?= $res[$i]['id'] ?></td>
-                            <td><?= $res[$i]['descripcion'] ?></td>
-                            <td><?= $res[$i]['isActivo'] ?></td>
-                            <?php if (check_permiso($mod1, $act1, $user_rol)) { ?>
-                            <?php } ?>
+                            <td><?= $res[$i]['descripcion'] ?></td> 
+                            <?php
+                            $active = ($res[$i]['isActivo'] == 1) ? "text-success" : "text-danger";
+                            $title = ($res[$i]['isActivo'] == 1) ? $vocab["isActivo"] : $vocab["isInactivo"];
+                            ?>
+                            <td><i title =" <?= $title ?>" class="fa fa-circle  <?= $active ?> puntero "></i></td>
+
                             <td><a class="puntero" onClick="javascript:OpcionMenu('mod/admin/permits/edit_mod.php?', 'id=<?= $res[$i]["id"] ?>&view_mode=0');"><div class="text-center"><i class="fa fa-eye text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></a></td>
                         <?php } ?>
                         <?php if (check_permiso($mod1, $act4, $user_rol)) { ?>

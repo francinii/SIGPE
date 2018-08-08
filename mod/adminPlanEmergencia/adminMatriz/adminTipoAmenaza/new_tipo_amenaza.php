@@ -3,6 +3,9 @@ include("../../../login/check.php");
 include("../../../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
+
+$sql = "SELECT id, descripcion FROM OrigenAmenaza";
+$comb = seleccion($sql);
 ?>
 <div class="container">
     <div class="well well-sm">
@@ -13,15 +16,21 @@ $user_rol = $mySessionController->getVar("rol");
         <form method="post" action="">
             <div class="form-group">
                 <label  for="nombre"><?= $vocab["nombre_tipo_amenaza"] ?> </label>
-                <input id="nombre" name="id_user" class="form-control" type="text" placeholder="<?= $vocab["nombre_tipo_amenaza"] ?>" onchange="javascrip:onchange_cedula();" onblur="javascrip:onchange_cedula();" /> 
+                <input id="nombre" name="nombre" class="form-control" type="text" placeholder="<?= $vocab["nombre_tipo_amenaza"] ?>" /> 
                 <p class="help-block"><small><?= $vocab["nombre_desc_tipo_amenaza"] ?></small></p> 
             </div>
             <div class="form-group">
-                <label  for="id_user"><?= $vocab["nombre_tipo_amenaza"] ?> </label>
-                <select class="form-control">
-                    <option>Mustard</option>
-                    <option>Ketchup</option>
-                    <option>Relish</option>
+                <label  for="select_tipo"><?= $vocab["nombre_tipo_amenaza"] ?> </label>
+                <select id="select_tipo" name ="select_tipo" class="form-control">                                  
+                    <?php
+                    if (count($comb) > 0) {
+                        for ($i = 0; $i < count($comb); $i++) {
+                            ?>
+                            <option value='<?= $comb[$i]['id'] ?>' selected><?= $comb[$i]['descripcion'] ?></option>
+                            <?php
+                        }
+                    }
+                    ?>
                 </select>
             </div>
             <div class="form-group">
@@ -38,7 +47,7 @@ $user_rol = $mySessionController->getVar("rol");
                 </div>  
                 <p class="help-block"><small><?= $vocab["desc_tipo_isActivo"] ?></small></p> 
             </div>  
-            <a class="btn btn-success" name="submit" onclick="new_user(1);"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?>  <?= $vocab["tipo_amenaza_title"] ?>  </a>
+            <a class="btn btn-success" name="submit" onclick="new_tipo_amenaza();"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?>  <?= $vocab["tipo_amenaza_title"] ?>  </a>
 
         </form>
     </div>

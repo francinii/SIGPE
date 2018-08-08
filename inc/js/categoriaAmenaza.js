@@ -37,15 +37,15 @@ function new_categoria_amenaza() {
         if (document.getElementById('inlineCheckbox1').checked)
             activo = 1;
         else
-            activo = 0;        
+            activo = 0;    
         
+
         var select_tipo = document.getElementById('select_tipo').value;
-            alert(select_tipo);
         var ajax = NuevoAjax();
         var _values_send =
                 'nombre=' + nombre +
                 '&inlineCheckbox=' + activo +
-                '&select_tipo=' + activo;
+                '&select_tipo=' + select_tipo;
         var _URL_ = "mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/ajax_new_categoria_amenaza.php?";
         //alert(_URL_ + _values_send); //DEBUG
         ajax.open("GET", _URL_ + _values_send, true);
@@ -72,6 +72,13 @@ function new_categoria_amenaza() {
         loading.innerHTML = "";
     }
 }
+
+
+function cambiarTipoAmenaza(){
+    var find_key = document.getElementById("select_tipo_amenaza").value;
+    OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/list_categoria_amenaza.php?', 'find_key='+find_key);
+}
+
 /**
  * Actualiza la informacion del usuario
  * @param {string} id_user identificador del usuario que se actualiza

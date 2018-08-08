@@ -49,7 +49,7 @@ $start = "0";
 
 
 // select para llenar el combo
-$sql = "SELECT  id,titulo FROM capitulo";
+$sql = "SELECT id,titulo FROM capitulo";
 
 
 $order_key = (isset($_GET['order_key'])) ? $_GET['order_key'] : 'orden';
