@@ -89,11 +89,11 @@ $res = seleccion($sql);
                             <td><?= $res[$i]['id'] ?></td>
                             <td><?= $res[$i]['descripcion'] ?></td>
                             <td><?= $res[$i]['origen'] ?></td>
-                             <?php
+                            <?php
                             $active = ($res[$i]['isActivo'] == 1) ? "text-success" : "text-danger";
                             $title = ($res[$i]['isActivo'] == 1) ? $vocab["isActivo"] : $vocab["isInactivo"];
                             ?>
-                            <td><i title =" <?= $title ?>" class="fa fa-circle  <?= $active ?> puntero "></i></td>
+                            <td><a class="puntero" onClick="javascript:active_tipo_amenaza(<?= $res[$i]['id'] . "," . $res[$i]['isActivo'] ?>);"><div class="text-center"><i title =" <?= $title ?>" class="fa fa-circle  <?= $active ?> puntero "></i></div></a></td>
                             <td><a class="puntero" onClick="javascript:OpcionMenu('mod/admin/permits/edit_mod.php?', 'id=<?= $res[$i]["id"] ?>&view_mode=0');"><div class="text-center"><i class="fa fa-eye text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></a></td>
                         <?php } ?>
                         <?php if (check_permiso($mod1, $act4, $user_rol)) { ?>

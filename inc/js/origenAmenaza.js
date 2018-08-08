@@ -105,6 +105,107 @@ function delete_origen_action(id) {
 
 
 
+
+function active_origen_action(id,activo) {
+    var page = document.getElementById('container');
+    page.innerHTML = cargando;
+    var ajax = NuevoAjax();
+    //Preparacion  llamada AJAX
+    var _values_send = 'id=' + id +
+            '&activo='+activo;
+    var _URL_ = "mod/adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/ajax_active_origen_amenaza.php?";
+    //alert(_URL_ + _values_send); //DEBUG
+    ajax.open("GET", _URL_ + "&" + _values_send, true);
+    ajax.onreadystatechange = function () {
+        if (ajax.readyState == 1) {
+            page.innerHTML = cargando;
+        } else if (ajax.readyState == 4) {
+            var response = ajax.responseText;
+            //alert(response); //DEBUG
+            if (response == 1) {
+                jAlert('El estado ha sido actualizado!', 'Exito');
+            } else if (response == 0) {
+                jAlert('Ha ocurrido un error en la Base de Datos Intentelo Nuevamente\n Si el problema continua comuniquese con la USTDS', 'Error');
+            } else {
+                jAlert('Ha ocurrido un error inesperado intentelo más tarde!', 'Error');
+            }
+            OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/list_origen_amenaza.php?', '');
+        }
+    };
+    page.innerHTML = '';
+    ajax.send(null);
+}
+
+/**
+ * 
+ * @param {type} id_origen_amenaza
+ * @param {type} activo
+ * @returns {undefined}
+ */function active_origen_amenaza(id_origen_amenaza, activo) {
+    var estado;
+    if (activo == 1) {
+        estado = "desactivar ";
+        activo =0;
+    } else {
+        estado = "activar ";
+        activo =1;
+    }
+    jConfirm("Desea " + estado + " el origen: " + id_origen_amenaza, "Cambiar estado de actividad", function (r) {
+        if (r) {
+            active_origen_action(id_origen_amenaza, activo);
+        }
+    });
+}
+
+
+//ACTUALIZAR ESTE METODO
+function update_origen_amenaza(id){
+     if (validate_capitulo()) {
+        var loading = document.getElementById('loading_container');
+        loading.innerHTML = cargando_bar;
+        //Obtener Valores
+        var nombre = document.getElementById('nombre').value;          
+        var activo = 0;
+        if (document.getElementById('inlineCheckbox1').checked)
+            activo = 1;
+        else
+            activo = 0;
+        
+        var ajax = NuevoAjax();
+        var _values_send =
+                'id=' + id +
+                '&nombre=' + nombre +              
+                '&activo=' + activo;
+        var _URL_ = "mod/adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/ajax_edit_origen_amenaza.php?";
+        //alert(_URL_ + _values_send); //DEBUG
+        ajax.open("GET", _URL_ + _values_send, true);
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 1) {
+
+                //Nada
+            } else if (ajax.readyState == 4) {
+                var response = ajax.responseText;
+                //alert(response); //DEBUG
+                if (response == 0) {
+                    jAlert("Capitulo actualizado con exito", "Exito");
+                    OpcionMenu('adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/list_origen_amenaza.php?', '');
+                } else if (response == 1 || response == 2) {
+                    jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
+                } else if (response == 3) {
+                    jAlert("El categoria ya existe.\n Consulte a la USTDS", "Usuario ya existe");
+                } else {
+                    jAlert("Ocurrio un error inesperado.\n Consulte a la USTDS", "Error inesperado");
+                }
+            }
+        };
+        ajax.send(null);
+        loading.innerHTML = "";
+    }
+    
+}
+
+
+
 /**
  * Actualiza la informacion del usuario
  * @param {string} id_user identificador del usuario que se actualiza
