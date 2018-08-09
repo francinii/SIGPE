@@ -187,7 +187,7 @@ function update_origen_amenaza(id){
                 var response = ajax.responseText;
                 //alert(response); //DEBUG
                 if (response == 0) {
-                    jAlert("Capitulo actualizado con exito", "Exito");
+                    jAlert("Origen actualizado con exito", "Exito");
                     OpcionMenu('adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/list_origen_amenaza.php?', '');
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");

@@ -652,3 +652,32 @@ DELIMITER ;
 -- CALL update_subcapitulo(1,'PRESENTACIÓN','nombre',1,@res);
 
 
+-- ----------------------------
+-- Proceso actualizar origen de amenaza
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `update_origen_amenaza`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_origen_amenaza`(IN `p_nombre` varchar(150),IN `p_activo` int, OUT `res` TINYINT  UNSIGNED)
+BEGIN   
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;           
+        START TRANSACTION;
+        UPDATE `OrigenAmenaza` SET `descripcion`= p_descripcion ,`titulo`=p_titulo, `FKidCapitulo`=p_fkcapitulo WHERE `id`=p_id;
+        COMMIT;
+        -- SUCCESS
+        SET res = 0;
+       
+END
+;;
+DELIMITER ;
