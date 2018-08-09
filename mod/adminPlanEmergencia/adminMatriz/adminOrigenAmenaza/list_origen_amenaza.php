@@ -86,7 +86,8 @@ $res = seleccion($sql);
                             $title = ($res[$i]['isActivo'] == 1) ? $vocab["isActivo"] : $vocab["isInactivo"];
                             ?>
                             <td><a class="puntero" onClick="javascript:active_origen_amenaza(<?= $res[$i]['id'] . "," . $res[$i]['isActivo'] ?>);"><div class="text-center"><i title =" <?= $title ?>" class="fa fa-circle  <?= $active ?> puntero "></i></div></a></td>
-
+                        <?php } ?>
+                        <?php if (check_permiso($act2, $act1, $user_rol)) { ?>
                             <td>
                                 <a class="puntero" onClick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/edit_origen_amenaza.php?', 'id=<?= $res[$i]["id"] ?>&view_mode=0');">                                     
                                     <div class="text-center"><i class="fa fa-eye text-primary" title="<?= $vocab["symbol_view"] ?>"></i></div>                                  

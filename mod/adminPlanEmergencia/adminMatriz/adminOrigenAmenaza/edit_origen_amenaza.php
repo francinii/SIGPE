@@ -25,29 +25,15 @@ $res = seleccion($sql);
             </div>
             <div class="form-group">
                 <label for="type-radio"><?= $vocab["list_origen_amenaza_isActivo"] ?> </label>                    
-                <div class="radio radio_efect">
-                    <?php if ($res[0]["isActivo"] == 1) { ?>
+                <div class="radio radio_efect">                  
                         <label class="radio-inline">
-                            <input <?= ($view_mode == 0) ? "disabled" : ""; ?> id="inlineCheckbox1" name="inlineCheckbox" type="radio" value="1" checked> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                            <input <?= ($view_mode == 0) ? "disabled" : ""; ?><?= ($res[0]["isActivo"] == 1) ? "checked" : ""; ?> id="inlineCheckbox1" name="inlineCheckbox" type="radio" value="1" checked> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
                             <?= $vocab["isActivo"] ?> 
-                        </label>
-                    <?php } else { ?>
+                        </label>                
                         <label class="radio-inline">
-                            <input <?= ($view_mode == 0) ? "disabled" : ""; ?> id="inlineCheckbox1" name="inlineCheckbox" type="radio" value="0"> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                            <?= $vocab["isActivo"] ?> 
-                        </label>
-                    <?php } ?>
-                   <?php if ($res[0]["isActivo"] == 0) { ?>
-                        <label class="radio-inline">
-                            <input  <?= ($view_mode == 0) ? "disabled" : ""; ?> id="inlineCheckbox1" name="inlineCheckbox" type="radio" value="1" checked> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                            <input <?= ($view_mode == 0) ? "disabled" : ""; ?><?= ($res[0]["isActivo"] == 0) ? "checked" : ""; ?>  id="inlineCheckbox2" name="inlineCheckbox" type="radio" value="0"> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
                             <?= $vocab["isInactivo"] ?> 
-                        </label>
-                    <?php } else { ?>
-                        <label class="radio-inline">
-                            <input <?= ($view_mode == 0) ? "disabled" : ""; ?> id="inlineCheckbox1" name="inlineCheckbox" type="radio" value="0"> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                            <?= $vocab["isInactivo"] ?> 
-                        </label>
-                    <?php } ?>
+                        </label>       
                 </div>  
                 <p class="help-block"><small><?= $vocab["desc_origen_isActivo"] ?></small></p> 
             </div>  

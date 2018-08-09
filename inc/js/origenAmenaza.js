@@ -160,7 +160,7 @@ function active_origen_action(id,activo) {
 
 //ACTUALIZAR ESTE METODO
 function update_origen_amenaza(id){
-     if (validate_capitulo()) {
+     if (validate_origen_amenaza()) {
         var loading = document.getElementById('loading_container');
         loading.innerHTML = cargando_bar;
         //Obtener Valores
@@ -188,7 +188,7 @@ function update_origen_amenaza(id){
                 //alert(response); //DEBUG
                 if (response == 0) {
                     jAlert("Origen actualizado con exito", "Exito");
-                    OpcionMenu('adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/list_origen_amenaza.php?', '');
+                    OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/list_origen_amenaza.php?', '');
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else if (response == 3) {
@@ -203,6 +203,18 @@ function update_origen_amenaza(id){
     }
     
 }
+
+//
+//function validate_origen_Amenaza() {
+//    var nombre = document.getElementById('nombre');
+//    if (nombre.value == "") {
+//        jAlert("Ingrese un nombre para el origen de la amenaza", "Dato Requerido");
+//        nombre.setAttribute("style", "background-color:#EDF0FF");
+//        nombre.focus();
+//        return false;
+//    }
+//    return true;
+//}
 
 
 

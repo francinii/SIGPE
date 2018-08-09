@@ -357,7 +357,7 @@ BEGIN
 	SET res = 0;
 END
 ;;
-DELIMITER;
+DELIMITER ;
 
 
 -- ----------------------------
@@ -691,7 +691,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_origen_amenaza`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_origen_amenaza`(IN `p_nombre` varchar(150),IN `p_activo` int, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_origen_amenaza`(IN `p_id` int, IN `p_nombre` varchar(150),IN `p_activo` int, OUT `res` TINYINT  UNSIGNED)
 BEGIN   
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -707,7 +707,70 @@ BEGIN
     ROLLBACK;
 	END;           
         START TRANSACTION;
-        UPDATE `OrigenAmenaza` SET `descripcion`= p_descripcion ,`titulo`=p_titulo, `FKidCapitulo`=p_fkcapitulo WHERE `id`=p_id;
+        UPDATE `OrigenAmenaza` SET `descripcion`= p_nombre ,`isActivo`= p_activo WHERE `id`= p_id;
+        COMMIT;
+        -- SUCCESS
+        SET res = 0;
+       
+END
+;;
+DELIMITER ;
+
+
+-- ----------------------------
+-- Proceso actualizar tipo de amenaza
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `update_tipo_amenaza`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_tipo_amenaza`(IN `p_id` int, IN `p_nombre` varchar(150),IN `p_activo` int, IN `p_FkidOrigen` int, OUT `res` TINYINT  UNSIGNED)
+BEGIN   
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;           
+        START TRANSACTION;
+        UPDATE `TipoAmenaza` SET `descripcion`= p_nombre ,`isActivo`= p_activo, `FkidOrigen` = p_FkidOrigen WHERE `id`= p_id;
+        COMMIT;
+        -- SUCCESS
+        SET res = 0;
+       
+END
+;;
+DELIMITER ;
+
+
+-- ----------------------------
+-- Proceso actualizar categoria de amenaza
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `update_categoria_amenaza`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_categoria_amenaza`(IN `p_id` int, IN `p_nombre` varchar(150),IN `p_activo` int, IN `p_FKidTipoAmenaza` int, OUT `res` TINYINT  UNSIGNED)
+BEGIN   
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;    
+       
+        START TRANSACTION;
+        UPDATE `CategoriaTipoAmenaza` SET `descripcion`= p_nombre ,`isActivo`= p_activo, `FKidTipoAmenaza` = p_FKidTipoAmenaza WHERE `id`= p_id;
         COMMIT;
         -- SUCCESS
         SET res = 0;
