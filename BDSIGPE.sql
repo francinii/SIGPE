@@ -232,7 +232,7 @@ drop table ZonaTrabajo;
 
 
 
-------------------Procedimientos almacenados----------------------------------
+-- ----------------Procedimientos almacenados----------------------------------
 -- ----------------------------
 -- Proceso insertar origen de amenaza
 -- ----------------------------
@@ -357,7 +357,7 @@ BEGIN
 	SET res = 0;
 END
 ;;
-DELIMITER;
+DELIMITER ;
 
 
 -- ----------------------------
@@ -483,6 +483,7 @@ BEGIN
     SET respuesta=0;
 END IF;
 END
+
 -- ----------------------------
 -- Proceso insertar capitulo
 -- ----------------------------
@@ -656,10 +657,114 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `ordenar_capitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ordenar_capitulo`(IN `p_list` cursor, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ordenar_capitulo`(IN `p_id` int,IN `p_orden` int, OUT `res` TINYINT  UNSIGNED)
+BEGIN      
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;            
+            START TRANSACTION;            
+                   UPDATE `Capitulo` SET `orden`= p_orden WHERE `id`=p_id;            
+            COMMIT;
+            -- SUCCESS
+            SET res = 0;
+            -- Existe usuario
+END
+;;
+DELIMITER ;
+
+
+-- ----------------------------
+-- Proceso ordenar Subcapitulos
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `ordenar_subcapitulo`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ordenar_subcapitulo`(IN `p_id` int,IN `p_orden` int,OUT `res` TINYINT  UNSIGNED)
+BEGIN      
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;            
+            START TRANSACTION;            
+                   UPDATE `Subcapitulo` SET `orden`= p_orden WHERE `id`=p_id;            
+            COMMIT;
+            -- SUCCESS
+            SET res = 0;
+            -- Existe usuario
+END
+;;
+DELIMITER ;
+-- CALL ordenar_subcapitulo(1,2,@res);
+
+
+-- ----------------------------
+-- Proceso activar capitulo
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `active_capitulo`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `active_capitulo`(IN `p_id` int,IN `p_activo` int,OUT `respuesta` int)
 BEGIN
-        declare miId int;
-        declare cont int;
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET respuesta=0;
+    START TRANSACTION;
+        UPDATE Capitulo SET  isActivo = p_activo WHERE id=p_id;
+        SELECT ROW_COUNT() INTO respuesta;
+    IF (respuesta=1) THEN
+    COMMIT;
+    ELSE
+    ROLLBACK;
+    SET respuesta=0;
+END IF;
+END
+;;
+DELIMITER ;
+
+
+-- ----------------------------
+-- Proceso activar subcapitulo
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `active_subcapitulo`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `active_subcapitulo`(IN `p_id` int,IN `p_activo` int,OUT `respuesta` int)
+BEGIN
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET respuesta=0;
+    START TRANSACTION;
+        UPDATE Subcapitulo SET  isActivo = p_activo WHERE id=p_id;
+        SELECT ROW_COUNT() INTO respuesta;
+    IF (respuesta=1) THEN
+    COMMIT;
+    ELSE
+    ROLLBACK;
+    SET respuesta=0;
+END IF;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Proceso eliminar origen de amenaza
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `delete_capitulo`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_capitulo`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
+BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 		-- ERROR
@@ -673,16 +778,45 @@ BEGIN
     SET res = 2;
     ROLLBACK;
 	END;
-            SET cont = 1;
-            START TRANSACTION;
-            FETCH p_list INTO miId 
-                   UPDATE `capitulo` SET `orden`= cont ,WHERE `id`=miId;
-            END LOOP loop_List;
-            COMMIT;
-            -- SUCCESS
-            SET res = 0;
-            -- Existe usuario
+
+	START TRANSACTION ;
+		DELETE FROM Capitulo WHERE id=p_id;
+	
+	COMMIT;
+	-- SUCCESS
+	SET res = 0;
 END
 ;;
 DELIMITER ;
 
+
+-- ----------------------------
+-- Proceso eliminar origen de amenaza
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `delete_subcapitulo`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_subcapitulo`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
+BEGIN
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;
+
+	START TRANSACTION ;
+		DELETE FROM Subcapitulo WHERE id=p_id;
+	
+	COMMIT;
+	-- SUCCESS
+	SET res = 0;
+END
+;;
+DELIMITER ;

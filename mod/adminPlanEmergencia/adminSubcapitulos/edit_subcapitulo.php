@@ -29,20 +29,15 @@ $find_key =$res[0]['FKidCapitulo'];
 
             </div>
             <div class="form-group">
-                <label  for="subcapitulo_capitulo"><?= $vocab["subcapitulo_capitulo"] ?></label>
-                <select <?= ($view_mode == 0) ? "readonly" : ""; ?>  id= "subcapitulo_capitulo" name="subcapitulo_capitulo" class="form-control">
+                <label for="subcapitulo_capitulo"><?= $vocab["subcapitulo_capitulo"] ?></label>
+                <select  <?= ($view_mode == 0) ? "disabled" : ""; ?>  id= "subcapitulo_capitulo" name="subcapitulo_capitulo" class="form-control">
                     <?php
                     if (count($comb) > 0) {
-                     for ($i = 0; $i < count($comb); $i++) {
-                         if($comb[$i]['id']==$find_key){                       
+                     for ($i = 0; $i < count($comb); $i++) {                                          
                             ?>
-                    <option value='<?= $comb[$i]['id'] ?>' selected><?= $comb[$i]['titulo'] ?></option>
-                             <?php
-                         }else{
-                        ?>
-                    <option value='<?= $comb[$i]['id'] ?>'><?= $comb[$i]['titulo'] ?></option>
-                 <?php
-                         }
+                    <option <?= ($comb[$i]['id']==$find_key) ? "selected " : ""; ?> value='<?= $comb[$i]['id'] ?>'><?= $comb[$i]['titulo'] ?></option>
+                            
+                 <?php                        
                      }
                 }
                  ?>

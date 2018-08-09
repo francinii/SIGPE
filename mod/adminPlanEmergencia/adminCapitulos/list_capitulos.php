@@ -17,7 +17,7 @@ $ip .= $mySessionController->getVar("cds_locate");
 
 /* * ********************************************************************************************** */
 $start = "0";
-$sql = "SELECT  id, orden,titulo
+$sql = "SELECT  id, orden,titulo,isActivo
         FROM Capitulo ORDER BY orden";
 
 $res = seleccion($sql);
@@ -31,8 +31,13 @@ $res = seleccion($sql);
         <thead>
             <tr>
                 <th hidden width="10%"><?= $vocab["list_capitulo_id"] ?></th>
-                  <th width="10%"><?= $vocab["list_capitulo_orden"] ?></th>                
-                <th width="50%"><?= $vocab["list_capitulo_title"] ?></th> 
+                <th width="10%"><?= $vocab["list_capitulo_orden"] ?></th>                
+                <th width="50%"><?= $vocab["list_capitulo_title"] ?></th>
+                
+                <?php if (check_permiso($mod3, $act4, $user_rol)) { ?>
+                 <th width="5%"><?= $vocab["isActivo"] ?></th>
+                 <?php } ?>
+                 
                 <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
                     <th width="5%"><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
                 <?php } ?>
@@ -51,8 +56,15 @@ $res = seleccion($sql);
                     ?>
                     <tr id="fila<?= $i ?>"  align='center'>
                         <td hidden><?= $res[$i]['id'] ?></td>                        
-                        <td><a href="#" class="up "><span class="glyphicon glyphicon-triangle-top"></span></a> <a href="#" class="down">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-triangle-bottom"></span></a></td>
+                        <td ><a href="#" class="up "><span class="glyphicon glyphicon-triangle-top"></span></a> <a href="#" class="down">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-triangle-bottom"></span></a></td>
                         <td><?= $res[$i]['titulo'] ?></td>
+                        
+                        <?php
+                            $active = ($res[$i]['isActivo'] == 1) ? "text-success" : "text-danger";
+                            $title = ($res[$i]['isActivo'] == 1) ? $vocab["isActivo"] : $vocab["isInactivo"];
+                            ?>
+                            <td><a class="puntero" onClick="javascript:active_capitulo(<?= $res[$i]['id'] . "," . $res[$i]['isActivo']. ",'" . $res[$i]['titulo']."'" ?>);"><div class="text-center"><i title =" <?= $title ?>" class="fa fa-circle  <?= $active ?> puntero "></i></div></a></td>
+
                         <?php if (check_permiso($act2, $act1, $user_rol)) { ?>
                             <td>                      
                                 <a class="puntero" onClick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/edit_capitulo.php?', 'id_cap=<?= $res[$i]["id"] ?>&view_mode=0');">                                     
@@ -69,7 +81,7 @@ $res = seleccion($sql);
                         <?php } ?>
                         <?php if (check_permiso($act2, $act5, $user_rol)) { ?>
                             <td>              
-                                <a class="puntero"  onClick="javascript:delete_roll(<?= $res[$i]['id'] ?>);">                                 
+                                <a class="puntero"  onClick="javascript:delete_capitulo(<?= $res[$i]['id'].",'".$res[$i]['titulo'] ."'"?>);">                                 
                                     <div class="text-center"><i class="fa fa-close text-danger" title="<?= $vocab["symbol_delete"] ?>"></i></div>                                       
                                 </a>                             
                             </td>
@@ -87,8 +99,12 @@ $res = seleccion($sql);
               <th hidden width="10%"><?= $vocab["list_capitulo_id"] ?></th>
                   <th width="10%">
                 <a class="btn btn-success" name="submit" onclick="javascript:ordenarCapitulos();"><?= $vocab["symbol_save"] ?> <?= $vocab["list_capitulo_orden"] ?></a>
-                </th>              
-                <th width="50%"><?= $vocab["list_capitulo_title"] ?></th> 
+                </th> 
+                 
+                <th width="50%"><?= $vocab["list_capitulo_title"] ?></th>
+                <?php if (check_permiso($mod3, $act4, $user_rol)) { ?>
+                 <th width="5%"><?= $vocab["isActivo"] ?></th>
+                 <?php } ?>
                 <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
                     <th><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
                 <?php } ?>
@@ -104,7 +120,7 @@ $res = seleccion($sql);
     <?php /*     * ***************************************************************************************** */ ?>
     <br/>
     <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
-        <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/new_capitulo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["add_capitulo"] ?></a></div>
+        <div class="text-center"><a id="boton" class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/new_capitulo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["add_capitulo"] ?></a></div>
     <?php } ?>   
 
 </div>

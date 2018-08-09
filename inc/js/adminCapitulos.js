@@ -15,7 +15,8 @@ function flechasCapitulos() {
         }
         if (!row.hasClass("bg-info")) {
             row.addClass("bg-info");
-        }
+        }       
+         document.getElementById("") .focus();
     });
 
 }
@@ -31,17 +32,17 @@ function ordenarCapitulos() {
                 lista.push(text);
                 fila = fila.nextElementSibling;
             }
-            guardarCapitulo(lista)
+            guardarOrdenCapitulo(lista)
         }
     });
 
 }
 
-function guardarCapitulo(lista) {
+function guardarOrdenCapitulo(lista) {
     var loading = document.getElementById('loading_container');
     loading.innerHTML = cargando_bar;
     //Obtener Valores
- 
+
     var ajax = NuevoAjax();
     var _values_send =
             'lista=' + JSON.stringify(lista);
@@ -70,6 +71,97 @@ function guardarCapitulo(lista) {
     ajax.send(null);
     loading.innerHTML = "";
 
+}
+
+function active_capitulo(id, isActivo, titulo) {
+    var estado;
+    if (isActivo == 1) {
+        estado = "desactivar ";
+        isActivo = 0;
+    } else {
+        estado = "activar ";
+        isActivo = 1;
+    }
+    jConfirm("Desea " + estado + " el capitulo: " + titulo, "Cambiar estado de actividad", function (r) {
+        if (r) {
+            active_capitulo_action(id, isActivo);
+        }
+    });
+
+}
+
+function active_capitulo_action(id, isActivo) {
+    var page = document.getElementById('container');
+    page.innerHTML = cargando;
+    var ajax = NuevoAjax();
+    //Preparacion  llamada AJAX
+    var _values_send = 'id=' + id +
+            '&activo=' + isActivo;
+    var _URL_ = "mod/adminPlanEmergencia/adminCapitulos/ajax_active_capitulo.php?";
+    //alert(_URL_ + _values_send); //DEBUG
+    ajax.open("GET", _URL_ + "&" + _values_send, true);
+    ajax.onreadystatechange = function () {
+        if (ajax.readyState == 1) {
+            page.innerHTML = cargando;
+        } else if (ajax.readyState == 4) {
+            var response = ajax.responseText;
+            //alert(response); //DEBUG
+            if (response == 1) {
+                jAlert('El estado ha sido actualizado!', 'Exito');
+                OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/list_capitulos.php?', '');
+            } else if (response == 0) {
+                jAlert('Ha ocurrido un error en la Base de Datos Intentelo Nuevamente\n Si el problema continua comuniquese con la USTDS', 'Error');
+            } else {
+                jAlert('Ha ocurrido un error inesperado intentelo más tarde!', 'Error');
+            }
+
+        }
+    };
+    page.innerHTML = '';
+    ajax.send(null);
+}
+
+
+/**
+ * 
+ * @param {type} id_origen_amenaza
+ * @returns {undefined}
+ */function delete_capitulo(id, titulo) {
+    jConfirm("Desea eliminar el capitulo:" + titulo, "Eliminar capitulo", function (r) {
+        if (r) {
+            delete_capitulo_action(id);
+        }
+    });
+}
+
+function delete_capitulo_action(id) {
+    var page = document.getElementById('container');
+    page.innerHTML = cargando;
+    var ajax = NuevoAjax();
+    //Preparacion  llamada AJAX
+    var _values_send = 'id=' + id;
+    var _URL_ = "mod/adminPlanEmergencia/adminCapitulos/ajax_del_capitulo.php?";
+    //alert(_URL_ + _values_send); //DEBUG
+    ajax.open("GET", _URL_ + "&" + _values_send, true);
+    ajax.onreadystatechange = function () {
+        if (ajax.readyState == 1) {
+            page.innerHTML = cargando;
+        } else if (ajax.readyState == 4) {
+            var response = ajax.responseText;
+            //alert(response); //DEBUG
+            if (response == 0) {
+                jAlert('El Capitulo  se a eliminado correctamente!', 'Exito');
+                OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/list_capitulos.php?', '');
+            } else if (response == 1 || response == 2) {
+                jAlert('Ha ocurrido un error en la Base de Datos Intentelo Nuevamente\n Si el problema continua comuniquese con la USTDS', 'Error');
+            } else {
+                jAlert('Ha ocurrido un error inesperado intentelo más tarde!', 'Error');
+            }
+
+        }
+    };
+    page.innerHTML = '';
+    ajax.send(null);
 }
 
 //*****+*+ new capitulo********+
@@ -181,3 +273,4 @@ function update_capitulo(id) {
     }
 
 }
+ 
