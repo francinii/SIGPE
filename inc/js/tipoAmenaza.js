@@ -37,9 +37,9 @@ function new_tipo_amenaza() {
         if (document.getElementById('inlineCheckbox1').checked)
             activo = 1;
         else
-            activo = 0;        
-        
-        var select_tipo = document.getElementById('select_tipo').value;           
+            activo = 0;
+
+        var select_tipo = document.getElementById('select_tipo').value;
         var ajax = NuevoAjax();
         var _values_send =
                 'nombre=' + nombre +
@@ -200,10 +200,10 @@ function active_tipo_action(id,activo) {
     var estado;
     if (activo == 1) {
         estado = "desactivar ";
-        activo =0;
+        activo = 0;
     } else {
         estado = "activar ";
-        activo =1;
+        activo = 1;
     }
     jConfirm("Desea " + estado + " el tipo: " + id_tipo_amenaza, "Cambiar estado de actividad", function (r) {
         if (r) {
@@ -212,6 +212,65 @@ function active_tipo_action(id,activo) {
     });
 }
 
+//ACTUALIZAR ESTE METODO
+function update_tipo_amenaza(id) {
+    if (validate_tipo_amenaza()) {
+        var loading = document.getElementById('loading_container');
+        loading.innerHTML = cargando_bar;
+        //Obtener Valores
+        var nombre = document.getElementById('nombre').value;
+        var activo = 0;
+        if (document.getElementById('inlineCheckbox1').checked)
+            activo = 1;
+        else
+            activo = 0;
+
+        var fkid = document.getElementById('select_tipo').value;
+
+        var ajax = NuevoAjax();
+        var _values_send =
+                'id=' + id +
+                '&nombre=' + nombre +
+                '&fkid=' + fkid +
+                '&activo=' + activo;
+        var _URL_ = "mod/adminPlanEmergencia/adminMatriz/adminTipoAmenaza/ajax_edit_tipo_amenaza.php?";
+        //alert(_URL_ + _values_send); //DEBUG
+        ajax.open("GET", _URL_ + _values_send, true);
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 1) {
+                //Nada
+            } else if (ajax.readyState == 4) {
+                var response = ajax.responseText;
+                //alert(response); //DEBUG
+                if (response == 0) {
+                    jAlert("Tipo de amenaza actualizada con exito", "Exito");
+                    OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminTipoAmenaza/list_tipo_amenaza.php?', '');
+                } else if (response == 1 || response == 2) {
+                    jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
+                } else if (response == 3) {
+                    jAlert("El categoria ya existe.\n Consulte a la USTDS", "Usuario ya existe");
+                } else {
+                    jAlert("Ocurrio un error inesperado.\n Consulte a la USTDS", "Error inesperado");
+                }
+            }
+        };
+        ajax.send(null);
+        loading.innerHTML = "";
+    }
+
+}
+
+
+//function validate_tipo_amenaza() {
+//    var nombre = document.getElementById('nombre');
+//    if (nombre.value == "") {
+//        jAlert("Ingrese un nombre para el origen de la amenaza", "Dato Requerido");
+//        nombre.setAttribute("style", "background-color:#EDF0FF");
+//        nombre.focus();
+//        return false;
+//    }
+//    return true;
+//}
 
 
 
