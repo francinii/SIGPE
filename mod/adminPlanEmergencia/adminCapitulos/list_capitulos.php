@@ -18,7 +18,7 @@ $ip .= $mySessionController->getVar("cds_locate");
 /* * ********************************************************************************************** */
 $start = "0";
 $sql = "SELECT  id, orden,titulo
-        FROM capitulo ORDER BY orden";
+        FROM Capitulo ORDER BY orden";
 
 $res = seleccion($sql);
 ?>

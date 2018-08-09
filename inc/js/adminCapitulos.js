@@ -20,9 +20,55 @@ function flechasCapitulos() {
 
 }
 function ordenarCapitulos() {
-var lista= new array();
-var fila = jQuery("#fila1");
-var hijo = fila.children().children();
+    jConfirm("Desea reordenar los capitulos ", "Ordenar", function (r) {
+        if (r) {
+            var lista = new Array();
+            var fila = document.getElementById("lista_capitulos").firstElementChild.nextElementSibling;
+            fila = fila.firstElementChild;
+            while (fila != null) {
+                var hijo = fila.firstElementChild;
+                var text = hijo.innerHTML;
+                lista.push(text);
+                fila = fila.nextElementSibling;
+            }
+            guardarCapitulo(lista)
+        }
+    });
+
+}
+
+function guardarCapitulo(lista) {
+    var loading = document.getElementById('loading_container');
+    loading.innerHTML = cargando_bar;
+    //Obtener Valores
+ 
+    var ajax = NuevoAjax();
+    var _values_send =
+            'lista=' + JSON.stringify(lista);
+    var _URL_ = "mod/adminPlanEmergencia/adminCapitulos/ajax_ordenar_capitulo.php?";
+    //alert(_URL_ + _values_send); //DEBUG
+    ajax.open("GET", _URL_ + _values_send, true);
+    ajax.onreadystatechange = function () {
+        if (ajax.readyState == 1) {
+
+            //Nada
+        } else if (ajax.readyState == 4) {
+            var response = ajax.responseText;
+            //alert(response); //DEBUG
+            if (response == 0) {
+                jAlert("Ordenado  con exito", "Exito");
+                OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/list_capitulos.php?', '');
+            } else if (response == 1 || response == 2) {
+                jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
+            } else if (response == 3) {
+                jAlert("el orden ya existe.\n Consulte a la USTDS", "Usuario ya existe");
+            } else {
+                jAlert("Ocurrio un error inesperado.\n Consulte a la USTDS", "Error inesperado");
+            }
+        }
+    };
+    ajax.send(null);
+    loading.innerHTML = "";
 
 }
 
@@ -50,7 +96,7 @@ function validate_capitulo() {
         titulo.setAttribute("style", "background-color:#EDF0FF");
         titulo.focus();
         return false;
-    }   
+    }
     return true;
 }
 
@@ -60,7 +106,7 @@ function new_capitulo() {
         loading.innerHTML = cargando_bar;
         //Obtener Valores
         var titulo = document.getElementById('capitulo_title').value;
-        var activo = 1;       
+        var activo = 1;
         var descripcion = CKEDITOR.instances['capitulo_Descripcion'].getData();
         var ajax = NuevoAjax();
         var _values_send =
@@ -83,7 +129,7 @@ function new_capitulo() {
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else if (response == 3) {
-                    jAlert("El categoria ya existe.\n Consulte a la USTDS", "Usuario ya existe");
+                    jAlert("El Capitulo ya existe.\n Consulte a la USTDS", "Usuario ya existe");
                 } else {
                     jAlert("Ocurrio un error inesperado.\n Consulte a la USTDS", "Error inesperado");
                 }
@@ -96,17 +142,17 @@ function new_capitulo() {
 
 //*****+*+ editar y ver capitulo********+
 
-function update_capitulo(id){
-     if (validate_capitulo()) {
+function update_capitulo(id) {
+    if (validate_capitulo()) {
         var loading = document.getElementById('loading_container');
         loading.innerHTML = cargando_bar;
         //Obtener Valores
-        var titulo = document.getElementById('capitulo_title').value;          
+        var titulo = document.getElementById('capitulo_title').value;
         var descripcion = CKEDITOR.instances['capitulo_Descripcion'].getData();
         var ajax = NuevoAjax();
         var _values_send =
                 'id=' + id +
-                '&titulo=' + titulo +              
+                '&titulo=' + titulo +
                 '&descripcion=' + descripcion;
         var _URL_ = "mod/adminPlanEmergencia/adminCapitulos/ajax_edit_capitulo.php?";
         //alert(_URL_ + _values_send); //DEBUG
@@ -124,7 +170,7 @@ function update_capitulo(id){
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else if (response == 3) {
-                    jAlert("El categoria ya existe.\n Consulte a la USTDS", "Usuario ya existe");
+                    jAlert("El Capitulo ya existe.\n Consulte a la USTDS", "Usuario ya existe");
                 } else {
                     jAlert("Ocurrio un error inesperado.\n Consulte a la USTDS", "Error inesperado");
                 }
@@ -133,5 +179,5 @@ function update_capitulo(id){
         ajax.send(null);
         loading.innerHTML = "";
     }
-    
+
 }

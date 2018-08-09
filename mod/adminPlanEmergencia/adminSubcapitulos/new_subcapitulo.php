@@ -4,7 +4,7 @@ include("../../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
 
-$sql = "SELECT id, titulo FROM capitulo";
+$sql = "SELECT id, titulo FROM Capitulo";
 $comb = seleccion($sql);
 ?>
 <div class="container">

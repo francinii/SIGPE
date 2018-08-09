@@ -514,7 +514,7 @@ declare ordenar Integer;
             END IF;           
             START TRANSACTION;
                      
-                    INSERT INTO `capitulo`(descripcion,isActivo,titulo,orden) VALUES (p_descripcion, p_activo,p_titulo,ordenar);
+                    INSERT INTO `Capitulo`(descripcion,isActivo,titulo,orden) VALUES (p_descripcion, p_activo,p_titulo,ordenar);
             COMMIT;
             -- SUCCESS
             SET res = 0;
@@ -522,7 +522,7 @@ declare ordenar Integer;
 END
 ;;
 DELIMITER ;
---CALL insert_capitulo('micapitulo',1,'$nombre',@res);
+-- CALL insert_capitulo('micapitulo',1,'$nombre',@res);
 
 
 -- ----------------------------
@@ -547,14 +547,14 @@ declare ordenar Integer;
     SET res = 2;
     ROLLBACK;
 	END;
-            select MAX(orden) into ordenar from subcapitulo where FKidCapitulo=p_fkcapitulo;
+            select MAX(orden) into ordenar from Subcapitulo where FKidCapitulo=p_fkcapitulo;
              IF (ISNULL(ordenar)) THEN
                 SET ordenar=1;
             ELSE
                 SET ordenar= ordenar +1;   
             END IF;  
             START TRANSACTION;
-                    INSERT INTO `subcapitulo`(descripcion, titulo, isActivo, FKidCapitulo, orden) VALUES (p_descripcion, p_titulo,p_activo,p_fkcapitulo,ordenar);
+                    INSERT INTO `Subcapitulo`(descripcion, titulo, isActivo, FKidCapitulo, orden) VALUES (p_descripcion, p_titulo,p_activo,p_fkcapitulo,ordenar);
             COMMIT;
             -- SUCCESS
             SET res = 0;
@@ -562,7 +562,7 @@ declare ordenar Integer;
 END
 ;;
 DELIMITER ;
---CALL insert_subcapitulo('micapitulo',1,2'nombre',@res);
+-- CALL insert_subcapitulo('micapitulo',1,2'nombre',@res);
 
 
 
@@ -590,7 +590,7 @@ BEGIN
     ROLLBACK;
 	END;
             START TRANSACTION;
-                   UPDATE `capitulo` SET `descripcion`= p_descripcion ,`titulo`=p_titulo WHERE `id`=p_id;
+                   UPDATE `Capitulo` SET `descripcion`= p_descripcion ,`titulo`=p_titulo WHERE `id`=p_id;
             COMMIT;
             -- SUCCESS
             SET res = 0;
@@ -624,22 +624,22 @@ BEGIN
     SET res = 2;
     ROLLBACK;
 	END;
-            select FKidCapitulo into FKAntigua from subcapitulo WHERE `id`=p_id;
+            select FKidCapitulo into FKAntigua from Subcapitulo WHERE `id`=p_id;
             IF(FKAntigua = p_fkcapitulo) THEN
                   START TRANSACTION;
-                   UPDATE `subcapitulo` SET `descripcion`= p_descripcion ,`titulo`=p_titulo, `FKidCapitulo`=p_fkcapitulo WHERE `id`=p_id;
+                   UPDATE `Subcapitulo` SET `descripcion`= p_descripcion ,`titulo`=p_titulo, `FKidCapitulo`=p_fkcapitulo WHERE `id`=p_id;
                  COMMIT;
                 -- SUCCESS
                 SET res = 0;
             ELSE
-                select MAX(orden) into ordenar from subcapitulo where FKidCapitulo=p_fkcapitulo;
+                select MAX(orden) into ordenar from Subcapitulo where FKidCapitulo=p_fkcapitulo;
                 IF (ISNULL(ordenar)) THEN
                   SET ordenar=1;
                 ELSE
                   SET ordenar= ordenar +1;   
                 END IF;
                 START TRANSACTION;
-                   UPDATE `subcapitulo` SET `descripcion`= p_descripcion ,`titulo`=p_titulo, `FKidCapitulo`=p_fkcapitulo,`orden`=ordenar WHERE `id`=p_id;
+                   UPDATE `Subcapitulo` SET `descripcion`= p_descripcion ,`titulo`=p_titulo, `FKidCapitulo`=p_fkcapitulo,`orden`=ordenar WHERE `id`=p_id;
                  COMMIT;
                  -- SUCCESS
                SET res = 0;
@@ -651,6 +651,40 @@ DELIMITER ;
 
 -- CALL update_subcapitulo(1,'PRESENTACIÓN','nombre',1,@res);
 
+-- ----------------------------
+-- Proceso ordenar capitulos
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `ordenar_capitulo`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ordenar_capitulo`(IN `p_list` cursor, OUT `res` TINYINT  UNSIGNED)
+BEGIN
+        declare miId int;
+        declare cont int;
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;
+            SET cont = 1;
+            START TRANSACTION;
+            FETCH p_list INTO miId 
+                   UPDATE `capitulo` SET `orden`= cont ,WHERE `id`=miId;
+            END LOOP loop_List;
+            COMMIT;
+            -- SUCCESS
+            SET res = 0;
+            -- Existe usuario
+END
+;;
+DELIMITER ;
 
 -- ----------------------------
 -- Proceso actualizar origen de amenaza
