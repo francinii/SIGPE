@@ -30,12 +30,11 @@
 <script language="JavaScript" type="text/javascript" src="inc/js/adminSubcapitulo.js"></script>
 
 
-
-
 <!-- adminitrar Origenes de amenazas -->
 <script language="JavaScript" type="text/javascript"  src="inc/js/origenAmenaza.js"></script>
 <script language="JavaScript" type="text/javascript"  src="inc/js/categoriaAmenaza.js"></script>
 <script language="JavaScript" type="text/javascript"  src="inc/js/tipoAmenaza.js"></script>
+<script language="JavaScript" type="text/javascript"  src="inc/js/zonaTrabajo.js"></script>
 
 <!-- Bootstrap + Font-Awesome + Estilo -->
 <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
