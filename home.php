@@ -194,23 +194,18 @@ $vocab = $mySessionController->getVar("vocab");
                     </select>
                 </div>
                 <div class="">
-                    <select class=" selectpicker" data-live-search="true">
-                        <optgroup label="Picnic">
+                    <select class="form-control selectpicker" data-live-search="true">
+                        <optgroup  label="Picnic">
                             <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
                             <option data-tokens="mustard">Burger, Shake and a Smile</option>
                             <option data-tokens="frosting">Sugar, Spice and all things nice</option>
                         </optgroup>
                         <optgroup label="Camping">
-                            <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
-                            <option data-tokens="mustard">Burger, Shake and a Smile</option>
-                            <option data-tokens="frosting">Sugar, Spice and all things nice</option>
+                            
                         </optgroup>
                     </select>
                     <script>
-                        jQuery('.selectpicker').selectpicker({
-                          
-                            size: 4
-                        })
+                       jQuery('.selectpicker').selectpicker()
                     </script>
                 </div>
             </form>

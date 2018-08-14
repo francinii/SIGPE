@@ -223,7 +223,14 @@ INSERT INTO `subcapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, 
 un mejor entendimiento o completar su ejecución no incluidos en los puntos anteriores.</p>','Documentos de referencia',1,1,5);
  
 
-INSERT INTO `formulario`(`descripcion`, `FKidSubcapitulos`) VALUES ([value-2],[value-3])
+INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario1',1);
+INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario2',1);
+INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario3',3);
+INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario4',3);
+INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario5',4);
+INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario6',5);
+INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario7',5);
+INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario8',5);
 
 drop table TipoPoblacion;
 drop table Formulario;
@@ -620,14 +627,14 @@ declare ordenar Integer;
     SET res = 2;
     ROLLBACK;
 	END;
-            select MAX(orden) into ordenar from Subcapitulo where FKidCapitulo=p_fkcapitulo;
+            select MAX(orden) into ordenar from SubCapitulo where FKidCapitulo=p_fkcapitulo;
              IF (ISNULL(ordenar)) THEN
                 SET ordenar=1;
             ELSE
                 SET ordenar= ordenar +1;   
             END IF;  
             START TRANSACTION;
-                    INSERT INTO `Subcapitulo`(descripcion, titulo, isActivo, FKidCapitulo, orden) VALUES (p_descripcion, p_titulo,p_activo,p_fkcapitulo,ordenar);
+                    INSERT INTO `SubCapitulo`(descripcion, titulo, isActivo, FKidCapitulo, orden) VALUES (p_descripcion, p_titulo,p_activo,p_fkcapitulo,ordenar);
             COMMIT;
             -- SUCCESS
             SET res = 0;
@@ -697,19 +704,19 @@ BEGIN
             select FKidCapitulo into FKAntigua from Subcapitulo WHERE `id`=p_id;
             IF(FKAntigua = p_fkcapitulo) THEN
                   START TRANSACTION;
-                   UPDATE `Subcapitulo` SET `descripcion`= p_descripcion ,`titulo`=p_titulo, `FKidCapitulo`=p_fkcapitulo WHERE `id`=p_id;
+                   UPDATE `SubCapitulo` SET `descripcion`= p_descripcion ,`titulo`=p_titulo, `FKidCapitulo`=p_fkcapitulo WHERE `id`=p_id;
                  COMMIT;
                 -- SUCCESS
                 SET res = 0;
             ELSE
-                select MAX(orden) into ordenar from Subcapitulo where FKidCapitulo=p_fkcapitulo;
+                select MAX(orden) into ordenar from SubCapitulo where FKidCapitulo=p_fkcapitulo;
                 IF (ISNULL(ordenar)) THEN
                   SET ordenar=1;
                 ELSE
                   SET ordenar= ordenar +1;   
                 END IF;
                 START TRANSACTION;
-                   UPDATE `Subcapitulo` SET `descripcion`= p_descripcion ,`titulo`=p_titulo, `FKidCapitulo`=p_fkcapitulo,`orden`=ordenar WHERE `id`=p_id;
+                   UPDATE `SubCapitulo` SET `descripcion`= p_descripcion ,`titulo`=p_titulo, `FKidCapitulo`=p_fkcapitulo,`orden`=ordenar WHERE `id`=p_id;
                  COMMIT;
                  -- SUCCESS
                SET res = 0;
@@ -773,7 +780,7 @@ BEGIN
     ROLLBACK;
 	END;            
             START TRANSACTION;            
-                   UPDATE `Subcapitulo` SET `orden`= p_orden WHERE `id`=p_id;            
+                   UPDATE `SubCapitulo` SET `orden`= p_orden WHERE `id`=p_id;            
             COMMIT;
             -- SUCCESS
             SET res = 0;
@@ -815,7 +822,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `active_subcapitulo`(IN `p_id` int,I
 BEGIN
     DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET respuesta=0;
     START TRANSACTION;
-        UPDATE Subcapitulo SET  isActivo = p_activo WHERE id=p_id;
+        UPDATE SubCapitulo SET  isActivo = p_activo WHERE id=p_id;
         SELECT ROW_COUNT() INTO respuesta;
     IF (respuesta=1) THEN
     COMMIT;
@@ -881,7 +888,7 @@ BEGIN
 	END;
 
 	START TRANSACTION ;
-		DELETE FROM Subcapitulo WHERE id=p_id;
+		DELETE FROM SubCapitulo WHERE id=p_id;
 	
 	COMMIT;
 	-- SUCCESS

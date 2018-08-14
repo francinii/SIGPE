@@ -48,7 +48,7 @@ $start = "0";
 
 
 // select para llenar el combo
-$sql = "SELECT id,titulo FROM capitulo";
+$sql = "SELECT id,titulo FROM Capitulo WHERE isActivo=1";
 
 
 $order_key = (isset($_GET['order_key'])) ? $_GET['order_key'] : 'orden';
@@ -63,7 +63,7 @@ $comb = seleccion($sql);
 
 // select lista
 $sql = "SELECT  id, orden,titulo,isActivo
-        FROM subcapitulo";
+        FROM SubCapitulo";
 $find_key='0';
 if ((isset($_GET['find_key'])) ){
 $find_key =$_GET['find_key']; 
@@ -71,7 +71,7 @@ $find_key =$_GET['find_key'];
    $find_key = $comb[0]['id'];
 }
 if ($find_key != "") {    
-    $sql .= "  WHERE FKidCapitulo =" . $find_key;
+    $sql .= "  WHERE  FKidCapitulo =" . $find_key;
 }
 $order_key = (isset($_GET['order_key'])) ? $_GET['order_key'] : '';
 if ($order_key != "") {

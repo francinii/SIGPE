@@ -23,16 +23,15 @@
 <script language="JavaScript" type="text/javascript" src="inc/js/roll.js"></script>
 <script language="JavaScript" type="text/javascript"  src="inc/js/user.js"></script>
 
-<!-- adminCapitulos danny -->
+<!-- adminCapitulos  -->
 
 <script type="text/javascript" src="lib/ckeditor/ckeditor.js"></script>
 <script language="JavaScript" type="text/javascript" src="inc/js/adminCapitulos.js"></script>
 <script language="JavaScript" type="text/javascript" src="inc/js/adminSubcapitulo.js"></script>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+
+<!-- adminSubcapitulos  -->
+
 
 
 
@@ -52,11 +51,13 @@
 <link href="lib/calendar/calendar.css" rel="stylesheet" type="text/css"/>
 <script src="lib/wickedpicker/wickedpicker.js" language="JavaScript" type="text/javascript"></script>
 <link href="lib/wickedpicker/wickedpicker.css" rel="stylesheet" type="text/css"/>
-<link href="inc/css/estilo.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="lib\bootstrap-select-1.12.4\dist\css\bootstrap-select.min.css">
+<script src="lib\bootstrap-select-1.12.4\dist\js\bootstrap-select.min.js"></script>
+<link href="inc/css/estilo.css" rel="stylesheet" type="text/css"/>-->
 
 
 <!--estilo capitulos-->
-<link href="inc/css/capitulos.css" rel="stylesheet" type="text/css"/>
+
 
 <?php require_once 'config.inc';?>
 
