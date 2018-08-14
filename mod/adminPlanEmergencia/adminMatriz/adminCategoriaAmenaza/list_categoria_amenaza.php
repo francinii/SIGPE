@@ -58,7 +58,7 @@ if ($find_key != "") {
 //    $sql .= " ORDER BY id";
 //}
 
-$sql .= " limit " . (int) $start . "," . (int) $page_cant . ";";
+//$sql .= " limit " . (int) $start . "," . (int) $page_cant . ";";
 $res = seleccion($sql);
 ?>
 <!--  ****** Titulo ***** -->
@@ -87,7 +87,6 @@ $res = seleccion($sql);
                         }
                     }
                     ?>
-
                 </select>
             </div>
         </div>

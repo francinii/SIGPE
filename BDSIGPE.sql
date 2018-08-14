@@ -234,6 +234,38 @@ drop table ZonaTrabajo;
 
 -- ----------------Procedimientos almacenados----------------------------------
 -- ----------------------------
+-- Proceso insertar zona de trabajo
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `insert_zona_trabajo`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_zona_trabajo`(IN `p_nombre` varchar(150),IN `p_activo` int, OUT `res` TINYINT  UNSIGNED)
+BEGIN
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;
+            START TRANSACTION;
+                    INSERT INTO `ZonaTrabajo`(nombreZonaTrabajo,isActivo) VALUES (p_nombre, p_activo);
+            COMMIT;
+            -- SUCCESS
+            SET res = 0;
+            -- Existe usuario
+END
+;;
+DELIMITER ;
+
+
+
+-- ----------------------------
 -- Proceso insertar origen de amenaza
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_origen_amenaza`;
@@ -326,6 +358,37 @@ END
 ;;
 DELIMITER ;
 
+
+-- ----------------------------
+-- Proceso eliminar zona de trabajo
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `delete_zona_trabajo`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_zona_trabajo`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
+BEGIN
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;
+
+	START TRANSACTION ;
+		DELETE FROM ZonaTrabajo WHERE id=p_id;
+	
+	COMMIT;
+	-- SUCCESS
+	SET res = 0;
+END
+;;
+DELIMITER ;
 
 
 -- ----------------------------
@@ -443,7 +506,8 @@ BEGIN
     SET respuesta=0;
 END IF;
 END
-
+;;
+DELIMITER ;
 
 -- ----------------------------
 -- Proceso activar categoria de amenaza
@@ -463,7 +527,8 @@ BEGIN
     SET respuesta=0;
 END IF;
 END
-
+;;
+DELIMITER ;
 
 -- ----------------------------
 -- Proceso activar origen de amenaza
@@ -482,8 +547,9 @@ BEGIN
     ROLLBACK;
     SET respuesta=0;
 END IF;
-END
-
+END 
+;;
+DELIMITER ;
 -- ----------------------------
 -- Proceso insertar capitulo
 -- ----------------------------
@@ -564,9 +630,6 @@ END
 ;;
 DELIMITER ;
 -- CALL insert_subcapitulo('micapitulo',1,2'nombre',@res);
-
-
-
 
 
 -- ----------------------------
@@ -817,6 +880,9 @@ BEGIN
 	COMMIT;
 	-- SUCCESS
 	SET res = 0;
+END
+;;
+DELIMITER ;
 -- ----------------------------
 -- Proceso actualizar origen de amenaza
 -- ----------------------------
