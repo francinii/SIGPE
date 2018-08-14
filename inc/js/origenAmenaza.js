@@ -106,6 +106,28 @@ function delete_origen_action(id) {
 
 
 
+/**
+ * 
+ * @param {type} id_origen_amenaza
+ * @param {type} activo
+ * @returns {undefined}
+ */function active_origen_amenaza(id_origen_amenaza, activo) {
+    var estado;
+    if (activo == 1) {
+        estado = "desactivar ";
+        activo =0;
+    } else {
+        estado = "activar ";
+        activo =1;
+    }
+    jConfirm("Desea " + estado + " el origen: " + id_origen_amenaza, "Cambiar estado de actividad", function (r) {
+        if (r) {
+            active_origen_action(id_origen_amenaza, activo);
+        }
+    });
+}
+
+
 function active_origen_action(id,activo) {
     var page = document.getElementById('container');
     page.innerHTML = cargando;
@@ -135,28 +157,6 @@ function active_origen_action(id,activo) {
     page.innerHTML = '';
     ajax.send(null);
 }
-
-/**
- * 
- * @param {type} id_origen_amenaza
- * @param {type} activo
- * @returns {undefined}
- */function active_origen_amenaza(id_origen_amenaza, activo) {
-    var estado;
-    if (activo == 1) {
-        estado = "desactivar ";
-        activo =0;
-    } else {
-        estado = "activar ";
-        activo =1;
-    }
-    jConfirm("Desea " + estado + " el origen: " + id_origen_amenaza, "Cambiar estado de actividad", function (r) {
-        if (r) {
-            active_origen_action(id_origen_amenaza, activo);
-        }
-    });
-}
-
 
 //ACTUALIZAR ESTE METODO
 function update_origen_amenaza(id){
