@@ -18,14 +18,20 @@ $ip .= $mySessionController->getVar("cds_locate");
 /* * ********************************************************************************************** */
 $start = "0";
 $sql = "SELECT  id, descripcion,FKidSubcapitulos 
-        FROM FOrmulario ORDER BY id";
-
+        FROM Formulario ORDER BY id";
 $res = seleccion($sql);
+
+$sql = "SELECT id,titulo FROM Capitulo WHERE isActivo=1";
+$cap = seleccion($sql);
+for ($i = 0; $i < count($cap); $i++) {
+    $sql = "SELECT id,titulo FROM SubCapitulo WHERE isActivo=1 and FKidCapitulo =" . $cap[$i]['id'];
+    $Cap[$i][0] = seleccion($sql);
+}
 ?>
 <!--  ****** Titulo ***** -->
 <div class="well well-sm"><h1><?= $vocab["list_formulario"] ?></h1>
- <p><?= $vocab["formulario_admin_Desc"] ?></p>
- 
+    <p><?= $vocab["formulario_admin_Desc"] ?></p>
+
 
 </div>
 <!-- div original anterior a integración bootstrap3 
@@ -37,42 +43,39 @@ $res = seleccion($sql);
                 <th  width="10%"><?= $vocab["formulario_id"] ?></th>
                 <th width="50%"><?= $vocab["formulario_formulario"] ?></th>                
                 <th width="30%"><?= $vocab["formulario_subcapitulo"] ?></th>
-                <?php if (check_permiso($mod3, $act4, $user_rol)) { ?>
-                    <th width="5%"><div class="text-center"><i class="fa fa-pencil fa-2x text-success puntero" title="<?= $vocab["symbol_edit"] ?>"></i></div></th>
-                <?php } ?>               
+                
             </tr>
         </thead>
         <tbody>
             <?php
             if (count($res) > 0) {
                 for ($i = 0; $i < count($res); $i++) {
+                    $find_key = $res[$i]['FKidSubcapitulos'];
                     ?>
                     <tr id="fila<?= $i ?>"  align='center'>
-                        <td><?= $res[$i]['id'] ?></td>                        
-                        <td ><a href="#" class="up "><span class="glyphicon glyphicon-triangle-top"></span></a> <a href="#" class="down">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-triangle-bottom"></span></a></td>
-                        <td><?= $res[$i]['titulo'] ?></td>                      
+                        <td><?= $res[$i]['id'] ?></td>                    
+                        <td><?= $res[$i]['descripcion'] ?></td>                      
+                        <td><select  id="select <?= $res[$i]['id']; ?>" <?= (check_permiso($act2, $act1, $user_rol)) ? "disabled " : "";?> class="form-control selectpicker" data-live-search="true">
+                                <?php for ($a = 0; $a < count($cap); $a++) { ?>                           
+                                    <optgroup label="<?= $cap[$a]['titulo'] ?>">         
+                                        <?php
+                                        $subcapi = $Cap[$a][0];
+                                        if (count($subcapi) > 0) {
+                                            for ($j = 0; $j < count($subcapi); $j++) {
+                                                ?>                                      
+                                                <option <?= ($subcapi[$j]['id'] == $find_key) ? "selected " : ""; ?> data-tokens="<?= $subcapi[$j]['titulo'] ?>"><?= $subcapi[$j]['titulo'] ?></option>                         
+                                                <?php
+                                            }
+                                        }
+                                        ?>
+                                    </optgroup>
+                                <?php }
+                                ?>
+                            </select></td>
+
                        
-                        <?php if (check_permiso($act2, $act1, $user_rol)) { ?>
-                            <td>                      
-                                <a class="puntero" onClick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/edit_capitulo.php?', 'id_cap=<?= $res[$i]["id"] ?>&view_mode=0');">                                     
-                                    <div class="text-center"><i class="fa fa-eye text-primary" title="<?= $vocab["symbol_view"] ?>"></i></div>                                  
-                                </a>                                  
-                            </td>
-                        <?php } ?>
-                        <?php if (check_permiso($act2, $act4, $user_rol)) { ?>
-                            <td>                           
-                                <a class="puntero"  onClick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/edit_capitulo.php?', 'id_cap=<?= $res[$i]["id"] ?>&view_mode=1');">                                      
-                                    <div class="text-center"><i class="fa fa-pencil text-success" title="<?= $vocab["symbol_edit"] ?>"></i></div>                                    
-                                </a>
-                            </td>
-                        <?php } ?>
-                        <?php if (check_permiso($act2, $act5, $user_rol)) { ?>
-                            <td>              
-                                <a class="puntero"  onClick="javascript:delete_capitulo(<?= $res[$i]['id'].",'".$res[$i]['titulo'] ."'"?>);">                                 
-                                    <div class="text-center"><i class="fa fa-close text-danger" title="<?= $vocab["symbol_delete"] ?>"></i></div>                                       
-                                </a>                             
-                            </td>
-                        <?php } ?>
+                        
+
                     </tr>
                 <?php } ?>
             <?php } else { ?>
@@ -85,19 +88,17 @@ $res = seleccion($sql);
             <tr>
                 <th width="10%"><?= $vocab["formulario_id"] ?></th>
                 <th width="50%"><?= $vocab["formulario_formulario"] ?></th>                
-                <th width="30%"><?= $vocab["formulario_subcapitulo"] ?></th>             
-                <?php if (check_permiso($mod3, $act4, $user_rol)) { ?>
-                    <th><div class="text-center"><i class="fa fa-pencil fa-2x text-success puntero" title="<?= $vocab["symbol_edit"] ?>"></i></div></th>
-                <?php } ?>               
+                <th width="30%"><?= $vocab["formulario_subcapitulo"] ?></th>            
+              
             </tr>
         </tfoot>
     </table>
     <?php /*     * ***************************************************************************************** */ ?>
-    <br/>
-    <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
-        <div class="text-center"><a id="boton" class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/new_capitulo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["add_capitulo"] ?></a></div>
-    <?php } ?>   
+    <br/> 
 
 </div>
+<script>
+    jQuery('.selectpicker').selectpicker()
+</script>
 
 

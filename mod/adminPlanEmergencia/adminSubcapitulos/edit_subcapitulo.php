@@ -10,7 +10,7 @@ $comb = seleccion($sql);
 $view_mode = $_GET['view_mode'];
 $id_subcap= $_GET['id_subcap'];
 $sql = "SELECT  id, descripcion,titulo,FKidCapitulo
-        FROM Subcapitulo  WHERE id =" . $id_subcap;
+        FROM SubCapitulo  WHERE id =" . $id_subcap;
 $res = seleccion($sql);
 
 $find_key =$res[0]['FKidCapitulo']; 
