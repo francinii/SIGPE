@@ -1,5 +1,4 @@
 <?php
-
 include("../login/check.php");
 include("../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
@@ -15,8 +14,8 @@ function consultaOrigenes() {
     return "SELECT id, descripcion FROM OrigenAmenaza";
 }
 
-function consultaTipos() {
-    return "SELECT id, descripcion FROM TipoAmenaza";
+function consultaTipos($idOrigen) {
+    return "SELECT id, descripcion, FkidOrigen FROM TipoAmenaza where FkidOrigen=$idOrigen";
 }
 
 //Selecciona todas las categorias
@@ -113,6 +112,46 @@ $origenes = seleccion(consultaOrigenes());
             </tr>
         </thead>
         <tbody>
+            <?php
+            for ($i = 0; $i < count($origenes); $i++) {
+                $idOrigen = $origenes[$i]['id'];
+                $categorias = seleccion(consultaCategoriasPorOrigen($idOrigen));
+                $cantidadCategorias = count($categorias);
+                $tipos = seleccion(consultaTipos($idOrigen));
+                $cantidadTipos = count($tipos);
+                ?>       
+                <tr>
+                    <td rowspan="<?= $cantidadCategorias ?>"> <?= $origenes[$i]['descripcion']; ?> </td>
+                    <?php for ($j = 0; $j < $cantidadTipos; $j++) { ?>
+                        <?php
+                        $idTipo = $tipos[$j]['id']; 
+                        $categoriasPorTipo = seleccion(consultaCategoriasPorTipo($idTipo));
+                        $cantidadCategoriasPorTipo = count($categoriasPorTipo);
+                        ?>
+                        <?php if ($j != 0) { ?>
+                        <tr>
+                        <?php } ?>
+                        <td rowspan="<?= $cantidadCategoriasPorTipo ?>"> <?= $tipos[$j]['descripcion']; ?> </td>
+                        <?php for ($k = 0; $k < $cantidadCategoriasPorTipo; $k++) { ?>
+                            <?php if ($k != 0 && $j != 0) { ?>
+                            <tr>
+                            <?php } ?>
+                            <td> <?= $categorias[$j]['descripcion']; ?></td>
+                            <td> fuente</td>
+                            <td> valor</td>
+                            <td> criterio</td>
+                            <td> valor</td>
+                            <td> criterio</td>
+                            <td> valor</td>
+                            <td> criterio</td>
+                            <td> valor</td>
+                            <td> criterio</td>
+                        </tr>
+                    <?php } ?>
+
+                <?php } ?>
+            <?php } ?>
+
         </tbody>
     </table>
 

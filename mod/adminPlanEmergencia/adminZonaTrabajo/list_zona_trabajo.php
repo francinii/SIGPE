@@ -15,24 +15,24 @@ $ip .= $mySessionController->getVar("cds_locate");
 $page_cant = $mySessionController->getVar("page_cant");
 
 //
-$sql = "SELECT COUNT(id) AS cant
-        FROM ZonaTrabajo";
-
-$find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
-if ($find_key != "") {
-    $sql .= " WHERE roll_name LIKE  '%" . $find_key . "%'";
-}
-$sql .= ";";
-$res_cant = seleccion($sql);
-
-$cant_pagi = ceil((int) $res_cant[0]['cant'] / (int) $page_cant);
-$page = (isset($_GET["page"])) ? $_GET["page"] : "1";
-if (!$page) {
-    $start = 0;
-    $page = 1;
-} else {
-    $start = (isset($_GET["start"])) ? $_GET["start"] : "0";
-}
+//$sql = "SELECT COUNT(id) AS cant
+//        FROM ZonaTrabajo";
+//
+//$find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
+//if ($find_key != "") {
+//    $sql .= " WHERE roll_name LIKE  '%" . $find_key . "%'";
+//}
+//$sql .= ";";
+//$res_cant = seleccion($sql);
+//
+//$cant_pagi = ceil((int) $res_cant[0]['cant'] / (int) $page_cant);
+//$page = (isset($_GET["page"])) ? $_GET["page"] : "1";
+//if (!$page) {
+//    $start = 0;
+//    $page = 1;
+//} else {
+//    $start = (isset($_GET["start"])) ? $_GET["start"] : "0";
+//}
 
 /* * ********************************************************************************************** */
 $sql = "SELECT  id, nombreZonaTrabajo FROM ZonaTrabajo";
@@ -51,7 +51,6 @@ if ($order_key != "") {
 
 $sql .= " limit " . (int) $start . "," . (int) $page_cant . ";";
 $res = seleccion($sql);
-
 ?>
 <!--  ****** Titulo ***** -->
 <div class="well well-sm"><h1><?= $vocab["list_zona_trabajo_title"] ?></h1></div>
@@ -80,7 +79,7 @@ $res = seleccion($sql);
                     <tr id="fila<?= $i ?>"  align='center'>                        
                         <?php if (check_permiso($act2, $act1, $user_rol)) { ?>
                             <td><?= $res[$i]['id'] ?></td>
-                        <td><?= $res[$i]['nombreZonaTrabajo'] ?></td>
+                            <td><?= $res[$i]['nombreZonaTrabajo'] ?></td>
                         <?php } ?>
                         <?php if (check_permiso($act2, $act1, $user_rol)) { ?>
                             <td>
@@ -92,7 +91,7 @@ $res = seleccion($sql);
                         <?php if (check_permiso($mod1, $act4, $user_rol)) { ?>
                             <td><a class="puntero" onClick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/edit_zona_trabajo.php?', 'id=<?= $res[$i]["id"] ?>&view_mode=1');"><div class="text-center"><i class="fa fa-pencil text-success puntero" title="<?= $vocab["symbol_edit"] ?>"></i></div></a></td>
                         <?php } ?>
-                        
+
                         <?php if (check_permiso($mod1, $act5, $user_rol)) { ?>
                             <td><a class="puntero" onClick="javascript:delete_zona_trabajo(<?= $res[$i]['id'] ?>);"><div class="text-center"><i class="fa fa-close text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></a></td>
                         <?php } ?>
@@ -107,7 +106,7 @@ $res = seleccion($sql);
         <tfoot>
             <tr>
                 <th><?= $vocab["list_zona_trabajo_id"] ?></th>
-                <th><input type="text" name="nombre_search" id="nombre_search" value="<?= $vocab["symbol_name"] ?>" class="search_init" /></th>
+                <th><?= $vocab["list_zona_trabajo_descripcion"] ?></th>
                 <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
                     <th><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
                 <?php } ?>

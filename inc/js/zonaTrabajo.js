@@ -24,6 +24,7 @@ function new_zona_trabajo() {
         loading.innerHTML = cargando_bar;
         //Obtener Valores
         var nombre = document.getElementById('nombre').value;
+         var descripcion = document.getElementById('descripcion').value;
         var activo = 0;
         if (document.getElementById('inlineCheckbox1').checked)
             activo = 1;
@@ -33,6 +34,7 @@ function new_zona_trabajo() {
         var ajax = NuevoAjax();
         var _values_send =
                 'nombre=' + nombre +
+                '&descripcion=' + descripcion +
                 '&inlineCheckbox=' + activo;
         var _URL_ = "mod/adminPlanEmergencia/adminZonaTrabajo/ajax_new_zona_trabajo.php?";
         //alert(_URL_ + _values_send); //DEBUG
@@ -101,64 +103,13 @@ function delete_zona_trabajo_action(id) {
     });
 }
 
-//function active_origen_action(id,activo) {
-//    var page = document.getElementById('container');
-//    page.innerHTML = cargando;
-//    var ajax = NuevoAjax();
-//    //Preparacion  llamada AJAX
-//    var _values_send = 'id=' + id +
-//            '&activo='+activo;
-//    var _URL_ = "mod/adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/ajax_active_zona_trabajo.php?";
-//    //alert(_URL_ + _values_send); //DEBUG
-//    ajax.open("GET", _URL_ + "&" + _values_send, true);
-//    ajax.onreadystatechange = function () {
-//        if (ajax.readyState == 1) {
-//            page.innerHTML = cargando;
-//        } else if (ajax.readyState == 4) {
-//            var response = ajax.responseText;
-//            //alert(response); //DEBUG
-//            if (response == 1) {
-//                jAlert('El estado ha sido actualizado!', 'Exito');
-//            } else if (response == 0) {
-//                jAlert('Ha ocurrido un error en la Base de Datos Intentelo Nuevamente\n Si el problema continua comuniquese con la USTDS', 'Error');
-//            } else {
-//                jAlert('Ha ocurrido un error inesperado intentelo más tarde!', 'Error');
-//            }
-//            OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/list_zona_trabajo.php?', '');
-//        }
-//    };
-//    page.innerHTML = '';
-//    ajax.send(null);
-//}
-
-/**
- * 
- * @param {type} id_zona_trabajo
- * @param {type} activo
- * @returns {undefined}
- */
-//function active_zona_trabajo(id_zona_trabajo, activo) {
-//    var estado;
-//    if (activo == 1) {
-//        estado = "desactivar ";
-//        activo =0;
-//    } else {
-//        estado = "activar ";
-//        activo =1;
-//    }
-//    jConfirm("Desea " + estado + " el origen: " + id_zona_trabajo, "Cambiar estado de actividad", function (r) {
-//        if (r) {
-//            active_origen_action(id_zona_trabajo, activo);
-//        }
-//    });
-//}
-
 function update_zona_trabajo(id){
      if (validate_zona_trabajo()) {
         var loading = document.getElementById('loading_container');
         loading.innerHTML = cargando_bar;
         //Obtener Valores
-        var nombre = document.getElementById('nombre').value;          
+        var nombre = document.getElementById('nombre').value;
+        var descripcion = document.getElementById('descripcion').value;  
         var activo = 0;
         if (document.getElementById('inlineCheckbox1').checked)
             activo = 1;
@@ -168,9 +119,10 @@ function update_zona_trabajo(id){
         var ajax = NuevoAjax();
         var _values_send =
                 'id=' + id +
-                '&nombre=' + nombre +              
+                '&nombre=' + nombre +     
+                '&descripcion=' + descripcion +             
                 '&activo=' + activo;
-        var _URL_ = "mod/adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/ajax_edit_zona_trabajo.php?";
+        var _URL_ = "mod/adminPlanEmergencia/adminZonaTrabajo/ajax_edit_zona_trabajo.php?";
         //alert(_URL_ + _values_send); //DEBUG
         ajax.open("GET", _URL_ + _values_send, true);
         ajax.onreadystatechange = function () {
@@ -182,7 +134,7 @@ function update_zona_trabajo(id){
                 //alert(response); //DEBUG
                 if (response == 0) {
                     jAlert("Origen actualizado con exito", "Exito");
-                    OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/list_zona_trabajo.php?', '');
+                    OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', '');
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else if (response == 3) {
