@@ -87,7 +87,6 @@ $res = seleccion($sql);
                         }
                     }
                     ?>
-
                 </select>
             </div>
         </div>
