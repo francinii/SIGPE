@@ -25,6 +25,8 @@ $res = seleccion($sql);
 <!--  ****** Titulo ***** -->
 <div class="well well-sm"><h1><?= $vocab["list_formulario"] ?></h1>
  <p><?= $vocab["formulario_admin_Desc"] ?></p>
+ 
+
 </div>
 <!-- div original anterior a integración bootstrap3 
 <div style=" width: 800px; margin: 0 auto;"  class="ex_highlight_row"> -->
