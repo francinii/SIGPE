@@ -187,14 +187,32 @@ $vocab = $mySessionController->getVar("vocab");
                     <p class="help-block">Es como un text solo que se usa cuando se hace un buscar en el sitio solo</p>
                 </div>
                 <div class="form-group">
-                <select class="form-control">
-                    <option>Mustard</option>
-                    <option>Ketchup</option>
-                    <option>Relish</option>
-                </select>
+                    <select class="form-control">
+                        <option>Mustard</option>
+                        <option>Ketchup</option>
+                        <option>Relish</option>
+                    </select>
                 </div>
-
-
+                <div class="">
+                    <select class=" selectpicker" data-live-search="true">
+                        <optgroup label="Picnic">
+                            <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
+                            <option data-tokens="mustard">Burger, Shake and a Smile</option>
+                            <option data-tokens="frosting">Sugar, Spice and all things nice</option>
+                        </optgroup>
+                        <optgroup label="Camping">
+                            <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
+                            <option data-tokens="mustard">Burger, Shake and a Smile</option>
+                            <option data-tokens="frosting">Sugar, Spice and all things nice</option>
+                        </optgroup>
+                    </select>
+                    <script>
+                        jQuery('.selectpicker').selectpicker({
+                          
+                            size: 4
+                        })
+                    </script>
+                </div>
             </form>
         </div>
     </div>

@@ -140,7 +140,7 @@ require 'functions.php';
                                     <a href="#"><span><i class="fa fa-sitemap text-warning"></i> <?= $vocab["menu_admin_formulario"] ?></span></a>
                                 <ul class="dropdown-menu">
                                         <?php if (check_permiso($mod3, $act2, $user_rol)) { ?>
-                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminFormularios/adminFormularios.php?', '');"><span> <i class="fa fa-list text-primary"></i>  <?= $vocab["formulario_admin"] ?></span></a></li>
+                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminFormularios/list_formulario.php?', '');"><span> <i class="fa fa-list text-primary"></i>  <?= $vocab["formulario_admin"] ?></span></a></li>
                                         <?php } ?>                                                                             
                                     </ul>
                                 </li>

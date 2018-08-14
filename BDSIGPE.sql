@@ -12,10 +12,17 @@ create table ZonaTrabajo(
 id int  NOT NULL AUTO_INCREMENT,
 isActivo int,
 nombreZonaTrabajo varchar(150),
+descripcion varchar(150),
+PRIMARY KEY(id)
+);
+
+create table PlanEmergencia(
+id int  NOT NULL AUTO_INCREMENT,
+FKidZonaTrabajo int, 
 revisadoPor varchar(150),
 codigoZonaTrabajo varchar(150),
 actividad varchar(150),
-direcion varchar(150),
+dirrecion varchar(150),
 personaContactoGeneral varchar(150),
 numeroTelefono varchar(150),
 numeroFax varchar(150),
@@ -27,9 +34,6 @@ seguridadInstitucional varchar(150),
 servicioConsegeria varchar(150),
 personalAdministrativo varchar(150),
 presenciaEstudiantil varchar(150),
-tipoPoblacion varchar(150),
-tipoPoblacionPersonalAcademico varchar(150),
-tipoPoblacionEstudiantes varchar(150),
 instalacionesDensidadOcupacion varchar(150),
 instalacionesAreaConstruccion varchar(150),
 instalacionesInstalaciones varchar(150),
@@ -53,7 +57,8 @@ elementosConstructivosAlcantarilladoPluvial varchar(150),
 elementosConstructivosSistemaElectrico varchar(150),
 elementosConstructivosSistemaTelefonico varchar(150),
 elementosConstructivosOtros varchar(150),
-PRIMARY KEY(id)
+PRIMARY KEY(id),
+FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 );
 
 create table OrigenAmenaza(
@@ -85,14 +90,14 @@ create table CategoriaTipoAmenaza (
 create table Matriz (
     id int NOT NULL AUTO_INCREMENT,  
     FKidCategoriaTipoAmenaza int,
-    FKidZonaTrabajo int,
+    FKidPlanEmergencias int,
     fuente text,
     probabilidad int,
     gravedad int,
     consecuenciaAmenaza int,
     PRIMARY KEY(id), 
     FOREIGN KEY(FKidCategoriaTipoAmenaza) REFERENCES CategoriaTipoAmenaza(id),
-    FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
+    FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 );
 
 create table Capitulo(
@@ -126,16 +131,16 @@ FOREIGN KEY (FKidSubcapitulos) REFERENCES SubCapitulo(id)
 
 create table TipoPoblacion(
 id int NOT NULL AUTO_INCREMENT,
-FKidZonaTrabajo int,
+FKidPlanEmergencias int,
 tipoPoblacion varchar(150),
 descripcion varchar(150),
 total int,
 representacionDe varchar(150),
 PRIMARY KEY(id),
-FOREIGN KEY (FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
+FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 );
 
-
+-- cambiar insert
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` ( `nombreZonaTrabajo`, `revisadoPor`, `codigoZonaTrabajo`, `actividad`, `direcion`, `personaContactoGeneral`, `numeroTelefono`, `numeroFax`, `notificaciones`, `categoriNFPA`, `usoInstalaciones`, `horarioJornada`, `seguridadInstitucional`, `servicioConsegeria`, `personalAdministrativo`, `presenciaEstudiantil`, `tipoPoblacion`, `tipoPoblacionPersonalAcademico`, `tipoPoblacionEstudiantes`, `instalacionesDensidadOcupacion`, `instalacionesAreaConstruccion`, `instalacionesInstalaciones`, `instalacionesCaracteristicasZona`, `instalacionesTopografia`, `instalacionesNivelTerreno`, `instalacionesColindates`, `elementosConstructivosTipoConstruccion`, `elementosConstructivosAntiguedad`, `elementosConstructivosCimientos`, `elementosConstructivosEstructura`, `elementosConstructivosParedes`, `elementosConstructivosEntrepiso`, `elementosConstructivosTecho`, `elementosConstructivosCielos`, `elementosConstructivosPisos`, `elementosConstructivosAreaParqueo`, `elementosConstructivosSistemaAguaPotable`, `elementosConstructivosAlcantarilladoSanitario`, `elementosConstructivosAlcantarilladoPluvial`, `elementosConstructivosSistemaElectrico`, `elementosConstructivosSistemaTelefonico`, `elementosConstructivosOtros`) VALUES ('Limon', 'Fran', 'Fran', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` ( `nombreZonaTrabajo`, `revisadoPor`, `codigoZonaTrabajo`, `actividad`, `direcion`, `personaContactoGeneral`, `numeroTelefono`, `numeroFax`, `notificaciones`, `categoriNFPA`, `usoInstalaciones`, `horarioJornada`, `seguridadInstitucional`, `servicioConsegeria`, `personalAdministrativo`, `presenciaEstudiantil`, `tipoPoblacion`, `tipoPoblacionPersonalAcademico`, `tipoPoblacionEstudiantes`, `instalacionesDensidadOcupacion`, `instalacionesAreaConstruccion`, `instalacionesInstalaciones`, `instalacionesCaracteristicasZona`, `instalacionesTopografia`, `instalacionesNivelTerreno`, `instalacionesColindates`, `elementosConstructivosTipoConstruccion`, `elementosConstructivosAntiguedad`, `elementosConstructivosCimientos`, `elementosConstructivosEstructura`, `elementosConstructivosParedes`, `elementosConstructivosEntrepiso`, `elementosConstructivosTecho`, `elementosConstructivosCielos`, `elementosConstructivosPisos`, `elementosConstructivosAreaParqueo`, `elementosConstructivosSistemaAguaPotable`, `elementosConstructivosAlcantarilladoSanitario`, `elementosConstructivosAlcantarilladoPluvial`, `elementosConstructivosSistemaElectrico`, `elementosConstructivosSistemaTelefonico`, `elementosConstructivosOtros`) VALUES ( 'Limon', 'Fran', 'Fran', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` ( `nombreZonaTrabajo`, `revisadoPor`, `codigoZonaTrabajo`, `actividad`, `direcion`, `personaContactoGeneral`, `numeroTelefono`, `numeroFax`, `notificaciones`, `categoriNFPA`, `usoInstalaciones`, `horarioJornada`, `seguridadInstitucional`, `servicioConsegeria`, `personalAdministrativo`, `presenciaEstudiantil`, `tipoPoblacion`, `tipoPoblacionPersonalAcademico`, `tipoPoblacionEstudiantes`, `instalacionesDensidadOcupacion`, `instalacionesAreaConstruccion`, `instalacionesInstalaciones`, `instalacionesCaracteristicasZona`, `instalacionesTopografia`, `instalacionesNivelTerreno`, `instalacionesColindates`, `elementosConstructivosTipoConstruccion`, `elementosConstructivosAntiguedad`, `elementosConstructivosCimientos`, `elementosConstructivosEstructura`, `elementosConstructivosParedes`, `elementosConstructivosEntrepiso`, `elementosConstructivosTecho`, `elementosConstructivosCielos`, `elementosConstructivosPisos`, `elementosConstructivosAreaParqueo`, `elementosConstructivosSistemaAguaPotable`, `elementosConstructivosAlcantarilladoSanitario`, `elementosConstructivosAlcantarilladoPluvial`, `elementosConstructivosSistemaElectrico`, `elementosConstructivosSistemaTelefonico`, `elementosConstructivosOtros`) VALUES ( 'Limon', 'Fran', 'Fran', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
@@ -218,7 +223,7 @@ INSERT INTO `subcapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, 
 un mejor entendimiento o completar su ejecución no incluidos en los puntos anteriores.</p>','Documentos de referencia',1,1,5);
  
 
-
+INSERT INTO `formulario`(`descripcion`, `FKidSubcapitulos`) VALUES ([value-2],[value-3])
 
 drop table TipoPoblacion;
 drop table Formulario;
@@ -228,6 +233,7 @@ drop table Matriz;
 drop table CategoriaTipoAmenaza;
 drop table TipoAmenaza;
 drop table OrigenAmenaza;
+drop table PlanEmergencia;
 drop table ZonaTrabajo;
 
 

@@ -28,6 +28,12 @@
 <script type="text/javascript" src="lib/ckeditor/ckeditor.js"></script>
 <script language="JavaScript" type="text/javascript" src="inc/js/adminCapitulos.js"></script>
 <script language="JavaScript" type="text/javascript" src="inc/js/adminSubcapitulo.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+
 
 
 <!-- adminitrar Origenes de amenazas -->
