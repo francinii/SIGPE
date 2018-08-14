@@ -81,13 +81,18 @@ $res = seleccion($sql);
                         <?php if (check_permiso($act2, $act1, $user_rol)) { ?>
                             <td><?= $res[$i]['id'] ?></td>
                         <td><?= $res[$i]['nombreZonaTrabajo'] ?></td>
-                            <?php if (check_permiso($mod1, $act1, $user_rol)) { ?>
-                            <?php } ?>
-                            <td><a class="puntero" onClick="javascript:OpcionMenu('mod/admin/permits/edit_mod.php?', 'id=<?= $res[$i]["id"] ?>&view_mode=0');"><div class="text-center"><i class="fa fa-eye text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></a></td>
+                        <?php } ?>
+                        <?php if (check_permiso($act2, $act1, $user_rol)) { ?>
+                            <td>
+                                <a class="puntero" onClick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/edit_zona_trabajo.php?', 'id=<?= $res[$i]["id"] ?>&view_mode=0');">                                     
+                                    <div class="text-center"><i class="fa fa-eye text-primary" title="<?= $vocab["symbol_view"] ?>"></i></div>                                  
+                                </a>   
+                            </td>
                         <?php } ?>
                         <?php if (check_permiso($mod1, $act4, $user_rol)) { ?>
-                            <td><a class="puntero" onClick="javascript:OpcionMenu('mod/admin/permits/edit_mod.php?', 'id=<?= $res[$i]["id"] ?>&view_mode=1');"><div class="text-center"><i class="fa fa-pencil text-success puntero" title="<?= $vocab["symbol_edit"] ?>"></i></div></a></td>
+                            <td><a class="puntero" onClick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/edit_zona_trabajo.php?', 'id=<?= $res[$i]["id"] ?>&view_mode=1');"><div class="text-center"><i class="fa fa-pencil text-success puntero" title="<?= $vocab["symbol_edit"] ?>"></i></div></a></td>
                         <?php } ?>
+                        
                         <?php if (check_permiso($mod1, $act5, $user_rol)) { ?>
                             <td><a class="puntero" onClick="javascript:delete_zona_trabajo(<?= $res[$i]['id'] ?>);"><div class="text-center"><i class="fa fa-close text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></a></td>
                         <?php } ?>
