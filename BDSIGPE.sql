@@ -218,7 +218,7 @@ INSERT INTO `subcapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, 
 un mejor entendimiento o completar su ejecución no incluidos en los puntos anteriores.</p>','Documentos de referencia',1,1,5);
  
 
-
+INSERT INTO `formulario`(`descripcion`, `FKidSubcapitulos`) VALUES ([value-2],[value-3])
 
 drop table TipoPoblacion;
 drop table Formulario;
