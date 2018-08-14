@@ -21,6 +21,20 @@ require 'functions.php';
                 <li><a href="" style="width: 150px;"></a></li>
                 <!-- PERFIL -->
                 <li><a href='#' onclick="javascript:OpcionMenu('mod/admin/users/edit_perfil.php?', '');"><span> <i class="fa fa-user fa-inverse"></i> <?= $vocab["menu_perfil"] ?></span></a></li>
+                <?php if (check_permiso($mod1, $act1, $user_rol)) { ?>
+                    <li class="dropdown">
+                        <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#"><span><i class="fa fa-gears fa-inverse"></i> <?= $vocab["menu_planes_emergencia"] ?></span> <span class="caret"></span></a>
+                        <ul class="dropdown-menu"> 
+                           <!-- Plan de emergencia-->
+                            <?php if (check_permiso($mod2, $act1, $user_rol)) { ?>
+                                <li class="dropdown-submenu">
+                                    <a onclick="javascript:OpcionMenu('mod/planEmergencia/plan_emergencia_matriz.php?', '');"><span><?= $vocab["menu_planes_emergencia"] ?></span></a>
+                                </li>
+                            <?php } ?>
+                        </ul>
+                    </li>
+                <?php } ?>
+                
                 <!-- ADMINISTRACION -->
                 <?php if (check_permiso($mod1, $act1, $user_rol)) { ?>
                     <li class="dropdown">
@@ -84,10 +98,10 @@ require 'functions.php';
                                     <a href="#"><span><i class="fa fa-puzzle-piece text-danger"></i> <?= $vocab["menu_admin_zona_trabajo"] ?></span></a>
                                     <ul class="dropdown-menu">
                                         <?php if (check_permiso($mod3, $act2, $user_rol)) { ?>
-                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonasTrabajo/list_zona_trabajo.php?', '');"><span> <i class="fa fa-list text-primary"></i>  <?= $vocab["menu_list"] ?></span></a></li>
+                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', '');"><span> <i class="fa fa-list text-primary"></i>  <?= $vocab["menu_list"] ?></span></a></li>
                                         <?php } ?>
                                         <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
-                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonasTrabajo/new_zona_trabajo.php?', '');"><span><i class="fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?></span></a></li>
+                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/new_zona_trabajo.php?', '');"><span><i class="fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?></span></a></li>
                                         <?php } ?>
                                     </ul>
                                 </li>

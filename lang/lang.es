@@ -44,6 +44,7 @@ $vocab["menu_admin_capitulos"]         = "Cap&iacute;tulos";
 $vocab["menu_admin_subcapitulos"]      = "Subcap&iacute;tulos";
 $vocab["menu_admin_zona_trabajo"]      = "Zonas de trabajo";
 $vocab["menu_admin_formulario"]        = "Formulario";
+$vocab["menu_planes_emergencia"]       = "Plan de emergencia";
 
 //***************************** Home *****************************************//
 $vocab["home_title"]               = "Simbolog&iacute;a";
@@ -105,7 +106,7 @@ $vocab["user_tel_desc"]         = "Ingese el numero de telefono";
 $vocab["user_perfil_desc"]      = "Información de usuario personal";
 
 
-//***************************** Modulo matriz de riesgos******************************//
+//**************** Modulo administración de matriz de riesgos *******************//
 $vocab["isActivo"]          = "Activo";
 $vocab["isInactivo"]          = "Inactivo";
 
@@ -127,8 +128,6 @@ $vocab["desc_tipo_isActivo"]                  = "Active o desactive el tipo de a
 $vocab["nombre_tipo_amenaza"]                 = "Nombre del tipo de amenaza";
 $vocab["nombre_desc_tipo_amenaza"]            = "Escriba el nombre del nuevo tipo de amenaza";
 
-
-
 $vocab["categoria_amenaza_title"]               = "Categoria";
 $vocab["list_categoria_amenaza_title"]          = "Categor&iacute;a de amenaza";
 $vocab["list_categoria_amenaza_id"]             = "Id";
@@ -146,7 +145,7 @@ $vocab["list_zona_trabajo_descripcion"]    = "Zona de trabajo";
 $vocab["zona_trabajo_title_Desc"]       = "Titulo de la zona de trabajo";
 $vocab["zona_trabajo_id"]               = "Id";
 $vocab["zona_trabajo_id_Desc"]          = "Id del capitulo";
-$vocab["zona_trabajo_Descripcion"]      = "Descripción del capitulo";
+$vocab["zona_trabajo_Descripcion"]      = "Descripción de la zona de trabajo";
 
 //***************************** Modulo administrar capitulos ******************************//
 $vocab["list_capitulo"]             = "Lista de capitulos";
@@ -187,4 +186,19 @@ $vocab["list_formulario"]              = "Lista de formularios";
 $vocab["formulario_id"]                = "id";
 $vocab["formulario_formulario"]        = "Formulario";
 $vocab["formulario_subcapitulo"]        = "subcapitulo";
+
+
+//***********     Modulo Formulario matriz de riesgos    ***********************//
+$vocab["td_origen"]                      = "Origen";
+$vocab["td_tipo"]                        = "Tipo";
+$vocab["td_categoria"]                   = "Categoria";
+$vocab["td_fuente"]                      = "Fuente";
+$vocab["td_probabilidad"]                = "Probabilidad";
+$vocab["td_gravedad"]                    = "Gravedad";
+$vocab["td_consecuencia_amenaza"]        = "Consecuencia de amenaza";
+$vocab["td_tipo_alerta"]                 = "Tipo de alerta";
+$vocab["td_valor"]                       = "Valor";
+$vocab["td_criterio"]                    = "Criterio";
+
+
 ?>
