@@ -200,5 +200,13 @@ $vocab["td_tipo_alerta"]                 = "Tipo de alerta";
 $vocab["td_valor"]                       = "Valor";
 $vocab["td_criterio"]                    = "Criterio";
 
-
+//***********    Incio plan de emergencia    ***********************//
+$vocab["inicio_Bienvenido"]                  ="Bienvenido";
+$vocab["inicio_Titulo"]                      = "SIGPE";
+$vocab["inicio_Subtitulo"]                   = "CIEUNA";
+$vocab["inicio_Titulo_Desc"]                 = "seleccione el plan de emergencia que desea trabajar";
+$vocab["inicio_Empezar"]                     = "Empeza";
+$vocab["inicio_Imprimir"]                    = "Imprimir";
+$vocab["inicio_Imprimir"]                    = "Imprimir";
+$vocab["incio_labe"]                         ="Plan de emergencia"
 ?>

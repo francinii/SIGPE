@@ -15,7 +15,7 @@ require 'functions.php';
         <div class="navbar-collapse collapse" id="navbar" aria-expanded="false" style="height: 1px;">
             <ul class="nav navbar-nav">
                 <!-- INICIO -->
-                <li><a onclick="javascript:OpcionMenu('home.php?', '');"><span><i class="fa fa-home fa-inverse"></i> <?= $vocab["menu_home"] ?></span></a></li>
+                <li><a onclick="javascript:OpcionMenu('mod/inicio.php?', '');"><span><i class="fa fa-home fa-inverse"></i> <?= $vocab["menu_home"] ?></span></a></li>
                 <!-- MODULOS DEL SISTEMA -->
                 <!-- ESPACIO -->
                 <li><a href="" style="width: 150px;"></a></li>
@@ -164,7 +164,8 @@ require 'functions.php';
                         </ul>
                     </li>
                 <?php } ?>
-                <li><a href="http://www.soporteinf.una.ac.cr" target="_blank"><span><i class="fa fa-question fa-inverse"></i> <?= $vocab["menu_help"] ?></span></a></li>
+                    <li><a onclick="javascript:OpcionMenu('home.php?', '');"><span><i class="fa fa-question fa-inverse"></i> <?= $vocab["menu_help"] ?></span></a></li>
+                <!--<li><a href="http://www.soporteinf.una.ac.cr" target="_blank"><span><i class="fa fa-question fa-inverse"></i> <?= $vocab["menu_help"] ?></span></a></li>-->
                 <li><a href='#' onclick="window.location = document.getElementById('cds_domain_locate').value + 'mod/login/logout.php'"><span><i class="fa fa-sign-out fa-inverse"></i> <?= $vocab["menu_logout"] ?></span></a></li>
             </ul>
         </div><!--/.nav-collapse -->

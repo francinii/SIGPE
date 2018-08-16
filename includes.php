@@ -55,10 +55,10 @@
 <link href="lib/wickedpicker/wickedpicker.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" href="lib\bootstrap-select-1.12.4\dist\css\bootstrap-select.min.css">
 <script src="lib\bootstrap-select-1.12.4\dist\js\bootstrap-select.min.js"></script>
-<link href="inc/css/estilo.css" rel="stylesheet" type="text/css"/>-->
+<link href="inc/css/estilo.css" rel="stylesheet" type="text/css"/>
 
 
-<!--estilo capitulos-->
+<!-- estilo capitulos-->
 
 
 <?php require_once 'config.inc';?>

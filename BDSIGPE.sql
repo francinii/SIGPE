@@ -229,14 +229,20 @@ INSERT INTO `SubCapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, 
 un mejor entendimiento o completar su ejecución no incluidos en los puntos anteriores.</p>','Documentos de referencia',1,1,5);
  
 
-INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario1',1);
+INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Datos generales',1);
 INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario2',1);
 INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario3',3);
 INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario4',3);
 INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario5',4);
 INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario6',5);
 INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario7',5);
-INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario8',5);
+INSERT INTO `Formulario`(`descripcion`, `FKidSubcapitulos`) VALUES ('Matriz de riesgo',1);
+
+
+INSERT INTO `usuariozona`(`FKidUsario`, `FKidZona`) VALUES ('402340420',1);
+INSERT INTO `usuariozona`(`FKidUsario`, `FKidZona`) VALUES ('402340420',2);
+INSERT INTO `usuariozona`(`FKidUsario`, `FKidZona`) VALUES ('402340420',5);
+
 
 drop  table UsuarioZona;
 drop table TipoPoblacion;
@@ -250,6 +256,7 @@ drop table OrigenAmenaza;
 drop table PlanEmergencia;
 drop table ZonaTrabajo;
 
+SELECT `id`, `nombreZonaTrabajo`FROM `zonatrabajo`,(SELECT `FKidZona` From UsuarioZona where `FKidUsario` = '402340420') UsuZona WHERE zonatrabajo.id = UsuZona.FKidZona  
 
 
 -- ----------------Procedimientos almacenados----------------------------------

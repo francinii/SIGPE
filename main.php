@@ -14,7 +14,7 @@ $user_rol = $mySessionController->getVar("rol");
         include('includes.php');
         ?>
     </head>
-    <body onload="javascript:OpcionMenu('home.php?', '');">
+    <body onload="javascript:OpcionMenu('mod/inicio.php?', '');">
         <div style="height: 60px;">
             <?php include('menu.php'); ?>
         </div>
