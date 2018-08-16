@@ -140,6 +140,13 @@ PRIMARY KEY(id),
 FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 );
 
+create table UsuarioZona(
+FKidUsario varchar(50),
+FKidZona int,
+FOREIGN KEY(FKidUsario) REFERENCES sis_user(id),
+FOREIGN KEY(FKidZona) REFERENCES ZonaTrabajo(id)
+);
+
 -- cambiar insert
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,'Limon','Zona ubicada en la region de limon');
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,'Heredia','Zona ubicada en la region de Heredia');
@@ -231,6 +238,7 @@ INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario6
 INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario7',5);
 INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario8',5);
 
+drop  table UsuarioZona;
 drop table TipoPoblacion;
 drop table Formulario;
 drop table SubCapitulo;
