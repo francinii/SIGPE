@@ -27,12 +27,14 @@
 
 <script type="text/javascript" src="lib/ckeditor/ckeditor.js"></script>
 <script language="JavaScript" type="text/javascript" src="inc/js/adminCapitulos.js"></script>
-<script language="JavaScript" type="text/javascript" src="inc/js/adminSubcapitulo.js"></script>
+
 
 
 <!-- adminSubcapitulos  -->
+<script language="JavaScript" type="text/javascript" src="inc/js/adminSubcapitulo.js"></script>
 
-
+<!-- adminformulario  -->
+<script language="JavaScript" type="text/javascript" src="inc/js/adminFormulario.js"></script>
 
 
 <!-- adminitrar Origenes de amenazas -->

@@ -43,7 +43,7 @@ for ($i = 0; $i < count($cap); $i++) {
                 <th  width="10%"><?= $vocab["formulario_id"] ?></th>
                 <th width="50%"><?= $vocab["formulario_formulario"] ?></th>                
                 <th width="30%"><?= $vocab["formulario_subcapitulo"] ?></th>
-                
+
             </tr>
         </thead>
         <tbody>
@@ -55,7 +55,7 @@ for ($i = 0; $i < count($cap); $i++) {
                     <tr id="fila<?= $i ?>"  align='center'>
                         <td><?= $res[$i]['id'] ?></td>                    
                         <td><?= $res[$i]['descripcion'] ?></td>                      
-                        <td><select  id="select <?= $res[$i]['id']; ?>" <?= (check_permiso($act2, $act1, $user_rol)) ? "disabled " : "";?> class="form-control selectpicker" data-live-search="true">
+                        <td><select  id="select<?= $res[$i]['id']; ?>"  onchange="javascript:odenarFomulario(<?= $res[$i]['id']; ?>, '<?= $res[$i]['descripcion']; ?>')" class="form-control selectpicker" data-live-search="true">
                                 <?php for ($a = 0; $a < count($cap); $a++) { ?>                           
                                     <optgroup label="<?= $cap[$a]['titulo'] ?>">         
                                         <?php
@@ -63,7 +63,7 @@ for ($i = 0; $i < count($cap); $i++) {
                                         if (count($subcapi) > 0) {
                                             for ($j = 0; $j < count($subcapi); $j++) {
                                                 ?>                                      
-                                                <option <?= ($subcapi[$j]['id'] == $find_key) ? "selected " : ""; ?> data-tokens="<?= $subcapi[$j]['titulo'] ?>"><?= $subcapi[$j]['titulo'] ?></option>                         
+                                                <option value="<?= $subcapi[$j]['id']; ?>"  <?= ($subcapi[$j]['id'] == $find_key) ? "selected " : ""; ?> data-tokens="<?= $subcapi[$j]['titulo'] ?>"><?= $subcapi[$j]['titulo'] ?> (<?= $cap[$a]['titulo'] ?>)</option>                         
                                                 <?php
                                             }
                                         }
@@ -71,11 +71,7 @@ for ($i = 0; $i < count($cap); $i++) {
                                     </optgroup>
                                 <?php }
                                 ?>
-                            </select></td>
-
-                       
-                        
-
+                            </select></td>                                           
                     </tr>
                 <?php } ?>
             <?php } else { ?>
@@ -89,7 +85,7 @@ for ($i = 0; $i < count($cap); $i++) {
                 <th width="10%"><?= $vocab["formulario_id"] ?></th>
                 <th width="50%"><?= $vocab["formulario_formulario"] ?></th>                
                 <th width="30%"><?= $vocab["formulario_subcapitulo"] ?></th>            
-              
+
             </tr>
         </tfoot>
     </table>
@@ -98,7 +94,8 @@ for ($i = 0; $i < count($cap); $i++) {
 
 </div>
 <script>
-    jQuery('.selectpicker').selectpicker()
+    cargoAdminFormulario();
+    
 </script>
 
 
