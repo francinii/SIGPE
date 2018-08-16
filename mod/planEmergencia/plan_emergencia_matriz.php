@@ -22,6 +22,20 @@ function consultaCategoriasPorTipo($idTipo) {
     return "SELECT  id, descripcion, FKidTipoAmenaza,isActivo FROM CategoriaTipoAmenaza where FKidTipoAmenaza=$idTipo";
 }
 
+
+// Funcion que genera un selector de valor para la matriz
+function selectorMatriz($cod) { // cod corresponde a si es probabilidad (0) o consecuecia/gravedad (1)
+    echo '<select class="form-control" onchange = "javascript:cambiarCriterio(this)">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>  ';
+    if ($cod == 1) {
+        echo '  <option>4</option>';
+    }
+    echo ' </select>';
+}
+
+
 //Selecciona todas las categorias
 //SELECT origen.id as idOrigen, tipo.id as idTipo, categoria.id as idCategoria, tipo.FkidOrigen as fkOrigen,  origen.descripcion as origenDes,tipo.descripcion as tipoDes, categoria.descripcion as categoriaDes  FROM
 //(SELECT  id, descripcion, isActivo, FkidOrigen FROM TipoAmenaza) tipo,(SELECT  id, descripcion  FROM OrigenAmenaza) origen,
@@ -34,7 +48,8 @@ function consultaCategoriasPorTipo($idTipo) {
 //(SELECT  id, descripcion, FKidTipoAmenaza,isActivo FROM CategoriaTipoAmenaza) categoria
 //where tipo.FkidOrigen = origen.id and tipo.id = categoria.FKidTipoAmenaza and categoria.FKidTipoAmenaza = $idTipo";
 //}
-
+//
+//cambiar esta consulta!!!!!!!!!!! Ya no hace falta que sea tan grande 
 function consultaCategoriasPorOrigen($idOrigen) {
     return "SELECT origen.id as idOrigen, tipo.id as idTipo, categoria.id as idCategoria, tipo.FkidOrigen as fkorigen,  origen.descripcion as origenDes,tipo.descripcion as tipoDes, categoria.descripcion as categoriaDes  FROM
 (SELECT  id, descripcion, isActivo, FkidOrigen FROM TipoAmenaza) tipo,(SELECT  id, descripcion,isActivo  FROM OrigenAmenaza) origen,
@@ -42,16 +57,15 @@ function consultaCategoriasPorOrigen($idOrigen) {
 where tipo.FkidOrigen = origen.id and tipo.id = categoria.FKidTipoAmenaza and tipo.FkidOrigen = $idOrigen";
 }
 
-function consultaCategorias() {
-    return "SELECT origen.id as idOrigen, tipo.id as idTipo, categoria.id as idCategoria, tipo.FkidOrigen as fkorigen,  origen.descripcion as origenDes,tipo.descripcion as tipoDes, categoria.descripcion as categoriaDes  FROM
-(SELECT  id, descripcion, isActivo, FkidOrigen FROM TipoAmenaza) tipo,(SELECT  id, descripcion,isActivo  FROM OrigenAmenaza) origen,
-(SELECT  id, descripcion, FKidTipoAmenaza,isActivo FROM CategoriaTipoAmenaza) categoria
-where tipo.FkidOrigen = origen.id and tipo.id = categoria.FKidTipoAmenaza and tipo.FkidOrigen = origen.id";
-}
-
-$sql = "SELECT COUNT(id) AS cant
-        FROM ZonaTrabajo";
-
+//function consultaCategorias() {
+//    return "SELECT origen.id as idOrigen, tipo.id as idTipo, categoria.id as idCategoria, tipo.FkidOrigen as fkorigen,  origen.descripcion as origenDes,tipo.descripcion as tipoDes, categoria.descripcion as categoriaDes  FROM
+//(SELECT  id, descripcion, isActivo, FkidOrigen FROM TipoAmenaza) tipo,(SELECT  id, descripcion,isActivo  FROM OrigenAmenaza) origen,
+//(SELECT  id, descripcion, FKidTipoAmenaza,isActivo FROM CategoriaTipoAmenaza) categoria
+//where tipo.FkidOrigen = origen.id and tipo.id = categoria.FKidTipoAmenaza and tipo.FkidOrigen = origen.id";
+//}
+//
+//$sql = "SELECT COUNT(id) AS cant
+//        FROM ZonaTrabajo";
 //$origenes = seleccion(consultaOrigenes());
 //$tipos = seleccion(consultaTipos());
 $origenes = seleccion(consultaOrigenes());
@@ -145,12 +159,12 @@ $origenes = seleccion(consultaOrigenes());
                                     <?php } ?>
                                     <td> <?= $categoriasPorTipo[$k]['descripcion']; ?></td>
                                     <td> fuente</td>
-                                    <td> valor</td>
-                                    <td> criterio</td>
-                                    <td> valor</td>
-                                    <td> criterio</td>
-                                    <td> valor</td>
-                                    <td> criterio</td>
+                                    <td> <?= selectorMatriz(0); ?></td>
+                                    <td id = "criterioProbabilidad"> BAJA</td>
+                                    <td> <?= selectorMatriz(1); ?></td>
+                                    <td id = "criterioGravedad"> BAJA</td>
+                                    <td> <?= selectorMatriz(1); ?></td>
+                                    <td id = "criterioConsecuencia"> BAJA </td>
                                     <td> valor</td>
                                     <td> criterio</td>
                                 </tr>
