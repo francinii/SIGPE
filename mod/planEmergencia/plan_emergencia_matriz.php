@@ -104,7 +104,13 @@ $origenes = seleccion(consultaOrigenes());
 //$sql .= " limit " . (int) $start . "," . (int) $page_cant . ";";
 ?>
 <!--  ****** Titulo ***** -->
-<div class="well well-sm"><h1><?= $vocab["list_zona_trabajo_title"] ?></h1></div>
+
+<?php
+include("plan_emergencia_menu.php"); 
+?>
+<div class="well well-sm">
+
+    <h1><?= $vocab["list_zona_trabajo_title"] ?></h1></div>
 <div class="dataTables_wrapper form-inline dt-bootstrap">
     <table id="lista_usuarios" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable text-center" >
         <thead>
