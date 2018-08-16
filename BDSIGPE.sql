@@ -141,7 +141,7 @@ FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 );
 
 create table UsuarioZona(
-FKidUsario varchar(50),
+FKidUsuario varchar(50),
 FKidZona int,
 FOREIGN KEY(FKidUsuario) REFERENCES sis_user(id),
 FOREIGN KEY(FKidZona) REFERENCES ZonaTrabajo(id)
@@ -239,9 +239,9 @@ INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario7
 INSERT INTO `Formulario`(`descripcion`, `FKidSubcapitulos`) VALUES ('Matriz de riesgo',1);
 
 
-INSERT INTO `usuariozona`(`FKidUsario`, `FKidZona`) VALUES ('402340420',1);
-INSERT INTO `usuariozona`(`FKidUsario`, `FKidZona`) VALUES ('402340420',2);
-INSERT INTO `usuariozona`(`FKidUsario`, `FKidZona`) VALUES ('402340420',5);
+INSERT INTO `usuariozona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',1);
+INSERT INTO `usuariozona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',2);
+INSERT INTO `usuariozona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',5);
 
 
 drop  table UsuarioZona;
