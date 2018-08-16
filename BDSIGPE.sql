@@ -143,7 +143,7 @@ FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 create table UsuarioZona(
 FKidUsario varchar(50),
 FKidZona int,
-FOREIGN KEY(FKidUsario) REFERENCES sis_user(id),
+FOREIGN KEY(FKidUsuario) REFERENCES sis_user(id),
 FOREIGN KEY(FKidZona) REFERENCES ZonaTrabajo(id)
 );
 
@@ -270,6 +270,38 @@ BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 		-- ERROR
+    SET res = -1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = -2;
+    ROLLBACK;
+	END;
+            START TRANSACTION;
+                    INSERT INTO `ZonaTrabajo`(nombreZonaTrabajo,isActivo, descripcion) VALUES (p_nombre, p_activo,p_descripcion);
+                    SELECT  MAX(id) into res from ZonaTrabajo ;
+            COMMIT;
+            -- SUCCESS
+           
+            -- Existe usuario
+END
+;;
+DELIMITER ;
+
+
+-- ----------------------------
+-- Proceso insertar elemento a usuarioZona
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `insert_usuario_zona_trabajo`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_usuario_zona_trabajo`(IN `p_FKidUsuario` varchar(50),IN `p_FKidZona` int, OUT `res` TINYINT  UNSIGNED)
+BEGIN
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
     SET res = 1;
     ROLLBACK;
 	END;
@@ -281,7 +313,9 @@ BEGIN
     ROLLBACK;
 	END;
             START TRANSACTION;
-                    INSERT INTO `ZonaTrabajo`(nombreZonaTrabajo,isActivo, descripcion) VALUES (p_nombre, p_activo,p_descripcion);
+                    INSERT INTO `UsuarioZona`(FKidUsuario,FKidZona) VALUES (p_FKidUsuario, p_FKidZona);
+                     
+
             COMMIT;
             -- SUCCESS
             SET res = 0;
@@ -289,6 +323,8 @@ BEGIN
 END
 ;;
 DELIMITER ;
+
+
 
 
 
