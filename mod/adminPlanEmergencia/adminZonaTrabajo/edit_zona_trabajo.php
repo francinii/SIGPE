@@ -8,8 +8,17 @@ $view_mode = $_GET['view_mode'];
 $id = $_GET['id'];
 $sql = "SELECT  id, nombreZonaTrabajo,descripcion,isActivo FROM ZonaTrabajo  WHERE id =" . $id;
 $res = seleccion($sql);
+//$sql = "SELECT id, nombre FROM sis_user";
+//$comb = seleccion($sql);
+//
 $sql = "SELECT id, nombre FROM sis_user";
 $comb = seleccion($sql);
+
+$sql = "SELECT usuario.id, usuario.nombre FROM
+(SELECT id, nombre FROM sis_user ) usuario,
+(SELECT FKidUsuario, FKidZona FROM UsuarioZona where FKidZona = " . $id . ") usuariozona
+where usuario.id = usuariozona.FKidUsuario";
+$usuarios = seleccion($sql);
 ?>
 <div class="container">
     <div class="well well-sm">
@@ -41,6 +50,7 @@ $comb = seleccion($sql);
                 </div>  
                 <p class="help-block"><small><?= $vocab["desc_origen_isActivo"] ?></small></p> 
             </div> 
+           
             <div class="form-group"> 
                 <div><label  for=""><?= $vocab["symbol_desc"] ?> </label></div> 
                 <select id = "select_usuario">
@@ -60,6 +70,13 @@ $comb = seleccion($sql);
                     <th><i class="fa fa-close fa-2x text-danger" title="Eliminar"></i> </th>
                     </thead>
                     <tbody>
+                        <?php for ($i = 0; $i < count($usuarios); $i++) { ?>
+                        <tr>
+                        <td><?= $usuarios[$i]['id'] ?> </td>
+                        <td><?= $usuarios[$i]['nombre'] ?> </td>
+                        <td onclick = 'eliminar_usuario_zona(" + cedula + ");'><i class='fa fa-close text-danger puntero' title='Eliminar'></i></td>
+                        </tr>
+                    <?php } ?>
                     </tbody>
                 </table>
             </div>  
