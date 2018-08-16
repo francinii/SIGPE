@@ -1,4 +1,5 @@
 <?php
+
 // -*-mode: PHP; coding:utf-8;-*-
 // $Id: lang.es 08-Nov-2012
 // Creado Aarón Castillo
@@ -208,5 +209,24 @@ $vocab["inicio_Titulo_Desc"]                 = "seleccione el plan de emergencia
 $vocab["inicio_Empezar"]                     = "Empeza";
 $vocab["inicio_Imprimir"]                    = "Imprimir";
 $vocab["inicio_Imprimir"]                    = "Imprimir";
-$vocab["incio_labe"]                         ="Plan de emergencia"
+$vocab["incio_labe"]                         ="Plan de emergencia";
+
+//***********     plan de emergencia  datos generales  ***********************//
+$vocab["datos_generares_Titulo"]             ="Datos generales";
+$vocab["datos_generares_Desc"]               ="Datos generales de la empresa";
+$vocab["datos_generares_nombre"]             ="Nombre de la institución:";
+$vocab["datos_generares_actividad"]          ="Actividad:";
+$vocab["datos_generares_dirección"]          ="Dirección:";
+$vocab["datos_generares_contacto"]           ="Persona de contacto general:";
+$vocab["datos_generares_teléfono"]           ="Números de teléfono:";
+$vocab["datos_generares_fax"]                ="Número de fax:";
+$vocab["datos_generares_Correo"]             ="Correo electrónico para notificaciones:";
+$vocab["datos_generares_NFPA"]               ="Categoría NFPA:";
+$vocab["datos_generares_instalaciones"]      ="Uso principal de las instalaciones:";
+$vocab["datos_generares_Horarios"]           ="Horarios o Jornadas:";
+$vocab["datos_generares_Seguridad"]          ="Seguridad Insitucional:";
+$vocab["datos_generares_Servicio"]           ="Servicio de Conserjería:";
+$vocab["datos_generares_Administrativo"]     ="Personal Administrativo:";
+$vocab["datos_generares_Académico"]          ="Personal Académico:";
+$vocab["datos_generares_Estudiantil"]        ="Presencia Estudiantil:";
 ?>

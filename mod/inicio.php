@@ -58,7 +58,7 @@ $res = seleccion($sql);
             <br/>
             <br/>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <a class="btn btn-success btn-group-justified"  name="submit" > <?= $vocab["inicio_Empezar"] ?></a>
+                <a class="btn btn-success btn-group-justified" onclick="javascript:OpcionMenu('mod/planEmergencia/plan_emergencia_datos_generales.php?', '');" name="submit" > <?= $vocab["inicio_Empezar"] ?></a>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <a class="btn btn-warning btn-group-justified"  name="submit" ><i class="fa fa-print"></i> <?= $vocab["inicio_Imprimir"] ?></a>
