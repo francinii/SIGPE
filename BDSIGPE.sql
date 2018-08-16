@@ -600,7 +600,7 @@ declare ordenar Integer;
     SET res = 2;  
     ROLLBACK;
 	END;          
-            select MAX(`orden`) into ordenar from capitulo;
+            select MAX(`orden`) into ordenar from Capitulo;
             IF (ISNULL(ordenar)) THEN
                 SET ordenar = 1;
             ELSE

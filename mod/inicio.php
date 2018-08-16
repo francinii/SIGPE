@@ -17,7 +17,7 @@ $ip .= $mySessionController->getVar("cds_locate");
 
 /* * ********************************************************************************************** */
 $start = "0";
-$sql = "SELECT `id`, `nombreZonaTrabajo`FROM `zonatrabajo`,(SELECT `FKidZona` From UsuarioZona where `FKidUsario` = '" . $user_id . "') UsuZona WHERE zonatrabajo.id = UsuZona.FKidZona  ";
+$sql = "SELECT `id`, `nombreZonaTrabajo`FROM `ZonaTrabajo`,(SELECT `FKidZona` From UsuarioZona where `FKidUsario` = '" . $user_id . "') UsuZona WHERE ZonaTrabajo.id = UsuZona.FKidZona  ";
 
 $res = seleccion($sql);
 ?>

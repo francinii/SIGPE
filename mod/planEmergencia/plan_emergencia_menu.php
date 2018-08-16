@@ -1,6 +1,6 @@
 <?php
 $start = "0";
-$sql = "SELECT `id`, `descripcion` FROM `formulario`";
+$sql = "SELECT `id`, `descripcion` FROM `Formulario`";
 
 $res = seleccion($sql);
 ?>
