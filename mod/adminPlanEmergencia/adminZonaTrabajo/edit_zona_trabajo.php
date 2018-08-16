@@ -8,6 +8,8 @@ $view_mode = $_GET['view_mode'];
 $id = $_GET['id'];
 $sql = "SELECT  id, nombreZonaTrabajo,descripcion,isActivo FROM ZonaTrabajo  WHERE id =" . $id;
 $res = seleccion($sql);
+$sql = "SELECT id, nombre FROM sis_user";
+$comb = seleccion($sql);
 ?>
 <div class="container">
     <div class="well well-sm">
@@ -38,6 +40,28 @@ $res = seleccion($sql);
                     </label>
                 </div>  
                 <p class="help-block"><small><?= $vocab["desc_origen_isActivo"] ?></small></p> 
+            </div> 
+            <div class="form-group"> 
+                <div><label  for=""><?= $vocab["symbol_desc"] ?> </label></div> 
+                <select id = "select_usuario">
+                    <?php for ($i = 0; $i < count($comb); $i++) { ?>
+                        <option value='<?= $comb[$i]['id'] ?>' selected><?= $comb[$i]['nombre'] ?></option>
+                    <?php } ?>
+                </select>
+                <span class="text-center"><a class="btn btn-success" onclick="asociar_usuario_zona_trabajo();"><i class="fa fa-save fa-inverse"></i>Add</a></span>
+                <p class="help-block"><small><?= $vocab["zona_trabajo_Descripcion"] ?></small></p> 
+            </div>
+            <div class="form-group"> 
+                <div><label  for=""><?= $vocab["symbol_desc"] ?> </label></div> 
+                <table  id = "tabla_usuario_zona" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable">
+                    <thead>
+                    <th><?= $vocab["symbol_desc"] ?> </th>
+                    <th><?= $vocab["symbol_desc"] ?> </th>
+                    <th><i class="fa fa-close fa-2x text-danger" title="Eliminar"></i> </th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>  
             <?php
             if ($view_mode == 1) {
