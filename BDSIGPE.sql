@@ -956,7 +956,7 @@ END
 DELIMITER ;
 
 
---update_zona_trabajo('$id','$nombre','$activo','$descripcion',@res);";
+-- update_zona_trabajo('$id','$nombre','$activo','$descripcion',@res);";
 
 
 -- ----------------------------
@@ -1020,3 +1020,36 @@ BEGIN
 END
 ;;
 DELIMITER ;
+
+-- ----------------------------
+-- Proceso ordenar formularios
+-- ----------------------------
+
+DROP PROCEDURE IF EXISTS `ordenar_formulario`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ordenar_formulario`(IN `p_id` int, IN `p_subcapitulo` int, OUT `res` TINYINT  UNSIGNED)
+BEGIN   
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;    
+       
+        START TRANSACTION;
+        UPDATE `Formulario` SET `FKidSubcapitulos`= p_subcapitulo  WHERE `id`= p_id;
+        COMMIT;
+        -- SUCCESS
+        SET res = 0;
+       
+END
+;;
+DELIMITER ;
+-- ordenar_formulario('1','2',@res);
