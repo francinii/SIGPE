@@ -69,7 +69,7 @@ $res = seleccion($sql);
     <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <div class="form-group">
-            <label class="control-label col-sm-2" for="select_tipo_amenaza"><?= $vocab["subcapitulo_capitulo"] ?></label>
+            <label class="control-label col-sm-2" for="select_tipo_amenaza"><?= $vocab["list_tipo_amenaza_title"] ?></label>
             <div class="col-sm-10">
                 <select id="select_tipo_amenaza" name="select_tipo_amenaza" class="form-control" onchange="javascript: cambiarTipoAmenaza();">
                     <?php
@@ -100,7 +100,7 @@ $res = seleccion($sql);
             <tr>
                 <th width="10%"><?= $vocab["list_categoria_amenaza_id"] ?></th>
                 <th width="50%"><?= $vocab["list_categoria_amenaza_descripcion"] ?></th>    
-                <th width="5%"><?= $vocab["list_tipo_amenaza_isActivo"] ?></th>
+                <th width="5%"><?= $vocab["isActivo"] ?></th>
                 <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
                     <th width="5%"><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
                 <?php } ?>

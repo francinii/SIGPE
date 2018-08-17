@@ -128,7 +128,7 @@ $res = seleccion($sql);
             <tr>
                 <th><?= $vocab["list_tipo_amenaza_id"] ?></th>
                 <th width="50%"><?= $vocab["list_tipo_amenaza_descripcion"] ?></th>   
-                <th width="10%"><?= $vocab["list_tipo_amenaza_descripcion"] ?></th>
+                <th width="10%"><?= $vocab["origen_amenaza_title"] ?></th>
                 <th width="5%"><?= $vocab["isActivo"] ?></th>                
                 <?php if (check_permiso($mod3, $act1, $user_rol)) { ?>
                     <th width="5%"><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>

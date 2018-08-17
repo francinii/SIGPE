@@ -53,7 +53,7 @@ include("plan_emergencia_menu.php");
 ?>
 <div class="well well-sm">
 
-    <h1><?= $vocab["list_zona_trabajo_title"] ?></h1></div>
+    <h1><?= $vocab["matriz_title"] ?></h1></div>
 <div class="dataTables_wrapper form-inline dt-bootstrap">
     <table id="lista_usuarios" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable text-center" >
         <thead>
@@ -132,7 +132,7 @@ for ($i = 0; $i < count($origenes); $i++) {
 
     <br/>
 <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
-        <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/new_zona_trabajo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["zona_trabajo_title"] ?></a></div>
+        <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/new_zona_trabajo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["matriz_title"] ?></a></div>
     <?php } ?>
 </div>
 

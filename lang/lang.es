@@ -132,11 +132,12 @@ $vocab["nombre_desc_tipo_amenaza"]            = "Escriba el nombre del nuevo tip
 $vocab["categoria_amenaza_title"]               = "Categoria";
 $vocab["list_categoria_amenaza_title"]          = "Categor&iacute;a de amenaza";
 $vocab["list_categoria_amenaza_id"]             = "Id";
-$vocab["list_categoria_amenaza_descripcion"]    = "Informaci&iacute; de la categoria de amenaza";
+$vocab["list_categoria_amenaza_descripcion"]    = "Informaci&oacute;n de la categoria";
 $vocab["list_categoria_amenaza_isActivo"]          = "Activar categoria de amenaza";
 $vocab["desc_categoria_isActivo"]                  = "Active o desactive la categoria de amenaza";
 $vocab["nombre_categoria_amenaza"]                 = "Nombre de la categoria de amenaza";
 $vocab["nombre_desc_categoria_amenaza"]            = "Escriba el nombre de la nueva categoria de amenaza";
+
 //***************************** Modulo zona de trabajo******************************//
 $vocab["zona_trabajo_title"]               = "Zona de trabajo";
 $vocab["list_zona_trabajo_title"]          = "Zona de trabajo";
@@ -190,6 +191,7 @@ $vocab["formulario_subcapitulo"]        = "subcapitulo";
 
 
 //***********     Modulo Formulario matriz de riesgos    ***********************//
+$vocab["matriz_title"]               = "Matriz de riesgos";
 $vocab["td_origen"]                      = "Origen";
 $vocab["td_tipo"]                        = "Tipo";
 $vocab["td_categoria"]                   = "Categoria";
