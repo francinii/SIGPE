@@ -140,6 +140,13 @@ PRIMARY KEY(id),
 FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 );
 
+create table UsuarioZona(
+FKidUsuario varchar(50),
+FKidZona int,
+FOREIGN KEY(FKidUsuario) REFERENCES sis_user(id),
+FOREIGN KEY(FKidZona) REFERENCES ZonaTrabajo(id)
+);
+
 -- cambiar insert
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,'Limon','Zona ubicada en la region de limon');
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,'Heredia','Zona ubicada en la region de Heredia');
@@ -222,15 +229,22 @@ INSERT INTO `SubCapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, 
 un mejor entendimiento o completar su ejecución no incluidos en los puntos anteriores.</p>','Documentos de referencia',1,1,5);
  
 
-INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario1',1);
+INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Datos generales',1);
 INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario2',1);
 INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario3',3);
 INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario4',3);
 INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario5',4);
 INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario6',5);
 INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario7',5);
-INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario8',5);
+INSERT INTO `Formulario`(`descripcion`, `FKidSubcapitulos`) VALUES ('Matriz de riesgo',1);
 
+
+INSERT INTO `usuariozona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',1);
+INSERT INTO `usuariozona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',2);
+INSERT INTO `usuariozona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',5);
+
+
+drop  table UsuarioZona;
 drop table TipoPoblacion;
 drop table Formulario;
 drop table SubCapitulo;
@@ -242,6 +256,7 @@ drop table OrigenAmenaza;
 drop table PlanEmergencia;
 drop table ZonaTrabajo;
 
+SELECT `id`, `nombreZonaTrabajo`FROM `zonatrabajo`,(SELECT `FKidZona` From UsuarioZona where `FKidUsario` = '402340420') UsuZona WHERE zonatrabajo.id = UsuZona.FKidZona  
 
 
 -- ----------------Procedimientos almacenados----------------------------------
@@ -251,6 +266,38 @@ drop table ZonaTrabajo;
 DROP PROCEDURE IF EXISTS `insert_zona_trabajo`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_zona_trabajo`(IN `p_nombre` varchar(150),IN `p_activo` int, IN `p_descripcion` varchar(150), OUT `res` TINYINT  UNSIGNED)
+BEGIN
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = -1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = -2;
+    ROLLBACK;
+	END;
+            START TRANSACTION;
+                    INSERT INTO `ZonaTrabajo`(nombreZonaTrabajo,isActivo, descripcion) VALUES (p_nombre, p_activo,p_descripcion);
+                    SELECT  MAX(id) into res from ZonaTrabajo ;
+            COMMIT;
+            -- SUCCESS
+           
+            -- Existe usuario
+END
+;;
+DELIMITER ;
+
+
+-- ----------------------------
+-- Proceso insertar elemento a usuarioZona
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `insert_usuario_zona_trabajo`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_usuario_zona_trabajo`(IN `p_FKidUsuario` varchar(50),IN `p_FKidZona` int, OUT `res` TINYINT  UNSIGNED)
 BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -266,7 +313,9 @@ BEGIN
     ROLLBACK;
 	END;
             START TRANSACTION;
-                    INSERT INTO `ZonaTrabajo`(nombreZonaTrabajo,isActivo, descripcion) VALUES (p_nombre, p_activo,p_descripcion);
+                    INSERT INTO `UsuarioZona`(FKidUsuario,FKidZona) VALUES (p_FKidUsuario, p_FKidZona);
+                     
+
             COMMIT;
             -- SUCCESS
             SET res = 0;
@@ -274,6 +323,8 @@ BEGIN
 END
 ;;
 DELIMITER ;
+
+
 
 
 
@@ -585,7 +636,7 @@ declare ordenar Integer;
     SET res = 2;  
     ROLLBACK;
 	END;          
-            select MAX(`orden`) into ordenar from capitulo;
+            select MAX(`orden`) into ordenar from Capitulo;
             IF (ISNULL(ordenar)) THEN
                 SET ordenar = 1;
             ELSE

@@ -24,8 +24,17 @@ function new_zona_trabajo() {
         loading.innerHTML = cargando_bar;
         //Obtener Valores
         var nombre = document.getElementById('nombre').value;
-         var descripcion = document.getElementById('descripcion').value;
+        var descripcion = document.getElementById('descripcion').value;
         var activo = 0;
+        var lista = new Array();
+        var fila = document.getElementById("tabla_usuario_zona").firstElementChild.nextElementSibling;
+        fila = fila.firstElementChild;
+        while (fila != null) {
+            var hijo = fila.firstElementChild;
+            var text = hijo.innerHTML;
+            lista.push(text);
+            fila = fila.nextElementSibling;
+        }
         if (document.getElementById('inlineCheckbox1').checked)
             activo = 1;
         else
@@ -33,7 +42,8 @@ function new_zona_trabajo() {
 
         var ajax = NuevoAjax();
         var _values_send =
-                'nombre=' + nombre +
+                '&lista=' + JSON.stringify(lista) +
+                '&nombre=' + nombre +
                 '&descripcion=' + descripcion +
                 '&inlineCheckbox=' + activo;
         var _URL_ = "mod/adminPlanEmergencia/adminZonaTrabajo/ajax_new_zona_trabajo.php?";
@@ -103,24 +113,24 @@ function delete_zona_trabajo_action(id) {
     });
 }
 
-function update_zona_trabajo(id){
-     if (validate_zona_trabajo()) {
+function update_zona_trabajo(id) {
+    if (validate_zona_trabajo()) {
         var loading = document.getElementById('loading_container');
         loading.innerHTML = cargando_bar;
         //Obtener Valores
         var nombre = document.getElementById('nombre').value;
-        var descripcion = document.getElementById('descripcion').value;  
+        var descripcion = document.getElementById('descripcion').value;
         var activo = 0;
         if (document.getElementById('inlineCheckbox1').checked)
             activo = 1;
         else
             activo = 0;
-        
+
         var ajax = NuevoAjax();
         var _values_send =
                 'id=' + id +
-                '&nombre=' + nombre +     
-                '&descripcion=' + descripcion +             
+                '&nombre=' + nombre +
+                '&descripcion=' + descripcion +
                 '&activo=' + activo;
         var _URL_ = "mod/adminPlanEmergencia/adminZonaTrabajo/ajax_edit_zona_trabajo.php?";
         //alert(_URL_ + _values_send); //DEBUG
@@ -147,7 +157,23 @@ function update_zona_trabajo(id){
         ajax.send(null);
         loading.innerHTML = "";
     }
-    
+
 }
+
+
+function asociar_usuario_zona_trabajo() {
+    var cedula = document.getElementById('select_usuario').value;
+    var nombre = jQuery('#select_usuario option:selected').text();
+    var existe = jQuery("#" + cedula);
+    if (existe.length == 0) {
+        jQuery("#tabla_usuario_zona tbody").append("<tr id = '" + cedula + "'><td>" + cedula + "</td><td>" + nombre + "</td><td onclick = 'eliminar_usuario_zona(" + cedula + ");'><i class='fa fa-close text-danger puntero' title='Eliminar'></i></td></tr>");
+    }
+}
+
+function eliminar_usuario_zona(cedula) {
+    var elementoCedula = jQuery('#' + cedula);
+    elementoCedula.remove();
+}
+
 
 

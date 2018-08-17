@@ -32,7 +32,7 @@ function ordenarCapitulos() {
                 lista.push(text);
                 fila = fila.nextElementSibling;
             }
-            guardarOrdenCapitulo(lista)
+            guardarOrdenCapitulo(lista);
         }
     });
 

@@ -8,6 +8,7 @@ body {
 
 .img_fix_full{
     width: 100%;
+   
 }
 /*
 Permite utilizar FontAwesome con &#xHHHH ej &#xf030; se usa cuando no se puede usar el tag < i > ver http://fontawesome.io/cheatsheet/ 
