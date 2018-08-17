@@ -34,27 +34,6 @@ function selectorMatriz($cod) { // cod corresponde a si es probabilidad (0) o co
     echo ' </select>';
 }
 
-//Selecciona todas las categorias
-//SELECT origen.id as idOrigen, tipo.id as idTipo, categoria.id as idCategoria, tipo.FkidOrigen as fkOrigen,  origen.descripcion as origenDes,tipo.descripcion as tipoDes, categoria.descripcion as categoriaDes  FROM
-//(SELECT  id, descripcion, isActivo, FkidOrigen FROM TipoAmenaza) tipo,(SELECT  id, descripcion  FROM OrigenAmenaza) origen,
-//(SELECT  id, descripcion, FKidTipoAmenaza FROM CategoriaTipoAmenaza) categoria
-//where tipo.FkidOrigen = origen.id and tipo.id = categoria.FKidTipoAmenaza
-//Selecciona las categorias correspondientes a un tipo
-//function consultaCategoriasPorTipo($idTipo) {
-//    return "SELECT origen.id as idOrigen, tipo.id as idTipo, categoria.id as idCategoria, tipo.FkidOrigen as fkorigen, categoria.FKidTipoAmenaza as FKidTipoAmenaza,  origen.descripcion as origenDes,tipo.descripcion as tipoDes, categoria.descripcion as categoriaDes  FROM
-//(SELECT  id, descripcion, isActivo, FkidOrigen FROM TipoAmenaza) tipo,(SELECT  id, descripcion,isActivo  FROM OrigenAmenaza) origen,
-//(SELECT  id, descripcion, FKidTipoAmenaza,isActivo FROM CategoriaTipoAmenaza) categoria
-//where tipo.FkidOrigen = origen.id and tipo.id = categoria.FKidTipoAmenaza and categoria.FKidTipoAmenaza = $idTipo";
-//}
-//
-//cambiar esta consulta!!!!!!!!!!! Ya no hace falta que sea tan grande 
-//function consultaCategoriasPorOrigen($idOrigen) {
-//    return "SELECT origen.id as idOrigen, tipo.id as idTipo, categoria.id as idCategoria, tipo.FkidOrigen as fkorigen,  origen.descripcion as origenDes,tipo.descripcion as tipoDes, categoria.descripcion as categoriaDes  FROM
-//(SELECT  id, descripcion, isActivo, FkidOrigen FROM TipoAmenaza) tipo,(SELECT  id, descripcion,isActivo  FROM OrigenAmenaza) origen,
-//(SELECT  id, descripcion, FKidTipoAmenaza,isActivo FROM CategoriaTipoAmenaza) categoria
-//where tipo.FkidOrigen = origen.id and tipo.id = categoria.FKidTipoAmenaza and tipo.FkidOrigen = $idOrigen";
-//}
-
 
 function consultaCategoriasPorOrigen($idOrigen) {
     return "SELECT  categoria.id as idCategoria FROM
@@ -64,51 +43,8 @@ function consultaCategoriasPorOrigen($idOrigen) {
 where tipo.FkidOrigen = origen.id and tipo.id = categoria.FKidTipoAmenaza and tipo.FkidOrigen = $idOrigen;";
 }
 
-//function consultaCategorias() {
-//    return "SELECT origen.id as idOrigen, tipo.id as idTipo, categoria.id as idCategoria, tipo.FkidOrigen as fkorigen,  origen.descripcion as origenDes,tipo.descripcion as tipoDes, categoria.descripcion as categoriaDes  FROM
-//(SELECT  id, descripcion, isActivo, FkidOrigen FROM TipoAmenaza) tipo,(SELECT  id, descripcion,isActivo  FROM OrigenAmenaza) origen,
-//(SELECT  id, descripcion, FKidTipoAmenaza,isActivo FROM CategoriaTipoAmenaza) categoria
-//where tipo.FkidOrigen = origen.id and tipo.id = categoria.FKidTipoAmenaza and tipo.FkidOrigen = origen.id";
-//}
-//
-//$sql = "SELECT COUNT(id) AS cant
-//        FROM ZonaTrabajo";
-//$origenes = seleccion(consultaOrigenes());
-//$tipos = seleccion(consultaTipos());
 $origenes = seleccion(consultaOrigenes());
-//
-//$find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
-//if ($find_key != "") {
-//    $sql .= " WHERE roll_name LIKE  '%" . $find_key . "%'";
-//}
-//$sql .= ";";
-//$res_cant = seleccion($sql);
-//
-//$cant_pagi = ceil((int) $res_cant[0]['cant'] / (int) $page_cant);
-//$page = (isset($_GET["page"])) ? $_GET["page"] : "1";
-//if (!$page) {
-//    $start = 0;
-//    $page = 1;
-//} else {
-//    $start = (isset($_GET["start"])) ? $_GET["start"] : "0";
-//}
-//
-///* * ********************************************************************************************** */
-//$sql = "SELECT  id, nombreZonaTrabajo FROM ZonaTrabajo";
-//
-//$find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
-//if ($find_key != "") {
-//    $sql .= "  WHERE nombreZonaTrabajo LIKE '%" . $find_key . "%'";
-//}
-//
-//$order_key = (isset($_GET['order_key'])) ? $_GET['order_key'] : '';
-//if ($order_key != "") {
-//    $sql .= " ORDER BY " . $order_key;
-//} else {
-//    $sql .= " ORDER BY id";
-//}
-//
-//$sql .= " limit " . (int) $start . "," . (int) $page_cant . ";";
+
 ?>
 <!--  ****** Titulo ***** -->
 

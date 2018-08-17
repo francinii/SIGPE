@@ -44,39 +44,44 @@ $usuarios = seleccion($sql);
                         <?= $vocab["isActivo"] ?>  
                     </label>
                     <label class="radio-inline">
-                        <input <?= ($view_mode == 0) ? "disabled" : ""; ?><?= ($res[0]["isActivo"] == 0) ? "checked" : ""; ?> id="inlineCheckbox2" name="inlineCheckbox" type="radio" value="0"> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 
+                        <input <?= ($view_mode == 0) ? "disabled" : ""; ?> <?= ($res[0]["isActivo"] == 0) ? "checked" : ""; ?> id="inlineCheckbox2" name="inlineCheckbox" type="radio" value="0"> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 
                         <?= $vocab["isInactivo"] ?> 
                     </label>
                 </div>  
                 <p class="help-block"><small><?= $vocab["desc_origen_isActivo"] ?></small></p> 
             </div> 
-           
+            <?php if ($view_mode != 0) { ?>
+                <div class="form-group"> 
+                    <div><label  for=""><?= $vocab["symbol_desc"] ?> </label></div> 
+                    <select id = "select_usuario">
+                        <?php for ($i = 0; $i < count($comb); $i++) { ?>
+                            <option value='<?= $comb[$i]['id'] ?>' selected><?= $comb[$i]['nombre'] ?></option>
+                        <?php } ?>
+                    </select>
+                    <span class="text-center"><a class="btn btn-success" onclick="asociar_usuario_zona_trabajo();"><i class="fa fa-save fa-inverse"></i>Add</a></span>
+                    <p class="help-block"><small><?= $vocab["zona_trabajo_Descripcion"] ?></small></p> 
+                </div> 
+            <?php } ?>
             <div class="form-group"> 
                 <div><label  for=""><?= $vocab["symbol_desc"] ?> </label></div> 
-                <select id = "select_usuario">
-                    <?php for ($i = 0; $i < count($comb); $i++) { ?>
-                        <option value='<?= $comb[$i]['id'] ?>' selected><?= $comb[$i]['nombre'] ?></option>
-                    <?php } ?>
-                </select>
-                <span class="text-center"><a class="btn btn-success" onclick="asociar_usuario_zona_trabajo();"><i class="fa fa-save fa-inverse"></i>Add</a></span>
-                <p class="help-block"><small><?= $vocab["zona_trabajo_Descripcion"] ?></small></p> 
-            </div>
-            <div class="form-group"> 
-                <div><label  for=""><?= $vocab["symbol_desc"] ?> </label></div> 
-                <table  id = "tabla_usuario_zona" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable">
+                <table <?= ($view_mode == 0) ? "disabled" : ""; ?> id = "tabla_usuario_zona" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable">
                     <thead>
                     <th><?= $vocab["symbol_desc"] ?> </th>
                     <th><?= $vocab["symbol_desc"] ?> </th>
-                    <th><i class="fa fa-close fa-2x text-danger" title="Eliminar"></i> </th>
+                    <?php if ($view_mode != 0) { ?>
+                        <th><i class="fa fa-close fa-2x text-danger" title="Eliminar"></i> </th>
+                    <?php } ?>
                     </thead>
                     <tbody>
                         <?php for ($i = 0; $i < count($usuarios); $i++) { ?>
-                        <tr>
-                        <td><?= $usuarios[$i]['id'] ?> </td>
-                        <td><?= $usuarios[$i]['nombre'] ?> </td>
-                        <td onclick = 'eliminar_usuario_zona(" + cedula + ");'><i class='fa fa-close text-danger puntero' title='Eliminar'></i></td>
-                        </tr>
-                    <?php } ?>
+                            <tr id ="<?= $usuarios[$i]['id'] ?>" >
+                                <td><?= $usuarios[$i]['id'] ?> </td>
+                                <td><?= $usuarios[$i]['nombre'] ?> </td>
+                                <?php if ($view_mode != 0) { ?>
+                                    <td <?= ($view_mode == 0) ? "disabled" : ""; ?>  onclick = "eliminar_usuario_zona(<?= $usuarios[$i]['id'] ?>);"> <i class='fa fa-close text-danger puntero' title='Eliminar'></i></td>
+                                <?php } ?>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>  
