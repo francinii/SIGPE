@@ -22,7 +22,6 @@ function consultaCategoriasPorTipo($idTipo) {
     return "SELECT  id, descripcion, FKidTipoAmenaza,isActivo FROM CategoriaTipoAmenaza where FKidTipoAmenaza=$idTipo";
 }
 
-
 // Funcion que genera un selector de valor para la matriz
 function selectorMatriz($cod) { // cod corresponde a si es probabilidad (0) o consecuecia/gravedad (1)
     echo '<select class="form-control" onchange = "javascript:cambiarCriterio(this)">
@@ -34,7 +33,6 @@ function selectorMatriz($cod) { // cod corresponde a si es probabilidad (0) o co
     }
     echo ' </select>';
 }
-
 
 //Selecciona todas las categorias
 //SELECT origen.id as idOrigen, tipo.id as idTipo, categoria.id as idCategoria, tipo.FkidOrigen as fkOrigen,  origen.descripcion as origenDes,tipo.descripcion as tipoDes, categoria.descripcion as categoriaDes  FROM
@@ -106,7 +104,7 @@ $origenes = seleccion(consultaOrigenes());
 <!--  ****** Titulo ***** -->
 
 <?php
-include("plan_emergencia_menu.php"); 
+include("plan_emergencia_menu.php");
 ?>
 <div class="well well-sm">
 
@@ -116,8 +114,8 @@ include("plan_emergencia_menu.php");
         <thead>
             <tr>
                 <th rowspan="2" width="10%"><?= $vocab["td_origen"] ?></th>
-                <th rowspan="2" width="10%"><?= $vocab["td_tipo"] ?></th>    
-                <th rowspan="2" width="10%"><?= $vocab["td_categoria"] ?></th> 
+                <th rowspan="2" width="8%"><?= $vocab["td_tipo"] ?></th>    
+                <th rowspan="2" width="20%"><?= $vocab["td_categoria"] ?></th> 
                 <th rowspan="2" width="10%"><?= $vocab["td_fuente"] ?></th> 
                 <th colspan="2" width="10%"><?= $vocab["td_probabilidad"] ?></th> 
                 <th colspan="2" width="10%"><?= $vocab["td_gravedad"] ?></th>
@@ -136,19 +134,19 @@ include("plan_emergencia_menu.php");
             </tr>
         </thead>
         <tbody>
-            <?php
-            for ($i = 0; $i < count($origenes); $i++) {
-                $idOrigen = $origenes[$i]['id'];
-                $categorias = seleccion(consultaCategoriasPorOrigen($idOrigen)); //cambiar esta consulta
-                $cantidadCategorias = count($categorias);
-                $tipos = seleccion(consultaTipos($idOrigen));
-                $cantidadTipos = count($tipos);
-                ?>
+<?php
+for ($i = 0; $i < count($origenes); $i++) {
+    $idOrigen = $origenes[$i]['id'];
+    $categorias = seleccion(consultaCategoriasPorOrigen($idOrigen)); //cambiar esta consulta
+    $cantidadCategorias = count($categorias);
+    $tipos = seleccion(consultaTipos($idOrigen));
+    $cantidadTipos = count($tipos);
+    ?>
                 <?php // if ($origenes > 0) { ?>
                 <?php if ($cantidadCategorias > 0) { ?>
                     <tr>
                         <td rowspan="<?= $cantidadCategorias ?>"> <?= $origenes[$i]['descripcion']; ?> </td>
-                        <?php for ($j = 0; $j < $cantidadTipos; $j++) { ?>
+        <?php for ($j = 0; $j < $cantidadTipos; $j++) { ?>
                             <?php
                             $idTipo = $tipos[$j]['id'];
                             $categoriasPorTipo = seleccion(consultaCategoriasPorTipo($idTipo));
@@ -164,7 +162,10 @@ include("plan_emergencia_menu.php");
                                     <tr>
                                     <?php } ?>
                                     <td> <?= $categoriasPorTipo[$k]['descripcion']; ?></td>
-                                    <td> fuente</td>
+                                    <td> <div class="form-group">                                            
+                                            <input id="type-text" name="type-text" class="form-control" placeholder="fuente" title="propiedad title" type="text">
+                                            
+                                        </div></td>
                                     <td> <?= selectorMatriz(0); ?></td>
                                     <td id = "criterioProbabilidad"> BAJA</td>
                                     <td> <?= selectorMatriz(1); ?></td>
@@ -174,7 +175,7 @@ include("plan_emergencia_menu.php");
                                     <td> valor</td>
                                     <td> criterio</td>
                                 </tr>
-                            <?php } ?>
+                <?php } ?>
                         <?php } else { ?>
                             </tr>
                         <?php } ?>
@@ -185,7 +186,7 @@ include("plan_emergencia_menu.php");
     </table>
 
     <br/>
-    <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
+<?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
         <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/new_zona_trabajo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["zona_trabajo_title"] ?></a></div>
     <?php } ?>
 </div>

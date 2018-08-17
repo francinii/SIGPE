@@ -33,7 +33,7 @@ $res = seleccion($sql);
                     if (count($comb) > 0) {
                         for ($i = 0; $i < count($comb); $i++) {
                             ?>
-                            <option <?= ($res[0]['FKidOrigen'] == $comb[$i]['id'] ) ? "selected" : ""; ?>  value='<?= $comb[$i]['id'] ?>'><?= $comb[$i]['descripcion'] ?></option>
+                            <option <?= ($res[0]['FKidTipoAmenaza'] == $comb[$i]['id'] ) ? "selected" : ""; ?>  value='<?= $comb[$i]['id'] ?>'><?= $comb[$i]['descripcion'] ?></option>
                             <?php
                         }
                     }
