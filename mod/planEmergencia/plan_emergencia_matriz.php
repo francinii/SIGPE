@@ -11,15 +11,15 @@ $ip .= $mySessionController->getVar("cds_locate");
 $page_cant = $mySessionController->getVar("page_cant");
 
 function consultaOrigenes() {
-    return "SELECT id, descripcion FROM OrigenAmenaza";
+    return "SELECT id, descripcion, isActivo FROM OrigenAmenaza where isActivo = 1";
 }
 
 function consultaTipos($idOrigen) {
-    return "SELECT id, descripcion, FkidOrigen FROM TipoAmenaza where FkidOrigen=$idOrigen";
+    return "SELECT id, descripcion, FkidOrigen, isActivo FROM TipoAmenaza where FkidOrigen=$idOrigen and isActivo = 1";
 }
 
 function consultaCategoriasPorTipo($idTipo) {
-    return "SELECT  id, descripcion, FKidTipoAmenaza,isActivo FROM CategoriaTipoAmenaza where FKidTipoAmenaza=$idTipo";
+    return "SELECT  id, descripcion, FKidTipoAmenaza,isActivo FROM CategoriaTipoAmenaza where FKidTipoAmenaza=$idTipo and isActivo = 1";
 }
 
 // Funcion que genera un selector de valor para la matriz
@@ -48,11 +48,20 @@ function selectorMatriz($cod) { // cod corresponde a si es probabilidad (0) o co
 //}
 //
 //cambiar esta consulta!!!!!!!!!!! Ya no hace falta que sea tan grande 
+//function consultaCategoriasPorOrigen($idOrigen) {
+//    return "SELECT origen.id as idOrigen, tipo.id as idTipo, categoria.id as idCategoria, tipo.FkidOrigen as fkorigen,  origen.descripcion as origenDes,tipo.descripcion as tipoDes, categoria.descripcion as categoriaDes  FROM
+//(SELECT  id, descripcion, isActivo, FkidOrigen FROM TipoAmenaza) tipo,(SELECT  id, descripcion,isActivo  FROM OrigenAmenaza) origen,
+//(SELECT  id, descripcion, FKidTipoAmenaza,isActivo FROM CategoriaTipoAmenaza) categoria
+//where tipo.FkidOrigen = origen.id and tipo.id = categoria.FKidTipoAmenaza and tipo.FkidOrigen = $idOrigen";
+//}
+
+
 function consultaCategoriasPorOrigen($idOrigen) {
-    return "SELECT origen.id as idOrigen, tipo.id as idTipo, categoria.id as idCategoria, tipo.FkidOrigen as fkorigen,  origen.descripcion as origenDes,tipo.descripcion as tipoDes, categoria.descripcion as categoriaDes  FROM
-(SELECT  id, descripcion, isActivo, FkidOrigen FROM TipoAmenaza) tipo,(SELECT  id, descripcion,isActivo  FROM OrigenAmenaza) origen,
-(SELECT  id, descripcion, FKidTipoAmenaza,isActivo FROM CategoriaTipoAmenaza) categoria
-where tipo.FkidOrigen = origen.id and tipo.id = categoria.FKidTipoAmenaza and tipo.FkidOrigen = $idOrigen";
+    return "SELECT  categoria.id as idCategoria FROM
+(SELECT  id, FkidOrigen FROM TipoAmenaza where isActivo = 1 ) tipo,
+(SELECT  id  FROM OrigenAmenaza where isActivo = 1) origen,
+(SELECT  id, FKidTipoAmenaza,isActivo FROM CategoriaTipoAmenaza where isActivo = 1) categoria
+where tipo.FkidOrigen = origen.id and tipo.id = categoria.FKidTipoAmenaza and tipo.FkidOrigen = $idOrigen;";
 }
 
 //function consultaCategorias() {
