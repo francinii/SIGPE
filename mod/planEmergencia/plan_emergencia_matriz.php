@@ -22,19 +22,12 @@ function consultaCategoriasPorTipo($idTipo) {
     return "SELECT  id, descripcion, FKidTipoAmenaza,isActivo FROM CategoriaTipoAmenaza where FKidTipoAmenaza=$idTipo and isActivo = 1";
 }
 
-// Funcion que genera un selector de valor para la matriz
-function selectorMatriz($cod) { // cod corresponde a si es probabilidad (0) o consecuecia/gravedad (1)
-    echo '<select class="form-control" onchange = "javascript:cambiarCriterio(this)">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>  ';
-    if ($cod == 1) {
-        echo '  <option>4</option>';
-    }
-    echo ' </select>';
+//cambiar el valor quemado de 1
+function consultaMatriz() {
+    return "SELECT id, FKidCategoriaTipoAmenaza, FKidPlanEmergencias, fuente, probabilidad,gravedad,consecuenciaAmenaza FROM Matriz where FKidPlanEmergencias = 1";
 }
 
-
+//Pasar esto a una vista
 function consultaCategoriasPorOrigen($idOrigen) {
     return "SELECT  categoria.id as idCategoria FROM
 (SELECT  id, FkidOrigen FROM TipoAmenaza where isActivo = 1 ) tipo,
@@ -43,8 +36,72 @@ function consultaCategoriasPorOrigen($idOrigen) {
 where tipo.FkidOrigen = origen.id and tipo.id = categoria.FKidTipoAmenaza and tipo.FkidOrigen = $idOrigen;";
 }
 
-$origenes = seleccion(consultaOrigenes());
+// Funcion que genera un selector de valor para la matriz
+// cod corresponde al valor de  probabilidad (0) o consecuecia/gravedad (1)
+function selectorMatriz($cod, $opcion) {
+    $valor = '<select class="form-control" onchange = "javascript:cambiarCriterio(this,' . $cod . ')">';
+    $valor .= '  <option ' . (($opcion == 1) ? 'selected' : '') . '> 1</option>';
+    $valor .= '  <option ' . (($opcion == 2) ? 'selected' : '') . '> 2</option>';
+    $valor .= '  <option ' . (($opcion == 3) ? 'selected' : '') . '> 3</option>';
+    if ($cod == 1) {
+            $valor .= '  <option ' . (($opcion == 4) ? 'selected' : '') . '> 4</option>';
+    }
+    $valor .= ' </select>';
+    return $valor;
+}
 
+function buscarRegistro($matriz, $categoria) {
+    for ($i = 0; $i < count($matriz); $i++) {
+        if ($matriz[$i]['id'] == $categoria) {
+            return $matriz[$i];
+        }
+    }
+    return $mat = ["fuente" => "", "probabilidad" => 1, "gravedad" => 1, "consecuenciaAmenaza" => 1];
+}
+
+function selectorProbabilidad($opc) {
+    if ($opc == 1) {
+        return "BAJA";
+    } else if ($opc == 2) {
+        return "MEDIA";
+    } else if ($opc == 3) {
+        return "ALTA";
+    }
+    return "";
+}
+
+function selectorGravedadConsecuencia($opc) {
+    if ($opc == 1) {
+        return "NINGUNA";
+    } else if ($opc == 2) {
+        return "BAJA";
+    } else if ($opc == 3) {
+        return "MEDIA";
+    } else if ($opc == 4) {
+        return "ALTA";
+    }
+    return "";
+}
+
+function calcularValorAlerta($registro) {
+    return $registro['probabilidad'] * ( $registro['gravedad'] + $registro['consecuenciaAmenaza'] );
+}
+
+function calcularCriterioAlertaColor($registro) {
+    $valor = calcularValorAlerta($registro);
+    if ($valor <= 3) {
+        return $mat = ["color" => "grey", "criterio" => "NINGUNA"];
+    } else if ($valor > 3 && $valor <= 12) {
+        return $mat = ["color" => "green", "criterio" => "VERDE"];
+    } else if ($valor > 12 && $valor <= 24) {
+        return $mat = ["color" => "yellow", "criterio" => "AMARILLA"];
+    } else if ($valor > 24) {
+        return $mat = ["color" => "red", "criterio" => "ROJA"];
+    }
+}
+
+$origenes = seleccion(consultaOrigenes());
+$matriz = seleccion(consultaMatriz());
 ?>
 <!--  ****** Titulo ***** -->
 
@@ -79,19 +136,22 @@ include("plan_emergencia_menu.php");
             </tr>
         </thead>
         <tbody>
-<?php
-for ($i = 0; $i < count($origenes); $i++) {
-    $idOrigen = $origenes[$i]['id'];
-    $categorias = seleccion(consultaCategoriasPorOrigen($idOrigen)); //cambiar esta consulta
-    $cantidadCategorias = count($categorias);
-    $tipos = seleccion(consultaTipos($idOrigen));
-    $cantidadTipos = count($tipos);
-    ?>
+            <?php
+//if(){
+//    
+//}
+            for ($i = 0; $i < count($origenes); $i++) {
+                $idOrigen = $origenes[$i]['id'];
+                $categorias = seleccion(consultaCategoriasPorOrigen($idOrigen)); //cambiar esta consulta
+                $cantidadCategorias = count($categorias);
+                $tipos = seleccion(consultaTipos($idOrigen));
+                $cantidadTipos = count($tipos);
+                ?>
                 <?php // if ($origenes > 0) { ?>
                 <?php if ($cantidadCategorias > 0) { ?>
                     <tr>
                         <td rowspan="<?= $cantidadCategorias ?>"> <?= $origenes[$i]['descripcion']; ?> </td>
-        <?php for ($j = 0; $j < $cantidadTipos; $j++) { ?>
+                        <?php for ($j = 0; $j < $cantidadTipos; $j++) { ?>
                             <?php
                             $idTipo = $tipos[$j]['id'];
                             $categoriasPorTipo = seleccion(consultaCategoriasPorTipo($idTipo));
@@ -105,22 +165,23 @@ for ($i = 0; $i < count($origenes); $i++) {
                                 <?php for ($k = 0; $k < $cantidadCategoriasPorTipo; $k++) { ?>
                                     <?php if ($k != 0 && $j != 0) { ?>
                                     <tr>
-                                    <?php } ?>
+                                    <?php } ?>                                   
                                     <td> <?= $categoriasPorTipo[$k]['descripcion']; ?></td>
+                                    <?php $registroMatriz = buscarRegistro($matriz, $categoriasPorTipo[$k]['id']); ?>  
                                     <td> <div class="form-group">                                            
-                                            <input id="type-text" name="type-text" class="form-control" placeholder="fuente" title="propiedad title" type="text">
-                                            
-                                        </div></td>
-                                    <td> <?= selectorMatriz(0); ?></td>
-                                    <td id = "criterioProbabilidad"> BAJA</td>
-                                    <td> <?= selectorMatriz(1); ?></td>
-                                    <td id = "criterioGravedad"> BAJA</td>
-                                    <td> <?= selectorMatriz(1); ?></td>
-                                    <td id = "criterioConsecuencia"> BAJA </td>
-                                    <td> valor</td>
-                                    <td> criterio</td>
+                                            <input id="type-text" name="type-text" class="form-control" placeholder="fuente"value ="<?= $registroMatriz['fuente'] ?>"  title="propiedad title" type="text">
+                                        </div>
+                                    </td>
+                                    <td> <?= selectorMatriz(0, $registroMatriz['probabilidad']); ?></td>
+                                    <td id = "criterioProbabilidad"> <?= selectorProbabilidad($registroMatriz['probabilidad']) ?> </td>
+                                    <td> <?= selectorMatriz(1, $registroMatriz['gravedad']); ?></td>
+                                    <td id = "criterioGravedad"> <?= selectorGravedadConsecuencia($registroMatriz['gravedad']) ?></td>
+                                    <td> <?= selectorMatriz(1, $registroMatriz['consecuenciaAmenaza']); ?></td>
+                                    <td id = "criterioConsecuencia"> <?= selectorGravedadConsecuencia($registroMatriz['consecuenciaAmenaza']) ?> </td>
+                                    <td><?= calcularValorAlerta($registroMatriz); ?> </td>
+                                    <td style="background-color: <?= calcularCriterioAlertaColor($registroMatriz)['color']; ?> "> <?= calcularCriterioAlertaColor($registroMatriz)['criterio']; ?></td>
                                 </tr>
-                <?php } ?>
+                            <?php } ?>
                         <?php } else { ?>
                             </tr>
                         <?php } ?>
@@ -131,7 +192,7 @@ for ($i = 0; $i < count($origenes); $i++) {
     </table>
 
     <br/>
-<?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
+    <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
         <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/new_zona_trabajo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["matriz_title"] ?></a></div>
     <?php } ?>
 </div>
