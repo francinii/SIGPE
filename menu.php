@@ -10,7 +10,11 @@ require 'functions.php';
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+
             <a href="#" class="navbar-brand"><?php echo $mySessionController->getVar("page_title") ?></a>
+            <a id="tituloGeneral" href="#" class="navbar-brand"><?php echo $mySessionController->getVar("page_title") ?></a>
+            <a id="NombreUsuario"  href="#" class="navbar-brand"><?php echo $mySessionController->getVar("nombre") ?></a>
+
         </div>
         <div class="navbar-collapse collapse" id="navbar" aria-expanded="false" style="height: 1px;">
             <ul class="nav navbar-nav">
@@ -25,7 +29,7 @@ require 'functions.php';
                     <li class="dropdown">
                         <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#"><span><i class="fa fa-gears fa-inverse"></i> <?= $vocab["menu_planes_emergencia"] ?></span> <span class="caret"></span></a>
                         <ul class="dropdown-menu"> 
-                           <!-- Plan de emergencia-->
+                            <!-- Plan de emergencia-->
                             <?php if (check_permiso($mod2, $act1, $user_rol)) { ?>
                                 <li class="dropdown-submenu">
                                     <a onclick="javascript:OpcionMenu('mod/planEmergencia/plan_emergencia_matriz.php?', '');"><span><?= $vocab["menu_planes_emergencia"] ?></span></a>
@@ -34,7 +38,7 @@ require 'functions.php';
                         </ul>
                     </li>
                 <?php } ?>
-                
+
                 <!-- ADMINISTRACION -->
                 <?php if (check_permiso($mod1, $act1, $user_rol)) { ?>
                     <li class="dropdown">
@@ -87,7 +91,7 @@ require 'functions.php';
                         </ul>
                     </li>
                 <?php } ?>
-                    <!-- ADMINISTRACION PLANES DE EMERGENCIA-->
+                <!-- ADMINISTRACION PLANES DE EMERGENCIA-->
                 <?php if (check_permiso($mod1, $act1, $user_rol)) { ?>
                     <li class="dropdown">
                         <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#"><span><i class="fa fa-gears fa-inverse"></i> <?= $vocab["menu_admin_planes_emergencia"] ?></span> <span class="caret"></span></a>
@@ -124,7 +128,7 @@ require 'functions.php';
                             <?php if (check_permiso($mod2, $act1, $user_rol)) { ?>
                                 <li class="dropdown-submenu">
                                     <a href="#"><span><i class="fa fa-sitemap text-warning"></i> <?= $vocab["menu_admin_subcapitulos"] ?></span></a>
-                                <ul class="dropdown-menu">
+                                    <ul class="dropdown-menu">
                                         <?php if (check_permiso($mod3, $act2, $user_rol)) { ?>
                                             <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminSubcapitulos/list_subcapitulos.php?', '');"><span> <i class="fa fa-list text-primary"></i>  <?= $vocab["menu_list"] ?></span></a></li>
                                         <?php } ?>
@@ -134,11 +138,11 @@ require 'functions.php';
                                     </ul>
                                 </li>
                             <?php } ?>
-                                <!-- ADMINISTRAR  formulario-->
+                            <!-- ADMINISTRAR  formulario-->
                             <?php if (check_permiso($mod2, $act1, $user_rol)) { ?>
                                 <li class="dropdown-submenu">
                                     <a href="#"><span><i class="fa fa-sitemap text-warning"></i> <?= $vocab["menu_admin_formulario"] ?></span></a>
-                                <ul class="dropdown-menu">
+                                    <ul class="dropdown-menu">
                                         <?php if (check_permiso($mod3, $act2, $user_rol)) { ?>
                                             <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminFormularios/list_formulario.php?', '');"><span> <i class="fa fa-list text-primary"></i>  <?= $vocab["formulario_admin"] ?></span></a></li>
                                         <?php } ?>                                                                             
@@ -164,8 +168,8 @@ require 'functions.php';
                         </ul>
                     </li>
                 <?php } ?>
-                    <li><a onclick="javascript:OpcionMenu('home.php?', '');"><span><i class="fa fa-question fa-inverse"></i> <?= $vocab["menu_help"] ?></span></a></li>
-                <!--<li><a href="http://www.soporteinf.una.ac.cr" target="_blank"><span><i class="fa fa-question fa-inverse"></i> <?= $vocab["menu_help"] ?></span></a></li>-->
+                <li><a onclick="javascript:OpcionMenu('home.php?', '');"><span><i class="fa fa-question fa-inverse"></i> <?= $vocab["menu_help"] ?></span></a></li>
+            <!--<li><a href="http://www.soporteinf.una.ac.cr" target="_blank"><span><i class="fa fa-question fa-inverse"></i> <?= $vocab["menu_help"] ?></span></a></li>-->
                 <li><a href='#' onclick="window.location = document.getElementById('cds_domain_locate').value + 'mod/login/logout.php'"><span><i class="fa fa-sign-out fa-inverse"></i> <?= $vocab["menu_logout"] ?></span></a></li>
             </ul>
         </div><!--/.nav-collapse -->
