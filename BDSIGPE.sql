@@ -101,6 +101,9 @@ create table Matriz (
     FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 );
 
+
+
+
 create table Capitulo(
 id int NOT NULL AUTO_INCREMENT,
 descripcion text,
@@ -147,6 +150,21 @@ FKidZona int,
 FOREIGN KEY(FKidUsuario) REFERENCES sis_user(id),
 FOREIGN KEY(FKidZona) REFERENCES ZonaTrabajo(id)
 );
+
+
+-- insert matriz de riesgo
+INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
+`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (5,1,'placa tectonica',2,4,3);
+INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
+`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (3,1,'placa tectonica',2,4,3);
+INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
+`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (4,1,'placa tectonica',2,4,3);
+INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
+`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (6,1,'placa tectonica',2,4,3);
+INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
+`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (7,1,'placa tectonica',2,4,3);
+INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
+`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (1,1,'placa tectonica',2,4,3);
 
 -- cambiar insert
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,'Limon','Zona ubicada en la region de limon');

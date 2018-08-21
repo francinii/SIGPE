@@ -41,11 +41,16 @@
 <script language="JavaScript" type="text/javascript" src="inc/js/adminFormulario.js"></script>
 
 
-<!-- adminitrar Origenes de amenazas -->
+<!-- adminitrar Origenes de amenaza -->
 <script language="JavaScript" type="text/javascript"  src="inc/js/origenAmenaza.js"></script>
+<!-- adminitrar Categorias de amenaza -->
 <script language="JavaScript" type="text/javascript"  src="inc/js/categoriaAmenaza.js"></script>
+<!-- adminitrar Tipos de amenaza -->
 <script language="JavaScript" type="text/javascript"  src="inc/js/tipoAmenaza.js"></script>
+<!-- adminitrar Zona de trabajo-->
 <script language="JavaScript" type="text/javascript"  src="inc/js/zonaTrabajo.js"></script>
+<!-- adminitrar Matriz de riesgo -->
+<script language="JavaScript" type="text/javascript"  src="inc/js/matrizRiesgo.js"></script>
 
 
 <!-- Plan de emergencia datos generales -->
