@@ -27,7 +27,7 @@ personaContactoGeneral varchar(150),
 numeroTelefono varchar(150),
 numeroFax varchar(150),
 notificaciones varchar(150),
-categoriNFPA varchar(150),
+categoriaNFPA varchar(150),
 usoInstalaciones varchar(150),
 horarioJornada varchar(150),
 seguridadInstitucional varchar(150),
@@ -249,12 +249,8 @@ un mejor entendimiento o completar su ejecución no incluidos en los puntos ante
  
 
 INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Datos generales',1);
-INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario2',1);
-INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario3',3);
-INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario4',3);
-INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario5',4);
-INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario6',5);
-INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Formulario7',5);
+INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Actividades',1);
+INSERT INTO `Formulario`(`descripcion`, `FKidSubcapitulos`) VALUES ('Instalaciones',1);
 INSERT INTO `Formulario`(`descripcion`, `FKidSubcapitulos`) VALUES ('Matriz de riesgo',1);
 
 
@@ -1129,70 +1125,16 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `datos_generales`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `datos_generales`(IN `p_fkidZonaTrabajo ` int,IN `p_actividad`  varchar(150),
- IN  `p_direccion`  varchar(150), IN  `p_contacto`  varchar(150),
- IN `p_fax` varchar(150),IN `p_email`  varchar(150), IN  `p_NFPA`  varchar(150),
- IN `p_uso` varchar(150),IN `p_horarios `  varchar(150), IN  `p_seguridad`  varchar(150),
- IN `p_servicio` varchar(150),IN `p_administracion`  varchar(150), IN  `p_academico`  varchar(150),
- IN `p_estudiantil` varchar(150), OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `datos_generales`(IN `p_FKidZonaTrabajo` int, IN `p_actividad` varchar(150),
+ IN `p_direccion` varchar(150), IN `p_personaContactoGeneral` varchar(150),IN `p_numeroTelefono` varchar(150),
+ IN `p_numeroFax` varchar(150),IN `p_notificaciones` varchar(150),
+IN `p_categoriaNFPA` varchar(150),IN `p_usoInstalaciones` varchar(150),
+IN `p_horarioJornada` varchar(150),IN `p_seguridadInstitucional` varchar(150),
+IN `p_servicioConsegeria` varchar(150),IN `p_personalAdministrativo` varchar(150),
+IN `p_personalAcademico` varchar(150),IN `p_presenciaEstudiantil` varchar(150),
+OUT `res` TINYINT  UNSIGNED)
 BEGIN   
-        declare existe Integer;      
-	DECLARE EXIT HANDLER FOR SQLEXCEPTION
-	BEGIN
-		-- ERROR
-    SET res = 1;
-    ROLLBACK;
-	END;
-
-  DECLARE EXIT HANDLER FOR SQLWARNING
-	BEGIN
-		-- ERROR
-    SET res = 2;
-    ROLLBACK;
-	END;
-         --   set existe=null;
-         --   select FKidZonaTrabajo  into existe from PlanEmergencia WHERE `FKidZonaTrabajo`=p_fkidZonaTrabajo;
-          --  IF(existe=p_fkidZonaTrabajo) THEN
-                --  START TRANSACTION;
-                 --    UPDATE  `PlanEmergencia` SET `actividad`=p_actividad,`dirrecion`=p_direccion,`personaContactoGeneral`=p_contacto,`numeroFax`=p_fax,
-                  --          `notificaciones`=p_email,`categoriNFPA`=p_NFPA,`usoInstalaciones`=p_uso,`horarioJornada`=p_horarios,`seguridadInstitucional`=p_seguridad,
-                   --         `servicioConsegeria`=p_servicio,`personalAdministrativo`=p_administracion,`personalAdcademico`=p_academico,`presenciaEstudiantil`=p_estudiantil
-                    --        WHERE `FKidZonaTrabajo`=p_fkidZonaTrabajo;
-                  
-               --  COMMIT;
-                -- SUCCESS
-             --   SET res = 0;
-          --  ELSE               
-                START TRANSACTION;
-                  INSERT INTO `PlanEmergencia`(`FKidZonaTrabajo`,`actividad`,`dirrecion`,`personaContactoGeneral`,`numeroFax`,`notificaciones`,
-                             `categoriNFPA`,`usoInstalaciones`,`horarioJornada`,`seguridadInstitucional`,`servicioConsegeria`,`personalAdministrativo`,
-                               `personalAcademico`, `presenciaEstudiantil`) VALUES (p_fkidZonaTrabajo,p_actividad,
-                              p_direccion, p_contacto,p_fax, p_email, p_NFPA, p_uso,p_horarios , p_seguridad,
-                              p_servicio,p_administracion,p_academico, p_estudiantil);
-                COMMIT;
-                 -- SUCCESS
-               SET res = 0;
-               -- Existe usuario
-          --  END IF;
-END
-;;
-DELIMITER ;
-
--- CALL datos_generales('1','$actividad','$direccion','$conctacto',
---                     '$fax','$email','$NFPA','$uso','$horarios','$seguridad','$servicio','$administracion',
---                     '$academico','$estudiantil',@res);
-
-
-DROP PROCEDURE IF EXISTS `datos_generales`;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `datos_generales`(IN `p_fkidZonaTrabajo ` int,IN `p_actividad`  varchar(150),
- IN  `p_direccion`  varchar(150), IN  `p_contacto`  varchar(150),
- IN `p_fax` varchar(150),IN `p_email`  varchar(150), IN  `p_NFPA`  varchar(150),
- IN `p_uso` varchar(150),IN `p_horarios `  varchar(150), IN  `p_seguridad`  varchar(150),
- IN `p_servicio` varchar(150),IN `p_administracion`  varchar(150), IN  `p_academico`  varchar(150),
- IN `p_estudiantil` varchar(150), OUT `res` TINYINT  UNSIGNED)
-BEGIN  
- 
+        declare existe Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 	-- ERROR
@@ -1202,62 +1144,83 @@ BEGIN
 
   DECLARE EXIT HANDLER FOR SQLWARNING
 	BEGIN
-		-- ERROR
-    SET res = 2;
-    ROLLBACK;
-	END;    
-       
-        START TRANSACTION;
-    INSERT INTO `PlanEmergencia`(`FKidZonaTrabajo`,`actividad`,`dirrecion`,`personaContactoGeneral`,`numeroFax`,`notificaciones`,
-                             `categoriNFPA`,`usoInstalaciones`,`horarioJornada`,`seguridadInstitucional`,`servicioConsegeria`,`personalAdministrativo`,
-                               `personalAcademico`, `presenciaEstudiantil`) VALUES (p_fkidZonaTrabajo,p_actividad,
-                              p_direccion, p_contacto,p_fax, p_email, p_NFPA, p_uso,p_horarios , p_seguridad,
-                               p_servicio,p_administracion,p_academico, p_estudiantil);
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+      set existe = null;
+      select count(`FKidZonaTrabajo`) into existe from planemergencia WHERE `FKidZonaTrabajo`=p_FKidZonaTrabajo;
+         IF(existe = 1) THEN
+         START TRANSACTION;
+         UPDATE `PlanEmergencia` SET `actividad`=p_actividad,`direccion`= p_direccion,`personaContactoGeneral`=p_personaContactoGeneral,
+         `numeroTelefono`=p_numeroTelefono,`numeroFax`= p_numeroFax,`notificaciones`=p_notificaciones,`categoriaNFPA`=p_categoriaNFPA,`usoInstalaciones`=p_usoInstalaciones,`horarioJornada`=p_horarioJornada,
+         `seguridadInstitucional`=p_seguridadInstitucional,`servicioConsegeria`=p_servicioConsegeria,`personalAdministrativo`=p_personalAdministrativo,`personalAcademico`=p_personalAcademico,
+           `presenciaEstudiantil` = p_presenciaEstudiantil   where `FKidZonaTrabajo`=p_FKidZonaTrabajo;   
+
         COMMIT;
-        -- SUCCESS
-        SET res = 0;
-       
+        -- SUCCESS       
+     ELSE
+        START TRANSACTION;       
+        INSERT INTO `PlanEmergencia`(`FKidZonaTrabajo`,`actividad`,`direccion`,`personaContactoGeneral`,`numeroFax`,`notificaciones`,
+        `categoriaNFPA`,`usoInstalaciones`,`horarioJornada`,`seguridadInstitucional`,`servicioConsegeria`,`personalAdministrativo`,`personalAcademico`,
+        `presenciaEstudiantil`) VALUES (p_FKidZonaTrabajo, p_actividad , p_direccion , p_personaContactoGeneral , p_numeroFax , p_notificaciones ,
+         p_categoriaNFPA , p_usoInstalaciones , p_horarioJornada , p_seguridadInstitucional , p_servicioConsegeria , p_personalAdministrativo , p_personalAcademico ,
+         p_presenciaEstudiantil );
+         
+        COMMIT;
+        -- SUCCESS         
+   END IF;
+         SET res = 0;
 END
 ;;
 DELIMITER ;
+-- Call datos_generales(1,'3','3','3','3','3','3','3','3','3','3','3','3','3',@res);
+--    SELECT @res as res;
 
-
-
-
-
-
-DROP PROCEDURE IF EXISTS `datos_generales`;
+-- ----------------------------
+-- Proceso tipoPoblacion actividades
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `tipo_poblacion`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `datos_generales`(IN `p_fkidZonaTrabajo ` int,IN `p_actividad`  varchar(150),
- IN  `p_direccion`  varchar(150), IN  `p_contacto`  varchar(150),
- IN `p_fax` varchar(150),IN `p_email`  varchar(150), IN  `p_NFPA`  varchar(150),
- IN `p_uso` varchar(150),IN `p_horarios `  varchar(150), IN  `p_seguridad`  varchar(150),
- IN `p_servicio` varchar(150),IN `p_administracion`  varchar(150), IN  `p_academico`  varchar(150),
- IN `p_estudiantil` varchar(150), OUT `res` TINYINT  UNSIGNED)
-BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `tipo_poblacion`(IN `p_FKidPlanEmergencias` int, IN `p_tipoPoblacion` varchar(150),
+ IN `p_descripcion` varchar(150), IN `p_total` int, IN `p_representacionDe` varchar(150),
+OUT `res` TINYINT  UNSIGNED)
+BEGIN   
+        declare existe Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
-		-- ERROR
+	-- ERROR
     SET res = 1;
     ROLLBACK;
 	END;
 
   DECLARE EXIT HANDLER FOR SQLWARNING
 	BEGIN
-		-- ERROR
-    SET res = 2;
-    ROLLBACK;
-	END;
-            START TRANSACTION;
-                    INSERT INTO `PlanEmergencia`(`FKidZonaTrabajo`,`actividad`,`dirrecion`,`personaContactoGeneral`,`numeroFax`,`notificaciones`,
-                             `categoriNFPA`,`usoInstalaciones`,`horarioJornada`,`seguridadInstitucional`,`servicioConsegeria`,`personalAdministrativo`,
-                               `personalAcademico`, `presenciaEstudiantil`) VALUES (p_fkidZonaTrabajo,p_actividad,
-                              p_direccion, p_contacto,p_fax, p_email, p_NFPA, p_uso,p_horarios , p_seguridad,
-                               p_servicio,p_administracion,p_academico, p_estudiantil);
-            COMMIT;
-            -- SUCCESS
-            SET res = 0;
-            -- Existe usuario
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+      set existe = null;
+      select count(`FKidPlanEmergencias`) into existe from TipoPoblacion WHERE  `FKidPlanEmergencias`=p_FKidPlanEmergencias and `tipoPoblacion`=p_tipoPoblacion;
+         IF(existe = 1) THEN
+         START TRANSACTION;
+         UPDATE `TipoPoblacion` SET `descripcion`=p_descripcion,`total`=p_total,`representacionDe`=p_representacionDe WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias and `tipoPoblacion`=p_tipoPoblacion;  
+
+        COMMIT;
+        -- SUCCESS       
+     ELSE
+        START TRANSACTION;       
+       INSERT INTO `TipoPoblacion`( `FKidPlanEmergencias`, `tipoPoblacion`, `descripcion`, `total`, `representacionDe`)
+       VALUES (p_FKidPlanEmergencias,p_tipoPoblacion,p_descripcion,p_total,p_representacionDe);
+         
+        COMMIT;
+        -- SUCCESS         
+   END IF;
+         SET res = 0;
 END
 ;;
 DELIMITER ;
+
+-- call tipo_poblacion(1,'1','1',1,'1',@res);
