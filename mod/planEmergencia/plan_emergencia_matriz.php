@@ -27,6 +27,10 @@ function consultaMatriz() {
     return "SELECT id, FKidCategoriaTipoAmenaza, FKidPlanEmergencias, fuente, probabilidad,gravedad,consecuenciaAmenaza FROM Matriz where FKidPlanEmergencias = 1";
 }
 
+function consultarMatrizRegistroActivo() {
+    return "SELECT id, FKidCategoriaTipoAmenaza, FKidPlanEmergencias, fuente, probabilidad,gravedad,consecuenciaAmenaza FROM Matriz where FKidPlanEmergencias = 1";
+}
+
 //Pasar esto a una vista
 function consultaCategoriasPorOrigen($idOrigen) {
     return "SELECT  categoria.id as idCategoria FROM
@@ -44,7 +48,7 @@ function selectorMatriz($cod, $opcion) {
     $valor .= '  <option ' . (($opcion == 2) ? 'selected' : '') . '> 2</option>';
     $valor .= '  <option ' . (($opcion == 3) ? 'selected' : '') . '> 3</option>';
     if ($cod == 1) {
-            $valor .= '  <option ' . (($opcion == 4) ? 'selected' : '') . '> 4</option>';
+        $valor .= '  <option ' . (($opcion == 4) ? 'selected' : '') . '> 4</option>';
     }
     $valor .= ' </select>';
     return $valor;
@@ -58,6 +62,15 @@ function buscarRegistro($matriz, $categoria) {
     }
     return $mat = ["fuente" => "", "probabilidad" => 1, "gravedad" => 1, "consecuenciaAmenaza" => 1];
 }
+
+function buscar($color, $criterios) {
+    $total = 0;
+    foreach ($criterios as $criterio) {
+        $total = ($criterio == $color) ? $total + 1 : $total;
+    }
+    return $total;
+}
+
 
 function selectorProbabilidad($opc) {
     if ($opc == 1) {
@@ -87,18 +100,20 @@ function calcularValorAlerta($registro) {
     return $registro['probabilidad'] * ( $registro['gravedad'] + $registro['consecuenciaAmenaza'] );
 }
 
-function calcularCriterioAlertaColor($registro) {
+function calcularCriterioAlertaColor($registro, $vocab) {
     $valor = calcularValorAlerta($registro);
     if ($valor <= 3) {
-        return $mat = ["color" => "grey", "criterio" => "NINGUNA"];
+        return $mat = ["color" => "grey", "criterio" => $vocab["criterio_ninguna"]];
     } else if ($valor > 3 && $valor <= 12) {
-        return $mat = ["color" => "green", "criterio" => "VERDE"];
-    } else if ($valor > 12 && $valor <= 24) {
-        return $mat = ["color" => "yellow", "criterio" => "AMARILLA"];
-    } else if ($valor > 24) {
-        return $mat = ["color" => "red", "criterio" => "ROJA"];
+        return $mat = ["color" => "green", "criterio" => $vocab["criterio_verde"]];
+    } else if ($valor > 12 && $valor < 24) {
+
+        return $mat = ["color" => "yellow", "criterio" => $vocab["criterio_amarilla"]];
+    } else if ($valor >= 24) {
+        return $mat = ["color" => "red", "criterio" => $vocab["criterio_roja"]];
     }
 }
+
 
 $origenes = seleccion(consultaOrigenes());
 $matriz = seleccion(consultaMatriz());
@@ -137,9 +152,6 @@ include("plan_emergencia_menu.php");
         </thead>
         <tbody>
             <?php
-//if(){
-//    
-//}
             for ($i = 0; $i < count($origenes); $i++) {
                 $idOrigen = $origenes[$i]['id'];
                 $categorias = seleccion(consultaCategoriasPorOrigen($idOrigen)); //cambiar esta consulta
@@ -179,7 +191,11 @@ include("plan_emergencia_menu.php");
                                     <td> <?= selectorMatriz(1, $registroMatriz['consecuenciaAmenaza']); ?></td>
                                     <td id = "criterioConsecuencia"> <?= selectorGravedadConsecuencia($registroMatriz['consecuenciaAmenaza']) ?> </td>
                                     <td><?= calcularValorAlerta($registroMatriz); ?> </td>
-                                    <td style="background-color: <?= calcularCriterioAlertaColor($registroMatriz)['color']; ?> "> <?= calcularCriterioAlertaColor($registroMatriz)['criterio']; ?></td>
+                                    <?php
+                                    $criterio = calcularCriterioAlertaColor($registroMatriz, $vocab)['criterio'];
+                                    $criterios[] = $criterio; //arreglo que guardar los criterios (VERDE, NINGUNA,AMARILLA,ROJA)
+                                    ?>                                    
+                                    <td style="background-color: <?= calcularCriterioAlertaColor($registroMatriz)['color']; ?> "> <?= $criterio ?></td>
                                 </tr>
                             <?php } ?>
                         <?php } else { ?>
@@ -190,10 +206,15 @@ include("plan_emergencia_menu.php");
             <?php } ?>
         </tbody>
     </table>
-
+ 
     <br/>
-    <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
+    <?php if (check_permiso($mod3, $act3, $user_rol)) {        
+        $prueba = JSON_encode($criterios);
+        $prueba2 = str_replace('"',"\'",$prueba);
+        ?>
         <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/new_zona_trabajo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["matriz_title"] ?></a></div>
+        <div class="text-center"><a class="btn btn-success" name="" onclick="javascript:OpcionMenu('mod/planEmergencia/plan_emergencia_matriz_grafico.php?', 'criterios=<?= $prueba2 ?>');"><i class='fa fa-plus fa-inverse'></i> hola</a></div>
+
     <?php } ?>
 </div>
 
