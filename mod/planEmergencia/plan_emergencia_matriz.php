@@ -27,6 +27,10 @@ function consultaMatriz() {
     return "SELECT id, FKidCategoriaTipoAmenaza, FKidPlanEmergencias, fuente, probabilidad,gravedad,consecuenciaAmenaza FROM Matriz where FKidPlanEmergencias = 1";
 }
 
+function consultarMatrizRegistroActivo(){
+    return "SELECT id, FKidCategoriaTipoAmenaza, FKidPlanEmergencias, fuente, probabilidad,gravedad,consecuenciaAmenaza FROM Matriz where FKidPlanEmergencias = 1";
+}
+
 //Pasar esto a una vista
 function consultaCategoriasPorOrigen($idOrigen) {
     return "SELECT  categoria.id as idCategoria FROM
@@ -44,7 +48,7 @@ function selectorMatriz($cod, $opcion) {
     $valor .= '  <option ' . (($opcion == 2) ? 'selected' : '') . '> 2</option>';
     $valor .= '  <option ' . (($opcion == 3) ? 'selected' : '') . '> 3</option>';
     if ($cod == 1) {
-            $valor .= '  <option ' . (($opcion == 4) ? 'selected' : '') . '> 4</option>';
+        $valor .= '  <option ' . (($opcion == 4) ? 'selected' : '') . '> 4</option>';
     }
     $valor .= ' </select>';
     return $valor;
@@ -93,9 +97,9 @@ function calcularCriterioAlertaColor($registro) {
         return $mat = ["color" => "grey", "criterio" => "NINGUNA"];
     } else if ($valor > 3 && $valor <= 12) {
         return $mat = ["color" => "green", "criterio" => "VERDE"];
-    } else if ($valor > 12 && $valor <= 24) {
+    } else if ($valor > 12 && $valor < 24) {
         return $mat = ["color" => "yellow", "criterio" => "AMARILLA"];
-    } else if ($valor > 24) {
+    } else if ($valor >= 24) {
         return $mat = ["color" => "red", "criterio" => "ROJA"];
     }
 }
@@ -137,9 +141,6 @@ include("plan_emergencia_menu.php");
         </thead>
         <tbody>
             <?php
-//if(){
-//    
-//}
             for ($i = 0; $i < count($origenes); $i++) {
                 $idOrigen = $origenes[$i]['id'];
                 $categorias = seleccion(consultaCategoriasPorOrigen($idOrigen)); //cambiar esta consulta
@@ -190,6 +191,27 @@ include("plan_emergencia_menu.php");
             <?php } ?>
         </tbody>
     </table>
+
+
+    <table id="lista_usuarios" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable text-center" >
+        <thead>
+            <tr>
+                <th width="10%"><?= $vocab["tipo_alerta_nombre"] ?></th>
+                <th width="5%"><?= $vocab["tipo_alerta_cantidad"] ?></th>    
+                <th width="5%"><?= $vocab["tipo_alerta_porcentaje"] ?></th>
+                <th width="20%"><?= $vocab["tipo_alerta_amenaza"] ?></th>                
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td ><?= $vocab["tipo_alerta_nombre"] ?></td>
+
+            </tr>
+
+        </tbody>
+    </table>
+
+
 
     <br/>
     <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
