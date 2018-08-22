@@ -27,7 +27,7 @@ function consultaMatriz() {
     return "SELECT id, FKidCategoriaTipoAmenaza, FKidPlanEmergencias, fuente, probabilidad,gravedad,consecuenciaAmenaza FROM Matriz where FKidPlanEmergencias = 1";
 }
 
-function consultarMatrizRegistroActivo(){
+function consultarMatrizRegistroActivo() {
     return "SELECT id, FKidCategoriaTipoAmenaza, FKidPlanEmergencias, fuente, probabilidad,gravedad,consecuenciaAmenaza FROM Matriz where FKidPlanEmergencias = 1";
 }
 
@@ -63,6 +63,15 @@ function buscarRegistro($matriz, $categoria) {
     return $mat = ["fuente" => "", "probabilidad" => 1, "gravedad" => 1, "consecuenciaAmenaza" => 1];
 }
 
+function buscar($color, $criterios) {
+    $total = 0;
+    foreach ($criterios as $criterio) {
+        $total = ($criterio == $color) ? $total + 1 : $total;
+    }
+    return $total;
+}
+
+
 function selectorProbabilidad($opc) {
     if ($opc == 1) {
         return "BAJA";
@@ -91,18 +100,20 @@ function calcularValorAlerta($registro) {
     return $registro['probabilidad'] * ( $registro['gravedad'] + $registro['consecuenciaAmenaza'] );
 }
 
-function calcularCriterioAlertaColor($registro) {
+function calcularCriterioAlertaColor($registro, $vocab) {
     $valor = calcularValorAlerta($registro);
     if ($valor <= 3) {
-        return $mat = ["color" => "grey", "criterio" => "NINGUNA"];
+        return $mat = ["color" => "grey", "criterio" => $vocab["criterio_ninguna"]];
     } else if ($valor > 3 && $valor <= 12) {
-        return $mat = ["color" => "green", "criterio" => "VERDE"];
+        return $mat = ["color" => "green", "criterio" => $vocab["criterio_verde"]];
     } else if ($valor > 12 && $valor < 24) {
-        return $mat = ["color" => "yellow", "criterio" => "AMARILLA"];
+
+        return $mat = ["color" => "yellow", "criterio" => $vocab["criterio_amarilla"]];
     } else if ($valor >= 24) {
-        return $mat = ["color" => "red", "criterio" => "ROJA"];
+        return $mat = ["color" => "red", "criterio" => $vocab["criterio_roja"]];
     }
 }
+
 
 $origenes = seleccion(consultaOrigenes());
 $matriz = seleccion(consultaMatriz());
@@ -180,7 +191,11 @@ include("plan_emergencia_menu.php");
                                     <td> <?= selectorMatriz(1, $registroMatriz['consecuenciaAmenaza']); ?></td>
                                     <td id = "criterioConsecuencia"> <?= selectorGravedadConsecuencia($registroMatriz['consecuenciaAmenaza']) ?> </td>
                                     <td><?= calcularValorAlerta($registroMatriz); ?> </td>
-                                    <td style="background-color: <?= calcularCriterioAlertaColor($registroMatriz)['color']; ?> "> <?= calcularCriterioAlertaColor($registroMatriz)['criterio']; ?></td>
+                                    <?php
+                                    $criterio = calcularCriterioAlertaColor($registroMatriz, $vocab)['criterio'];
+                                    $criterios[] = $criterio; //arreglo que guardar los criterios (VERDE, NINGUNA,AMARILLA,ROJA)
+                                    ?>                                    
+                                    <td style="background-color: <?= calcularCriterioAlertaColor($registroMatriz)['color']; ?> "> <?= $criterio ?></td>
                                 </tr>
                             <?php } ?>
                         <?php } else { ?>
@@ -191,31 +206,15 @@ include("plan_emergencia_menu.php");
             <?php } ?>
         </tbody>
     </table>
-
-
-    <table id="lista_usuarios" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable text-center" >
-        <thead>
-            <tr>
-                <th width="10%"><?= $vocab["tipo_alerta_nombre"] ?></th>
-                <th width="5%"><?= $vocab["tipo_alerta_cantidad"] ?></th>    
-                <th width="5%"><?= $vocab["tipo_alerta_porcentaje"] ?></th>
-                <th width="20%"><?= $vocab["tipo_alerta_amenaza"] ?></th>                
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td ><?= $vocab["tipo_alerta_nombre"] ?></td>
-
-            </tr>
-
-        </tbody>
-    </table>
-
-
-
+ 
     <br/>
-    <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
+    <?php if (check_permiso($mod3, $act3, $user_rol)) {        
+        $prueba = JSON_encode($criterios);
+        $prueba2 = str_replace('"',"\'",$prueba);
+        ?>
         <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/new_zona_trabajo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["matriz_title"] ?></a></div>
+        <div class="text-center"><a class="btn btn-success" name="" onclick="javascript:OpcionMenu('mod/planEmergencia/plan_emergencia_matriz_grafico.php?', 'criterios=<?= $prueba2 ?>');"><i class='fa fa-plus fa-inverse'></i> hola</a></div>
+
     <?php } ?>
 </div>
 

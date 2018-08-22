@@ -138,12 +138,7 @@ $vocab["desc_categoria_isActivo"]                  = "Active o desactive la cate
 $vocab["nombre_categoria_amenaza"]                 = "Nombre de la categoria de amenaza";
 $vocab["nombre_desc_categoria_amenaza"]            = "Escriba el nombre de la nueva categoria de amenaza";
 
-//***********     Matriz cuadro resumen   ***********************//
-$vocab["tipo_alerta_nombre"]               = "Tipo de alerta";
-$vocab["tipo_alerta_cantidad"]               = "QTY";
-$vocab["tipo_alerta_porcentaje"]               = "%";
-$vocab["tipo_alerta_amenaza"]               = "Amenaza identificada";
-$vocab["tipo_alerta_total"]               = "Amenaza identificada";
+
 
 //***************************** Modulo zona de trabajo******************************//
 $vocab["zona_trabajo_title"]               = "Zona de trabajo";
@@ -209,6 +204,20 @@ $vocab["td_consecuencia_amenaza"]        = "Consecuencia de amenaza";
 $vocab["td_tipo_alerta"]                 = "Tipo de alerta";
 $vocab["td_valor"]                       = "Valor";
 $vocab["td_criterio"]                    = "Criterio";
+
+$vocab["criterio_ninguna"]               = "NINGUNA";
+$vocab["criterio_verde"]                 = "VERDE";
+$vocab["criterio_amarilla"]              = "AMARILLA";
+$vocab["criterio_roja"]                  = "ROJA";
+
+//***********     Matriz cuadro resumen   ***********************//
+$vocab["tipo_alerta_nombre"]               = "Tipo de alerta";
+$vocab["tipo_alerta_cantidad"]               = "QTY";
+$vocab["tipo_alerta_porcentaje"]               = "%";
+$vocab["tipo_alerta_amenaza"]               = "Amenaza identificada";
+$vocab["tipo_alerta_total"]               = "Amenaza identificada";
+
+
 
 //***********    Incio plan de emergencia    ***********************//
 $vocab["inicio_Bienvenido"]                  ="Bienvenido";

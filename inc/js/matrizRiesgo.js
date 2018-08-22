@@ -1,4 +1,5 @@
 //Selector que cambia el valor del criterio
+
 function cambiarCriterio(event, cod) {
     var opcion = event.value; //selector
     var hermano = event.parentNode.nextElementSibling; //td hermano al td del selector
@@ -35,6 +36,11 @@ function selectorGravedadConsecuencia(opc) {
 }
 
 
+function obtenerCriterioAlerta() {
+   // var tr = JQuery("#matriz_riesgos tbody")
+    //var criterioTipoAlerta = tr.lastElementChild;
+}
+
 function calcularTipoAlerta(event) {
     var opcion = event.value;
     var tr = event.parentNode.parentNode; //td hermano al td del selector
@@ -42,10 +48,8 @@ function calcularTipoAlerta(event) {
     var valorTipoAlerta = criterioTipoAlerta.previousElementSibling;  //td valor de tipo de alerta
     var valorConsecuencia = valorTipoAlerta.previousElementSibling.previousElementSibling;
     var valorGravedad = valorConsecuencia.previousElementSibling.previousElementSibling;
-    var valorProbabilidad = valorGravedad.previousElementSibling.previousElementSibling;
-   
-    //criterioTipoAlerta
-    
+    var valorProbabilidad = valorGravedad.previousElementSibling.previousElementSibling;   
+    //criterioTipoAlerta    
     var probabilidad = parseInt(valorProbabilidad.firstElementChild.value);
     var gravedad = parseInt(valorGravedad.firstElementChild.value);
     var consecuencia = parseInt(valorConsecuencia.firstElementChild.value);
@@ -69,6 +73,4 @@ function calcularCriterioTipoAlerta(criterioTipoAlerta,valor){
          criterioTipoAlerta.innerHTML = "ROJA";   
         
     }
-
-    
 }
