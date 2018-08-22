@@ -23,6 +23,10 @@
 <script language="JavaScript" type="text/javascript" src="inc/js/roll.js"></script>
 <script language="JavaScript" type="text/javascript"  src="inc/js/user.js"></script>
 
+<!-- Inicio-->
+<script language="JavaScript" type="text/javascript"  src="inc/js/inicio.js"></script>
+
+
 <!-- adminCapitulos  -->
 
 <script type="text/javascript" src="lib/ckeditor/ckeditor.js"></script>
@@ -47,6 +51,10 @@
 <script language="JavaScript" type="text/javascript"  src="inc/js/zonaTrabajo.js"></script>
 <!-- adminitrar Matriz de riesgo -->
 <script language="JavaScript" type="text/javascript"  src="inc/js/matrizRiesgo.js"></script>
+
+
+<!-- Plan de emergencia datos generales -->
+<script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_datos_generales.js"></script>
 
 <!-- Bootstrap + Font-Awesome + Estilo -->
 <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>

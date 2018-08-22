@@ -22,7 +22,7 @@ FKidZonaTrabajo int,
 revisadoPor varchar(150),
 codigoZonaTrabajo varchar(150),
 actividad varchar(150),
-dirrecion varchar(150),
+direccion varchar(150),
 personaContactoGeneral varchar(150),
 numeroTelefono varchar(150),
 numeroFax varchar(150),
@@ -33,6 +33,7 @@ horarioJornada varchar(150),
 seguridadInstitucional varchar(150),
 servicioConsegeria varchar(150),
 personalAdministrativo varchar(150),
+personalAcademico varchar(150),
 presenciaEstudiantil varchar(150),
 instalacionesDensidadOcupacion varchar(150),
 instalacionesAreaConstruccion varchar(150),
@@ -1122,3 +1123,141 @@ END
 ;;
 DELIMITER ;
 -- ordenar_formulario('1','2',@res);
+
+-- ----------------------------
+-- Proceso datos generales
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `datos_generales`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `datos_generales`(IN `p_fkidZonaTrabajo ` int,IN `p_actividad`  varchar(150),
+ IN  `p_direccion`  varchar(150), IN  `p_contacto`  varchar(150),
+ IN `p_fax` varchar(150),IN `p_email`  varchar(150), IN  `p_NFPA`  varchar(150),
+ IN `p_uso` varchar(150),IN `p_horarios `  varchar(150), IN  `p_seguridad`  varchar(150),
+ IN `p_servicio` varchar(150),IN `p_administracion`  varchar(150), IN  `p_academico`  varchar(150),
+ IN `p_estudiantil` varchar(150), OUT `res` TINYINT  UNSIGNED)
+BEGIN   
+        declare existe Integer;      
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;
+         --   set existe=null;
+         --   select FKidZonaTrabajo  into existe from PlanEmergencia WHERE `FKidZonaTrabajo`=p_fkidZonaTrabajo;
+          --  IF(existe=p_fkidZonaTrabajo) THEN
+                --  START TRANSACTION;
+                 --    UPDATE  `PlanEmergencia` SET `actividad`=p_actividad,`dirrecion`=p_direccion,`personaContactoGeneral`=p_contacto,`numeroFax`=p_fax,
+                  --          `notificaciones`=p_email,`categoriNFPA`=p_NFPA,`usoInstalaciones`=p_uso,`horarioJornada`=p_horarios,`seguridadInstitucional`=p_seguridad,
+                   --         `servicioConsegeria`=p_servicio,`personalAdministrativo`=p_administracion,`personalAdcademico`=p_academico,`presenciaEstudiantil`=p_estudiantil
+                    --        WHERE `FKidZonaTrabajo`=p_fkidZonaTrabajo;
+                  
+               --  COMMIT;
+                -- SUCCESS
+             --   SET res = 0;
+          --  ELSE               
+                START TRANSACTION;
+                  INSERT INTO `PlanEmergencia`(`FKidZonaTrabajo`,`actividad`,`dirrecion`,`personaContactoGeneral`,`numeroFax`,`notificaciones`,
+                             `categoriNFPA`,`usoInstalaciones`,`horarioJornada`,`seguridadInstitucional`,`servicioConsegeria`,`personalAdministrativo`,
+                               `personalAcademico`, `presenciaEstudiantil`) VALUES (p_fkidZonaTrabajo,p_actividad,
+                              p_direccion, p_contacto,p_fax, p_email, p_NFPA, p_uso,p_horarios , p_seguridad,
+                              p_servicio,p_administracion,p_academico, p_estudiantil);
+                COMMIT;
+                 -- SUCCESS
+               SET res = 0;
+               -- Existe usuario
+          --  END IF;
+END
+;;
+DELIMITER ;
+
+-- CALL datos_generales('1','$actividad','$direccion','$conctacto',
+--                     '$fax','$email','$NFPA','$uso','$horarios','$seguridad','$servicio','$administracion',
+--                     '$academico','$estudiantil',@res);
+
+
+DROP PROCEDURE IF EXISTS `datos_generales`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `datos_generales`(IN `p_fkidZonaTrabajo ` int,IN `p_actividad`  varchar(150),
+ IN  `p_direccion`  varchar(150), IN  `p_contacto`  varchar(150),
+ IN `p_fax` varchar(150),IN `p_email`  varchar(150), IN  `p_NFPA`  varchar(150),
+ IN `p_uso` varchar(150),IN `p_horarios `  varchar(150), IN  `p_seguridad`  varchar(150),
+ IN `p_servicio` varchar(150),IN `p_administracion`  varchar(150), IN  `p_academico`  varchar(150),
+ IN `p_estudiantil` varchar(150), OUT `res` TINYINT  UNSIGNED)
+BEGIN  
+ 
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;    
+       
+        START TRANSACTION;
+    INSERT INTO `PlanEmergencia`(`FKidZonaTrabajo`,`actividad`,`dirrecion`,`personaContactoGeneral`,`numeroFax`,`notificaciones`,
+                             `categoriNFPA`,`usoInstalaciones`,`horarioJornada`,`seguridadInstitucional`,`servicioConsegeria`,`personalAdministrativo`,
+                               `personalAcademico`, `presenciaEstudiantil`) VALUES (p_fkidZonaTrabajo,p_actividad,
+                              p_direccion, p_contacto,p_fax, p_email, p_NFPA, p_uso,p_horarios , p_seguridad,
+                               p_servicio,p_administracion,p_academico, p_estudiantil);
+        COMMIT;
+        -- SUCCESS
+        SET res = 0;
+       
+END
+;;
+DELIMITER ;
+
+
+
+
+
+
+DROP PROCEDURE IF EXISTS `datos_generales`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `datos_generales`(IN `p_fkidZonaTrabajo ` int,IN `p_actividad`  varchar(150),
+ IN  `p_direccion`  varchar(150), IN  `p_contacto`  varchar(150),
+ IN `p_fax` varchar(150),IN `p_email`  varchar(150), IN  `p_NFPA`  varchar(150),
+ IN `p_uso` varchar(150),IN `p_horarios `  varchar(150), IN  `p_seguridad`  varchar(150),
+ IN `p_servicio` varchar(150),IN `p_administracion`  varchar(150), IN  `p_academico`  varchar(150),
+ IN `p_estudiantil` varchar(150), OUT `res` TINYINT  UNSIGNED)
+BEGIN
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;
+            START TRANSACTION;
+                    INSERT INTO `PlanEmergencia`(`FKidZonaTrabajo`,`actividad`,`dirrecion`,`personaContactoGeneral`,`numeroFax`,`notificaciones`,
+                             `categoriNFPA`,`usoInstalaciones`,`horarioJornada`,`seguridadInstitucional`,`servicioConsegeria`,`personalAdministrativo`,
+                               `personalAcademico`, `presenciaEstudiantil`) VALUES (p_fkidZonaTrabajo,p_actividad,
+                              p_direccion, p_contacto,p_fax, p_email, p_NFPA, p_uso,p_horarios , p_seguridad,
+                               p_servicio,p_administracion,p_academico, p_estudiantil);
+            COMMIT;
+            -- SUCCESS
+            SET res = 0;
+            -- Existe usuario
+END
+;;
+DELIMITER ;

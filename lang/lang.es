@@ -247,4 +247,5 @@ $vocab["datos_generares_Servicio"]           ="Servicio de Conserjería:";
 $vocab["datos_generares_Administrativo"]     ="Personal Administrativo:";
 $vocab["datos_generares_Académico"]          ="Personal Académico:";
 $vocab["datos_generares_Estudiantil"]        ="Presencia Estudiantil:";
+$vocab["datos_generares_siguente"]           ="Y pasar el siguiente";
 ?>
