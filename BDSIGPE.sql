@@ -152,19 +152,7 @@ FOREIGN KEY(FKidZona) REFERENCES ZonaTrabajo(id)
 );
 
 
--- insert matriz de riesgo
-INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
-`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (5,1,'placa tectonica',2,4,3);
-INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
-`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (3,1,'placa tectonica',2,4,3);
-INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
-`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (4,1,'placa tectonica',2,4,3);
-INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
-`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (6,1,'placa tectonica',2,4,3);
-INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
-`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (7,1,'placa tectonica',2,4,3);
-INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
-`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (1,1,'placa tectonica',2,4,3);
+
 
 -- cambiar insert
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,'Limon','Zona ubicada en la region de limon');
@@ -254,9 +242,27 @@ INSERT INTO `Formulario`(`descripcion`, `FKidSubcapitulos`) VALUES ('Instalacion
 INSERT INTO `Formulario`(`descripcion`, `FKidSubcapitulos`) VALUES ('Matriz de riesgo',1);
 
 
-INSERT INTO `usuariozona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',1);
-INSERT INTO `usuariozona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',2);
-INSERT INTO `usuariozona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',5);
+INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',1);
+INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',2);
+INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',5);
+
+insert into `PlanEmergencia`(`FKidZonaTrabajo`) VALUES (1);
+INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
+`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (1,1,'placa tectonica',2,4,3);
+
+-- insert matriz de riesgo
+INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
+`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (5,1,'placa tectonica',2,4,3);
+INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
+`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (3,1,'placa tectonica',2,4,3);
+INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
+`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (4,1,'placa tectonica',2,4,3);
+INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
+`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (6,1,'placa tectonica',2,4,3);
+INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
+`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (7,1,'placa tectonica',2,4,3);
+INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
+`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (1,1,'placa tectonica',2,4,3);
 
 
 drop  table UsuarioZona;
@@ -271,7 +277,7 @@ drop table OrigenAmenaza;
 drop table PlanEmergencia;
 drop table ZonaTrabajo;
 
-SELECT `id`, `nombreZonaTrabajo`FROM `zonatrabajo`,(SELECT `FKidZona` From UsuarioZona where `FKidUsario` = '402340420') UsuZona WHERE zonatrabajo.id = UsuZona.FKidZona  
+--SELECT `id`, `nombreZonaTrabajo`FROM `zonatrabajo`,(SELECT `FKidZona` From UsuarioZona where `FKidUsario` = '402340420') UsuZona WHERE zonatrabajo.id = UsuZona.FKidZona  
 
 
 -- ----------------Procedimientos almacenados----------------------------------
@@ -298,10 +304,9 @@ BEGIN
             START TRANSACTION;
                     INSERT INTO `ZonaTrabajo`(nombreZonaTrabajo,isActivo, descripcion) VALUES (p_nombre, p_activo,p_descripcion);
                     SELECT  MAX(id) into res from ZonaTrabajo ;
+                    INSERT INTO `PlanEmergencia`(FKidZonaTrabajo) VALUES (res);                  
             COMMIT;
             -- SUCCESS
-           
-            -- Existe usuario
 END
 ;;
 DELIMITER ;

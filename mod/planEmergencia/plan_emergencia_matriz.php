@@ -4,11 +4,16 @@ include("../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
 
-/* * *************************************************************************************** */
+/* **************************************************************************************** */
 //Informacion requerida obtenida de la sesion
 $ip = $mySessionController->getVar("cds_domain");
 $ip .= $mySessionController->getVar("cds_locate");
 $page_cant = $mySessionController->getVar("page_cant");
+
+
+include("plan_emergencia_menu.php");
+
+
 
 function consultaOrigenes() {
     return "SELECT id, descripcion, isActivo FROM OrigenAmenaza where isActivo = 1";
@@ -20,15 +25,6 @@ function consultaTipos($idOrigen) {
 
 function consultaCategoriasPorTipo($idTipo) {
     return "SELECT  id, descripcion, FKidTipoAmenaza,isActivo FROM CategoriaTipoAmenaza where FKidTipoAmenaza=$idTipo and isActivo = 1";
-}
-
-//cambiar el valor quemado de 1
-function consultaMatriz() {
-    return "SELECT id, FKidCategoriaTipoAmenaza, FKidPlanEmergencias, fuente, probabilidad,gravedad,consecuenciaAmenaza FROM Matriz where FKidPlanEmergencias = 1";
-}
-
-function consultarMatrizRegistroActivo() {
-    return "SELECT id, FKidCategoriaTipoAmenaza, FKidPlanEmergencias, fuente, probabilidad,gravedad,consecuenciaAmenaza FROM Matriz where FKidPlanEmergencias = 1";
 }
 
 //Pasar esto a una vista
@@ -106,7 +102,6 @@ function calcularCriterioAlertaColor($registro, $vocab) {
     } else if ($valor > 3 && $valor <= 12) {
         return $mat = ["color" => "#5cb85c", "criterio" => $vocab["criterio_verde"]];
     } else if ($valor > 12 && $valor < 24) {
-
         return $mat = ["color" => "#f0ad4e", "criterio" => $vocab["criterio_amarilla"]];
     } else if ($valor >= 24) {
         return $mat = ["color" => "#d9534f", "criterio" => $vocab["criterio_roja"]];
@@ -114,15 +109,16 @@ function calcularCriterioAlertaColor($registro, $vocab) {
 }
 
 $origenes = seleccion(consultaOrigenes());
-$matriz = seleccion(consultaMatriz());
+$sql = "SELECT matriz.id, matriz.FKidCategoriaTipoAmenaza, matriz.FKidPlanEmergencias, 
+matriz.fuente, matriz.probabilidad, matriz.gravedad, matriz.consecuenciaAmenaza FROM
+(SELECT id FROM PlanEmergencia where FKidZonaTrabajo = $idCentro ) plan,
+(SELECT id, FKidCategoriaTipoAmenaza, FKidPlanEmergencias, fuente,
+ probabilidad,gravedad,consecuenciaAmenaza FROM Matriz) matriz
+ where matriz.FKidPlanEmergencias = plan.id";
+$matriz = seleccion($sql);
 ?>
-<!--  ****** Titulo ***** -->
 
-<?php
-include("plan_emergencia_menu.php");
-?>
 <div class="well well-sm">
-
     <h1><?= $vocab["matriz_title"] ?></h1></div>
 <div class="dataTables_wrapper form-inline dt-bootstrap">
     <table id="matriz_riesgos" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable text-center" >
@@ -213,7 +209,7 @@ include("plan_emergencia_menu.php");
         ?>
         <div class="text-center">
             <span class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/new_zona_trabajo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["matriz_title"] ?></a></span>
-            <span class="text-center"><a class="btn btn-success" name="" onclick="javascript:OpcionMenu('mod/planEmergencia/plan_emergencia_matriz_grafico.php?', 'criterios=' + JSON.stringify(crearVectorValores()));"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["graficar_matriz"] ?></a></span>
+            <span class="text-center"><a class="btn btn-success" name="" onclick="javascript:OpcionMenu('mod/planEmergencia/plan_emergencia_matriz_grafico.php?', 'nombreCentro=<?=$nombreCentro?>&idCentro=<?=$idCentro?>&criterios=' + JSON.stringify(crearVectorValores()));"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["graficar_matriz"] ?></a></span>
         </div>
     <?php } ?>
 </div>
