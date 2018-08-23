@@ -1,4 +1,4 @@
-<?php
+<?php //
 require 'functions.php';
 ?>
 <nav class="navbar navbar-inverse navbar-fixed-top" style="cursor: pointer;">
@@ -10,14 +10,14 @@ require 'functions.php';
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-
-            <a href="#" class="navbar-brand"><?php echo $mySessionController->getVar("page_title") ?></a>
-            <a id="tituloGeneral" href="#" class="navbar-brand"><?php echo $mySessionController->getVar("page_title") ?></a>
-            <a id="NombreUsuario"  href="#" class="navbar-brand"><?php echo $mySessionController->getVar("nombre") ?></a>
-
+             <a href="#" class="navbar-brand"><?php echo $mySessionController->getVar("page_title") ?></a>
+<!--             <a id="tituloGeneral" href="#" class="navbar-brand">Bienvenido a la soda de la escula de informatica </a>                     -->
         </div>
         <div class="navbar-collapse collapse" id="navbar" aria-expanded="false" style="height: 1px;">
-            <ul class="nav navbar-nav">
+               <ul class="nav navbar-nav">
+                 <li  class="nav-item mr-auto"><a id="NombreUsuario"  href="#" class="navbar-brand"><?php echo $mySessionController->getVar("nombre") ?></a></li>
+               </ul>
+                <ul class="nav navbar-nav">
                 <!-- INICIO -->
                 <li><a onclick="javascript:OpcionMenu('mod/inicio.php?', '');"><span><i class="fa fa-home fa-inverse"></i> <?= $vocab["menu_home"] ?></span></a></li>
                 <!-- MODULOS DEL SISTEMA -->

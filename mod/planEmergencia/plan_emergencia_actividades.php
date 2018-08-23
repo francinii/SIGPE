@@ -21,9 +21,6 @@ if (count($res) <= 0) {
         $vocab["actividades_Estudiantes"], $vocab["actividades_Visitantes"]);
 }
 ?>
-<script>   
-    document.getElementById("tituloGeneral").innerHTML = "<?= $nombreCentro ?>";
-</script>
 <div class="container">   
        
     <div class="well well-sm">

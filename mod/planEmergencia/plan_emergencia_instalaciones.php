@@ -16,9 +16,6 @@ $sql = "SELECT `instalacionesDensidadOcupacion`, `instalacionesAreaConstruccion`
         . "`elementosConstructivosOtros` FROM `PlanEmergencia` WHERE `FKidZonaTrabajo`=".$idCentro;
 $res = seleccion($sql);
 ?>
-<script>
-document.getElementById("tituloGeneral").innerHTML="<?=$nombreCentro?>";
-</script>
 <div class="container">
     <div class="well well-sm">
         <h2><?= $vocab["instalaciones_Titulo"] ?></h2>

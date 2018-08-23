@@ -9,7 +9,9 @@ $nombreCentro = $_GET['nombreCentro'];
 <script>
     var idCentro =<?= $idCentro ?>;
     var nombreCentro = "<?= $nombreCentro ?>";
+//    document.getElementById("tituloGeneral").innerHTML=nombreCentro;
 </script>
+
 <br/>
 <div>
 

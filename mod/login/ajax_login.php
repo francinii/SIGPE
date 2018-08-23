@@ -58,7 +58,7 @@ if ($out == 0) {
     $mySessionController->save("cds_domain", $cds_domain);
     $mySessionController->save("cds_locate", $cds_locate);
     $mySessionController->save("page_cant", $page_cant);
-    $mySessionController->save("page_title", $page_title);
+    $mySessionController->save("page_title", $page_title);  
     $mySessionController->save("footer_title", $footer_title);
     $mySessionController->save('vocab', $vocab);
 }

@@ -13,9 +13,7 @@ $sql = "SELECT `actividad`,`direccion`,`personaContactoGeneral`,`numeroTelefono`
         . "`personalAcademico`, `presenciaEstudiantil` from PlanEmergencia WHERE `FKidZonaTrabajo`=".$idCentro;
 $res = seleccion($sql);
 ?>
-<script>
-document.getElementById("tituloGeneral").innerHTML="<?=$nombreCentro?>";
-</script>
+
 <div class="container">
     <div class="well well-sm">
         <h2><?= $vocab["datos_generares_Titulo"] ?></h2>

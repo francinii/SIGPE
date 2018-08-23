@@ -186,7 +186,7 @@ Array.prototype.map = function(fun)
 var cargando = '<div style="text-align:center; top: 50px;"><img src="img/loader_circle.gif"/><div>';
 var cargando_bar = '<div style="text-align:center"><img src="img/loader_bar.gif"/><div>';
 
-function OpcionMenu(opcion, parametros){
+function OpcionMenu(opcion, parametros){    
     if (cambios) {         
     jConfirm("Desea continuar sin guardar los cambios", "cambios sin guardar", function (r) {
         if (r) {
