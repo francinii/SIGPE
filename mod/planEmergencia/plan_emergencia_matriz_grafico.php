@@ -56,8 +56,8 @@ function buscar($color, $criterios) {
                         ?>
                         <tr>
                             <td><?= $colores[$i] ?></td>
-                            <?php $cantidad[] = buscar($colores[$i], $criterios);?>
-                            <td><?= $cantidad[$i]?></td>
+                            <?php $cantidad[] = buscar($colores[$i], $criterios); ?>
+                            <td><?= $cantidad[$i] ?></td>
                             <td><?= cacularPorcentajeAmenaza($colores[$i], $criterios); ?></td>
                             <td></td>
                         </tr>
@@ -74,7 +74,7 @@ function buscar($color, $criterios) {
             ?>
             <img class="img_fix_grap" src="mod/planEmergencia/grafico.php?criterios=<?= $valores ?>&colores=<?= $color ?>&time=<?= time() ?>">
         </div>
-             <div class="text-center"><a class="btn btn-warning" name="" onclick="javascript:OpcionMenu('mod/planEmergencia/plan_emergencia_matriz.php?', 'nombreCentro=<?=$nombreCentro?>&idCentro=<?=$idCentro?>');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_return"] ?></a></div>
-   </div>
+        <div class="text-center"><a class="btn btn-warning" name="" onclick="javascript:OpcionMenu('mod/planEmergencia/plan_emergencia_matriz.php?', 'nombreCentro=<?= $nombreCentro ?>&idCentro=<?= $idCentro ?>');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_return"] ?></a></div>
+    </div>
 </div>
 
