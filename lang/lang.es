@@ -249,4 +249,45 @@ $vocab["datos_generares_Administrativo"]     ="Personal Administrativo:";
 $vocab["datos_generares_Académico"]          ="Personal Académico:";
 $vocab["datos_generares_Estudiantil"]        ="Presencia Estudiantil:";
 $vocab["datos_generares_siguente"]           ="Y pasar el siguiente";
+
+
+//***********     plan de emergencia  datos generales  ***********************//
+$vocab["actividades_Titulo"]             ="Tipo de población";
+$vocab["actividades_Titulo_Desc"]        ="Tipo de poblacion en las actividades";
+$vocab["actividades_Descripcion"]        ="Descripción";
+$vocab["actividades_total"]              ="Total aproximado";
+$vocab["actividades_Discapacidad"]        ="Representación de personas con discapacidad identificadas(detalle tipo de discapacidad)";
+$vocab["actividades_administrativo"]     ="Personal administrativo";
+$vocab["actividades_académico"]          ="Personal académico";
+$vocab["actividades_Estudiantes"]        ="Estudiantes";
+$vocab["actividades_Visitantes"]         ="Visitantes";
+
+
+//***********     plan de emergencia  datos generales  ***********************//
+$vocab["instalaciones_Titulo"]        ="características propias de la edificación";
+$vocab["instalaciones_subTitulo1"]             ="Características de las Instalaciones";
+$vocab["instalaciones_Densidad"]         ="Densidad de ocupación";
+$vocab["instalaciones_Area"]         ="Área de construcción";
+$vocab["instalaciones_Instalaciones"]         ="Instalaciones:";
+$vocab["instalaciones_zona"]         ="Características de la zona";
+$vocab["instalaciones_topografica"]         ="Topografía";
+$vocab["instalaciones_terreno"]         ="Nivel del terreno";
+$vocab["instalaciones_Colindantes"]         ="Colindantes";
+$vocab["instalaciones_Elementos"]         ="Elementos constructivos";
+$vocab["instalaciones_Tipo"]         ="Tipo de construcción";
+$vocab["instalaciones_Antiguedad"]         ="Antigûedad";
+$vocab["instalaciones_Cimientos"]         ="Cimientos";
+$vocab["instalaciones_Estructura"]         ="Estructura";
+$vocab["instalaciones_Paredes"]         ="Paredes";
+$vocab["instalaciones_Entrepiso"]         ="Entrepiso";
+$vocab["instalaciones_Techo"]         ="Techo";
+$vocab["instalaciones_Cielos"]         ="Cielos";
+$vocab["instalaciones_Pisos"]         ="Pisos";
+$vocab["instalaciones_parqueo"]         ="Área de parqueo";
+$vocab["instalaciones_aguapotable"]         ="Sistema de agua potable";
+$vocab["instalaciones_pluvial"]         ="Sistema de alcantarillado pluvial";
+$vocab["instalaciones_electrico"]         ="Sistema electrico";
+$vocab["instalaciones_telefónico"]         ="Sistema telefónico";
+$vocab["instalaciones_Otros"]         ="Otros";
+
 ?>
