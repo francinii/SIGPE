@@ -75,12 +75,38 @@ function calcularCriterioTipoAlerta(criterioTipoAlerta, valor) {
     }
 }
 
-
+//Crea un vector con los datos de la tabla correspondiente a los colores de la 
+//matriz
 function crearVectorValores() {
     var criterio = [];
     jQuery("td.criterioAlerta").each(function () {
         criterio.push(jQuery(this).text());
     }).get();
     return criterio;
+
+}
+
+//Crea un vector con los datos de la tabla correspondiente a los colores de la 
+//matriz
+function generaVectorMatriz() {
+    var matriz = jQuery("#matriz_riesgos tbody tr");
+    matriz.each(function () {
+       var fuente = jQuery(this).find("td div input.fuente").val();
+       var probabilidad = jQuery(this).find("td.criterioProbabilidad option:selected").val();
+       var gravedad =  jQuery(this).find("td.criterioGravedad option:selected").val();
+       var consecuencia = jQuery(this).find("td.criterioConsecuencia option:selected").val();
+       
+       
+     });
+//    var tr = jQuery(); //td hermano al td del selector
+//    var criterioTipoAlerta = tr.lastElementChild; //td criterio de tipo de alerta
+//    var valorTipoAlerta = criterioTipoAlerta.previousElementSibling;  //td valor de tipo de alerta
+//    var valorConsecuencia = valorTipoAlerta.previousElementSibling.previousElementSibling;
+//    var valorGravedad = valorConsecuencia.previousElementSibling.previousElementSibling;
+//    var valorProbabilidad = valorGravedad.previousElementSibling.previousElementSibling;
+//    //criterioTipoAlerta    
+//    var probabilidad = parseInt(valorProbabilidad.firstElementChild.value);
+//    var gravedad = parseInt(valorGravedad.firstElementChild.value);
+//    var consecuencia = parseInt(valorConsecuencia.firstElementChild.value);
 
 }

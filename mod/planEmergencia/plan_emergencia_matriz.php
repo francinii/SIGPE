@@ -4,7 +4,7 @@ include("../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
 
-/* **************************************************************************************** */
+/* * *************************************************************************************** */
 //Informacion requerida obtenida de la sesion
 $ip = $mySessionController->getVar("cds_domain");
 $ip .= $mySessionController->getVar("cds_locate");
@@ -12,8 +12,6 @@ $page_cant = $mySessionController->getVar("page_cant");
 
 
 include("plan_emergencia_menu.php");
-
-
 
 function consultaOrigenes() {
     return "SELECT id, descripcion, isActivo FROM OrigenAmenaza where isActivo = 1";
@@ -173,18 +171,18 @@ $matriz = seleccion($sql);
                                     <?php if ($k != 0 && $j != 0) { ?>
                                     <tr>
                                     <?php } ?>                                   
-                                    <td> <?= $categoriasPorTipo[$k]['descripcion']; ?></td>
+                                    <td class ="categoria"> <?= $categoriasPorTipo[$k]['descripcion']; ?></td>
                                     <?php $registroMatriz = buscarRegistro($matriz, $categoriasPorTipo[$k]['id']); ?>  
                                     <td> <div class="form-group">                                            
-                                            <input id="type-text" name="type-text" class="form-control" placeholder="fuente"value ="<?= $registroMatriz['fuente'] ?>"  title="propiedad title" type="text">
+                                            <input  id="type-text" name="type-text" class="form-control fuente" placeholder="fuente"value ="<?= $registroMatriz['fuente'] ?>"  title="propiedad title" type="text">
                                         </div>
                                     </td>
-                                    <td> <?= selectorMatriz(0, $registroMatriz['probabilidad']); ?></td>
+                                    <td class = "criterioProbabilidad" > <?= selectorMatriz(0, $registroMatriz['probabilidad']); ?></td>
                                     <td id = "criterioProbabilidad"> <?= selectorProbabilidad($registroMatriz['probabilidad']) ?> </td>
-                                    <td> <?= selectorMatriz(1, $registroMatriz['gravedad']); ?></td>
-                                    <td id = "criterioGravedad"> <?= selectorGravedadConsecuencia($registroMatriz['gravedad']) ?></td>
-                                    <td> <?= selectorMatriz(1, $registroMatriz['consecuenciaAmenaza']); ?></td>
-                                    <td id = "criterioConsecuencia"> <?= selectorGravedadConsecuencia($registroMatriz['consecuenciaAmenaza']) ?> </td>
+                                    <td class = "criterioGravedad"> <?= selectorMatriz(1, $registroMatriz['gravedad']); ?></td>
+                                    <td  id = "criterioGravedad"> <?= selectorGravedadConsecuencia($registroMatriz['gravedad']) ?></td>
+                                    <td class = "criterioConsecuencia"> <?= selectorMatriz(1, $registroMatriz['consecuenciaAmenaza']); ?></td>
+                                    <td  id = "criterioConsecuencia"> <?= selectorGravedadConsecuencia($registroMatriz['consecuenciaAmenaza']) ?> </td>
                                     <td><?= calcularValorAlerta($registroMatriz); ?> </td>
                                     <?php
                                     $criterio = calcularCriterioAlertaColor($registroMatriz, $vocab)['criterio'];
@@ -202,15 +200,13 @@ $matriz = seleccion($sql);
         </tbody>
     </table>
     <br/>
-    <?php
-    if (check_permiso($mod3, $act3, $user_rol)) {
-        $prueba = ($criterios != null) ? JSON_encode($criterios) : ""; //verificar esta condicion
-        $prueba2 = str_replace('"', "\'", $prueba);
-        ?>
-        <div class="text-center">
-            <span class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/new_zona_trabajo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["matriz_title"] ?></a></span>
-            <span class="text-center"><a class="btn btn-success" name="" onclick="javascript:OpcionMenu('mod/planEmergencia/plan_emergencia_matriz_grafico.php?', 'nombreCentro=<?=$nombreCentro?>&idCentro=<?=$idCentro?>&criterios=' + JSON.stringify(crearVectorValores()));"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["graficar_matriz"] ?></a></span>
-        </div>
-    <?php } ?>
+    <div class="text-center">
+        <span class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/new_zona_trabajo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["matriz_title"] ?></a></span>
+        <span class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:generaVectorMatriz();"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["matriz_title"] ?></a></span>
+        <?php if ($criterios != null) { ?>   
+            <span class="text-center"><a class="btn btn-success" name="" onclick="javascript:OpcionMenu('mod/planEmergencia/plan_emergencia_matriz_grafico.php?', 'nombreCentro=<?= $nombreCentro ?>&idCentro=<?= $idCentro ?>&criterios=' + JSON.stringify(crearVectorValores()));"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["graficar_matriz"] ?></a></span>
+        <?php } ?>
+    </div>
+
 </div>
 
