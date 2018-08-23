@@ -209,6 +209,7 @@ $vocab["criterio_ninguna"]               = "NINGUNA";
 $vocab["criterio_verde"]                 = "VERDE";
 $vocab["criterio_amarilla"]              = "AMARILLA";
 $vocab["criterio_roja"]                  = "ROJA";
+$vocab["graficar_matriz"]                  = "Graficar";
 
 //***********     Matriz cuadro resumen   ***********************//
 $vocab["tipo_alerta_nombre"]               = "Tipo de alerta";

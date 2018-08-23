@@ -71,7 +71,6 @@ function buscar($color, $criterios) {
     return $total;
 }
 
-
 function selectorProbabilidad($opc) {
     if ($opc == 1) {
         return "BAJA";
@@ -103,17 +102,16 @@ function calcularValorAlerta($registro) {
 function calcularCriterioAlertaColor($registro, $vocab) {
     $valor = calcularValorAlerta($registro);
     if ($valor <= 3) {
-        return $mat = ["color" => "grey", "criterio" => $vocab["criterio_ninguna"]];
+        return $mat = ["color" => "#828282", "criterio" => $vocab["criterio_ninguna"]];
     } else if ($valor > 3 && $valor <= 12) {
-        return $mat = ["color" => "green", "criterio" => $vocab["criterio_verde"]];
+        return $mat = ["color" => "#5cb85c", "criterio" => $vocab["criterio_verde"]];
     } else if ($valor > 12 && $valor < 24) {
 
-        return $mat = ["color" => "yellow", "criterio" => $vocab["criterio_amarilla"]];
+        return $mat = ["color" => "#f0ad4e", "criterio" => $vocab["criterio_amarilla"]];
     } else if ($valor >= 24) {
-        return $mat = ["color" => "red", "criterio" => $vocab["criterio_roja"]];
+        return $mat = ["color" => "#d9534f", "criterio" => $vocab["criterio_roja"]];
     }
 }
-
 
 $origenes = seleccion(consultaOrigenes());
 $matriz = seleccion(consultaMatriz());
@@ -127,7 +125,7 @@ include("plan_emergencia_menu.php");
 
     <h1><?= $vocab["matriz_title"] ?></h1></div>
 <div class="dataTables_wrapper form-inline dt-bootstrap">
-    <table id="lista_usuarios" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable text-center" >
+    <table id="matriz_riesgos" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable text-center" >
         <thead>
             <tr>
                 <th rowspan="2" width="10%"><?= $vocab["td_origen"] ?></th>
@@ -152,6 +150,7 @@ include("plan_emergencia_menu.php");
         </thead>
         <tbody>
             <?php
+            $criterios = null;
             for ($i = 0; $i < count($origenes); $i++) {
                 $idOrigen = $origenes[$i]['id'];
                 $categorias = seleccion(consultaCategoriasPorOrigen($idOrigen)); //cambiar esta consulta
@@ -195,7 +194,7 @@ include("plan_emergencia_menu.php");
                                     $criterio = calcularCriterioAlertaColor($registroMatriz, $vocab)['criterio'];
                                     $criterios[] = $criterio; //arreglo que guardar los criterios (VERDE, NINGUNA,AMARILLA,ROJA)
                                     ?>                                    
-                                    <td style="background-color: <?= calcularCriterioAlertaColor($registroMatriz)['color']; ?> "> <?= $criterio ?></td>
+                                    <td class = "criterioAlerta" style="background-color: <?= calcularCriterioAlertaColor($registroMatriz)['color']; ?> "><?= $criterio ?></td>
                                 </tr>
                             <?php } ?>
                         <?php } else { ?>
@@ -206,15 +205,16 @@ include("plan_emergencia_menu.php");
             <?php } ?>
         </tbody>
     </table>
- 
     <br/>
-    <?php if (check_permiso($mod3, $act3, $user_rol)) {        
-        $prueba = JSON_encode($criterios);
-        $prueba2 = str_replace('"',"\'",$prueba);
+    <?php
+    if (check_permiso($mod3, $act3, $user_rol)) {
+        $prueba = ($criterios != null) ? JSON_encode($criterios) : ""; //verificar esta condicion
+        $prueba2 = str_replace('"', "\'", $prueba);
         ?>
-        <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/new_zona_trabajo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["matriz_title"] ?></a></div>
-        <div class="text-center"><a class="btn btn-success" name="" onclick="javascript:OpcionMenu('mod/planEmergencia/plan_emergencia_matriz_grafico.php?', 'criterios=<?= $prueba2 ?>');"><i class='fa fa-plus fa-inverse'></i> hola</a></div>
-
+        <div class="text-center">
+            <span class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/new_zona_trabajo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["matriz_title"] ?></a></span>
+            <span class="text-center"><a class="btn btn-success" name="" onclick="javascript:OpcionMenu('mod/planEmergencia/plan_emergencia_matriz_grafico.php?', 'criterios=' + JSON.stringify(crearVectorValores()));"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["graficar_matriz"] ?></a></span>
+        </div>
     <?php } ?>
 </div>
 

@@ -12,7 +12,8 @@ $ip .= $mySessionController->getVar("cds_locate");
 $page_cant = $mySessionController->getVar("page_cant");
 
 $criterios = $_GET['criterios'];
-$criterios = str_replace("'", '"', $criterios);
+//$criterios = str_replace(" ", "", $criterios);
+//$criterios = str_replace("'", '"', $criterios);
 $criterios = JSON_decode($criterios);
 
 function cacularPorcentajeAmenaza($color, $criterios) {
@@ -68,7 +69,7 @@ include("plan_emergencia_menu.php");
                 </tbody>
             </table>
         </div>
-        <div  class="col-lg-6 col-md-6 col-sm-8 col-xs-12">
+        <div  class=" text-center col-lg-6 col-md-6 col-sm-8 col-xs-12">
             <?php
             $prueba = JSON_encode($cantidad);
             $valores = str_replace('"', "'", $prueba);
@@ -77,7 +78,7 @@ include("plan_emergencia_menu.php");
             ?>
             <img class="img_fix_grap" src="mod/planEmergencia/grafico.php?criterios=<?= $valores ?>&colores=<?= $color ?>&time=<?= time() ?>">
         </div>
-    </div>
-
+             <div class="text-center"><a class="btn btn-warning" name="" onclick="javascript:OpcionMenu('mod/planEmergencia/plan_emergencia_matriz.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_return"] ?></a></div>
+   </div>
 </div>
 
