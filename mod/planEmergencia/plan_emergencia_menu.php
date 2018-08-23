@@ -29,4 +29,13 @@ $nombreCentro = $_GET['nombreCentro'];
     </div> 
 </div>
 <br/>
-
+<div class="container">
+    <div id="divalertaDatosSinGuardar" class="">
+        <div class="panel-heading" id="alertaDatosSinGuardar"></div>     
+    </div>
+</div>
+<script>
+    jQuery(document).ready(function () {
+        IniciarGuardarCambios('<?= $vocab["incio_Datos_sin_guardar"] ?>');
+    });
+</script>

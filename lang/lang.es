@@ -228,6 +228,7 @@ $vocab["inicio_Empezar"]                     = "Empeza";
 $vocab["inicio_Imprimir"]                    = "Imprimir";
 $vocab["inicio_Imprimir"]                    = "Imprimir";
 $vocab["incio_labe"]                         ="Plan de emergencia";
+$vocab["incio_Datos_sin_guardar"]            ="Datos sin guardar";
 
 //***********     plan de emergencia  datos generales  ***********************//
 $vocab["datos_generares_Titulo"]             ="Datos generales";
@@ -263,30 +264,32 @@ $vocab["actividades_Visitantes"]         ="Visitantes";
 
 
 //***********     plan de emergencia  datos generales  ***********************//
-$vocab["instalaciones_Titulo"]        ="características propias de la edificación";
+$vocab["instalaciones_Titulo"]        ="Instalaciones:";
+$vocab["instalaciones_Titulo_Desc"]        ="características propias de la edificación:";
 $vocab["instalaciones_subTitulo1"]             ="Características de las Instalaciones";
-$vocab["instalaciones_Densidad"]         ="Densidad de ocupación";
-$vocab["instalaciones_Area"]         ="Área de construcción";
+$vocab["instalaciones_Densidad"]         ="Densidad de ocupación:";
+$vocab["instalaciones_Area"]         ="Área de construcción:";
 $vocab["instalaciones_Instalaciones"]         ="Instalaciones:";
-$vocab["instalaciones_zona"]         ="Características de la zona";
-$vocab["instalaciones_topografica"]         ="Topografía";
-$vocab["instalaciones_terreno"]         ="Nivel del terreno";
-$vocab["instalaciones_Colindantes"]         ="Colindantes";
-$vocab["instalaciones_Elementos"]         ="Elementos constructivos";
-$vocab["instalaciones_Tipo"]         ="Tipo de construcción";
-$vocab["instalaciones_Antiguedad"]         ="Antigûedad";
-$vocab["instalaciones_Cimientos"]         ="Cimientos";
-$vocab["instalaciones_Estructura"]         ="Estructura";
-$vocab["instalaciones_Paredes"]         ="Paredes";
-$vocab["instalaciones_Entrepiso"]         ="Entrepiso";
-$vocab["instalaciones_Techo"]         ="Techo";
-$vocab["instalaciones_Cielos"]         ="Cielos";
-$vocab["instalaciones_Pisos"]         ="Pisos";
-$vocab["instalaciones_parqueo"]         ="Área de parqueo";
-$vocab["instalaciones_aguapotable"]         ="Sistema de agua potable";
-$vocab["instalaciones_pluvial"]         ="Sistema de alcantarillado pluvial";
-$vocab["instalaciones_electrico"]         ="Sistema electrico";
-$vocab["instalaciones_telefónico"]         ="Sistema telefónico";
-$vocab["instalaciones_Otros"]         ="Otros";
+$vocab["instalaciones_zona"]         ="Características de la zona:";
+$vocab["instalaciones_topografica"]         ="Topografía:";
+$vocab["instalaciones_terreno"]         ="Nivel del terreno:";
+$vocab["instalaciones_Colindantes"]         ="Colindantes:";
+$vocab["instalaciones_subTitulo2"]         ="Elementos constructivos";
+$vocab["instalaciones_Tipo"]         ="Tipo de construcción:";
+$vocab["instalaciones_Antiguedad"]         ="Antigûedad:";
+$vocab["instalaciones_Cimientos"]         ="Cimientos:";
+$vocab["instalaciones_Estructura"]         ="Estructura:";
+$vocab["instalaciones_Paredes"]         ="Paredes:";
+$vocab["instalaciones_Entrepiso"]         ="Entrepiso:";
+$vocab["instalaciones_Techo"]         ="Techo:";
+$vocab["instalaciones_Cielos"]         ="Cielos:";
+$vocab["instalaciones_Pisos"]             ="Pisos:";
+$vocab["instalaciones_parqueo"]           ="Área de parqueo:";
+$vocab["instalaciones_aguapotable"]       ="Sistema de agua potable:";
+$vocab["instalaciones_sanitario"]         ="Sistema de alcantarillado sanitario:";
+$vocab["instalaciones_pluvial"]           ="Sistema de alcantarillado pluvial:";
+$vocab["instalaciones_electrico"]         ="Sistema electrico:";
+$vocab["instalaciones_telefónico"]        ="Sistema telefónico:";
+$vocab["instalaciones_Otros"]             ="Otros:";
 
 ?>

@@ -1128,13 +1128,12 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `datos_generales`(IN `p_FKidZonaTrabajo` int, IN `p_actividad` varchar(150),
  IN `p_direccion` varchar(150), IN `p_personaContactoGeneral` varchar(150),IN `p_numeroTelefono` varchar(150),
  IN `p_numeroFax` varchar(150),IN `p_notificaciones` varchar(150),
-IN `p_categoriaNFPA` varchar(150),IN `p_usoInstalaciones` varchar(150),
-IN `p_horarioJornada` varchar(150),IN `p_seguridadInstitucional` varchar(150),
-IN `p_servicioConsegeria` varchar(150),IN `p_personalAdministrativo` varchar(150),
-IN `p_personalAcademico` varchar(150),IN `p_presenciaEstudiantil` varchar(150),
-OUT `res` TINYINT  UNSIGNED)
-BEGIN   
-        declare existe Integer;
+ IN `p_categoriaNFPA` varchar(150),IN `p_usoInstalaciones` varchar(150),
+ IN `p_horarioJornada` varchar(150),IN `p_seguridadInstitucional` varchar(150),
+ IN `p_servicioConsegeria` varchar(150),IN `p_personalAdministrativo` varchar(150),
+ IN `p_personalAcademico` varchar(150),IN `p_presenciaEstudiantil` varchar(150),
+ OUT `res` TINYINT  UNSIGNED)
+ BEGIN           
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 	-- ERROR
@@ -1148,10 +1147,7 @@ BEGIN
             SET res = 2;
             ROLLBACK;
 	END; 
-
-      set existe = null;
-      select count(`FKidZonaTrabajo`) into existe from planemergencia WHERE `FKidZonaTrabajo`=p_FKidZonaTrabajo;
-         IF(existe = 1) THEN
+     
          START TRANSACTION;
          UPDATE `PlanEmergencia` SET `actividad`=p_actividad,`direccion`= p_direccion,`personaContactoGeneral`=p_personaContactoGeneral,
          `numeroTelefono`=p_numeroTelefono,`numeroFax`= p_numeroFax,`notificaciones`=p_notificaciones,`categoriaNFPA`=p_categoriaNFPA,`usoInstalaciones`=p_usoInstalaciones,`horarioJornada`=p_horarioJornada,
@@ -1159,18 +1155,8 @@ BEGIN
            `presenciaEstudiantil` = p_presenciaEstudiantil   where `FKidZonaTrabajo`=p_FKidZonaTrabajo;   
 
         COMMIT;
-        -- SUCCESS       
-     ELSE
-        START TRANSACTION;       
-        INSERT INTO `PlanEmergencia`(`FKidZonaTrabajo`,`actividad`,`direccion`,`personaContactoGeneral`,`numeroFax`,`notificaciones`,
-        `categoriaNFPA`,`usoInstalaciones`,`horarioJornada`,`seguridadInstitucional`,`servicioConsegeria`,`personalAdministrativo`,`personalAcademico`,
-        `presenciaEstudiantil`) VALUES (p_FKidZonaTrabajo, p_actividad , p_direccion , p_personaContactoGeneral , p_numeroFax , p_notificaciones ,
-         p_categoriaNFPA , p_usoInstalaciones , p_horarioJornada , p_seguridadInstitucional , p_servicioConsegeria , p_personalAdministrativo , p_personalAcademico ,
-         p_presenciaEstudiantil );
-         
-        COMMIT;
         -- SUCCESS         
-   END IF;
+
          SET res = 0;
 END
 ;;
@@ -1224,3 +1210,58 @@ END
 DELIMITER ;
 
 -- call tipo_poblacion(1,'1','1',1,'1',@res);
+
+-- ----------------------------
+-- Proceso datos generales
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `datos_Instalaciones`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `datos_Instalaciones`(
+ IN `p_FKidZonaTrabajo` int, IN `p_instalacionesDensidadOcupacion` varchar(150),
+ IN `p_instalacionesAreaConstruccion` varchar(150), IN `p_instalacionesInstalaciones` varchar(150),
+ IN `p_instalacionesCaracteristicasZona` varchar(150), IN `p_instalacionesTopografia` varchar(150),
+ IN `p_instalacionesNivelTerreno` varchar(150), IN `p_instalacionesColindates` varchar(150),
+ IN `p_elementosConstructivosTipoConstruccion` varchar(150), IN `p_elementosConstructivosAntiguedad` varchar(150),
+ IN `p_elementosConstructivosCimientos` varchar(150), IN `p_elementosConstructivosEstructura` varchar(150),
+IN `p_elementosConstructivosParedes` varchar(150), IN `p_elementosConstructivosEntrepiso` varchar(150),
+IN `p_elementosConstructivosTecho` varchar(150), IN `p_elementosConstructivosCielos` varchar(150),
+IN `p_elementosConstructivosPisos` varchar(150), IN `p_elementosConstructivosAreaParqueo` varchar(150),
+IN `p_elementosConstructivosSistemaAguaPotable` varchar(150), IN `p_elementosConstructivosAlcantarilladoSanitario` varchar(150),
+IN `p_elementosConstructivosAlcantarilladoPluvial` varchar(150), IN `p_elementosConstructivosSistemaElectrico` varchar(150),
+IN `p_elementosConstructivosSistemaTelefonico` varchar(150),
+IN `p_elementosConstructivosOtros` varchar(150), OUT `res` TINYINT  UNSIGNED)
+ BEGIN           
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+     
+         START TRANSACTION;
+         UPDATE `PlanEmergencia` SET `instalacionesDensidadOcupacion`=p_instalacionesDensidadOcupacion,`instalacionesAreaConstruccion`=p_instalacionesAreaConstruccion,
+        `instalacionesInstalaciones`=p_instalacionesInstalaciones,`instalacionesCaracteristicasZona`=p_instalacionesCaracteristicasZona,
+        `instalacionesTopografia`=p_instalacionesTopografia,`instalacionesNivelTerreno`=p_instalacionesNivelTerreno,`instalacionesColindates`=p_instalacionesColindates,
+         `elementosConstructivosTipoConstruccion`=p_elementosConstructivosTipoConstruccion,`elementosConstructivosAntiguedad`=p_elementosConstructivosAntiguedad,
+         `elementosConstructivosCimientos`=p_elementosConstructivosCimientos,`elementosConstructivosEstructura`=p_elementosConstructivosEstructura,
+        `elementosConstructivosParedes`=p_elementosConstructivosParedes,`elementosConstructivosEntrepiso`=p_elementosConstructivosEntrepiso,`elementosConstructivosTecho`=p_elementosConstructivosTecho,
+        `elementosConstructivosCielos`=p_elementosConstructivosCielos,`elementosConstructivosPisos`=p_elementosConstructivosPisos,`elementosConstructivosAreaParqueo`=p_elementosConstructivosAreaParqueo,
+        `elementosConstructivosSistemaAguaPotable`=p_elementosConstructivosSistemaAguaPotable,`elementosConstructivosAlcantarilladoSanitario`=p_elementosConstructivosAlcantarilladoSanitario,
+        `elementosConstructivosAlcantarilladoPluvial`=p_elementosConstructivosAlcantarilladoPluvial,`elementosConstructivosSistemaElectrico`=p_elementosConstructivosSistemaElectrico,
+        `elementosConstructivosSistemaTelefonico`=p_elementosConstructivosSistemaTelefonico,`elementosConstructivosOtros`=p_elementosConstructivosOtros WHERE  `FKidZonaTrabajo`=p_FKidZonaTrabajo;   
+
+        COMMIT;
+        -- SUCCESS         
+
+         SET res = 0;
+END
+;;
+DELIMITER ;
+-- call datos_Instalaciones(1,'1','1',1,'1',@res);

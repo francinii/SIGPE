@@ -186,7 +186,23 @@ Array.prototype.map = function(fun)
 var cargando = '<div style="text-align:center; top: 50px;"><img src="img/loader_circle.gif"/><div>';
 var cargando_bar = '<div style="text-align:center"><img src="img/loader_bar.gif"/><div>';
 
-function OpcionMenu(opcion, parametros) {
+function OpcionMenu(opcion, parametros){
+    if (cambios) {         
+    jConfirm("Desea continuar sin guardar los cambios", "cambios sin guardar", function (r) {
+        if (r) {
+            cambios=0;
+          OpcionMenuPasar(opcion, parametros);
+        }
+    });
+
+    } 
+    else {
+       OpcionMenuPasar(opcion, parametros);
+    }
+    
+}
+
+function OpcionMenuPasar(opcion, parametros) {    
     var page = document.getElementById('container');
     var ajax = NuevoAjax();
     var page_dir = document.getElementById("cds_domain_locate").value;

@@ -46,7 +46,7 @@ function guardarDatosGenerales(idCentro, pasar) {
             //alert(response); //DEBUG
             if (response == 0) {
                 jAlert("Guardado  con exito", "Exito");
-                cambios=0;
+                datosGuardados();
                 if (pasar) {                    
                     OpcionMenu('mod/planEmergencia/plan_emergencia_actividades.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
                 }

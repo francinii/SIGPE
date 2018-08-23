@@ -60,6 +60,8 @@
 <!-- Plan de emergencia actividades-->
 <script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_actividades.js"></script>
 
+<!-- Plan de emergencia actividades-->
+<script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_instalaciones.js"></script>
 
 <!-- Plan de emergencia datos generales -->
 <script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_menu.js"></script>

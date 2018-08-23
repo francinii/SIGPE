@@ -21,95 +21,95 @@ document.getElementById("tituloGeneral").innerHTML="<?=$nombreCentro?>";
         <h2><?= $vocab["datos_generares_Titulo"] ?></h2>
         <p><?= $vocab["datos_generares_Desc"] ?></p>
     </div>
-    <div class="col-lg-8 col-md-8 col-sm-11 col-xs-12">
+    <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
         <form method="post" action="">
             <div class="form-group row">
-                <label for="institucion" class="col-sm-2 col-form-label"><?= $vocab["datos_generares_nombre"] ?></label>
-                <div class="col-sm-10">
+                <label for="institucion" class="col-sm-3 col-form-label"><?= $vocab["datos_generares_nombre"] ?></label>
+                <div class="col-sm-9">
                     <input type="text"  class="form-control cambios" id="institucion" readonly value="<?=$nombreCentro ?>">                                 
                 </div>
             </div>
             <div class="form-group row">
-                <label for="actividad" class="col-sm-2 col-form-label"><?= $vocab["datos_generares_actividad"] ?></label>
-                <div class="col-sm-10">
+                <label for="actividad" class="col-sm-3 col-form-label"><?= $vocab["datos_generares_actividad"] ?></label>
+                <div class="col-sm-9">
                     <input type="text"  class="form-control cambios" id="actividad" value="<?= ( count($res) > 0) ? $res[0]['actividad'] : ""; ?>">                                 
                 </div>
             </div>
             <div class="form-group row">
-                <label for="direccion" class="col-sm-2 col-form-label"><?= $vocab["datos_generares_dirección"] ?></label>
-                <div class="col-sm-10">
+                <label for="direccion" class="col-sm-3 col-form-label"><?= $vocab["datos_generares_dirección"] ?></label>
+                <div class="col-sm-9">
                     <input type="text"  class="form-control cambios" id="direccion" value="<?= ( count($res) > 0) ? $res[0]['direccion'] : ""; ?>">                                 
                 </div>
             </div>
             <div class="form-group row">
-                <label for="conctacto_general" class="col-sm-2 col-form-label"><?= $vocab["datos_generares_contacto"] ?></label>
-                <div class="col-sm-10">
+                <label for="conctacto_general" class="col-sm-3 col-form-label"><?= $vocab["datos_generares_contacto"] ?></label>
+                <div class="col-sm-9">
                     <input type="text"  class="form-control cambios" id="conctacto_general" value="<?= ( count($res) > 0) ? $res[0]['personaContactoGeneral'] : ""; ?>">                                 
                 </div>
             </div>
             <div class="form-group row">
-                <label for="telefono" class="col-sm-2 col-form-label"><?= $vocab["datos_generares_teléfono"] ?></label>
-                <div class="col-sm-10">
+                <label for="telefono" class="col-sm-3 col-form-label"><?= $vocab["datos_generares_teléfono"] ?></label>
+                <div class="col-sm-9">
                     <input type="text"  class="form-control cambios" id="telefono" value="<?= ( count($res) > 0) ? $res[0]['numeroTelefono'] : ""; ?>">                                 
                 </div>
             </div>
             <div class="form-group row">
-                <label for="fax" class="col-sm-2 col-form-label"><?= $vocab["datos_generares_fax"] ?></label>
-                <div class="col-sm-10">
+                <label for="fax" class="col-sm-3 col-form-label"><?= $vocab["datos_generares_fax"] ?></label>
+                <div class="col-sm-9">
                     <input type="text"  class="form-control cambios" id="fax" value="<?= ( count($res) > 0) ? $res[0]['numeroFax'] : ""; ?>">                                 
                 </div>
             </div>
             <div class="form-group row">
-                <label for="email" class="col-sm-2 col-form-label"><?= $vocab["datos_generares_Correo"] ?></label>
-                <div class="col-sm-10">
+                <label for="email" class="col-sm-3 col-form-label"><?= $vocab["datos_generares_Correo"] ?></label>
+                <div class="col-sm-9">
                     <input type="text"  class="form-control cambios" id="email" value="<?= ( count($res) > 0) ? $res[0]['notificaciones'] : ""; ?>">                                 
                 </div>
             </div>
             <div class="form-group row">
-                <label for="NFPA" class="col-sm-2 col-form-label"><?= $vocab["datos_generares_NFPA"] ?></label>
-                <div class="col-sm-10">
+                <label for="NFPA" class="col-sm-3 col-form-label"><?= $vocab["datos_generares_NFPA"] ?></label>
+                <div class="col-sm-9">
                     <input type="text"  class="form-control cambios" id="NFPA" value="<?= ( count($res) > 0) ? $res[0]['categoriaNFPA'] : ""; ?>">                                 
                 </div>
             </div>
             <div class="form-group row">
-                <label for="uso" class="col-sm-2 col-form-label"><?= $vocab["datos_generares_instalaciones"] ?></label>
-                <div class="col-sm-10">
+                <label for="uso" class="col-sm-3 col-form-label"><?= $vocab["datos_generares_instalaciones"] ?></label>
+                <div class="col-sm-9">
                     <input type="text"  class="form-control cambios" id="uso" value="<?= ( count($res) > 0) ? $res[0]['usoInstalaciones'] : ""; ?>">                                 
                 </div>
             </div>
             <div class="form-group row">
-                <label for="horarios" class="col-sm-2 col-form-label"><?= $vocab["datos_generares_Horarios"] ?></label>
-                <div class="col-sm-10">
+                <label for="horarios" class="col-sm-3 col-form-label"><?= $vocab["datos_generares_Horarios"] ?></label>
+                <div class="col-sm-9">
                     <input type="text"  class="form-control cambios" id="horarios" value="<?= ( count($res) > 0) ? $res[0]['horarioJornada'] : ""; ?>">                                 
                 </div>
             </div>
             <div class="form-group row">
-                <label for="seguridad" class="col-sm-2 col-form-label"><?= $vocab["datos_generares_Seguridad"] ?></label>
-                <div class="col-sm-10">
+                <label for="seguridad" class="col-sm-3 col-form-label"><?= $vocab["datos_generares_Seguridad"] ?></label>
+                <div class="col-sm-9">
                     <input type="text"  class="form-control cambios" id="seguridad" value="<?= ( count($res) > 0) ? $res[0]['seguridadInstitucional'] : ""; ?>">                                 
                 </div>
             </div>
             <div class="form-group row">
-                <label for="servicio" class="col-sm-2 col-form-label"><?= $vocab["datos_generares_Servicio"] ?></label>
-                <div class="col-sm-10">
+                <label for="servicio" class="col-sm-3 col-form-label"><?= $vocab["datos_generares_Servicio"] ?></label>
+                <div class="col-sm-9">
                     <input type="text"  class="form-control cambios" id="servicio" value="<?= ( count($res) > 0) ? $res[0]['servicioConsegeria'] : ""; ?>">                                 
                 </div>
             </div>
             <div class="form-group row">
-                <label for="administracion" class="col-sm-2 col-form-label"><?= $vocab["datos_generares_Administrativo"] ?></label>
-                <div class="col-sm-10">
+                <label for="administracion" class="col-sm-3 col-form-label"><?= $vocab["datos_generares_Administrativo"] ?></label>
+                <div class="col-sm-9">
                     <input type="text"  class="form-control cambios" id="administracion" value="<?= ( count($res) > 0) ? $res[0]['personalAdministrativo'] : ""; ?>">                                 
                 </div>
             </div>
             <div class="form-group row">
-                <label for="academico" class="col-sm-2 col-form-label"><?= $vocab["datos_generares_Académico"] ?></label>
-                <div class="col-sm-10">
+                <label for="academico" class="col-sm-3 col-form-label"><?= $vocab["datos_generares_Académico"] ?></label>
+                <div class="col-sm-9">
                     <input type="text"  class="form-control cambios" id="academico" value="<?= ( count($res) > 0) ? $res[0]['personalAcademico'] : ""; ?>">                                 
                 </div>
             </div>
             <div class="form-group row">
-                <label for="estudiantil" class="col-sm-2 col-form-label"><?= $vocab["datos_generares_Estudiantil"] ?></label>
-                <div class="col-sm-10">
+                <label for="estudiantil" class="col-sm-3 col-form-label"><?= $vocab["datos_generares_Estudiantil"] ?></label>
+                <div class="col-sm-9">
                     <input type="text"  class="form-control cambios" id="estudiantil" value="<?= ( count($res) > 0) ? $res[0]['presenciaEstudiantil'] : ""; ?>">                                 
                 </div>
             </div>
@@ -130,7 +130,7 @@ document.getElementById("tituloGeneral").innerHTML="<?=$nombreCentro?>";
     </div>
 </div>
 <script>
-IniciarGuardarCambios();
+///IniciarGuardarCambios();
 </script>
 
 

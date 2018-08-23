@@ -21,15 +21,16 @@ if (count($res) <= 0) {
         $vocab["actividades_Estudiantes"], $vocab["actividades_Visitantes"]);
 }
 ?>
-<script>
-    var idCentro =<?= $idCentro ?>;
-    var nombreCentro = "<?= $nombreCentro ?>";
+<script>   
     document.getElementById("tituloGeneral").innerHTML = "<?= $nombreCentro ?>";
 </script>
-<div class="container">
+<div class="container">   
+       
     <div class="well well-sm">
+      
         <h2><?= $vocab["actividades_Titulo"] ?></h2>
         <p><?= $vocab["actividades_Titulo_Desc"] ?></p>
+             
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="dataTables_wrapper form-inline dt-bootstrap">
@@ -74,9 +75,7 @@ if (count($res) <= 0) {
 <?php } ?>
     </div>   
 </div>
-<script>
-    IniciarGuardarCambios();
-</script>
+
 
 
 
