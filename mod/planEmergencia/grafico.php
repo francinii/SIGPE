@@ -21,7 +21,7 @@ $legend = JSON_decode($colores);
 //$legend = array("APR", "RPR", "RJ", "NSP");
 $colors = array( "#828282","#5cb85c", "#f0ad4e","#d9534f");
 
-$graph = new PieGraph(400, 400);
+$graph = new PieGraph(350, 350);
 $graph->SetShadow();
 
 $graph->title->Set("Tipos de amenazas");
