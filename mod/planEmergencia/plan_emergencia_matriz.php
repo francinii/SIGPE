@@ -171,7 +171,10 @@ $matriz = seleccion($sql);
                                     <?php if ($k != 0 && $j != 0) { ?>
                                     <tr>
                                     <?php } ?>                                   
-                                    <td class ="categoria"> <?= $categoriasPorTipo[$k]['descripcion']; ?></td>
+                                    <td class ="categoria"> <?= $categoriasPorTipo[$k]['descripcion']; ?>
+                                        <input type="hidden" class ="idCategoria" value="<?= $categoriasPorTipo[$k]['id']; ?>" />
+                                    </td>
+
                                     <?php $registroMatriz = buscarRegistro($matriz, $categoriasPorTipo[$k]['id']); ?>  
                                     <td> <div class="form-group">                                            
                                             <input  id="type-text" name="type-text" class="form-control fuente" placeholder="fuente"value ="<?= $registroMatriz['fuente'] ?>"  title="propiedad title" type="text">
@@ -188,7 +191,7 @@ $matriz = seleccion($sql);
                                     $criterio = calcularCriterioAlertaColor($registroMatriz, $vocab)['criterio'];
                                     $criterios[] = $criterio; //arreglo que guardar los criterios (VERDE, NINGUNA,AMARILLA,ROJA)
                                     ?>                                    
-                                    <td class = "criterioAlerta" style="background-color: <?= calcularCriterioAlertaColor($registroMatriz)['color']; ?> "><?= $criterio ?></td>
+                                    <td class = "criterioAlerta" style="background-color: <?= calcularCriterioAlertaColor($registroMatriz, $vocab)['color']; ?> "><?= $criterio ?></td>
                                 </tr>
                             <?php } ?>
                         <?php } else { ?>
@@ -201,10 +204,9 @@ $matriz = seleccion($sql);
     </table>
     <br/>
     <div class="text-center">
-        <span class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/new_zona_trabajo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["matriz_title"] ?></a></span>
-        <span class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:generaVectorMatriz();"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["matriz_title"] ?></a></span>
+        <span class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:generaVectorMatriz('<?= $nombreCentro ?>','<?= $idCentro ?>');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["matriz_title"] ?></a></span>
         <?php if ($criterios != null) { ?>   
-            <span class="text-center"><a class="btn btn-success" name="" onclick="javascript:OpcionMenu('mod/planEmergencia/plan_emergencia_matriz_grafico.php?', 'nombreCentro=<?= $nombreCentro ?>&idCentro=<?= $idCentro ?>&criterios=' + JSON.stringify(crearVectorValores()));"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["graficar_matriz"] ?></a></span>
+            <span class="text-center"><a class="btn btn-warning" name="" onclick="javascript:OpcionMenu('mod/planEmergencia/plan_emergencia_matriz_grafico.php?', 'nombreCentro=<?= $nombreCentro ?>&idCentro=<?= $idCentro ?>&criterios=' + JSON.stringify(crearVectorValores()));"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["graficar_matriz"] ?></a></span>
         <?php } ?>
     </div>
 

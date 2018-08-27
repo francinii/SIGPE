@@ -88,25 +88,46 @@ function crearVectorValores() {
 
 //Crea un vector con los datos de la tabla correspondiente a los colores de la 
 //matriz
-function generaVectorMatriz() {
+function generaVectorMatriz(nombreCentro, idCentro) {
     var matriz = jQuery("#matriz_riesgos tbody tr");
+    var arreglo = new Array();
     matriz.each(function () {
-       var fuente = jQuery(this).find("td div input.fuente").val();
-       var probabilidad = jQuery(this).find("td.criterioProbabilidad option:selected").val();
-       var gravedad =  jQuery(this).find("td.criterioGravedad option:selected").val();
-       var consecuencia = jQuery(this).find("td.criterioConsecuencia option:selected").val();
-       
-       
-     });
-//    var tr = jQuery(); //td hermano al td del selector
-//    var criterioTipoAlerta = tr.lastElementChild; //td criterio de tipo de alerta
-//    var valorTipoAlerta = criterioTipoAlerta.previousElementSibling;  //td valor de tipo de alerta
-//    var valorConsecuencia = valorTipoAlerta.previousElementSibling.previousElementSibling;
-//    var valorGravedad = valorConsecuencia.previousElementSibling.previousElementSibling;
-//    var valorProbabilidad = valorGravedad.previousElementSibling.previousElementSibling;
-//    //criterioTipoAlerta    
-//    var probabilidad = parseInt(valorProbabilidad.firstElementChild.value);
-//    var gravedad = parseInt(valorGravedad.firstElementChild.value);
-//    var consecuencia = parseInt(valorConsecuencia.firstElementChild.value);
-
+        var categoria = jQuery(this).find("td input.idCategoria").val();
+        var fuente = jQuery(this).find("td div input.fuente").val();
+        var probabilidad = jQuery(this).find("td.criterioProbabilidad option:selected").val();
+        var gravedad = jQuery(this).find("td.criterioGravedad option:selected").val();
+        var consecuencia = jQuery(this).find("td.criterioConsecuencia option:selected").val();
+        arreglo.push({"id": categoria, "fuente": fuente, "probabilidad": probabilidad, "gravedad": gravedad, "consecuencia": consecuencia});
+    });
+    console.log(arreglo);
+    var loading = document.getElementById('loading_container');
+    loading.innerHTML = cargando_bar;
+    var ajax = NuevoAjax();
+    var _values_send =
+            'idCentro=' + idCentro +
+            '&matriz=' + JSON.stringify(arreglo);
+    var _URL_ = "mod/planEmergencia/ajax_plan_emergencia_matriz.php?";
+    //alert(_URL_ + _values_send); //DEBUG
+    ajax.open("GET", _URL_ + _values_send, true);
+    ajax.onreadystatechange = function () {
+        if (ajax.readyState == 1) { //Nada
+        } else if (ajax.readyState == 4) {
+            var response = ajax.responseText;
+            //alert(response); //DEBUG
+            if (response == 0) {
+                jAlert("Origen añadido con exito", "Exito");
+                OpcionMenu('mod/planEmergencia/plan_emergencia_matriz.php?', '');
+            } else if (response == 1 || response == 2) {
+                jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
+            } else if (response == 3) {
+                jAlert("El categoria ya existe.\n Consulte a la USTDS", "Usuario ya existe");
+            } else {
+                jAlert("Ocurrio un error inesperado.\n Consulte a la USTDS", "Error inesperado");
+            }
+        }
+    };
+    ajax.send(null);
+    loading.innerHTML = "";
 }
+
+

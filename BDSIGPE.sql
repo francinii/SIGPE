@@ -1270,3 +1270,36 @@ END
 ;;
 DELIMITER ;
 -- call datos_Instalaciones(1,'1','1',1,'1',@res);
+
+
+
+
+-- ----------------------------
+-- Proceso insertar y actualizar matriz de riesgos update_matriz
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `update_matriz`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_matriz`(IN `p_id` int,IN `p_idPlan` int, IN `p_fuente` varchar(150), IN `p_probabilidad` int, IN `p_gravedad` int, IN `p_consecuencia` int OUT `res` TINYINT  UNSIGNED)
+BEGIN
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = -1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = -2;
+    ROLLBACK;
+	END;
+
+            START TRANSACTION;                
+                    INSERT INTO `matriz`(FKidCategoriaTipoAmenaza,FKidPlanEmergencias, fuente,probabilidad, gravedad, consecuenciaAmenaza) VALUES (p_id, p_idPlan,p_fuente,p_probabilidad,p_gravedad, p_consecuencia);
+                                 
+            COMMIT;
+            -- SUCCESS
+END
+;;
+DELIMITER ;
