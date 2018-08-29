@@ -1178,14 +1178,13 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `tipo_poblacion`(IN `p_FKidPlanEmerg
  IN `p_descripcion` varchar(150), IN `p_total` int, IN `p_representacionDe` varchar(150),
 OUT `res` TINYINT  UNSIGNED)
 BEGIN   
-        declare existe Integer;
-	DECLARE EXIT HANDLER FOR SQLEXCEPTION
-	BEGIN
+    declare existe Integer;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
 	-- ERROR
     SET res = 1;
     ROLLBACK;
-	END;
-
+    END;
   DECLARE EXIT HANDLER FOR SQLWARNING
 	BEGIN
 	-- ERROR
@@ -1198,7 +1197,6 @@ BEGIN
          IF(existe = 1) THEN
          START TRANSACTION;
          UPDATE `TipoPoblacion` SET `descripcion`=p_descripcion,`total`=p_total,`representacionDe`=p_representacionDe WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias and `tipoPoblacion`=p_tipoPoblacion;  
-
         COMMIT;
         -- SUCCESS       
      ELSE
@@ -1279,8 +1277,10 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_matriz`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_matriz`(IN `p_id` int,IN `p_idPlan` int, IN `p_fuente` varchar(150), IN `p_probabilidad` int, IN `p_gravedad` int, IN `p_consecuencia` int OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_matriz`(IN `p_id` int,IN `p_idZona` int, IN `p_fuente` varchar(150), IN `p_probabilidad` int, IN `p_gravedad` int, IN `p_consecuencia` int, OUT `res` TINYINT  UNSIGNED)
 BEGIN
+	declare existe Integer;
+    declare idPlanEmergencia Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 		-- ERROR
@@ -1294,12 +1294,25 @@ BEGIN
     SET res = -2;
     ROLLBACK;
 	END;
-
-            START TRANSACTION;                
-                    INSERT INTO `matriz`(FKidCategoriaTipoAmenaza,FKidPlanEmergencias, fuente,probabilidad, gravedad, consecuenciaAmenaza) VALUES (p_id, p_idPlan,p_fuente,p_probabilidad,p_gravedad, p_consecuencia);
-                                 
-            COMMIT;
-            -- SUCCESS
+    
+	SET existe = null;    
+    SET idPlanEmergencia = null;    
+    select `id` into idPlanEmergencia from PlanEmergencia WHERE  `FKidZonaTrabajo`=p_idZona;
+    select count(`FKidCategoriaTipoAmenaza`) into existe from Matriz WHERE  `FKidCategoriaTipoAmenaza`=p_id and `FKidPlanEmergencias`=idPlanEmergencia;
+    IF (existe = 1) THEN
+    START TRANSACTION;
+         UPDATE `Matriz` SET `fuente`=p_fuente,`probabilidad`=p_probabilidad,`gravedad`=p_gravedad,`consecuenciaAmenaza`=p_consecuencia WHERE `FKidCategoriaTipoAmenaza`=p_id and `FKidPlanEmergencias`=idPlanEmergencia;  
+        SET res = 0;
+        COMMIT;
+     ELSE
+        START TRANSACTION;       
+            INSERT INTO `Matriz`(FKidCategoriaTipoAmenaza,FKidPlanEmergencias, fuente,probabilidad, gravedad, consecuenciaAmenaza) VALUES (p_id, idPlanEmergencia,p_fuente,p_probabilidad,p_gravedad, p_consecuencia);
+       SET res = 0;
+       COMMIT;
+        -- SUCCESS         
+   END IF;
+  
 END
 ;;
 DELIMITER ;
+

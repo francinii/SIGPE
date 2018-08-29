@@ -88,7 +88,7 @@ function crearVectorValores() {
 
 //Crea un vector con los datos de la tabla correspondiente a los colores de la 
 //matriz
-function generaVectorMatriz(nombreCentro, idCentro) {
+function generaVectorMatriz(nombreCentro, idCentro, clave) {
     var matriz = jQuery("#matriz_riesgos tbody tr");
     var arreglo = new Array();
     matriz.each(function () {
@@ -99,12 +99,12 @@ function generaVectorMatriz(nombreCentro, idCentro) {
         var consecuencia = jQuery(this).find("td.criterioConsecuencia option:selected").val();
         arreglo.push({"id": categoria, "fuente": fuente, "probabilidad": probabilidad, "gravedad": gravedad, "consecuencia": consecuencia});
     });
-    console.log(arreglo);
     var loading = document.getElementById('loading_container');
     loading.innerHTML = cargando_bar;
     var ajax = NuevoAjax();
     var _values_send =
             'idCentro=' + idCentro +
+            '&nombreCentro=' + nombreCentro +
             '&matriz=' + JSON.stringify(arreglo);
     var _URL_ = "mod/planEmergencia/ajax_plan_emergencia_matriz.php?";
     //alert(_URL_ + _values_send); //DEBUG
@@ -115,12 +115,14 @@ function generaVectorMatriz(nombreCentro, idCentro) {
             var response = ajax.responseText;
             //alert(response); //DEBUG
             if (response == 0) {
-                jAlert("Origen añadido con exito", "Exito");
-                OpcionMenu('mod/planEmergencia/plan_emergencia_matriz.php?', '');
+                jAlert("Matriz guardada con exito", "Exito");
+                if (clave == 0) {                    
+                    OpcionMenu('mod/planEmergencia/plan_emergencia_matriz.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
+                }else {
+                    OpcionMenu('mod/planEmergencia/plan_emergencia_matriz_grafico.php?', 'nombreCentro='+nombreCentro+'&idCentro='+idCentro+'&criterios=' + JSON.stringify(crearVectorValores()));
+                }
             } else if (response == 1 || response == 2) {
                 jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
-            } else if (response == 3) {
-                jAlert("El categoria ya existe.\n Consulte a la USTDS", "Usuario ya existe");
             } else {
                 jAlert("Ocurrio un error inesperado.\n Consulte a la USTDS", "Error inesperado");
             }
