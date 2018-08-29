@@ -16,8 +16,11 @@ $ip .= $mySessionController->getVar("cds_locate");
 
 
 /* * ********************************************************************************************** */
+$sql = "SELECT id, nombreSede FROM Sede";
+$sede = seleccion($sql);
+
 $start = "0";
-$sql = "SELECT `id`, `nombreZonaTrabajo`FROM `ZonaTrabajo`,(SELECT `FKidZona` From UsuarioZona where `FKidUsuario` = '" . $user_id . "') UsuZona WHERE ZonaTrabajo.id = UsuZona.FKidZona  ";
+$sql = "SELECT `id`, `nombreZonaTrabajo`FROM `ZonaTrabajo`,(SELECT `FKidZona` From UsuarioZona where `FKidUsuario` = '" . $user_id . "') UsuZona WHERE ZonaTrabajo.id = UsuZona.FKidZona  and isActivo=1";
 
 $res = seleccion($sql);
 ?>
@@ -43,6 +46,21 @@ $res = seleccion($sql);
             <div class="form-group">
                 <h2 style="text-align: center;"><?= $vocab["incio_labe"]  ?></h2>
                 <br/>
+                <h3 style="text-align: center;"><?= $vocab["zona_trabajo_sede"] ?></h3>
+                <select id="selectInicio" class="form-control">
+                    <?php 
+                    if (count($sede) > 0) {
+                        for ($i = 0; $i < count($sede); $i++) {               
+                                ?>
+                                <option value='<?= $sede[$i]['id'] ?>' selected><?= $sede[$i]['nombreSede'] ?></option>
+                                <?php                             
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+             <div class="form-group">                
+                <h3 style="text-align: center;"><?= $vocab["zona_trabajo_title"] ?></h3>
                 <select id="selectInicio" class="form-control">
                     <?php 
                     if (count($res) > 0) {

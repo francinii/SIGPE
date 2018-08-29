@@ -43,7 +43,7 @@ $vocab["menu_admin_tipo_amenaza"]      = "Tipo de amenaza";
 $vocab["menu_admin_categoria_amenaza"] = "Categor&iacute;a de amenaza";
 $vocab["menu_admin_capitulos"]         = "Cap&iacute;tulos";
 $vocab["menu_admin_subcapitulos"]      = "Subcap&iacute;tulos";
-$vocab["menu_admin_zona_trabajo"]      = "Zonas de trabajo";
+$vocab["menu_admin_zona_trabajo"]      = "Centro de trabajo";
 $vocab["menu_admin_formulario"]        = "Formulario";
 $vocab["menu_planes_emergencia"]       = "Plan de emergencia";
 $vocab["menu_admin_sede"]              = "Sedes";
@@ -153,6 +153,8 @@ $vocab["zona_trabajo_id_Desc"]          = "Id del capitulo";
 $vocab["zona_trabajo_Descripcion"]      = "Descripción del centro de trabajo";
 $vocab["zona_trabajo_activar"]           = "Activar centro de trabajo";
 $vocab["desc_zona_trabajo_isActivo"]   = "Active o desactive el centro de trabajo";
+$vocab["zona_trabajo_sede"]            = "Sede";
+$vocab["zona_trabajo_sede_Desc"]            = "Sede a la que pertenece el centro";
 
 //***************************** Modulo Sedes******************************//
 $vocab["sede_title"]               = "Sedes";

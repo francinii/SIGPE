@@ -6,11 +6,15 @@ $user_rol = $mySessionController->getVar("rol");
 
 $view_mode = $_GET['view_mode'];
 $id = $_GET['id'];
-$sql = "SELECT  id, nombreZonaTrabajo,descripcion,isActivo FROM ZonaTrabajo  WHERE id =" . $id;
+$sql = "SELECT  id, nombreZonaTrabajo,FKidSede,descripcion,isActivo FROM ZonaTrabajo  WHERE id =" . $id;
 $res = seleccion($sql);
 //$sql = "SELECT id, nombre FROM sis_user";
 //$comb = seleccion($sql);
 //
+
+$sql = "SELECT id, nombreSede FROM Sede";
+$sede = seleccion($sql);
+
 $sql = "SELECT id, nombre FROM sis_user";
 $comb = seleccion($sql);
 
@@ -30,6 +34,15 @@ $usuarios = seleccion($sql);
                 <label  for="zona_trabajo_title"><?= $vocab["zona_trabajo_title"] ?></label>
                 <input <?= ($view_mode == 0) ? "readonly" : ""; ?> id="nombre" name="zona_trabajo_title" class="form-control" type="text" value="<?= $res[0]["nombreZonaTrabajo"] ?>" /> 
                 <p class="help-block"><small><?= $vocab["zona_trabajo_title_Desc"] ?></small></p> 
+            </div>
+            <div class="form-group">
+                <div><label  for=""><?= $vocab["zona_trabajo_sede"] ?> </label></div> 
+                <select  <?= ($view_mode == 0) ? "disabled" : ""; ?> class="form-control" id = "select_sede">
+                    <?php for ($i = 0; $i < count($sede); $i++) { ?>
+                        <option <?= ($res[0]['FKidSede']==$sede[$i]['id']) ? "selected " : ""; ?> value='<?= $sede[$i]['id'] ?>'><?= $sede[$i]['nombreSede'] ?></option>
+                    <?php } ?>
+                </select>
+                <p class="help-block"><small><?= $vocab["zona_trabajo_sede_Desc"] ?></small></p> 
             </div>
             <div class="form-group">
                 <label  for="descripcion"><?= $vocab["symbol_desc"] ?> </label>                
