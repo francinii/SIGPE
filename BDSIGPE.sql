@@ -13,6 +13,8 @@ id int  NOT NULL AUTO_INCREMENT,
 isActivo int,
 nombreZonaTrabajo varchar(150),
 descripcion varchar(150),
+longitud varchar(150),
+latitud varchar(150),
 PRIMARY KEY(id)
 );
 
@@ -151,7 +153,7 @@ FOREIGN KEY(FKidUsuario) REFERENCES sis_user(id),
 FOREIGN KEY(FKidZona) REFERENCES ZonaTrabajo(id)
 );
 
-
+-- para wamp en cada tabla ENGINE=INNODB;
 
 
 -- cambiar insert
@@ -160,6 +162,12 @@ INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`isActivo`,`nombreZonaTrabajo`,`descripcion
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,'Guanacaste','Zona ubicada en la region de Guanacaste');
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,'Alajuela','Zona ubicada en la region de Alajuela');
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,'Cartago','Zona ubicada en la region de Cartago');
+
+INSERT INTO `PlanEmergencia`( `FKidZonaTrabajo`) VALUES(1);
+INSERT INTO `PlanEmergencia`( `FKidZonaTrabajo`) VALUES(2);
+INSERT INTO `PlanEmergencia`( `FKidZonaTrabajo`) VALUES(3);
+INSERT INTO `PlanEmergencia`( `FKidZonaTrabajo`) VALUES(4);
+INSERT INTO `PlanEmergencia`( `FKidZonaTrabajo`) VALUES(5);
 
 INSERT INTO `BDSIGPE`.`OrigenAmenaza` (`descripcion`,`isActivo`) VALUES ('Natural',1);
 INSERT INTO `BDSIGPE`.`OrigenAmenaza` (`descripcion`,`isActivo`) VALUES ('Socio-Natural',1);

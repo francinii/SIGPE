@@ -9,7 +9,7 @@ $nombreCentro = $_GET['nombreCentro'];
 <script>
     var idCentro =<?= $idCentro ?>;
     var nombreCentro = "<?= $nombreCentro ?>";
-//    document.getElementById("tituloGeneral").innerHTML=nombreCentro;
+   document.getElementById("tituloGeneral").innerHTML="<?= $vocab["Menu_Datos_Plan"] ?>"+nombreCentro;
 </script>
 
 <br/>
@@ -38,6 +38,6 @@ $nombreCentro = $_GET['nombreCentro'];
 </div>
 <script>
     jQuery(document).ready(function () {
-        IniciarGuardarCambios('<?= $vocab["incio_Datos_sin_guardar"] ?>');
+        IniciarGuardarCambios('<?= $vocab["Menu_Datos_sin_guardar"] ?>');
     });
 </script>

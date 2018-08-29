@@ -122,7 +122,7 @@ var tagScript = '(?:<script.*?>)((\n|\r|.)*?)(?:<\/script>)';
  * Eval script fragment
  * @return String
  */
-String.prototype.evalScript = function()
+String.prototype.evalScript = function ()
 {
     return (this.match(new RegExp(tagScript, 'img')) || []).evalScript();
 };
@@ -130,7 +130,7 @@ String.prototype.evalScript = function()
  * strip script fragment
  * @return String
  */
-String.prototype.stripScript = function()
+String.prototype.stripScript = function ()
 {
     return this.replace(new RegExp(tagScript, 'img'), '');
 };
@@ -138,7 +138,7 @@ String.prototype.stripScript = function()
  * extract script fragment
  * @return String
  */
-String.prototype.extractXScript = function()
+String.prototype.extractXScript = function ()
 {
     var matchAll = new RegExp(tagScript, 'img');
     return (this.match(matchAll) || []);
@@ -148,14 +148,13 @@ String.prototype.extractXScript = function()
  * @param {string} extracted javascript code
  * @return String
  */
-Array.prototype.evalScript = function(extracted)
+Array.prototype.evalScript = function (extracted)
 {
-    var s = this.map(function(sr) {
+    var s = this.map(function (sr) {
         var sc = (sr.match(new RegExp(tagScript, 'im')) || ['', ''])[1];
         if (window.execScript) {
             window.execScript(sc);
-        }
-        else
+        } else
         {
             window.setTimeout(sc, 0);
         }
@@ -167,7 +166,7 @@ Array.prototype.evalScript = function(extracted)
  * @param {Function} fun
  * @return Function
  */
-Array.prototype.map = function(fun)
+Array.prototype.map = function (fun)
 {
     if (typeof fun !== "function") {
         return false;
@@ -186,28 +185,29 @@ Array.prototype.map = function(fun)
 var cargando = '<div style="text-align:center; top: 50px;"><img src="img/loader_circle.gif"/><div>';
 var cargando_bar = '<div style="text-align:center"><img src="img/loader_bar.gif"/><div>';
 
-function OpcionMenu(opcion, parametros){    
-    if (cambios) {         
-    jConfirm("Desea continuar sin guardar los cambios", "cambios sin guardar", function (r) {
-        if (r) {
-            cambios=0;
-          OpcionMenuPasar(opcion, parametros);
-        }
-    });
+function OpcionMenu(opcion, parametros) {
+    if (cambios) {
+        jConfirm("Desea continuar sin guardar los cambios", "cambios sin guardar", function (r) {
+            if (r) {
+                cambios = 0;
+                OpcionMenuPasar(opcion, parametros);
+            }
+        });
 
-    } 
-    else {
-       OpcionMenuPasar(opcion, parametros);
+    } else {
+        OpcionMenuPasar(opcion, parametros);
     }
-    
+
 }
 
-function OpcionMenuPasar(opcion, parametros) {    
+function OpcionMenuPasar(opcion, parametros) {
+   
+    
     var page = document.getElementById('container');
     var ajax = NuevoAjax();
     var page_dir = document.getElementById("cds_domain_locate").value;
     ajax.open("GET", page_dir + opcion + "&" + parametros, true);
-    ajax.onreadystatechange = function() {
+    ajax.onreadystatechange = function () {
         if (ajax.readyState == 1) {
             page.innerHTML = cargando;
         } else if (ajax.readyState == 4) {
@@ -215,10 +215,24 @@ function OpcionMenuPasar(opcion, parametros) {
             var out = ajax.responseText;
             page.innerHTML = out;
             scs.evalScript();
+             if ( typeof  nombreCentro !== 'undefined') {
+                   nombreCentro=null;
+                }
+                
+            jQuery(document).ready(function () {
+                if ( typeof nombreCentro === 'undefined') {
+                    document.getElementById("tituloGeneral").innerHTML = "";
+                }else if(nombreCentro==null){
+                    document.getElementById("tituloGeneral").innerHTML = "";
+                }
+            });
+
         }
     };
     ajax.send(null);
     window.scrollTo(0, 0);
+
+
 }
 
 /**
@@ -247,24 +261,24 @@ function is_chrome() {
 }
 
 
-(function() {
+(function () {
     var isBootstrapEvent = false;
     if (window.jQuery) {
         var all = jQuery('*');
-        jQuery.each(['hide.bs.dropdown', 
-            'hide.bs.collapse', 
-            'hide.bs.modal', 
+        jQuery.each(['hide.bs.dropdown',
+            'hide.bs.collapse',
+            'hide.bs.modal',
             'hide.bs.tooltip',
-            'hide.bs.popover'], function(index, eventName) {
-            all.on(eventName, function( event ) {
+            'hide.bs.popover'], function (index, eventName) {
+            all.on(eventName, function (event) {
                 isBootstrapEvent = true;
             });
         });
     }
     var originalHide = Element.hide;
     Element.addMethods({
-        hide: function(element) {
-            if(isBootstrapEvent) {
+        hide: function (element) {
+            if (isBootstrapEvent) {
                 isBootstrapEvent = false;
                 return element;
             }
