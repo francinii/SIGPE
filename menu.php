@@ -4,37 +4,38 @@ require 'functions.php';
 ?>
 <nav class="navbar navbar-inverse navbar-fixed-top" style="cursor: pointer;">
     <div class="container">
+  <a href="#" class="navbar-brand" id="tituloGeneral"></a>    
+        <div class="navbar-header col-sm-4">
+                
         
-            <div class="navbar-header col-sm-4">
-                <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
-                    <span class="sr-only">Alternar Navegación</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="#" class="navbar-brand"><?php echo $mySessionController->getVar("page_title") ?></a>          
+            <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                <span class="sr-only">Alternar Navegación</span>
+               
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
 
-            </div>
-            <div class="navbar-header col-sm-4">
 
-                <a href="#" class="navbar-brand" id="tituloGeneral"></a>          
-
-            </div>
-        
         <div class="navbar-collapse collapse" id="navbar" aria-expanded="false" style="height: 1px;">
-            <ul class="nav navbar-nav pull-right">
-                <li  class="nav-item "><a id="NombreUsuario"  href="#" class="navbar-brand"><span><?php echo $mySessionController->getVar("nombre") ?></a></span></li>
+            <ul class="nav navbar-nav " style="width:100%">
+               
+                <li class="nav-item" style="width: 55%;"><a class="nav-item" href="" ></a></li>
+                <li  class="nav-item">
+                    <a id="NombreUsuario"  href="#" class="navbar-brand"><span><?php echo $mySessionController->getVar("nombre") ?></a></span>
+                </li>
 
             </ul>
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav"  style="width:100%">
                 <!-- INICIO -->
                 <li><a onclick="javascript:OpcionMenu('mod/inicio.php?', '');"><span><i class="fa fa-home fa-inverse"></i> <?= $vocab["menu_home"] ?></span></a></li>
                 <!-- MODULOS DEL SISTEMA -->
                 <!-- ESPACIO -->
-                <li><a href="" style="width: 150px;"></a></li>
+                <li style="width: 10%;"><a href="" style="width: 150px;"></a></li>
                 <!-- PERFIL -->
                 <li><a href='#' onclick="javascript:OpcionMenu('mod/admin/users/edit_perfil.php?', '');"><span> <i class="fa fa-user fa-inverse"></i> <?= $vocab["menu_perfil"] ?></span></a></li>
-               
+
 
                 <!-- ADMINISTRACION -->
                 <?php if (check_permiso($mod1, $act1, $user_rol)) { ?>
@@ -121,7 +122,7 @@ require 'functions.php';
                                     </ul>
                                 </li>
                             <?php } ?> 
-                            
+
                             <!-- ADMINISTRAR CAPITULOS -->
                             <?php if (check_permiso($mod1, $act1, $user_rol)) { ?>
                                 <li class="dropdown-submenu">
