@@ -12,7 +12,7 @@ $res = seleccion($sql);
 //$comb = seleccion($sql);
 //
 
-$sql = "SELECT id, nombreSede FROM Sede";
+$sql = "SELECT id, nombreSede FROM Sede where isActivo=1";
 $sede = seleccion($sql);
 
 $sql = "SELECT id, nombre FROM sis_user";

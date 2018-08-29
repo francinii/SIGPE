@@ -2,6 +2,12 @@
  *  Valida la información de la zona de la amenaza
  * @returns {boolean}
  */
+function cambiarCentro(){
+    var find_key = jQuery("#select_capitulos").val();
+    OpcionMenu('mod/adminPlanEmergencia/adminSubcapitulos/list_subcapitulos.php?', 'find_key='+find_key)
+}
+
+
 function validate_zona_trabajo() {
     var nombre = document.getElementById('nombre');
     if (nombre.value == "") {
