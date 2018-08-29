@@ -928,6 +928,36 @@ END
 ;;
 DELIMITER ;
 
+
+-- ----------------------------
+-- Proceso actualizar zona de trabajo
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `update_sede`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_sede`(IN `p_id` int, IN `p_nombre` varchar(150),IN `p_activo` int, IN `p_descripcion` varchar(150), OUT `res` TINYINT  UNSIGNED)
+BEGIN   
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;           
+        START TRANSACTION;
+        UPDATE `Sede` SET `nombreSede`= p_nombre ,`isActivo`= p_activo,descripcion = p_descripcion WHERE `id`= p_id;
+        COMMIT;
+        -- SUCCESS
+        SET res = 0;
+       
+END
+;;
+DELIMITER ;
 -- ----------------------------
 -- Proceso ordenar Subcapitulos
 -- ----------------------------

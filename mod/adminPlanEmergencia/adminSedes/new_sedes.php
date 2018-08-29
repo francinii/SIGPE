@@ -11,7 +11,7 @@ $user_rol = $mySessionController->getVar("rol");
     <div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
         <form method="post" action="">            
             <div class="form-group">
-                <label  for="sede_title"><?= $vocab["sede_title"] ?></label>
+                <label  for="nombre"><?= $vocab["sede_title"] ?></label>
                 <input id="nombre" name="sede_title" class="form-control" type="text" value=""/> 
                 <p class="help-block"><small><?= $vocab["sede_title_Desc"] ?></small></p> 
             </div>
@@ -35,8 +35,13 @@ $user_rol = $mySessionController->getVar("rol");
                 <p class="help-block"><small><?= $vocab["desc_sede_isActivo"] ?></small></p> 
             </div>   
             <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
-                <div class="text-center"><a class="btn btn-success"  name="submit" onclick="new_sede();"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] . " " . $vocab["sede_title"] ?>  </a></div>
-            <?php } ?>            
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <a class="btn btn-success btn-group-justified"  name="submit" onclick="new_sede();"><i class="fa fa-save fa-inverse"> </i> <?= $vocab["symbol_save"] . " " . $vocab["sede_title"] ?>  </a>
+                </div>
+            <?php } ?>                   
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <a class="btn btn-warning btn-group-justified"  name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminSedes/list_sedes.php?', '');"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_return"] ?></a>
+                </div>
         </form>
     </div>
 </div>

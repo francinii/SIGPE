@@ -14,26 +14,6 @@ $ip .= $mySessionController->getVar("cds_locate");
 
 $page_cant = $mySessionController->getVar("page_cant");
 
-//
-//$sql = "SELECT COUNT(id) AS cant
-//        FROM ZonaTrabajo";
-//
-//$find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
-//if ($find_key != "") {
-//    $sql .= " WHERE roll_name LIKE  '%" . $find_key . "%'";
-//}
-//$sql .= ";";
-//$res_cant = seleccion($sql);
-//
-//$cant_pagi = ceil((int) $res_cant[0]['cant'] / (int) $page_cant);
-//$page = (isset($_GET["page"])) ? $_GET["page"] : "1";
-//if (!$page) {
-//    $start = 0;
-//    $page = 1;
-//} else {
-//    $start = (isset($_GET["start"])) ? $_GET["start"] : "0";
-//}
-
 /* * ********************************************************************************************** */
 $sql = "SELECT  id, nombreSede, isActivo FROM Sede";
 
