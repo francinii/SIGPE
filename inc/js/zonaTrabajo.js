@@ -25,7 +25,7 @@ function new_zona_trabajo() {
         //Obtener Valores
         var nombre = document.getElementById('nombre').value;
         var descripcion = document.getElementById('descripcion').value;
-        var activo = 0;
+        var activo = 0;      
         var lista = new Array();
         var fila = document.getElementById("tabla_usuario_zona").firstElementChild.nextElementSibling;
         fila = fila.firstElementChild;
@@ -43,6 +43,8 @@ function new_zona_trabajo() {
         var ajax = NuevoAjax();
         var _values_send =
                 '&lista=' + JSON.stringify(lista) +
+                '&nombre=' + nombre +
+                '&descripcion=' + descripcion +
                 '&nombre=' + nombre +
                 '&descripcion=' + descripcion +
                 '&inlineCheckbox=' + activo;

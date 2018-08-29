@@ -142,17 +142,17 @@ $vocab["nombre_desc_categoria_amenaza"]            = "Escriba el nombre de la nu
 
 
 //***************************** Modulo zona de trabajo******************************//
-$vocab["zona_trabajo_title"]               = "Zona de trabajo";
-$vocab["list_zona_trabajo_title"]          = "Zona de trabajo";
+$vocab["zona_trabajo_title"]               = "Centro de trabajo";
+$vocab["list_zona_trabajo_title"]          = "Centro de trabajo";
 $vocab["list_zona_trabajo_id"]             = "Id";
-$vocab["list_zona_trabajo_descripcion"]    = "Zona de trabajo";
+$vocab["list_zona_trabajo_descripcion"]    = "Centro de trabajo";
 
-$vocab["zona_trabajo_title_Desc"]       = "Titulo de la zona de trabajo";
+$vocab["zona_trabajo_title_Desc"]       = "Titulo del centro de trabajo";
 $vocab["zona_trabajo_id"]               = "Id";
 $vocab["zona_trabajo_id_Desc"]          = "Id del capitulo";
-$vocab["zona_trabajo_Descripcion"]      = "Descripción de la zona de trabajo";
-$vocab["zona_trabajo_activar"]      = "Activar zona de trabajo";
-$vocab["desc_zona_trabajo_isActivo"]   = "Active o desactive la zona de trabajo";
+$vocab["zona_trabajo_Descripcion"]      = "Descripción del centro de trabajo";
+$vocab["zona_trabajo_activar"]           = "Activar centro de trabajo";
+$vocab["desc_zona_trabajo_isActivo"]   = "Active o desactive el centro de trabajo";
 
 //***************************** Modulo Sedes******************************//
 $vocab["sede_title"]               = "Sedes";
@@ -244,7 +244,10 @@ $vocab["inicio_Empezar"]                     = "Empeza";
 $vocab["inicio_Imprimir"]                    = "Imprimir";
 $vocab["inicio_Imprimir"]                    = "Imprimir";
 $vocab["incio_labe"]                         ="Plan de emergencia";
-$vocab["incio_Datos_sin_guardar"]            ="Datos sin guardar";
+
+//***********    Menu plan de emergencia    ***********************//
+$vocab["Menu_Datos_sin_guardar"]            ="Datos sin guardar";
+$vocab["Menu_Datos_Plan"]                   ="Plan de emergencia:";
 
 //***********     plan de emergencia  datos generales  ***********************//
 $vocab["datos_generares_Titulo"]             ="Datos generales";

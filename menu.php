@@ -1,23 +1,32 @@
-<?php //
+<?php
+//
 require 'functions.php';
 ?>
 <nav class="navbar navbar-inverse navbar-fixed-top" style="cursor: pointer;">
     <div class="container">
-        <div class="navbar-header">
-            <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
-                <span class="sr-only">Alternar Navegación</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-             <a href="#" class="navbar-brand"><?php echo $mySessionController->getVar("page_title") ?></a>
-<!--             <a id="tituloGeneral" href="#" class="navbar-brand">Bienvenido a la soda de la escula de informatica </a>                     -->
-        </div>
+        
+            <div class="navbar-header col-sm-4">
+                <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                    <span class="sr-only">Alternar Navegación</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#" class="navbar-brand"><?php echo $mySessionController->getVar("page_title") ?></a>          
+
+            </div>
+            <div class="navbar-header col-sm-4">
+
+                <a href="#" class="navbar-brand" id="tituloGeneral"></a>          
+
+            </div>
+        
         <div class="navbar-collapse collapse" id="navbar" aria-expanded="false" style="height: 1px;">
-               <ul class="nav navbar-nav">
-                 <li  class="nav-item mr-auto"><a id="NombreUsuario"  href="#" class="navbar-brand"><?php echo $mySessionController->getVar("nombre") ?></a></li>
-               </ul>
-                <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav pull-right">
+                <li  class="nav-item "><a id="NombreUsuario"  href="#" class="navbar-brand"><?php echo $mySessionController->getVar("nombre") ?></a></li>
+
+            </ul>
+            <ul class="nav navbar-nav">
                 <!-- INICIO -->
                 <li><a onclick="javascript:OpcionMenu('mod/inicio.php?', '');"><span><i class="fa fa-home fa-inverse"></i> <?= $vocab["menu_home"] ?></span></a></li>
                 <!-- MODULOS DEL SISTEMA -->
@@ -25,19 +34,7 @@ require 'functions.php';
                 <li><a href="" style="width: 150px;"></a></li>
                 <!-- PERFIL -->
                 <li><a href='#' onclick="javascript:OpcionMenu('mod/admin/users/edit_perfil.php?', '');"><span> <i class="fa fa-user fa-inverse"></i> <?= $vocab["menu_perfil"] ?></span></a></li>
-                <?php if (check_permiso($mod1, $act1, $user_rol)) { ?>
-                    <li class="dropdown">
-                        <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#"><span><i class="fa fa-gears fa-inverse"></i> <?= $vocab["menu_planes_emergencia"] ?></span> <span class="caret"></span></a>
-                        <ul class="dropdown-menu"> 
-                            <!-- Plan de emergencia-->
-                            <?php if (check_permiso($mod2, $act1, $user_rol)) { ?>
-                                <li class="dropdown-submenu">
-                                    <a onclick="javascript:OpcionMenu('mod/planEmergencia/plan_emergencia_matriz.php?', '');"><span><?= $vocab["menu_planes_emergencia"] ?></span></a>
-                                </li>
-                            <?php } ?>
-                        </ul>
-                    </li>
-                <?php } ?>
+               
 
                 <!-- ADMINISTRACION -->
                 <?php if (check_permiso($mod1, $act1, $user_rol)) { ?>
