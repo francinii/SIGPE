@@ -24,6 +24,7 @@ function new_zona_trabajo() {
         loading.innerHTML = cargando_bar;
         //Obtener Valores
         var nombre = document.getElementById('nombre').value;
+        var sede = document.getElementById('select_sede').value;
         var descripcion = document.getElementById('descripcion').value;
         var activo = 0;      
         var lista = new Array();
@@ -44,8 +45,8 @@ function new_zona_trabajo() {
         var _values_send =
                 '&lista=' + JSON.stringify(lista) +
                 '&nombre=' + nombre +
-                '&descripcion=' + descripcion +
-                '&nombre=' + nombre +
+                '&sede=' + sede +
+                '&descripcion=' + descripcion +                
                 '&descripcion=' + descripcion +
                 '&inlineCheckbox=' + activo;
         var _URL_ = "mod/adminPlanEmergencia/adminZonaTrabajo/ajax_new_zona_trabajo.php?";
@@ -121,6 +122,7 @@ function update_zona_trabajo(id) {
         loading.innerHTML = cargando_bar;
         //Obtener Valores
         var nombre = document.getElementById('nombre').value;
+        var sede = document.getElementById('select_sede').value;
         var descripcion = document.getElementById('descripcion').value;
         var activo = 0;
         if (document.getElementById('inlineCheckbox1').checked)
@@ -132,6 +134,7 @@ function update_zona_trabajo(id) {
         var _values_send =
                 'id=' + id +
                 '&nombre=' + nombre +
+                '&sede=' + sede +
                 '&descripcion=' + descripcion +
                 '&activo=' + activo;
         var _URL_ = "mod/adminPlanEmergencia/adminZonaTrabajo/ajax_edit_zona_trabajo.php?";

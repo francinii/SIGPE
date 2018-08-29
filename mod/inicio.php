@@ -43,6 +43,21 @@ $res = seleccion($sql);
             <div class="form-group">
                 <h2 style="text-align: center;"><?= $vocab["incio_labe"]  ?></h2>
                 <br/>
+                <h3 style="text-align: center;"><?= $vocab["zona_trabajo_sede"] ?></h3>
+                <select id="selectInicio" class="form-control">
+                    <?php 
+                    if (count($res) > 0) {
+                        for ($i = 0; $i < count($res); $i++) {               
+                                ?>
+                                <option value='<?= $res[$i]['id'] ?>' selected><?= $res[$i]['nombreZonaTrabajo'] ?></option>
+                                <?php                             
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+             <div class="form-group">                
+                <h3 style="text-align: center;"><?= $vocab["zona_trabajo_sede"] ?></h3>
                 <select id="selectInicio" class="form-control">
                     <?php 
                     if (count($res) > 0) {

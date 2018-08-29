@@ -8,15 +8,6 @@
  * Created: 26/07/2018
  */
 
-create table ZonaTrabajo(
-id int  NOT NULL AUTO_INCREMENT,
-isActivo int,
-nombreZonaTrabajo varchar(150),
-descripcion varchar(150),
-longitud varchar(150),
-latitud varchar(150),
-PRIMARY KEY(id)
-);
 
 create table Sede(
 id int  NOT NULL AUTO_INCREMENT,
@@ -24,6 +15,18 @@ isActivo int,
 nombreSede varchar(150),
 descripcion varchar(150),
 PRIMARY KEY(id)
+);
+
+create table ZonaTrabajo(
+id int  NOT NULL AUTO_INCREMENT,
+FKidSede int,
+isActivo int,
+nombreZonaTrabajo varchar(150),
+descripcion varchar(150),
+longitud varchar(150),
+latitud varchar(150),
+PRIMARY KEY(id),
+FOREIGN KEY(FKidSede) REFERENCES Sede(id)
 );
 
 
@@ -164,8 +167,10 @@ FOREIGN KEY(FKidZona) REFERENCES ZonaTrabajo(id)
 
 -- para wamp en cada tabla ENGINE=INNODB;
 
+INSERT INTO `sede`(`isActivo`, `nombreSede`, `descripcion`) VALUES (1,'Heredia','Heredia');
+INSERT INTO `sede`(`isActivo`, `nombreSede`, `descripcion`) VALUES (1,'San Jose','San Jose');
+INSERT INTO `sede`(`isActivo`, `nombreSede`, `descripcion`) VALUES (1,'Alajuela','Alajuela');
 
--- cambiar insert
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,'Limon','Zona ubicada en la region de limon');
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,'Heredia','Zona ubicada en la region de Heredia');
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,'Guanacaste','Zona ubicada en la region de Guanacaste');
@@ -331,7 +336,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_zona_trabajo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_zona_trabajo`(IN `p_nombre` varchar(150),IN `p_activo` int, IN `p_descripcion` varchar(150), OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_zona_trabajo`(IN `p_nombre` varchar(150),IN `p_FKidSede` int,IN `p_activo` int, IN `p_descripcion` varchar(150), OUT `res` TINYINT  UNSIGNED)
 BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -347,7 +352,7 @@ BEGIN
     ROLLBACK;
 	END;
             START TRANSACTION;
-                    INSERT INTO `ZonaTrabajo`(nombreZonaTrabajo,isActivo, descripcion) VALUES (p_nombre, p_activo,p_descripcion);
+                    INSERT INTO `ZonaTrabajo`(FKidSede,nombreZonaTrabajo,isActivo, descripcion) VALUES (p_FKidSede,p_nombre, p_activo,p_descripcion);
                     SELECT  MAX(id) into res from ZonaTrabajo ;
                     INSERT INTO `PlanEmergencia`(FKidZonaTrabajo) VALUES (res);                  
             COMMIT;
@@ -911,7 +916,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_zona_trabajo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_zona_trabajo`(IN `p_id` int, IN `p_nombre` varchar(150),IN `p_activo` int, IN `p_descripcion` varchar(150), OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_zona_trabajo`(IN `p_id` int, IN `p_FKidSede` int,IN `p_nombre` varchar(150),IN `p_activo` int, IN `p_descripcion` varchar(150), OUT `res` TINYINT  UNSIGNED)
 BEGIN   
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -927,7 +932,7 @@ BEGIN
     ROLLBACK;
 	END;           
         START TRANSACTION;
-        UPDATE `ZonaTrabajo` SET `nombreZonaTrabajo`= p_nombre ,`isActivo`= p_activo,descripcion = p_descripcion WHERE `id`= p_id;
+        UPDATE `ZonaTrabajo` SET `FKidSede`= p_FKidSede ,`nombreZonaTrabajo`= p_nombre ,`isActivo`= p_activo,descripcion = p_descripcion WHERE `id`= p_id;
         COMMIT;
         -- SUCCESS
         SET res = 0;

@@ -6,6 +6,9 @@ $user_rol = $mySessionController->getVar("rol");
 
 $sql = "SELECT id, nombre FROM sis_user";
 $comb = seleccion($sql);
+
+$sql = "SELECT id, nombreSede FROM Sede";
+$sede = seleccion($sql);
 ?>
 <div class="container">
     <div class="well well-sm">
@@ -17,6 +20,15 @@ $comb = seleccion($sql);
                 <label  for="zona_trabajo_title"><?= $vocab["zona_trabajo_title"] ?></label>
                 <input id="nombre" name="zona_trabajo_title" class="form-control" type="text" value=""/> 
                 <p class="help-block"><small><?= $vocab["zona_trabajo_title_Desc"] ?></small></p> 
+            </div>
+            <div class="form-group">
+                <div><label  for=""><?= $vocab["zona_trabajo_sede"] ?> </label></div> 
+                <select class="form-control" id = "select_sede">
+                    <?php for ($i = 0; $i < count($sede); $i++) { ?>
+                        <option value='<?= $sede[$i]['id'] ?>' selected><?= $sede[$i]['nombreSede'] ?></option>
+                    <?php } ?>
+                </select>
+                <p class="help-block"><small><?= $vocab["zona_trabajo_sede_Desc"] ?></small></p> 
             </div>
             <div class="form-group">
                 <label  for="descripcion"><?= $vocab["symbol_desc"] ?> </label>                
@@ -39,7 +51,7 @@ $comb = seleccion($sql);
             </div>   
             <div class="form-group"> 
                 <div><label  for=""><?= $vocab["symbol_desc"] ?> </label></div> 
-                <select id = "select_usuario">
+                <select  id = "select_usuario">
                     <?php for ($i = 0; $i < count($comb); $i++) { ?>
                         <option value='<?= $comb[$i]['id'] ?>' selected><?= $comb[$i]['nombre'] ?></option>
                     <?php } ?>
@@ -51,9 +63,9 @@ $comb = seleccion($sql);
                 <div><label  for=""><?= $vocab["symbol_desc"] ?> </label></div> 
                 <table  id = "tabla_usuario_zona" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable">
                     <thead>
-                        <th><?= $vocab["symbol_desc"] ?> </th>
-                        <th><?= $vocab["symbol_desc"] ?> </th>
-                        <th><i class="fa fa-close fa-2x text-danger" title="Eliminar"></i> </th>
+                    <th><?= $vocab["symbol_desc"] ?> </th>
+                    <th><?= $vocab["symbol_desc"] ?> </th>
+                    <th><i class="fa fa-close fa-2x text-danger" title="Eliminar"></i> </th>
                     </thead>
                     <tbody>
                     </tbody>

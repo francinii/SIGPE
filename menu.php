@@ -23,7 +23,7 @@ require 'functions.php';
         
         <div class="navbar-collapse collapse" id="navbar" aria-expanded="false" style="height: 1px;">
             <ul class="nav navbar-nav pull-right">
-                <li  class="nav-item "><a id="NombreUsuario"  href="#" class="navbar-brand"><?php echo $mySessionController->getVar("nombre") ?></a></li>
+                <li  class="nav-item "><a id="NombreUsuario"  href="#" class="navbar-brand"><span><?php echo $mySessionController->getVar("nombre") ?></a></span></li>
 
             </ul>
             <ul class="nav navbar-nav">
