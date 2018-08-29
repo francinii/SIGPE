@@ -12,7 +12,7 @@ $res = seleccion($sql);
 //$comb = seleccion($sql);
 //
 
-$sql = "SELECT id, nombreSede FROM Sede";
+$sql = "SELECT id, nombreSede FROM Sede where isActivo=1";
 $sede = seleccion($sql);
 
 $sql = "SELECT id, nombre FROM sis_user";
@@ -23,6 +23,8 @@ $sql = "SELECT usuario.id, usuario.nombre FROM
 (SELECT FKidUsuario, FKidZona FROM UsuarioZona where FKidZona = " . $id . ") usuariozona
 where usuario.id = usuariozona.FKidUsuario";
 $usuarios = seleccion($sql);
+
+$find_key =$res[0]['FKidSede']; 
 ?>
 <div class="container">
     <div class="well well-sm">
@@ -106,7 +108,7 @@ $usuarios = seleccion($sql);
                         <a <?= ($view_mode == 0) ? "readonly" : ""; ?> class="btn btn-success btn-group-justified"  name="submit" onclick="update_zona_trabajo(<?= $res[0]['id'] ?>);"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_update"] . " " . $vocab["permits_title"] ?></a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <a class="btn btn-warning btn-group-justified"  name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', '');"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_return"] ?></a>
+                        <a class="btn btn-warning btn-group-justified"  name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', 'find_key='+<?=$find_key?>);"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_return"] ?></a>
                     </div>
                     <?php
                 }
@@ -114,7 +116,7 @@ $usuarios = seleccion($sql);
                 ?>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <a class="btn btn-warning btn-group-justified"  name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', '');"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_return"] ?></a>
+                    <a class="btn btn-warning btn-group-justified"  name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', 'find_key='+<?=$find_key?>);"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_return"] ?></a>
                 </div>
             <?php } ?>          
         </form>

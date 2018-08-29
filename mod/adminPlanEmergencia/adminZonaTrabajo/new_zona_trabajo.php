@@ -7,7 +7,7 @@ $user_rol = $mySessionController->getVar("rol");
 $sql = "SELECT id, nombre FROM sis_user";
 $comb = seleccion($sql);
 
-$sql = "SELECT id, nombreSede FROM Sede";
+$sql = "SELECT id, nombreSede FROM Sede where isActivo=1";
 $sede = seleccion($sql);
 ?>
 <div class="container">

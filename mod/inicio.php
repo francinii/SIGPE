@@ -20,8 +20,27 @@ $sql = "SELECT id, nombreSede FROM Sede";
 $sede = seleccion($sql);
 
 $start = "0";
-$sql = "SELECT `id`, `nombreZonaTrabajo`FROM `ZonaTrabajo`,(SELECT `FKidZona` From UsuarioZona where `FKidUsuario` = '" . $user_id . "') UsuZona WHERE ZonaTrabajo.id = UsuZona.FKidZona  and isActivo=1";
-
+if (check_permiso($mod3, $act3, $user_rol)) {
+    $sql = "SELECT `id`, `nombreZonaTrabajo`FROM `ZonaTrabajo` WHERE isActivo=1";
+}else{ 
+    $sql = "SELECT `id`, `nombreZonaTrabajo`FROM `ZonaTrabajo`,(SELECT `FKidZona` From UsuarioZona where `FKidUsuario` = '" . $user_id . "') UsuZona WHERE ZonaTrabajo.id = UsuZona.FKidZona  and isActivo=1";
+}
+$find_key='0';
+if ((isset($_GET['find_key'])) ){
+$find_key =$_GET['find_key']; 
+}else if (count($sede) > 0){
+   $find_key = $sede[0]['id'];
+}
+if ($find_key != "") {    
+    $sql .= " and  FKidSede =" . $find_key;
+}
+$order_key = (isset($_GET['order_key'])) ? $_GET['order_key'] : '';
+if ($order_key != "") {
+    $sql .= " ORDER BY " . $order_key;
+} else {
+    $sql .= " ORDER BY id";
+}
+//$sql .= " limit " . (int) $start . "," . (int) $page_cant . ";";
 $res = seleccion($sql);
 ?>
 <!--  ****** Titulo ***** -->
@@ -47,12 +66,12 @@ $res = seleccion($sql);
                 <h2 style="text-align: center;"><?= $vocab["incio_labe"]  ?></h2>
                 <br/>
                 <h3 style="text-align: center;"><?= $vocab["zona_trabajo_sede"] ?></h3>
-                <select id="selectInicio" class="form-control">
+                <select id="selectIniciosede" class="form-control" onchange="javascript: cambiarCentroInicio();">
                     <?php 
                     if (count($sede) > 0) {
                         for ($i = 0; $i < count($sede); $i++) {               
                                 ?>
-                                <option value='<?= $sede[$i]['id'] ?>' selected><?= $sede[$i]['nombreSede'] ?></option>
+                                <option  <?= ($sede[$i]['id']==$find_key) ? "selected " : ""; ?> value='<?= $sede[$i]['id'] ?>'><?= $sede[$i]['nombreSede'] ?></option>
                                 <?php                             
                         }
                     }

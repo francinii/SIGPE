@@ -35,25 +35,61 @@ $page_cant = $mySessionController->getVar("page_cant");
 //}
 
 /* * ********************************************************************************************** */
+$sql = "SELECT id, nombreSede FROM Sede where isActivo=1";
+$comb = seleccion($sql);
+
+
+
+
 $sql = "SELECT  id, nombreZonaTrabajo FROM ZonaTrabajo";
 
-$find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
-if ($find_key != "") {
-    $sql .= "  WHERE nombreZonaTrabajo LIKE '%" . $find_key . "%'";
+$find_key='0';
+if ((isset($_GET['find_key'])) ){
+$find_key =$_GET['find_key']; 
+}else if (count($comb) > 0){
+   $find_key = $comb[0]['id'];
 }
-
+if ($find_key != "") {    
+    $sql .= "  WHERE  FKidSede =" . $find_key;
+}
 $order_key = (isset($_GET['order_key'])) ? $_GET['order_key'] : '';
 if ($order_key != "") {
     $sql .= " ORDER BY " . $order_key;
 } else {
     $sql .= " ORDER BY id";
 }
-
 //$sql .= " limit " . (int) $start . "," . (int) $page_cant . ";";
 $res = seleccion($sql);
 ?>
 <!--  ****** Titulo ***** -->
 <div class="well well-sm"><h1><?= $vocab["list_zona_trabajo_title"] ?></h1></div>
+<div class="row">
+    <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="select_sede"><?= $vocab["zona_trabajo_sede"] ?></label>
+            <div class="col-sm-10">
+                <select id="select_sede" name="select_sede" class="form-control" onchange="javascript: cambiarCentro();">
+                 <?php
+                   
+                 if (count($comb) > 0) {
+                     for ($i = 0; $i < count($comb); $i++) {
+                          ?>
+                    <option  <?= ($comb[$i]['id']==$find_key) ? "selected " : ""; ?> value='<?= $comb[$i]['id'] ?>' ><?= $comb[$i]['nombreSede'] ?></option>
+                            
+                 <?php
+                  
+                     }
+                }
+                 ?>
+                   
+                </select>
+            </div>
+        </div>
+
+
+    </div>
+</div>
 <div class="dataTables_wrapper form-inline dt-bootstrap">
     <table id="lista_usuarios" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable" >
         <thead>

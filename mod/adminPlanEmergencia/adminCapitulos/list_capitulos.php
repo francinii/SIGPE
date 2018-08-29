@@ -6,9 +6,7 @@ include("../../login/check.php");
 include("../../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
- 
-    include("../../planEmergencia/plan_emergencia_menu.php");
-   
+
 /* * *************************************************************************************** */
 //Informacion requerida obtenida de la sesion
 $ip = $mySessionController->getVar("cds_domain");
