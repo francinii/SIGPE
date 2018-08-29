@@ -16,6 +16,15 @@ descripcion varchar(150),
 PRIMARY KEY(id)
 );
 
+create table Sede(
+id int  NOT NULL AUTO_INCREMENT,
+isActivo int,
+nombreSede varchar(150),
+descripcion varchar(150),
+PRIMARY KEY(id)
+);
+
+
 create table PlanEmergencia(
 id int  NOT NULL AUTO_INCREMENT,
 FKidZonaTrabajo int, 
@@ -284,6 +293,34 @@ drop table ZonaTrabajo;
 -- ----------------------------
 -- Proceso insertar zona de trabajo
 -- ----------------------------
+DROP PROCEDURE IF EXISTS `insert_sede`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_sede`(IN `p_nombre` varchar(150),IN `p_activo` int, IN `p_descripcion` varchar(150), OUT `res` TINYINT  UNSIGNED)
+BEGIN
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = -1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = -2;
+    ROLLBACK;
+	END;
+            START TRANSACTION;
+                    INSERT INTO `Sede`(nombreSede,isActivo, descripcion) VALUES (p_nombre, p_activo,p_descripcion);
+            COMMIT;
+            -- SUCCESS
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Proceso insertar zona de trabajo
+-- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_zona_trabajo`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_zona_trabajo`(IN `p_nombre` varchar(150),IN `p_activo` int, IN `p_descripcion` varchar(150), OUT `res` TINYINT  UNSIGNED)
@@ -437,6 +474,38 @@ BEGIN
             -- SUCCESS
             SET res = 0;
             -- Existe usuario
+END
+;;
+DELIMITER ;
+
+
+-- ----------------------------
+-- Proceso eliminar zona de trabajo
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `delete_sede`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_sede`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
+BEGIN
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;
+
+	START TRANSACTION ;
+		DELETE FROM Sede WHERE id=p_id;
+	
+	COMMIT;
+	-- SUCCESS
+	SET res = 0;
 END
 ;;
 DELIMITER ;

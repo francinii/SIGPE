@@ -99,6 +99,20 @@ require 'functions.php';
                             <!-- ADMINISTRAR ZONAS DE TRABAJO -->
                             <?php if (check_permiso($mod1, $act1, $user_rol)) { ?>
                                 <li class="dropdown-submenu">
+                                    <a href="#"><span><i class="fa fa-puzzle-piece text-danger"></i> <?= $vocab["menu_admin_sede"] ?></span></a>
+                                    <ul class="dropdown-menu">
+                                        <?php if (check_permiso($mod3, $act2, $user_rol)) { ?>
+                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminSedes/list_sedes.php?', '');"><span> <i class="fa fa-list text-primary"></i>  <?= $vocab["menu_list"] ?></span></a></li>
+                                        <?php } ?>
+                                        <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
+                                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminSedes/new_sedes.php?', '');"><span><i class="fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?></span></a></li>
+                                        <?php } ?>
+                                    </ul>
+                                </li>
+                            <?php } ?> 
+                            <!-- ADMINISTRAR ZONAS DE TRABAJO -->
+                            <?php if (check_permiso($mod1, $act1, $user_rol)) { ?>
+                                <li class="dropdown-submenu">
                                     <a href="#"><span><i class="fa fa-puzzle-piece text-danger"></i> <?= $vocab["menu_admin_zona_trabajo"] ?></span></a>
                                     <ul class="dropdown-menu">
                                         <?php if (check_permiso($mod3, $act2, $user_rol)) { ?>
@@ -110,6 +124,7 @@ require 'functions.php';
                                     </ul>
                                 </li>
                             <?php } ?> 
+                            
                             <!-- ADMINISTRAR CAPITULOS -->
                             <?php if (check_permiso($mod1, $act1, $user_rol)) { ?>
                                 <li class="dropdown-submenu">
