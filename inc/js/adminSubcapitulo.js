@@ -1,6 +1,6 @@
 /// list_subcapitulo
 function cambiarSubcapitulos(){
-    var find_key = jQuery("#select_capitulos").val();
+    var find_key = jQuery("#select_subcapitulos").val();
     OpcionMenu('mod/adminPlanEmergencia/adminSubcapitulos/list_subcapitulos.php?', 'find_key='+find_key)
 }
 

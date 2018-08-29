@@ -67,9 +67,9 @@ $res = seleccion($sql);
     <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <div class="form-group">
-            <label class="control-label col-sm-2" for="select_capitulos"><?= $vocab["zona_trabajo_sede"] ?></label>
+            <label class="control-label col-sm-2" for="select_sede"><?= $vocab["zona_trabajo_sede"] ?></label>
             <div class="col-sm-10">
-                <select id="select_capitulos" name="select_capitulos" class="form-control" onchange="javascript: cambiarCentro,();">
+                <select id="select_sede" name="select_sede" class="form-control" onchange="javascript: cambiarCentro();">
                  <?php
                    
                  if (count($comb) > 0) {

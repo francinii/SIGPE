@@ -3,8 +3,8 @@
  * @returns {boolean}
  */
 function cambiarCentro(){
-    var find_key = jQuery("#select_capitulos").val();
-    OpcionMenu('mod/adminPlanEmergencia/adminSubcapitulos/list_subcapitulos.php?', 'find_key='+find_key)
+    var find_key = jQuery("#select_sede").val();
+    OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', 'find_key='+find_key)
 }
 
 
@@ -66,7 +66,7 @@ function new_zona_trabajo() {
                 //alert(response); //DEBUG
                 if (response == 0) {
                     jAlert("Origen añadido con exito", "Exito");
-                    OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', '');
+                    OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', 'find_key='+sede);
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else if (response == 3) {
@@ -155,7 +155,7 @@ function update_zona_trabajo(id) {
                 //alert(response); //DEBUG
                 if (response == 0) {
                     jAlert("Origen actualizado con exito", "Exito");
-                    OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', '');
+                    OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', 'find_key='+sede);
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else if (response == 3) {

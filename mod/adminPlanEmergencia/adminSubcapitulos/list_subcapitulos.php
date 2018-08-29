@@ -92,9 +92,9 @@ $res = seleccion($sql);
     <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <div class="form-group">
-            <label class="control-label col-sm-2" for="select_capitulos"><?= $vocab["subcapitulo_capitulo"] ?></label>
+            <label class="control-label col-sm-2" for="select_subcapitulos"><?= $vocab["subcapitulo_capitulo"] ?></label>
             <div class="col-sm-10">
-                <select id="select_capitulos" name="select_capitulos" class="form-control" onchange="javascript: cambiarSubcapitulos();">
+                <select id="select_subcapitulos" name="select_subcapitulos" class="form-control" onchange="javascript: cambiarSubcapitulos();">
                  <?php
                    
                  if (count($comb) > 0) {
