@@ -49,8 +49,9 @@ function selectorMatriz($cod, $opcion) {
 }
 
 function buscarRegistro($matriz, $categoria) {
-    for ($i = 0; $i < count($matriz); $i++) {
-        if ($matriz[$i]['id'] == $categoria) {
+    for ($i = 0; $i < count($matriz); $i++) { 
+        if ($matriz[$i]['FKidCategoriaTipoAmenaza'] == $categoria) {
+       // if ($matriz[$i]['id'] == $categoria) {
             return $matriz[$i];
         }
     }
@@ -204,10 +205,11 @@ $matriz = seleccion($sql);
     </table>
     <br/>
     <div class="text-center">
-        <span class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:generaVectorMatriz('<?= $nombreCentro ?>','<?= $idCentro ?>');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["matriz_title"] ?></a></span>
+        <span class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:generaVectorMatriz('<?= $nombreCentro ?>','<?= $idCentro ?>','0');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["matriz_title"] ?></a></span>
         <?php if ($criterios != null) { ?>   
-            <span class="text-center"><a class="btn btn-warning" name="" onclick="javascript:OpcionMenu('mod/planEmergencia/plan_emergencia_matriz_grafico.php?', 'nombreCentro=<?= $nombreCentro ?>&idCentro=<?= $idCentro ?>&criterios=' + JSON.stringify(crearVectorValores()));"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["graficar_matriz"] ?></a></span>
-        <?php } ?>
+         <span class="text-center"><a class="btn btn-warning" name="" onclick="javascript:generaVectorMatriz('<?= $nombreCentro ?>','<?= $idCentro ?>','1');"><i class='fa fa-plus fa-inverse'></i>  <?= $vocab["graficar_matriz"] ?></a></span>
+       
+      <?php } ?>
     </div>
 
 </div>

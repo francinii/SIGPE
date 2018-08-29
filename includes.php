@@ -51,6 +51,8 @@
 <script language="JavaScript" type="text/javascript"  src="inc/js/zonaTrabajo.js"></script>
 <!-- adminitrar Matriz de riesgo -->
 <script language="JavaScript" type="text/javascript"  src="inc/js/matrizRiesgo.js"></script>
+<!-- adminitrar Sedes-->
+<script language="JavaScript" type="text/javascript"  src="inc/js/sedes.js"></script>
 
 
 

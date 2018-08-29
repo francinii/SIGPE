@@ -46,6 +46,7 @@ $vocab["menu_admin_subcapitulos"]      = "Subcap&iacute;tulos";
 $vocab["menu_admin_zona_trabajo"]      = "Zonas de trabajo";
 $vocab["menu_admin_formulario"]        = "Formulario";
 $vocab["menu_planes_emergencia"]       = "Plan de emergencia";
+$vocab["menu_admin_sede"]              = "Sedes";
 
 //***************************** Home *****************************************//
 $vocab["home_title"]               = "Simbolog&iacute;a";
@@ -150,7 +151,21 @@ $vocab["zona_trabajo_title_Desc"]       = "Titulo del centro de trabajo";
 $vocab["zona_trabajo_id"]               = "Id";
 $vocab["zona_trabajo_id_Desc"]          = "Id del capitulo";
 $vocab["zona_trabajo_Descripcion"]      = "Descripción del centro de trabajo";
+$vocab["zona_trabajo_activar"]           = "Activar centro de trabajo";
+$vocab["desc_zona_trabajo_isActivo"]   = "Active o desactive el centro de trabajo";
 
+//***************************** Modulo Sedes******************************//
+$vocab["sede_title"]               = "Sedes";
+$vocab["list_sede_title"]          = "Sedes";
+$vocab["list_sede_id"]             = "Id";
+$vocab["list_sede_descripcion"]    = "Sedes";
+
+$vocab["sede_title_Desc"]       = "Titulo de la sede";
+$vocab["sede_id"]               = "Id";
+$vocab["sede_id_Desc"]          = "Id de la sede";
+$vocab["sede_Descripcion"]      = "Descripción de la sede";
+$vocab["sede_activar"]      = "Activar sede";
+$vocab["desc_sede_isActivo"]   = "Active o desactive la sede";
 //***************************** Modulo administrar capitulos ******************************//
 $vocab["list_capitulo"]             = "Lista de capitulos";
 $vocab["add_capitulo"]              = "capitulos";

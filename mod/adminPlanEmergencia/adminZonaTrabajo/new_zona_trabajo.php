@@ -24,7 +24,7 @@ $comb = seleccion($sql);
                 <p class="help-block"><small><?= $vocab["zona_trabajo_Descripcion"] ?></small></p> 
             </div>   
             <div class="form-group">
-                <label for="type-radio"><?= $vocab["list_origen_amenaza_isActivo"] ?> </label>                    
+                <label for="type-radio"><?= $vocab["zona_trabajo_activar"] ?> </label>                    
                 <div class="radio radio_efect">
                     <label class="radio-inline">
                         <input id="inlineCheckbox1" name="inlineCheckbox" type="radio" value="1" checked> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
@@ -35,7 +35,7 @@ $comb = seleccion($sql);
                         <?= $vocab["isInactivo"] ?> 
                     </label>
                 </div> 
-                <p class="help-block"><small><?= $vocab["desc_origen_isActivo"] ?></small></p> 
+                <p class="help-block"><small><?= $vocab["desc_zona_trabajo_isActivo"] ?></small></p> 
             </div>   
             <div class="form-group"> 
                 <div><label  for=""><?= $vocab["symbol_desc"] ?> </label></div> 
