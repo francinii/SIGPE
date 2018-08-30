@@ -13,8 +13,6 @@ require 'functions.php';
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-
-
         </div>
 
 
@@ -26,6 +24,7 @@ require 'functions.php';
                 </ul>
             
                 <ul class="nav navbar-nav">
+                     <li><a href='#' onclick="javascript:OpcionMenu('lib/tcpdf/examples/index.php?', '');"><span> <i class="fa fa-user fa-inverse"></i> <?= $vocab["menu_perfil"] ?></span></a></li>
                     <!-- INICIO -->
                     <li><a onclick="javascript:OpcionMenu('mod/inicio.php?', '');"><span><i class="fa fa-home fa-inverse"> <?= $vocab["menu_home"] ?></i> </span></a></li>
                     <!-- MODULOS DEL SISTEMA -->
