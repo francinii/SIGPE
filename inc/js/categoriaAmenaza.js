@@ -58,7 +58,7 @@ function new_categoria_amenaza() {
                 //alert(response); //DEBUG
                 if (response == 0) {
                     jAlert("Origen añadido con exito", "Exito");
-                    OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/list_categoria_amenaza.php?', '');
+                    OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/list_categoria_amenaza.php?', 'find_key='+select_tipo);
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else if (response == 3) {
@@ -102,7 +102,7 @@ function delete_categoria_action(id) {
             } else {
                 jAlert('Ha ocurrido un error inesperado intentelo más tarde!', 'Error');
             }
-            OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/list_categoria_amenaza.php?', '');
+            OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/list_categoria_amenaza.php?', 'find_key=' + find_key);
         }
     };
     page.innerHTML = '';
@@ -124,6 +124,7 @@ function delete_categoria_action(id) {
 
 function active_categoria_action(id,activo) {
     var page = document.getElementById('container');
+    var fkid = document.getElementById('select_tipo_amenaza').value;
     page.innerHTML = cargando;
     var ajax = NuevoAjax();
     //Preparacion  llamada AJAX
@@ -145,7 +146,7 @@ function active_categoria_action(id,activo) {
             } else {
                 jAlert('Ha ocurrido un error inesperado intentelo más tarde!', 'Error');
             }
-            OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/list_categoria_amenaza.php?', '');
+            OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/list_categoria_amenaza.php?', 'find_key=' + fkid);
         }
     };
     page.innerHTML = '';
@@ -207,7 +208,7 @@ function update_categoria_amenaza(id){
                 //alert(response); //DEBUG
                 if (response == 0) {
                     jAlert("Tipo de amenaza actualizada con exito", "Exito");
-                    OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/list_categoria_amenaza.php?', '');
+                    OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/list_categoria_amenaza.php?', 'find_key=' + find_key);
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else if (response == 3) {

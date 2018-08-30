@@ -13,6 +13,7 @@ $view_mode = $_GET['view_mode'];
 $id = $_GET['id'];
 $sql = "SELECT  id, descripcion,isActivo, FKidTipoAmenaza FROM CategoriaTipoAmenaza  WHERE id =" . $id;
 $res = seleccion($sql);
+$find_key =$res[0]['FKidTipoAmenaza']
 ?>
 <div class="container">
     <div class="well well-sm">
@@ -56,13 +57,13 @@ $res = seleccion($sql);
             </div>  
             <?php
             if ($view_mode == 1) {
-                if (check_permiso($mod1, $act4, $user_rol)) {
+                if (check_permiso($mod4, $act4, $user_rol)) {
                     ?>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <a <?= ($view_mode == 0) ? "readonly" : ""; ?> class="btn btn-success btn-group-justified"  name="submit" onclick="update_categoria_amenaza(<?= $res[0]['id'] ?>);"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_update"] ?></a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <a class="btn btn-warning btn-group-justified"  name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/list_categoria_amenaza.php?', '');"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_return"] ?></a>
+                        <a class="btn btn-warning btn-group-justified"  name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/list_categoria_amenaza.php?','find_key=<?=$find_key?>');"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_return"] ?></a>
                     </div>
                     <?php
                 }
@@ -70,7 +71,7 @@ $res = seleccion($sql);
                 ?>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <a class="btn btn-warning btn-group-justified"  name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/list_categoria_amenaza.php?', '');"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_return"] ?></a>
+                    <a class="btn btn-warning btn-group-justified"  name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/list_categoria_amenaza.php?', 'find_key=<?=$find_key?>');"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_return"] ?></a>
                 </div>
             <?php } ?>
 

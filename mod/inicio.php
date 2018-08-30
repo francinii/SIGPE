@@ -14,34 +14,37 @@ $ip .= $mySessionController->getVar("cds_locate");
 
 
 
-
 /* * ********************************************************************************************** */
-$sql = "SELECT id, nombreSede FROM Sede";
-$sede = seleccion($sql);
-
-$start = "0";
-if (check_permiso($mod3, $act3, $user_rol)) {
-    $sql = "SELECT `id`, `nombreZonaTrabajo`FROM `ZonaTrabajo` WHERE isActivo=1";
-}else{ 
-    $sql = "SELECT `id`, `nombreZonaTrabajo`FROM `ZonaTrabajo`,(SELECT `FKidZona` From UsuarioZona where `FKidUsuario` = '" . $user_id . "') UsuZona WHERE ZonaTrabajo.id = UsuZona.FKidZona  and isActivo=1";
-}
-$find_key='0';
-if ((isset($_GET['find_key'])) ){
-$find_key =$_GET['find_key']; 
-}else if (count($sede) > 0){
-   $find_key = $sede[0]['id'];
-}
-if ($find_key != "") {    
-    $sql .= " and  FKidSede =" . $find_key;
-}
-$order_key = (isset($_GET['order_key'])) ? $_GET['order_key'] : '';
-if ($order_key != "") {
-    $sql .= " ORDER BY " . $order_key;
+if (check_permiso($mod4, $act2, $user_rol)) {
+    $sql = "select sede.id as idSede, sede.nombreSede, zonatrabajo.id as idZona, zonatrabajo.nombreZonaTrabajo from zonatrabajo ,(SELECT `id`,`nombreSede`  FROM `sede` WHERE `isActivo`=1) sede where  zonatrabajo.FKidSede = sede.id  and isActivo=1 order by idSede";
 } else {
-    $sql .= " ORDER BY id";
+    $sql = "SELECT sede.id as idSede, sede.nombreSede,zona.id as idZona, zona.nombreZonaTrabajo FROM `sede`,(SELECT `id`, `nombreZonaTrabajo`,`FKidSede` FROM `zonatrabajo`,(SELECT `FKidZona` From UsuarioZona where `FKidUsuario` = '$user_id') UsuZona WHERE ZonaTrabajo.id = UsuZona.FKidZona  and isActivo=1) zona  where sede.`id`= zona.FKidSede and isActivo=1 order by idSede";
 }
-//$sql .= " limit " . (int) $start . "," . (int) $page_cant . ";";
 $res = seleccion($sql);
+$sedes = Array();
+$sedeId;
+$centros = Array();
+$find_key;
+if (count($res) > 0) {
+    $sedeId = $res[0]['idSede'];
+    if(isset($_GET['find_key'])){
+        $find_key=$_GET['find_key'];
+    }else{
+          $find_key =$res[0]['idSede'];
+    }  
+    $sede = Array('id' => $res[0]['idSede'], 'nombreSede' => $res[0]['nombreSede']);
+    $sedes[]=$sede;
+}
+foreach ($res as $value) {
+    if ($sedeId != $value['idSede']) {
+        $sede = Array('id' => $value['idSede'], 'nombreSede' => $value['nombreSede']);
+        $sedes []=$sede;
+        $sedeId=$value['idSede'];
+    }
+
+    $centro = Array('id' => $value['idZona'], 'nombreZonaTrabajo' => $value['nombreZonaTrabajo'],'idSede'=>$sedeId);
+    $centros[]=$centro;
+}
 ?>
 <!--  ****** Titulo ***** -->
 <br/><br/>
@@ -63,42 +66,54 @@ $res = seleccion($sql);
     <div class="col-lg-6 col-md-6 col-sm-9 col-xs-10">
         <form method="post" action="">
             <div class="form-group">
-                <h2 style="text-align: center;"><?= $vocab["incio_labe"]  ?></h2>
+                <h2 style="text-align: center;"><?= $vocab["incio_labe"] ?></h2>
                 <br/>
-                <h3 style="text-align: center;"><?= $vocab["zona_trabajo_sede"] ?></h3>
-                <select id="selectIniciosede" class="form-control" onchange="javascript: cambiarCentroInicio();">
-                    <?php 
-                    if (count($sede) > 0) {
-                        for ($i = 0; $i < count($sede); $i++) {               
+                <?php if (check_permiso($mod5, $act1, $user_rol) || check_permiso($mod5, $act2, $user_rol)) { ?>
+                    <h3 style="text-align: center;"><?= $vocab["zona_trabajo_sede"] ?></h3>
+
+                    <select id="selectIniciosede" class="form-control" onchange="javascript: cambiarCentroInicio();">
+                        <?php
+                        if (count($sede) > 0) {
+                            for ($i = 0; $i < count($sedes); $i++) {
                                 ?>
-                                <option  <?= ($sede[$i]['id']==$find_key) ? "selected " : ""; ?> value='<?= $sede[$i]['id'] ?>'><?= $sede[$i]['nombreSede'] ?></option>
-                                <?php                             
+
+                                <option  <?= ($sedes[$i]['id'] == $find_key) ? "selected " : ""; ?> value='<?= $sedes[$i]['id'] ?>'><?= $sedes[$i]['nombreSede'] ?></option>
+                                <?php
+                            }
                         }
-                    }
-                    ?>
-                </select>
+                        ?>
+                    </select>
+                <?php } ?>
             </div>
-             <div class="form-group">                
-                <h3 style="text-align: center;"><?= $vocab["zona_trabajo_title"] ?></h3>
-                <select id="selectInicio" class="form-control">
-                    <?php 
-                    if (count($res) > 0) {
-                        for ($i = 0; $i < count($res); $i++) {               
+            <?php if (check_permiso($mod5, $act1, $user_rol) || check_permiso($mod5, $act2, $user_rol)) { ?>
+                <div class="form-group">                
+                    <h3 style="text-align: center;"><?= $vocab["zona_trabajo_title"] ?></h3>
+                    <select id="selectInicio" class="form-control">
+                        <?php
+                        if (count($centros) > 0) {
+                            for ($i = 0; $i < count($centros); $i++) {
+                                if($centros[$i]['idSede']===$find_key){
                                 ?>
-                                <option value='<?= $res[$i]['id'] ?>' selected><?= $res[$i]['nombreZonaTrabajo'] ?></option>
-                                <?php                             
+                                <option value='<?= $centros[$i]['id'] ?>' selected><?= $centros[$i]['nombreZonaTrabajo'] ?></option>
+                                <?php
+                                }
+                            }
                         }
-                    }
-                    ?>
-                </select>
-            </div>
+                        ?>
+                    </select>
+                </div>
+            <?php } ?>
             <br/>
             <br/>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <a class="btn btn-success btn-group-justified" onclick="javascript:OpcionInicio();" name="submit" > <?= $vocab["inicio_Empezar"] ?></a>
+                <?php if (check_permiso($mod5, $act1, $user_rol) || check_permiso($mod5, $act2, $user_rol)) { ?>
+                    <a class="btn btn-success btn-group-justified" onclick="javascript:OpcionInicio();" name="submit" > <?= $vocab["inicio_Empezar"] ?></a>
+                <?php } ?>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <a class="btn btn-warning btn-group-justified"  name="submit" ><i class="fa fa-print"></i> <?= $vocab["inicio_Imprimir"] ?></a>
+                <?php if (check_permiso($mod5, $act6, $user_rol)) { ?>
+                    <a class="btn btn-warning btn-group-justified"  name="submit" ><i class="fa fa-print"></i> <?= $vocab["inicio_Imprimir"] ?></a>
+                <?php } ?>
             </div>                
         </form>
         <?php /*         * ***************************************************************************************** */ ?>

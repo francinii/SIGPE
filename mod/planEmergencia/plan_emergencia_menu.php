@@ -5,6 +5,7 @@ $sql = "SELECT `id`, `descripcion` FROM `Formulario` order by id";
 $res = seleccion($sql);
 $idCentro = $_GET['idCentro'];
 $nombreCentro = $_GET['nombreCentro'];
+$editar =(check_permiso($mod5, $act4, $user_rol) || check_permiso($mod5, $act3, $user_rol) );
 ?>
 <script>
     var idCentro =<?= $idCentro ?>;

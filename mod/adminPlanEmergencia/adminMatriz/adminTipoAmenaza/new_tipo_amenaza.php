@@ -46,9 +46,10 @@ $comb = seleccion($sql);
                     </label>
                 </div>  
                 <p class="help-block"><small><?= $vocab["desc_tipo_isActivo"] ?></small></p> 
-            </div>  
-            <a class="btn btn-success" name="submit" onclick="new_tipo_amenaza();"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?>  <?= $vocab["tipo_amenaza_title"] ?>  </a>
-
+            </div>
+            <?php if (check_permiso($mod4, $act3, $user_rol)) { ?>
+                <a class="btn btn-success" name="submit" onclick="new_tipo_amenaza();"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?>  <?= $vocab["tipo_amenaza_title"] ?>  </a>
+            <?php } ?>
         </form>
     </div>
 </div>

@@ -15,7 +15,7 @@ isActivo int,
 nombreSede varchar(150),
 descripcion varchar(150),
 PRIMARY KEY(id)
-);
+)ENGINE=InnoDB;
 
 create table ZonaTrabajo(
 id int  NOT NULL AUTO_INCREMENT,
@@ -27,7 +27,7 @@ longitud varchar(150),
 latitud varchar(150),
 PRIMARY KEY(id),
 FOREIGN KEY(FKidSede) REFERENCES Sede(id)
-);
+)ENGINE=InnoDB;
 
 
 create table PlanEmergencia(
@@ -74,14 +74,14 @@ elementosConstructivosSistemaTelefonico varchar(150),
 elementosConstructivosOtros varchar(150),
 PRIMARY KEY(id),
 FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
-);
+)ENGINE=InnoDB;
 
 create table OrigenAmenaza(
     id int NOT NULL AUTO_INCREMENT,
     descripcion varchar(150),
     isActivo int,
     PRIMARY KEY(id)
-);
+)ENGINE=InnoDB;
 
 
 create table TipoAmenaza (
@@ -91,7 +91,7 @@ create table TipoAmenaza (
     FkidOrigen int,
     PRIMARY KEY(id),
     FOREIGN KEY(FKidOrigen) REFERENCES OrigenAmenaza(id)
-);
+)ENGINE=InnoDB;
 
 create table CategoriaTipoAmenaza (
     id int NOT NULL AUTO_INCREMENT, 
@@ -100,7 +100,7 @@ create table CategoriaTipoAmenaza (
     descripcion varchar(150),    
     PRIMARY KEY(id), 
     FOREIGN KEY(FKidTipoAmenaza) REFERENCES TipoAmenaza(id)
-);
+)ENGINE=InnoDB;
 
 create table Matriz (
     id int NOT NULL AUTO_INCREMENT,  
@@ -113,7 +113,7 @@ create table Matriz (
     PRIMARY KEY(id), 
     FOREIGN KEY(FKidCategoriaTipoAmenaza) REFERENCES CategoriaTipoAmenaza(id),
     FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
-);
+)ENGINE=InnoDB;
 
 
 
@@ -125,7 +125,7 @@ isActivo int,
 titulo varchar(150),
 orden int,
  PRIMARY KEY(id) 
-);
+)ENGINE=InnoDB;
 
 create table SubCapitulo(
 id int NOT NULL AUTO_INCREMENT,
@@ -136,7 +136,7 @@ FKidCapitulo int,
 orden int,
 PRIMARY KEY(id),
 FOREIGN KEY (FKidCapitulo) REFERENCES Capitulo(id)
-);
+)ENGINE=InnoDB;
 
 create table Formulario(
 id int NOT NULL AUTO_INCREMENT,
@@ -144,7 +144,7 @@ descripcion text,
 FKidSubcapitulos int,
 PRIMARY KEY(id),
 FOREIGN KEY (FKidSubcapitulos) REFERENCES SubCapitulo(id)
-);
+)ENGINE=InnoDB;
 
 
 create table TipoPoblacion(
@@ -156,14 +156,14 @@ total int,
 representacionDe varchar(150),
 PRIMARY KEY(id),
 FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
-);
+) ENGINE=InnoDB;
 
 create table UsuarioZona(
 FKidUsuario varchar(50),
 FKidZona int,
 FOREIGN KEY(FKidUsuario) REFERENCES sis_user(id),
 FOREIGN KEY(FKidZona) REFERENCES ZonaTrabajo(id)
-);
+) ENGINE=InnoDB;
 
 -- para wamp en cada tabla ENGINE=INNODB;
 
@@ -171,11 +171,11 @@ INSERT INTO `sede`(`isActivo`, `nombreSede`, `descripcion`) VALUES (1,'Heredia',
 INSERT INTO `sede`(`isActivo`, `nombreSede`, `descripcion`) VALUES (1,'San Jose','San Jose');
 INSERT INTO `sede`(`isActivo`, `nombreSede`, `descripcion`) VALUES (1,'Alajuela','Alajuela');
 
-INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,'Limon','Zona ubicada en la region de limon');
-INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,'Heredia','Zona ubicada en la region de Heredia');
-INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,'Guanacaste','Zona ubicada en la region de Guanacaste');
-INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,'Alajuela','Zona ubicada en la region de Alajuela');
-INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,'Cartago','Zona ubicada en la region de Cartago');
+INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,1,'Escuala de informatica','Zona ubicada en la region de limon');
+INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (2,1,'central','Zona ubicada en la region de Heredia');
+INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (2,1,'side','Zona ubicada en la region de Guanacaste');
+INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (3,1,'cede alajuela','Zona ubicada en la region de Alajuela');
+INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,1,'cede Cartago','Zona ubicada en la region de Cartago');
 
 INSERT INTO `PlanEmergencia`( `FKidZonaTrabajo`) VALUES(1);
 INSERT INTO `PlanEmergencia`( `FKidZonaTrabajo`) VALUES(2);
@@ -272,7 +272,7 @@ insert into `PlanEmergencia`(`FKidZonaTrabajo`) VALUES (1);
 INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
 `probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (1,1,'placa tectonica',2,4,3);
 
--- insert matriz de riesgo
+-- insert matriz de riesgo no sirve
 INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
 `probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (5,1,'placa tectonica',2,4,3);
 INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
@@ -287,8 +287,26 @@ INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`
 `probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (1,1,'placa tectonica',2,4,3);
 
 
+-- ******************************Alerta***********************************
+-- correr solo una vez en la base 
+-- inserta en la base de permisos
 INSERT INTO `sis_mod` VALUES ('4', 'Administración Planes', 'Administración de los planes de energencia', '1');
 INSERT INTO `sis_mod` VALUES ('5', 'Planes de emergencia', 'permite la edición de los planes de emergencia', '1');
+
+INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('5','1','2');
+INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('5','2','2');
+INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('5','3','2');
+INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('5','4','2');
+INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('5','5','2');
+INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('5','6','2');
+
+INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('4','1','2');
+INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('4','2','2');
+INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('4','3','2');
+INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('4','4','2');
+INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('4','5','2');
+INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('4','6','2');
+
 
 
 drop  table UsuarioZona;
@@ -302,6 +320,7 @@ drop table TipoAmenaza;
 drop table OrigenAmenaza;
 drop table PlanEmergencia;
 drop table ZonaTrabajo;
+drop table Sede;
 
 --SELECT `id`, `nombreZonaTrabajo`FROM `zonatrabajo`,(SELECT `FKidZona` From UsuarioZona where `FKidUsario` = '402340420') UsuZona WHERE zonatrabajo.id = UsuZona.FKidZona  
 
@@ -372,7 +391,8 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS `insert_usuario_zona_trabajo`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_usuario_zona_trabajo`(IN `p_FKidUsuario` varchar(50),IN `p_FKidZona` int, OUT `res` TINYINT  UNSIGNED)
-BEGIN
+BEGIN   
+         declare existe Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 		-- ERROR
@@ -387,8 +407,41 @@ BEGIN
     ROLLBACK;
 	END;
             START TRANSACTION;
+                    select count(`FKidUsuario`) into existe from UsuarioZona where FKidUsuario=p_FKidUsuario and FKidZona=p_FKidZona;
+                    IF(existe = 0) THEN
                     INSERT INTO `UsuarioZona`(FKidUsuario,FKidZona) VALUES (p_FKidUsuario, p_FKidZona);
-                     
+                    END IF; 
+
+            COMMIT;
+            -- SUCCESS
+            SET res = 0;
+            -- Existe usuario
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Proceso Eliminar elemento a usuarioZona
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `delete_usuario_zona_trabajo`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_usuario_zona_trabajo`(IN `p_FKidZona` int, OUT `res` TINYINT  UNSIGNED)
+BEGIN  
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;
+            START TRANSACTION;                   
+                  DELETE FROM `UsuarioZona` WHERE `FKidZona`=p_FKidZona;                   
 
             COMMIT;
             -- SUCCESS

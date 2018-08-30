@@ -108,13 +108,13 @@ function active_capitulo_action(id, isActivo) {
             //alert(response); //DEBUG
             if (response == 1) {
                 jAlert('El estado ha sido actualizado!', 'Exito');
-                OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/list_capitulos.php?', '');
+               
             } else if (response == 0) {
                 jAlert('Ha ocurrido un error en la Base de Datos Intentelo Nuevamente\n Si el problema continua comuniquese con la USTDS', 'Error');
             } else {
                 jAlert('Ha ocurrido un error inesperado intentelo más tarde!', 'Error');
             }
-
+           OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/list_capitulos.php?', '');
         }
     };
     page.innerHTML = '';
@@ -151,13 +151,13 @@ function delete_capitulo_action(id) {
             //alert(response); //DEBUG
             if (response == 0) {
                 jAlert('El Capitulo  se a eliminado correctamente!', 'Exito');
-                OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/list_capitulos.php?', '');
+               
             } else if (response == 1 || response == 2) {
                 jAlert('Ha ocurrido un error en la Base de Datos Intentelo Nuevamente\n Si el problema continua comuniquese con la USTDS', 'Error');
             } else {
                 jAlert('Ha ocurrido un error inesperado intentelo más tarde!', 'Error');
             }
-
+          OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/list_capitulos.php?', '');
         }
     };
     page.innerHTML = '';

@@ -7,7 +7,6 @@ $user_rol = $mySessionController->getVar("rol");
 
 $sql = "SELECT id, descripcion FROM TipoAmenaza";
 $comb = seleccion($sql);
-
 ?>
 <div class="container">
     <div class="well well-sm">
@@ -26,10 +25,10 @@ $comb = seleccion($sql);
                 <select id="select_tipo" name ="select_tipo" class="form-control">                                  
                     <?php
                     if (count($comb) > 0) {
-                        for ($i = 0; $i < count($comb); $i++) {               
-                                ?>
-                                <option value='<?= $comb[$i]['id'] ?>' selected><?= $comb[$i]['descripcion'] ?></option>
-                                <?php                             
+                        for ($i = 0; $i < count($comb); $i++) {
+                            ?>
+                            <option value='<?= $comb[$i]['id'] ?>' selected><?= $comb[$i]['descripcion'] ?></option>
+                            <?php
                         }
                     }
                     ?>
@@ -40,16 +39,18 @@ $comb = seleccion($sql);
                 <div class="radio radio_efect">
                     <label class="radio-inline">
                         <input id="inlineCheckbox1" name="inlineCheckbox" type="radio" value="1" checked> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-<?= $vocab["isActivo"] ?>  
+                        <?= $vocab["isActivo"] ?>  
                     </label>
                     <label class="radio-inline">
                         <input id="inlineCheckbox2" name="inlineCheckbox" type="radio" value="0"> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 
-<?= $vocab["isInactivo"] ?> 
+                        <?= $vocab["isInactivo"] ?> 
                     </label>
                 </div>  
                 <p class="help-block"><small><?= $vocab["desc_categoria_isActivo"] ?></small></p> 
-            </div>  
-            <a class="btn btn-success" name="submit" onclick="new_categoria_amenaza();"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?>  <?= $vocab["categoria_amenaza_title"] ?>  </a>
+            </div>
+            <?php if (check_permiso($mod4, $act3, $user_rol)) { ?>
+                <a class="btn btn-success" name="submit" onclick="new_categoria_amenaza();"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?>  <?= $vocab["categoria_amenaza_title"] ?>  </a>
+            <?php } ?>
         </form>
 
     </div>

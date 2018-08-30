@@ -34,7 +34,7 @@ $user_rol = $mySessionController->getVar("rol");
                 </div> 
                 <p class="help-block"><small><?= $vocab["desc_sede_isActivo"] ?></small></p> 
             </div>   
-            <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
+            <?php if (check_permiso($mod4, $act3, $user_rol)) { ?>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <a class="btn btn-success btn-group-justified"  name="submit" onclick="new_sede();"><i class="fa fa-save fa-inverse"> </i> <?= $vocab["symbol_save"] . " " . $vocab["sede_title"] ?>  </a>
                 </div>

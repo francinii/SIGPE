@@ -47,9 +47,9 @@ if (count($res) <= 0) {
                             ?>
                             <tr>
                                 <td id="tipo<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['tipoPoblacion'] : "$res[$i]"; ?></td>
-                                <td><textarea  type="text"  class="form-control cambios" id="descripcion<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['descripcion'] : ""; ?></textarea></td>
-                                <td> <input type="number" min="0" class="form-control cambios" id="total<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['total'] : "0"; ?>" ></td>
-                                <td><textarea  type="text"  class="form-control cambios" id="discapacidad<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['representacionDe'] : ""; ?></textarea></td> 
+                                <td><textarea  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios" id="descripcion<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['descripcion'] : ""; ?></textarea></td>
+                                <td> <input type="number"  <?= (!$editar) ? "readonly" : ""; ?>  min="0" class="form-control cambios" id="total<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['total'] : "0"; ?>" ></td>
+                                <td><textarea  type="text"   <?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios" id="discapacidad<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['representacionDe'] : ""; ?></textarea></td> 
                             </tr>   
                         <?php
                         }
@@ -60,7 +60,7 @@ if (count($res) <= 0) {
         </div>
     </div>
     <div class="col-lg-8 col-md-8 col-sm-11 col-xs-12">
-<?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
+<?php if ($editar) { ?>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <a class="btn  btn-warning  btn-group-justified"  onclick="javascript:guardarDatosActividades('<?= $idPlanEmergencia ?>', 0,<?= count($res) ?>)" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?></a>
             </div>

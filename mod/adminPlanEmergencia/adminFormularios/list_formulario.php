@@ -54,31 +54,50 @@ for ($i = 0; $i < count($cap); $i++) {
                     ?>
                     <tr id="fila<?= $i ?>"  align='center'>
                         <td><?= $res[$i]['id'] ?></td>                    
-                        <td><?= $res[$i]['descripcion'] ?></td>                      
-                        <td><select  id="select<?= $res[$i]['id']; ?>"  onchange="javascript:odenarFomulario(<?= $res[$i]['id']; ?>, '<?= $res[$i]['descripcion']; ?>')" class="form-control selectpicker" data-live-search="true">
-                                <?php for ($a = 0; $a < count($cap); $a++) { ?>                           
-                                    <optgroup label="<?= $cap[$a]['titulo'] ?>">         
-                                        <?php
-                                        $subcapi = $Cap[$a][0];
-                                        if (count($subcapi) > 0) {
-                                            for ($j = 0; $j < count($subcapi); $j++) {
-                                                ?>                                      
-                                                <option value="<?= $subcapi[$j]['id']; ?>"  <?= ($subcapi[$j]['id'] == $find_key) ? "selected " : ""; ?> data-tokens="<?= $subcapi[$j]['titulo'] ?>"><?= $subcapi[$j]['titulo'] ?> (<?= $cap[$a]['titulo'] ?>)</option>                         
-                                                <?php
+                        <td><?= $res[$i]['descripcion'] ?></td> 
+                        <?php if (check_permiso($mod4, $act4, $user_rol)) { ?>
+                            <td><select  id="select<?= $res[$i]['id']; ?>"  onchange="javascript:odenarFomulario(<?= $res[$i]['id']; ?>, '<?= $res[$i]['descripcion']; ?>')" class="form-control selectpicker" data-live-search="true">
+                                    <?php for ($a = 0; $a < count($cap); $a++) { ?>                           
+                                        <optgroup label="<?= $cap[$a]['titulo'] ?>">         
+                                            <?php
+                                            $subcapi = $Cap[$a][0];
+                                            if (count($subcapi) > 0) {
+                                                for ($j = 0; $j < count($subcapi); $j++) {
+                                                    ?>                                      
+                                                    <option value="<?= $subcapi[$j]['id']; ?>"  <?= ($subcapi[$j]['id'] == $find_key) ? "selected " : ""; ?> data-tokens="<?= $subcapi[$j]['titulo'] ?>"><?= $subcapi[$j]['titulo'] ?> (<?= $cap[$a]['titulo'] ?>)</option>                         
+                                                    <?php
+                                                }
                                             }
+                                            ?>
+                                        </optgroup>
+                                    <?php } ?>
+                                </select></td>
+                        <?php } else { ?>
+                            <?php for ($a = 0; $a < count($cap); $a++) { ?>                          
+                                <?php
+                                $subcapi = $Cap[$a][0];
+                                if (count($subcapi) > 0) {
+                                    for ($j = 0; $j < count($subcapi); $j++) {
+
+                                        if ($subcapi[$j]['id'] == $find_key) {
+                                            ?>
+                                            <td><?= $subcapi[$j]['titulo'] ?>(<?= $cap[$a]['titulo'] ?>)</td> 
+                                            <?php
                                         }
-                                        ?>
-                                    </optgroup>
-                                <?php }
+                                    }
+                                }
                                 ?>
-                            </select></td>                                           
+
+                            <?php } ?>
+
+                    <?php } ?>
                     </tr>
                 <?php } ?>
-            <?php } else { ?>
+<?php } else { ?>
                 <tr id="fila0" align='center'>
                     <td colspan="4"><?= $vocab["symbol_no_data"] ?></td>
                 </tr>   
-            <?php } ?>
+<?php } ?>
         </tbody>
         <tfoot>
             <tr>
@@ -89,13 +108,13 @@ for ($i = 0; $i < count($cap); $i++) {
             </tr>
         </tfoot>
     </table>
-    <?php /*     * ***************************************************************************************** */ ?>
+<?php /* * ***************************************************************************************** */ ?>
     <br/> 
 
 </div>
 <script>
     cargoAdminFormulario();
-    
+
 </script>
 
 

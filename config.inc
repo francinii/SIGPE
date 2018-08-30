@@ -40,5 +40,5 @@ $mod1 = 1; // Administracion
 $mod2 = 2; // Modulos
 $mod3 = 3; // Usuarios
 $mod4 = 4; // Administracion planes de emergencia
-$mod3 = 5; // Planes de emergencia
+$mod5 = 5; // Planes de emergencia
 ?>

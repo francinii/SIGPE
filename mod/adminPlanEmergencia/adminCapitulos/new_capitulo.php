@@ -22,7 +22,7 @@ $user_rol = $mySessionController->getVar("rol");
                 <p class="help-block"><small><?= $vocab["capitulo_Descripcion"] ?></small></p> 
             </div>            
            
-                <?php if (check_permiso($mod3, $act3, $user_rol)) { ?>
+                <?php if (check_permiso($mod4, $act3, $user_rol)) { ?>
                     <div class="text-center"><a class="btn btn-success"  name="submit" onclick="new_capitulo();"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] . " " . $vocab["capitulo_capitulo"] ?>  </a></div>
                 <?php } ?>
             

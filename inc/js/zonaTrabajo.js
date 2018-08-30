@@ -83,10 +83,12 @@ function new_zona_trabajo() {
 
 function delete_zona_trabajo_action(id) {
     var page = document.getElementById('container');
+    var sede = document.getElementById('select_sede').value;
     page.innerHTML = cargando;
     var ajax = NuevoAjax();
     //Preparacion  llamada AJAX
     var _values_send = 'id=' + id;
+    
     var _URL_ = "mod/adminPlanEmergencia/adminZonaTrabajo/ajax_del_zona_trabajo.php?";
     //alert(_URL_ + _values_send); //DEBUG
     ajax.open("GET", _URL_ + "&" + _values_send, true);
@@ -103,7 +105,7 @@ function delete_zona_trabajo_action(id) {
             } else {
                 jAlert('Ha ocurrido un error inesperado intentelo más tarde!', 'Error');
             }
-            OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', '');
+            OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', 'find_key='+sede);
         }
     };
     page.innerHTML = '';
@@ -131,6 +133,15 @@ function update_zona_trabajo(id) {
         var sede = document.getElementById('select_sede').value;
         var descripcion = document.getElementById('descripcion').value;
         var activo = 0;
+        var lista = new Array();
+        var fila = document.getElementById("tabla_usuario_zona").firstElementChild.nextElementSibling;
+        fila = fila.firstElementChild;
+        while (fila != null) {
+            var hijo = fila.firstElementChild;
+            var text = hijo.innerHTML;
+            lista.push(text);
+            fila = fila.nextElementSibling;
+        }        
         if (document.getElementById('inlineCheckbox1').checked)
             activo = 1;
         else
@@ -138,7 +149,8 @@ function update_zona_trabajo(id) {
 
         var ajax = NuevoAjax();
         var _values_send =
-                'id=' + id +
+                '&lista=' + JSON.stringify(lista) +
+                '&id=' + id +
                 '&nombre=' + nombre +
                 '&sede=' + sede +
                 '&descripcion=' + descripcion +

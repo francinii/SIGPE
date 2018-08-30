@@ -113,13 +113,13 @@ function active_subcapitulo_action(id,isActivo,select) {
             //alert(response); //DEBUG
             if (response == 1) {
                 jAlert('El estado ha sido actualizado!', 'Exito');
-                   OpcionMenu('mod/adminPlanEmergencia/adminSubcapitulos/list_subcapitulos.php?', 'find_key='+select);
+                   
             } else if (response == 0) {
                 jAlert('Ha ocurrido un error en la Base de Datos Intentelo Nuevamente\n Si el problema continua comuniquese con la USTDS', 'Error');
             } else {
                 jAlert('Ha ocurrido un error inesperado intentelo más tarde!', 'Error');
             }
-         
+         OpcionMenu('mod/adminPlanEmergencia/adminSubcapitulos/list_subcapitulos.php?', 'find_key='+select);
         }
     };
     page.innerHTML = '';
@@ -156,13 +156,13 @@ function delete_subcapitulo_action(id,select) {
             //alert(response); //DEBUG
             if (response == 0) {
                 jAlert('El Capitulo  se a eliminado correctamente!', 'Exito');
-             OpcionMenu('mod/adminPlanEmergencia/adminSubcapitulos/list_subcapitulos.php?', 'find_key='+select);
+             
             } else if (response == 1 || response == 2) {
                 jAlert('Ha ocurrido un error en la Base de Datos Intentelo Nuevamente\n Si el problema continua comuniquese con la USTDS', 'Error');
             } else {
                 jAlert('Ha ocurrido un error inesperado intentelo más tarde!', 'Error');
             }
-            
+            OpcionMenu('mod/adminPlanEmergencia/adminSubcapitulos/list_subcapitulos.php?', 'find_key='+select);
         }
     };
     page.innerHTML = '';

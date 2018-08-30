@@ -39,7 +39,7 @@ $res = seleccion($sql);
             </div>  
            <?php
             if ($view_mode == 1) {
-                if (check_permiso($mod1, $act4, $user_rol)) {
+                if (check_permiso($mod4, $act4, $user_rol)) {
                     ?>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <a <?= ($view_mode == 0) ? "readonly" : ""; ?> class="btn btn-success btn-group-justified"  name="submit" onclick="update_origen_amenaza(<?= $res[0]['id'] ?>);"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_update"] . " " . $vocab["permits_title"] ?></a>

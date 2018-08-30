@@ -206,7 +206,7 @@ $vocab["formulario_admin_Desc"]        = "Colocar la información de los formula
 $vocab["list_formulario"]              = "Lista de formularios";
 $vocab["formulario_id"]                = "id";
 $vocab["formulario_formulario"]        = "Formulario";
-$vocab["formulario_subcapitulo"]        = "subcapitulo";
+$vocab["formulario_subcapitulo"]        = "subcapitulo(CAPITULO)";
 
 
 //***********     Modulo Formulario matriz de riesgos    ***********************//
