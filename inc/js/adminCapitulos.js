@@ -166,6 +166,7 @@ function delete_capitulo_action(id) {
 
 //*****+*+ new capitulo********+
 function CrearEditorCapitulos() {
+   
     editor = CKEDITOR.replace('capitulo_Descripcion');
     editor.addCommand("mySimpleCommand", {
         exec: function (edt) {
