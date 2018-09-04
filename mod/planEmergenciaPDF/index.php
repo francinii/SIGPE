@@ -20,7 +20,7 @@ echo '<'.'?'.'xml version="1.0" encoding="UTF-8"'.'?'.'>';
 <h2>PDF</h2>
 
 <ol>
-    <li>Simple PDF with default Header and Footer: [<a href="lib/tcpdf/examples/planEmergenciaPDF.php" title="PDF [new window]" target="_blank">PDF</a>]</li>
+    <li>Simple PDF with default Header and Footer: [<a href="mod/planEmergenciaPDF/planEmergenciaPDF.php" title="PDF [new window]" target="_blank">PDF</a>]</li>
 </ol>
 
 </body>

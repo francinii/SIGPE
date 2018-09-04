@@ -166,9 +166,9 @@ FOREIGN KEY(FKidZona) REFERENCES ZonaTrabajo(id)
 
 -- para wamp en cada tabla ENGINE=INNODB;
 
-INSERT INTO `sede`(`isActivo`, `nombreSede`, `descripcion`) VALUES (1,'Heredia','Heredia');
-INSERT INTO `sede`(`isActivo`, `nombreSede`, `descripcion`) VALUES (1,'San Jose','San Jose');
-INSERT INTO `sede`(`isActivo`, `nombreSede`, `descripcion`) VALUES (1,'Alajuela','Alajuela');
+INSERT INTO `Sede`(`isActivo`, `nombreSede`, `descripcion`) VALUES (1,'Heredia','Heredia');
+INSERT INTO `Sede`(`isActivo`, `nombreSede`, `descripcion`) VALUES (1,'San Jose','San Jose');
+INSERT INTO `Sede`(`isActivo`, `nombreSede`, `descripcion`) VALUES (1,'Alajuela','Alajuela');
 
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,1,'Escuala de informatica','Zona ubicada en la region de limon');
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (2,1,'central','Zona ubicada en la region de Heredia');
@@ -306,7 +306,6 @@ drop table PlanEmergencia;
 drop table ZonaTrabajo;
 drop table Sede;
 
---SELECT `id`, `nombreZonaTrabajo`FROM `zonatrabajo`,(SELECT `FKidZona` From UsuarioZona where `FKidUsario` = '402340420') UsuZona WHERE zonatrabajo.id = UsuZona.FKidZona  
 
 
 -- ----------------Procedimientos almacenados----------------------------------

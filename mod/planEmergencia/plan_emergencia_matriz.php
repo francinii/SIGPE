@@ -49,9 +49,9 @@ function selectorMatriz($cod, $opcion) {
 }
 
 function buscarRegistro($matriz, $categoria) {
-    for ($i = 0; $i < count($matriz); $i++) { 
+    for ($i = 0; $i < count($matriz); $i++) {
         if ($matriz[$i]['FKidCategoriaTipoAmenaza'] == $categoria) {
-       // if ($matriz[$i]['id'] == $categoria) {
+            // if ($matriz[$i]['id'] == $categoria) {
             return $matriz[$i];
         }
     }
@@ -145,6 +145,7 @@ $matriz = seleccion($sql);
         </thead>
         <tbody>
             <?php
+            $bandera = 0;
             $criterios = null;
             for ($i = 0; $i < count($origenes); $i++) {
                 $idOrigen = $origenes[$i]['id'];
@@ -154,6 +155,7 @@ $matriz = seleccion($sql);
                 $cantidadTipos = count($tipos);
                 ?>
                 <?php // if ($origenes > 0) { ?>
+
                 <?php if ($cantidadCategorias > 0) { ?>
                     <tr>
                         <td rowspan="<?= $cantidadCategorias ?>"> <?= $origenes[$i]['descripcion']; ?> </td>
@@ -162,8 +164,10 @@ $matriz = seleccion($sql);
                             $idTipo = $tipos[$j]['id'];
                             $categoriasPorTipo = seleccion(consultaCategoriasPorTipo($idTipo));
                             $cantidadCategoriasPorTipo = count($categoriasPorTipo);
+                            $a = count($categoriasPorTipo);
+                            $bandera = (count($categoriasPorTipo) > 0)? $bandera + 1:$bandera;                            
                             ?>
-                            <?php if ($j != 0 && $cantidadCategoriasPorTipo > 0) { ?>
+                            <?php if ($j != 0 && $cantidadCategoriasPorTipo > 0 && $bandera > 1) { ?>
                             <tr>
                             <?php } ?>
                             <?php if ($cantidadCategoriasPorTipo > 0) { ?>
@@ -196,20 +200,22 @@ $matriz = seleccion($sql);
                                 </tr>
                             <?php } ?>
                         <?php } else { ?>
-                            </tr>
+                            <?php if ($bandera > 1) { ?>
+                                </tr>
+                            <?php } ?>
                         <?php } ?>
-                    <?php } ?>
+                    <?php } $bandera = 0; ?>
                 <?php } ?>  
             <?php } ?>
         </tbody>
     </table>
     <br/>
     <div class="text-center">
-        <span class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:generaVectorMatriz('<?= $nombreCentro ?>','<?= $idCentro ?>','0');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["matriz_title"] ?></a></span>
+        <span class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:generaVectorMatriz('<?= $nombreCentro ?>', '<?= $idCentro ?>', '0');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["matriz_title"] ?></a></span>
         <?php if ($criterios != null) { ?>   
-         <span class="text-center"><a class="btn btn-warning" name="" onclick="javascript:generaVectorMatriz('<?= $nombreCentro ?>','<?= $idCentro ?>','1');"><i class='fa fa-plus fa-inverse'></i>  <?= $vocab["graficar_matriz"] ?></a></span>
-       
-      <?php } ?>
+            <span class="text-center"><a class="btn btn-warning" name="" onclick="javascript:generaVectorMatriz('<?= $nombreCentro ?>', '<?= $idCentro ?>', '1');"><i class='fa fa-plus fa-inverse'></i>  <?= $vocab["graficar_matriz"] ?></a></span>
+
+        <?php } ?>
     </div>
 
 </div>
