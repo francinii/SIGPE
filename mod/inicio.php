@@ -107,12 +107,13 @@ foreach ($res as $value) {
             <br/>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <?php if (check_permiso($mod5, $act1, $user_rol) || check_permiso($mod5, $act2, $user_rol)) { ?>
-                    <a class="btn btn-success btn-group-justified" onclick="javascript:OpcionInicio();" name="submit" > <?= $vocab["inicio_Empezar"] ?></a>
+                    <a class="btn btn-success btn-group-justified" onclick="javascript:OpcionInicio(0);" name="submit" > <?= $vocab["inicio_Empezar"] ?></a>
                 <?php } ?>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <?php if (check_permiso($mod5, $act6, $user_rol)) { ?>
-                    <a class="btn btn-warning btn-group-justified"  name="submit" ><i class="fa fa-print"></i> <?= $vocab["inicio_Imprimir"] ?></a>
+                <a class="btn btn-warning btn-group-justified" onclick="javascript:OpcionInicio(1);"
+                      name="" ><i class="fa fa-print"></i> <?= $vocab["inicio_Imprimir"] ?></a>
                 <?php } ?>
             </div>                
         </form>

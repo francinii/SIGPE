@@ -25,14 +25,20 @@
  * @since 2008-03-04
  */
 
+include("../login/check.php");
+include("../../functions.php");
+$vocab = $mySessionController->getVar("vocab");
+$user_rol = $mySessionController->getVar("rol");
+include_once('../../lib/tcpdf/examples/tcpdf_include.php');
 
-require_once('tcpdf_include.php');
-$sql = "SELECT  id, nombreZonaTrabajo FROM ZonaTrabajo";
+$id = $_GET['idCentro'];
+$sql = "(SELECT  id, nombreZonaTrabajo FROM ZonaTrabajo where id =".$id .")";
 // Extend the TCPDF class to create custom Header and Footer
-
+$res = seleccion($sql); 
 global $datosCabecera;
-$centroTrabajo = "Escuela de informatica";
-$logoUNA = "logo_una.jpg";
+$dirImages= "images/";
+$centroTrabajo = $res[0]["nombreZonaTrabajo"];
+$logoUNA = $dirImages."logo_una.jpg";
 $logoCentro = "logoCentro";
 $codigo = "";
 $revisadoPor = "";
@@ -43,6 +49,7 @@ $datosCabecera = array(
     "codigo" => $codigo,
     "revisado" => $revisadoPor);
 
+
 class MYPDF extends TCPDF {
 
     public function Header() {
@@ -50,9 +57,9 @@ class MYPDF extends TCPDF {
 
         $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
                 . '<tr style = "text-align:center;">'
-                . '<td rowspan="3"><img src= "images/' . $datosCabecera['logoUNA'] . '" width="100" height="100" ></td>'
+                . '<td rowspan="3"><img src= "' . $datosCabecera['logoUNA'] . '" width="100" height="100" ></td>'
                 . '<td >' . $datosCabecera['centroTrabajo'] . '</td>'
-                . '<td rowspan="3"><img src= "images/' . $datosCabecera['logoUNA'] . '" width="100" height="100" ></td>'
+                . '<td rowspan="3"><img src= "' . $datosCabecera['logoUNA'] . '" width="100" height="100" ></td>'
                 . '<td>Codigo ' . $datosCabecera['codigo'] . '</td>'
                 . '</tr>'
                 . '<tr style = "text-align:center;">'
