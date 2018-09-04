@@ -161,7 +161,6 @@ FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 create table UsuarioZona(
 FKidUsuario varchar(50),
 FKidZona int,
-FOREIGN KEY(FKidUsuario) REFERENCES sis_user(id),
 FOREIGN KEY(FKidZona) REFERENCES ZonaTrabajo(id)
 ) ENGINE=InnoDB;
 
@@ -269,22 +268,7 @@ INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',2);
 INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',5);
 
 insert into `PlanEmergencia`(`FKidZonaTrabajo`) VALUES (1);
-INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
-`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (1,1,'placa tectonica',2,4,3);
 
--- insert matriz de riesgo no sirve
-INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
-`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (5,1,'placa tectonica',2,4,3);
-INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
-`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (3,1,'placa tectonica',2,4,3);
-INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
-`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (4,1,'placa tectonica',2,4,3);
-INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
-`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (6,1,'placa tectonica',2,4,3);
-INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
-`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (7,1,'placa tectonica',2,4,3);
-INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
-`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (1,1,'placa tectonica',2,4,3);
 
 
 -- ******************************Alerta***********************************
