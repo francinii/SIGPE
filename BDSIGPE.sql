@@ -270,6 +270,7 @@ INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',5);
 insert into `PlanEmergencia`(`FKidZonaTrabajo`) VALUES (1);
 
 
+
 -- ******************************Alerta***********************************
 -- correr solo una vez en la base 
 -- inserta en la base de permisos

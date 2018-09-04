@@ -16,9 +16,9 @@ $ip .= $mySessionController->getVar("cds_locate");
 
 /* * ********************************************************************************************** */
 if (check_permiso($mod4, $act2, $user_rol)) {
-    $sql = "select sede.id as idSede, sede.nombreSede, zonatrabajo.id as idZona, zonatrabajo.nombreZonaTrabajo from zonatrabajo ,(SELECT `id`,`nombreSede`  FROM `sede` WHERE `isActivo`=1) sede where  zonatrabajo.FKidSede = sede.id  and isActivo=1 order by idSede";
+    $sql = "select sede.id as idSede, sede.nombreSede, ZonaTrabajo.id as idZona, ZonaTrabajo.nombreZonaTrabajo from ZonaTrabajo ,(SELECT `id`,`nombreSede`  FROM `sede` WHERE `isActivo`=1) sede where  ZonaTrabajo.FKidSede = sede.id  and isActivo=1 order by idSede";
 } else {
-    $sql = "SELECT sede.id as idSede, sede.nombreSede,zona.id as idZona, zona.nombreZonaTrabajo FROM `sede`,(SELECT `id`, `nombreZonaTrabajo`,`FKidSede` FROM `zonatrabajo`,(SELECT `FKidZona` From UsuarioZona where `FKidUsuario` = '$user_id') UsuZona WHERE ZonaTrabajo.id = UsuZona.FKidZona  and isActivo=1) zona  where sede.`id`= zona.FKidSede and isActivo=1 order by idSede";
+    $sql = "SELECT sede.id as idSede, sede.nombreSede,zona.id as idZona, zona.nombreZonaTrabajo FROM `Sede`,(SELECT `id`, `nombreZonaTrabajo`,`FKidSede` FROM `ZonaTrabajo`,(SELECT `FKidZona` From UsuarioZona where `FKidUsuario` = '$user_id') UsuZona WHERE ZonaTrabajo.id = UsuZona.FKidZona  and isActivo=1) zona  where sede.`id`= zona.FKidSede and isActivo=1 order by idSede";
 }
 $res = seleccion($sql);
 $sedes = Array();
