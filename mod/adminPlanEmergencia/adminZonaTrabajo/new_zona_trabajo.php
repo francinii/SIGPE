@@ -15,7 +15,7 @@ $sede = seleccion($sql);
         <h2><?= $vocab["zona_trabajo_title"] ?></h2>        
     </div>
     <div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
-        <form method="post" action="">            
+        <form method="post" action="" enctype="multipart/form-data">            
             <div class="form-group">
                 <label  for="zona_trabajo_title"><?= $vocab["zona_trabajo_title"] ?></label>
                 <input id="nombre" name="zona_trabajo_title" class="form-control" type="text" value=""/> 
@@ -29,6 +29,16 @@ $sede = seleccion($sql);
                     <?php } ?>
                 </select>
                 <p class="help-block"><small><?= $vocab["zona_trabajo_sede_Desc"] ?></small></p> 
+            </div>
+            <div class="form-group">
+                    <label for="type-file">Elemento input type file</label>
+                    <input id="type-file" name="type-file" class="form-control filestyle" type="file" placeholder="propiedad placeholder" title="propiedad title"/>
+                    <script type="text/javascript">
+                        jQuery(document).ready(function () {
+                            jQuery(":file").filestyle();
+                        });
+                    </script>
+                    <p class="help-block">Sirve para seleccionar la ruta a un archivo local</p>
             </div>
             <div class="form-group">
                 <label  for="descripcion"><?= $vocab["symbol_desc"] ?> </label>                

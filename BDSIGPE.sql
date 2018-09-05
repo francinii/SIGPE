@@ -23,6 +23,7 @@ FKidSede int,
 isActivo int,
 nombreZonaTrabajo varchar(150),
 descripcion varchar(150),
+logo varchar(150),
 longitud varchar(150),
 latitud varchar(150),
 PRIMARY KEY(id),
@@ -106,7 +107,7 @@ create table Matriz (
     id int NOT NULL AUTO_INCREMENT,  
     FKidCategoriaTipoAmenaza int,
     FKidPlanEmergencias int,
-    fuente text,
+    fuente varchar(5000),
     probabilidad int,
     gravedad int,
     consecuenciaAmenaza int,
@@ -120,7 +121,7 @@ create table Matriz (
 
 create table Capitulo(
 id int NOT NULL AUTO_INCREMENT,
-descripcion text,
+descripcion varchar(5000),
 isActivo int,
 titulo varchar(150),
 orden int,
@@ -129,7 +130,7 @@ orden int,
 
 create table SubCapitulo(
 id int NOT NULL AUTO_INCREMENT,
-descripcion text,
+descripcion varchar(5000),
 titulo varchar(150),
 isActivo int,
 FKidCapitulo int,
@@ -140,7 +141,7 @@ FOREIGN KEY (FKidCapitulo) REFERENCES Capitulo(id)
 
 create table Formulario(
 id int NOT NULL AUTO_INCREMENT,
-descripcion text,
+descripcion varchar(5000),
 FKidSubcapitulos int,
 PRIMARY KEY(id),
 FOREIGN KEY (FKidSubcapitulos) REFERENCES SubCapitulo(id)
@@ -762,7 +763,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `insert_capitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_capitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_descripcion` text,  OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_capitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_descripcion` varchar(5000),  OUT `res` TINYINT  UNSIGNED)
 BEGIN
 declare ordenar Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION     
@@ -803,7 +804,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `insert_subcapitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_subcapitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_fkcapitulo` int,IN  `p_descripcion` text,  OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_subcapitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_fkcapitulo` int,IN  `p_descripcion` varchar(5000),  OUT `res` TINYINT  UNSIGNED)
 BEGIN
 declare ordenar Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -842,7 +843,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_capitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_capitulo`(IN `p_id` int,IN `p_titulo` varchar(150), IN  `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_capitulo`(IN `p_id` int,IN `p_titulo` varchar(150), IN  `p_descripcion` varchar(5000), OUT `res` TINYINT  UNSIGNED)
 BEGIN
         
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -876,7 +877,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_subcapitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_subcapitulo`(IN `p_id` int,IN `p_titulo` varchar(150),IN `p_fkcapitulo` int, IN  `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_subcapitulo`(IN `p_id` int,IN `p_titulo` varchar(150),IN `p_fkcapitulo` int, IN  `p_descripcion` varchar(5000), OUT `res` TINYINT  UNSIGNED)
 BEGIN   
         declare ordenar Integer;
         declare FKAntigua Integer;
