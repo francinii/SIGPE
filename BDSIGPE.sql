@@ -851,7 +851,7 @@ BEGIN
     SET res = 2;
     ROLLBACK;
 	END;
-            select FKidCapitulo into FKAntigua from Subcapitulo WHERE `id`=p_id;
+            select FKidCapitulo into FKAntigua from SubCapitulo WHERE `id`=p_id;
             IF(FKAntigua = p_fkcapitulo) THEN
                   START TRANSACTION;
                    UPDATE `SubCapitulo` SET `descripcion`= p_descripcion ,`titulo`=p_titulo, `FKidCapitulo`=p_fkcapitulo WHERE `id`=p_id;
