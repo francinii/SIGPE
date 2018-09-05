@@ -33,11 +33,12 @@ include_once('../../lib/tcpdf/examples/tcpdf_include.php');
 $id = $_GET['idCentro'];
 $sql = "(SELECT  id, nombreZonaTrabajo FROM ZonaTrabajo where id =" . $id . ")";
 $sqlPlan = "(SELECT `id`, `FKidZonaTrabajo`, `revisadoPor`, `codigoZonaTrabajo`, `actividad`, `direccion`, `personaContactoGeneral`, `numeroTelefono`, `numeroFax`, `notificaciones`, `categoriaNFPA`, `usoInstalaciones`, `horarioJornada`, `seguridadInstitucional`, `servicioConsegeria`, `personalAdministrativo`, `personalAcademico`, `presenciaEstudiantil`, `instalacionesDensidadOcupacion`, `instalacionesAreaConstruccion`, `instalacionesInstalaciones`, `instalacionesCaracteristicasZona`, `instalacionesTopografia`, `instalacionesNivelTerreno`, `instalacionesColindates`, `elementosConstructivosTipoConstruccion`, `elementosConstructivosAntiguedad`, `elementosConstructivosCimientos`, `elementosConstructivosEstructura`, `elementosConstructivosParedes`, `elementosConstructivosEntrepiso`, `elementosConstructivosTecho`, `elementosConstructivosCielos`, `elementosConstructivosPisos`, `elementosConstructivosAreaParqueo`, `elementosConstructivosSistemaAguaPotable`, `elementosConstructivosAlcantarilladoSanitario`, `elementosConstructivosAlcantarilladoPluvial`, `elementosConstructivosSistemaElectrico`, `elementosConstructivosSistemaTelefonico`, `elementosConstructivosOtros` FROM `PlanEmergencia` where FKidZonaTrabajo =" . $id . ")";
-$capitulos = "(SELECT  id, descripcion, orden,titulo,isActivo FROM Capitulo ORDER BY orden)";
+$sqlCapitulos = "(SELECT  id, descripcion, orden,titulo,isActivo FROM Capitulo ORDER BY orden)";
 
 
 $res = seleccion($sql);
 $resPlan = seleccion($sqlPlan);
+$rescapitulos = seleccion($sqlCapitulos);
 global $datosCabecera;
 $dirImages = "images/";
 $centroTrabajo = $res[0]["nombreZonaTrabajo"];
@@ -59,19 +60,20 @@ class MYPDF extends TCPDF {
         global $datosCabecera;
         $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
                 . '<tr style = "text-align:center;">'
-                . '<td rowspan="3"><img src= "' . $datosCabecera['logoUNA'] . '" width="100" height="100" ></td>'
+                . '<td rowspan="2"><img src= "' . $datosCabecera['logoUNA'] . '" width="60" height="60" ></td>'
                 . '<td >' . $datosCabecera['centroTrabajo'] . '</td>'
-                . '<td rowspan="3"><img src= "' . $datosCabecera['logoUNA'] . '" width="100" height="100" ></td>'
+                . '<td rowspan="2"><img src= "' . $datosCabecera['logoUNA'] . '" width="60" height="60" ></td>'
                 . '<td><b>Código</b> ' . $datosCabecera['codigo'] . '</td>'
                 . '</tr>'
                 . '<tr style = "text-align:center;">'
-                . '<td rowspan="2">Plan de preparativos de respuesta ante emergencias</td>'
+                . '<td >Plan de preparativos de respuesta ante emergencias</td>'
                 . '<td><b>Revisado por:</b><br>' . $datosCabecera['revisado'] . '</td>'
                 . '</tr>'
                 . '<tr style = "text-align:center;">'
-                . '<td>Pagina</td>'
+              
                 . '</tr>'
-                . '</table>';
+                . '</table>'
+                . '<div style = "height: 250px;"></div>';
         $this->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $html, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'top', $autopadding = true);
     }
 
@@ -96,7 +98,7 @@ $pdf->SetKeywords('Plan, PDF, emergencias, CIEUNA, UNA');
 //$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 //
 // set default monospaced font
-$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+//$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
 $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
@@ -105,7 +107,8 @@ $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
 // set auto page breaks
 $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-
+$font = array('times', '', 10);
+$pdf->SetHeaderFont($font);
 // set image scale factor
 $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
@@ -118,17 +121,29 @@ $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 //
 //// ---------------------------------------------------------
 portada($pdf);
-capitulos($pdf, $capitulos);
+capitulos($pdf, $rescapitulos);
 
 function capitulos($pdf, $capitulos) {
     cargarNuevaPagina($pdf);
-    $html = '<div style = "height: 100px;"><div>';
+   // $html = '<div style = "height: 250px;"><div>';
     foreach ($capitulos as $cap) {
-      
-      //  $html .= $cap['descripcion'];
-        
-    }  $html = "'<span>fag</span>";
+        $html .= '<div><h1><b>' . $cap['titulo']  .'</b></h1>';
+        $html .= $cap['descripcion'] . '</div>';
+        $html .=  subCapitulos($pdf, $cap['id']);
+    }
+
     $pdf->writeHTML($html, true, false, true, false, '');
+}
+
+function subCapitulos($pdf, $id) {
+    $sql = "(SELECT  id, descripcion, orden,titulo,isActivo FROM SubCapitulo where FKidCapitulo = $id ORDER BY orden)";
+    $subcapitulos = seleccion($sql);
+    foreach ($subcapitulos as $sub) {        
+        $html .= '<div><h2><b>' . $sub['titulo'] .'</b></h2>' ;
+        $html .= $sub['descripcion'] . '</div>';
+    }
+
+   return $html;
 }
 
 function portada($pdf) {
