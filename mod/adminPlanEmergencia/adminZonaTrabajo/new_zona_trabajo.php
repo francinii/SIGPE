@@ -31,14 +31,14 @@ $sede = seleccion($sql);
                 <p class="help-block"><small><?= $vocab["zona_trabajo_sede_Desc"] ?></small></p> 
             </div>
             <div class="form-group">
-                    <label for="type-file">Elemento input type file</label>
+                    <label for="type-file"><?= $vocab["list_zona_trabajo_logo"] ?></label>
                     <input id="type-file" name="type-file" class="form-control filestyle" type="file" placeholder="propiedad placeholder" title="propiedad title"/>
                     <script type="text/javascript">
                         jQuery(document).ready(function () {
                             jQuery(":file").filestyle();
                         });
                     </script>
-                    <p class="help-block">Sirve para seleccionar la ruta a un archivo local</p>
+                    <p class="help-block"><?= $vocab["list_zona_trabajo_logo_desc"] ?></p>
             </div>
             <div class="form-group">
                 <label  for="descripcion"><?= $vocab["symbol_desc"] ?> </label>                

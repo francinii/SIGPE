@@ -8,7 +8,20 @@ $nombre = $_GET['nombre'];
 $sede = $_GET['sede'];
 $activo = $_GET['activo'];
 $descripcion = $_GET['descripcion'];
-$sql_a = "CALL update_zona_trabajo('$id','$sede','$nombre','$activo','$descripcion',@res);";
+
+$nombrearchivo=null;
+if(isset($_FILES['archivo'])){
+$nombrearchivo =explode(".",$_FILES['archivo']['name']);
+$nombrearchivo=$nombre.".".$nombrearchivo[count($nombrearchivo)-1];
+$tipo = $_FILES['archivo']['type'];
+$tamanio = $_FILES['archivo']['size'];
+$ruta = $_FILES['archivo']['tmp_name'];
+$destino = "../../../img/" . $nombrearchivo;
+$sirvio=move_uploaded_file($ruta,$destino);
+}
+
+
+$sql_a = "CALL update_zona_trabajo('$id','$sede','$nombre','$activo','$nombrearchivo','$descripcion',@res);";
 $sql_b = "SELECT @res as res;";
 //echo $sql_a.$sql_b;
 $res = transaccion_verificada($sql_a, $sql_b);

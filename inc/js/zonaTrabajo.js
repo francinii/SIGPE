@@ -48,6 +48,8 @@ function new_zona_trabajo() {
             activo = 0;
         var file2 = document.getElementById("type-file")
         var archivo = file2.files[0]; 
+        var formData = new FormData();
+        formData.append('archivo',archivo);
         
         var ajax = NuevoAjax();
         var _values_send =
@@ -57,13 +59,12 @@ function new_zona_trabajo() {
                 '&descripcion=' + descripcion +                
                 '&descripcion=' + descripcion +
                 '&inlineCheckbox=' + activo;
-        var formData = new FormData();
-        formData.append('archivo',archivo);
+        
  
         var _URL_ = "mod/adminPlanEmergencia/adminZonaTrabajo/ajax_new_zona_trabajo.php?";
         //alert(_URL_ + _values_send); //DEBUG
         ajax.open("POST", _URL_ + _values_send, true);
-        ajax.send(formData);
+       
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 1) {
                 //Nada
@@ -82,7 +83,7 @@ function new_zona_trabajo() {
                 }
             }
         };
-        ajax.send(null);
+        ajax.send(formData);
         loading.innerHTML = "";
     }
 }
@@ -153,6 +154,11 @@ function update_zona_trabajo(id) {
         else
             activo = 0;
 
+ var file2 = document.getElementById("type-file")
+        var archivo = file2.files[0]; 
+        var formData = new FormData();
+        formData.append('archivo',archivo);
+
         var ajax = NuevoAjax();
         var _values_send =
                 '&lista=' + JSON.stringify(lista) +
@@ -163,10 +169,9 @@ function update_zona_trabajo(id) {
                 '&activo=' + activo;
         var _URL_ = "mod/adminPlanEmergencia/adminZonaTrabajo/ajax_edit_zona_trabajo.php?";
         //alert(_URL_ + _values_send); //DEBUG
-        ajax.open("GET", _URL_ + _values_send, true);
+        ajax.open("POST", _URL_ + _values_send, true);
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 1) {
-
                 //Nada
             } else if (ajax.readyState == 4) {
                 var response = ajax.responseText;
@@ -183,7 +188,7 @@ function update_zona_trabajo(id) {
                 }
             }
         };
-        ajax.send(null);
+        ajax.send(formData);
         loading.innerHTML = "";
     }
 
