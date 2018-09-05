@@ -36,6 +36,13 @@ $sqlPlan = "(SELECT `id`, `FKidZonaTrabajo`, `revisadoPor`, `codigoZonaTrabajo`,
 $sqlCapitulos = "(SELECT  id, descripcion, orden,titulo,isActivo FROM Capitulo ORDER BY orden)";
 
 
+$sql = "(SELECT  id, FKidSubcapitulos FROM Formulario)";
+$formularios = seleccion($sql);
+
+$sql = "(SELECT  tipoPoblacion, descripcion, total, representacionDe FROM TipoPoblacion)";
+$resTipoPoblacion = seleccion($sql);
+
+
 $res = seleccion($sql);
 $resPlan = seleccion($sqlPlan);
 $rescapitulos = seleccion($sqlCapitulos);
@@ -70,7 +77,6 @@ class MYPDF extends TCPDF {
                 . '<td><b>Revisado por:</b><br>' . $datosCabecera['revisado'] . '</td>'
                 . '</tr>'
                 . '<tr style = "text-align:center;">'
-              
                 . '</tr>'
                 . '</table>'
                 . '<div style = "height: 250px;"></div>';
@@ -99,7 +105,6 @@ $pdf->SetKeywords('Plan, PDF, emergencias, CIEUNA, UNA');
 //
 // set default monospaced font
 //$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-
 // set margins
 $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
@@ -121,29 +126,30 @@ $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 //
 //// ---------------------------------------------------------
 portada($pdf);
-capitulos($pdf, $rescapitulos);
+capitulos($pdf, $rescapitulos, $resPlan, $resTipoPoblacion);
 
-function capitulos($pdf, $capitulos) {
+function capitulos($pdf, $capitulos, $resPlan, $resTipoPoblacion, $formularios) {
     cargarNuevaPagina($pdf);
-   // $html = '<div style = "height: 250px;"><div>';
+    // $html = '<div style = "height: 250px;"><div>';
     foreach ($capitulos as $cap) {
-        $html .= '<div><h1><b>' . $cap['titulo']  .'</b></h1>';
+        $html .= '<div><h1><b>' . $cap['titulo'] . '</b></h1>';
         $html .= $cap['descripcion'] . '</div>';
-        $html .=  subCapitulos($pdf, $cap['id']);
+        $html .= subCapitulos($cap['id'], $resPlan, $resTipoPoblacion, $formularios);
     }
 
     $pdf->writeHTML($html, true, false, true, false, '');
 }
 
-function subCapitulos($pdf, $id) {
+function subCapitulos($id, $resPlan, $resTipoPoblacion, $formularios) {
     $sql = "(SELECT  id, descripcion, orden,titulo,isActivo FROM SubCapitulo where FKidCapitulo = $id ORDER BY orden)";
     $subcapitulos = seleccion($sql);
-    foreach ($subcapitulos as $sub) {        
-        $html .= '<div><h2><b>' . $sub['titulo'] .'</b></h2>' ;
+    foreach ($subcapitulos as $sub) {
+        $html .= '<div><h2><b>' . $sub['titulo'] . '</b></h2>';
         $html .= $sub['descripcion'] . '</div>';
+        $html .= listarFormularios($sub['id'], $formularios,$resPlan,$resTipoPoblacion);
+        $html .= '<div></div>';
     }
-
-   return $html;
+    return $html;
 }
 
 function portada($pdf) {
@@ -165,9 +171,225 @@ function portada($pdf) {
              <img src= "' . $datosCabecera['logoUNA'] . '" width="100" height="100" >
             <h1>' . $datosCabecera["centroTrabajo"] . ' <h1>
             <h1>   Fecha <h1>
+            <h6 style="border: 1px solid black; padding: 20px; text-align: center;">
+            Este documento tiene como objeto cumplir con los requisitos y contenidos que debe
+            cumplir un plan de preparativos y respuesta ante emergencias en centros laborales y 
+            de ocupación pública. Se basa en la Norma CNE-NA- INTE-DN-01:2014, la cual se sustenta 
+            en el artículo 12 de la Ley Nacional de Emergencias y Prevención del Riesgo Nº 8488 y 
+            el artículo 4 de la Ley del Benemérito Cuerpo de Bomberos de Costa Rica Nº 8228
+            </h6>
         </div>';
-
     $pdf->writeHTML($html, true, false, true, false, '');
+}
+
+function formularioDatosGenerales($resPlan) {
+    $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
+            . '<tr style = "text-align:center;">'
+            . '<td>Nombre del centro de trabajo</td>'
+            . '<td>' . $resPlan[0]['actividad'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Actividad</td>'
+            . '<td>' . $resPlan[0]['actividad'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Direccion</td>'
+            . '<td>' . $resPlan[0]['direccion'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Persona de contacto general</td>'
+            . '<td>' . $resPlan[0]['personaContactoGeneral'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Números de teléfono:</td>'
+            . '<td>' . $resPlan[0]['numeroTelefono'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Números de fax:</td>'
+            . '<td>' . $resPlan[0]['numeroFax'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Correo electrónico para notificaciones:</td>'
+            . '<td>' . $resPlan[0]['notificaciones'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Categoría NFPA :</td>'
+            . '<td>' . $resPlan[0]['categoriaNFPA'] . '</td>'
+            . '</tr>'
+            . '<tr >'
+            . '<td>Uso principal de las instalaciones::</td>'
+            . '<td>' . $resPlan[0]['usoInstalaciones'] . '</td>'
+            . '</tr>'
+            . '<tr >'
+            . '<td>Horarios o Jornadas:</td>'
+            . '<td>' . $resPlan[0]['horarioJornada'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Seguridad Institucional:</td>'
+            . '<td>' . $resPlan[0]['seguridadInstitucional'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Servicio de Conserjería:</td>'
+            . '<td>' . $resPlan[0]['servicioConsegeria'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Personal Administrativo:</td>'
+            . '<td>' . $resPlan[0]['personalAdministrativo'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Personal Académico:</td>'
+            . '<td>' . $resPlan[0]['personalAcademico'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Presencia Estudiantil:</td>'
+            . '<td>' . $resPlan[0]['presenciaEstudiantil'] . '</td>'
+            . '</tr>'
+            . '</table>';
+    return $html;
+}
+
+function formularioActividades($resTipoPoblacion) {
+    $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
+            . '<thead><tr style = "text-align:center;">'
+            . '<th>Tipo de población</th>'
+            . '<th>Descripción</th>'
+            . '<th>Total aproximado</th>'
+            . '<th>Representación de persona con discapacidad identificadas (detalle tipo de discapacidad)</th>'
+            . '</tr></thead>';
+    foreach ($resTipoPoblacion as $res) {
+        $html .= '<tbody>'
+                . '<tr>'
+                . '<td>' . $res['tipoPoblacion'] . '</td>'
+                . '<td>' . $res['descripcion'] . '</td>'
+                . '<td>' . $res['total'] . '</td>'
+                . '<td>' . $res['representacionDe'] . '</td>'
+                . '</tr>'
+                . '</tbody>';
+    }
+    $html .= '</table>';
+    return $html;
+}
+
+function formularioInstalaciones($resPlan) {
+    $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
+            . '<tr style = "text-align:center;">'
+            . '<td>Densidad de ocupación:</td>'
+            . '<td>' . $resPlan[0]['instalacionesDensidadOcupacion'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Área de construcción</td>'
+            . '<td>' . $resPlan[0]['instalacionesAreaConstruccion'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Instalaciones:</td>'
+            . '<td>' . $resPlan[0]['instalacionesInstalaciones'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Características de la zona</td>'
+            . '<td>' . $resPlan[0]['instalacionesCaracteristicasZona'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Topografía</td>'
+            . '<td>' . $resPlan[0]['instalacionesTopografia'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Nivel del terreno:</td>'
+            . '<td>' . $resPlan[0]['instalacionesNivelTerreno'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Colindantes:</td>'
+            . '<td>' . $resPlan[0]['instalacionesColindates'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td colspan = "2"><b>Elementos constructivos</b></td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Tipo de construcción:</td>'
+            . '<td>' . $resPlan[0]['elementosConstructivosTipoConstruccion'] . '</td>'
+            . '</tr>'
+            . '<tr >'
+            . '<td>Antigüedad:</td>'
+            . '<td>' . $resPlan[0]['elementosConstructivosAntiguedad'] . '</td>'
+            . '</tr>'
+            . '<tr >'
+            . '<td>Cimientos:</td>'
+            . '<td>' . $resPlan[0]['elementosConstructivosCimientos'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Estructura:</td>'
+            . '<td>' . $resPlan[0]['elementosConstructivosEstructura'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Paredes:</td>'
+            . '<td>' . $resPlan[0]['elementosConstructivosParedes'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Entrepiso:</td>'
+            . '<td>' . $resPlan[0]['elementosConstructivosEntrepiso'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Techo:</td>'
+            . '<td>' . $resPlan[0]['elementosConstructivosTecho'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Cielos:</td>'
+            . '<td>' . $resPlan[0]['elementosConstructivosCielos'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Pisos:</td>'
+            . '<td>' . $resPlan[0]['elementosConstructivosPisos'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Área de parqueo:</td>'
+            . '<td>' . $resPlan[0]['elementosConstructivosSistemaAguaPotable'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Sistema de agua potable:</td>'
+            . '<td>' . $resPlan[0]['elementosConstructivosSistemaAguaPotable'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Sistema de alcantarillado sanitario:</td>'
+            . '<td>' . $resPlan[0]['elementosConstructivosAlcantarilladoSanitario'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Sistema de alcantarillado pluvial:</td>'
+            . '<td>' . $resPlan[0]['elementosConstructivosAlcantarilladoPluvial'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Sistema eléctrico:</td>'
+            . '<td>' . $resPlan[0]['elementosConstructivosSistemaElectrico'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Sistema telefónico:</td>'
+            . '<td>' . $resPlan[0]['elementosConstructivosSistemaTelefonico'] . '</td>'
+            . '</tr>'
+            . '<tr>'
+            . '<td>Otros:</td>'
+            . '<td>' . $resPlan[0]['elementosConstructivosOtros'] . '</td>'
+            . '</tr>'
+            . '</table>';
+    return $html;
+}
+
+function listarFormularios($id, $formularios,$resPlan,$resTipoPoblacion) {
+    foreach ($formularios as $form) {
+        formularioSeleccionada($id, $form,$resPlan,$resTipoPoblacion);
+    }
+}
+
+function formularioSeleccionada($id, $form,$resPlan,$resTipoPoblacion) {
+    if ($form['FKidSubcapitulos'] == $id) {
+        $idForm = $form['id'];
+        $html = "";
+        if ($idForm == 1) {
+            $html = formularioDatosGenerales($resPlan);
+        } else if ($idForm == 2) {
+            $html = formularioActividades($resTipoPoblacion);
+        } else if ($idForm == 3) {
+            $html = formularioInstalaciones($resPlan);
+        }
+    }
+    return $html;
 }
 
 function cargarNuevaPagina($pdf) {
