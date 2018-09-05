@@ -208,54 +208,11 @@ INSERT INTO `Capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',
 INSERT INTO `Capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'ANEXO',11);
 
 
-INSERT INTO `SubCapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, `orden`) VALUES ('<p>Es la condición o resultado cuantificable que debe ser alcanzado y mantenido, con la aplicación<br/>
-del procedimiento y que refleja el valor o beneficio que obtiene el usuario. El propósito debe<br/>
-redactarse en forma breve y concisa; especificará los resultados o condiciones que se desean<br/>
-lograr, iniciará con un verbo en infinitivo y, en lo posible, se evitará utilizar gerundios y adjetivos<br/>
-calificativos. El propósito debe quedar escrito en prosa, únicamente para la redacción de<br/>
-este se facilita la siguiente tabla, que no deberá incorporarse en el manual respectivo:</p>','Propósito',1,1,1);
-INSERT INTO `SubCapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, `orden`) VALUES ('<p>En este apartado se describe brevemente el área o campo de aplicación del procedimiento;<br/>
-es decir, a quiénes afecta o qué límites o influencia tiene, representa la esfera de acción<br />
-que cubren los procedimientos.</p>','Alcance',1,1,2);
-INSERT INTO `SubCapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, `orden`) VALUES ('<p>Aqu&iacute; se registra el compendio de normas aplicables al procedimiento, conforme a la secuencia<br />
-l&oacute;gica de las etapas del mismo. Es decir aquellas disposiciones internas que:</p>
-
-<p>&nbsp;&nbsp; a) Tienen como prop&oacute;sito regular la interacci&oacute;n entre los individuos en una</p>
-<p>&nbsp;&nbsp; organizaci&oacute;n y las actividades de una unidad responsable.</p>
-<p>&nbsp;&nbsp; b) Marcan responsabilidades y l&iacute;mites generales y espec&iacute;ficos, dentro de los cuales<br />
-&nbsp;&nbsp; se realizan leg&iacute;timamente las actividades en distintas &aacute;reas de acci&oacute;n.<br />
-&nbsp;&nbsp; c) Se aplican a todas las situaciones similares.<br />
-&nbsp;&nbsp; d) Dan orientaciones claras hacia donde deben dirigirse todas las actividades de un<br />
-&nbsp;&nbsp; mismo tipo.<br />
-&nbsp;&nbsp; e) Facilitan la toma de decisiones en actividades rutinarias.<br />
-&nbsp;&nbsp; f) Describen lo que la direcci&oacute;n desea que se haga en cada situaci&oacute;n definida.</p>','Marco normativo',1,1,3);
-INSERT INTO `SubCapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, `orden`) VALUES ('<p>a) Secuencia de etapas
-i. Son las partes en que se divide el procedimiento, y cada una de ellas integra
-un conjunto afín de actividades.
-ii. La redacción de la etapa, iniciará con un verbo conjugado en el tiempo
-presente de la tercera persona del singular.
-b) Descripción de las actividades
-i. Es la descripción detallada de las actividades; de manera tal que permita al
-personal comprenderlas, seguirlas y aplicarlas, aun cuando sea de recién
-ingreso al área.
-ii. El número con que se registrará cada actividad, estará compuesto por el dígito
-de la etapa correspondiente, seguido de un punto, y a la derecha de éste, del
-número consecutivo respectivo.
-iii. La redacción de la actividad, iniciará con un verbo conjugado en el tiempo
-presente de la tercera persona del singular.
-iv. Deberá considerarse en la redacción de las actividades, los elementos
-necesarios para su realización; así como los productos que se generen.
-c) Responsable
-i. Se refiere a los órganos o cargos de la estructura autorizada responsables de
-la ejecución y cumplimiento de las actividades del procedimiento.
-ii. En el caso del personal operativo habrá de señalarse el nombre del puesto por
-funciones reales desempeñadas: analista, secretaria, mensajero, etcétera; y
-no por el nombre de la plaza: coordinador de técnicos, secretaria ejecutiva,
-entre otros.
-
-En la descripción se utilizará la siguiente forma:</p>','Descripción del plan',1,1,4);
-INSERT INTO `SubCapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, `orden`) VALUES ('<p>Anotar qué documentos no normativos se requieren al utilizar el procedimiento, para tener
-un mejor entendimiento o completar su ejecución no incluidos en los puntos anteriores.</p>','Documentos de referencia',1,1,5);
+INSERT INTO `SubCapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, `orden`) VALUES ('descripcion','Propósito',1,1,1);
+INSERT INTO `SubCapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, `orden`) VALUES ('descripcion','Alcance',1,1,2);
+INSERT INTO `SubCapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, `orden`) VALUES ('descripcion','Marco normativo',1,1,3);
+INSERT INTO `SubCapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, `orden`) VALUES ('descripcion','Descripción del plan',1,1,4);
+INSERT INTO `SubCapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, `orden`) VALUES ('descripcion','Documentos de referencia',1,1,5);
  
 
 INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Datos generales',1);
@@ -343,7 +300,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_zona_trabajo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_zona_trabajo`(IN `p_nombre` varchar(150),IN `p_FKidSede` int,IN `p_activo` int, IN `p_descripcion` varchar(150), OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_zona_trabajo`(IN `p_nombre` varchar(150),IN `p_FKidSede` int,IN `p_activo` int,IN `p_logo` varchar(150), IN `p_descripcion` varchar(150), OUT `res` TINYINT  UNSIGNED)
 BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -359,7 +316,7 @@ BEGIN
     ROLLBACK;
 	END;
             START TRANSACTION;
-                    INSERT INTO `ZonaTrabajo`(FKidSede,nombreZonaTrabajo,isActivo, descripcion) VALUES (p_FKidSede,p_nombre, p_activo,p_descripcion);
+                    INSERT INTO `ZonaTrabajo`(FKidSede,nombreZonaTrabajo,isActivo, descripcion,logo) VALUES (p_FKidSede,p_nombre, p_activo,p_descripcion,p_logo);
                     SELECT  MAX(id) into res from ZonaTrabajo ;
                     INSERT INTO `PlanEmergencia`(FKidZonaTrabajo) VALUES (res);                  
             COMMIT;
@@ -957,7 +914,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_zona_trabajo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_zona_trabajo`(IN `p_id` int, IN `p_FKidSede` int,IN `p_nombre` varchar(150),IN `p_activo` int, IN `p_descripcion` varchar(150), OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_zona_trabajo`(IN `p_id` int, IN `p_FKidSede` int,IN `p_nombre` varchar(150),IN `p_activo` int,IN `p_logo` varchar(150), IN `p_descripcion` varchar(150), OUT `res` TINYINT  UNSIGNED)
 BEGIN   
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -973,7 +930,7 @@ BEGIN
     ROLLBACK;
 	END;           
         START TRANSACTION;
-        UPDATE `ZonaTrabajo` SET `FKidSede`= p_FKidSede ,`nombreZonaTrabajo`= p_nombre ,`isActivo`= p_activo,descripcion = p_descripcion WHERE `id`= p_id;
+        UPDATE `ZonaTrabajo` SET `FKidSede`= p_FKidSede ,`nombreZonaTrabajo`= p_nombre ,`isActivo`= p_activo,descripcion = p_descripcion, logo=p_logo WHERE `id`= p_id;
         COMMIT;
         -- SUCCESS
         SET res = 0;

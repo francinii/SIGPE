@@ -109,15 +109,15 @@ $vocab["user_perfil_desc"]      = "Información de usuario personal";
 
 
 //**************** Modulo administración de matriz de riesgos *******************//
-$vocab["isActivo"]          = "Activo";
-$vocab["isInactivo"]          = "Inactivo";
+$vocab["isActivo"]                              = "Activo";
+$vocab["isInactivo"]                             = "Inactivo";
 
 $vocab["origen_amenaza_title"]                  = "Origen de la amenaza";
 $vocab["list_origen_amenaza_title"]             = "Or&iacute;gen de la amenaza";
 $vocab["list_origen_amenaza_id"]                = "Id";
 $vocab["list_origen_amenaza_descripcion"]       = "Origen de la amenaza";
 $vocab["list_origen_amenaza_isActivo"]          = "Activar origen de la amenaza";
-$vocab["desc_origen_isActivo"]                 = "Active o desactive el origen";
+$vocab["desc_origen_isActivo"]                  = "Active o desactive el origen";
 $vocab["nombre_origen_amenaza"]                 = "Nombre del origen de la amenaza";
 $vocab["nombre_desc_origen_amenaza"]            = "Escriba el nombre de la nueva amenaza";
 
@@ -142,20 +142,21 @@ $vocab["nombre_desc_categoria_amenaza"]            = "Escriba el nombre de la nu
 
 
 //***************************** Modulo zona de trabajo******************************//
-$vocab["zona_trabajo_title"]               = "Centro de trabajo";
-$vocab["list_zona_trabajo_title"]          = "Centro de trabajo";
-$vocab["list_zona_trabajo_id"]             = "Id";
-$vocab["list_zona_trabajo_descripcion"]    = "Centro de trabajo";
+$vocab["zona_trabajo_title"]              = "Centro de trabajo";
+$vocab["list_zona_trabajo_title"]         = "Centro de trabajo";
+$vocab["list_zona_trabajo_id"]            = "Id";
+$vocab["list_zona_trabajo_descripcion"]   = "Centro de trabajo";
 
-$vocab["zona_trabajo_title_Desc"]       = "Titulo del centro de trabajo";
-$vocab["zona_trabajo_id"]               = "Id";
-$vocab["zona_trabajo_id_Desc"]          = "Id del capitulo";
-$vocab["zona_trabajo_Descripcion"]      = "Descripción del centro de trabajo";
+$vocab["zona_trabajo_title_Desc"]        = "Titulo del centro de trabajo";
+$vocab["zona_trabajo_id"]                = "Id";
+$vocab["zona_trabajo_id_Desc"]           = "Id del capitulo";
+$vocab["zona_trabajo_Descripcion"]       = "Descripción del centro de trabajo";
 $vocab["zona_trabajo_activar"]           = "Activar centro de trabajo";
-$vocab["desc_zona_trabajo_isActivo"]   = "Active o desactive el centro de trabajo";
-$vocab["zona_trabajo_sede"]            = "Sede";
-$vocab["zona_trabajo_sede_Desc"]            = "Sede a la que pertenece el centro";
-
+$vocab["desc_zona_trabajo_isActivo"]     = "Active o desactive el centro de trabajo";
+$vocab["zona_trabajo_sede"]              = "Sede";
+$vocab["zona_trabajo_sede_Desc"]         = "Sede a la que pertenece el centro";
+$vocab["list_zona_trabajo_logo"]         = "Logo ";
+$vocab["list_zona_trabajo_logo_desc"]    = "Logo del centro de trabajo";
 //***************************** Modulo Sedes******************************//
 $vocab["sede_title"]               = "Sedes";
 $vocab["list_sede_title"]          = "Sedes";

@@ -8,16 +8,18 @@ $sede = $_GET['sede'];
 $activo = $_GET['inlineCheckbox'];
 $descripcion = $_GET['descripcion'];
 
-
-$nombre = $_FILES['archivo']['name'];
+$nombrearchivo=null;
+if(isset($_FILES['archivo'])){
+$nombrearchivo =explode(".",$_FILES['archivo']['name']);
+$nombrearchivo=$nombre.".".$nombrearchivo[count($nombrearchivo)-1];
 $tipo = $_FILES['archivo']['type'];
 $tamanio = $_FILES['archivo']['size'];
 $ruta = $_FILES['archivo']['tmp_name'];
-$destino = "archivos/" . $nombre;
+$destino = "../../../img/" . $nombrearchivo;
+$sirvio=move_uploaded_file($ruta,$destino);
+}
 
-rename ($ruta,"procesados/datos.txt");
-
-$sql_a = "CALL insert_zona_trabajo('$nombre','$sede','$activo','$descripcion', @res);";
+$sql_a = "CALL insert_zona_trabajo('$nombre','$sede','$activo','$nombrearchivo','$descripcion', @res);";
 $sql_b = "SELECT @res as res;";
 //echo $sql_a.$sql_b;
 $res = transaccion_verificada($sql_a, $sql_b);

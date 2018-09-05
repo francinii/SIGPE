@@ -6,7 +6,7 @@ $user_rol = $mySessionController->getVar("rol");
 
 $view_mode = $_GET['view_mode'];
 $id = $_GET['id'];
-$sql = "SELECT  id, nombreZonaTrabajo,FKidSede,descripcion,isActivo FROM ZonaTrabajo  WHERE id =" . $id;
+$sql = "SELECT  id, nombreZonaTrabajo,FKidSede,descripcion,isActivo,logo FROM ZonaTrabajo  WHERE id =" . $id;
 $res = seleccion($sql);
 //$sql = "SELECT id, nombre FROM sis_user";
 //$comb = seleccion($sql);
@@ -24,14 +24,14 @@ $sql = "SELECT usuario.id, usuario.nombre FROM
 where usuario.id = usuariozona.FKidUsuario";
 $usuarios = seleccion($sql);
 
-$find_key =$res[0]['FKidSede']; 
+$find_key = $res[0]['FKidSede'];
 ?>
 <div class="container">
     <div class="well well-sm">
         <h2><?= $vocab["zona_trabajo_title"] ?></h2>        
     </div>
     <div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
-        <form method="post" action="">            
+        <form method="post" action="" enctype="multipart/form-data">            
             <div class="form-group">
                 <label  for="zona_trabajo_title"><?= $vocab["zona_trabajo_title"] ?></label>
                 <input <?= ($view_mode == 0) ? "readonly" : ""; ?> id="nombre" name="zona_trabajo_title" class="form-control" type="text" value="<?= $res[0]["nombreZonaTrabajo"] ?>" /> 
@@ -41,10 +41,25 @@ $find_key =$res[0]['FKidSede'];
                 <div><label  for=""><?= $vocab["zona_trabajo_sede"] ?> </label></div> 
                 <select  <?= ($view_mode == 0) ? "disabled" : ""; ?> class="form-control" id = "select_sede">
                     <?php for ($i = 0; $i < count($sede); $i++) { ?>
-                        <option <?= ($res[0]['FKidSede']==$sede[$i]['id']) ? "selected " : ""; ?> value='<?= $sede[$i]['id'] ?>'><?= $sede[$i]['nombreSede'] ?></option>
+                        <option <?= ($res[0]['FKidSede'] == $sede[$i]['id']) ? "selected " : ""; ?> value='<?= $sede[$i]['id'] ?>'><?= $sede[$i]['nombreSede'] ?></option>
                     <?php } ?>
                 </select>
                 <p class="help-block"><small><?= $vocab["zona_trabajo_sede_Desc"] ?></small></p> 
+            </div>
+
+            <div class="form-group">
+                <label for="type-file">Elemento input type file</label>
+                <?php if ($view_mode == 1) { ?>
+                    <input  id="type-file" name="type-file" class="form-control filestyle" value='<?= $res[0]['logo'] ?>' type="file" placeholder="propiedad placeholder" title="propiedad title"/>
+                    <script type="text/javascript">
+                        jQuery(document).ready(function () {
+                            jQuery(":file").filestyle();
+                        });
+                    </script>
+                <?php } else { ?>
+                    <input readonly id="type-file" name="type-file" class="form-control" type="text" value="<?= $res[0]["logo"] ?>" /> 
+                <?php } ?>
+                <p class="help-block">Sirve para seleccionar la ruta a un archivo local</p>
             </div>
             <div class="form-group">
                 <label  for="descripcion"><?= $vocab["symbol_desc"] ?> </label>                
@@ -108,7 +123,7 @@ $find_key =$res[0]['FKidSede'];
                         <a <?= ($view_mode == 0) ? "readonly" : ""; ?> class="btn btn-success btn-group-justified"  name="submit" onclick="update_zona_trabajo(<?= $res[0]['id'] ?>);"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_update"] . " " . $vocab["permits_title"] ?></a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <a class="btn btn-warning btn-group-justified"  name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', 'find_key='+<?=$find_key?>);"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_return"] ?></a>
+                        <a class="btn btn-warning btn-group-justified"  name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', 'find_key=' +<?= $find_key ?>);"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_return"] ?></a>
                     </div>
                     <?php
                 }
@@ -116,7 +131,7 @@ $find_key =$res[0]['FKidSede'];
                 ?>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <a class="btn btn-warning btn-group-justified"  name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', 'find_key='+<?=$find_key?>);"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_return"] ?></a>
+                    <a class="btn btn-warning btn-group-justified"  name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', 'find_key=' +<?= $find_key ?>);"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_return"] ?></a>
                 </div>
             <?php } ?>          
         </form>
