@@ -48,9 +48,9 @@ $find_key = $res[0]['FKidSede'];
             </div>
 
             <div class="form-group">
-                <label for="type-file">Elemento input type file</label>
+                <label for="type-file"><?= $vocab["list_zona_trabajo_logo"] ?></label>
                 <?php if ($view_mode == 1) { ?>
-                    <input  id="type-file" name="type-file" class="form-control filestyle" value='<?= $res[0]['logo'] ?>' type="file" placeholder="propiedad placeholder" title="propiedad title"/>
+                    <input  id="type-file" name="type-file" class="form-control filestyle"  type="file" placeholder="propiedad placeholder" title="propiedad title"/>
                     <script type="text/javascript">
                         jQuery(document).ready(function () {
                             jQuery(":file").filestyle();
@@ -59,7 +59,10 @@ $find_key = $res[0]['FKidSede'];
                 <?php } else { ?>
                     <input readonly id="type-file" name="type-file" class="form-control" type="text" value="<?= $res[0]["logo"] ?>" /> 
                 <?php } ?>
-                <p class="help-block">Sirve para seleccionar la ruta a un archivo local</p>
+                <p class="help-block"><?= $vocab["list_zona_trabajo_logo_desc"] ?></p>
+            </div>
+            <div class="form-group">
+                <img src="../../../img/<?= $res[0]['logo'] ?>" class="img-rounded" alt=""> 
             </div>
             <div class="form-group">
                 <label  for="descripcion"><?= $vocab["symbol_desc"] ?> </label>                
