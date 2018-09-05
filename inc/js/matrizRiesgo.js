@@ -88,7 +88,8 @@ function crearVectorValores() {
 
 //Crea un vector con los datos de la tabla correspondiente a los colores de la 
 //matriz
-function generaVectorMatriz(nombreCentro, idCentro, clave) {
+function generaVectorMatriz(nombreCentro, idCentro, clave, editar) {
+   if(editar){
     var matriz = jQuery("#matriz_riesgos tbody tr");
     var arreglo = new Array();
     matriz.each(function () {
@@ -130,6 +131,9 @@ function generaVectorMatriz(nombreCentro, idCentro, clave) {
     };
     ajax.send(null);
     loading.innerHTML = "";
+   }else{
+       OpcionMenu('mod/planEmergencia/plan_emergencia_matriz_grafico.php?', 'nombreCentro='+nombreCentro+'&idCentro='+idCentro+'&criterios=' + JSON.stringify(crearVectorValores()));
+   }
 }
 
 

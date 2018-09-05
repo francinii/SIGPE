@@ -36,8 +36,8 @@ where tipo.FkidOrigen = origen.id and tipo.id = categoria.FKidTipoAmenaza and ti
 
 // Funcion que genera un selector de valor para la matriz
 // cod corresponde al valor de  probabilidad (0) o consecuecia/gravedad (1)
-function selectorMatriz($cod, $opcion) {
-    $valor = '<select class="form-control" onchange = "javascript:cambiarCriterio(this,' . $cod . ')">';
+function selectorMatriz($cod, $opcion,$editar) {
+    $valor = '<select    ' . (($editar) ? '' : 'disabled').  ' class="form-control" onchange = "javascript:cambiarCriterio(this,' . $cod . ')">';
     $valor .= '  <option ' . (($opcion == 1) ? 'selected' : '') . '> 1</option>';
     $valor .= '  <option ' . (($opcion == 2) ? 'selected' : '') . '> 2</option>';
     $valor .= '  <option ' . (($opcion == 3) ? 'selected' : '') . '> 3</option>';
@@ -177,19 +177,19 @@ $matriz = seleccion($sql);
                                     <tr>
                                     <?php } ?>                                   
                                     <td class ="categoria"> <?= $categoriasPorTipo[$k]['descripcion']; ?>
-                                        <input type="hidden" class ="idCategoria" value="<?= $categoriasPorTipo[$k]['id']; ?>" />
+                                        <input   type="hidden" class ="idCategoria" value="<?= $categoriasPorTipo[$k]['id']; ?>" />
                                     </td>
 
                                     <?php $registroMatriz = buscarRegistro($matriz, $categoriasPorTipo[$k]['id']); ?>  
                                     <td> <div class="form-group">                                            
-                                            <input  id="type-text" name="type-text" class="form-control fuente" placeholder="fuente"value ="<?= $registroMatriz['fuente'] ?>"  title="propiedad title" type="text">
+                                            <input <?= (!$editar) ? "readonly" : ""; ?> id="type-text" name="type-text" class="form-control fuente" placeholder="fuente"value ="<?= $registroMatriz['fuente'] ?>"  title="propiedad title" type="text">
                                         </div>
                                     </td>
-                                    <td class = "criterioProbabilidad" > <?= selectorMatriz(0, $registroMatriz['probabilidad']); ?></td>
+                                    <td class = "criterioProbabilidad" > <?= selectorMatriz(0, $registroMatriz['probabilidad'],$editar); ?></td>
                                     <td id = "criterioProbabilidad"> <?= selectorProbabilidad($registroMatriz['probabilidad']) ?> </td>
-                                    <td class = "criterioGravedad"> <?= selectorMatriz(1, $registroMatriz['gravedad']); ?></td>
+                                    <td class = "criterioGravedad"> <?= selectorMatriz(1, $registroMatriz['gravedad'],$editar); ?></td>
                                     <td  id = "criterioGravedad"> <?= selectorGravedadConsecuencia($registroMatriz['gravedad']) ?></td>
-                                    <td class = "criterioConsecuencia"> <?= selectorMatriz(1, $registroMatriz['consecuenciaAmenaza']); ?></td>
+                                    <td class = "criterioConsecuencia"> <?= selectorMatriz(1, $registroMatriz['consecuenciaAmenaza'],$editar); ?></td>
                                     <td  id = "criterioConsecuencia"> <?= selectorGravedadConsecuencia($registroMatriz['consecuenciaAmenaza']) ?> </td>
                                     <td><?= calcularValorAlerta($registroMatriz); ?> </td>
                                     <?php
@@ -211,9 +211,11 @@ $matriz = seleccion($sql);
     </table>
     <br/>
     <div class="text-center">
-        <span class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:generaVectorMatriz('<?= $nombreCentro ?>', '<?= $idCentro ?>', '0');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["matriz_title"] ?></a></span>
-        <?php if ($criterios != null) { ?>   
-            <span class="text-center"><a class="btn btn-warning" name="" onclick="javascript:generaVectorMatriz('<?= $nombreCentro ?>', '<?= $idCentro ?>', '1');"><i class='fa fa-plus fa-inverse'></i>  <?= $vocab["graficar_matriz"] ?></a></span>
+        <?php if ($editar) { ?>  
+        <span class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:generaVectorMatriz('<?= $nombreCentro ?>', '<?= $idCentro ?>', '0', <?= $editar ?>);"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["matriz_title"] ?></a></span>
+          <?php } ?>
+           <?php if ($criterios != null) { ?>   
+            <span class="text-center"><a class="btn btn-warning" name="" onclick="javascript:generaVectorMatriz('<?= $nombreCentro ?>', '<?= $idCentro ?>', '1', <?= $editar ?>);"><i class='fa fa-plus fa-inverse'></i>  <?= $vocab["graficar_matriz"] ?></a></span>
 
         <?php } ?>
     </div>
