@@ -9,17 +9,29 @@ $activo = $_GET['inlineCheckbox'];
 $descripcion = $_GET['descripcion'];
 
 $nombrearchivo=null;
-if(isset($_FILES['archivo'])){
-$nombrearchivo =explode(".",$_FILES['archivo']['name']);
-$nombrearchivo=$nombre.".".$nombrearchivo[count($nombrearchivo)-1];
-$tipo = $_FILES['archivo']['type'];
-$tamanio = $_FILES['archivo']['size'];
-$ruta = $_FILES['archivo']['tmp_name'];
+if(isset($_FILES['archivo1'])){
+$nombrearchivo =explode(".",$_FILES['archivo1']['name']);
+$nombrearchivo=str_replace(" ","",$nombre).".".$nombrearchivo[count($nombrearchivo)-1];
+$tipo = $_FILES['archivo1']['type'];
+$tamanio = $_FILES['archivo1']['size'];
+$ruta = $_FILES['archivo1']['tmp_name'];
 $destino = "../../../img/" . $nombrearchivo;
 $sirvio=move_uploaded_file($ruta,$destino);
 }
 
-$sql_a = "CALL insert_zona_trabajo('$nombre','$sede','$activo','$nombrearchivo','$descripcion', @res);";
+$nombrearchivoUbicacion=null;
+if(isset($_FILES['archivo2'])){
+$nombrearchivoUbicacion =explode(".",$_FILES['archivo2']['name']);
+$nombrearchivoUbicacion=str_replace(" ","",$nombre).".".$nombrearchivoUbicacion[count($nombrearchivoUbicacion)-1];
+$nombrearchivoUbicacion="GEO".$nombrearchivoUbicacion;
+$tipo = $_FILES['archivo2']['type'];
+$tamanio = $_FILES['archivo2']['size'];
+$ruta = $_FILES['archivo2']['tmp_name'];
+$destino = "../../../img/" . $nombrearchivoUbicacion;
+$sirvio=move_uploaded_file($ruta,$destino);
+}
+
+$sql_a = "CALL insert_zona_trabajo('$nombre','$sede','$activo','$nombrearchivo','$nombrearchivoUbicacion','$descripcion', @res);";
 $sql_b = "SELECT @res as res;";
 //echo $sql_a.$sql_b;
 $res = transaccion_verificada($sql_a, $sql_b);

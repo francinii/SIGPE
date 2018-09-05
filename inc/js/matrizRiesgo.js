@@ -116,12 +116,12 @@ function generaVectorMatriz(nombreCentro, idCentro, clave, editar) {
             var response = ajax.responseText;
             //alert(response); //DEBUG
             if (response == 0) {
+                datosGuardados();
                 jAlert("Matriz guardada con exito", "Exito");
-                if (clave == 0) {                    
-                    OpcionMenu('mod/planEmergencia/plan_emergencia_matriz.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
-                }else {
-                    OpcionMenu('mod/planEmergencia/plan_emergencia_matriz_grafico.php?', 'nombreCentro='+nombreCentro+'&idCentro='+idCentro+'&criterios=' + JSON.stringify(crearVectorValores()));
+                if (clave == 1) {                    
+                      OpcionMenu('mod/planEmergencia/plan_emergencia_matriz_grafico.php?', 'nombreCentro='+nombreCentro+'&idCentro='+idCentro+'&criterios=' + JSON.stringify(crearVectorValores()));
                 }
+                
             } else if (response == 1 || response == 2) {
                 jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
             } else {

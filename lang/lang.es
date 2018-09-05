@@ -155,8 +155,10 @@ $vocab["zona_trabajo_activar"]           = "Activar centro de trabajo";
 $vocab["desc_zona_trabajo_isActivo"]     = "Active o desactive el centro de trabajo";
 $vocab["zona_trabajo_sede"]              = "Sede";
 $vocab["zona_trabajo_sede_Desc"]         = "Sede a la que pertenece el centro";
-$vocab["list_zona_trabajo_logo"]         = "Logo ";
-$vocab["list_zona_trabajo_logo_desc"]    = "Logo del centro de trabajo";
+$vocab["zona_trabajo_logo"]               = "Logo ";
+$vocab["zona_trabajo_logo_desc"]           = "Cambiar Logo del centro";
+$vocab["zona_trabajo_Ubicacion"]               = "Ubicacion ";
+$vocab["zona_trabajo_Ubicacion_desc"]           = "Ubicación según google georeferenciada";
 //***************************** Modulo Sedes******************************//
 $vocab["sede_title"]               = "Sedes";
 $vocab["list_sede_title"]          = "Sedes";

@@ -37,7 +37,7 @@ where tipo.FkidOrigen = origen.id and tipo.id = categoria.FKidTipoAmenaza and ti
 // Funcion que genera un selector de valor para la matriz
 // cod corresponde al valor de  probabilidad (0) o consecuecia/gravedad (1)
 function selectorMatriz($cod, $opcion,$editar) {
-    $valor = '<select    ' . (($editar) ? '' : 'disabled').  ' class="form-control" onchange = "javascript:cambiarCriterio(this,' . $cod . ')">';
+    $valor = '<select    ' . (($editar) ? '' : 'disabled').  ' class="form-control cambios" onchange = "javascript:cambiarCriterio(this,' . $cod . ')">';
     $valor .= '  <option ' . (($opcion == 1) ? 'selected' : '') . '> 1</option>';
     $valor .= '  <option ' . (($opcion == 2) ? 'selected' : '') . '> 2</option>';
     $valor .= '  <option ' . (($opcion == 3) ? 'selected' : '') . '> 3</option>';
@@ -182,7 +182,7 @@ $matriz = seleccion($sql);
 
                                     <?php $registroMatriz = buscarRegistro($matriz, $categoriasPorTipo[$k]['id']); ?>  
                                     <td> <div class="form-group">                                            
-                                            <input <?= (!$editar) ? "readonly" : ""; ?> id="type-text" name="type-text" class="form-control fuente" placeholder="fuente"value ="<?= $registroMatriz['fuente'] ?>"  title="propiedad title" type="text">
+                                            <input <?= (!$editar) ? "readonly" : ""; ?> id="type-text" name="type-text" class="form-control fuente cambios" placeholder="fuente"value ="<?= $registroMatriz['fuente'] ?>"  title="propiedad title" type="text">
                                         </div>
                                     </td>
                                     <td class = "criterioProbabilidad" > <?= selectorMatriz(0, $registroMatriz['probabilidad'],$editar); ?></td>

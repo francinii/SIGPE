@@ -6,7 +6,7 @@ $user_rol = $mySessionController->getVar("rol");
 
 $view_mode = $_GET['view_mode'];
 $id = $_GET['id'];
-$sql = "SELECT  id, nombreZonaTrabajo,FKidSede,descripcion,isActivo,logo FROM ZonaTrabajo  WHERE id =" . $id;
+$sql = "SELECT  id, nombreZonaTrabajo,FKidSede,descripcion,isActivo,logo,ubicacion FROM ZonaTrabajo  WHERE id =" . $id;
 $res = seleccion($sql);
 //$sql = "SELECT id, nombre FROM sis_user";
 //$comb = seleccion($sql);
@@ -48,22 +48,32 @@ $find_key = $res[0]['FKidSede'];
             </div>
 
             <div class="form-group">
-                <label for="type-file"><?= $vocab["list_zona_trabajo_logo"] ?></label>
+                <label for="type-file"><?= $vocab["zona_trabajo_logo"] ?></label>
                 <?php if ($view_mode == 1) { ?>
-                    <input  id="type-file" name="type-file" class="form-control filestyle"  type="file" placeholder="propiedad placeholder" title="propiedad title"/>
-                    <script type="text/javascript">
-                        jQuery(document).ready(function () {
-                            jQuery(":file").filestyle();
-                        });
-                    </script>
+                    <input  id="type-file" accept="image/*" name="type-file" class="form-control filestyle"  type="file" placeholder="propiedad placeholder" title="propiedad title"/>
+                    
                 <?php } else { ?>
                     <input readonly id="type-file" name="type-file" class="form-control" type="text" value="<?= $res[0]["logo"] ?>" /> 
                 <?php } ?>
-                <p class="help-block"><?= $vocab["list_zona_trabajo_logo_desc"] ?></p>
+                <p class="help-block"><?= $vocab["zona_trabajo_logo_desc"] ?></p>
+            </div>
+            <div class="form-group" id="logo">
+                <img src="../SIGPE/img/<?= $res[0]['logo'] ?>" style="max-width:100%" class="img-rounded" alt=""> 
             </div>
             <div class="form-group">
-                <img src="../../../img/<?= $res[0]['logo'] ?>" class="img-rounded" alt=""> 
+                <label for="type-file-ubicacion"><?= $vocab["zona_trabajo_Ubicacion"] ?></label>
+                <?php if ($view_mode == 1) { ?>
+                    <input  id="type-file-ubicacion" accept="image/*" name="type-file" class="form-control filestyle"  type="file" placeholder="propiedad placeholder" title="propiedad title"/>
+
+                <?php } else { ?>
+                    <input readonly id="type-file" name="type-file" class="form-control" type="text" value="<?= $res[0]["logo"] ?>" /> 
+                <?php } ?>
+                <p class="help-block"><?= $vocab["zona_trabajo_Ubicacion_desc"] ?></p>
             </div>
+            <div class="form-group" id="ubicacion">
+                <img src="../SIGPE/img/<?= $res[0]['ubicacion'] ?>"  style="max-width:100%" class="img-rounded" alt=""> 
+            </div>
+
             <div class="form-group">
                 <label  for="descripcion"><?= $vocab["symbol_desc"] ?> </label>                
                 <textarea <?= ($view_mode == 0) ? "readonly" : ""; ?> class="ckeditor form-control" id="descripcion" name="descripcion" ><?= $res[0]["descripcion"] ?></textarea>
@@ -133,10 +143,61 @@ $find_key = $res[0]['FKidSede'];
             } else {
                 ?>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div  class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <a class="btn btn-warning btn-group-justified"  name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', 'find_key=' +<?= $find_key ?>);"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_return"] ?></a>
                 </div>
             <?php } ?>          
         </form>
     </div>
 </div>
+<script>
+    function archivoLogo(evt) {
+        var files = evt.target.files; // FileList object
+
+        // Obtenemos la imagen del campo "file".
+        for (var i = 0, f; f = files[i]; i++) {
+            //Solo admitimos imágenes.
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+
+            var reader = new FileReader();
+
+            reader.onload = (function (theFile) {
+                return function (e) {
+                    // Insertamos la imagen
+                    document.getElementById("logo").innerHTML = ['<img class="thumb" style="max-width:100%" " src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
+                };
+            })(f);
+
+            reader.readAsDataURL(f);
+        }
+    }
+    function archivoUbicacion(evt) {
+        var files = evt.target.files; // FileList object
+
+        // Obtenemos la imagen del campo "file".
+        for (var i = 0, f; f = files[i]; i++) {
+            //Solo admitimos imágenes.
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+
+            var reader = new FileReader();
+
+            reader.onload = (function (theFile) {
+                return function (e) {
+                    // Insertamos la imagen
+                    document.getElementById("ubicacion").innerHTML = ['<img class="thumb" style="max-width:100%"  src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
+                };
+            })(f);
+
+            reader.readAsDataURL(f);
+        }
+    }
+    document.getElementById('type-file').addEventListener('change', archivoLogo, false);
+    document.getElementById('type-file-ubicacion').addEventListener('change', archivoUbicacion, false);
+    jQuery(document).ready(function () {
+        jQuery(":file").filestyle();
+    });
+</script>

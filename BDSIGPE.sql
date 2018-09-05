@@ -24,8 +24,7 @@ isActivo int,
 nombreZonaTrabajo varchar(150),
 descripcion varchar(150),
 logo varchar(150),
-longitud varchar(150),
-latitud varchar(150),
+ubicacion varchar(150),
 PRIMARY KEY(id),
 FOREIGN KEY(FKidSede) REFERENCES Sede(id)
 )ENGINE=InnoDB;
@@ -216,7 +215,7 @@ INSERT INTO `SubCapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, 
  
 
 INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Datos generales',1);
-INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Actividades',1);
+INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Tipo de población',1);
 INSERT INTO `Formulario`(`descripcion`, `FKidSubcapitulos`) VALUES ('Instalaciones',1);
 INSERT INTO `Formulario`(`descripcion`, `FKidSubcapitulos`) VALUES ('Matriz de riesgo',1);
 
@@ -300,7 +299,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_zona_trabajo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_zona_trabajo`(IN `p_nombre` varchar(150),IN `p_FKidSede` int,IN `p_activo` int,IN `p_logo` varchar(150), IN `p_descripcion` varchar(150), OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_zona_trabajo`(IN `p_nombre` varchar(150),IN `p_FKidSede` int,IN `p_activo` int,IN `p_logo` varchar(150), IN `p_ubicacion` varchar(150), IN `p_descripcion` varchar(150), OUT `res` TINYINT  UNSIGNED)
 BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -316,7 +315,7 @@ BEGIN
     ROLLBACK;
 	END;
             START TRANSACTION;
-                    INSERT INTO `ZonaTrabajo`(FKidSede,nombreZonaTrabajo,isActivo, descripcion,logo) VALUES (p_FKidSede,p_nombre, p_activo,p_descripcion,p_logo);
+                    INSERT INTO `ZonaTrabajo`(FKidSede,nombreZonaTrabajo,isActivo, descripcion,logo,ubicacion) VALUES (p_FKidSede,p_nombre, p_activo,p_descripcion,p_logo,p_ubicacion);
                     SELECT  MAX(id) into res from ZonaTrabajo ;
                     INSERT INTO `PlanEmergencia`(FKidZonaTrabajo) VALUES (res);                  
             COMMIT;
@@ -914,8 +913,8 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_zona_trabajo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_zona_trabajo`(IN `p_id` int, IN `p_FKidSede` int,IN `p_nombre` varchar(150),IN `p_activo` int,IN `p_logo` varchar(150), IN `p_descripcion` varchar(150), OUT `res` TINYINT  UNSIGNED)
-BEGIN   
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_zona_trabajo`(IN `p_id` int, IN `p_FKidSede` int,IN `p_nombre` varchar(150),IN `p_activo` int,IN `p_logo` varchar(150),IN `p_ubicacion` varchar(150), IN `p_descripcion` varchar(150), OUT `res` TINYINT  UNSIGNED)
+BEGIN            
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 		-- ERROR
@@ -928,12 +927,12 @@ BEGIN
 		-- ERROR
     SET res = 2;
     ROLLBACK;
-	END;           
-        START TRANSACTION;
-        UPDATE `ZonaTrabajo` SET `FKidSede`= p_FKidSede ,`nombreZonaTrabajo`= p_nombre ,`isActivo`= p_activo,descripcion = p_descripcion, logo=p_logo WHERE `id`= p_id;
+	END;       
+        START TRANSACTION;        
+        UPDATE `ZonaTrabajo` SET `FKidSede`= p_FKidSede ,`nombreZonaTrabajo`= p_nombre ,`isActivo`= p_activo,descripcion = p_descripcion, logo=p_logo, ubicacion=p_ubicacion WHERE `id`= p_id;
         COMMIT;
-        -- SUCCESS
-        SET res = 0;
+        -- SUCCESS      
+        SET res = 0;      
        
 END
 ;;

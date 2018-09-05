@@ -9,22 +9,58 @@ $sede = $_GET['sede'];
 $activo = $_GET['activo'];
 $descripcion = $_GET['descripcion'];
 
-$nombrearchivo=null;
-if(isset($_FILES['archivo'])){
-$nombrearchivo =explode(".",$_FILES['archivo']['name']);
-$nombrearchivo=$nombre.".".$nombrearchivo[count($nombrearchivo)-1];
-$tipo = $_FILES['archivo']['type'];
-$tamanio = $_FILES['archivo']['size'];
-$ruta = $_FILES['archivo']['tmp_name'];
-$destino = "../../../img/" . $nombrearchivo;
-$sirvio=move_uploaded_file($ruta,$destino);
+$sql = "SELECT   nombreZonaTrabajo,logo,ubicacion FROM ZonaTrabajo  WHERE id =" . $id;
+$res = seleccion($sql);
+
+$rutavieja = "../../../img/" . $res[0]['logo'];
+$rutaviejaUbicacion = "../../../img/" . $res[0]['ubicacion'];
+
+$nombrearchivo = null;
+if (isset($_FILES['archivo1'])) {
+    $nombrearchivo = explode(".", $_FILES['archivo1']['name']);
+    $nombrearchivo = str_replace(" ", "", $nombre) . "." . $nombrearchivo[count($nombrearchivo) - 1];
+    $ruta = $_FILES['archivo1']['tmp_name'];
+    $destino = "../../../img/" . $nombrearchivo;
+    $sirvio = move_uploaded_file($ruta, $destino);
+    if ($res[0]['nombreZonaTrabajo'] != $nombre) {
+        $sirvio = unlink($rutavieja);
+    }
+} else if ($res[0]['nombreZonaTrabajo'] != $nombre) {
+    $nombrearchivo = explode(".", $res[0]['logo']);
+    $nombrearchivo = str_replace(" ", "", $nombre) . "." . $nombrearchivo[count($nombrearchivo) - 1];
+    $destino = "../../../img/" . $nombrearchivo;
+    $sirvio = copy($rutavieja, $destino);
+    $sirvio = unlink($rutavieja);
 }
 
 
-$sql_a = "CALL update_zona_trabajo('$id','$sede','$nombre','$activo','$nombrearchivo','$descripcion',@res);";
+$nombrearchivoUbicacion = null;
+if (isset($_FILES['archivo2'])) {
+    $nombrearchivoUbicacion = explode(".", $_FILES['archivo2']['name']);
+    $nombrearchivoUbicacion = str_replace(" ", "", $nombre) . "." . $nombrearchivoUbicacion[count($nombrearchivoUbicacion) - 1];
+    $nombrearchivoUbicacion="GEO".$nombrearchivoUbicacion;
+    $ruta = $_FILES['archivo2']['tmp_name'];
+    $destino = "../../../img/" . $nombrearchivoUbicacion;
+    $sirvio = move_uploaded_file($ruta, $destino);
+    if ($res[0]['nombreZonaTrabajo'] != $nombre) {
+        $sirvio = unlink($rutaviejaUbicacion);
+    }
+} else if ($res[0]['nombreZonaTrabajo'] != $nombre) {
+    $nombrearchivoUbicacion = explode(".", $res[0]['ubicacion']);
+    $nombrearchivoUbicacion = str_replace(" ", "", $nombre) . "." . $nombrearchivoUbicacion[count($nombrearchivoUbicacion) - 1];
+     $nombrearchivoUbicacion="GEO".$nombrearchivoUbicacion;
+    $destino = "../../../img/" . $nombrearchivoUbicacion;
+    $sirvio = copy($rutaviejaUbicacion, $destino);
+    $sirvio = unlink($rutaviejaUbicacion);
+}
+
+$sql_a = "CALL update_zona_trabajo('$id','$sede','$nombre','$activo','$nombrearchivo','$nombrearchivoUbicacion','$descripcion',@res);";
 $sql_b = "SELECT @res as res;";
 //echo $sql_a.$sql_b;
 $res = transaccion_verificada($sql_a, $sql_b);
+
+
+
 
 if ($res[0]['res'] == 0) {
     $sql_a = "CALL delete_usuario_zona_trabajo('$id',@res);";
