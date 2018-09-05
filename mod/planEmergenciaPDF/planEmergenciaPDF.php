@@ -24,7 +24,6 @@
  * @author Nicola Asuni
  * @since 2008-03-04
  */
-
 include("../login/check.php");
 include("../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
@@ -32,16 +31,21 @@ $user_rol = $mySessionController->getVar("rol");
 include_once('../../lib/tcpdf/examples/tcpdf_include.php');
 
 $id = $_GET['idCentro'];
-$sql = "(SELECT  id, nombreZonaTrabajo FROM ZonaTrabajo where id =".$id .")";
-// Extend the TCPDF class to create custom Header and Footer
-$res = seleccion($sql); 
+$sql = "(SELECT  id, nombreZonaTrabajo FROM ZonaTrabajo where id =" . $id . ")";
+$sqlPlan = "(SELECT `id`, `FKidZonaTrabajo`, `revisadoPor`, `codigoZonaTrabajo`, `actividad`, `direccion`, `personaContactoGeneral`, `numeroTelefono`, `numeroFax`, `notificaciones`, `categoriaNFPA`, `usoInstalaciones`, `horarioJornada`, `seguridadInstitucional`, `servicioConsegeria`, `personalAdministrativo`, `personalAcademico`, `presenciaEstudiantil`, `instalacionesDensidadOcupacion`, `instalacionesAreaConstruccion`, `instalacionesInstalaciones`, `instalacionesCaracteristicasZona`, `instalacionesTopografia`, `instalacionesNivelTerreno`, `instalacionesColindates`, `elementosConstructivosTipoConstruccion`, `elementosConstructivosAntiguedad`, `elementosConstructivosCimientos`, `elementosConstructivosEstructura`, `elementosConstructivosParedes`, `elementosConstructivosEntrepiso`, `elementosConstructivosTecho`, `elementosConstructivosCielos`, `elementosConstructivosPisos`, `elementosConstructivosAreaParqueo`, `elementosConstructivosSistemaAguaPotable`, `elementosConstructivosAlcantarilladoSanitario`, `elementosConstructivosAlcantarilladoPluvial`, `elementosConstructivosSistemaElectrico`, `elementosConstructivosSistemaTelefonico`, `elementosConstructivosOtros` FROM `PlanEmergencia` where FKidZonaTrabajo =" . $id . ")";
+$capitulos = "(SELECT  id, descripcion, orden,titulo,isActivo FROM Capitulo ORDER BY orden)";
+
+
+$res = seleccion($sql);
+$resPlan = seleccion($sqlPlan);
 global $datosCabecera;
-$dirImages= "images/";
+$dirImages = "images/";
 $centroTrabajo = $res[0]["nombreZonaTrabajo"];
-$logoUNA = $dirImages."logo_una.jpg";
+$logoUNA = $dirImages . "logo_una.jpg";
 $logoCentro = "logoCentro";
-$codigo = "";
-$revisadoPor = "";
+$codigo = $resPlan[0]['codigoZonaTrabajo'];
+$revisadoPor = $resPlan[0]['revisadoPor'];
+
 $datosCabecera = array(
     "centroTrabajo" => $centroTrabajo,
     "logoUNA" => $logoUNA,
@@ -49,41 +53,26 @@ $datosCabecera = array(
     "codigo" => $codigo,
     "revisado" => $revisadoPor);
 
-
 class MYPDF extends TCPDF {
 
     public function Header() {
         global $datosCabecera;
-
         $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
                 . '<tr style = "text-align:center;">'
                 . '<td rowspan="3"><img src= "' . $datosCabecera['logoUNA'] . '" width="100" height="100" ></td>'
                 . '<td >' . $datosCabecera['centroTrabajo'] . '</td>'
                 . '<td rowspan="3"><img src= "' . $datosCabecera['logoUNA'] . '" width="100" height="100" ></td>'
-                . '<td>Codigo ' . $datosCabecera['codigo'] . '</td>'
+                . '<td><b>Código</b> ' . $datosCabecera['codigo'] . '</td>'
                 . '</tr>'
                 . '<tr style = "text-align:center;">'
                 . '<td rowspan="2">Plan de preparativos de respuesta ante emergencias</td>'
-                . '<td>Revisado por: ' . $datosCabecera['revisado'] . '</td>'
+                . '<td><b>Revisado por:</b><br>' . $datosCabecera['revisado'] . '</td>'
                 . '</tr>'
                 . '<tr style = "text-align:center;">'
                 . '<td>Pagina</td>'
                 . '</tr>'
                 . '</table>';
-      
         $this->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $html, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'top', $autopadding = true);
-    }
-
-
-    // Page footer
-    public function Footer() {
-//        // Position at 15 mm from bottom
-//        $this->SetY(-15);
-//        // Set font
-//        $this->SetFont('helvetica', 'I', 8);
-//        // Page number
-//        $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
-//    
     }
 
 }
@@ -95,17 +84,17 @@ $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Francini Corrales Garro & Danny Valerio Ramírez');
-$pdf->SetTitle('TCPDF Example 003');
-$pdf->SetSubject('TCPDF Tutorial');
-$pdf->SetKeywords('TCPDF, PDF, example, test, guide');
+$pdf->SetTitle('Plan de emergencias');
+$pdf->SetSubject('Plan de emergencias');
+$pdf->SetKeywords('Plan, PDF, emergencias, CIEUNA, UNA');
 
 //$pdf->SetHeaderData();
 // set default header data
 //$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
 // set header and footer fonts
-$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
-
+//$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+//$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+//
 // set default monospaced font
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
@@ -120,27 +109,60 @@ $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 // set image scale factor
 $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
-// set some language-dependent strings (optional)
-if (@file_exists(dirname(__FILE__) . '/lang/eng.php')) {
-    require_once(dirname(__FILE__) . '/lang/eng.php');
-    $pdf->setLanguageArray($l);
+//
+//// set some language-dependent strings (optional)
+////if (@file_exists(dirname(__FILE__) . '/lang/eng.php')) {
+////    require_once(dirname(__FILE__) . '/lang/eng.php');
+////    $pdf->setLanguageArray($l);
+////}
+//
+//// ---------------------------------------------------------
+portada($pdf);
+capitulos($pdf, $capitulos);
+
+function capitulos($pdf, $capitulos) {
+    cargarNuevaPagina($pdf);
+    $html = '<div style = "height: 100px;"><div>';
+    foreach ($capitulos as $cap) {
+      
+      //  $html .= $cap['descripcion'];
+        
+    }  $html = "'<span>fag</span>";
+    $pdf->writeHTML($html, true, false, true, false, '');
+}
+
+function portada($pdf) {
+    global $datosCabecera;
+    cargarNuevaPagina($pdf);
+    $html = '<div style = "height: 100px;"><div>
+        <div>
+        <span align="left">
+            <img src= "' . $datosCabecera['logoUNA'] . '"  width="100" height="100" >
+        </span> 
+        <span align="right">
+            <img src= "' . $datosCabecera['logoUNA'] . '"  width="100" height="100" >
+        </span>
+        </div>
+        <div style = "text-align:center;">
+            <h1>PLAN DE PREPARATIVOS DE RESPUESTA ANTE EMERGENCIAS</h1>
+            <h1>' . $datosCabecera["centroTrabajo"] . ' <h1>
+            <h1>   UNIVERSIDAD NACIONAL DE COSTA RICA <h1>
+             <img src= "' . $datosCabecera['logoUNA'] . '" width="100" height="100" >
+            <h1>' . $datosCabecera["centroTrabajo"] . ' <h1>
+            <h1>   Fecha <h1>
+        </div>';
+
+    $pdf->writeHTML($html, true, false, true, false, '');
+}
+
+function cargarNuevaPagina($pdf) {
+    $pdf->SetFont('times', '', 12);
+    $pdf->AddPage();
 }
 
 // ---------------------------------------------------------
-// set font
-$pdf->SetFont('times', 'BI', 12);
-
-// add a page
-$pdf->AddPage();
-
-
-
-// print a block of text using Write()
-$pdf->Write(0, $txt, '', 0, 'C', true, 0, false, false, 0);
-
-// ---------------------------------------------------------
 //Close and output PDF document
-$pdf->Output('example_003.pdf', 'I');
+$pdf->Output('planEmergencias.pdf', 'I');
 
 //============================================================+
 // END OF FILE
