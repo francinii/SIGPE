@@ -180,7 +180,7 @@ create table EquipoMovil(
 id int NOT NULL AUTO_INCREMENT,
 FKidPlanEmergencias int,
 cantidad int,
-capacidad varchar(150),
+capacidad int,
 tipo varchar(150),
 caracteristicas varchar(150),
 contacto varchar(150),
@@ -211,7 +211,6 @@ tipo varchar(150),
 caracteristicas varchar(150),
 contacto varchar(150),
 ubicacion varchar(150),
-categoria varchar(150),
 categoria varchar(150),
 PRIMARY KEY(id),
 FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
@@ -293,11 +292,12 @@ INSERT INTO `SubCapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, 
 INSERT INTO `SubCapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, `orden`) VALUES ('descripcion','Documentos de referencia',1,1,5);
  
 
-INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Datos generales',1);
-INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Tipo de población',1);
-INSERT INTO `Formulario`(`descripcion`, `FKidSubcapitulos`) VALUES ('Instalaciones',1);
-INSERT INTO `Formulario`(`descripcion`, `FKidSubcapitulos`) VALUES ('Matriz de riesgo',1);
-
+INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubCapitulos`) VALUES (1,'Datos generales',1);
+INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubCapitulos`) VALUES (2,'Tipo de población',1);
+INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (3,'Instalaciones',1);
+INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (4,'Matriz de riesgo',1);
+INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (5,'Recurso Humano',1);
+INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (6,'Equipo movil',1);
 
 INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',1);
 INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',2);

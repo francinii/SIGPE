@@ -58,7 +58,7 @@ $find_key = $res[0]['FKidSede'];
                 <p class="help-block"><?= $vocab["zona_trabajo_logo_desc"] ?></p>
             </div>
             <div class="form-group" id="logo">
-                <img src="../SIGPE/img/imgPlanes/<?= $res[0]['logo'] ?>?time=<?= time() ?>" style="max-width:100%" class="img-rounded" alt="Sin logo"> 
+                <img src="../SIGPE/mod/planEmergenciaPDF/img/imgPlanes/<?= $res[0]['logo'] ?>?time=<?= time() ?>" style="max-width:100%" class="img-rounded" alt="Sin logo"> 
             </div>
             <div class="form-group">
                 <label for="type-file-ubicacion"><?= $vocab["zona_trabajo_Ubicacion"] ?></label>
@@ -71,7 +71,7 @@ $find_key = $res[0]['FKidSede'];
                 <p class="help-block"><?= $vocab["zona_trabajo_Ubicacion_desc"] ?></p>
             </div>
             <div class="form-group" id="ubicacion">
-                <img src="../SIGPE/img/imgPlanes/<?= $res[0]['ubicacion'] ?>?time=<?= time() ?>"  style="max-width:100%" class="img-rounded" alt="Sin ubicación"> 
+                <img src="../SIGPE/mod/planEmergenciaPDF/img/imgPlanes/<?= $res[0]['ubicacion'] ?>?time=<?= time() ?>"  style="max-width:100%" class="img-rounded" alt="Sin ubicación"> 
             </div>
 
             <div class="form-group">

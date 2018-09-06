@@ -36,8 +36,8 @@ where tipo.FkidOrigen = origen.id and tipo.id = categoria.FKidTipoAmenaza and ti
 
 // Funcion que genera un selector de valor para la matriz
 // cod corresponde al valor de  probabilidad (0) o consecuecia/gravedad (1)
-function selectorMatriz($cod, $opcion,$editar) {
-    $valor = '<select    ' . (($editar) ? '' : 'disabled').  ' class="form-control cambios" onchange = "javascript:cambiarCriterio(this,' . $cod . ')">';
+function selectorMatriz($cod, $opcion, $editar) {
+    $valor = '<select    ' . (($editar) ? '' : 'disabled') . ' class="form-control cambios" onchange = "javascript:cambiarCriterio(this,' . $cod . ')">';
     $valor .= '  <option ' . (($opcion == 1) ? 'selected' : '') . '> 1</option>';
     $valor .= '  <option ' . (($opcion == 2) ? 'selected' : '') . '> 2</option>';
     $valor .= '  <option ' . (($opcion == 3) ? 'selected' : '') . '> 3</option>';
@@ -119,8 +119,9 @@ $matriz = seleccion($sql);
 
 <div class="well well-sm">
     <h1><?= $vocab["matriz_title"] ?></h1></div>
-<div class="dataTables_wrapper form-inline dt-bootstrap">
-    <table id="matriz_riesgos" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable text-center" >
+
+<div class="dataTables_wrapper form-inline dt-bootstrap" style=overflow-x:auto;">
+    <table style = "width: 99%;" id="matriz_riesgos" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable text-center" >
         <thead>
             <tr>
                 <th rowspan="2" width="10%"><?= $vocab["td_origen"] ?></th>
@@ -165,7 +166,7 @@ $matriz = seleccion($sql);
                             $categoriasPorTipo = seleccion(consultaCategoriasPorTipo($idTipo));
                             $cantidadCategoriasPorTipo = count($categoriasPorTipo);
                             $a = count($categoriasPorTipo);
-                            $bandera = (count($categoriasPorTipo) > 0)? $bandera + 1:$bandera;                            
+                            $bandera = (count($categoriasPorTipo) > 0) ? $bandera + 1 : $bandera;
                             ?>
                             <?php if ($j != 0 && $cantidadCategoriasPorTipo > 0 && $bandera > 1) { ?>
                             <tr>
@@ -185,11 +186,11 @@ $matriz = seleccion($sql);
                                             <input <?= (!$editar) ? "readonly" : ""; ?> id="type-text" name="type-text" class="form-control fuente cambios" placeholder="fuente"value ="<?= $registroMatriz['fuente'] ?>"  title="propiedad title" type="text">
                                         </div>
                                     </td>
-                                    <td class = "criterioProbabilidad" > <?= selectorMatriz(0, $registroMatriz['probabilidad'],$editar); ?></td>
+                                    <td class = "criterioProbabilidad" > <?= selectorMatriz(0, $registroMatriz['probabilidad'], $editar); ?></td>
                                     <td id = "criterioProbabilidad"> <?= selectorProbabilidad($registroMatriz['probabilidad']) ?> </td>
-                                    <td class = "criterioGravedad"> <?= selectorMatriz(1, $registroMatriz['gravedad'],$editar); ?></td>
+                                    <td class = "criterioGravedad"> <?= selectorMatriz(1, $registroMatriz['gravedad'], $editar); ?></td>
                                     <td  id = "criterioGravedad"> <?= selectorGravedadConsecuencia($registroMatriz['gravedad']) ?></td>
-                                    <td class = "criterioConsecuencia"> <?= selectorMatriz(1, $registroMatriz['consecuenciaAmenaza'],$editar); ?></td>
+                                    <td class = "criterioConsecuencia"> <?= selectorMatriz(1, $registroMatriz['consecuenciaAmenaza'], $editar); ?></td>
                                     <td  id = "criterioConsecuencia"> <?= selectorGravedadConsecuencia($registroMatriz['consecuenciaAmenaza']) ?> </td>
                                     <td><?= calcularValorAlerta($registroMatriz); ?> </td>
                                     <?php
@@ -210,15 +211,17 @@ $matriz = seleccion($sql);
         </tbody>
     </table>
     <br/>
-    <div class="text-center">
-        <?php if ($editar) { ?>  
-        <span class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:generaVectorMatriz('<?= $nombreCentro ?>', '<?= $idCentro ?>', '0', <?= $editar ?>);"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["matriz_title"] ?></a></span>
-          <?php } ?>
-           <?php if ($criterios != null) { ?>   
-            <span class="text-center"><a class="btn btn-warning" name="" onclick="javascript:generaVectorMatriz('<?= $nombreCentro ?>', '<?= $idCentro ?>', '1', <?= $editar ?>);"><i class='fa fa-plus fa-inverse'></i>  <?= $vocab["graficar_matriz"] ?></a></span>
 
-        <?php } ?>
-    </div>
 
 </div>
+<br>
+<div class="text-center">
+    <?php if ($editar) { ?>  
+        <span class="text-center"><a class="btn btn-warning" name="submit" onclick="javascript:generaVectorMatriz('<?= $nombreCentro ?>', '<?= $idCentro ?>', '0', <?= $editar ?>);"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["matriz_title"] ?></a></span>
+        <span class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:generaVectorMatriz('<?= $nombreCentro ?>', '<?= $idCentro ?>', '2', <?= $editar ?>);"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_siguente"] ?></a></span>
+    <?php } ?>
+    <?php if ($criterios != null) { ?>   
+        <span class="text-center"><a class="btn btn-warning" name="" onclick="javascript:generaVectorMatriz('<?= $nombreCentro ?>', '<?= $idCentro ?>', '1', <?= $editar ?>);"><i class='fa fa-plus fa-inverse'></i>  <?= $vocab["graficar_matriz"] ?></a></span>
 
+    <?php } ?>
+</div>

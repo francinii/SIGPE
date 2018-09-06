@@ -272,7 +272,7 @@ $vocab["datos_generares_Servicio"]           ="Servicio de Conserjería:";
 $vocab["datos_generares_Administrativo"]     ="Personal Administrativo:";
 $vocab["datos_generares_Académico"]          ="Personal Académico:";
 $vocab["datos_generares_Estudiantil"]        ="Presencia Estudiantil:";
-$vocab["datos_generares_siguente"]           ="Y pasar el siguiente";
+$vocab["datos_generares_siguente"]           ="y pasar el siguiente";
 
 
 //***********     plan de emergencia  datos generales  ***********************//
@@ -287,26 +287,26 @@ $vocab["actividades_Estudiantes"]        ="Estudiantes";
 $vocab["actividades_Visitantes"]         ="Visitantes";
 
 
-//***********     plan de emergencia  datos generales  ***********************//
-$vocab["instalaciones_Titulo"]        ="Instalaciones:";
-$vocab["instalaciones_Titulo_Desc"]        ="características propias de la edificación:";
-$vocab["instalaciones_subTitulo1"]             ="Características de las Instalaciones";
-$vocab["instalaciones_Densidad"]         ="Densidad de ocupación:";
-$vocab["instalaciones_Area"]         ="Área de construcción:";
-$vocab["instalaciones_Instalaciones"]         ="Instalaciones:";
-$vocab["instalaciones_zona"]         ="Características de la zona:";
+//***********     plan de emergencia  instalaciones ***********************//
+$vocab["instalaciones_Titulo"]              ="Instalaciones";
+$vocab["instalaciones_Titulo_Desc"]         ="características propias de la edificación:";
+$vocab["instalaciones_subTitulo1"]          ="Características de las Instalaciones";
+$vocab["instalaciones_Densidad"]            ="Densidad de ocupación:";
+$vocab["instalaciones_Area"]                ="Área de construcción:";
+$vocab["instalaciones_Instalaciones"]       ="Instalaciones:";
+$vocab["instalaciones_zona"]                ="Características de la zona:";
 $vocab["instalaciones_topografica"]         ="Topografía:";
-$vocab["instalaciones_terreno"]         ="Nivel del terreno:";
+$vocab["instalaciones_terreno"]             ="Nivel del terreno:";
 $vocab["instalaciones_Colindantes"]         ="Colindantes:";
-$vocab["instalaciones_subTitulo2"]         ="Elementos constructivos";
-$vocab["instalaciones_Tipo"]         ="Tipo de construcción:";
-$vocab["instalaciones_Antiguedad"]         ="Antigûedad:";
-$vocab["instalaciones_Cimientos"]         ="Cimientos:";
-$vocab["instalaciones_Estructura"]         ="Estructura:";
-$vocab["instalaciones_Paredes"]         ="Paredes:";
+$vocab["instalaciones_subTitulo2"]          ="Elementos constructivos";
+$vocab["instalaciones_Tipo"]                ="Tipo de construcción:";
+$vocab["instalaciones_Antiguedad"]          ="Antigûedad:";
+$vocab["instalaciones_Cimientos"]           ="Cimientos:";
+$vocab["instalaciones_Estructura"]          ="Estructura:";
+$vocab["instalaciones_Paredes"]             ="Paredes:";
 $vocab["instalaciones_Entrepiso"]         ="Entrepiso:";
-$vocab["instalaciones_Techo"]         ="Techo:";
-$vocab["instalaciones_Cielos"]         ="Cielos:";
+$vocab["instalaciones_Techo"]             ="Techo:";
+$vocab["instalaciones_Cielos"]            ="Cielos:";
 $vocab["instalaciones_Pisos"]             ="Pisos:";
 $vocab["instalaciones_parqueo"]           ="Área de parqueo:";
 $vocab["instalaciones_aguapotable"]       ="Sistema de agua potable:";
@@ -316,4 +316,18 @@ $vocab["instalaciones_electrico"]         ="Sistema electrico:";
 $vocab["instalaciones_telefónico"]        ="Sistema telefónico:";
 $vocab["instalaciones_Otros"]             ="Otros:";
 
+
+//***********     plan de emergencia  equipos moviles  ***********************//
+$vocab["equipo_moviles_titulo"]             ="Recurso equipo móvil";
+$vocab["equipo_moviles_titulo_desc"]        ="equipo móvil: terrestres,acuático,aereo";
+$vocab["equipo_moviles_tipo"]               ="Tipo de equipo";
+$vocab["equipo_moviles_cantidad"]           ="Cantidad";
+$vocab["equipo_moviles_capacidad"]          ="Capacidad";
+$vocab["equipo_moviles_caracteristicas"]    ="Características";
+$vocab["equipo_moviles_contacto"]           ="Contacto";
+$vocab["equipo_moviles_ubicacion"]          ="Ubicación";
+$vocab["equipo_moviles_categoria"]          ="Categoría";
+$vocab["equipo_moviles_terrestre"]          ="Terrestre";
+$vocab["equipo_moviles_terrestre"]          ="Acuático";
+$vocab["equipo_moviles_terrestre"]          ="Aereo";
 ?>

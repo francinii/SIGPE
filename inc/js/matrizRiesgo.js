@@ -120,6 +120,8 @@ function generaVectorMatriz(nombreCentro, idCentro, clave, editar) {
                 jAlert("Matriz guardada con exito", "Exito");
                 if (clave == 1) {                    
                       OpcionMenu('mod/planEmergencia/plan_emergencia_matriz_grafico.php?', 'nombreCentro='+nombreCentro+'&idCentro='+idCentro+'&criterios=' + JSON.stringify(crearVectorValores()));
+                }else if(clave==2){
+                     OpcionMenu('mod/planEmergencia/plan_emergencia_recurso_humano.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
                 }
                 
             } else if (response == 1 || response == 2) {
