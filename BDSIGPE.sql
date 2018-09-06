@@ -342,6 +342,12 @@ drop table PlanEmergencia;
 drop  table UsuarioZona;
 drop table ZonaTrabajo;
 drop table Sede;
+drop table  RecursoHumanos;
+drop table  EquipoMovil;
+drop table  RecursoIntalaciones;
+drop table  RecursosOtros;
+drop table  CuerposScorro;
+drop table  ZonaSegurida;
 
 
 
