@@ -9,14 +9,21 @@ function flechasCapitulos() {
         }
         rowPreCapitulo = row;
         if (jQuery(this).is(".up")) {
+            var texto=row.children(".numeroCapitulo").text();
+            row.children(".numeroCapitulo").text(row.prev().children(".numeroCapitulo").text());
+            row.prev().children(".numeroCapitulo").text(texto);
             row.insertBefore(row.prev());
         } else {
+            
+            var texto=row.children(".numeroCapitulo").text();
+            row.children(".numeroCapitulo").text(row.next().children(".numeroCapitulo").text());
+            row.next().children(".numeroCapitulo").text(texto);            
             row.insertAfter(row.next());
         }
         if (!row.hasClass("bg-info")) {
             row.addClass("bg-info");
         }       
-         document.getElementById("") .focus();
+        
     });
 
 }

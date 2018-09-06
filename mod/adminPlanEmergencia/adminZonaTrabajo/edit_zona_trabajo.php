@@ -50,7 +50,7 @@ $find_key = $res[0]['FKidSede'];
             <div class="form-group">
                 <label for="type-file"><?= $vocab["zona_trabajo_logo"] ?></label>
                 <?php if ($view_mode == 1) { ?>
-                    <input  id="type-file" accept="image/*" name="type-file" class="form-control filestyle"  type="file" placeholder="propiedad placeholder" title="propiedad title"/>
+                <input  id="type-file" value="<?= $res[0]['logo'] ?>" accept="image/*" name="type-file" class="form-control filestyle"  type="file" placeholder="propiedad placeholder" title="propiedad title"/>
                     
                 <?php } else { ?>
                     <input readonly id="type-file" name="type-file" class="form-control" type="text" value="<?= $res[0]["logo"] ?>" /> 
@@ -58,20 +58,20 @@ $find_key = $res[0]['FKidSede'];
                 <p class="help-block"><?= $vocab["zona_trabajo_logo_desc"] ?></p>
             </div>
             <div class="form-group" id="logo">
-                <img src="../SIGPE/img/<?= $res[0]['logo'] ?>" style="max-width:100%" class="img-rounded" alt=""> 
+                <img src="../SIGPE/img/imgPlanes/<?= $res[0]['logo'] ?>?time=<?= time() ?>" style="max-width:100%" class="img-rounded" alt="Sin logo"> 
             </div>
             <div class="form-group">
                 <label for="type-file-ubicacion"><?= $vocab["zona_trabajo_Ubicacion"] ?></label>
                 <?php if ($view_mode == 1) { ?>
-                    <input  id="type-file-ubicacion" accept="image/*" name="type-file" class="form-control filestyle"  type="file" placeholder="propiedad placeholder" title="propiedad title"/>
+                    <input  id="type-file-ubicacion" value="<?= $res[0]['ubicacion'] ?>" accept="image/*" name="type-file" class="form-control filestyle"  type="file" placeholder="propiedad placeholder" title="propiedad title"/>
 
                 <?php } else { ?>
-                    <input readonly id="type-file" name="type-file" class="form-control" type="text" value="<?= $res[0]["logo"] ?>" /> 
+                    <input readonly id="type-file" name="type-file" class="form-control" type="text" value="<?= $res[0]["ubicacion"] ?>" /> 
                 <?php } ?>
                 <p class="help-block"><?= $vocab["zona_trabajo_Ubicacion_desc"] ?></p>
             </div>
             <div class="form-group" id="ubicacion">
-                <img src="../SIGPE/img/<?= $res[0]['ubicacion'] ?>"  style="max-width:100%" class="img-rounded" alt=""> 
+                <img src="../SIGPE/img/imgPlanes/<?= $res[0]['ubicacion'] ?>?time=<?= time() ?>"  style="max-width:100%" class="img-rounded" alt="Sin ubicación"> 
             </div>
 
             <div class="form-group">

@@ -3,6 +3,7 @@
 include("../../login/check.php");
 include("../../../inc/db/db.php");
 
+
 $id = $_GET['id'];
 $nombre = $_GET['nombre'];
 $sede = $_GET['sede'];
@@ -12,15 +13,15 @@ $descripcion = $_GET['descripcion'];
 $sql = "SELECT   nombreZonaTrabajo,logo,ubicacion FROM ZonaTrabajo  WHERE id =" . $id;
 $res = seleccion($sql);
 
-$rutavieja = "../../../img/" . $res[0]['logo'];
-$rutaviejaUbicacion = "../../../img/" . $res[0]['ubicacion'];
+$rutavieja = "../../../img/imgPlanes/" . $res[0]['logo'];
+$rutaviejaUbicacion = "../../../img/imgPlanes/" . $res[0]['ubicacion'];
 
-$nombrearchivo = null;
+$nombrearchivo = $res[0]['logo'];
 if (isset($_FILES['archivo1'])) {
     $nombrearchivo = explode(".", $_FILES['archivo1']['name']);
     $nombrearchivo = str_replace(" ", "", $nombre) . "." . $nombrearchivo[count($nombrearchivo) - 1];
     $ruta = $_FILES['archivo1']['tmp_name'];
-    $destino = "../../../img/" . $nombrearchivo;
+    $destino = "../../../img/imgPlanes/" . $nombrearchivo;
     $sirvio = move_uploaded_file($ruta, $destino);
     if ($res[0]['nombreZonaTrabajo'] != $nombre) {
         $sirvio = unlink($rutavieja);
@@ -28,19 +29,19 @@ if (isset($_FILES['archivo1'])) {
 } else if ($res[0]['nombreZonaTrabajo'] != $nombre) {
     $nombrearchivo = explode(".", $res[0]['logo']);
     $nombrearchivo = str_replace(" ", "", $nombre) . "." . $nombrearchivo[count($nombrearchivo) - 1];
-    $destino = "../../../img/" . $nombrearchivo;
+    $destino = "../../../img/imgPlanes/" . $nombrearchivo;
     $sirvio = copy($rutavieja, $destino);
     $sirvio = unlink($rutavieja);
 }
 
 
-$nombrearchivoUbicacion = null;
+$nombrearchivoUbicacion = $res[0]['ubicacion'];
 if (isset($_FILES['archivo2'])) {
     $nombrearchivoUbicacion = explode(".", $_FILES['archivo2']['name']);
     $nombrearchivoUbicacion = str_replace(" ", "", $nombre) . "." . $nombrearchivoUbicacion[count($nombrearchivoUbicacion) - 1];
     $nombrearchivoUbicacion="GEO".$nombrearchivoUbicacion;
     $ruta = $_FILES['archivo2']['tmp_name'];
-    $destino = "../../../img/" . $nombrearchivoUbicacion;
+    $destino = "../../../img/imgPlanes/" . $nombrearchivoUbicacion;
     $sirvio = move_uploaded_file($ruta, $destino);
     if ($res[0]['nombreZonaTrabajo'] != $nombre) {
         $sirvio = unlink($rutaviejaUbicacion);
@@ -49,7 +50,7 @@ if (isset($_FILES['archivo2'])) {
     $nombrearchivoUbicacion = explode(".", $res[0]['ubicacion']);
     $nombrearchivoUbicacion = str_replace(" ", "", $nombre) . "." . $nombrearchivoUbicacion[count($nombrearchivoUbicacion) - 1];
      $nombrearchivoUbicacion="GEO".$nombrearchivoUbicacion;
-    $destino = "../../../img/" . $nombrearchivoUbicacion;
+    $destino = "../../../img/imgPlanes/" . $nombrearchivoUbicacion;
     $sirvio = copy($rutaviejaUbicacion, $destino);
     $sirvio = unlink($rutaviejaUbicacion);
 }

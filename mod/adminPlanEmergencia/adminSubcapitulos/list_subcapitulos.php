@@ -80,6 +80,7 @@ if ($order_key != "") {
     $sql .= " ORDER BY orden";
 }
 $res = seleccion($sql);
+$capituloNumero = 0;
 ?>
 <!--***** Titulo ***** -->
 <div class="well well-sm"><h1><?= $vocab["list_subcapitulo"] ?></h1></div>
@@ -101,6 +102,13 @@ $res = seleccion($sql);
                             <option  <?= ($comb[$i]['id'] == $find_key) ? "selected " : ""; ?> value='<?= $comb[$i]['id'] ?>' ><?= $comb[$i]['titulo'] ?></option>
 
                             <?php
+                            if ($comb[$i]['id'] == $find_key) {
+                                if ($i == 0) {
+                                    $capituloNumero = "inicio";
+                                } else {
+                                    $capituloNumero = $i;
+                                }
+                            }
                         }
                     }
                     ?>
@@ -120,6 +128,7 @@ $res = seleccion($sql);
                 <?php if (check_permiso($mod4, $act4, $user_rol)) { ?>
                     <th width="10%"><?= $vocab["list_subcapitulo_orden"] ?></th> 
                 <?php } ?>
+                <th width="5%" ><?= $vocab["subcapitulo_subcapitulo"] ?></th>
                 <th width="50%"><?= $vocab["list_subcapitulo_title"] ?></th>
                 <?php if (check_permiso($mod4, $act4, $user_rol)) { ?>
                     <th width="5%"><?= $vocab["isActivo"] ?></th>
@@ -145,6 +154,7 @@ $res = seleccion($sql);
                         <?php if (check_permiso($mod4, $act4, $user_rol)) { ?>
                             <td><a href="#" class="up "><span class="glyphicon glyphicon-triangle-top"></span></a> <a href="#" class="down">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-triangle-bottom"></span></a></td>
                         <?php } ?>
+                        <td class="numeroSubcapitulo"><?= $capituloNumero . "." . ($i + 1) ?></td>
                         <td><?= $res[$i]['titulo'] ?></td>
                         <?php if (check_permiso($mod4, $act4, $user_rol)) { ?>
                             <?php
@@ -187,10 +197,11 @@ $res = seleccion($sql);
             <tr>
                 <th hidden><?= $vocab["list_capitulo_id"] ?></th>
                 <?php if (check_permiso($mod4, $act4, $user_rol)) { ?>
-                <th width="10%">
-                    <a class="btn btn-success" name="submit" onclick="javascript:ordenarSubCapitulos();"><?= $vocab["symbol_save"] ?> <?= $vocab["list_capitulo_orden"] ?></a>
-                </th>
-                 <?php } ?>
+                    <th width="10%">
+                        <a class="btn btn-success" name="submit" onclick="javascript:ordenarSubCapitulos();"><?= $vocab["symbol_save"] ?> <?= $vocab["list_capitulo_orden"] ?></a>
+                    </th>
+                <?php } ?>
+                <th width="5%" ><?= $vocab["subcapitulo_subcapitulo"] ?></th>
                 <th width="50%"><?= $vocab["list_capitulo_title"] ?></th> 
                 <?php if (check_permiso($mod4, $act4, $user_rol)) { ?>
                     <th width="5%"><?= $vocab["isActivo"] ?></th>
