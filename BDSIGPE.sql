@@ -29,6 +29,12 @@ PRIMARY KEY(id),
 FOREIGN KEY(FKidSede) REFERENCES Sede(id)
 )ENGINE=InnoDB;
 
+create table UsuarioZona(
+FKidUsuario varchar(50),
+FKidZona int,
+FOREIGN KEY(FKidZona) REFERENCES ZonaTrabajo(id)
+) ENGINE=InnoDB;
+
 
 create table PlanEmergencia(
 id int  NOT NULL AUTO_INCREMENT,
@@ -158,10 +164,83 @@ PRIMARY KEY(id),
 FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 ) ENGINE=InnoDB;
 
-create table UsuarioZona(
-FKidUsuario varchar(50),
-FKidZona int,
-FOREIGN KEY(FKidZona) REFERENCES ZonaTrabajo(id)
+create table RecursoHumanos(
+id int NOT NULL AUTO_INCREMENT,
+FKidPlanEmergencias int,
+cantidad int,
+profesion varchar(150),
+categorias varchar(150),
+localizacion varchar(150),
+contacto varchar(150),
+PRIMARY KEY(id),
+FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
+) ENGINE=InnoDB;
+
+create table EquipoMovil(
+id int NOT NULL AUTO_INCREMENT,
+FKidPlanEmergencias int,
+cantidad int,
+capacidad varchar(150),
+tipo varchar(150),
+caracteristicas varchar(150),
+contacto varchar(150),
+ubicacion varchar(150),
+categoria varchar(150),
+PRIMARY KEY(id),
+FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
+) ENGINE=InnoDB;
+
+create table RecursoIntalaciones(
+id int NOT NULL AUTO_INCREMENT,
+FKidPlanEmergencias int,
+tipo int,
+cantidad int,
+tamaño varchar(150),
+distribucion varchar(150),
+contacto varchar(150),
+ubicacion varchar(150),
+PRIMARY KEY(id),
+FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
+) ENGINE=InnoDB;
+
+create table RecursosOtros(
+id int NOT NULL AUTO_INCREMENT,
+FKidPlanEmergencias int,
+cantidad int,
+tipo varchar(150),
+caracteristicas varchar(150),
+contacto varchar(150),
+ubicacion varchar(150),
+categoria varchar(150),
+categoria varchar(150),
+PRIMARY KEY(id),
+FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
+) ENGINE=InnoDB;
+
+create table CuerposScorro(
+id int NOT NULL AUTO_INCREMENT,
+FKidPlanEmergencias int,
+cantidad int,
+tipo varchar(150),
+ubicacion varchar(150),
+Distancia varchar(150),
+Tiempo varchar(150),
+PRIMARY KEY(id),
+FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
+) ENGINE=InnoDB;
+
+-- faltan 3 tablas increso cuerpo de socorro y  las rutas de evacuacion
+
+create table ZonaSegurida(
+id int NOT NULL AUTO_INCREMENT,
+FKidPlanEmergencias int,
+Nombre varchar(150),
+ubicacion varchar(150),
+capacidad varchar(150),
+observaciones varchar(150),
+sector varchar(150),
+PRIMARY KEY(id),
+FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 ) ENGINE=InnoDB;
 
 -- para wamp en cada tabla ENGINE=INNODB;
@@ -173,8 +252,8 @@ INSERT INTO `Sede`(`isActivo`, `nombreSede`, `descripcion`) VALUES (1,'Alajuela'
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,1,'Escuala de informatica','Zona ubicada en la region de limon');
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (2,1,'central','Zona ubicada en la region de Heredia');
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (2,1,'side','Zona ubicada en la region de Guanacaste');
-INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (3,1,'cede alajuela','Zona ubicada en la region de Alajuela');
-INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,1,'cede Cartago','Zona ubicada en la region de Cartago');
+INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (3,1,'Sede alajuela','Zona ubicada en la region de Alajuela');
+INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,1,'Sede Cartago','Zona ubicada en la region de Cartago');
 
 INSERT INTO `PlanEmergencia`( `FKidZonaTrabajo`) VALUES(1);
 INSERT INTO `PlanEmergencia`( `FKidZonaTrabajo`) VALUES(2);
@@ -250,7 +329,7 @@ INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('4','6','2'
 
 
 
-drop  table UsuarioZona;
+
 drop table TipoPoblacion;
 drop table Formulario;
 drop table SubCapitulo;
@@ -260,8 +339,15 @@ drop table CategoriaTipoAmenaza;
 drop table TipoAmenaza;
 drop table OrigenAmenaza;
 drop table PlanEmergencia;
+drop  table UsuarioZona;
 drop table ZonaTrabajo;
 drop table Sede;
+drop table  RecursoHumanos;
+drop table  EquipoMovil;
+drop table  RecursoIntalaciones;
+drop table  RecursosOtros;
+drop table  CuerposScorro;
+drop table  ZonaSegurida;
 
 
 

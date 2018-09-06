@@ -15,7 +15,7 @@ $nombrearchivo=str_replace(" ","",$nombre).".".$nombrearchivo[count($nombrearchi
 $tipo = $_FILES['archivo1']['type'];
 $tamanio = $_FILES['archivo1']['size'];
 $ruta = $_FILES['archivo1']['tmp_name'];
-$destino = "../../../img/" . $nombrearchivo;
+$destino = "../../../img/imgPlanes/" . $nombrearchivo;
 $sirvio=move_uploaded_file($ruta,$destino);
 }
 
@@ -27,7 +27,7 @@ $nombrearchivoUbicacion="GEO".$nombrearchivoUbicacion;
 $tipo = $_FILES['archivo2']['type'];
 $tamanio = $_FILES['archivo2']['size'];
 $ruta = $_FILES['archivo2']['tmp_name'];
-$destino = "../../../img/" . $nombrearchivoUbicacion;
+$destino = "../../../img/imgPlanes/" . $nombrearchivoUbicacion;
 $sirvio=move_uploaded_file($ruta,$destino);
 }
 
