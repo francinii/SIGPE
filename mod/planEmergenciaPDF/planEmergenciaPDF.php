@@ -31,10 +31,12 @@ $user_rol = $mySessionController->getVar("rol");
 include_once('../../lib/tcpdf/examples/tcpdf_include.php');
 
 $id = $_GET['idCentro'];
-$sql = "(SELECT  id, nombreZonaTrabajo FROM ZonaTrabajo where id =" . $id . ")";
 $sqlPlan = "(SELECT `id`, `FKidZonaTrabajo`, `revisadoPor`, `codigoZonaTrabajo`, `actividad`, `direccion`, `personaContactoGeneral`, `numeroTelefono`, `numeroFax`, `notificaciones`, `categoriaNFPA`, `usoInstalaciones`, `horarioJornada`, `seguridadInstitucional`, `servicioConsegeria`, `personalAdministrativo`, `personalAcademico`, `presenciaEstudiantil`, `instalacionesDensidadOcupacion`, `instalacionesAreaConstruccion`, `instalacionesInstalaciones`, `instalacionesCaracteristicasZona`, `instalacionesTopografia`, `instalacionesNivelTerreno`, `instalacionesColindates`, `elementosConstructivosTipoConstruccion`, `elementosConstructivosAntiguedad`, `elementosConstructivosCimientos`, `elementosConstructivosEstructura`, `elementosConstructivosParedes`, `elementosConstructivosEntrepiso`, `elementosConstructivosTecho`, `elementosConstructivosCielos`, `elementosConstructivosPisos`, `elementosConstructivosAreaParqueo`, `elementosConstructivosSistemaAguaPotable`, `elementosConstructivosAlcantarilladoSanitario`, `elementosConstructivosAlcantarilladoPluvial`, `elementosConstructivosSistemaElectrico`, `elementosConstructivosSistemaTelefonico`, `elementosConstructivosOtros` FROM `PlanEmergencia` where FKidZonaTrabajo =" . $id . ")";
 $sqlCapitulos = "(SELECT  id, descripcion, orden,titulo,isActivo FROM Capitulo ORDER BY orden)";
 
+
+$sqlZonas = "(SELECT  id, nombreZonaTrabajo, logo FROM ZonaTrabajo where id =" . $id . ")";
+$zonas = seleccion($sqlZonas);
 
 $sql = "(SELECT  id, FKidSubcapitulos FROM Formulario)";
 $formularios = seleccion($sql);
@@ -43,14 +45,14 @@ $sql = "(SELECT  tipoPoblacion, descripcion, total, representacionDe FROM TipoPo
 $resTipoPoblacion = seleccion($sql);
 
 
-$res = seleccion($sql);
+//$res = seleccion($sql);
 $resPlan = seleccion($sqlPlan);
 $rescapitulos = seleccion($sqlCapitulos);
 global $datosCabecera;
-$dirImages = "images/";
-$centroTrabajo = $res[0]["nombreZonaTrabajo"];
+$dirImages = "img/";
+$centroTrabajo = $zonas[0]["nombreZonaTrabajo"];
 $logoUNA = $dirImages . "logo_una.jpg";
-$logoCentro = $dirImages . "logo_una.jpg";
+$logoCentro = $dirImages . "imgPlanes/" .$zonas[0]["logo"];
 $logoCIEUNA = $dirImages . "logo_cieuna.png";
 $codigo = $resPlan[0]['codigoZonaTrabajo'];
 $revisadoPor = $resPlan[0]['revisadoPor'];
@@ -69,22 +71,22 @@ class MYPDF extends TCPDF {
         global $datosCabecera;
         $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
                 . '<tr style = "text-align:center;">'
-                . '<td rowspan="2"><img src= "' . $datosCabecera['logoUNA'] . '" width="60" height="60" ></td>'
-                . '<td >' . $datosCabecera['centroTrabajo'] . '</td>'
-                . '<td rowspan="2"><img src= "' . $datosCabecera['logoUNA'] . '" width="60" height="60" ></td>'
-                . '<td><b>Código</b> ' . $datosCabecera['codigo'] . '</td>'
+                . '<td rowspan="3"><img src= "' . $datosCabecera['logoUNA'] . '" width="60" height="60" ></td>'
+                . '<td><b>' . $datosCabecera['centroTrabajo'] . '</b></td>'
+                . '<td rowspan="3"><img src= "' . $datosCabecera['logoCentro'] . '" width="60" height="60" ></td>'
+                . '<td><b>Código:</b> ' . $datosCabecera['codigo'] . '</td>'
                 . '</tr>'
                 . '<tr style = "text-align:center;">'
-                . '<td >Plan de preparativos de respuesta ante emergencias</td>'
-                . '<td><b>Revisado por:</b><br>' . $datosCabecera['revisado'] . '</td>'
+                . '<td rowspan="2"><b>Plan de preparativos de respuesta ante emergencias</b></td>'
+                . '<td><b>Revisado por:</b><br>' . $datosCabecera['revisado'] . '</td>'                
                 . '</tr>'
                 . '<tr style = "text-align:center;">'
+                . '<td><b>Página </b>' . $this->getAliasNumPage().' de '.$this->getAliasNbPages(). '</td>'
                 . '</tr>'
                 . '</table>'
                 . '<div style = "height: 250px;"></div>';
         $this->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $html, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'top', $autopadding = true);
-    }
-    
+    }  
     
 
 }
@@ -108,7 +110,7 @@ $pdf->SetKeywords('Plan, PDF, emergencias, CIEUNA, UNA');
 //$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 //
 // set default monospaced font
-//$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 // set margins
 $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
@@ -131,6 +133,7 @@ $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 ////}
 //
 //// ---------------------------------------------------------
+$pdf->setPrintFooter(false);
 portada($pdf);
 capitulos($pdf, $rescapitulos, $resPlan, $resTipoPoblacion, $formularios);
 tablaContenidos($pdf);
@@ -169,7 +172,8 @@ function tablaContenidos($pdf) {
 }
 
 function capitulos($pdf, $capitulos, $resPlan, $resTipoPoblacion, $formularios) {
-  
+    //Empieza a mostrar el header
+    $pdf->setPrintHeader(true);
     // $html = '<div style = "height: 250px;"><div>';
     foreach ($capitulos as $cap) {
           cargarNuevaPagina($pdf);
@@ -199,6 +203,7 @@ function subCapitulos($pdf, $id, $ordenCapitulo, $resPlan, $resTipoPoblacion, $f
 }
 
 function portada($pdf) {
+    $pdf->setPrintHeader(false);
     global $datosCabecera;
     cargarNuevaPagina($pdf);
     $logo = '<img src= "' . $datosCabecera['logoUNA'] . '"  width="100" height="100" >';
@@ -219,12 +224,12 @@ function portada($pdf) {
 //        </div>';
 
     $html = '<div style = "text-align:center;">
-            <h1>PLAN DE PREPARATIVOS DE RESPUESTA ANTE EMERGENCIAS</h1>
-            <h1>' . $datosCabecera["centroTrabajo"] . ' <h1>
-            <h1>   UNIVERSIDAD NACIONAL DE COSTA RICA <h1>
-             <img src= "' . $datosCabecera['logoUNA'] . '" width="100" height="100" >
-            <h1>' . $datosCabecera["centroTrabajo"] . ' <h1>
-            <h1>   Fecha <h1>
+            <h2>PLAN DE PREPARATIVOS DE RESPUESTA ANTE EMERGENCIAS</h2>
+            <h2>' . $datosCabecera["centroTrabajo"] . ' </h2>
+            <h2>   UNIVERSIDAD NACIONAL DE COSTA RICA </h2>
+             <img src= "' . $datosCabecera['logoCentro'] . '" width="400" height="400" >
+            <h2>' . $datosCabecera["centroTrabajo"] . ' </h2>
+            <h2>   Fecha </h2>
             <h6 style="border: 1px solid black; padding: 20px; text-align: center;">
             Este documento tiene como objeto cumplir con los requisitos y contenidos que debe
             cumplir un plan de preparativos y respuesta ante emergencias en centros laborales y 
