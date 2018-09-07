@@ -23,11 +23,17 @@ FKidSede int,
 isActivo int,
 nombreZonaTrabajo varchar(150),
 descripcion varchar(150),
-longitud varchar(150),
-latitud varchar(150),
+logo varchar(150),
+ubicacion varchar(150),
 PRIMARY KEY(id),
 FOREIGN KEY(FKidSede) REFERENCES Sede(id)
 )ENGINE=InnoDB;
+
+create table UsuarioZona(
+FKidUsuario varchar(50),
+FKidZona int,
+FOREIGN KEY(FKidZona) REFERENCES ZonaTrabajo(id)
+) ENGINE=InnoDB;
 
 
 create table PlanEmergencia(
@@ -106,7 +112,7 @@ create table Matriz (
     id int NOT NULL AUTO_INCREMENT,  
     FKidCategoriaTipoAmenaza int,
     FKidPlanEmergencias int,
-    fuente text,
+    fuente varchar(5000),
     probabilidad int,
     gravedad int,
     consecuenciaAmenaza int,
@@ -120,7 +126,7 @@ create table Matriz (
 
 create table Capitulo(
 id int NOT NULL AUTO_INCREMENT,
-descripcion text,
+descripcion varchar(5000),
 isActivo int,
 titulo varchar(150),
 orden int,
@@ -129,7 +135,7 @@ orden int,
 
 create table SubCapitulo(
 id int NOT NULL AUTO_INCREMENT,
-descripcion text,
+descripcion varchar(5000),
 titulo varchar(150),
 isActivo int,
 FKidCapitulo int,
@@ -140,7 +146,7 @@ FOREIGN KEY (FKidCapitulo) REFERENCES Capitulo(id)
 
 create table Formulario(
 id int NOT NULL AUTO_INCREMENT,
-descripcion text,
+descripcion varchar(5000),
 FKidSubcapitulos int,
 PRIMARY KEY(id),
 FOREIGN KEY (FKidSubcapitulos) REFERENCES SubCapitulo(id)
@@ -158,24 +164,95 @@ PRIMARY KEY(id),
 FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 ) ENGINE=InnoDB;
 
-create table UsuarioZona(
-FKidUsuario varchar(50),
-FKidZona int,
-FOREIGN KEY(FKidUsuario) REFERENCES sis_user(id),
-FOREIGN KEY(FKidZona) REFERENCES ZonaTrabajo(id)
+create table RecursoHumanos(
+id int NOT NULL AUTO_INCREMENT,
+FKidPlanEmergencias int,
+cantidad int,
+profesion varchar(150),
+categorias varchar(150),
+localizacion varchar(150),
+contacto varchar(150),
+PRIMARY KEY(id),
+FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
+) ENGINE=InnoDB;
+
+create table EquipoMovil(
+id int NOT NULL AUTO_INCREMENT,
+FKidPlanEmergencias int,
+cantidad int,
+capacidad int,
+tipo varchar(150),
+caracteristicas varchar(150),
+contacto varchar(150),
+ubicacion varchar(150),
+categoria varchar(150),
+PRIMARY KEY(id),
+FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
+) ENGINE=InnoDB;
+
+create table RecursoIntalaciones(
+id int NOT NULL AUTO_INCREMENT,
+FKidPlanEmergencias int,
+tipo int,
+cantidad int,
+tamaño varchar(150),
+distribucion varchar(150),
+contacto varchar(150),
+ubicacion varchar(150),
+PRIMARY KEY(id),
+FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
+) ENGINE=InnoDB;
+
+create table RecursosOtros(
+id int NOT NULL AUTO_INCREMENT,
+FKidPlanEmergencias int,
+cantidad int,
+tipo varchar(150),
+caracteristicas varchar(150),
+contacto varchar(150),
+ubicacion varchar(150),
+categoria varchar(150),
+PRIMARY KEY(id),
+FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
+) ENGINE=InnoDB;
+
+create table CuerposScorro(
+id int NOT NULL AUTO_INCREMENT,
+FKidPlanEmergencias int,
+cantidad int,
+tipo varchar(150),
+ubicacion varchar(150),
+Distancia varchar(150),
+Tiempo varchar(150),
+PRIMARY KEY(id),
+FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
+) ENGINE=InnoDB;
+
+-- faltan 3 tablas increso cuerpo de socorro y  las rutas de evacuacion
+
+create table ZonaSegurida(
+id int NOT NULL AUTO_INCREMENT,
+FKidPlanEmergencias int,
+Nombre varchar(150),
+ubicacion varchar(150),
+capacidad varchar(150),
+observaciones varchar(150),
+sector varchar(150),
+PRIMARY KEY(id),
+FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 ) ENGINE=InnoDB;
 
 -- para wamp en cada tabla ENGINE=INNODB;
 
-INSERT INTO `sede`(`isActivo`, `nombreSede`, `descripcion`) VALUES (1,'Heredia','Heredia');
-INSERT INTO `sede`(`isActivo`, `nombreSede`, `descripcion`) VALUES (1,'San Jose','San Jose');
-INSERT INTO `sede`(`isActivo`, `nombreSede`, `descripcion`) VALUES (1,'Alajuela','Alajuela');
+INSERT INTO `Sede`(`isActivo`, `nombreSede`, `descripcion`) VALUES (1,'Heredia','Heredia');
+INSERT INTO `Sede`(`isActivo`, `nombreSede`, `descripcion`) VALUES (1,'San Jose','San Jose');
+INSERT INTO `Sede`(`isActivo`, `nombreSede`, `descripcion`) VALUES (1,'Alajuela','Alajuela');
 
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,1,'Escuala de informatica','Zona ubicada en la region de limon');
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (2,1,'central','Zona ubicada en la region de Heredia');
 INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (2,1,'side','Zona ubicada en la region de Guanacaste');
-INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (3,1,'cede alajuela','Zona ubicada en la region de Alajuela');
-INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,1,'cede Cartago','Zona ubicada en la region de Cartago');
+INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (3,1,'Sede alajuela','Zona ubicada en la region de Alajuela');
+INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,1,'Sede Cartago','Zona ubicada en la region de Cartago');
 
 INSERT INTO `PlanEmergencia`( `FKidZonaTrabajo`) VALUES(1);
 INSERT INTO `PlanEmergencia`( `FKidZonaTrabajo`) VALUES(2);
@@ -208,83 +285,26 @@ INSERT INTO `Capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',
 INSERT INTO `Capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'ANEXO',11);
 
 
-INSERT INTO `SubCapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, `orden`) VALUES ('<p>Es la condición o resultado cuantificable que debe ser alcanzado y mantenido, con la aplicación<br/>
-del procedimiento y que refleja el valor o beneficio que obtiene el usuario. El propósito debe<br/>
-redactarse en forma breve y concisa; especificará los resultados o condiciones que se desean<br/>
-lograr, iniciará con un verbo en infinitivo y, en lo posible, se evitará utilizar gerundios y adjetivos<br/>
-calificativos. El propósito debe quedar escrito en prosa, únicamente para la redacción de<br/>
-este se facilita la siguiente tabla, que no deberá incorporarse en el manual respectivo:</p>','Propósito',1,1,1);
-INSERT INTO `SubCapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, `orden`) VALUES ('<p>En este apartado se describe brevemente el área o campo de aplicación del procedimiento;<br/>
-es decir, a quiénes afecta o qué límites o influencia tiene, representa la esfera de acción<br />
-que cubren los procedimientos.</p>','Alcance',1,1,2);
-INSERT INTO `SubCapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, `orden`) VALUES ('<p>Aqu&iacute; se registra el compendio de normas aplicables al procedimiento, conforme a la secuencia<br />
-l&oacute;gica de las etapas del mismo. Es decir aquellas disposiciones internas que:</p>
+INSERT INTO `SubCapitulo` (`descripcion`,`titulo`,`isActivo`,`FKidCapitulo`,`orden`) VALUES ('<p style=\"text-align:justify\">Es la condición o resultado cuantificable que debe ser alcanzado y mantenido, con la aplicación del procedimiento y que refleja el valor o beneficio que obtiene el usuario. El propósito debe redactarse en forma breve y concisa; especificará los resultados o condiciones que se desean lograr, iniciará con un verbo en infinitivo y, en lo posible, se evitará utilizar gerundios y adjetivos calificativos. <u><strong>El propósito debe quedar escrito en prosa, únicamente para la redacción de este se facilita la siguiente tabla, que no deberá incorporarse en el manual respectivo:</strong></u></p><table align=\"center\" border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:500px\"><tbody><tr><td colspan=\"1\" rowspan=\"2\" style=\"text-align:center\"><strong>Qué se hace</strong></td><td colspan=\"1\" rowspan=\"2\" style=\"text-align:center\"><strong>En qué función o campo de especialidad se hace</strong></td><td colspan=\"2\" rowspan=\"1\" style=\"text-align:center\"><strong>Justificación Razón de ser</strong></td></tr><tr><td style=\"text-align:center\"><strong>Para qué se hace</strong></td><td style=\"text-align:center\"><strong>Para quién se hace</strong></td></tr><tr><td style=\"text-align:center\">Acción<br />expresada en<br />verbo</td><td style=\"text-align:center\">Campo de especialidad<br />principal</td><td style=\"text-align:center\">Resultado</td><td style=\"text-align:center\">Usuario final</td></tr></tbody></table><p>','Propósito',1,1,1);
+INSERT INTO `SubCapitulo` (`descripcion`,`titulo`,`isActivo`,`FKidCapitulo`,`orden`) VALUES ('<p style=\"text-align:justify\">En este apartado se describe brevemente el área o campo de aplicación del procedimiento; es decir, a quiénes afecta o qué límites o influencia tiene, representa la esfera de acción que cubren los procedimientos.</p>','Alcance',1,1,2);
+INSERT INTO `SubCapitulo` (`descripcion`,`titulo`,`isActivo`,`FKidCapitulo`,`orden`) VALUES ('<p>Aquí se registra el compendio de normas aplicables al procedimiento, conforme a la secuencia lógica de las etapas del mismo. Es decir aquellas disposiciones internas que:</p><p style=\"margin-left:40px\">a) Tienen como propósito regular la interacción entre los individuos en una organización y las actividades de una unidad responsable.<br />b) Marcan responsabilidades y límites generales y específicos, dentro de los cuales se realizan legítimamente las actividades en distintas áreas de acción.<br />c) Se aplican a todas las situaciones similares.<br />d) Dan orientaciones claras hacia donde deben dirigirse todas las actividades de un mismo tipo.<br />e) Facilitan la toma de decisiones en actividades rutinarias.<br />f) Describen lo que la dirección desea que se haga en cada situación definida.</p>','Marco normativo',1,1,3);
+INSERT INTO `SubCapitulo` (`descripcion`,`titulo`,`isActivo`,`FKidCapitulo`,`orden`) VALUES ('<p style=\"margin-left:40px\"><strong>a) Secuencia de etapas</strong></p><p style=\"margin-left:80px\">i. Son las partes en que se divide el procedimiento, y cada una de ellas integra<br />un conjunto afín de actividades.<br />ii. La redacción de la etapa, iniciará con un verbo conjugado en el tiempo<br />presente de la tercera persona del singular.</p><p style=\"margin-left:40px\"><strong>b) Descripción de las actividades</strong></p><p style=\"margin-left:80px\">i. Es la descripción detallada de las actividades; de manera tal que permita al<br />personal comprenderlas, seguirlas y aplicarlas, aun cuando sea de recién<br />ingreso al área.<br />ii. El número con que se registrará cada actividad, estará compuesto por el dígito<br />de la etapa correspondiente, seguido de un punto, y a la derecha de éste, del<br />número consecutivo respectivo.<br />iii. La redacción de la actividad, iniciará con un verbo conjugado en el tiempo<br />presente de la tercera persona del singular.<br />iv. Deberá considerarse en la redacción de las actividades, los elementos<br />necesarios para su realización; así como los productos que se generen.</p><p style=\"margin-left:40px\"><strong>c) Responsable</strong></p><p style=\"margin-left:80px\">i. Se refiere a los órganos o cargos de la estructura autorizada responsables de<br />la ejecución y cumplimiento de las actividades del procedimiento.<br />ii. En el caso del personal operativo habrá de señalarse el nombre del puesto por<br />funciones reales desempeñadas: analista, secretaria, mensajero, etcétera; y<br />no por el nombre de la plaza: coordinador de técnicos, secretaria ejecutiva,<br />entre otros.</p><p><strong>En la descripción se utilizará la siguiente forma:</strong></p><p>','Descripción del plan',1,1,4);
+INSERT INTO `SubCapitulo` (`descripcion`,`titulo`,`isActivo`,`FKidCapitulo`,`orden`) VALUES ('descripcion','Documentos de referencia',1,1,5);
+INSERT INTO `SubCapitulo` (`descripcion`,`titulo`,`isActivo`,`FKidCapitulo`,`orden`) VALUES ('','Datos Generales y actividades que desarrolla la organización',1,2,1);
 
-<p>&nbsp;&nbsp; a) Tienen como prop&oacute;sito regular la interacci&oacute;n entre los individuos en una</p>
-<p>&nbsp;&nbsp; organizaci&oacute;n y las actividades de una unidad responsable.</p>
-<p>&nbsp;&nbsp; b) Marcan responsabilidades y l&iacute;mites generales y espec&iacute;ficos, dentro de los cuales<br />
-&nbsp;&nbsp; se realizan leg&iacute;timamente las actividades en distintas &aacute;reas de acci&oacute;n.<br />
-&nbsp;&nbsp; c) Se aplican a todas las situaciones similares.<br />
-&nbsp;&nbsp; d) Dan orientaciones claras hacia donde deben dirigirse todas las actividades de un<br />
-&nbsp;&nbsp; mismo tipo.<br />
-&nbsp;&nbsp; e) Facilitan la toma de decisiones en actividades rutinarias.<br />
-&nbsp;&nbsp; f) Describen lo que la direcci&oacute;n desea que se haga en cada situaci&oacute;n definida.</p>','Marco normativo',1,1,3);
-INSERT INTO `SubCapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, `orden`) VALUES ('<p>a) Secuencia de etapas
-i. Son las partes en que se divide el procedimiento, y cada una de ellas integra
-un conjunto afín de actividades.
-ii. La redacción de la etapa, iniciará con un verbo conjugado en el tiempo
-presente de la tercera persona del singular.
-b) Descripción de las actividades
-i. Es la descripción detallada de las actividades; de manera tal que permita al
-personal comprenderlas, seguirlas y aplicarlas, aun cuando sea de recién
-ingreso al área.
-ii. El número con que se registrará cada actividad, estará compuesto por el dígito
-de la etapa correspondiente, seguido de un punto, y a la derecha de éste, del
-número consecutivo respectivo.
-iii. La redacción de la actividad, iniciará con un verbo conjugado en el tiempo
-presente de la tercera persona del singular.
-iv. Deberá considerarse en la redacción de las actividades, los elementos
-necesarios para su realización; así como los productos que se generen.
-c) Responsable
-i. Se refiere a los órganos o cargos de la estructura autorizada responsables de
-la ejecución y cumplimiento de las actividades del procedimiento.
-ii. En el caso del personal operativo habrá de señalarse el nombre del puesto por
-funciones reales desempeñadas: analista, secretaria, mensajero, etcétera; y
-no por el nombre de la plaza: coordinador de técnicos, secretaria ejecutiva,
-entre otros.
-
-En la descripción se utilizará la siguiente forma:</p>','Descripción del plan',1,1,4);
-INSERT INTO `SubCapitulo`( `descripcion`, `titulo`, `isActivo`, `FKidCapitulo`, `orden`) VALUES ('<p>Anotar qué documentos no normativos se requieren al utilizar el procedimiento, para tener
-un mejor entendimiento o completar su ejecución no incluidos en los puntos anteriores.</p>','Documentos de referencia',1,1,5);
- 
-
-INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Datos generales',1);
-INSERT INTO `Formulario`(`descripcion`, `FKidSubCapitulos`) VALUES ('Actividades',1);
-INSERT INTO `Formulario`(`descripcion`, `FKidSubcapitulos`) VALUES ('Instalaciones',1);
-INSERT INTO `Formulario`(`descripcion`, `FKidSubcapitulos`) VALUES ('Matriz de riesgo',1);
-
+INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubCapitulos`) VALUES (1,'Datos generales',1);
+INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubCapitulos`) VALUES (2,'Tipo de población',1);
+INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (3,'Instalaciones',1);
+INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (4,'Matriz de riesgo',1);
+INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (5,'Recurso Humano',1);
+INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (6,'Equipo movil',1);
 
 INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',1);
 INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',2);
 INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',5);
 
 insert into `PlanEmergencia`(`FKidZonaTrabajo`) VALUES (1);
-INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
-`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (1,1,'placa tectonica',2,4,3);
 
--- insert matriz de riesgo no sirve
-INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
-`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (5,1,'placa tectonica',2,4,3);
-INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
-`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (3,1,'placa tectonica',2,4,3);
-INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
-`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (4,1,'placa tectonica',2,4,3);
-INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
-`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (6,1,'placa tectonica',2,4,3);
-INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
-`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (7,1,'placa tectonica',2,4,3);
-INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
-`probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (1,1,'placa tectonica',2,4,3);
 
 
 -- ******************************Alerta***********************************
@@ -309,7 +329,7 @@ INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('4','6','2'
 
 
 
-drop  table UsuarioZona;
+
 drop table TipoPoblacion;
 drop table Formulario;
 drop table SubCapitulo;
@@ -319,10 +339,16 @@ drop table CategoriaTipoAmenaza;
 drop table TipoAmenaza;
 drop table OrigenAmenaza;
 drop table PlanEmergencia;
+drop  table UsuarioZona;
 drop table ZonaTrabajo;
 drop table Sede;
+drop table  RecursoHumanos;
+drop table  EquipoMovil;
+drop table  RecursoIntalaciones;
+drop table  RecursosOtros;
+drop table  CuerposScorro;
+drop table  ZonaSegurida;
 
---SELECT `id`, `nombreZonaTrabajo`FROM `zonatrabajo`,(SELECT `FKidZona` From UsuarioZona where `FKidUsario` = '402340420') UsuZona WHERE zonatrabajo.id = UsuZona.FKidZona  
 
 
 -- ----------------Procedimientos almacenados----------------------------------
@@ -359,7 +385,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_zona_trabajo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_zona_trabajo`(IN `p_nombre` varchar(150),IN `p_FKidSede` int,IN `p_activo` int, IN `p_descripcion` varchar(150), OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_zona_trabajo`(IN `p_nombre` varchar(150),IN `p_FKidSede` int,IN `p_activo` int,IN `p_logo` varchar(150), IN `p_ubicacion` varchar(150), IN `p_descripcion` varchar(150), OUT `res` TINYINT  UNSIGNED)
 BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -375,7 +401,7 @@ BEGIN
     ROLLBACK;
 	END;
             START TRANSACTION;
-                    INSERT INTO `ZonaTrabajo`(FKidSede,nombreZonaTrabajo,isActivo, descripcion) VALUES (p_FKidSede,p_nombre, p_activo,p_descripcion);
+                    INSERT INTO `ZonaTrabajo`(FKidSede,nombreZonaTrabajo,isActivo, descripcion,logo,ubicacion) VALUES (p_FKidSede,p_nombre, p_activo,p_descripcion,p_logo,p_ubicacion);
                     SELECT  MAX(id) into res from ZonaTrabajo ;
                     INSERT INTO `PlanEmergencia`(FKidZonaTrabajo) VALUES (res);                  
             COMMIT;
@@ -779,7 +805,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `insert_capitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_capitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_descripcion` text,  OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_capitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_descripcion` varchar(5000),  OUT `res` TINYINT  UNSIGNED)
 BEGIN
 declare ordenar Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION     
@@ -820,7 +846,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `insert_subcapitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_subcapitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_fkcapitulo` int,IN  `p_descripcion` text,  OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_subcapitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_fkcapitulo` int,IN  `p_descripcion` varchar(5000),  OUT `res` TINYINT  UNSIGNED)
 BEGIN
 declare ordenar Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -859,7 +885,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_capitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_capitulo`(IN `p_id` int,IN `p_titulo` varchar(150), IN  `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_capitulo`(IN `p_id` int,IN `p_titulo` varchar(150), IN  `p_descripcion` varchar(5000), OUT `res` TINYINT  UNSIGNED)
 BEGIN
         
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -893,7 +919,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_subcapitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_subcapitulo`(IN `p_id` int,IN `p_titulo` varchar(150),IN `p_fkcapitulo` int, IN  `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_subcapitulo`(IN `p_id` int,IN `p_titulo` varchar(150),IN `p_fkcapitulo` int, IN  `p_descripcion` varchar(5000), OUT `res` TINYINT  UNSIGNED)
 BEGIN   
         declare ordenar Integer;
         declare FKAntigua Integer;
@@ -910,7 +936,7 @@ BEGIN
     SET res = 2;
     ROLLBACK;
 	END;
-            select FKidCapitulo into FKAntigua from Subcapitulo WHERE `id`=p_id;
+            select FKidCapitulo into FKAntigua from SubCapitulo WHERE `id`=p_id;
             IF(FKAntigua = p_fkcapitulo) THEN
                   START TRANSACTION;
                    UPDATE `SubCapitulo` SET `descripcion`= p_descripcion ,`titulo`=p_titulo, `FKidCapitulo`=p_fkcapitulo WHERE `id`=p_id;
@@ -973,8 +999,8 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_zona_trabajo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_zona_trabajo`(IN `p_id` int, IN `p_FKidSede` int,IN `p_nombre` varchar(150),IN `p_activo` int, IN `p_descripcion` varchar(150), OUT `res` TINYINT  UNSIGNED)
-BEGIN   
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_zona_trabajo`(IN `p_id` int, IN `p_FKidSede` int,IN `p_nombre` varchar(150),IN `p_activo` int,IN `p_logo` varchar(150),IN `p_ubicacion` varchar(150), IN `p_descripcion` varchar(150), OUT `res` TINYINT  UNSIGNED)
+BEGIN            
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 		-- ERROR
@@ -987,12 +1013,12 @@ BEGIN
 		-- ERROR
     SET res = 2;
     ROLLBACK;
-	END;           
-        START TRANSACTION;
-        UPDATE `ZonaTrabajo` SET `FKidSede`= p_FKidSede ,`nombreZonaTrabajo`= p_nombre ,`isActivo`= p_activo,descripcion = p_descripcion WHERE `id`= p_id;
+	END;       
+        START TRANSACTION;        
+        UPDATE `ZonaTrabajo` SET `FKidSede`= p_FKidSede ,`nombreZonaTrabajo`= p_nombre ,`isActivo`= p_activo,descripcion = p_descripcion, logo=p_logo, ubicacion=p_ubicacion WHERE `id`= p_id;
         COMMIT;
-        -- SUCCESS
-        SET res = 0;
+        -- SUCCESS      
+        SET res = 0;      
        
 END
 ;;
@@ -1484,4 +1510,3 @@ BEGIN
 END
 ;;
 DELIMITER ;
-
