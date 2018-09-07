@@ -15,7 +15,7 @@ $sede = seleccion($sql);
         <h2><?= $vocab["zona_trabajo_title"] ?></h2>        
     </div>
     <div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
-        <form method="post" action="">            
+        <form method="post" action="" enctype="multipart/form-data">            
             <div class="form-group">
                 <label  for="zona_trabajo_title"><?= $vocab["zona_trabajo_title"] ?></label>
                 <input id="nombre" name="zona_trabajo_title" class="form-control" type="text" value=""/> 
@@ -30,6 +30,25 @@ $sede = seleccion($sql);
                 </select>
                 <p class="help-block"><small><?= $vocab["zona_trabajo_sede_Desc"] ?></small></p> 
             </div>
+            <div class="form-group">
+                    <label for="type-file"><?= $vocab["zona_trabajo_logo"] ?></label>
+                   <input id="type-file" accept="image/*" name="type-file" class="form-control filestyle" type="file" placeholder="propiedad placeholder" title="propiedad title"/>
+                    
+                    <p class="help-block"><?= $vocab["zona_trabajo_logo_desc"] ?></p>
+            </div>
+            <div class="form-group" id="logo">
+              
+            </div>
+          <div class="form-group">
+                    <label for="type-file-ubicacion"><?= $vocab["zona_trabajo_Ubicacion"] ?></label>
+                   <input id="type-file-ubicacion" accept="image/*" name="type-file" class="form-control filestyle" type="file" placeholder="propiedad placeholder" title="propiedad title"/>
+                    
+                    <p class="help-block"><?= $vocab["zona_trabajo_Ubicacion_desc"] ?></p>
+            </div>
+            <div class="form-group" id="ubicacion">
+              
+            </div>
+            
             <div class="form-group">
                 <label  for="descripcion"><?= $vocab["symbol_desc"] ?> </label>                
                 <textarea class="ckeditor form-control" id="descripcion" name="descripcion" ></textarea>
@@ -77,3 +96,54 @@ $sede = seleccion($sql);
         </form>
     </div>
 </div>
+<script>
+    function archivoLogo(evt) {
+        var files = evt.target.files; // FileList object
+
+        // Obtenemos la imagen del campo "file".
+        for (var i = 0, f; f = files[i]; i++) {
+            //Solo admitimos imágenes.
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+
+            var reader = new FileReader();
+
+            reader.onload = (function (theFile) {
+                return function (e) {
+                    // Insertamos la imagen
+                    document.getElementById("logo").innerHTML = ['<img class="thumb" style="max-width:100%" " src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
+                };
+            })(f);
+
+            reader.readAsDataURL(f);
+        }
+    }
+    function archivoUbicacion(evt) {
+        var files = evt.target.files; // FileList object
+
+        // Obtenemos la imagen del campo "file".
+        for (var i = 0, f; f = files[i]; i++) {
+            //Solo admitimos imágenes.
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+
+            var reader = new FileReader();
+
+            reader.onload = (function (theFile) {
+                return function (e) {
+                    // Insertamos la imagen
+                    document.getElementById("ubicacion").innerHTML = ['<img class="thumb" style="max-width:100%"  src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
+                };
+            })(f);
+
+            reader.readAsDataURL(f);
+        }
+    }
+    document.getElementById('type-file').addEventListener('change', archivoLogo, false);
+    document.getElementById('type-file-ubicacion').addEventListener('change', archivoUbicacion, false);
+    jQuery(document).ready(function () {
+        jQuery(":file").filestyle();
+    });
+</script>

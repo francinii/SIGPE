@@ -109,15 +109,15 @@ $vocab["user_perfil_desc"]      = "Información de usuario personal";
 
 
 //**************** Modulo administración de matriz de riesgos *******************//
-$vocab["isActivo"]          = "Activo";
-$vocab["isInactivo"]          = "Inactivo";
+$vocab["isActivo"]                              = "Activo";
+$vocab["isInactivo"]                             = "Inactivo";
 
 $vocab["origen_amenaza_title"]                  = "Origen de la amenaza";
 $vocab["list_origen_amenaza_title"]             = "Or&iacute;gen de la amenaza";
 $vocab["list_origen_amenaza_id"]                = "Id";
 $vocab["list_origen_amenaza_descripcion"]       = "Origen de la amenaza";
 $vocab["list_origen_amenaza_isActivo"]          = "Activar origen de la amenaza";
-$vocab["desc_origen_isActivo"]                 = "Active o desactive el origen";
+$vocab["desc_origen_isActivo"]                  = "Active o desactive el origen";
 $vocab["nombre_origen_amenaza"]                 = "Nombre del origen de la amenaza";
 $vocab["nombre_desc_origen_amenaza"]            = "Escriba el nombre de la nueva amenaza";
 
@@ -142,20 +142,23 @@ $vocab["nombre_desc_categoria_amenaza"]            = "Escriba el nombre de la nu
 
 
 //***************************** Modulo zona de trabajo******************************//
-$vocab["zona_trabajo_title"]               = "Centro de trabajo";
-$vocab["list_zona_trabajo_title"]          = "Centro de trabajo";
-$vocab["list_zona_trabajo_id"]             = "Id";
-$vocab["list_zona_trabajo_descripcion"]    = "Centro de trabajo";
+$vocab["zona_trabajo_title"]              = "Centro de trabajo";
+$vocab["list_zona_trabajo_title"]         = "Centro de trabajo";
+$vocab["list_zona_trabajo_id"]            = "Id";
+$vocab["list_zona_trabajo_descripcion"]   = "Centro de trabajo";
 
-$vocab["zona_trabajo_title_Desc"]       = "Titulo del centro de trabajo";
-$vocab["zona_trabajo_id"]               = "Id";
-$vocab["zona_trabajo_id_Desc"]          = "Id del capitulo";
-$vocab["zona_trabajo_Descripcion"]      = "Descripción del centro de trabajo";
+$vocab["zona_trabajo_title_Desc"]        = "Titulo del centro de trabajo";
+$vocab["zona_trabajo_id"]                = "Id";
+$vocab["zona_trabajo_id_Desc"]           = "Id del capitulo";
+$vocab["zona_trabajo_Descripcion"]       = "Descripción del centro de trabajo";
 $vocab["zona_trabajo_activar"]           = "Activar centro de trabajo";
-$vocab["desc_zona_trabajo_isActivo"]   = "Active o desactive el centro de trabajo";
-$vocab["zona_trabajo_sede"]            = "Sede";
-$vocab["zona_trabajo_sede_Desc"]            = "Sede a la que pertenece el centro";
-
+$vocab["desc_zona_trabajo_isActivo"]     = "Active o desactive el centro de trabajo";
+$vocab["zona_trabajo_sede"]              = "Sede";
+$vocab["zona_trabajo_sede_Desc"]         = "Sede a la que pertenece el centro";
+$vocab["zona_trabajo_logo"]               = "Logo ";
+$vocab["zona_trabajo_logo_desc"]           = "Cambiar Logo del centro";
+$vocab["zona_trabajo_Ubicacion"]               = "Ubicacion ";
+$vocab["zona_trabajo_Ubicacion_desc"]           = "Ubicación según google georeferenciada";
 //***************************** Modulo Sedes******************************//
 $vocab["sede_title"]               = "Sedes";
 $vocab["list_sede_title"]          = "Sedes";
@@ -269,7 +272,7 @@ $vocab["datos_generares_Servicio"]           ="Servicio de Conserjería:";
 $vocab["datos_generares_Administrativo"]     ="Personal Administrativo:";
 $vocab["datos_generares_Académico"]          ="Personal Académico:";
 $vocab["datos_generares_Estudiantil"]        ="Presencia Estudiantil:";
-$vocab["datos_generares_siguente"]           ="Y pasar el siguiente";
+$vocab["datos_generares_siguente"]           ="y pasar el siguiente";
 
 
 //***********     plan de emergencia  datos generales  ***********************//
@@ -284,26 +287,26 @@ $vocab["actividades_Estudiantes"]        ="Estudiantes";
 $vocab["actividades_Visitantes"]         ="Visitantes";
 
 
-//***********     plan de emergencia  datos generales  ***********************//
-$vocab["instalaciones_Titulo"]        ="Instalaciones:";
-$vocab["instalaciones_Titulo_Desc"]        ="características propias de la edificación:";
-$vocab["instalaciones_subTitulo1"]             ="Características de las Instalaciones";
-$vocab["instalaciones_Densidad"]         ="Densidad de ocupación:";
-$vocab["instalaciones_Area"]         ="Área de construcción:";
-$vocab["instalaciones_Instalaciones"]         ="Instalaciones:";
-$vocab["instalaciones_zona"]         ="Características de la zona:";
+//***********     plan de emergencia  instalaciones ***********************//
+$vocab["instalaciones_Titulo"]              ="Instalaciones";
+$vocab["instalaciones_Titulo_Desc"]         ="características propias de la edificación:";
+$vocab["instalaciones_subTitulo1"]          ="Características de las Instalaciones";
+$vocab["instalaciones_Densidad"]            ="Densidad de ocupación:";
+$vocab["instalaciones_Area"]                ="Área de construcción:";
+$vocab["instalaciones_Instalaciones"]       ="Instalaciones:";
+$vocab["instalaciones_zona"]                ="Características de la zona:";
 $vocab["instalaciones_topografica"]         ="Topografía:";
-$vocab["instalaciones_terreno"]         ="Nivel del terreno:";
+$vocab["instalaciones_terreno"]             ="Nivel del terreno:";
 $vocab["instalaciones_Colindantes"]         ="Colindantes:";
-$vocab["instalaciones_subTitulo2"]         ="Elementos constructivos";
-$vocab["instalaciones_Tipo"]         ="Tipo de construcción:";
-$vocab["instalaciones_Antiguedad"]         ="Antigûedad:";
-$vocab["instalaciones_Cimientos"]         ="Cimientos:";
-$vocab["instalaciones_Estructura"]         ="Estructura:";
-$vocab["instalaciones_Paredes"]         ="Paredes:";
+$vocab["instalaciones_subTitulo2"]          ="Elementos constructivos";
+$vocab["instalaciones_Tipo"]                ="Tipo de construcción:";
+$vocab["instalaciones_Antiguedad"]          ="Antigûedad:";
+$vocab["instalaciones_Cimientos"]           ="Cimientos:";
+$vocab["instalaciones_Estructura"]          ="Estructura:";
+$vocab["instalaciones_Paredes"]             ="Paredes:";
 $vocab["instalaciones_Entrepiso"]         ="Entrepiso:";
-$vocab["instalaciones_Techo"]         ="Techo:";
-$vocab["instalaciones_Cielos"]         ="Cielos:";
+$vocab["instalaciones_Techo"]             ="Techo:";
+$vocab["instalaciones_Cielos"]            ="Cielos:";
 $vocab["instalaciones_Pisos"]             ="Pisos:";
 $vocab["instalaciones_parqueo"]           ="Área de parqueo:";
 $vocab["instalaciones_aguapotable"]       ="Sistema de agua potable:";
@@ -313,4 +316,18 @@ $vocab["instalaciones_electrico"]         ="Sistema electrico:";
 $vocab["instalaciones_telefónico"]        ="Sistema telefónico:";
 $vocab["instalaciones_Otros"]             ="Otros:";
 
+
+//***********     plan de emergencia  equipos moviles  ***********************//
+$vocab["equipo_moviles_titulo"]             ="Recurso equipo móvil";
+$vocab["equipo_moviles_titulo_desc"]        ="equipo móvil: terrestres,acuático,aereo";
+$vocab["equipo_moviles_tipo"]               ="Tipo de equipo";
+$vocab["equipo_moviles_cantidad"]           ="Cantidad";
+$vocab["equipo_moviles_capacidad"]          ="Capacidad";
+$vocab["equipo_moviles_caracteristicas"]    ="Características";
+$vocab["equipo_moviles_contacto"]           ="Contacto";
+$vocab["equipo_moviles_ubicacion"]          ="Ubicación";
+$vocab["equipo_moviles_categoria"]          ="Categoría";
+$vocab["equipo_moviles_terrestre"]          ="Terrestre";
+$vocab["equipo_moviles_terrestre"]          ="Acuático";
+$vocab["equipo_moviles_terrestre"]          ="Aereo";
 ?>

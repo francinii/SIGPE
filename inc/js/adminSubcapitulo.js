@@ -14,8 +14,14 @@ function flechasSubCapitulos() {
         }
         rowPreSubCapitulo = row;
         if (jQuery(this).is(".up")) {
+            var texto=row.children(".numeroSubcapitulo").text();
+            row.children(".numeroSubcapitulo").text(row.prev().children(".numeroSubcapitulo").text());
+            row.prev().children(".numeroSubcapitulo").text(texto);
             row.insertBefore(row.prev());
         } else {
+            var texto=row.children(".numeroSubcapitulo").text();
+            row.children(".numeroSubcapitulo").text(row.next().children(".numeroSubcapitulo").text());
+            row.next().children(".numeroSubcapitulo").text(texto);
             row.insertAfter(row.next());
         }
         if (!row.hasClass("bg-info")) {

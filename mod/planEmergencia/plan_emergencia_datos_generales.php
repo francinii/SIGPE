@@ -116,7 +116,7 @@ $res = seleccion($sql);
 
             <?php if ($editar) { ?>
              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <a class="btn  btn-warning  btn-group-justified"  onclick="javascript:guardarDatosGenerales('<?=$idCentro?>',0)" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"]?></a>
+                        <a class="btn  btn-warning  btn-group-justified"  onclick="javascript:guardarDatosGenerales('<?=$idCentro?>',0)" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"]?> <?= $vocab["datos_generares_Titulo"]?></a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <a class="btn  btn-success btn-group-justified"  onclick="javascript:guardarDatosGenerales('<?=$idCentro?>',1)" name="submit"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_save"] . " " . $vocab["datos_generares_siguente"] ?></a>
@@ -128,8 +128,6 @@ $res = seleccion($sql);
         </form>
     </div>
 </div>
-<script>
-///IniciarGuardarCambios();
-</script>
+
 
 

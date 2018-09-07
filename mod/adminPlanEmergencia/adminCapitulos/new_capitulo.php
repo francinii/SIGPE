@@ -19,16 +19,22 @@ $user_rol = $mySessionController->getVar("rol");
             <div class="form-group">
                 <label  for="capitulo_Descripcion"><?= $vocab["symbol_desc"] ?> </label>                
                 <textarea class="ckeditor form-control" id="capitulo_Descripcion" name="capitulo_Descripcion" ></textarea>
+                <div id="toolbar-container"></div>
+
+                <!-- This container will become the editable. -->
+                <div id="editor">
+                    <p>This is the initial editor content.</p>
+                </div>
                 <p class="help-block"><small><?= $vocab["capitulo_Descripcion"] ?></small></p> 
             </div>            
-           
-                <?php if (check_permiso($mod4, $act3, $user_rol)) { ?>
-                    <div class="text-center"><a class="btn btn-success"  name="submit" onclick="new_capitulo();"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] . " " . $vocab["capitulo_capitulo"] ?>  </a></div>
-                <?php } ?>
-            
+
+            <?php if (check_permiso($mod4, $act3, $user_rol)) { ?>
+                <div class="text-center"><a class="btn btn-success"  name="submit" onclick="new_capitulo();"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] . " " . $vocab["capitulo_capitulo"] ?>  </a></div>
+            <?php } ?>
+
         </form>
     </div>
 </div>
 <script>
-CrearEditorCapitulos();
+    CrearEditorCapitulos();
 </script>

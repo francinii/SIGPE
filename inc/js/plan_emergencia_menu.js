@@ -6,7 +6,7 @@ function IniciarGuardarCambios(alert) {
             jQuery("#divalertaDatosSinGuardar").addClass("panel panel-warning ");
             jQuery("#divalertaDatosSinGuardar").css("position", "fixed");
             jQuery("#divalertaDatosSinGuardar").css("bottom", "0");
-             jQuery("#divalertaDatosSinGuardar").css("right", "0");
+            jQuery("#divalertaDatosSinGuardar").css("right", "0");
             jQuery("#divalertaDatosSinGuardar").css("margin-right", "2%");
             jQuery("#divalertaDatosSinGuardar").css("z-index", "1030");
             jQuery("#alertaDatosSinGuardar").append("<p>" + alert + "</p>");
@@ -32,6 +32,12 @@ function cambiarMenu(numero, idCentro, nombreCentro) {
             break;
         case 4:
             OpcionMenu('mod/planEmergencia/plan_emergencia_matriz.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
+            break;
+        case 5:
+            OpcionMenu('mod/planEmergencia/plan_emergencia_recurso_humano.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
+            break;
+        case 6:
+            OpcionMenu('mod/planEmergencia/plan_emergencia_equipomovil.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
             break;
     }
 
