@@ -296,8 +296,10 @@ create table Brigada(
     numPersonasEvacuar int,    
     distancia float,
     tiempo int,
+    PRIMARY KEY(id),
     FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id) 
 ) ENGINE=InnoDB;
+ 
  
 create table RutaEvacuacion(
     id int NOT NULL AUTO_INCREMENT, 
