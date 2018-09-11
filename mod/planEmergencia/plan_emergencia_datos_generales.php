@@ -8,7 +8,7 @@ $user_rol = $mySessionController->getVar("rol");
 ?>
 <?php
 include("plan_emergencia_menu.php");
-$sql = "SELECT `actividad`,`direccion`,`personaContactoGeneral`,`numeroTelefono`,`numeroFax`,`notificaciones`,`categoriaNFPA`,"
+$sql = "SELECT `actividad`,`direccion`,`personaContactoGeneral`,`numeroTelefono`,`numeroFax`,`correo`,`categoriaNFPA`,"
         . "`usoInstalaciones`,`horarioJornada`,`seguridadInstitucional`,`servicioConsegeria`,`personalAdministrativo`,"
         . "`personalAcademico`, `presenciaEstudiantil` from PlanEmergencia WHERE `FKidZonaTrabajo`=".$idCentro;
 $res = seleccion($sql);

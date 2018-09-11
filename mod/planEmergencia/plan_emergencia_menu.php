@@ -16,7 +16,7 @@ $editar =(check_permiso($mod5, $act4, $user_rol) || check_permiso($mod5, $act3, 
 <br/>
 <div>
 
-    <h4><?= $vocab["incio_labe"] ?></h4>
+   
     <div class="btn-group btn-group-justified">
 
         <?php
