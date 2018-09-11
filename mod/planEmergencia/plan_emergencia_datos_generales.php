@@ -61,7 +61,7 @@ $res = seleccion($sql);
             <div class="form-group row">
                 <label for="email" class="col-sm-3 col-form-label"><?= $vocab["datos_generares_Correo"] ?></label>
                 <div class="col-sm-9">
-                    <input type="text"  <?= (!$editar) ? "readonly" : ""; ?> class="form-control cambios" id="email" value="<?= ( count($res) > 0) ? $res[0]['notificaciones'] : ""; ?>">                                 
+                    <input type="text"  <?= (!$editar) ? "readonly" : ""; ?> class="form-control cambios" id="email" value="<?= ( count($res) > 0) ? $res[0]['correo'] : ""; ?>">                                 
                 </div>
             </div>
             <div class="form-group row">

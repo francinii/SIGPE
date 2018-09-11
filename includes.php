@@ -66,7 +66,7 @@
 <script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_instalaciones.js"></script>
 
 <!-- Plan de emergencia instalaciones-->
-<script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_equipomovil.js"></script>
+<script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_equipoMovil.js"></script>
 
 <!-- Plan de emergencia datos generales -->
 <script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_menu.js"></script>
