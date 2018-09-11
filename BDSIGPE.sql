@@ -8,6 +8,34 @@
  * Created: 26/07/2018
  */
 
+drop table TipoPoblacion;
+drop table CapituloPlan;
+drop table SubCapituloPlan;
+drop table Formulario;
+drop table SubCapitulo;
+drop table Capitulo;
+drop table Matriz;
+drop table CategoriaTipoAmenaza;
+drop table TipoAmenaza;
+drop table OrigenAmenaza;
+drop table  RecursoHumanos;
+drop table  EquipoMovil;
+drop table  RecursoIntalaciones;
+drop table  RecursosOtros;
+drop table  CuerposScorro;
+drop table  ZonaSeguridad;
+drop table  IdentificacionPeligro;
+drop table  PlanAccion;
+drop table  FormularioPoblacion;
+drop table  RutaEvacuacion;
+drop table  Brigada;
+drop table IngresoCuerpoSocorro;
+drop table  PlanEmergencia;
+drop table  UsuarioZona;
+drop table  ZonaTrabajo;
+drop table  Sede;
+
+
 
 create table Sede(
 id int  NOT NULL AUTO_INCREMENT,
@@ -38,7 +66,8 @@ FOREIGN KEY(FKidZona) REFERENCES ZonaTrabajo(id)
 
 create table PlanEmergencia(
 id int  NOT NULL AUTO_INCREMENT,
-FKidZonaTrabajo int, 
+FKidZonaTrabajo int,
+version int, 
 revisadoPor varchar(150),
 codigoZonaTrabajo varchar(150),
 actividad varchar(150),
@@ -46,7 +75,7 @@ direccion varchar(150),
 personaContactoGeneral varchar(150),
 numeroTelefono varchar(150),
 numeroFax varchar(150),
-notificaciones varchar(150),
+correo varchar(150),
 categoriaNFPA varchar(150),
 usoInstalaciones varchar(150),
 horarioJornada varchar(150),
@@ -112,7 +141,7 @@ create table Matriz (
     id int NOT NULL AUTO_INCREMENT,  
     FKidCategoriaTipoAmenaza int,
     FKidPlanEmergencias int,
-    fuente varchar(5000),
+    fuente text,
     probabilidad int,
     gravedad int,
     consecuenciaAmenaza int,
@@ -126,7 +155,7 @@ create table Matriz (
 
 create table Capitulo(
 id int NOT NULL AUTO_INCREMENT,
-descripcion varchar(5000),
+descripcion text,
 isActivo int,
 titulo varchar(150),
 orden int,
@@ -135,7 +164,7 @@ orden int,
 
 create table SubCapitulo(
 id int NOT NULL AUTO_INCREMENT,
-descripcion varchar(5000),
+descripcion text,
 titulo varchar(150),
 isActivo int,
 FKidCapitulo int,
@@ -146,12 +175,29 @@ FOREIGN KEY (FKidCapitulo) REFERENCES Capitulo(id)
 
 create table Formulario(
 id int NOT NULL AUTO_INCREMENT,
-descripcion varchar(5000),
+descripcion text,
 FKidSubcapitulos int,
 PRIMARY KEY(id),
 FOREIGN KEY (FKidSubcapitulos) REFERENCES SubCapitulo(id)
 )ENGINE=InnoDB;
 
+
+create table CapituloPlan(
+    FKidCapitulo int NOT NULL,
+    FKidPlanEmergencias int NOT NULL,
+descripcion text,
+    FOREIGN KEY (FKidCapitulo) REFERENCES Capitulo(id),
+    FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
+
+) ENGINE=InnoDB;
+
+create table SubCapituloPlan(
+    FKidSubCapitulo int NOT NULL,
+    FKidPlanEmergencias int NOT NULL,
+    descripcion text,
+    FOREIGN KEY (FKidSubCapitulo) REFERENCES SubCapitulo(id),
+    FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
+) ENGINE=InnoDB;
 
 create table TipoPoblacion(
 id int NOT NULL AUTO_INCREMENT,
@@ -228,9 +274,49 @@ PRIMARY KEY(id),
 FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 ) ENGINE=InnoDB;
 
+create table IngresoCuerpoSocorro(
+    id int NOT NULL AUTO_INCREMENT,
+    dimensionAreaAcceso varchar(150),
+    FKidPlanEmergencias int,
+    radioGiro varchar(150),
+    caseta varchar(150),
+    plumas varchar(150),
+    anchoLibre varchar(150),
+   PRIMARY KEY(id),
+FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id) 
+)ENGINE=InnoDB;
 -- faltan 3 tablas increso cuerpo de socorro y  las rutas de evacuacion
 
-create table ZonaSegurida(
+create table Brigada(
+    id int NOT NULL AUTO_INCREMENT, 
+    FKidPlanEmergencias int,
+    brigadista varchar(150),
+    puntoPartida varchar(150),
+    zonaEvacuar varchar(150),
+    numPersonasEvacuar int,    
+    distancia float,
+    tiempo int,
+    FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id) 
+) ENGINE=InnoDB;
+ 
+create table RutaEvacuacion(
+    id int NOT NULL AUTO_INCREMENT, 
+    FKidPlanEmergencias int,
+    nombreArea varchar(150),
+    personaPermanente varchar(150),
+    personaFlotante varchar(150),
+    ruta1 varchar(150),
+    distancia1 float,
+    tiempo1 int,
+    ruta2 varchar(150),
+    distancia2 float,
+    tiempo2 int,
+    PRIMARY KEY(id),
+    FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id) 
+) ENGINE=InnoDB;
+
+
+create table ZonaSeguridad(
 id int NOT NULL AUTO_INCREMENT,
 FKidPlanEmergencias int,
 Nombre varchar(150),
@@ -241,6 +327,52 @@ sector varchar(150),
 PRIMARY KEY(id),
 FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 ) ENGINE=InnoDB;
+
+create table FormularioPoblacion(
+    id int NOT NULL AUTO_INCREMENT,
+    FKidPlanEmergencias int,
+    nombreOficina varchar(150),
+    capacidadPermanente int, 
+    capacidadTemporal int,
+    representanteComite varchar(150),
+    representanteBrigadaEfectiva varchar(150),
+    representantePrimerosAuxilios varchar(150),
+    telefonoOficina varchar(150),
+    contactoEmergencia varchar(150),
+    telefonoPersonal varchar(150),
+    correoElectronico varchar (150),
+    PRIMARY KEY(id),
+    FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
+)ENGINE=InnoDB;
+
+create table IdentificacionPeligro(
+    id int NOT NULL AUTO_INCREMENT,
+    FKidPlanEmergencias int,
+    peligro varchar(150),
+    presente int,
+    ubicacion varchar(150),
+    recomendacion varchar(150),
+    fecha date,
+    responsable varchar(150),
+    priorizacion int,
+    PRIMARY KEY(id),
+    FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
+)ENGINE=InnoDB;
+
+create table PlanAccion(
+    id int NOT NULL AUTO_INCREMENT,
+    FKidPlanEmergencias int,
+    area varchar(150),
+    peligro varchar(150),
+    accionPorRealizar varchar(150),
+    recomendaciones varchar(150),
+    fechaEjecucion date,
+    responsable varchar(150),
+    PRIMARY KEY(id),
+    FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
+) ENGINE=InnoDB;
+
+
 
 -- para wamp en cada tabla ENGINE=INNODB;
 
@@ -329,25 +461,6 @@ INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('4','6','2'
 
 
 
-
-drop table TipoPoblacion;
-drop table Formulario;
-drop table SubCapitulo;
-drop table Capitulo;
-drop table Matriz;
-drop table CategoriaTipoAmenaza;
-drop table TipoAmenaza;
-drop table OrigenAmenaza;
-drop table PlanEmergencia;
-drop  table UsuarioZona;
-drop table ZonaTrabajo;
-drop table Sede;
-drop table  RecursoHumanos;
-drop table  EquipoMovil;
-drop table  RecursoIntalaciones;
-drop table  RecursosOtros;
-drop table  CuerposScorro;
-drop table  ZonaSegurida;
 
 
 
@@ -805,7 +918,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `insert_capitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_capitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_descripcion` varchar(5000),  OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_capitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_descripcion` text,  OUT `res` TINYINT  UNSIGNED)
 BEGIN
 declare ordenar Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION     
@@ -846,7 +959,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `insert_subcapitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_subcapitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_fkcapitulo` int,IN  `p_descripcion` varchar(5000),  OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_subcapitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_fkcapitulo` int,IN  `p_descripcion` text,  OUT `res` TINYINT  UNSIGNED)
 BEGIN
 declare ordenar Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -885,7 +998,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_capitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_capitulo`(IN `p_id` int,IN `p_titulo` varchar(150), IN  `p_descripcion` varchar(5000), OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_capitulo`(IN `p_id` int,IN `p_titulo` varchar(150), IN  `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
 BEGIN
         
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -919,7 +1032,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_subcapitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_subcapitulo`(IN `p_id` int,IN `p_titulo` varchar(150),IN `p_fkcapitulo` int, IN  `p_descripcion` varchar(5000), OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_subcapitulo`(IN `p_id` int,IN `p_titulo` varchar(150),IN `p_fkcapitulo` int, IN  `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
 BEGIN   
         declare ordenar Integer;
         declare FKAntigua Integer;
@@ -1327,7 +1440,7 @@ DROP PROCEDURE IF EXISTS `datos_generales`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `datos_generales`(IN `p_FKidZonaTrabajo` int, IN `p_actividad` varchar(150),
  IN `p_direccion` varchar(150), IN `p_personaContactoGeneral` varchar(150),IN `p_numeroTelefono` varchar(150),
- IN `p_numeroFax` varchar(150),IN `p_notificaciones` varchar(150),
+ IN `p_numeroFax` varchar(150),IN `p_correo` varchar(150),
  IN `p_categoriaNFPA` varchar(150),IN `p_usoInstalaciones` varchar(150),
  IN `p_horarioJornada` varchar(150),IN `p_seguridadInstitucional` varchar(150),
  IN `p_servicioConsegeria` varchar(150),IN `p_personalAdministrativo` varchar(150),
@@ -1350,7 +1463,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `datos_generales`(IN `p_FKidZonaTrab
      
          START TRANSACTION;
          UPDATE `PlanEmergencia` SET `actividad`=p_actividad,`direccion`= p_direccion,`personaContactoGeneral`=p_personaContactoGeneral,
-         `numeroTelefono`=p_numeroTelefono,`numeroFax`= p_numeroFax,`notificaciones`=p_notificaciones,`categoriaNFPA`=p_categoriaNFPA,`usoInstalaciones`=p_usoInstalaciones,`horarioJornada`=p_horarioJornada,
+         `numeroTelefono`=p_numeroTelefono,`numeroFax`= p_numeroFax,`correo`=p_correo,`categoriaNFPA`=p_categoriaNFPA,`usoInstalaciones`=p_usoInstalaciones,`horarioJornada`=p_horarioJornada,
          `seguridadInstitucional`=p_seguridadInstitucional,`servicioConsegeria`=p_servicioConsegeria,`personalAdministrativo`=p_personalAdministrativo,`personalAcademico`=p_personalAcademico,
            `presenciaEstudiantil` = p_presenciaEstudiantil   where `FKidZonaTrabajo`=p_FKidZonaTrabajo;   
 
