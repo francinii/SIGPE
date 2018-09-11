@@ -319,7 +319,6 @@ $vocab["instalaciones_Otros"]             ="Otros:";
 
 //***********     plan de emergencia  equipos moviles  ***********************//
 $vocab["equipo_moviles_titulo"]             ="Recurso equipo móvil";
-$vocab["equipo_moviles_titulo_desc"]        ="equipo móvil: terrestres,acuático,aereo";
 $vocab["equipo_moviles_tipo"]               ="Tipo de equipo";
 $vocab["equipo_moviles_cantidad"]           ="Cantidad";
 $vocab["equipo_moviles_capacidad"]          ="Capacidad";
@@ -328,6 +327,8 @@ $vocab["equipo_moviles_contacto"]           ="Contacto";
 $vocab["equipo_moviles_ubicacion"]          ="Ubicación";
 $vocab["equipo_moviles_categoria"]          ="Categoría";
 $vocab["equipo_moviles_terrestre"]          ="Terrestre";
-$vocab["equipo_moviles_terrestre"]          ="Acuático";
-$vocab["equipo_moviles_terrestre"]          ="Aereo";
+$vocab["equipo_moviles_titulo_desc"]     ="Equipo móvil terrestres: jeep,camión,tractor,otros. - Equipo móvil acuático: Lancha,bote,Panga,otros. -  Equipo móvil aereo: avioneta,helicoptero,otros.";
+$vocab["equipo_moviles_Acuático"]          ="Acuático";
+$vocab["equipo_moviles_Aereo"]             ="Aereo";
+
 ?>

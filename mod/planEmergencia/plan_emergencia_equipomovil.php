@@ -26,10 +26,16 @@ if (count($res) <= 0) {
 
     <h2><?= $vocab["equipo_moviles_titulo"] ?></h2>
     <p><?= $vocab["equipo_moviles_titulo_desc"] ?></p>
+    
 
 </div>
+<div align="right">
+    <span class="text-center" >
+        <a class="btn btn-success" onclick="javascript: agregarFila();"><i class=" fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?></a>
+    </span>
+</div>
 <div   class="dataTables_wrapper  form-inline dt-bootstrap" style = "overflow-x:auto;">
-    <table style = "width: 99%;" id="lista_usuarios" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center" >
+    <table style = "width: 99%;" id="lista_equipos" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center" >
         <thead>
             <tr>
                 <th  width="5%"><?= $vocab["equipo_moviles_tipo"] ?></th>

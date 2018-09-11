@@ -62,11 +62,17 @@
 <!-- Plan de emergencia actividades-->
 <script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_actividades.js"></script>
 
-<!-- Plan de emergencia actividades-->
+<!-- Plan de emergencia instalaciones-->
 <script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_instalaciones.js"></script>
+
+<!-- Plan de emergencia instalaciones-->
+<script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_equipomovil.js"></script>
 
 <!-- Plan de emergencia datos generales -->
 <script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_menu.js"></script>
+
+
+
 <!-- Bootstrap + Font-Awesome + Estilo -->
 <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <link href="lib/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
