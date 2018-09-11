@@ -39,6 +39,9 @@ function cambiarMenu(numero, idCentro, nombreCentro) {
         case 6:
             OpcionMenu('mod/planEmergencia/plan_emergencia_equipoMovil.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
             break;
+        case 7:
+            OpcionMenu('mod/planEmergencia/plan_emergencia_identificacion_peligros.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
+         break;
     }
 
 }

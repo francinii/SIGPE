@@ -269,7 +269,7 @@ function formularioDatosGenerales($resPlan) {
             . '</tr>'
             . '<tr>'
             . '<td>Correo electrónico para notificaciones:</td>'
-            . '<td>' . $resPlan[0]['notificaciones'] . '</td>'
+            . '<td>' . $resPlan[0]['correo'] . '</td>'
             . '</tr>'
             . '<tr>'
             . '<td>Categoría NFPA :</td>'
