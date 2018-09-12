@@ -1523,6 +1523,50 @@ END
 ;;
 DELIMITER ;
 
+
+-- ----------------------------
+-- Proceso IdentificacionPeligro actividades
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `insert_identificacion_peligro`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_identificacion_peligro`(IN `p_FKidPlanEmergencias` int,IN `p_id` int,  IN `p_peligro` varchar(150),
+ IN `p_presente` int, IN `p_ubicacion` varchar(150), IN `p_recomendacion` varchar(150) ,IN `p_fecha` date, IN `p_responsable` varchar(150),  IN `p_priorizacion` int,
+OUT `res` TINYINT  UNSIGNED)
+BEGIN   
+    declare existe Integer;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+      set existe = null;
+      select count(`FKidPlanEmergencias`) into existe from IdentificacionPeligro WHERE  `FKidPlanEmergencias`=p_FKidPlanEmergencias and `id` = p_id ;
+         IF(existe = 1) THEN
+         START TRANSACTION;
+         UPDATE `IdentificacionPeligro` SET `peligro`= p_peligro,`presente`=p_presente,`ubicacion`=p_ubicacion,`recomendacion`=p_recomendacion,`fecha`=p_fecha,`responsable`=p_responsable,`priorizacion`=p_priorizacion  WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias and `id`=p_id;  
+        COMMIT;
+        -- SUCCESS       
+     ELSE
+        START TRANSACTION;       
+       INSERT INTO `IdentificacionPeligro`( `FKidPlanEmergencias`, `peligro`, `presente`, `ubicacion`, `recomendacion`, `fecha`, `responsable`, `priorizacion`)
+       VALUES (p_FKidPlanEmergencias,p_peligro,p_presente,p_ubicacion,p_recomendacion,p_fecha,p_responsable,p_priorizacion);
+         
+        COMMIT;
+        -- SUCCESS         
+   END IF;
+         SET res = 0;
+END
+;;
+DELIMITER ;
+
 -- call tipo_poblacion(1,'1','1',1,'1',@res);
 
 -- ----------------------------
