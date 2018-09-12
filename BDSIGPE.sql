@@ -1439,9 +1439,9 @@ DELIMITER ;
 -- ----------------------------
 -- Proceso datos generales
 -- ----------------------------
-DROP PROCEDURE IF EXISTS `datos_generales`;
+DROP PROCEDURE IF EXISTS `update_datos_generales`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `datos_generales`(IN `p_FKidZonaTrabajo` int, IN `p_actividad` varchar(150),
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_datos_generales`(IN `p_id` int, IN `p_actividad` varchar(150),
  IN `p_direccion` varchar(150), IN `p_personaContactoGeneral` varchar(150),IN `p_numeroTelefono` varchar(150),
  IN `p_numeroFax` varchar(150),IN `p_correo` varchar(150),
  IN `p_categoriaNFPA` varchar(150),IN `p_usoInstalaciones` varchar(150),
@@ -1468,7 +1468,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `datos_generales`(IN `p_FKidZonaTrab
          UPDATE `PlanEmergencia` SET `actividad`=p_actividad,`direccion`= p_direccion,`personaContactoGeneral`=p_personaContactoGeneral,
          `numeroTelefono`=p_numeroTelefono,`numeroFax`= p_numeroFax,`correo`=p_correo,`categoriaNFPA`=p_categoriaNFPA,`usoInstalaciones`=p_usoInstalaciones,`horarioJornada`=p_horarioJornada,
          `seguridadInstitucional`=p_seguridadInstitucional,`servicioConsegeria`=p_servicioConsegeria,`personalAdministrativo`=p_personalAdministrativo,`personalAcademico`=p_personalAcademico,
-           `presenciaEstudiantil` = p_presenciaEstudiantil   where `FKidZonaTrabajo`=p_FKidZonaTrabajo;   
+           `presenciaEstudiantil` = p_presenciaEstudiantil   where `id`=p_id;   
 
         COMMIT;
         -- SUCCESS         
@@ -1483,9 +1483,9 @@ DELIMITER ;
 -- ----------------------------
 -- Proceso tipoPoblacion actividades
 -- ----------------------------
-DROP PROCEDURE IF EXISTS `tipo_poblacion`;
+DROP PROCEDURE IF EXISTS `update_tipo_poblacion`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `tipo_poblacion`(IN `p_FKidPlanEmergencias` int, IN `p_tipoPoblacion` varchar(150),
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_tipo_poblacion`(IN `p_FKidPlanEmergencias` int, IN `p_tipoPoblacion` varchar(150),
  IN `p_descripcion` varchar(150), IN `p_total` int, IN `p_representacionDe` varchar(150),
 OUT `res` TINYINT  UNSIGNED)
 BEGIN   
@@ -1528,9 +1528,9 @@ DELIMITER ;
 -- ----------------------------
 -- Proceso datos generales
 -- ----------------------------
-DROP PROCEDURE IF EXISTS `datos_Instalaciones`;
+DROP PROCEDURE IF EXISTS `update_datos_Instalaciones`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `datos_Instalaciones`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_datos_Instalaciones`(
  IN `p_FKidZonaTrabajo` int, IN `p_instalacionesDensidadOcupacion` varchar(150),
  IN `p_instalacionesAreaConstruccion` varchar(150), IN `p_instalacionesInstalaciones` varchar(150),
  IN `p_instalacionesCaracteristicasZona` varchar(150), IN `p_instalacionesTopografia` varchar(150),
@@ -1685,6 +1685,75 @@ BEGIN
 
         START TRANSACTION;       
        DELETE FROM `equipomovil` WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias;
+         
+        COMMIT;
+        -- SUCCESS         
+
+         SET res = 0;
+END
+;;
+DELIMITER ;
+
+
+
+
+-- ----------------------------
+-- Proceso insertar y actualizar EquiposMovil
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `insert_RecursoHumano`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_RecursoHumano`(IN `p_FKidPlanEmergencias` int,IN `p_cantidad` int,
+IN `p_profesion` varchar(150),IN `p_categorias` varchar(150),
+IN `p_localizacion` varchar(150),IN `p_contacto` varchar(150),
+OUT `res` TINYINT  UNSIGNED)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+        START TRANSACTION;       
+        INSERT INTO `recursohumanos`( `FKidPlanEmergencias`, `cantidad`, `profesion`, `categorias`, `localizacion`, `contacto`) 
+        VALUES (p_FKidPlanEmergencias,p_cantidad,p_profesion,p_categorias,p_localizacion,p_contacto);
+         
+        COMMIT;
+        -- SUCCESS         
+
+         SET res = 0;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Proceso eliminar EquiposMovil
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `delete_RecursoHumano`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_RecursoHumano`(IN `p_FKidPlanEmergencias` int,OUT `res` TINYINT  UNSIGNED)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+        START TRANSACTION;       
+       DELETE FROM `RecursoHumanos` WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias;
          
         COMMIT;
         -- SUCCESS         

@@ -6,6 +6,13 @@ $res = seleccion($sql);
 $idCentro = $_GET['idCentro'];
 $nombreCentro = $_GET['nombreCentro'];
 $editar =(check_permiso($mod5, $act4, $user_rol) || check_permiso($mod5, $act3, $user_rol) );
+
+$sql = "SELECT  `id` FROM `PlanEmergencia`  WHERE `FKidZonaTrabajo`=" . $idCentro;
+$resid = seleccion($sql);
+
+if (count($resid) > 0) {
+    $idPlanEmergencia = $resid[0]['id'];
+}
 ?>
 <script>
     var idCentro =<?= $idCentro ?>;
@@ -14,6 +21,11 @@ $editar =(check_permiso($mod5, $act4, $user_rol) || check_permiso($mod5, $act3, 
 </script>
 
 <br/>
+<div class="container">
+    <div id="divalertaDatosSinGuardar" class="">
+        <div class="panel-heading" id="alertaDatosSinGuardar"></div>     
+    </div>
+</div>
 <div>
 
    
@@ -32,11 +44,6 @@ $editar =(check_permiso($mod5, $act4, $user_rol) || check_permiso($mod5, $act3, 
     </div> 
 </div>
 <br/>
-<div class="container">
-    <div id="divalertaDatosSinGuardar" class="">
-        <div class="panel-heading" id="alertaDatosSinGuardar"></div>     
-    </div>
-</div>
 <script>
     jQuery(document).ready(function () {
         IniciarGuardarCambios('<?= $vocab["Menu_Datos_sin_guardar"] ?>');

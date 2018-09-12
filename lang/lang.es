@@ -387,13 +387,16 @@ $vocab["peligro_35"] = "Disponibilidad de bombas de agua.";
 $vocab["peligro_36"] = "Existen cilindros de gas. ¿Qué tipo?";
 $vocab["peligro_37"] = "Hay cilindros de gas vacíos, tirados o sin proteger.";
 
-                
-    
-                
+//***********     plan de emergencia  recurso humano ***********************//
+$vocab["recurso_humano_titulo"]             ="Recurso Humano";                
+$vocab["recurso_humano_titulo_desc"]        ="Profesíon u oficio: Ingeniero, arquitecto, enfermera, medico, otros";    
+$vocab["recurso_humano_Cantidad"]           ="Cantidad"; 
+$vocab["recurso_humano_Profesion"]          ="Profesíon";
+$vocab["recurso_humano_categoria"]          ="Categoria";
+$vocab["recurso_humano_Localizacion"]       ="Localizacíon";       
+$vocab["recurso_humano_Contacto"]           ="Contacto";       
         
-        
-        
-
-
+//***********     plan de emergencia  Inventario ***********************//
+$vocab["inventario_fila"]           ="fila";    
 
 ?>
