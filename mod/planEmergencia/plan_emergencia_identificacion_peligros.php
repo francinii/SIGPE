@@ -6,10 +6,13 @@ $user_rol = $mySessionController->getVar("rol");
 
 include("plan_emergencia_menu.php");
 
+
+
+
 $sql = "SELECT  `id` FROM `PlanEmergencia`  WHERE `FKidZonaTrabajo`=" . $idCentro;
 $res = seleccion($sql);
-
-$sql = "SELECT  `id`, `peligro`, `presente`,`ubicacion`,`recomendacion`, `fecha`, `responsable`, `priorizacino` FROM `IdentificacionPeligro`  WHERE `FKidPlanEmergencia`=" . $res[0];
+$idPlanEmergencia = $res[0]['id'];
+$sql = "SELECT  `id`, `peligro`, `presente`,`ubicacion`,`recomendacion`, `fecha`, `responsable`, `priorizacion` FROM `IdentificacionPeligro`  WHERE `FKidPlanEmergencia`=" . $idPlanEmergencia;
 $res = seleccion($sql);
 
 if (count($res) <= 0) {
@@ -48,6 +51,7 @@ if (count($res) <= 0) {
         </thead>
         <tbody>
             <?php for ($i = 0; $i < count($res); $i++) { ?>
+             <input type ="hidden" id ="idPeligro<?= $i ?>" value ="<?= $i ?>" >
                 <?php if ($i == 0) { ?>
                     <tr style="background-color: lightblue; "> <td colspan="7" >  <b> <?= $vocab["identifica_peligro_aula"]; ?>  </b> </td></tr>  
                 <?php } else if ($i == 12) { ?>
@@ -57,15 +61,12 @@ if (count($res) <= 0) {
                 <?php } else if ($i == 30) { ?>
                     <tr style="background-color: lightblue">  <td colspan="7"> <b>  <?= $vocab["identifica_peligro_agua"] ?>  </b></td></tr>  
                 <?php } else if ($i == 35) { ?>
-                    <tr style="background-color: lightblue">  <td colspan="7"> <b>  <?= $vocab["identifica_peligro_aula"]; ?> </b> </td></tr>  
-                <?php } else if ($i == 37) { ?>
-                    <tr style="background-color: lightblue">  <td colspan="7"> <b>  <?= $vocab["identifica_peligro_aula"]; ?> </b> </td></tr>  
-                <?php } ?>    
-
+                    <tr style="background-color: lightblue">  <td colspan="7"> <b>  <?= $vocab["identifica_peligro_gas"]; ?> </b> </td></tr>  
+                <?php } ?>
                 <tr>  
-                    <td><?= (is_array($res[$i])) ? $res[$i][0] : $res[$i]; ?></td>
+                    <td id = "peligro<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i][0] : $res[$i]; ?></td>
                     <td>    
-                        <select name="presente">
+                        <select name="presente"  id ="presente<?= $i ?>">
                             <?php if (is_array($res[$i])) { ?>
                                 <option <?= ($res[$i]['presente'] == 1) ? "selected" : ""; ?> >SI</option>
                                 <option <?= ($res[$i]['presente'] == 0) ? "selected" : ""; ?> >NO</option> 
@@ -76,20 +77,20 @@ if (count($res) <= 0) {
                         </select>    
                     </td>
                     <td>  
-                        <input type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>">
+                        <input id ="ubicacion<?= $i ?>" type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>">
                     </td>
                     <td>
-                        <textarea  type="text"<?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios" id=""<?= $i ?>> <?= (is_array($res[$i])) ? $res[$i]['recomendacion'] : ""; ?></textarea>
+                        <textarea id ="recomendacion<?= $i ?>"  type="text"<?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios" id=""<?= $i ?>> <?= (is_array($res[$i])) ? $res[$i]['recomendacion'] : ""; ?></textarea>
                     </td> 
                     <td>
-                        <input  type="date"   <?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios" id=""<?= $i ?>><?= (is_array($res[$i])) ? $res[$i]['fecha'] : ""; ?>
+                        <input id ="fecha<?= $i ?>" type="date"   <?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios" id=""<?= $i ?>><?= (is_array($res[$i])) ? $res[$i]['fecha'] : ""; ?>
                     </td> 
                     <td>
-                        <input  type="text"   <?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios" id=""<?= $i ?>><?= (is_array($res[$i])) ? $res[$i]['responsable'] : ""; ?>
+                        <input id ="responsable<?= $i ?>" type="text"   <?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios" id=""<?= $i ?>><?= (is_array($res[$i])) ? $res[$i]['responsable'] : ""; ?>
                     </td> 
                     <td>   
-                  
-                        <select name="presente">
+
+                        <select id ="priorizacion<?= $i ?>" name="priorizacion">
                             <?php if (is_array($res[$i])) { ?>
                                 <option <?= ($res[$i]['priorizacion'] == 1) ? "selected" : ""; ?> >SI</option>
                                 <option <?= ($res[$i]['priorizacion'] == 2) ? "selected" : ""; ?> >NO</option> 
@@ -100,10 +101,13 @@ if (count($res) <= 0) {
                                 <option>3</option>
                             <?php } ?>
                         </select>    
-                   
+
                     </td>
                 </tr>   
-                <?php
+                <?php if ($i == 36) { ?>
+                    <tr style="background-color: lightblue">  <td colspan="7"> <b>  <?= $vocab["identifica_peligro_adicionales"]; ?> </b> </td></tr>  
+                    <?php
+                }
             }
             ?>
         </tbody>
@@ -112,12 +116,11 @@ if (count($res) <= 0) {
 <div class="text-center">
     <?php if ($editar) { ?>
         <span class="text-center">
-            <a class="btn btn-warning   "  onclick="javascript:guardarDatosActividades('<?= $idPlanEmergencia ?>', 0,<?= count($res) ?>)" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["actividades_Titulo"] ?></a>
+            <a class="btn btn-warning   "  onclick="javascript:guardarDatosIdentificacionPeligros('<?= $idPlanEmergencia ?>', 0,<?= count($res) ?>)" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["actividades_Titulo"] ?></a>
         </span>
         <span class="text-center">
-            <a class="btn  btn-success"  onclick="javascript:guardarDatosActividades('<?= $idPlanEmergencia ?>', 1,<?= count($res) ?>)" name="submit"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_save"] . " " . $vocab["datos_generares_siguente"] ?></a>
+            <a class="btn  btn-success"  onclick="javascript:guardarDatosIdentificacionPeligros('<?= $idPlanEmergencia ?>', 1,<?= count($res) ?>)" name="submit"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_save"] . " " . $vocab["datos_generares_siguente"] ?></a>
         </span>
-
     <?php } ?>
 </div>
 

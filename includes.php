@@ -71,7 +71,8 @@
 <!-- Plan de emergencia datos generales -->
 <script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_menu.js"></script>
 
-
+<!-- Plan de emergencia identificacion peligros -->
+<script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_identificacion_peligros.js"></script>
 
 <!-- Bootstrap + Font-Awesome + Estilo -->
 <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
