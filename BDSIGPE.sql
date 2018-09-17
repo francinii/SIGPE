@@ -8,6 +8,53 @@
  * Created: 26/07/2018
  */
 
+drop table TipoPoblacion;
+drop table CapituloPlan;
+drop table SubCapituloPlan;
+drop table Formulario;
+drop table SubCapitulo;
+drop table Capitulo;
+drop table Matriz;
+drop table CategoriaTipoAmenaza;
+drop table TipoAmenaza;
+drop table OrigenAmenaza;
+drop table  RecursoHumanos;
+drop table  EquipoMovil;
+drop table  RecursoIntalaciones;
+drop table  RecursosOtros;
+drop table  CuerposScorro;
+drop table  ZonaSeguridad;
+drop table  IdentificacionPeligro;
+drop table  PlanAccion;
+drop table  FormularioPoblacion;
+drop table  RutaEvacuacion;
+drop table  Brigada;
+drop table IngresoCuerpoSocorro;
+drop table  PlanEmergencia;
+drop table  UsuarioZona;
+drop table  ZonaTrabajo;
+drop table  Sede;
+
+-- ******************************Alerta***********************************
+-- correr solo una vez en la base 
+-- inserta en la base de permisos
+INSERT INTO `sis_mod` VALUES ('4', 'Administración Planes', 'Administración de los planes de energencia', '1');
+INSERT INTO `sis_mod` VALUES ('5', 'Planes de emergencia', 'permite la edición de los planes de emergencia', '1');
+
+INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('5','1','2');
+INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('5','2','2');
+INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('5','3','2');
+INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('5','4','2');
+INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('5','5','2');
+INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('5','6','2');
+
+INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('4','1','2');
+INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('4','2','2');
+INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('4','3','2');
+INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('4','4','2');
+INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('4','5','2');
+INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('4','6','2');
+
 
 create table Sede(
 id int  NOT NULL AUTO_INCREMENT,
@@ -38,7 +85,8 @@ FOREIGN KEY(FKidZona) REFERENCES ZonaTrabajo(id)
 
 create table PlanEmergencia(
 id int  NOT NULL AUTO_INCREMENT,
-FKidZonaTrabajo int, 
+FKidZonaTrabajo int,
+version int, 
 revisadoPor varchar(150),
 codigoZonaTrabajo varchar(150),
 actividad varchar(150),
@@ -46,7 +94,7 @@ direccion varchar(150),
 personaContactoGeneral varchar(150),
 numeroTelefono varchar(150),
 numeroFax varchar(150),
-notificaciones varchar(150),
+correo varchar(150),
 categoriaNFPA varchar(150),
 usoInstalaciones varchar(150),
 horarioJornada varchar(150),
@@ -112,7 +160,7 @@ create table Matriz (
     id int NOT NULL AUTO_INCREMENT,  
     FKidCategoriaTipoAmenaza int,
     FKidPlanEmergencias int,
-    fuente varchar(5000),
+    fuente text,
     probabilidad int,
     gravedad int,
     consecuenciaAmenaza int,
@@ -126,7 +174,7 @@ create table Matriz (
 
 create table Capitulo(
 id int NOT NULL AUTO_INCREMENT,
-descripcion varchar(5000),
+descripcion text,
 isActivo int,
 titulo varchar(150),
 orden int,
@@ -135,7 +183,7 @@ orden int,
 
 create table SubCapitulo(
 id int NOT NULL AUTO_INCREMENT,
-descripcion varchar(5000),
+descripcion text,
 titulo varchar(150),
 isActivo int,
 FKidCapitulo int,
@@ -146,12 +194,29 @@ FOREIGN KEY (FKidCapitulo) REFERENCES Capitulo(id)
 
 create table Formulario(
 id int NOT NULL AUTO_INCREMENT,
-descripcion varchar(5000),
+descripcion text,
 FKidSubcapitulos int,
 PRIMARY KEY(id),
 FOREIGN KEY (FKidSubcapitulos) REFERENCES SubCapitulo(id)
 )ENGINE=InnoDB;
 
+
+create table CapituloPlan(
+    FKidCapitulo int NOT NULL,
+    FKidPlanEmergencias int NOT NULL,
+descripcion text,
+    FOREIGN KEY (FKidCapitulo) REFERENCES Capitulo(id),
+    FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
+
+) ENGINE=InnoDB;
+
+create table SubCapituloPlan(
+    FKidSubCapitulo int NOT NULL,
+    FKidPlanEmergencias int NOT NULL,
+    descripcion text,
+    FOREIGN KEY (FKidSubCapitulo) REFERENCES SubCapitulo(id),
+    FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
+) ENGINE=InnoDB;
 
 create table TipoPoblacion(
 id int NOT NULL AUTO_INCREMENT,
@@ -228,9 +293,51 @@ PRIMARY KEY(id),
 FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 ) ENGINE=InnoDB;
 
+create table IngresoCuerpoSocorro(
+    id int NOT NULL AUTO_INCREMENT,
+    dimensionAreaAcceso varchar(150),
+    FKidPlanEmergencias int,
+    radioGiro varchar(150),
+    caseta varchar(150),
+    plumas varchar(150),
+    anchoLibre varchar(150),
+   PRIMARY KEY(id),
+FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id) 
+)ENGINE=InnoDB;
 -- faltan 3 tablas increso cuerpo de socorro y  las rutas de evacuacion
 
-create table ZonaSegurida(
+create table Brigada(
+    id int NOT NULL AUTO_INCREMENT, 
+    FKidPlanEmergencias int,
+    brigadista varchar(150),
+    puntoPartida varchar(150),
+    zonaEvacuar varchar(150),
+    numPersonasEvacuar int,    
+    distancia float,
+    tiempo int,
+    PRIMARY KEY(id),
+    FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id) 
+) ENGINE=InnoDB;
+ 
+ 
+create table RutaEvacuacion(
+    id int NOT NULL AUTO_INCREMENT, 
+    FKidPlanEmergencias int,
+    nombreArea varchar(150),
+    personaPermanente varchar(150),
+    personaFlotante varchar(150),
+    ruta1 varchar(150),
+    distancia1 float,
+    tiempo1 int,
+    ruta2 varchar(150),
+    distancia2 float,
+    tiempo2 int,
+    PRIMARY KEY(id),
+    FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id) 
+) ENGINE=InnoDB;
+
+
+create table ZonaSeguridad(
 id int NOT NULL AUTO_INCREMENT,
 FKidPlanEmergencias int,
 Nombre varchar(150),
@@ -241,6 +348,52 @@ sector varchar(150),
 PRIMARY KEY(id),
 FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 ) ENGINE=InnoDB;
+
+create table FormularioPoblacion(
+    id int NOT NULL AUTO_INCREMENT,
+    FKidPlanEmergencias int,
+    nombreOficina varchar(150),
+    capacidadPermanente int, 
+    capacidadTemporal int,
+    representanteComite varchar(150),
+    representanteBrigadaEfectiva varchar(150),
+    representantePrimerosAuxilios varchar(150),
+    telefonoOficina varchar(150),
+    contactoEmergencia varchar(150),
+    telefonoPersonal varchar(150),
+    correoElectronico varchar (150),
+    PRIMARY KEY(id),
+    FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
+)ENGINE=InnoDB;
+
+create table IdentificacionPeligro(
+    id int NOT NULL AUTO_INCREMENT,
+    FKidPlanEmergencias int,
+    peligro varchar(150),
+    presente int,
+    ubicacion varchar(150),
+    recomendacion varchar(150),
+    fecha date,
+    responsable varchar(150),
+    priorizacion int,
+    PRIMARY KEY(id),
+    FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
+)ENGINE=InnoDB;
+
+create table PlanAccion(
+    id int NOT NULL AUTO_INCREMENT,
+    FKidPlanEmergencias int,
+    area varchar(150),
+    peligro varchar(150),
+    accionPorRealizar varchar(150),
+    recomendaciones varchar(150),
+    fechaEjecucion date,
+    responsable varchar(150),
+    PRIMARY KEY(id),
+    FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
+) ENGINE=InnoDB;
+
+
 
 -- para wamp en cada tabla ENGINE=INNODB;
 
@@ -298,6 +451,7 @@ INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (3,'Inst
 INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (4,'Matriz de riesgo',1);
 INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (5,'Recurso Humano',1);
 INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (6,'Equipo movil',1);
+INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (7,'Identificacion de peligros',1);
 
 INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',1);
 INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',2);
@@ -307,47 +461,9 @@ insert into `PlanEmergencia`(`FKidZonaTrabajo`) VALUES (1);
 
 
 
--- ******************************Alerta***********************************
--- correr solo una vez en la base 
--- inserta en la base de permisos
-INSERT INTO `sis_mod` VALUES ('4', 'Administración Planes', 'Administración de los planes de energencia', '1');
-INSERT INTO `sis_mod` VALUES ('5', 'Planes de emergencia', 'permite la edición de los planes de emergencia', '1');
-
-INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('5','1','2');
-INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('5','2','2');
-INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('5','3','2');
-INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('5','4','2');
-INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('5','5','2');
-INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('5','6','2');
-
-INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('4','1','2');
-INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('4','2','2');
-INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('4','3','2');
-INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('4','4','2');
-INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('4','5','2');
-INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('4','6','2');
 
 
 
-
-drop table TipoPoblacion;
-drop table Formulario;
-drop table SubCapitulo;
-drop table Capitulo;
-drop table Matriz;
-drop table CategoriaTipoAmenaza;
-drop table TipoAmenaza;
-drop table OrigenAmenaza;
-drop table PlanEmergencia;
-drop  table UsuarioZona;
-drop table ZonaTrabajo;
-drop table Sede;
-drop table  RecursoHumanos;
-drop table  EquipoMovil;
-drop table  RecursoIntalaciones;
-drop table  RecursosOtros;
-drop table  CuerposScorro;
-drop table  ZonaSegurida;
 
 
 
@@ -805,7 +921,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `insert_capitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_capitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_descripcion` varchar(5000),  OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_capitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_descripcion` text,  OUT `res` TINYINT  UNSIGNED)
 BEGIN
 declare ordenar Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION     
@@ -846,7 +962,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `insert_subcapitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_subcapitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_fkcapitulo` int,IN  `p_descripcion` varchar(5000),  OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_subcapitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_fkcapitulo` int,IN  `p_descripcion` text,  OUT `res` TINYINT  UNSIGNED)
 BEGIN
 declare ordenar Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -885,7 +1001,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_capitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_capitulo`(IN `p_id` int,IN `p_titulo` varchar(150), IN  `p_descripcion` varchar(5000), OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_capitulo`(IN `p_id` int,IN `p_titulo` varchar(150), IN  `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
 BEGIN
         
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -919,7 +1035,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_subcapitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_subcapitulo`(IN `p_id` int,IN `p_titulo` varchar(150),IN `p_fkcapitulo` int, IN  `p_descripcion` varchar(5000), OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_subcapitulo`(IN `p_id` int,IN `p_titulo` varchar(150),IN `p_fkcapitulo` int, IN  `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
 BEGIN   
         declare ordenar Integer;
         declare FKAntigua Integer;
@@ -1323,11 +1439,11 @@ DELIMITER ;
 -- ----------------------------
 -- Proceso datos generales
 -- ----------------------------
-DROP PROCEDURE IF EXISTS `datos_generales`;
+DROP PROCEDURE IF EXISTS `update_datos_generales`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `datos_generales`(IN `p_FKidZonaTrabajo` int, IN `p_actividad` varchar(150),
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_datos_generales`(IN `p_id` int, IN `p_actividad` varchar(150),
  IN `p_direccion` varchar(150), IN `p_personaContactoGeneral` varchar(150),IN `p_numeroTelefono` varchar(150),
- IN `p_numeroFax` varchar(150),IN `p_notificaciones` varchar(150),
+ IN `p_numeroFax` varchar(150),IN `p_correo` varchar(150),
  IN `p_categoriaNFPA` varchar(150),IN `p_usoInstalaciones` varchar(150),
  IN `p_horarioJornada` varchar(150),IN `p_seguridadInstitucional` varchar(150),
  IN `p_servicioConsegeria` varchar(150),IN `p_personalAdministrativo` varchar(150),
@@ -1350,9 +1466,9 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `datos_generales`(IN `p_FKidZonaTrab
      
          START TRANSACTION;
          UPDATE `PlanEmergencia` SET `actividad`=p_actividad,`direccion`= p_direccion,`personaContactoGeneral`=p_personaContactoGeneral,
-         `numeroTelefono`=p_numeroTelefono,`numeroFax`= p_numeroFax,`notificaciones`=p_notificaciones,`categoriaNFPA`=p_categoriaNFPA,`usoInstalaciones`=p_usoInstalaciones,`horarioJornada`=p_horarioJornada,
+         `numeroTelefono`=p_numeroTelefono,`numeroFax`= p_numeroFax,`correo`=p_correo,`categoriaNFPA`=p_categoriaNFPA,`usoInstalaciones`=p_usoInstalaciones,`horarioJornada`=p_horarioJornada,
          `seguridadInstitucional`=p_seguridadInstitucional,`servicioConsegeria`=p_servicioConsegeria,`personalAdministrativo`=p_personalAdministrativo,`personalAcademico`=p_personalAcademico,
-           `presenciaEstudiantil` = p_presenciaEstudiantil   where `FKidZonaTrabajo`=p_FKidZonaTrabajo;   
+           `presenciaEstudiantil` = p_presenciaEstudiantil   where `id`=p_id;   
 
         COMMIT;
         -- SUCCESS         
@@ -1367,9 +1483,9 @@ DELIMITER ;
 -- ----------------------------
 -- Proceso tipoPoblacion actividades
 -- ----------------------------
-DROP PROCEDURE IF EXISTS `tipo_poblacion`;
+DROP PROCEDURE IF EXISTS `update_tipo_poblacion`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `tipo_poblacion`(IN `p_FKidPlanEmergencias` int, IN `p_tipoPoblacion` varchar(150),
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_tipo_poblacion`(IN `p_FKidPlanEmergencias` int, IN `p_tipoPoblacion` varchar(150),
  IN `p_descripcion` varchar(150), IN `p_total` int, IN `p_representacionDe` varchar(150),
 OUT `res` TINYINT  UNSIGNED)
 BEGIN   
@@ -1407,14 +1523,58 @@ END
 ;;
 DELIMITER ;
 
+
+-- ----------------------------
+-- Proceso IdentificacionPeligro actividades
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `insert_identificacion_peligro`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_identificacion_peligro`(IN `p_FKidPlanEmergencias` int,IN `p_id` int,  IN `p_peligro` varchar(150),
+ IN `p_presente` int, IN `p_ubicacion` varchar(150), IN `p_recomendacion` varchar(150) ,IN `p_fecha` date, IN `p_responsable` varchar(150),  IN `p_priorizacion` int,
+OUT `res` TINYINT  UNSIGNED)
+BEGIN   
+    declare existe Integer;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+      set existe = null;
+      select count(`FKidPlanEmergencias`) into existe from IdentificacionPeligro WHERE  `FKidPlanEmergencias`=p_FKidPlanEmergencias and `id` = p_id ;
+         IF(existe = 1) THEN
+         START TRANSACTION;
+         UPDATE `IdentificacionPeligro` SET `peligro`= p_peligro,`presente`=p_presente,`ubicacion`=p_ubicacion,`recomendacion`=p_recomendacion,`fecha`=p_fecha,`responsable`=p_responsable,`priorizacion`=p_priorizacion  WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias and `id`=p_id;  
+        COMMIT;
+        -- SUCCESS       
+     ELSE
+        START TRANSACTION;       
+       INSERT INTO `IdentificacionPeligro`( `FKidPlanEmergencias`, `peligro`, `presente`, `ubicacion`, `recomendacion`, `fecha`, `responsable`, `priorizacion`)
+       VALUES (p_FKidPlanEmergencias,p_peligro,p_presente,p_ubicacion,p_recomendacion,p_fecha,p_responsable,p_priorizacion);
+         
+        COMMIT;
+        -- SUCCESS         
+   END IF;
+         SET res = 0;
+END
+;;
+DELIMITER ;
+
 -- call tipo_poblacion(1,'1','1',1,'1',@res);
 
 -- ----------------------------
 -- Proceso datos generales
 -- ----------------------------
-DROP PROCEDURE IF EXISTS `datos_Instalaciones`;
+DROP PROCEDURE IF EXISTS `update_datos_Instalaciones`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `datos_Instalaciones`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_datos_Instalaciones`(
  IN `p_FKidZonaTrabajo` int, IN `p_instalacionesDensidadOcupacion` varchar(150),
  IN `p_instalacionesAreaConstruccion` varchar(150), IN `p_instalacionesInstalaciones` varchar(150),
  IN `p_instalacionesCaracteristicasZona` varchar(150), IN `p_instalacionesTopografia` varchar(150),
@@ -1510,3 +1670,143 @@ BEGIN
 END
 ;;
 DELIMITER ;
+
+-- ----------------------------
+-- Proceso insertar y actualizar EquiposMovil
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `insert_equipoMovil`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_equipoMovil`(IN `p_FKidPlanEmergencias` int,IN `p_cantidad` int,
+IN `p_capacidad` int, IN `p_tipo` varchar(150),
+IN `p_caracteristicas` varchar(150), IN `p_contacto` varchar(150),
+IN `p_ubicacion` varchar(150),IN `p_categoria` varchar(150),
+OUT `res` TINYINT  UNSIGNED)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+        START TRANSACTION;       
+       INSERT INTO `equipomovil`( `FKidPlanEmergencias`, `cantidad`, `capacidad`, `tipo`, `caracteristicas`, `contacto`, `ubicacion`, `categoria`)
+        VALUES (p_FKidPlanEmergencias,p_cantidad,p_capacidad,p_tipo,p_caracteristicas,p_contacto,p_ubicacion,p_categoria);
+         
+        COMMIT;
+        -- SUCCESS         
+
+         SET res = 0;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Proceso eliminar EquiposMovil
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `delete_equipoMovil`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_equipoMovil`(IN `p_FKidPlanEmergencias` int,OUT `res` TINYINT  UNSIGNED)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+        START TRANSACTION;       
+       DELETE FROM `equipomovil` WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias;
+         
+        COMMIT;
+        -- SUCCESS         
+
+         SET res = 0;
+END
+;;
+DELIMITER ;
+
+
+
+
+-- ----------------------------
+-- Proceso insertar y actualizar EquiposMovil
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `insert_RecursoHumano`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_RecursoHumano`(IN `p_FKidPlanEmergencias` int,IN `p_cantidad` int,
+IN `p_profesion` varchar(150),IN `p_categorias` varchar(150),
+IN `p_localizacion` varchar(150),IN `p_contacto` varchar(150),
+OUT `res` TINYINT  UNSIGNED)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+        START TRANSACTION;       
+        INSERT INTO `recursohumanos`( `FKidPlanEmergencias`, `cantidad`, `profesion`, `categorias`, `localizacion`, `contacto`) 
+        VALUES (p_FKidPlanEmergencias,p_cantidad,p_profesion,p_categorias,p_localizacion,p_contacto);
+         
+        COMMIT;
+        -- SUCCESS         
+
+         SET res = 0;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Proceso eliminar EquiposMovil
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `delete_RecursoHumano`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_RecursoHumano`(IN `p_FKidPlanEmergencias` int,OUT `res` TINYINT  UNSIGNED)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+        START TRANSACTION;       
+       DELETE FROM `RecursoHumanos` WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias;
+         
+        COMMIT;
+        -- SUCCESS         
+
+         SET res = 0;
+END
+;;
+DELIMITER ;
+
+
+
+

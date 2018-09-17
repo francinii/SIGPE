@@ -37,8 +37,11 @@ function cambiarMenu(numero, idCentro, nombreCentro) {
             OpcionMenu('mod/planEmergencia/plan_emergencia_recurso_humano.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
             break;
         case 6:
-            OpcionMenu('mod/planEmergencia/plan_emergencia_equipomovil.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
+            OpcionMenu('mod/planEmergencia/plan_emergencia_equipo_movil.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
             break;
+        case 7:
+            OpcionMenu('mod/planEmergencia/plan_emergencia_identificacion_peligros.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
+         break;
     }
 
 }

@@ -229,7 +229,7 @@ $vocab["criterio_ninguna"]               = "NINGUNA";
 $vocab["criterio_verde"]                 = "VERDE";
 $vocab["criterio_amarilla"]              = "AMARILLA";
 $vocab["criterio_roja"]                  = "ROJA";
-$vocab["graficar_matriz"]                  = "Graficar";
+$vocab["graficar_matriz"]                = "Graficar";
 
 //***********     Matriz cuadro resumen   ***********************//
 $vocab["tipo_alerta_nombre"]               = "Tipo de alerta";
@@ -316,10 +316,8 @@ $vocab["instalaciones_electrico"]         ="Sistema electrico:";
 $vocab["instalaciones_telefónico"]        ="Sistema telefónico:";
 $vocab["instalaciones_Otros"]             ="Otros:";
 
-
 //***********     plan de emergencia  equipos moviles  ***********************//
 $vocab["equipo_moviles_titulo"]             ="Recurso equipo móvil";
-$vocab["equipo_moviles_titulo_desc"]        ="equipo móvil: terrestres,acuático,aereo";
 $vocab["equipo_moviles_tipo"]               ="Tipo de equipo";
 $vocab["equipo_moviles_cantidad"]           ="Cantidad";
 $vocab["equipo_moviles_capacidad"]          ="Capacidad";
@@ -328,6 +326,79 @@ $vocab["equipo_moviles_contacto"]           ="Contacto";
 $vocab["equipo_moviles_ubicacion"]          ="Ubicación";
 $vocab["equipo_moviles_categoria"]          ="Categoría";
 $vocab["equipo_moviles_terrestre"]          ="Terrestre";
-$vocab["equipo_moviles_terrestre"]          ="Acuático";
-$vocab["equipo_moviles_terrestre"]          ="Aereo";
+$vocab["equipo_moviles_titulo_desc"]        ="Equipo móvil terrestres: jeep,camión,tractor,otros. - Equipo móvil acuático: Lancha,bote,Panga,otros. -  Equipo móvil aereo: avioneta,helicoptero,otros.";
+$vocab["equipo_moviles_Acuático"]           ="Acuático";
+$vocab["equipo_moviles_Aereo"]              ="Aereo";
+
+//***********     plan de emergencia  identificacion de peligros  ***********************//
+$vocab["identifica_peligro_Titulo"] = "Identificacion de peligros";
+$vocab["identifica_peligro_Titulo_Desc"] = "Identificacion de peligros";
+$vocab["identifica_peligro_lugar"]         = "Peligro identificado";
+$vocab["identifica_peligro_aula"]          = "Peligro en el aula oficina o laboratorio";
+$vocab["identifica_peligro_edificio"]      = "Peligro en el edificio";
+$vocab["identifica_peligro_electrica"]     = "Peligro en instalaciones eléctricas";
+$vocab["identifica_peligro_agua"]          = "Peligro en instalaciones de agua";
+$vocab["identifica_peligro_gas"]          = "Peligro en instalaciones de gas";
+$vocab["identifica_peligro_adicionales"]          = "Peligro adicionales identificados";
+$vocab["identifica_peligro_presente"]      = "Presente";
+$vocab["identifica_peligro_ubicacion"]     = "Ubicación";
+$vocab["identifica_peligro_presente"]      = "Presente";
+$vocab["identifica_peligro_recomendacion"] = "Recomendacion de solución";
+$vocab["identifica_peligro_fecha"]         = "Fecha de ejecución";
+$vocab["identifica_peligro_responsable"]   = "Responsable";
+$vocab["identifica_peligro_priorizacion"]  = "Priorización";
+
+
+
+//***********     plan de emergencia  identificacion de peligros primera columna  ***********************//
+$vocab["peligro_1"] = "Existen gabinetes, libros y estantes de pared sin asegurarse o con un débil apoyo estructural.";
+$vocab["peligro_2"] = "Hay objetos pesados en los estantes que sobrepasan la altura de la cabeza de las y los funcionarios o estudiantes cuando están sentados.";
+$vocab["peligro_3"] = "Hay peceras de vidrio u otras exhibiciones que pueden resultar peligrosas en caso de terremoto.";
+$vocab["peligro_4"] = "Hay objetos en las paredes (macetas, jarrones, cuadros) sin asegurar, que pueden balancearse o ser lanzados durante un terremoto.";
+$vocab["peligro_5"] = "Hay objetos en las paredes (macetas, jarrones, cuadros) sin asegurar, que pueden balancearse o ser lanzados durante un terremoto.";
+$vocab["peligro_6"] = "Las puertas abren hacia adentro.";
+$vocab["peligro_7"] = "Hay acumulaciones de basura o papel.";
+$vocab["peligro_8"] = "Existen cilindros de gas.";
+$vocab["peligro_9"] = "Hay escritorios o pupitres cerca de las ventanas de vidrio obstruyendo posibles salidas.";
+$vocab["peligro_10"] = "Las paredes presentan reventaduras o desprendimientos de repello.";
+$vocab["peligro_11"] = "Hay almacenamiento innecesario de material (combustible, papel, químicos, madera, etc.).";
+$vocab["peligro_12"] = "Existen los pasillos en su oficina con el espacio cerrado.";
+$vocab["peligro_13"] = "Hay basura que obstruye el paso en pasillos o rutas de salida.";
+$vocab["peligro_14"] = "Hay huecos o zanjas descubiertas.";
+$vocab["peligro_15"] = "Las puertas o portones de salida del edificio abren hacia atrás. Tienen llavines antipánico.";
+$vocab["peligro_16"] = "Hay  puertas y portones con llave.";
+$vocab["peligro_17"] = "Hay tendido eléctrico peligroso por los alrededores.";
+$vocab["peligro_18"] = "Hay hundimiento en los pisos.";
+$vocab["peligro_19"] = "Existe filtración de agua pluvial en el edificio.";
+$vocab["peligro_20"] = "En la cubierta existen láminas sueltas, de zinc u otro material.";
+$vocab["peligro_21"] = "Hay archivos o mobiliarios en desorden obstaculizan la salida.";
+$vocab["peligro_22"] = "Las escaleras carecen de pasamanos o cinta antideslizante.";
+$vocab["peligro_23"] = "Hay puertas obstruidas por desuso o falta de mantenimiento.";
+$vocab["peligro_24"] = "Presenta cables sueltos.";
+$vocab["peligro_25"] = "Tomacorrientes en mal estado.";
+$vocab["peligro_26"] = "Lámparas colgantes sin incluir, fluorescentes sin protector.";
+$vocab["peligro_27"] = "Cables parchados.";
+$vocab["peligro_28"] = "Apagadores en mal estado.";
+$vocab["peligro_29"] = "Faroles eléctricos en mal estado.";
+$vocab["peligro_30"] = "Existe percolador, plantilla, microondas u otros electrodomésticos.";
+$vocab["peligro_31"] = "Hay tanques sépticos deteriorados.";
+$vocab["peligro_32"] = "Existen tanques sépticos debajo del piso o áreas de seguridad. ";
+$vocab["peligro_33"] = "Hay tanques de agua en alto. ";
+$vocab["peligro_34"] = "Existe señalización de cañerías. ";
+$vocab["peligro_35"] = "Disponibilidad de bombas de agua.";
+$vocab["peligro_36"] = "Existen cilindros de gas. ¿Qué tipo?";
+$vocab["peligro_37"] = "Hay cilindros de gas vacíos, tirados o sin proteger.";
+
+//***********     plan de emergencia  recurso humano ***********************//
+$vocab["recurso_humano_titulo"]             ="Recurso Humano";                
+$vocab["recurso_humano_titulo_desc"]        ="Profesíon u oficio: Ingeniero, arquitecto, enfermera, medico, otros";    
+$vocab["recurso_humano_Cantidad"]           ="Cantidad"; 
+$vocab["recurso_humano_Profesion"]          ="Profesíon";
+$vocab["recurso_humano_categoria"]          ="Categoria";
+$vocab["recurso_humano_Localizacion"]       ="Localizacíon";       
+$vocab["recurso_humano_Contacto"]           ="Contacto";       
+        
+//***********     plan de emergencia  Inventario ***********************//
+$vocab["inventario_fila"]           ="fila";    
+
 ?>

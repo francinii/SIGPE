@@ -6,16 +6,11 @@ $user_rol = $mySessionController->getVar("rol");
 
 include("plan_emergencia_menu.php");
 
-$sql = "SELECT  `id` FROM `PlanEmergencia`  WHERE `FKidZonaTrabajo`=" . $idCentro;
-$res = seleccion($sql);
-
-if (count($res) > 0) {
-    $idPlanEmergencia = $res[0]['id'];
 
     $sql = "SELECT  `tipoPoblacion`, `descripcion`, `total`, `representacionDe` FROM 
     `TipoPoblacion` WHERE  `FKidPlanEmergencias`=" . $idPlanEmergencia;
     $res = seleccion($sql);
-}
+
 if (count($res) <= 0) {
     $res = array($vocab["actividades_administrativo"], $vocab["actividades_académico"],
         $vocab["actividades_Estudiantes"], $vocab["actividades_Visitantes"]);
