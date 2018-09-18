@@ -17,7 +17,12 @@ function guardarDatosIdentificacionPeligros(idPlanEmergencia, pasar, count) {
         var priorizacion = document.getElementById("priorizacion" + i).value;
         Peligros.push(idPeligro);
         Peligros.push(peligro);
-        Peligros.push(presente);
+        if(presente == 'SI'){
+             Peligros.push(1);
+        }else {
+             Peligros.push(0);
+        }
+       
         Peligros.push(ubicacion);
         Peligros.push(recomendacion);
         Peligros.push(fecha);
@@ -60,6 +65,37 @@ function guardarDatosIdentificacionPeligros(idPlanEmergencia, pasar, count) {
     loading.innerHTML = "";
 }
 
+function agregarFilaIdentificacionPeligro(titulo) {
+    var tabla = jQuery("#lista_identificacion_peligros tbody");
+    var id = tabla.children().last().attr('id');
+    if(id == "tr36"){
+        
+    }
+    var id = (parseInt(id[1]) + 1);    
+    var fila = '<tr id="tr' + id + '">' +
+                            '<td><input style = "width: 100%;" type="text"    class="form-control requerido cambios" id="peligro'+id+'" ></td>'
+                            '<td> <input style = "width: 100%;" type="text"   class="form-control requerido cambios" id="presente'+id+'" ></td>'+
+                            '<td> <input style = "width: 100%;" type="text"   class="form-control requerido  cambios" id="ubicacion'+id+'" value="" ></td>'+
+                            '<td> <input style = "width: 100%;" type="text"   class="form-control requerido cambios" id="recomendacion'+id+'"  ></td>'+
+                            '<td> <input style = "width: 100%;" type="date"   class="form-control requerido cambios" fecha'+id+'" ></td>'+    
+                            '<td> <input style = "width: 100%;" type="text" class="form-control requerido cambios" responsable'+id+'" ></td>'+               
+                            '<td> <input style = "width: 100%;" type="text" class="form-control requerido cambios" priorizacion'+id+'" ></td>'+               
+                            '<td>' + '<a class="puntero cambios"  onClick="javascript:eliminarFila(this);">' +
+            '<div class="text-center"><i class="fa fa-close  text-danger" title="' + titulo + '"></i></div>' +
+            ' </a>' +
+            ' </td>';
 
+    '</tr>'
+    tabla.append(fila);
+//        
+}
+
+
+function eliminarFila(event) {
+    jQuery(event).trigger('change');
+    var row = jQuery(event).parents("tr:first");
+    row.remove();
+
+}
 
 
