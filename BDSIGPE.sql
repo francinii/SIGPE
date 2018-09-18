@@ -1546,7 +1546,7 @@ BEGIN
             ROLLBACK;
 	END; 
 
-      set existe = null;
+      set existe = 0;
       select count(`FKidPlanEmergencias`) into existe from IdentificacionPeligro WHERE  `FKidPlanEmergencias`=p_FKidPlanEmergencias and `id` = p_id ;
          IF(existe = 1) THEN
          START TRANSACTION;
@@ -1565,7 +1565,7 @@ BEGIN
 END
 ;;
 DELIMITER ;
-
+-- call insert_identificacion_peligro(5,1,'1',1,'Heredia','hacer las cosas mejor','2003-05-21','Francini',1,@res);
 -- call tipo_poblacion(1,'1','1',1,'1',@res);
 
 -- ----------------------------

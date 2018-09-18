@@ -6,13 +6,10 @@ $user_rol = $mySessionController->getVar("rol");
 
 include("plan_emergencia_menu.php");
 
-
-
-
 $sql = "SELECT  `id` FROM `PlanEmergencia`  WHERE `FKidZonaTrabajo`=" . $idCentro;
 $res = seleccion($sql);
 $idPlanEmergencia = $res[0]['id'];
-$sql = "SELECT  `id`, `peligro`, `presente`,`ubicacion`,`recomendacion`, `fecha`, `responsable`, `priorizacion` FROM `IdentificacionPeligro`  WHERE `FKidPlanEmergencia`=" . $idPlanEmergencia;
+$sql = "SELECT  `id`, `peligro`, `presente`,`ubicacion`,`recomendacion`, `fecha`, `responsable`, `priorizacion` FROM `IdentificacionPeligro`  WHERE `FKidPlanEmergencias`=" . $idPlanEmergencia;
 $res = seleccion($sql);
 
 if (count($res) <= 0) {
@@ -35,9 +32,13 @@ if (count($res) <= 0) {
     <h2><?= $vocab["identifica_peligro_Titulo"] ?></h2>
     <p><?= $vocab["identifica_peligro_Titulo_Desc"] ?></p>
 </div>
-
+<div style="padding-right:0.5%;" align="right">
+    <span class="text-center">
+        <a class="btn btn-success" onclick="javascript: agregarFilaIdentificacionPeligro('Eliminar');"><i class=" fa fa-plus text-success"></i> Agregar</a>
+    </span>
+</div>
 <div class="dataTables_wrapper form-inline dt-bootstrap" style=overflow-x:auto;"> 
-    <table style = "width: 99%;" id="lista_usuarios" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable text-center" >
+    <table style = "width: 99%;" id="lista_identificacion_peligros" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable text-center" >
         <thead>
             <tr>
                 <th  width="40%"><?= $vocab["identifica_peligro_lugar"] ?></th>
@@ -51,65 +52,66 @@ if (count($res) <= 0) {
         </thead>
         <tbody>
             <?php for ($i = 0; $i < count($res); $i++) { ?>
-             <input type ="hidden" id ="idPeligro<?= $i ?>" value ="<?= $i ?>" >
-                <?php if ($i == 0) { ?>
-                    <tr style="background-color: lightblue; "> <td colspan="7" >  <b> <?= $vocab["identifica_peligro_aula"]; ?>  </b> </td></tr>  
-                <?php } else if ($i == 12) { ?>
-                    <tr style="background-color: lightblue">  <td colspan="7"> <b>  <?= $vocab["identifica_peligro_edificio"] ?> </b> </td></tr>  
-                <?php } else if ($i == 23) { ?>
-                    <tr style="background-color: lightblue"> <td colspan="7">  <b> <?= $vocab["identifica_peligro_electrica"] ?> </b> </td></tr>  
-                <?php } else if ($i == 30) { ?>
-                    <tr style="background-color: lightblue">  <td colspan="7"> <b>  <?= $vocab["identifica_peligro_agua"] ?>  </b></td></tr>  
-                <?php } else if ($i == 35) { ?>
-                    <tr style="background-color: lightblue">  <td colspan="7"> <b>  <?= $vocab["identifica_peligro_gas"]; ?> </b> </td></tr>  
-                <?php } ?>
-                <tr>  
-                    <td id = "peligro<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i][0] : $res[$i]; ?></td>
-                    <td>    
-                        <select name="presente"  id ="presente<?= $i ?>">
-                            <?php if (is_array($res[$i])) { ?>
-                                <option <?= ($res[$i]['presente'] == 1) ? "selected" : ""; ?> >SI</option>
-                                <option <?= ($res[$i]['presente'] == 0) ? "selected" : ""; ?> >NO</option> 
-                            <?php } else { ?>
-                                <option>SI</option>
-                                <option>NO</option> 
-                            <?php } ?>
-                        </select>    
-                    </td>
-                    <td>  
-                        <input id ="ubicacion<?= $i ?>" type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>">
-                    </td>
-                    <td>
-                        <textarea id ="recomendacion<?= $i ?>"  type="text"<?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios" id=""<?= $i ?>> <?= (is_array($res[$i])) ? $res[$i]['recomendacion'] : ""; ?></textarea>
-                    </td> 
-                    <td>
-                        <input id ="fecha<?= $i ?>" type="date"   <?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios" id=""<?= $i ?>><?= (is_array($res[$i])) ? $res[$i]['fecha'] : ""; ?>
-                    </td> 
-                    <td>
-                        <input id ="responsable<?= $i ?>" type="text"   <?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios" id=""<?= $i ?>><?= (is_array($res[$i])) ? $res[$i]['responsable'] : ""; ?>
-                    </td> 
-                    <td>   
+          
+            <?php if ($i == 0) { ?>
+                <tr style="background-color: lightblue; "> <td colspan="7" >  <b> <?= $vocab["identifica_peligro_aula"]; ?>  </b> </td></tr>  
+            <?php } else if ($i == 12) { ?>
+                <tr style="background-color: lightblue">  <td colspan="7"> <b>  <?= $vocab["identifica_peligro_edificio"] ?> </b> </td></tr>  
+            <?php } else if ($i == 23) { ?>
+                <tr style="background-color: lightblue"> <td colspan="7">  <b> <?= $vocab["identifica_peligro_electrica"] ?> </b> </td></tr>  
+            <?php } else if ($i == 30) { ?>
+                <tr style="background-color: lightblue">  <td colspan="7"> <b>  <?= $vocab["identifica_peligro_agua"] ?>  </b></td></tr>  
+            <?php } else if ($i == 35) { ?>
+                <tr style="background-color: lightblue">  <td colspan="7"> <b>  <?= $vocab["identifica_peligro_gas"]; ?> </b> </td></tr>  
+            <?php } ?>
+            <tr id="tr<?= $i ?>">  
+                <input type ="hidden" id ="idPeligro<?= $i ?>" value ="<?= (is_array($res[$i])) ? $res[$i]['id'] : -1; ?>" >
+                <td id = "peligro<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['peligro'] : $res[$i]; ?></td>
+                <td>    
+                    <select name="presente"  id ="presente<?= $i ?>">
+                        <?php if (is_array($res[$i])) { ?>
+                            <option <?= ($res[$i]['presente'] == 1) ? "selected" : ""; ?> >SI</option>
+                            <option <?= ($res[$i]['presente'] == 0) ? "selected" : ""; ?> >NO</option> 
+                        <?php } else { ?>
+                            <option>SI</option>
+                            <option>NO</option> 
+                        <?php } ?>
+                    </select>    
+                </td>
+                <td>  
+                    <input id ="ubicacion<?= $i ?>" type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>">
+                </td>
+                <td>
+                    <textarea id ="recomendacion<?= $i ?>"  type="text"<?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios"> <?= (is_array($res[$i])) ? $res[$i]['recomendacion'] : ""; ?></textarea>
+                </td> 
+                <td>
+                    <input id ="fecha<?= $i ?>" type="date"   <?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios" value="<?= (is_array($res[$i])) ? $res[$i]['fecha'] : "1900-01-01"; ?>">
+                </td> 
+                <td>
+                    <input id ="responsable<?= $i ?>" type="text"   <?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios"><?= (is_array($res[$i])) ? $res[$i]['responsable'] : ""; ?>
+                </td> 
+                <td>   
 
-                        <select id ="priorizacion<?= $i ?>" name="priorizacion">
-                            <?php if (is_array($res[$i])) { ?>
-                                <option <?= ($res[$i]['priorizacion'] == 1) ? "selected" : ""; ?> >SI</option>
-                                <option <?= ($res[$i]['priorizacion'] == 2) ? "selected" : ""; ?> >NO</option> 
-                                <option <?= ($res[$i]['priorizacion'] == 3) ? "selected" : ""; ?> >NO</option>
-                            <?php } else { ?>
-                                <option>1</option>
-                                <option>2</option> 
-                                <option>3</option>
-                            <?php } ?>
-                        </select>    
+                    <select id ="priorizacion<?= $i ?>" name="priorizacion">
+                        <?php if (is_array($res[$i])) { ?>
+                            <option <?= ($res[$i]['priorizacion'] == 1) ? "selected" : ""; ?> >1</option>
+                            <option <?= ($res[$i]['priorizacion'] == 2) ? "selected" : ""; ?> >2</option> 
+                            <option <?= ($res[$i]['priorizacion'] == 3) ? "selected" : ""; ?> >3</option>
+                        <?php } else { ?>
+                            <option>1</option>
+                            <option>2</option> 
+                            <option>3</option>
+                        <?php } ?>
+                    </select>    
 
-                    </td>
-                </tr>   
-                <?php if ($i == 36) { ?>
-                    <tr style="background-color: lightblue">  <td colspan="7"> <b>  <?= $vocab["identifica_peligro_adicionales"]; ?> </b> </td></tr>  
-                    <?php
-                }
+                </td>
+            </tr>   
+            <?php if ($i == 36) { ?>
+                <tr id = "tr36" style="background-color: lightblue">  <td colspan="7"> <b>  <?= $vocab["identifica_peligro_adicionales"]; ?> </b> </td></tr>  
+                <?php
             }
-            ?>
+        }
+        ?>
         </tbody>
     </table> 
 </div>
