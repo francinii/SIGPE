@@ -449,9 +449,8 @@ INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubCapitulos`) VALUES (1,'Dato
 INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubCapitulos`) VALUES (2,'Tipo de población',1);
 INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (3,'Instalaciones',1);
 INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (4,'Matriz de riesgo',1);
-INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (5,'Recurso Humano',1);
-INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (6,'Equipo movil',1);
-INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (7,'Identificacion de peligros',1);
+INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (5,'Inventario',1);
+INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (6,'Identificacion de peligros',1);
 
 INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',1);
 INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',2);
@@ -1808,5 +1807,134 @@ END
 DELIMITER ;
 
 
+-- ----------------------------
+-- Proceso insertar recursos instalaciones
+-- ----------------------------
 
+DROP PROCEDURE IF EXISTS `insert_RecursoInstalaciones`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_RecursoInstalaciones`(IN `p_FKidPlanEmergencias` int,IN `p_tipo` varchar(150),
+IN `p_cantidad` int,IN `p_tamaño` varchar(150),
+IN `p_distribucion` varchar(150),IN `p_contacto` varchar(150),
+IN `p_ubicacion` varchar(150),OUT `res` TINYINT  UNSIGNED)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
 
+        START TRANSACTION;       
+        INSERT INTO `recursointalaciones`( `FKidPlanEmergencias`, `tipo`, `cantidad`, `tamaño`, `distribucion`, `contacto`, `ubicacion`) 
+        VALUES (p_FKidPlanEmergencias,p_tipo,p_cantidad,p_tamaño,p_distribucion,p_contacto,p_ubicacion);
+
+        COMMIT;
+        -- SUCCESS         
+
+         SET res = 0;
+END
+;;
+DELIMITER ;
+-- ----------------------------
+-- Proceso eliminar recursos instalaciones
+-- ----------------------------
+
+DROP PROCEDURE IF EXISTS `delete_RecursoInstalaciones`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_RecursoInstalaciones`(IN `p_FKidPlanEmergencias` int,OUT `res` TINYINT  UNSIGNED)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+        START TRANSACTION;       
+       DELETE FROM `delete_RecursoInstalaciones` WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias;
+         
+        COMMIT;
+        -- SUCCESS         
+
+         SET res = 0;
+END
+;;
+DELIMITER ;
+-- ----------------------------
+-- Proceso insertar otros recursos 
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `insert_recursosOtros`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_recursosOtros`(IN `p_FKidPlanEmergencias` int,IN `p_tipo` varchar(150),
+IN `p_cantidad` int,IN `p_tamaño` varchar(150),
+IN `p_distribucion` varchar(150),IN `p_contacto` varchar(150),
+IN `p_ubicacion` varchar(150),OUT `res` TINYINT  UNSIGNED)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+        START TRANSACTION;       
+        INSERT INTO `RecursosOtros`( `FKidPlanEmergencias`, `tipo`, `cantidad`, `tamaño`, `distribucion`, `contacto`, `ubicacion`) 
+        VALUES (p_FKidPlanEmergencias,p_tipo,p_cantidad,p_tamaño,p_distribucion,p_contacto,p_ubicacion);
+
+        COMMIT;
+        -- SUCCESS         
+
+         SET res = 0;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Proceso eliminar otros recursos 
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `delete_recursosOtros`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_recursosOtros`(IN `p_FKidPlanEmergencias` int,IN `p_categoria` int,OUT `res` TINYINT  UNSIGNED)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+        START TRANSACTION;       
+       DELETE FROM `RecursosOtros` WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias and `categoria`=p_categoria;
+         
+        COMMIT;
+        -- SUCCESS         
+
+         SET res = 0;
+END
+;;
+DELIMITER ;

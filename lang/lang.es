@@ -326,7 +326,7 @@ $vocab["equipo_moviles_contacto"]           ="Contacto";
 $vocab["equipo_moviles_ubicacion"]          ="Ubicación";
 $vocab["equipo_moviles_categoria"]          ="Categoría";
 $vocab["equipo_moviles_terrestre"]          ="Terrestre";
-$vocab["equipo_moviles_titulo_desc"]        ="Equipo móvil terrestres: jeep,camión,tractor,otros. - Equipo móvil acuático: Lancha,bote,Panga,otros. -  Equipo móvil aereo: avioneta,helicoptero,otros.";
+$vocab["equipo_moviles_titulo_desc"]        ="Equipo móvil terrestres: jeep,camión,tractor,otros. <br>Equipo móvil acuático: Lancha,bote,Panga,otros. <br>Equipo móvil aereo: avioneta,helicoptero,otros.";
 $vocab["equipo_moviles_Acuático"]           ="Acuático";
 $vocab["equipo_moviles_Aereo"]              ="Aereo";
 
@@ -400,5 +400,29 @@ $vocab["recurso_humano_Contacto"]           ="Contacto";
         
 //***********     plan de emergencia  Inventario ***********************//
 $vocab["inventario_fila"]           ="fila";    
+
+
+//***********     plan de emergencia  instalaciones ***********************//
+$vocab["instalaciones_titulo"]        ="Recurso instalaciones";
+$vocab["instalaciones_titulo_desc"]   ="Espacios físicos, bodegas, infraestructua";  
+$vocab["instalaciones_tipo"]           ="Tipo de costrucción";    
+$vocab["instalaciones_cantida"]        ="Cantidad";  
+$vocab["instalaciones_tamaño"]         ="Tamaño M2";
+$vocab["instalaciones_distribucion"]   ="Distribución interna y externa";
+$vocab["instalaciones_encargada"]      ="Contacto y localización de la(s) persona(s) encargada(s) del lugar"; 
+$vocab["instalaciones_ubicacion"]      ="Ubicación exacta"; 
+
+
+//***********     plan de emergencia  otros recursos  ***********************//
+$vocab["otros_recursos_Telecomunicacion"]             ="Recurso Telecomunicaciones";
+$vocab["otros_recursos_Telecomunicacion_desc"]        ="Equipo: fax, télefono, celular, telex, internet, estación de radio, equipo de radio, repetidoras, etc.<br>"
+                                                      ."Características: portátil, fijo, frecuencia, longitud de ondas, marca, serie, número, otras.";
+
+$vocab["otros_recursos_tipo"]               ="Tipo de equipo";
+$vocab["otros_recursos_cantidad"]           ="Cantidad";
+$vocab["otros_recursos_caracteristicas"]    ="Características";
+$vocab["otros_recursos_contacto"]           ="Contacto";
+$vocab["otros_recursos_ubicacion"]          ="Ubicación";
+$vocab["otros_recursos_categoria"]          ="Categoría";
 
 ?>
