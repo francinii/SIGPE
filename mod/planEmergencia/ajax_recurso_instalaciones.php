@@ -3,7 +3,7 @@
 include("../login/check.php");
 include("../../inc/db/db.php");
 $idPlanEmergencia = $_GET['idPlanEmergencia'];
-$lista = json_decode($_GET['lista'], true);
+$lista = json_decode($_POST['lista'], true);
 
 
 $sql_a = "CALL delete_RecursoInstalaciones('$idPlanEmergencia',@res);";

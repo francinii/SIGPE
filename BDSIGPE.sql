@@ -21,7 +21,7 @@ drop table OrigenAmenaza;
 drop table  RecursoHumanos;
 drop table  EquipoMovil;
 drop table  RecursoIntalaciones;
-drop table  RecursosOtros;
+drop table  InventarioOtros;
 drop table  CuerposScorro;
 drop table  ZonaSeguridad;
 drop table  IdentificacionPeligro;
@@ -268,15 +268,16 @@ PRIMARY KEY(id),
 FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 ) ENGINE=InnoDB;
 
-create table RecursosOtros(
+create table InventarioOtros(
 id int NOT NULL AUTO_INCREMENT,
 FKidPlanEmergencias int,
 cantidad int,
 tipo varchar(150),
-caracteristicas varchar(150),
+caracteristicas text,
 contacto varchar(150),
 ubicacion varchar(150),
 categoria varchar(150),
+observaciones text,
 PRIMARY KEY(id),
 FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 ) ENGINE=InnoDB;
@@ -362,6 +363,7 @@ create table FormularioPoblacion(
     contactoEmergencia varchar(150),
     telefonoPersonal varchar(150),
     correoElectronico varchar (150),
+    sector varchar(150),
     PRIMARY KEY(id),
     FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 )ENGINE=InnoDB;
@@ -446,11 +448,12 @@ INSERT INTO `SubCapitulo` (`descripcion`,`titulo`,`isActivo`,`FKidCapitulo`,`ord
 INSERT INTO `SubCapitulo` (`descripcion`,`titulo`,`isActivo`,`FKidCapitulo`,`orden`) VALUES ('','Datos Generales y actividades que desarrolla la organización',1,2,1);
 
 INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubCapitulos`) VALUES (1,'Datos generales',1);
-INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubCapitulos`) VALUES (2,'Tipo de población',1);
+INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubCapitulos`) VALUES (2,'Población actividades',1);
 INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (3,'Instalaciones',1);
 INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (4,'Matriz de riesgo',1);
 INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (5,'Inventario',1);
 INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (6,'Identificacion de peligros',1);
+INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (7,'Poblacion',1);
 
 INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',1);
 INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',2);
@@ -1832,7 +1835,7 @@ BEGIN
 	END; 
 
         START TRANSACTION;       
-        INSERT INTO `recursointalaciones`( `FKidPlanEmergencias`, `tipo`, `cantidad`, `tamaño`, `distribucion`, `contacto`, `ubicacion`) 
+        INSERT INTO `RecursoIntalaciones`( `FKidPlanEmergencias`, `tipo`, `cantidad`, `tamaño`, `distribucion`, `contacto`, `ubicacion`) 
         VALUES (p_FKidPlanEmergencias,p_tipo,p_cantidad,p_tamaño,p_distribucion,p_contacto,p_ubicacion);
 
         COMMIT;
@@ -1864,7 +1867,7 @@ BEGIN
 	END; 
 
         START TRANSACTION;       
-       DELETE FROM `delete_RecursoInstalaciones` WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias;
+       DELETE FROM `RecursoIntalaciones` WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias;
          
         COMMIT;
         -- SUCCESS         
@@ -1876,12 +1879,12 @@ DELIMITER ;
 -- ----------------------------
 -- Proceso insertar otros recursos 
 -- ----------------------------
-DROP PROCEDURE IF EXISTS `insert_recursosOtros`;
+DROP PROCEDURE IF EXISTS `insert_InventarioOtros`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_recursosOtros`(IN `p_FKidPlanEmergencias` int,IN `p_tipo` varchar(150),
-IN `p_cantidad` int,IN `p_tamaño` varchar(150),
-IN `p_distribucion` varchar(150),IN `p_contacto` varchar(150),
-IN `p_ubicacion` varchar(150),OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_InventarioOtros`(IN `p_FKidPlanEmergencias` int,IN `p_cantidad` int,
+IN `p_tipo` varchar(150),IN `p_caracteristicas` text,
+IN `p_contacto` varchar(150),IN `p_ubicacion` varchar(150),
+IN `p_categoria` varchar(150),IN `p_observaciones` text,OUT `res` TINYINT  UNSIGNED)
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
@@ -1897,8 +1900,8 @@ BEGIN
 	END; 
 
         START TRANSACTION;       
-        INSERT INTO `RecursosOtros`( `FKidPlanEmergencias`, `tipo`, `cantidad`, `tamaño`, `distribucion`, `contacto`, `ubicacion`) 
-        VALUES (p_FKidPlanEmergencias,p_tipo,p_cantidad,p_tamaño,p_distribucion,p_contacto,p_ubicacion);
+        INSERT INTO `InventarioOtros`(`FKidPlanEmergencias`, `cantidad`, `tipo`, `caracteristicas`, `contacto`, `ubicacion`, `categoria`,`observaciones`)
+        VALUES (p_FKidPlanEmergencias,p_cantidad,p_tipo,p_caracteristicas,p_contacto,p_ubicacion,p_categoria,p_observaciones);
 
         COMMIT;
         -- SUCCESS         
@@ -1911,9 +1914,9 @@ DELIMITER ;
 -- ----------------------------
 -- Proceso eliminar otros recursos 
 -- ----------------------------
-DROP PROCEDURE IF EXISTS `delete_recursosOtros`;
+DROP PROCEDURE IF EXISTS `delete_InventarioOtros`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_recursosOtros`(IN `p_FKidPlanEmergencias` int,IN `p_categoria` int,OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_InventarioOtros`(IN `p_FKidPlanEmergencias` int,IN `p_categoria` varchar(150),OUT `res` TINYINT  UNSIGNED)
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
@@ -1929,7 +1932,77 @@ BEGIN
 	END; 
 
         START TRANSACTION;       
-       DELETE FROM `RecursosOtros` WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias and `categoria`=p_categoria;
+       DELETE FROM `InventarioOtros` WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias and `categoria`=p_categoria;
+         
+        COMMIT;
+        -- SUCCESS         
+
+         SET res = 0;
+END
+;;
+DELIMITER ;
+-- call delete_recursosOtros(5,'telecomunicaciones');
+
+
+-- ----------------------------
+-- Proceso insertar otros recursos 
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `insert_formularioPoblacion`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_formularioPoblacion`(IN p_FKidPlanEmergencias int ,IN p_nombreOficina varchar(150),
+IN p_capacidadPermanente int,IN p_capacidadTemporal int ,IN p_representanteComite varchar(150),IN p_representanteBrigadaEfectiva varchar(150),
+   IN p_representantePrimerosAuxilios varchar(150) ,IN p_telefonoOficina varchar(150),IN p_contactoEmergencia varchar(150) ,
+IN p_telefonoPersonal varchar(150),IN p_correoElectronico varchar(150),IN sector varchar(150),OUT `res` TINYINT  UNSIGNED)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+        START TRANSACTION;       
+        INSERT INTO `formulariopoblacion`(`FKidPlanEmergencias`, `nombreOficina`, `capacidadPermanente`, `capacidadTemporal`, `representanteComite`,
+     `representanteBrigadaEfectiva`, `representantePrimerosAuxilios`, `telefonoOficina`, `contactoEmergencia`, `telefonoPersonal`, `correoElectronico`, `sector`) 
+        VALUES (p_FKidPlanEmergencias,p_nombreOficina,p_capacidadPermanente,p_capacidadTemporal,p_representanteComite,p_representanteBrigadaEfectiva,p_representantePrimerosAuxilios
+      ,p_telefonoOficina,p_contactoEmergencia,p_telefonoPersonal,p_correoElectronico,sector);
+
+        COMMIT;
+        -- SUCCESS         
+
+         SET res = 0;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Proceso eliminar otros recursos 
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `delete_formularioPoblacion`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_formularioPoblacion`(IN `p_FKidPlanEmergencias` int,OUT `res` TINYINT  UNSIGNED)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+        START TRANSACTION;       
+       DELETE FROM `FormularioPoblacion` WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias;
          
         COMMIT;
         -- SUCCESS         

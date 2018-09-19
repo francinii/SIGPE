@@ -273,7 +273,7 @@ $vocab["datos_generares_Administrativo"]     ="Personal Administrativo:";
 $vocab["datos_generares_Académico"]          ="Personal Académico:";
 $vocab["datos_generares_Estudiantil"]        ="Presencia Estudiantil:";
 $vocab["datos_generares_siguente"]           ="y pasar el siguiente";
-
+$vocab["datos_generares_datos"]              ="Datos";
 
 //***********     plan de emergencia  datos generales  ***********************//
 $vocab["actividades_Titulo"]             ="Tipo de población";
@@ -400,7 +400,8 @@ $vocab["recurso_humano_Contacto"]           ="Contacto";
         
 //***********     plan de emergencia  Inventario ***********************//
 $vocab["inventario_fila"]           ="fila";    
-
+$vocab["inventario_sector"]           ="sector";
+$vocab["inventario_Datos"]           ="Datos";
 
 //***********     plan de emergencia  instalaciones ***********************//
 $vocab["instalaciones_titulo"]        ="Recurso instalaciones";
@@ -413,16 +414,42 @@ $vocab["instalaciones_encargada"]      ="Contacto y localización de la(s) perso
 $vocab["instalaciones_ubicacion"]      ="Ubicación exacta"; 
 
 
-//***********     plan de emergencia  otros recursos  ***********************//
+//***********     plan de emergencia  otros invetarios ***********************//
 $vocab["otros_recursos_Telecomunicacion"]             ="Recurso Telecomunicaciones";
 $vocab["otros_recursos_Telecomunicacion_desc"]        ="Equipo: fax, télefono, celular, telex, internet, estación de radio, equipo de radio, repetidoras, etc.<br>"
                                                       ."Características: portátil, fijo, frecuencia, longitud de ondas, marca, serie, número, otras.";
+$vocab["otros_recursos_equipo_repuestos"]             ="Recurso equipo para repuestos";
+$vocab["otros_recursos_equipo_repuestos_desc"]        ="Plantas eléctricas, motosierras, bombas para agua, equipo de rescate, cocinas de gas de más de cuatro quemadores, utensilios de cocina, motores fuera<br>"
+                                                      . "de borda, computadoras, impresoras, instrumentos de posicionamiento, atención prehospitalaria, búsqueda y rescate, tiendas de campaña, palas, picos,<br>"
+                                                      . "machetes, cascos, guantes, etc.";
+$vocab["otros_recursos_equipo_repuestosAgua"]         ="Recurso equipo para repuestos: servicios ccapacidades de almacenameinto de agua";
+$vocab["otros_recursos_equipo_repuestosAgua_desc"]    ="Tanques, reservorios, cisternas, piscinas, edificaciones vitales, plantas potabilizadoras, bombas de achique, otros sistemas.";
+$vocab["otros_recursos_equipo_repuestosEnergia"]       ="Recurso equipo para repuestos:Energia";
+$vocab["otros_recursos_equipo_repuestosEnergia_desc"]  ="Generadores eléctricos, plantas eléctricas portátiles, instalaciones vitales, otros sistemas";
+$vocab["otros_recursos_sistemas_insendios"]            ="sistemas fijos contra incendio,deteccion , alarmas y extintores";
+$vocab["otros_recursos_sistemas_insendios_desc"]       ="Sistema fijo contra incendio, gabinetes del SFCI, extintores, detectores de humo, otros.";
+$vocab["otros_recursos_Equipo_primeraRespuesta"]       ="Equipo de primera respuesta";
+$vocab["otros_recursos_Equipo_primeraRespuesta_desc"]  ="cuarto de primeros auxilios, botiquines, ferula de espalda/araña/extremidades/cuello/sujetador de cabeza, otros.";
+$vocab["otros_recursos_Señalizacion"]                  ="Señalización";
+$vocab["otros_recursos_Señalizacion_desc"]             ="Evacuación, salvamneto, combate de incendios, accesibilidad universal, prohibición, otros.";
+$vocab["otros_recursos_tipo"]                          ="Tipo de equipo";
+$vocab["otros_recursos_cantidad"]                      ="Cantidad";
+$vocab["otros_recursos_caracteristicas"]               ="Características";
+$vocab["otros_recursos_contacto"]                      ="Contacto";
+$vocab["otros_recursos_ubicacion"]                     ="Ubicación";
+$vocab["otros_recursos_categoria"]                     ="Categoría";
+$vocab["otros_recursos_observaciones"]                 ="Detalles/Observacion";
 
-$vocab["otros_recursos_tipo"]               ="Tipo de equipo";
-$vocab["otros_recursos_cantidad"]           ="Cantidad";
-$vocab["otros_recursos_caracteristicas"]    ="Características";
-$vocab["otros_recursos_contacto"]           ="Contacto";
-$vocab["otros_recursos_ubicacion"]          ="Ubicación";
-$vocab["otros_recursos_categoria"]          ="Categoría";
-
+//***********     plan de emergencia  poblacion ***********************//
+$vocab["poblacion_titulo"]                             ="Conformación de comité y brigadas de emergencia por oficinas, ubicación por sectores.";
+$vocab["poblacion_oficina"]                            ="Nombre de oficina";
+$vocab["poblacion_ocuapcional"]                        ="Capacidad ocupacional permanente";
+$vocab["poblacion_temporal"]                           ="Capacidad ocupacional temporal ";
+$vocab["poblacion_representante_comite"]               ="Representante del comité de emergencias ";
+$vocab["poblacion_representante_brigada"]              ="Representante de brigada efectiva (vigilancia, evacuación, extinción)";
+$vocab["poblacion_representante_primerosAuxilios"]     ="Representante brigada primeros auxilios";
+$vocab["poblacion_telefono_oficina"]                   ="Teléfonos de la oficina";
+$vocab["poblacion_contactoEmergencia"]                 ="Persona contacto en caso de emergencia";
+$vocab["poblacion_telefono_personal"]                  ="Teléfono personal en caso de emergencia";
+$vocab["poblacion_correo"]                             ="Correo electrónico en caso de emergencia";
 ?>

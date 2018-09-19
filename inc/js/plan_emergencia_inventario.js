@@ -8,12 +8,12 @@ function agregarFilaEquipo(titulo, combo,alert) {
     var id = (parseInt(id[1]) + 1); 
      }    
     var fila = '<tr id="E-' + id + '">' +
-            '<td> <input style = "width: 100%;" type="text"    class="form-control requerido cambios" id="E-tipoEquipo' + id + '"  ></td>' +
-            '<td> <input style = "width: 100%;" type="number"   class="form-control requerido cambios" id="E-cantidad' + id + '" value="0" ></td>' +
-            '<td> <input style = "width: 100%;" type="number"   class="form-control requerido cambios" id="E-capacidad' + id + '" value="0"></td>' +
-            '<td><textarea rows="1" style ="width: 100%;"  type="text"   class="form-control requerido cambios" id="E-caracteristica' + id + '"></textarea></td>' +
-            '<td> <input style = "width: 100%;" type="text"     class="form-control requerido cambios" id="E-contacto' + id + '"  ></td>' +
-            '<td> <input style = "width: 100%;" type="text"  class="form-control requerido cambios" id="E-ubicacion' + id + '" ></td>' +
+            '<td> <input  type="text"    class="form-control requerido cambios" id="E-tipoEquipo' + id + '"  ></td>' +
+            '<td> <input  type="number"   class="form-control requerido cambios" id="E-cantidad' + id + '" value="0" ></td>' +
+            '<td> <input  type="number"   class="form-control requerido cambios" id="E-capacidad' + id + '" value="0"></td>' +
+            '<td><textarea rows="1"   type="text"   class="form-control requerido cambios" id="E-caracteristica' + id + '"></textarea></td>' +
+            '<td> <input  type="text"     class="form-control requerido cambios" id="E-contacto' + id + '"  ></td>' +
+            '<td> <input  type="text"  class="form-control requerido cambios" id="E-ubicacion' + id + '" ></td>' +
             '<td> <select id="E-categoria' + id + '" name="select_subcapitulos" class="form-control cambios"></select></td>' +
             '<td>' +
             '<a class="puntero cambios"  onClick="javascript:eliminarFila(this);">' +
@@ -37,11 +37,11 @@ function agregarFilaRecursoHumano(titulo,alert) {
     var id = (parseInt(id[1]) + 1); 
      }      
     var fila = '<tr id="H-' + id + '">' +
-                            '<td> <input style = "width: 100%;" type="text"    class="form-control requerido cambios" id="H-profesion'+id+'" ></td>'+
-                            '<td> <input style = "width: 100%;" type="number"    min="0" class="form-control requerido  cambios" id="H-cantidad'+id+'" value="" ></td>'+
-                            '<td> <input style = "width: 100%;" type="text"    class="form-control requerido cambios" id="H-categoria'+id+'"  ></td>'+
-                            '<td> <input style = "width: 100%;" type="text"     class="form-control requerido cambios" id="H-localizacion'+id+'" ></td>'+                           
-                            '<td> <input style = "width: 100%;" type="text"    class="form-control requerido cambios" id="H-contacto'+id+'"  ></td>'+
+                            '<td> <input  type="text"    class="form-control requerido cambios" id="H-profesion'+id+'" ></td>'+
+                            '<td> <input  type="number"    min="0" class="form-control requerido  cambios" id="H-cantidad'+id+'" value="0" ></td>'+
+                            '<td> <input  type="text"    class="form-control requerido cambios" id="H-categoria'+id+'"  ></td>'+
+                            '<td> <input  type="text"     class="form-control requerido cambios" id="H-localizacion'+id+'" ></td>'+                           
+                            '<td> <input  type="text"    class="form-control requerido cambios" id="H-contacto'+id+'"  ></td>'+
                                 '<td>' +
                                 '<a class="puntero cambios"  onClick="javascript:eliminarFila(this);">' +
                                      '<div class="text-center"><i class="fa fa-close  text-danger" title="' + titulo + '"></i></div>' +
@@ -65,12 +65,12 @@ function agregarFilaRecursoInstalaciones(titulo,alert) {
     var id = (parseInt(id[1]) + 1); 
      }   
     var fila = '<tr id="I-' + id + '">' +
-                            '<td> <input style = "width: 100%;" type="text"   class="form-control requerido cambios" id="I-tipo' + id + '"  ></td>'+
-                            '<td> <input style = "width: 100%;" type="number"    min="0" class="form-control requerido  cambios" id="I-cantidad' + id + '" value="0" ></td>'+
-                            '<td> <input style = "width: 100%;" type="number"    min="0" class="form-control requerido cambios" id="I-tamano' + id + '" value="0" ></td>'+                                                      
-                            '<td> <input style = "width: 100%;" type="text"   class="form-control  requerido cambios" id="I-distribucion' + id + '" value="" ></td>'+
-                            '<td><textarea rows="1" style ="width: 100%;"  type="text"   class="form-control requerido cambios" id="I-contacto' + id + '"></textarea></td>'+
-                            '<td> <input style = "width: 100%;" type="text"   class="form-control  requerido cambios" id="I-ubicacion' + id + '" value="" ></td>'+
+                            '<td> <input  type="text"   class="form-control requerido cambios" id="I-tipo' + id + '"  ></td>'+
+                            '<td> <input  type="number"    min="0" class="form-control requerido  cambios" id="I-cantidad' + id + '" value="0" ></td>'+
+                            '<td> <input  type="number"    min="0" class="form-control requerido cambios" id="I-tamano' + id + '" value="0" ></td>'+                                                      
+                            '<td> <input  type="text"   class="form-control  requerido cambios" id="I-distribucion' + id + '" value="" ></td>'+
+                            '<td><textarea rows="1"   type="text"   class="form-control requerido cambios" id="I-contacto' + id + '"></textarea></td>'+
+                            '<td> <input  type="text"   class="form-control  requerido cambios" id="I-ubicacion' + id + '" value="" ></td>'+
                             '<td>' +
                                 '<a class="puntero cambios"  onClick="javascript:eliminarFila(this);">' +
                                      '<div class="text-center"><i class="fa fa-close  text-danger" title="' + titulo + '"></i></div>' +
@@ -84,7 +84,7 @@ function agregarFilaRecursoInstalaciones(titulo,alert) {
 
 
 
-function agregarOtrosRecursos(titulo,pref, idtabla,alert) {
+function agregarOtrosInventario(titulo,pref, idtabla,alert) {
     var tabla = jQuery(idtabla+" tbody");
     var id = tabla.children().last().attr('id')
       if(typeof id == 'undefined'){
@@ -94,12 +94,12 @@ function agregarOtrosRecursos(titulo,pref, idtabla,alert) {
     var id = (parseInt(id[1]) + 1); 
      }    
     var fila = '<tr id="'+ pref + id + '">' +
-            '<td> <input style = "width: 100%;" type="text"    class="form-control requerido cambios" id="'+ pref+'tipo' + id + '"  ></td>'+
-            '<td> <input style = "width: 100%;" type="number"  min="0" class="form-control requerido  cambios" id="'+ pref+'cantidad' + id + '" value="0" ></td>'+
-           '<td><textarea rows="1" style ="width: 100%;"  type="text"   class="form-control requerido cambios" id="'+ pref+'caracteristicas' + id + '"></textarea></td>'+
-            '<td> <input style = "width: 100%;" type="text"     class="form-control requerido cambios" id="'+ pref+'contacto' + id + '" ></td>'+                            
-            '<td> <input style = "width: 100%;" type="text"    class="form-control requerido cambios" id="'+ pref+'ubicacion' + id + '"  ></td>'+
-         
+            '<td> <input  type="text"    class="form-control requerido cambios" id="'+ pref+'tipo' + id + '"  ></td>'+
+            '<td> <input  type="number"  min="0" class="form-control requerido  cambios" id="'+ pref+'cantidad' + id + '" value="0" ></td>'+
+           '<td><textarea rows="1"   type="text"   class="form-control requerido cambios" id="'+ pref+'caracteristicas' + id + '"></textarea></td>'+
+            '<td> <input  type="text"     class="form-control requerido cambios" id="'+ pref+'contacto' + id + '" ></td>'+                            
+            '<td> <input  type="text"    class="form-control requerido cambios" id="'+ pref+'ubicacion' + id + '"  ></td>'+
+            '<td><textarea rows="1"   type="text"   class="form-control requerido cambios" id="'+ pref+'observaciones' + id + '"></textarea></td>'+
             '<td>' +
             '<a class="puntero cambios"  onClick="javascript:eliminarFila(this);">' +
             '<div class="text-center"><i class="fa fa-close  text-danger" title="' + titulo + '"></i></div>' +
@@ -188,15 +188,15 @@ function guardarequipoMovil(idPlanEmergencia, pasar) {
             count++;
             fila = fila.nextElementSibling;
         }
-
+         var formData = new FormData();
+        formData.append('lista',JSON.stringify(lista));
         //Preparacion  llamada AJAX
         var _values_send =
-                'idPlanEmergencia=' + idPlanEmergencia +
-                '&lista=' + JSON.stringify(lista);
+                'idPlanEmergencia=' + idPlanEmergencia;
 
         var _URL_ = "mod/planEmergencia/ajax_equipoMovil.php?";
         //alert(_URL_ + _values_send); //DEBUG
-        ajax.open("GET", _URL_ + "&" + _values_send, true);
+        ajax.open("POST", _URL_ + "&" + _values_send, true);
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 1) {
                 page.innerHTML = cargando;
@@ -219,14 +219,14 @@ function guardarequipoMovil(idPlanEmergencia, pasar) {
 
             }
         };
-        ajax.send(null);
+        ajax.send(formData);
         loading.innerHTML = "";
     }
 }
 
 function guardarRecursoHumano(idPlanEmergencia, pasar) {
     if (validate_Inventario("#lista_recurso_humano")) {
-         validado("#lista_recurso_humano");
+        validado("#lista_recurso_humano");
         var loading = document.getElementById('loading_container');
         loading.innerHTML = cargando_bar;
         var ajax = NuevoAjax();
@@ -244,15 +244,15 @@ function guardarRecursoHumano(idPlanEmergencia, pasar) {
             count++;
             fila = fila.nextElementSibling;
         }
-
+        var formData = new FormData();
+        formData.append('lista', JSON.stringify(lista));
         //Preparacion  llamada AJAX
         var _values_send =
-                'idPlanEmergencia=' + idPlanEmergencia +
-                '&lista=' + JSON.stringify(lista);
+                'idPlanEmergencia=' + idPlanEmergencia;
 
         var _URL_ = "mod/planEmergencia/ajax_recursoHumano.php?";
         //alert(_URL_ + _values_send); //DEBUG
-        ajax.open("GET", _URL_ + "&" + _values_send, true);
+        ajax.open("POST", _URL_ + "&" + _values_send, true);
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 1) {
                 page.innerHTML = cargando;
@@ -275,7 +275,7 @@ function guardarRecursoHumano(idPlanEmergencia, pasar) {
 
             }
         };
-        ajax.send(null);
+        ajax.send(formData);
         loading.innerHTML = "";
     }
 }
@@ -300,15 +300,15 @@ function guardarRecursoInstalaciones(idPlanEmergencia, pasar) {
             count++;
             fila = fila.nextElementSibling;
         }
-
+        var formData = new FormData();
+        formData.append('lista',JSON.stringify(lista));
         //Preparacion  llamada AJAX
         var _values_send =
-                'idPlanEmergencia=' + idPlanEmergencia +
-                '&lista=' + JSON.stringify(lista);
+                'idPlanEmergencia=' + idPlanEmergencia;
 
         var _URL_ = "mod/planEmergencia/ajax_recurso_instalaciones.php?";
         //alert(_URL_ + _values_send); //DEBUG
-        ajax.open("GET", _URL_ + "&" + _values_send, true);
+        ajax.open("POST", _URL_ + "&" + _values_send, true);
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 1) {
                 page.innerHTML = cargando;
@@ -331,41 +331,43 @@ function guardarRecursoInstalaciones(idPlanEmergencia, pasar) {
 
             }
         };
-        ajax.send(null);
+        ajax.send(formData);
         loading.innerHTML = "";
     }
 }
 
 
 
-function guardarOtrosRecurso(idPlanEmergencia, pasar,pref,categoria) {
-    if (validate_Inventario("#lista_telecomunicaciones")) {
-         validado("#lista_telecomunicaciones");
+function guardarOtrosInventario(idPlanEmergencia, pasar,pref,categoria,idtable) {
+    if (validate_Inventario("#"+idtable)) {
+         validado("#"+idtable);
         var loading = document.getElementById('loading_container');
         loading.innerHTML = cargando_bar;
         var ajax = NuevoAjax();
 
         var lista = new Array();
-        var fila = document.getElementById("lista_telecomunicaciones").firstElementChild.nextElementSibling;
+        var fila = document.getElementById(idtable).firstElementChild.nextElementSibling;
         fila = fila.firstElementChild;
         var count = 0;
         while (fila != null) {
             lista.push({"tipo": jQuery("#"+pref+"tipo" + count).val(), "cantidad": jQuery("#"+pref+"cantidad" + count).val(),
                 "caracteristicas": jQuery("#"+pref+"caracteristicas" + count).val(), "contacto": jQuery("#"+pref+"contacto" + count).val(),
-                "ubicacion": jQuery("#"+pref+"ubicacion" + count).val(), "categoria": categoria});
+                "ubicacion": jQuery("#"+pref+"ubicacion" + count).val(), "categoria": categoria,"observaciones":jQuery("#"+pref+"observaciones" + count).val()});
 
             count++;
             fila = fila.nextElementSibling;
         }
-
+        var formData = new FormData();
+        formData.append('lista',JSON.stringify(lista));
         //Preparacion  llamada AJAX
         var _values_send =
                 'idPlanEmergencia=' + idPlanEmergencia +
-                '&lista=' + JSON.stringify(lista);
+                 '&categoria=' + categoria;
+                
 
         var _URL_ = "mod/planEmergencia/ajax_otros_recursos.php?";
         //alert(_URL_ + _values_send); //DEBUG
-        ajax.open("GET", _URL_ + "&" + _values_send, true);
+        ajax.open("POST", _URL_ + "&" + _values_send, true);
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 1) {
                 page.innerHTML = cargando;
@@ -388,7 +390,7 @@ function guardarOtrosRecurso(idPlanEmergencia, pasar,pref,categoria) {
 
             }
         };
-        ajax.send(null);
+        ajax.send(formData);
         loading.innerHTML = "";
     }
 }
