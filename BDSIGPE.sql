@@ -369,10 +369,10 @@ create table FormularioPoblacion(
 create table IdentificacionPeligro(
     id int NOT NULL AUTO_INCREMENT,
     FKidPlanEmergencias int,
-    peligro varchar(150),
+    peligro text,
     presente int,
-    ubicacion varchar(150),
-    recomendacion varchar(150),
+    ubicacion varchar(1500),
+    recomendacion text,
     fecha date,
     responsable varchar(150),
     priorizacion int,
@@ -592,6 +592,37 @@ END
 ;;
 DELIMITER ;
 
+
+-----------------------------------------------
+-- ELIMINAR FILA DE IDENTIFICACION DE PELIGROS
+----------------------------------------------- 
+DROP PROCEDURE IF EXISTS `delete_identificacion_peligros`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_identificacion_peligros`(IN `p_idPeligro` int, IN `p_idPlan` int, OUT `res` TINYINT  UNSIGNED)
+BEGIN  
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;
+            START TRANSACTION;                   
+                  DELETE FROM `IdentificacionPeligro` WHERE `id`=p_idPeligro and `FKidPlanEmergencias`= p_idPlan ;                   
+
+            COMMIT;
+            -- SUCCESS
+            SET res = 0;
+            -- Existe usuario
+END
+;;
+DELIMITER ;
 
 
 
@@ -1528,8 +1559,8 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_identificacion_peligro`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_identificacion_peligro`(IN `p_FKidPlanEmergencias` int,IN `p_id` int,  IN `p_peligro` varchar(150),
- IN `p_presente` int, IN `p_ubicacion` varchar(150), IN `p_recomendacion` varchar(150) ,IN `p_fecha` date, IN `p_responsable` varchar(150),  IN `p_priorizacion` int,
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_identificacion_peligro`(IN `p_FKidPlanEmergencias` int,IN `p_id` int,  IN `p_peligro` text,
+ IN `p_presente` int, IN `p_ubicacion` varchar(1500), IN `p_recomendacion` text,IN `p_fecha` date, IN `p_responsable` varchar(150),  IN `p_priorizacion` int,
 OUT `res` TINYINT  UNSIGNED)
 BEGIN   
     declare existe Integer;
