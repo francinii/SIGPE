@@ -1,8 +1,8 @@
 var cambios = 0;
 function IniciarGuardarCambios(alert) {
     jQuery(".cambios").change(function (event) {
-         jQuery(event.currentTarget).css("background-color", "#ffeb8e");
-        if (cambios == 0) {           
+        jQuery(event.currentTarget).css("background-color", "#ffeb8e");
+        if (cambios == 0) {
             cambios = 1;
             jQuery("#divalertaDatosSinGuardar").addClass("panel panel-warning ");
             jQuery("#divalertaDatosSinGuardar").css("position", "fixed");

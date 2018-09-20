@@ -77,6 +77,9 @@
 <!-- Plan de emergencia poblacion -->
 <script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_poblacion.js"></script>
 
+<!-- Plan de emergencia ingresos -->
+<script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_ingreso.js"></script>
+
 
 <!-- Plan de emergencia plan de accion -->
 <script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_plan_accion.js"></script>

@@ -285,11 +285,10 @@ FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 create table CuerposScorro(
 id int NOT NULL AUTO_INCREMENT,
 FKidPlanEmergencias int,
-cantidad int,
 tipo varchar(150),
 ubicacion varchar(150),
-Distancia varchar(150),
-Tiempo varchar(150),
+Distancia float,
+Tiempo float,
 PRIMARY KEY(id),
 FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 ) ENGINE=InnoDB;
@@ -329,10 +328,10 @@ create table RutaEvacuacion(
     personaFlotante varchar(150),
     ruta1 varchar(150),
     distancia1 float,
-    tiempo1 int,
+    tiempo1 float,
     ruta2 varchar(150),
     distancia2 float,
-    tiempo2 int,
+    tiempo2 float,
     PRIMARY KEY(id),
     FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id) 
 ) ENGINE=InnoDB;
@@ -454,6 +453,7 @@ INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (4,'Matr
 INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (5,'Inventario',1);
 INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (6,'Identificacion de peligros',1);
 INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (7,'Poblacion',1);
+INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (8,'Ingreso',1);
 
 INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',1);
 INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',2);
@@ -2201,3 +2201,70 @@ BEGIN
 END
 ;;
 DELIMITER ;
+
+-- ----------------------------
+-- Proceso insertar Cuerpos de socorro 
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `insert_CuerposScorro`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_CuerposScorro`(IN p_FKidPlanEmergencias int,
+IN p_tipo varchar(150), IN p_ubicacion  varchar(150),IN  p_Distancia  float,
+ IN p_Tiempo  float ,OUT `res` TINYINT  UNSIGNED)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+        START TRANSACTION;       
+        INSERT INTO `CuerposScorro`(`FKidPlanEmergencias`, `tipo`, `ubicacion`, `Distancia`, `Tiempo`)
+         VALUES (p_FKidPlanEmergencias,p_tipo,p_ubicacion,p_Distancia,p_Tiempo);
+
+        COMMIT;
+        -- SUCCESS         
+
+         SET res = 0;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Proceso eliminar Cuerpos de socorro 
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `delete_CuerposScorro`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_CuerposScorro`(IN `p_FKidPlanEmergencias` int,OUT `res` TINYINT  UNSIGNED)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+        START TRANSACTION;       
+       DELETE FROM `CuerposScorro` WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias;
+         
+        COMMIT;
+        -- SUCCESS         
+
+         SET res = 0;
+END
+;;
+DELIMITER ;
+
+
