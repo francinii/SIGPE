@@ -78,6 +78,10 @@
 <script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_poblacion.js"></script>
 
 
+<!-- Plan de emergencia plan de accion -->
+<script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_plan_accion.js"></script>
+
+
 <!-- Bootstrap + Font-Awesome + Estilo -->
 <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <link href="lib/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>

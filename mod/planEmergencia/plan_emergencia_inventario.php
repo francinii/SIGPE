@@ -116,7 +116,6 @@ if (count($res) <= 0) {
                     <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
                         <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
                     <?php } ?>
-
                 </tr>
             </thead>
             <tbody>

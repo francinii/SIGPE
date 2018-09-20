@@ -44,6 +44,9 @@ function cambiarMenu(numero, idCentro, nombreCentro) {
         case 7:
             OpcionMenu('mod/planEmergencia/plan_emergencia_poblacion.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
             break;
+        case 8:
+            OpcionMenu('mod/planEmergencia/plan_emergencia_plan_accion.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
+        break;
      
     }
 

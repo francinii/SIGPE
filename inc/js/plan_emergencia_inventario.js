@@ -19,9 +19,8 @@ function agregarFilaEquipo(titulo, combo,alert) {
             '<a class="puntero cambios"  onClick="javascript:eliminarFila(this);">' +
             '<div class="text-center"><i class="fa fa-close  text-danger" title="' + titulo + '"></i></div>' +
             ' </a>' +
-            ' </td>';
-
-    '</tr>'
+            ' </td>'+
+            '</tr>';
     tabla.append(fila);
     selectEquipos(id, combo, 'nada');
     IniciarGuardarCambios(alert);
@@ -153,7 +152,7 @@ function validado(tabla){
 function selectEquipos(id, combo, seleccion) {
     var td = jQuery("#E-categoria" + id);
     var fila = '';
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < combo.length; i++) {
         fila += '<option';
         if (seleccion === combo[i]) {
             fila += ' selected ';

@@ -386,11 +386,11 @@ create table PlanAccion(
     id int NOT NULL AUTO_INCREMENT,
     FKidPlanEmergencias int,
     area varchar(150),
-    peligro varchar(150),
+    peligro text,
     accionPorRealizar varchar(150),
-    recomendaciones varchar(150),
+    recomendaciones text,
     fechaEjecucion date,
-    responsable varchar(150),
+    responsable varchar(1500),
     PRIMARY KEY(id),
     FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 ) ENGINE=InnoDB;
@@ -1972,8 +1972,68 @@ BEGIN
 END
 ;;
 DELIMITER ;
--- call delete_recursosOtros(5,'telecomunicaciones');
 
+-- ----------------------------
+-- Proceso insertar plan de accion
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `insert_plan_accion`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_plan_accion`(IN `p_FKidPlanEmergencias` int,IN `p_area` varchar(150),
+IN `p_peligro` text,IN `p_accionPorRealizar` varchar(150), IN `p_recomendaciones` text,
+IN `p_fechaEjecucion` date, IN `p_responsable` varchar(1500),OUT `res` TINYINT  UNSIGNED)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+        START TRANSACTION;       
+        INSERT INTO `PlanAccion`(`FKidPlanEmergencias`, `area`, `peligro`, `accionPorRealizar`, `recomendaciones`, `fechaEjecucion`, `responsable`)
+        VALUES (p_FKidPlanEmergencias,p_area,p_peligro,p_accionPorRealizar,p_recomendaciones,p_fechaEjecucion,p_responsable);
+
+        COMMIT;
+        -- SUCCESS         
+
+         SET res = 0;
+END
+;;
+DELIMITER ;
+------------------------- ELIMINAR PLAN DE ACCION
+DROP PROCEDURE IF EXISTS `delete_Plan_accion`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_Plan_accion`(IN `p_FKidPlanEmergencias` int,OUT `res` TINYINT  UNSIGNED)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+        START TRANSACTION;       
+       DELETE FROM `PlanAccion` WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias;
+         
+        COMMIT;
+        -- SUCCESS         
+
+         SET res = 0;
+END
+;;
+DELIMITER ;
 
 -- ----------------------------
 -- Proceso insertar otros recursos 
