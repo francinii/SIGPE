@@ -442,6 +442,7 @@ $vocab["otros_recursos_observaciones"]                 ="Detalles/Observacion";
 
 //***********     plan de emergencia  poblacion ***********************//
 $vocab["poblacion_titulo"]                             ="Conformación de comité y brigadas de emergencia por oficinas, ubicación por sectores.";
+$vocab["poblacion_titulo_desc"]                        ="INSTRUCCIONES: Completar el cuadro con el nombre completo de los funcionarios que pertenecerán al comité de emergencia, brigadistas de primeros auxilios capacitados anteriormente, e interesados en llevar el curso(poner un asterisco * en interesados que no hayan llevado el curso de primeros auxilios), brigadistas para la brigada efectiva(evacuación, vigilancia, extinción), contactos en caso de emergencia.";
 $vocab["poblacion_oficina"]                            ="Nombre de oficina";
 $vocab["poblacion_ocuapcional"]                        ="Capacidad ocupacional permanente";
 $vocab["poblacion_temporal"]                           ="Capacidad ocupacional temporal ";
@@ -452,4 +453,28 @@ $vocab["poblacion_telefono_oficina"]                   ="Teléfonos de la oficin
 $vocab["poblacion_contactoEmergencia"]                 ="Persona contacto en caso de emergencia";
 $vocab["poblacion_telefono_personal"]                  ="Teléfono personal en caso de emergencia";
 $vocab["poblacion_correo"]                             ="Correo electrónico en caso de emergencia";
+
+
+//***********     plan de emergencia  Ingresos ***********************//
+$vocab["ingreso_titulo"]                               ="Análisis de tiempo de respuesta de cuerpos de atención de emergencias";
+
+$vocab["ingreso_cuerpoRespuesta"]                      ="Cuerpo de respuesta";
+$vocab["ingreso_ubicación"]                            ="Ubicación";
+$vocab["ingreso_recorrido"]                            ="Distancia de recorrido";
+$vocab["ingreso_ubicación"]                            ="Ubicación";
+$vocab["ingreso_tiempoRespuesta"]                      ="Tiempo de respuesta";
+$vocab["ingreso_cruzRoja"]                      ="Cruz Roja";
+$vocab["ingreso_Bomberos"]                      ="Benemérito cuerpo de bomberos";
+$vocab["ingreso_transito"]                      ="Tránsito";
+
+
+
+$vocab["ingreso_subtitulo"]                            ="Descripción de ingreso de los cuerpos de socorro";
+$vocab["ingreso_Condiciones"]                          ="Condiciones de análisis";
+$vocab["ingreso_dimensiones"]                          ="Dimensiones de áreas de acceso ";
+$vocab["ingreso_radio"]                          ="Radios de giro";
+$vocab["ingreso_caseta"]                          ="Casetas ";
+$vocab["ingreso_plumas"]                          ="Plumas ";
+$vocab["ingreso_ancho"]                          ="Ancho libre ";
+$vocab["ingreso_protocolo"]                          ="Protocolos de coordinación con seguridad institucional";
 ?>

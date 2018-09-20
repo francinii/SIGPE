@@ -61,7 +61,7 @@ $res = seleccion($sql);
                     <tr id="fila<?= $i ?>"  align='center'>
                         <td hidden><?= $res[$i]['id'] ?></td>
                         <?php if (check_permiso($mod4, $act4, $user_rol)) { ?>
-                            <td ><a href="#" class="up "><span class="glyphicon glyphicon-triangle-top"></span></a> <a href="#" class="down">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-triangle-bottom"></span></a></td>
+                            <td ><a href="#" class="up "><span id="up<?=$i?>" class="glyphicon glyphicon-triangle-top"></span></a> <a href="#" class="down">&nbsp;&nbsp;&nbsp;<span id="down<?=$i?>" class="glyphicon glyphicon-triangle-bottom"></span></a></td>
                         <?php } ?>
                          <td class="numeroCapitulo"><?= ($i == 0) ? "Inicio" : $i;  ?></td>
                         <td><?= $res[$i]['titulo'] ?></td>
@@ -129,6 +129,7 @@ $res = seleccion($sql);
     <?php /*     * ***************************************************************************************** */ ?>
     <br/>
     <?php if (check_permiso($mod4, $act3, $user_rol)) { ?>
+    
         <div class="text-center"><a id="boton" class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/new_capitulo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["add_capitulo"] ?></a></div>
     <?php } ?>   
 

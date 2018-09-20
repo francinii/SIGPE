@@ -23,8 +23,10 @@ function agregarFilaEquipo(titulo, combo,alert) {
 
     '</tr>'
     tabla.append(fila);
+    
     selectEquipos(id, combo, 'nada');
     IniciarGuardarCambios(alert);
+    jQuery("#E-tipoEquipo" + id).focus();
 }
 
 function agregarFilaRecursoHumano(titulo,alert) {
@@ -51,6 +53,7 @@ function agregarFilaRecursoHumano(titulo,alert) {
             '</tr>'
     tabla.append(fila);
    IniciarGuardarCambios(alert);
+   jQuery("#H-profesion" + id).focus();
 }
 
 
@@ -80,6 +83,7 @@ function agregarFilaRecursoInstalaciones(titulo,alert) {
             '</tr>'
     tabla.append(fila);
    IniciarGuardarCambios(alert);
+   jQuery("#I-tipo" + id).focus();
 }
 
 
@@ -109,6 +113,7 @@ function agregarOtrosInventario(titulo,pref, idtabla,alert) {
     '</tr>'
     tabla.append(fila);
     IniciarGuardarCambios(alert);
+    jQuery("#"+pref+"tipo" + id).focus();
 }
 
 function eliminarFila(event) {

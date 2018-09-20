@@ -1,8 +1,8 @@
 var cambios = 0;
 function IniciarGuardarCambios(alert) {
     jQuery(".cambios").change(function (event) {
-         jQuery(event.currentTarget).css("background-color", "#ffeb8e");
-        if (cambios == 0) {           
+        jQuery(event.currentTarget).css("background-color", "#ffeb8e");
+        if (cambios == 0) {
             cambios = 1;
             jQuery("#divalertaDatosSinGuardar").addClass("panel panel-warning ");
             jQuery("#divalertaDatosSinGuardar").css("position", "fixed");
@@ -44,7 +44,10 @@ function cambiarMenu(numero, idCentro, nombreCentro) {
         case 7:
             OpcionMenu('mod/planEmergencia/plan_emergencia_poblacion.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
             break;
-     
+        case 8:
+            OpcionMenu('mod/planEmergencia/plan_emergencia_ingreso.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
+            break;
+
     }
 
 }

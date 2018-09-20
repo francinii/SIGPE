@@ -77,6 +77,9 @@
 <!-- Plan de emergencia poblacion -->
 <script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_poblacion.js"></script>
 
+<!-- Plan de emergencia ingresos -->
+<script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_ingreso.js"></script>
+
 
 <!-- Bootstrap + Font-Awesome + Estilo -->
 <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
