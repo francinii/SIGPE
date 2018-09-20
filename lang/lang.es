@@ -406,8 +406,27 @@ $vocab["plan_de_accion_reparar"]      ="Reparar";
 $vocab["plan_de_accion_remover"]      ="Remover";  
 
 
+//***********     plan de emergencia formulario rutas de evacuación ***********************//
+$vocab["rutas_evacuacion"]            = "rutas de evacuación";
+$vocab["rutas_evacuacion_nombre"]            = "Nombre de área";
+$vocab["rutas_evacuacion_personas_permanentes"]            = "Personas permanentes";
+$vocab["rutas_evacuacion_personas_flotantes"]            = "Personas flotantes";
+$vocab["rutas_evacuacion_ruta1"]            = "Ruta ev 1.(Nombre salida)";
+$vocab["rutas_evacuacion_distancia1"]            = "Distancia R1 (m) Se mide con cronograma a velocidad de caminado normal";
+$vocab["rutas_evacuacion_tiempo1"]            = "Tiempo R1 (min)";
+$vocab["rutas_evacuacion_ruta2"]            = "Ruta ev 2.(Nombre salida)";
+$vocab["rutas_evacuacion_distancia2"]            = "Distancia R2 (m) Se mide en los planitos por medio de las cotas";
+$vocab["rutas_evacuacion_tiempo2"]            = "Tiempo R2 (min)";
 
- 
+//***********     plan de emergencia formulario brigadistas ***********************// 
+$vocab["brigadista_nombre"]            = "brigadistas/número";
+$vocab["brigadista_punto_partida"]            = "Punto de  partida (zona habitual)";
+$vocab["brigadista_zona_asignada"]            = "Zona asignada a evacuar";
+$vocab["brigadista_numero_personas"]            = "Número de personas a evacuar";
+$vocab["brigadista_distancia_total"]            = "Distancia total a recorrer (m)";
+$vocab["brigadista_tiempo_evacuacion"]            = "Tiempo de evacuación (min)";
+
+
 //***********     plan de emergencia  recurso humano ***********************//
 $vocab["recurso_humano_titulo"]             ="Recurso Humano";                
 $vocab["recurso_humano_titulo_desc"]        ="Profesíon u oficio: Ingeniero, arquitecto, enfermera, medico, otros";    

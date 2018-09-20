@@ -81,6 +81,12 @@
 <!-- Plan de emergencia plan de accion -->
 <script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_plan_accion.js"></script>
 
+<!-- Plan de emergencia plan de accion -->
+<script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_brigadistas.js"></script>
+
+<!-- Plan de emergencia plan de accion -->
+<script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_rutas_evacuacion.js"></script>
+
 
 <!-- Bootstrap + Font-Awesome + Estilo -->
 <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>

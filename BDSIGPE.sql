@@ -2006,6 +2006,46 @@ BEGIN
 END
 ;;
 DELIMITER ;
+-- ----------------------------
+-- Proceso insertar ruta evacuacion
+-- ----------------------------
+-- DROP PROCEDURE IF EXISTS `insert_rutas_evacuacion`;
+-- DELIMITER ;;
+-- CREATE DEFINER=`root`@`localhost` PROCEDURE 
+-- `insert_rutas_evacuacion`(IN `p_FKidPlanEmergencias` int,IN `p_nombreArea` varchar(150),
+-- IN `p_personaPermanten` text,IN `p_personaFlotante` varchar(150), IN `p_ruta1` text,
+-- IN `p_distancia1` date, IN `p_tiempo1` varchar(1500),OUT `res` TINYINT  UNSIGNED)
+-- BEGIN
+--     DECLARE EXIT HANDLER FOR SQLEXCEPTION
+--     BEGIN
+	-- ERROR
+--     SET res = 1;
+--     ROLLBACK;
+ --    END;
+--   DECLARE EXIT HANDLER FOR SQLWARNING
+-- 	BEGIN
+	-- ERROR
+ --            SET res = 2;
+ --            ROLLBACK;
+-- 	END; 
+
+ --        START TRANSACTION;       
+ --        INSERT INTO `PlanAccion`(`FKidPlanEmergencias`, `area`, `peligro`, `accionPorRealizar`, `recomendaciones`, `fechaEjecucion`, `responsable`)
+ --        VALUES (p_FKidPlanEmergencias,p_area,p_peligro,p_accionPorRealizar,p_recomendaciones,p_fechaEjecucion,p_responsable);
+
+ --        COMMIT;
+        -- SUCCESS         
+
+ --         SET res = 0;
+-- END
+-- ;;
+-- DELIMITER ;
+
+
+
+
+
+
 ------------------------- ELIMINAR PLAN DE ACCION
 DROP PROCEDURE IF EXISTS `delete_Plan_accion`;
 DELIMITER ;;
@@ -2026,6 +2066,65 @@ BEGIN
 
         START TRANSACTION;       
        DELETE FROM `PlanAccion` WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias;
+         
+        COMMIT;
+        -- SUCCESS         
+
+         SET res = 0;
+END
+;;
+DELIMITER ;
+
+-- ----------------------- ELIMINAR RUTAS DE EVACUACION
+DROP PROCEDURE IF EXISTS `delete_rutas_evacuacion`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_rutas_evacuacion`(IN `p_FKidPlanEmergencias` int,OUT `res` TINYINT  UNSIGNED)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+        START TRANSACTION;       
+       DELETE FROM `RutaEvacuacion` WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias;
+         
+        COMMIT;
+        -- SUCCESS         
+
+         SET res = 0;
+END
+;;
+DELIMITER ;
+
+
+-- ----------------------- ELIMINAR brigadistas
+DROP PROCEDURE IF EXISTS `delete_brigadistas`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_brigadistas`(IN `p_FKidPlanEmergencias` int,OUT `res` TINYINT  UNSIGNED)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+        START TRANSACTION;       
+       DELETE FROM `Brigada` WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias;
          
         COMMIT;
         -- SUCCESS         
