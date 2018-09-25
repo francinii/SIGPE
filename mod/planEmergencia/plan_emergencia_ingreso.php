@@ -68,7 +68,7 @@ if (count($res) <= 0) {
                             <?php if (check_permiso($mod5, $act5, $user_rol)) {
                                 ?>
                                 <td>              
-                                    <a class="puntero cambios" <?= $style ?> <?= $style ?> >                                 
+                                    <a class="puntero cambios" <?= $style ?> <?= $onclick ?> >                                 
                                         <div class="text-center"><i class="fa fa-close  text-danger " title="<?= $vocab["symbol_delete"] ?>"></i></div>                                       
                                     </a>                             
                                 </td>
@@ -85,11 +85,76 @@ if (count($res) <= 0) {
         <?php if ($editar) { ?>
             <span class="text-center">
                 <a class="btn btn-warning"  onclick="javascript:guardarIncreso('<?= $idPlanEmergencia ?>', 0)" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["inventario_Datos"] ?></a>
-            </span>
-            <span class="text-center">
-                <a class="btn btn-success"  onclick="javascript:guardarIncreso('<?= $idPlanEmergencia ?>', 1)" name="submit"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_save"] . " " . $vocab["datos_generares_siguente"] ?></a>
-            </span>        
+            </span>                   
         <?php } ?>
     </div>
 </div>
+
+<!------------------------------------------- Tabla increso cuerpos de socorro----------------------------------------------->
+<?php
+$sql = "SELECT `dimensionAreaAcceso`, `radioGiro`, `caseta`, `plumas`, `anchoLibre` FROM `IngresoCuerpoSocorro` WHERE `FKidPlanEmergencias`=" . $idPlanEmergencia;
+$res = seleccion($sql);
+?>
+
+
+<div class="well well-sm">
+    <h2><?= $vocab["ingreso_subtitulo"] ?></h2>
+
+    <form method="post" action="">
+        <h4><?= $vocab["ingreso_Condiciones"] ?></h4>
+
+        <div class="form-group row">
+            <label for="area" class="col-sm-3 col-form-label"><?= $vocab["ingreso_dimensiones"] ?></label>
+            <div class="col-sm-9">
+                <input type="text"   <?= (!$editar) ? "readonly" : ""; ?> class="form-control cambios" id="dimensionAreaAcceso" value="<?= ( count($res) > 0) ? $res[0]['dimensionAreaAcceso'] : ""; ?>">                                 
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="instalaciones" class="col-sm-3 col-form-label"><?= $vocab["ingreso_radio"] ?></label>
+            <div class="col-sm-9">
+                <input type="text"   <?= (!$editar) ? "readonly" : ""; ?> class="form-control cambios" id="radioGiro" value="<?= ( count($res) > 0) ? $res[0]['radioGiro'] : ""; ?>">                                 
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="zona" class="col-sm-3 col-form-label"><?= $vocab["ingreso_caseta"] ?></label>
+            <div class="col-sm-9">
+                <input type="text"  <?= (!$editar) ? "readonly" : ""; ?> class="form-control cambios" id="caseta" value="<?= ( count($res) > 0) ? $res[0]['caseta'] : ""; ?>">                                 
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="topografica" class="col-sm-3 col-form-label"><?= $vocab["ingreso_plumas"] ?></label>
+            <div class="col-sm-9">
+                <input type="text"  <?= (!$editar) ? "readonly" : ""; ?> class="form-control cambios" id="plumas" value="<?= ( count($res) > 0) ? $res[0]['plumas'] : ""; ?>">                                 
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="terreno" class="col-sm-3 col-form-label"><?= $vocab["ingreso_ancho"] ?></label>
+            <div class="col-sm-9">
+                <input type="text"  <?= (!$editar) ? "readonly" : ""; ?> class="form-control cambios" id="anchoLibre" value="<?= ( count($res) > 0) ? $res[0]['anchoLibre'] : ""; ?>">                                 
+            </div>
+        </div>        
+        <h4><?= $vocab["ingreso_protocolo"] ?></h4>
+
+
+
+        <?php if ($editar) { ?>
+            <div class="text-center">
+                <?php if ($editar) { ?>
+                    <span class="text-center">
+                        <a class="btn btn-warning"  onclick="javascript:guardarIncresoCuerpoSocorro('<?= $idPlanEmergencia ?>', 0)" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["inventario_Datos"] ?></a>
+                    </span>
+                    <span class="text-center">
+                        <a class="btn btn-success"  onclick="javascript:guardarIncresoCuerpoSocorro('<?= $idPlanEmergencia ?>', 1)" name="submit"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_save"] . " " . $vocab["datos_generares_siguente"] ?></a>
+                    </span>        
+                <?php } ?>
+            </div>
+
+
+        <?php } ?>
+
+    </form>
+</div>
+
+
+
 

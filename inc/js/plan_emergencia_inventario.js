@@ -183,13 +183,16 @@ function guardarequipoMovil(idPlanEmergencia, pasar) {
         fila = fila.firstElementChild;
         var count = 0;
         while (fila != null) {
+            var id = fila.id;
+            id = id.split('-');
+            count=id[1];
             lista.push({"tipo": jQuery("#E-tipoEquipo" + count).val(), "cantidad": jQuery("#E-cantidad" + count).val(),
                 "capacidad": jQuery("#E-capacidad" + count).val(), "descripcion": jQuery("#E-caracteristica" + count).val(),
                 "contacto": jQuery("#E-contacto" + count).val(), "ubicacion": jQuery("#E-ubicacion" + count).val(),
                 "categoria": jQuery("#E-categoria" + count).val()});
 
 
-            count++;
+            
             fila = fila.nextElementSibling;
         }
          var formData = new FormData();
@@ -240,12 +243,15 @@ function guardarRecursoHumano(idPlanEmergencia, pasar) {
         fila = fila.firstElementChild;
         var count = 0;
         while (fila != null) {
+             var id = fila.id;
+            id = id.split('-');
+            count=id[1];
             lista.push({"profesion": jQuery("#H-profesion" + count).val(), "cantidad": jQuery("#H-cantidad" + count).val(),
                 "categoria": jQuery("#H-categoria" + count).val(), "localizacion": jQuery("#H-localizacion" + count).val(),
                 "contacto": jQuery("#H-contacto" + count).val()});
 
 
-            count++;
+            
             fila = fila.nextElementSibling;
         }
         var formData = new FormData();
@@ -296,12 +302,15 @@ function guardarRecursoInstalaciones(idPlanEmergencia, pasar) {
         fila = fila.firstElementChild;
         var count = 0;
         while (fila != null) {
+             var id = fila.id;
+            id = id.split('-');
+            count=id[1];
             lista.push({"tipo": jQuery("#I-tipo" + count).val(), "cantidad": jQuery("#I-cantidad" + count).val(),
                 "tamano": jQuery("#I-tamano" + count).val(), "distribucion": jQuery("#I-distribucion" + count).val(),
                 "contacto": jQuery("#I-contacto" + count).val(), "ubicacion": jQuery("#I-ubicacion" + count).val()});
 
 
-            count++;
+           
             fila = fila.nextElementSibling;
         }
         var formData = new FormData();
@@ -354,11 +363,14 @@ function guardarOtrosInventario(idPlanEmergencia, pasar,pref,categoria,idtable) 
         fila = fila.firstElementChild;
         var count = 0;
         while (fila != null) {
+             var id = fila.id;
+            id = id.split('-');
+            count=id[1];
             lista.push({"tipo": jQuery("#"+pref+"tipo" + count).val(), "cantidad": jQuery("#"+pref+"cantidad" + count).val(),
                 "caracteristicas": jQuery("#"+pref+"caracteristicas" + count).val(), "contacto": jQuery("#"+pref+"contacto" + count).val(),
                 "ubicacion": jQuery("#"+pref+"ubicacion" + count).val(), "categoria": categoria,"observaciones":jQuery("#"+pref+"observaciones" + count).val()});
 
-            count++;
+           
             fila = fila.nextElementSibling;
         }
         var formData = new FormData();

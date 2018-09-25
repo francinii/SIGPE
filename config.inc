@@ -12,7 +12,7 @@
 $cds_domain = "http://localhost";
 $cds_locate = "/SIGPE/"; 
 
-$ldap_status = 1;
+$ldap_status = 0;
 $ldap_server[0] = "10.0.2.53";
 $ldap_dn = "dc=una,dc=ac,dc=cr";
 
