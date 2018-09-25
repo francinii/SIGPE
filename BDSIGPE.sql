@@ -596,9 +596,9 @@ END
 DELIMITER ;
 
 
------------------------------------------------
+-- ---------------------------------------------
 -- ELIMINAR FILA DE IDENTIFICACION DE PELIGROS
------------------------------------------------ 
+-- --------------------------------------------- 
 DROP PROCEDURE IF EXISTS `delete_identificacion_peligros`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_identificacion_peligros`(IN `p_idPeligro` int, IN `p_idPlan` int, OUT `res` TINYINT  UNSIGNED)
@@ -2046,7 +2046,7 @@ DELIMITER ;
 
 
 
-------------------------- ELIMINAR PLAN DE ACCION
+-- ----------------------- ELIMINAR PLAN DE ACCION
 DROP PROCEDURE IF EXISTS `delete_Plan_accion`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_Plan_accion`(IN `p_FKidPlanEmergencias` int,OUT `res` TINYINT  UNSIGNED)
