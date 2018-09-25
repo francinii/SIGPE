@@ -342,11 +342,11 @@ create table RutaEvacuacion(
 create table ZonaSeguridad(
 id int NOT NULL AUTO_INCREMENT,
 FKidPlanEmergencias int,
-Nombre varchar(150),
-ubicacion varchar(150),
-capacidad varchar(150),
-observaciones varchar(150),
-sector varchar(150),
+nombre varchar(1500),
+ubicacion varchar(1500),
+capacidad int,
+observaciones text,
+sector varchar(1500),
 PRIMARY KEY(id),
 FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 ) ENGINE=InnoDB;
@@ -1980,11 +1980,11 @@ DELIMITER ;
 -- ----------------------------
 -- Proceso insertar plan de accion
 -- ----------------------------
-DROP PROCEDURE IF EXISTS `insert_plan_accion`;
+DROP PROCEDURE IF EXISTS `insert_zona_seguridad`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_plan_accion`(IN `p_FKidPlanEmergencias` int,IN `p_area` varchar(150),
-IN `p_peligro` text,IN `p_accionPorRealizar` varchar(150), IN `p_recomendaciones` text,
-IN `p_fechaEjecucion` date, IN `p_responsable` varchar(1500),OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_zona_seguridad`(IN `p_FKidPlanEmergencias` int,IN `p_nombre` varchar(1500),
+IN `p_ubicacion` varchar(1500), IN `p_capacidad` int,
+IN `p_observaciones` text, IN `p_sector` varchar(1500),OUT `res` TINYINT  UNSIGNED)
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
@@ -2000,8 +2000,8 @@ BEGIN
 	END; 
 
         START TRANSACTION;       
-        INSERT INTO `PlanAccion`(`FKidPlanEmergencias`, `area`, `peligro`, `accionPorRealizar`, `recomendaciones`, `fechaEjecucion`, `responsable`)
-        VALUES (p_FKidPlanEmergencias,p_area,p_peligro,p_accionPorRealizar,p_recomendaciones,p_fechaEjecucion,p_responsable);
+        INSERT INTO `ZonaSeguridad`(`FKidPlanEmergencias`, `nombre`, `ubicacion`, `capacidad`, `observaciones`, `sector`)
+        VALUES (p_FKidPlanEmergencias,p_nombre,p_ubicacion,p_capacidad,p_observaciones,p_sector);
 
         COMMIT;
         -- SUCCESS         
@@ -2010,10 +2010,12 @@ BEGIN
 END
 ;;
 DELIMITER ;
--- ---------------------- ELIMINAR PLAN DE ACCION
-DROP PROCEDURE IF EXISTS `delete_Plan_accion`;
+
+
+-- ---------------------- ELIMINAR ZONA DE SEGURIDAD
+DROP PROCEDURE IF EXISTS `delete_zona_seguridad`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_Plan_accion`(IN `p_FKidPlanEmergencias` int,OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_zona_seguridad`(IN `p_FKidPlanEmergencias` int,OUT `res` TINYINT  UNSIGNED)
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
@@ -2029,7 +2031,7 @@ BEGIN
 	END; 
 
         START TRANSACTION;       
-       DELETE FROM `PlanAccion` WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias;
+       DELETE FROM `ZonaSeguridad` WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias;
          
         COMMIT;
         -- SUCCESS         

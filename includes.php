@@ -82,7 +82,7 @@
 
 
 <!-- Plan de emergencia plan de accion -->
-<script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_plan_accion.js"></script>
+<script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_zona_seguridad.js"></script>
 
 <!-- Plan de emergencia plan de accion -->
 <script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_brigadistas.js"></script>

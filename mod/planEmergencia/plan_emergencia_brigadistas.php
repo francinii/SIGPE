@@ -57,9 +57,9 @@ if (count($res) <= 0) {
                             <td>   
                                 <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="zonaEvacuar<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['zonaEvacuar'] : ""; ?>" >
                             </td>    
-                            <td> <input  type="number"  min="0"<?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="numeroPersonas<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['numPersonasEvacuar'] : ""; ?>" ></td>
-                            <td> <input  type="number"  min="0"<?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="distancia<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['distancia'] : ""; ?>" ></td>
-                            <td> <input  type="number"  min="0"<?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="tiempo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tiempo'] : ""; ?>" ></td>
+                            <td> <input  type="number"  min="0"<?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="numeroPersonas<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['numPersonasEvacuar'] : "0"; ?>" ></td>
+                            <td> <input  type="number"  min="0"<?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="distancia<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['distancia'] : "0"; ?>" ></td>
+                            <td> <input  type="number"  min="0"<?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="tiempo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tiempo'] : "0"; ?>" ></td>
 
                             <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
                                 <td>              

@@ -390,20 +390,20 @@ $vocab["peligro_36"] = "Existen cilindros de gas. ¿Qué tipo?";
 $vocab["peligro_37"] = "Hay cilindros de gas vacíos, tirados o sin proteger.";
 
 //***********     plan de emergencia formulario plan de accion ***********************//
-$vocab["plan_de_accion"]            = "plan de acción";
-$vocab["plan_de_accion_title"]            = "Guía para el diagnóstico de amenazas y peligros de los centros de trabajo de la Universidad Nacional";
-$vocab["plan_de_accion_area"]             ="Área";  
-$vocab["plan_de_accion_peligro"]          ="Peligro";  
-$vocab["plan_de_accion_acciones"]         ="Acción por realizar";  
-$vocab["plan_de_accion_recomendaciones"]  ="Recomendaciones";  
-$vocab["plan_de_accion_fecha"]            ="Fecha de ejecución";  
-$vocab["plan_de_accion_responsable"]      ="Responsable";  
+$vocab["zona_seguridad"]                    = "zona de seguridad";
+$vocab["zona_seguridad_title"]              = "";
+$vocab["zona_seguridad_nombre"]             ="Nombre";  
+$vocab["zona_seguridad_ubicacion"]          ="Ubicacion";  
+$vocab["zona_seguridad_capacidad"]          ="Capacidad";  
+$vocab["zona_seguridad_observaciones"]      ="Observaciones";  
+$vocab["zona_seguridad_sector"]             ="Sector(es) que descargan a esa zona de seguidad";  
+//$vocab["zona_seguridad_responsable"]      ="Responsable";  
 
-$vocab["plan_de_accion_interior"]      ="Interior";  
-$vocab["plan_de_accion_exterior"]      ="Exterior";  
-$vocab["plan_de_accion_anclar"]      ="Anclar";  
-$vocab["plan_de_accion_reparar"]      ="Reparar";  
-$vocab["plan_de_accion_remover"]      ="Remover";  
+//$vocab["plan_de_accion_interior"]      ="Interior";  
+//$vocab["plan_de_accion_exterior"]      ="Exterior";  
+//$vocab["plan_de_accion_anclar"]      ="Anclar";  
+//$vocab["plan_de_accion_reparar"]      ="Reparar";  
+//$vocab["plan_de_accion_remover"]      ="Remover";  
 
 
 //***********     plan de emergencia formulario rutas de evacuación ***********************//

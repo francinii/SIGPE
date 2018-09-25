@@ -80,6 +80,7 @@ function guardarRutasEvacuacion(idPlanEmergencia, pasar, idtable) {
         fila = fila.firstElementChild;
         var count = 0;
         while (fila != null) {
+            count = fila.id;
             lista.push({"area": jQuery("#" + "area" + count).val(),
             "personasPermanentes": jQuery("#" + "personasPermanentes" + count).val(),
             "personasFlotantes": jQuery("#" + "personasFlotantes" + count).val(),

@@ -76,6 +76,7 @@ function guardarBrigadistas(idPlanEmergencia, pasar, idtable) {
         fila = fila.firstElementChild;
         var count = 0;
         while (fila != null) {
+            count = fila.id;
             lista.push({"brigadista": jQuery("#" + "brigadista" + count).val(),
                 "puntoPartida": jQuery("#" + "puntoPartida" + count).val(),
                 "zonaEvacuar": jQuery("#" + "zonaEvacuar" + count).val(), 
