@@ -273,7 +273,7 @@ $vocab["datos_generares_Administrativo"]     ="Personal Administrativo:";
 $vocab["datos_generares_Académico"]          ="Personal Académico:";
 $vocab["datos_generares_Estudiantil"]        ="Presencia Estudiantil:";
 $vocab["datos_generares_siguente"]           ="y pasar el siguiente";
-
+$vocab["datos_generares_datos"]              ="Datos";
 
 //***********     plan de emergencia  datos generales  ***********************//
 $vocab["actividades_Titulo"]             ="Tipo de población";
@@ -326,7 +326,7 @@ $vocab["equipo_moviles_contacto"]           ="Contacto";
 $vocab["equipo_moviles_ubicacion"]          ="Ubicación";
 $vocab["equipo_moviles_categoria"]          ="Categoría";
 $vocab["equipo_moviles_terrestre"]          ="Terrestre";
-$vocab["equipo_moviles_titulo_desc"]        ="Equipo móvil terrestres: jeep,camión,tractor,otros. - Equipo móvil acuático: Lancha,bote,Panga,otros. -  Equipo móvil aereo: avioneta,helicoptero,otros.";
+$vocab["equipo_moviles_titulo_desc"]        ="Equipo móvil terrestres: jeep,camión,tractor,otros. <br>Equipo móvil acuático: Lancha,bote,Panga,otros. <br>Equipo móvil aereo: avioneta,helicoptero,otros.";
 $vocab["equipo_moviles_Acuático"]           ="Acuático";
 $vocab["equipo_moviles_Aereo"]              ="Aereo";
 
@@ -355,13 +355,13 @@ $vocab["peligro_1"] = "Existen gabinetes, libros y estantes de pared sin asegura
 $vocab["peligro_2"] = "Hay objetos pesados en los estantes que sobrepasan la altura de la cabeza de las y los funcionarios o estudiantes cuando están sentados.";
 $vocab["peligro_3"] = "Hay peceras de vidrio u otras exhibiciones que pueden resultar peligrosas en caso de terremoto.";
 $vocab["peligro_4"] = "Hay objetos en las paredes (macetas, jarrones, cuadros) sin asegurar, que pueden balancearse o ser lanzados durante un terremoto.";
-$vocab["peligro_5"] = "Hay objetos en las paredes (macetas, jarrones, cuadros) sin asegurar, que pueden balancearse o ser lanzados durante un terremoto.";
 $vocab["peligro_6"] = "Las puertas abren hacia adentro.";
 $vocab["peligro_7"] = "Hay acumulaciones de basura o papel.";
 $vocab["peligro_8"] = "Existen cilindros de gas.";
 $vocab["peligro_9"] = "Hay escritorios o pupitres cerca de las ventanas de vidrio obstruyendo posibles salidas.";
 $vocab["peligro_10"] = "Las paredes presentan reventaduras o desprendimientos de repello.";
 $vocab["peligro_11"] = "Hay almacenamiento innecesario de material (combustible, papel, químicos, madera, etc.).";
+$vocab["peligro_5"] = "Existe en su laboratorio cañería expuesta.";
 $vocab["peligro_12"] = "Existen los pasillos en su oficina con el espacio cerrado.";
 $vocab["peligro_13"] = "Hay basura que obstruye el paso en pasillos o rutas de salida.";
 $vocab["peligro_14"] = "Hay huecos o zanjas descubiertas.";
@@ -389,6 +389,44 @@ $vocab["peligro_35"] = "Disponibilidad de bombas de agua.";
 $vocab["peligro_36"] = "Existen cilindros de gas. ¿Qué tipo?";
 $vocab["peligro_37"] = "Hay cilindros de gas vacíos, tirados o sin proteger.";
 
+//***********     plan de emergencia formulario plan de accion ***********************//
+$vocab["plan_de_accion"]            = "plan de acción";
+$vocab["plan_de_accion_title"]            = "Guía para el diagnóstico de amenazas y peligros de los centros de trabajo de la Universidad Nacional";
+$vocab["plan_de_accion_area"]             ="Área";  
+$vocab["plan_de_accion_peligro"]          ="Peligro";  
+$vocab["plan_de_accion_acciones"]         ="Acción por realizar";  
+$vocab["plan_de_accion_recomendaciones"]  ="Recomendaciones";  
+$vocab["plan_de_accion_fecha"]            ="Fecha de ejecución";  
+$vocab["plan_de_accion_responsable"]      ="Responsable";  
+
+$vocab["plan_de_accion_interior"]      ="Interior";  
+$vocab["plan_de_accion_exterior"]      ="Exterior";  
+$vocab["plan_de_accion_anclar"]      ="Anclar";  
+$vocab["plan_de_accion_reparar"]      ="Reparar";  
+$vocab["plan_de_accion_remover"]      ="Remover";  
+
+
+//***********     plan de emergencia formulario rutas de evacuación ***********************//
+$vocab["rutas_evacuacion"]            = "rutas de evacuación";
+$vocab["rutas_evacuacion_nombre"]            = "Nombre de área";
+$vocab["rutas_evacuacion_personas_permanentes"]            = "Personas permanentes";
+$vocab["rutas_evacuacion_personas_flotantes"]            = "Personas flotantes";
+$vocab["rutas_evacuacion_ruta1"]            = "Ruta ev 1.(Nombre salida)";
+$vocab["rutas_evacuacion_distancia1"]            = "Distancia R1 (m) Se mide con cronograma a velocidad de caminado normal";
+$vocab["rutas_evacuacion_tiempo1"]            = "Tiempo R1 (min)";
+$vocab["rutas_evacuacion_ruta2"]            = "Ruta ev 2.(Nombre salida)";
+$vocab["rutas_evacuacion_distancia2"]            = "Distancia R2 (m) Se mide en los planitos por medio de las cotas";
+$vocab["rutas_evacuacion_tiempo2"]            = "Tiempo R2 (min)";
+
+//***********     plan de emergencia formulario brigadistas ***********************// 
+$vocab["brigadista_nombre"]            = "brigadistas/número";
+$vocab["brigadista_punto_partida"]            = "Punto de  partida (zona habitual)";
+$vocab["brigadista_zona_asignada"]            = "Zona asignada a evacuar";
+$vocab["brigadista_numero_personas"]            = "Número de personas a evacuar";
+$vocab["brigadista_distancia_total"]            = "Distancia total a recorrer (m)";
+$vocab["brigadista_tiempo_evacuacion"]            = "Tiempo de evacuación (min)";
+
+
 //***********     plan de emergencia  recurso humano ***********************//
 $vocab["recurso_humano_titulo"]             ="Recurso Humano";                
 $vocab["recurso_humano_titulo_desc"]        ="Profesíon u oficio: Ingeniero, arquitecto, enfermera, medico, otros";    
@@ -400,5 +438,81 @@ $vocab["recurso_humano_Contacto"]           ="Contacto";
         
 //***********     plan de emergencia  Inventario ***********************//
 $vocab["inventario_fila"]           ="fila";    
+$vocab["inventario_sector"]           ="sector";
+$vocab["inventario_Datos"]           ="Datos";
 
+//***********     plan de emergencia  instalaciones ***********************//
+$vocab["instalaciones_titulo"]        ="Recurso instalaciones";
+$vocab["instalaciones_titulo_desc"]   ="Espacios físicos, bodegas, infraestructua";  
+$vocab["instalaciones_tipo"]           ="Tipo de costrucción";    
+$vocab["instalaciones_cantida"]        ="Cantidad";  
+$vocab["instalaciones_tamaño"]         ="Tamaño M2";
+$vocab["instalaciones_distribucion"]   ="Distribución interna y externa";
+$vocab["instalaciones_encargada"]      ="Contacto y localización de la(s) persona(s) encargada(s) del lugar"; 
+$vocab["instalaciones_ubicacion"]      ="Ubicación exacta"; 
+
+
+//***********     plan de emergencia  otros invetarios ***********************//
+$vocab["otros_recursos_Telecomunicacion"]             ="Recurso Telecomunicaciones";
+$vocab["otros_recursos_Telecomunicacion_desc"]        ="Equipo: fax, télefono, celular, telex, internet, estación de radio, equipo de radio, repetidoras, etc.<br>"
+                                                      ."Características: portátil, fijo, frecuencia, longitud de ondas, marca, serie, número, otras.";
+$vocab["otros_recursos_equipo_repuestos"]             ="Recurso equipo para repuestos";
+$vocab["otros_recursos_equipo_repuestos_desc"]        ="Plantas eléctricas, motosierras, bombas para agua, equipo de rescate, cocinas de gas de más de cuatro quemadores, utensilios de cocina, motores fuera<br>"
+                                                      . "de borda, computadoras, impresoras, instrumentos de posicionamiento, atención prehospitalaria, búsqueda y rescate, tiendas de campaña, palas, picos,<br>"
+                                                      . "machetes, cascos, guantes, etc.";
+$vocab["otros_recursos_equipo_repuestosAgua"]         ="Recurso equipo para repuestos: servicios ccapacidades de almacenameinto de agua";
+$vocab["otros_recursos_equipo_repuestosAgua_desc"]    ="Tanques, reservorios, cisternas, piscinas, edificaciones vitales, plantas potabilizadoras, bombas de achique, otros sistemas.";
+$vocab["otros_recursos_equipo_repuestosEnergia"]       ="Recurso equipo para repuestos:Energia";
+$vocab["otros_recursos_equipo_repuestosEnergia_desc"]  ="Generadores eléctricos, plantas eléctricas portátiles, instalaciones vitales, otros sistemas";
+$vocab["otros_recursos_sistemas_insendios"]            ="sistemas fijos contra incendio,deteccion , alarmas y extintores";
+$vocab["otros_recursos_sistemas_insendios_desc"]       ="Sistema fijo contra incendio, gabinetes del SFCI, extintores, detectores de humo, otros.";
+$vocab["otros_recursos_Equipo_primeraRespuesta"]       ="Equipo de primera respuesta";
+$vocab["otros_recursos_Equipo_primeraRespuesta_desc"]  ="cuarto de primeros auxilios, botiquines, ferula de espalda/araña/extremidades/cuello/sujetador de cabeza, otros.";
+$vocab["otros_recursos_Señalizacion"]                  ="Señalización";
+$vocab["otros_recursos_Señalizacion_desc"]             ="Evacuación, salvamneto, combate de incendios, accesibilidad universal, prohibición, otros.";
+$vocab["otros_recursos_tipo"]                          ="Tipo de equipo";
+$vocab["otros_recursos_cantidad"]                      ="Cantidad";
+$vocab["otros_recursos_caracteristicas"]               ="Características";
+$vocab["otros_recursos_contacto"]                      ="Contacto";
+$vocab["otros_recursos_ubicacion"]                     ="Ubicación";
+$vocab["otros_recursos_categoria"]                     ="Categoría";
+$vocab["otros_recursos_observaciones"]                 ="Detalles/Observacion";
+
+//***********     plan de emergencia  poblacion ***********************//
+$vocab["poblacion_titulo"]                             ="Conformación de comité y brigadas de emergencia por oficinas, ubicación por sectores.";
+$vocab["poblacion_titulo_desc"]                        ="INSTRUCCIONES: Completar el cuadro con el nombre completo de los funcionarios que pertenecerán al comité de emergencia, brigadistas de primeros auxilios capacitados anteriormente, e interesados en llevar el curso(poner un asterisco * en interesados que no hayan llevado el curso de primeros auxilios), brigadistas para la brigada efectiva(evacuación, vigilancia, extinción), contactos en caso de emergencia.";
+$vocab["poblacion_oficina"]                            ="Nombre de oficina";
+$vocab["poblacion_ocuapcional"]                        ="Capacidad ocupacional permanente";
+$vocab["poblacion_temporal"]                           ="Capacidad ocupacional temporal ";
+$vocab["poblacion_representante_comite"]               ="Representante del comité de emergencias ";
+$vocab["poblacion_representante_brigada"]              ="Representante de brigada efectiva (vigilancia, evacuación, extinción)";
+$vocab["poblacion_representante_primerosAuxilios"]     ="Representante brigada primeros auxilios";
+$vocab["poblacion_telefono_oficina"]                   ="Teléfonos de la oficina";
+$vocab["poblacion_contactoEmergencia"]                 ="Persona contacto en caso de emergencia";
+$vocab["poblacion_telefono_personal"]                  ="Teléfono personal en caso de emergencia";
+$vocab["poblacion_correo"]                             ="Correo electrónico en caso de emergencia";
+
+
+//***********     plan de emergencia  Ingresos ***********************//
+$vocab["ingreso_titulo"]                               ="Análisis de tiempo de respuesta de cuerpos de atención de emergencias";
+
+$vocab["ingreso_cuerpoRespuesta"]                      ="Cuerpo de respuesta";
+$vocab["ingreso_ubicación"]                            ="Ubicación";
+$vocab["ingreso_recorrido"]                            ="Distancia de recorrido";
+$vocab["ingreso_ubicación"]                            ="Ubicación";
+$vocab["ingreso_tiempoRespuesta"]                      ="Tiempo de respuesta";
+$vocab["ingreso_cruzRoja"]                      ="Cruz Roja";
+$vocab["ingreso_Bomberos"]                      ="Benemérito cuerpo de bomberos";
+$vocab["ingreso_transito"]                      ="Tránsito";
+
+
+
+$vocab["ingreso_subtitulo"]                            ="Descripción de ingreso de los cuerpos de socorro";
+$vocab["ingreso_Condiciones"]                          ="Condiciones de análisis";
+$vocab["ingreso_dimensiones"]                          ="Dimensiones de áreas de acceso ";
+$vocab["ingreso_radio"]                          ="Radios de giro";
+$vocab["ingreso_caseta"]                          ="Casetas ";
+$vocab["ingreso_plumas"]                          ="Plumas ";
+$vocab["ingreso_ancho"]                          ="Ancho libre ";
+$vocab["ingreso_protocolo"]                          ="Protocolos de coordinación con seguridad institucional";
 ?>

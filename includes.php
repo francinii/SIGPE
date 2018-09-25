@@ -66,13 +66,30 @@
 <script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_instalaciones.js"></script>
 
 <!-- Plan de emergencia instalaciones-->
-<script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_equipoMovil.js"></script>
+<script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_inventario.js"></script>
 
 <!-- Plan de emergencia datos generales -->
 <script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_menu.js"></script>
 
 <!-- Plan de emergencia identificacion peligros -->
 <script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_identificacion_peligros.js"></script>
+
+<!-- Plan de emergencia poblacion -->
+<script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_poblacion.js"></script>
+
+<!-- Plan de emergencia ingresos -->
+<script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_ingreso.js"></script>
+
+
+<!-- Plan de emergencia plan de accion -->
+<script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_plan_accion.js"></script>
+
+<!-- Plan de emergencia plan de accion -->
+<script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_brigadistas.js"></script>
+
+<!-- Plan de emergencia plan de accion -->
+<script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_rutas_evacuacion.js"></script>
+
 
 <!-- Bootstrap + Font-Awesome + Estilo -->
 <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
