@@ -179,9 +179,6 @@ $res = seleccion($sql);
         </form>
     </div>
 </div>
-<script>
-//IniciarGuardarCambios();
-</script>
 
 
 

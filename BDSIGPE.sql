@@ -295,8 +295,8 @@ FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 
 create table IngresoCuerpoSocorro(
     id int NOT NULL AUTO_INCREMENT,
-    dimensionAreaAcceso varchar(150),
     FKidPlanEmergencias int,
+    dimensionAreaAcceso varchar(150),   
     radioGiro varchar(150),
     caseta varchar(150),
     plumas varchar(150),
@@ -460,6 +460,7 @@ INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (7,'Pobl
 INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (8,'Ruta de evacuacion',1);
 INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (9,'Brigadistas',1);
 INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (10,'Ingreso',1);
+INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (11,'Plan de accion',1);
 
 INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',1);
 INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',2);
@@ -2307,6 +2308,49 @@ PROCEDURE `insert_brigadistas`(IN `p_FKidPlanEmergencias` int,IN `p_brigadista` 
 
 
 --   INSERT INTO `RutaEvacuacion`(`FKidPlanEmergencias`, `area`, `peligro`, 
---`accionPorRealizar`, `recomendaciones`, `fechaEjecucion`, `responsable`)
+-- `accionPorRealizar`, `recomendaciones`, `fechaEjecucion`, `responsable`)
 --         VALUES (p_FKidPlanEmergencias,p_area,p_peligro,p_accionPorRealizar,p_recomendaciones,p_fechaEjecucion,p_responsable);
 
+--
+-- Insertar y actualizar increso de cuerpos de socorro
+-- 
+DROP PROCEDURE IF EXISTS `insert_IngresoCuerpoSocorro`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_IngresoCuerpoSocorro`(IN `p_FKidPlanEmergencias` int, IN `p_dimensionAreaAcceso` varchar(150),
+ IN `p_radioGiro` varchar(150), IN `p_caseta` varchar(150), IN `p_plumas` varchar(150), IN `p_anchoLibre` varchar(150),
+OUT `res` TINYINT  UNSIGNED)
+BEGIN   
+    declare existe Integer;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+      set existe = null;
+      select count(`FKidPlanEmergencias`) into existe from IngresoCuerpoSocorro WHERE  `FKidPlanEmergencias`=p_FKidPlanEmergencias;
+         IF(existe = 1) THEN
+         START TRANSACTION;
+        UPDATE `IngresoCuerpoSocorro` SET `dimensionAreaAcceso`=p_dimensionAreaAcceso,
+        `radioGiro`=p_radioGiro,`caseta`=p_caseta,`plumas`=p_plumas,`anchoLibre`=p_anchoLibre WHERE `FKidPlanEmergencias`= p_FKidPlanEmergencias;
+        COMMIT;
+        -- SUCCESS       
+     ELSE
+        START TRANSACTION;       
+       INSERT INTO `IngresoCuerpoSocorro`( `FKidPlanEmergencias`, `dimensionAreaAcceso`, `radioGiro`, `caseta`, `plumas`, `anchoLibre`)
+       VALUES (p_FKidPlanEmergencias,p_dimensionAreaAcceso,p_radioGiro,p_caseta,p_plumas,p_anchoLibre);
+         
+        COMMIT;
+        -- SUCCESS         
+   END IF;
+         SET res = 0;
+END
+;;
+DELIMITER ;

@@ -507,12 +507,12 @@ $vocab["ingreso_transito"]                      ="Tránsito";
 
 
 
-$vocab["ingreso_subtitulo"]                            ="Descripción de ingreso de los cuerpos de socorro";
-$vocab["ingreso_Condiciones"]                          ="Condiciones de análisis";
-$vocab["ingreso_dimensiones"]                          ="Dimensiones de áreas de acceso ";
-$vocab["ingreso_radio"]                          ="Radios de giro";
-$vocab["ingreso_caseta"]                          ="Casetas ";
-$vocab["ingreso_plumas"]                          ="Plumas ";
-$vocab["ingreso_ancho"]                          ="Ancho libre ";
-$vocab["ingreso_protocolo"]                          ="Protocolos de coordinación con seguridad institucional";
+$vocab["ingreso_subtitulo"]                      ="Descripción de ingreso de los cuerpos de socorro";
+$vocab["ingreso_Condiciones"]                    ="Condiciones de análisis";
+$vocab["ingreso_dimensiones"]                    ="Dimensiones de áreas de acceso:";
+$vocab["ingreso_radio"]                          ="Radios de giro:";
+$vocab["ingreso_caseta"]                         ="Casetas:";
+$vocab["ingreso_plumas"]                         ="Plumas:";
+$vocab["ingreso_ancho"]                          ="Ancho libre:";
+$vocab["ingreso_protocolo"]                      ="Protocolos de coordinación con seguridad institucional";
 ?>
