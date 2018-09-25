@@ -34,9 +34,10 @@ $res = seleccion($sql);
 
                 <?php if (check_permiso($mod4, $act4, $user_rol)) { ?>
                     <th width="10%"><?= $vocab["list_capitulo_orden"] ?></th> 
-                <?php } ?>                
+                <?php } ?> 
+                <th width="5%" ><?= $vocab["capitulo_capitulo"] ?></th>
                 <th width="50%"><?= $vocab["list_capitulo_title"] ?></th>
-
+              
                 <?php if (check_permiso($mod4, $act4, $user_rol)) { ?>
                     <th width="5%"><?= $vocab["isActivo"] ?></th>
                 <?php } ?>
@@ -60,8 +61,9 @@ $res = seleccion($sql);
                     <tr id="fila<?= $i ?>"  align='center'>
                         <td hidden><?= $res[$i]['id'] ?></td>
                         <?php if (check_permiso($mod4, $act4, $user_rol)) { ?>
-                            <td ><a href="#" class="up "><span class="glyphicon glyphicon-triangle-top"></span></a> <a href="#" class="down">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-triangle-bottom"></span></a></td>
+                            <td ><a href="#" class="up "><span id="up<?=$i?>" class="glyphicon glyphicon-triangle-top"></span></a> <a href="#" class="down">&nbsp;&nbsp;&nbsp;<span id="down<?=$i?>" class="glyphicon glyphicon-triangle-bottom"></span></a></td>
                         <?php } ?>
+                         <td class="numeroCapitulo"><?= ($i == 0) ? "Inicio" : $i;  ?></td>
                         <td><?= $res[$i]['titulo'] ?></td>
                         <?php if (check_permiso($mod4, $act4, $user_rol)) { ?>
                             <?php
@@ -107,6 +109,7 @@ $res = seleccion($sql);
                     <a class="btn btn-success" name="submit" onclick="javascript:ordenarCapitulos();"><?= $vocab["symbol_save"] ?> <?= $vocab["list_capitulo_orden"] ?></a>
                 </th> 
                  <?php } ?>
+                 <th width="5%"><?= $vocab["capitulo_capitulo"] ?></th>
                 <th width="50%"><?= $vocab["list_capitulo_title"] ?></th>
                 <?php if (check_permiso($mod4, $act4, $user_rol)) { ?>
                     <th width="5%"><?= $vocab["isActivo"] ?></th>
@@ -126,6 +129,7 @@ $res = seleccion($sql);
     <?php /*     * ***************************************************************************************** */ ?>
     <br/>
     <?php if (check_permiso($mod4, $act3, $user_rol)) { ?>
+    
         <div class="text-center"><a id="boton" class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/new_capitulo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["add_capitulo"] ?></a></div>
     <?php } ?>   
 

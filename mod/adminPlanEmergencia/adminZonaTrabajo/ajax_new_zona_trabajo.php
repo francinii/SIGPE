@@ -7,7 +7,31 @@ $nombre = $_GET['nombre'];
 $sede = $_GET['sede'];
 $activo = $_GET['inlineCheckbox'];
 $descripcion = $_GET['descripcion'];
-$sql_a = "CALL insert_zona_trabajo('$nombre','$sede','$activo','$descripcion', @res);";
+
+$nombrearchivo=null;
+if(isset($_FILES['archivo1'])){
+$nombrearchivo =explode(".",$_FILES['archivo1']['name']);
+$nombrearchivo=str_replace(" ","",$nombre).".".$nombrearchivo[count($nombrearchivo)-1];
+$tipo = $_FILES['archivo1']['type'];
+$tamanio = $_FILES['archivo1']['size'];
+$ruta = $_FILES['archivo1']['tmp_name'];
+$destino = "../../planEmergenciaPDF/img/imgPlanes/" . $nombrearchivo;
+$sirvio=move_uploaded_file($ruta,$destino);
+}
+
+$nombrearchivoUbicacion=null;
+if(isset($_FILES['archivo2'])){
+$nombrearchivoUbicacion =explode(".",$_FILES['archivo2']['name']);
+$nombrearchivoUbicacion=str_replace(" ","",$nombre).".".$nombrearchivoUbicacion[count($nombrearchivoUbicacion)-1];
+$nombrearchivoUbicacion="GEO".$nombrearchivoUbicacion;
+$tipo = $_FILES['archivo2']['type'];
+$tamanio = $_FILES['archivo2']['size'];
+$ruta = $_FILES['archivo2']['tmp_name'];
+$destino = "../../planEmergenciaPDF/img/imgPlanes/" . $nombrearchivoUbicacion;
+$sirvio=move_uploaded_file($ruta,$destino);
+}
+
+$sql_a = "CALL insert_zona_trabajo('$nombre','$sede','$activo','$nombrearchivo','$nombrearchivoUbicacion','$descripcion', @res);";
 $sql_b = "SELECT @res as res;";
 //echo $sql_a.$sql_b;
 $res = transaccion_verificada($sql_a, $sql_b);
