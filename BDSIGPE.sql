@@ -269,10 +269,12 @@ INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',2);
 INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',5);
 
 insert into `PlanEmergencia`(`FKidZonaTrabajo`) VALUES (1);
+
+-- insert matriz de riesgo no sirve
 INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
 `probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (1,1,'placa tectonica',2,4,3);
 
--- insert matriz de riesgo no sirve
+
 INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
 `probabilidad`,`gravedad`,`consecuenciaAmenaza`) VALUES (5,1,'placa tectonica',2,4,3);
 INSERT INTO `BDSIGPE`.`Matriz` (`FKidCategoriaTipoAmenaza`,`FKidPlanEmergencias`,`fuente`,
