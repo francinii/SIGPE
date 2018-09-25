@@ -97,7 +97,7 @@ function guardarRutasEvacuacion(idPlanEmergencia, pasar, idtable) {
         //Preparacion  llamada AJAX
         var _values_send =
                 'idPlanEmergencia=' + idPlanEmergencia;
-        var _URL_ = "mod/planEmergencia/ajax_plan_accion.php?";
+        var _URL_ = "mod/planEmergencia/ajax_rutas_evacuacion.php?";
         //alert(_URL_ + _values_send); //DEBUG
         ajax.open("POST", _URL_ + "&" + _values_send, true);
         ajax.onreadystatechange = function () {

@@ -52,7 +52,7 @@ global $datosCabecera;
 $dirImages = "img/";
 $centroTrabajo = $zonas[0]["nombreZonaTrabajo"];
 $logoUNA = $dirImages . "logo_una.jpg";
-$logoCentro = $dirImages . "imgPlanes/" .$zonas[0]["logo"];
+$logoCentro = $dirImages . "imgPlanes/" . $zonas[0]["logo"];
 $logoCIEUNA = $dirImages . "logo_cieuna.png";
 $codigo = $resPlan[0]['codigoZonaTrabajo'];
 $revisadoPor = $resPlan[0]['revisadoPor'];
@@ -78,16 +78,15 @@ class MYPDF extends TCPDF {
                 . '</tr>'
                 . '<tr style = "text-align:center;">'
                 . '<td rowspan="2"><b>Plan de preparativos de respuesta ante emergencias</b></td>'
-                . '<td><b>Revisado por:</b><br>' . $datosCabecera['revisado'] . '</td>'                
+                . '<td><b>Revisado por:</b><br>' . $datosCabecera['revisado'] . '</td>'
                 . '</tr>'
                 . '<tr style = "text-align:center;">'
-                . '<td><b>Página </b>' . $this->getAliasNumPage().' de '.$this->getAliasNbPages(). '</td>'
+                . '<td><b>Página </b>' . $this->getAliasNumPage() . ' de ' . $this->getAliasNbPages() . '</td>'
                 . '</tr>'
                 . '</table>'
                 . '<div style = "height: 250px;"></div>';
         $this->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $html, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'top', $autopadding = true);
-    }  
-    
+    }
 
 }
 
@@ -176,11 +175,11 @@ function capitulos($pdf, $capitulos, $resPlan, $resTipoPoblacion, $formularios) 
     $pdf->setPrintHeader(true);
     // $html = '<div style = "height: 250px;"><div>';
     foreach ($capitulos as $cap) {
-          cargarNuevaPagina($pdf);
+        cargarNuevaPagina($pdf);
         $pdf->Bookmark($cap['orden'] . ". " . $cap['titulo'], 0, 0, '', 'B', array(0, 64, 128));
-       // $pdf->Cell(0, 10, $cap['orden'] . ". " . $cap['titulo'], 0, 1, 'L');
+        // $pdf->Cell(0, 10, $cap['orden'] . ". " . $cap['titulo'], 0, 1, 'L');
         $html = '<h2><b>' . $cap['orden'] . ". " . $cap['titulo'] . '</b></h2>';
-        $html .= $cap['descripcion'] ;
+        $html .= $cap['descripcion'];
         $pdf->writeHTML($html, true, false, true, false, '');
         subCapitulos($pdf, $cap['id'], $cap['orden'], $resPlan, $resTipoPoblacion, $formularios);
     }
@@ -191,7 +190,7 @@ function subCapitulos($pdf, $id, $ordenCapitulo, $resPlan, $resTipoPoblacion, $f
     $subcapitulos = seleccion($sql);
     foreach ($subcapitulos as $sub) {
         $pdf->Bookmark($ordenCapitulo . "." . $sub['orden'] . " " . $sub['titulo'], 1, 0, '', '', array(128, 0, 0));
-        
+
 //        $pdf->Cell(0, 10, $ordenCapitulo . "." . $sub['orden'] . " " . $sub['titulo'], 0, 1, 'L');
         $html = '<h3><b>' . $ordenCapitulo . "." . $sub['orden'] . " " . $sub['titulo'] . '</b></h3>';
         $html .= $sub['descripcion'];
@@ -209,7 +208,7 @@ function portada($pdf) {
     $logo = '<img src= "' . $datosCabecera['logoUNA'] . '"  width="100" height="100" >';
     $logo2 = '<img src= "' . $datosCabecera['logoCIEUNA'] . '"  width="100" height="100" >';
     $y = $pdf->getY();
-   
+
     $pdf->writeHTMLCell(150, '', '', $y, $logo, 0, 0, false, true, 'J', true);
     $pdf->writeHTMLCell(30, '', '', '', $logo2, 0, 1, false, true, 'right', true);
 //    $html = '<div style = "height: 100px;"><div>
@@ -431,6 +430,7 @@ function formularioInstalaciones($resPlan) {
 }
 
 function listarFormularios($id, $formularios, $resPlan, $resTipoPoblacion) {
+    $html = "";
     foreach ($formularios as $form) {
         $html .= formularioSeleccionada($id, $form, $resPlan, $resTipoPoblacion);
     }
@@ -438,9 +438,9 @@ function listarFormularios($id, $formularios, $resPlan, $resTipoPoblacion) {
 }
 
 function formularioSeleccionada($id, $form, $resPlan, $resTipoPoblacion) {
+     $html = "";
     if ($form['FKidSubcapitulos'] == $id) {
-        $idForm = $form['id'];
-        $html = "";
+        $idForm = $form['id'];       
         if ($idForm == 1) {
             $html = formularioDatosGenerales($resPlan);
             $html .= '<div></div>';

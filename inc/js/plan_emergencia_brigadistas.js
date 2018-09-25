@@ -1,4 +1,3 @@
-
 function agregarBrigadistas(titulo, idtabla, alert, comboArea,comboAccion) {
     var tabla = jQuery(idtabla + " tbody");
     var id = tabla.children().last().attr('id');
@@ -34,7 +33,7 @@ function eliminarFilaBrigadistas(event) {
 
 }
 
-function validate_Inventario(tabla) {
+function validate_brigada(tabla) {
     var filas = jQuery(tabla + " tbody").children();
     for (var i = 0; i < filas.length; i++) {
         var inputs = jQuery(filas[i]).children("td").children(".requerido");
@@ -67,7 +66,7 @@ function validado(tabla) {
 }
 
 function guardarBrigadistas(idPlanEmergencia, pasar, idtable) {
-    if (validate_Inventario("#" + idtable)) {
+    if (validate_brigada("#" + idtable)) {
         validado("#" + idtable);
         var loading = document.getElementById('loading_container');
         loading.innerHTML = cargando_bar;
@@ -77,9 +76,12 @@ function guardarBrigadistas(idPlanEmergencia, pasar, idtable) {
         fila = fila.firstElementChild;
         var count = 0;
         while (fila != null) {
-            lista.push({"area": jQuery("#" + "area" + count).val(), "peligro": jQuery("#" + "peligro" + count).val(),
-                "accion": jQuery("#" + "accion" + count).val(), "recomendaciones": jQuery("#" +  "recomendaciones" + count).val(),
-                "fecha": jQuery("#" + "fecha" + count).val(), "responsable": jQuery("#" +  "responsable" + count).val()});
+            lista.push({"brigadista": jQuery("#" + "brigadista" + count).val(),
+                "puntoPartida": jQuery("#" + "puntoPartida" + count).val(),
+                "zonaEvacuar": jQuery("#" + "zonaEvacuar" + count).val(), 
+                "numeroPersonas": jQuery("#" +  "numeroPersonas" + count).val(),
+                "distancia": jQuery("#" + "distancia" + count).val(),
+                "tiempo": jQuery("#" +  "tiempo" + count).val()});
 
             count++;
             fila = fila.nextElementSibling;
@@ -89,7 +91,7 @@ function guardarBrigadistas(idPlanEmergencia, pasar, idtable) {
         //Preparacion  llamada AJAX
         var _values_send =
                 'idPlanEmergencia=' + idPlanEmergencia;
-        var _URL_ = "mod/planEmergencia/ajax_plan_accion.php?";
+        var _URL_ = "mod/planEmergencia/ajax_brigadistas.php?";
         //alert(_URL_ + _values_send); //DEBUG
         ajax.open("POST", _URL_ + "&" + _values_send, true);
         ajax.onreadystatechange = function () {
@@ -102,7 +104,7 @@ function guardarBrigadistas(idPlanEmergencia, pasar, idtable) {
                     datosGuardados();
                     jAlert("Guardado  con exito", "Exito");
                     if (pasar) {
-                        OpcionMenu('mod/planEmergencia/plan_emergencia_plan_accion.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
+                        OpcionMenu('mod/planEmergencia/plan_emergencia_brigadistas.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
                     }
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");

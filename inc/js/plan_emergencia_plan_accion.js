@@ -34,7 +34,7 @@ function eliminarFilaPlanAccion(event) {
 
 }
 
-function validate_Inventario(tabla) {
+function validate_plan(tabla) {
     var filas = jQuery(tabla + " tbody").children();
     for (var i = 0; i < filas.length; i++) {
         var inputs = jQuery(filas[i]).children("td").children(".requerido");
@@ -91,7 +91,7 @@ function llenarSelect(id, combo, seleccion, selector) {
 
 
 function guardarPlanAccion(idPlanEmergencia, pasar, idtable) {
-    if (validate_Inventario("#" + idtable)) {
+    if (validate_plan("#" + idtable)) {
         validado("#" + idtable);
         var loading = document.getElementById('loading_container');
         loading.innerHTML = cargando_bar;
@@ -101,9 +101,12 @@ function guardarPlanAccion(idPlanEmergencia, pasar, idtable) {
         fila = fila.firstElementChild;
         var count = 0;
         while (fila != null) {
-            lista.push({"area": jQuery("#" + "area" + count).val(), "peligro": jQuery("#" + "peligro" + count).val(),
-                "accion": jQuery("#" + "accion" + count).val(), "recomendaciones": jQuery("#" +  "recomendaciones" + count).val(),
-                "fecha": jQuery("#" + "fecha" + count).val(), "responsable": jQuery("#" +  "responsable" + count).val()});
+            lista.push({"area": jQuery("#" + "area" + count).val(),
+                "peligro": jQuery("#" + "peligro" + count).val(),
+                "accion": jQuery("#" + "accion" + count).val(), 
+                "recomendaciones": jQuery("#" +  "recomendaciones" + count).val(),
+                "fecha": jQuery("#" + "fecha" + count).val(),
+                "responsable": jQuery("#" +  "responsable" + count).val()});
 
             count++;
             fila = fila.nextElementSibling;
