@@ -45,13 +45,13 @@ function cambiarMenu(numero, idCentro, nombreCentro) {
             OpcionMenu('mod/planEmergencia/plan_emergencia_poblacion.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
             break;
         case 8:
-            OpcionMenu('mod/planEmergencia/plan_emergencia_plan_accion.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
-        break;
-        case 9:
             OpcionMenu('mod/planEmergencia/plan_emergencia_rutas_evacuacion.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
         break;
-        case 10:
+        case 9:
             OpcionMenu('mod/planEmergencia/plan_emergencia_brigadistas.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
+        break;
+        case 10:
+            OpcionMenu('mod/planEmergencia/plan_emergencia_plan_accion.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
         break;
      
     }
