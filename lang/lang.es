@@ -432,9 +432,9 @@ $vocab["brigadista_tiempo_evacuacion"]            = "Tiempo de evacuación (min)
 $vocab["recurso_humano_titulo"]             ="Recurso Humano";                
 $vocab["recurso_humano_titulo_desc"]        ="Profesíon u oficio: Ingeniero, arquitecto, enfermera, medico, otros";    
 $vocab["recurso_humano_Cantidad"]           ="Cantidad"; 
-$vocab["recurso_humano_Profesion"]          ="Profesíon";
+$vocab["recurso_humano_Profesion"]          ="Profesión";
 $vocab["recurso_humano_categoria"]          ="Categoria";
-$vocab["recurso_humano_Localizacion"]       ="Localizacíon";       
+$vocab["recurso_humano_Localizacion"]       ="Localización";       
 $vocab["recurso_humano_Contacto"]           ="Contacto";       
         
 //***********     plan de emergencia  Inventario ***********************//
@@ -443,7 +443,7 @@ $vocab["inventario_sector"]           ="sector";
 $vocab["inventario_Datos"]           ="Datos";
 
 //***********     plan de emergencia  instalaciones ***********************//
-$vocab["instalaciones_titulo"]        ="Recurso instalaciones";
+$vocab["instalaciones_titulo"]        ="Recurso de instalaciones";
 $vocab["instalaciones_titulo_desc"]   ="Espacios físicos, bodegas, infraestructua";  
 $vocab["instalaciones_tipo"]           ="Tipo de costrucción";    
 $vocab["instalaciones_cantida"]        ="Cantidad";  
@@ -477,7 +477,7 @@ $vocab["otros_recursos_caracteristicas"]               ="Características";
 $vocab["otros_recursos_contacto"]                      ="Contacto";
 $vocab["otros_recursos_ubicacion"]                     ="Ubicación";
 $vocab["otros_recursos_categoria"]                     ="Categoría";
-$vocab["otros_recursos_observaciones"]                 ="Detalles/Observacion";
+$vocab["otros_recursos_observaciones"]                 ="Detalles/ Observacion";
 
 //***********     plan de emergencia  poblacion ***********************//
 $vocab["poblacion_titulo"]                             ="Conformación de comité y brigadas de emergencia por oficinas, ubicación por sectores.";
