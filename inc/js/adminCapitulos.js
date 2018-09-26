@@ -213,13 +213,14 @@ function new_capitulo() {
         var activo = 1;
         var descripcion = CKEDITOR.instances['capitulo_Descripcion'].getData();
         var ajax = NuevoAjax();
+          var formData = new FormData();
+        formData.append('descripcion',descripcion);
         var _values_send =
                 'titulo=' + titulo +
-                '&inlineCheckbox=' + activo +
-                '&descripcion=' + descripcion;
+                '&inlineCheckbox=' + activo;
         var _URL_ = "mod/adminPlanEmergencia/adminCapitulos/ajax_new_capitulo.php?";
         //alert(_URL_ + _values_send); //DEBUG
-        ajax.open("GET", _URL_ + _values_send, true);
+        ajax.open("POST", _URL_ + _values_send, true);
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 1) {
 
@@ -239,7 +240,7 @@ function new_capitulo() {
                 }
             }
         };
-        ajax.send(null);
+        ajax.send(formData);
         loading.innerHTML = "";
     }
 }
@@ -254,13 +255,14 @@ function update_capitulo(id) {
         var titulo = document.getElementById('capitulo_title').value;
         var descripcion = CKEDITOR.instances['capitulo_Descripcion'].getData();
         var ajax = NuevoAjax();
+          var formData = new FormData();
+        formData.append('descripcion',descripcion);        
         var _values_send =
                 'id=' + id +
-                '&titulo=' + titulo +
-                '&descripcion=' + descripcion;
+                '&titulo=' + titulo;
         var _URL_ = "mod/adminPlanEmergencia/adminCapitulos/ajax_edit_capitulo.php?";
         //alert(_URL_ + _values_send); //DEBUG
-        ajax.open("GET", _URL_ + _values_send, true);
+        ajax.open("POST", _URL_ + _values_send, true);
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 1) {
 
@@ -280,7 +282,7 @@ function update_capitulo(id) {
                 }
             }
         };
-        ajax.send(null);
+        ajax.send(formData);
         loading.innerHTML = "";
     }
 

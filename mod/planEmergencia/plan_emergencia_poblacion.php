@@ -22,7 +22,7 @@ if (count($res) <= 0) {
     <div align="right" style = "padding-right:0.5%;">
         <?php if ($editar) { ?>
             <span class="text-center" >
-                <a class="btn btn-info" onclick="javascript: agregarFilaSector('<?= $vocab["symbol_delete"] ?>', '<?= $vocab["Menu_Datos_sin_guardar"] ?>','<?= $vocab["symbol_add"] ?>');"><i class=" fa fa-plus text-info"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_sector"] ?>  </a>
+                <a class="btn btn-info" onclick="javascript: agregarFilaSector('<?= $vocab["symbol_delete"] ?>', '<?= $vocab["Menu_Datos_sin_guardar"] ?>','<?= $vocab["symbol_add"] ?>','<?= $vocab["poblacion_sectorNuevo"]?>');"><i class=" fa fa-plus text-info"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_sector"] ?>  </a>
             </span>            
         <?php } ?>
     </div>
@@ -55,13 +55,13 @@ if (count($res) <= 0) {
                     ?>
                     <?php
                     for ($i = 0, $id = 0; $i < count($res); $i++, $id++) {
-                        $sector = ((is_array($res[$i])) ? $res[$i]['sector'] : "sector nuevo");
+                        $sector = ((is_array($res[$i])) ? $res[$i]['sector'] :  $vocab["poblacion_sectorNuevo"]);
                         if ($sectorActual != $sector) {
                             $sectorActual = $sector;
                             ?>
                             <tr class="seccionPoblacion" id="Sec-<?= $id ?>">                   
                                 <td style="align-items:center; background-color:lightblue" colspan="10">
-                                    <input style="width:40%; margin: 0 auto;" type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="Sector<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['sector'] : "sector nuevo"; ?>" >
+                                    <input style="width:40%; margin: 0 auto;" type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="Sector<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['sector'] : $vocab["poblacion_sectorNuevo"] ?>" >
                                 </td>                                
                                 <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
                                     <td  style="background-color:lightblue">              

@@ -6,7 +6,7 @@ include("../../../inc/db/db.php");
 $id =$_GET['id'];
 $titulo = $_GET['titulo'];
 $fkcapitulo = $_GET['select_tipo'];// llave foranea del capitulo
-$descripcion= $_GET['descripcion'];
+$descripcion= $_POST['descripcion'];
 
 $sql_a = "CALL update_subcapitulo('$id','$titulo','$fkcapitulo','$descripcion',@res);";
 

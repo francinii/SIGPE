@@ -1,6 +1,6 @@
 
-function agregarFilaSector(titulo, alert, agregar,descripcion) {
-    var tabla = jQuery("#lista_poblacion tbody");
+function agregarFilaPuesto(titulo, alert, agregar,descripcion) {
+    var tabla = jQuery("#lista_puestoBrigada tbody");
     var id = tabla.children().last().attr('id');
     if (typeof id == 'undefined') {
         id = 0;
@@ -8,16 +8,16 @@ function agregarFilaSector(titulo, alert, agregar,descripcion) {
         var id = id.split('-');
         var id = (parseInt(id[1]) + 1);
     }
-    var fila = '<tr class="seccionPoblacion" id="Sec-' + id + '">' +
-            '<td  style="align-items:center; background-color:lightblue" colspan="10">' +
-            '<input style="width:40%; margin: 0 auto;" type="text"  class="form-control requerido cambios" id="Sector' + id + '" value="'+descripcion+'" ></td>' +
+    var fila = '<tr class="seccionPuesto" id="Pues-' + id + '">' +
+            '<td  style="align-items:center; background-color:lightblue" colspan="2">' +
+            '<input style="width:40%; margin: 0 auto;" type="text"  class="form-control requerido cambios" id="Puesto' + id + '" value="'+descripcion+'" ></td>' +
             '<td  style="background-color:lightblue">' +
-            '<a class="puntero cambios"  onClick="javascript:eliminarFila(this);">' +
+            '<a class="puntero cambios"  onClick="javascript:eliminarFilafuncion(this);">' +
             '<div class="text-center"><i class="fa fa-close  text-danger" title="' + titulo + '"></i></div>' +
             ' </a>' +
             ' </td>' +
             '<td  style="background-color:lightblue">' +
-            '<a class="puntero cambios"  onclick="javascript: agregarFilaPoblacion(\'' + titulo + '\',\'' + alert + '\',\'Sec-' + id + '\');">' +
+            '<a class="puntero cambios"  onclick="javascript: agregarFilafuncion(\'' + titulo + '\',\'' + alert + '\',\'Pues-' + id + '\');">' +
             '<div class="text-center"><i class="fa fa-plus  text-success " title="' + agregar + '"></i></div>' +
             '</a>' +
             '</td>';
@@ -25,16 +25,16 @@ function agregarFilaSector(titulo, alert, agregar,descripcion) {
     '</tr>'
     tabla.append(fila);
     IniciarGuardarCambios(alert);
-    jQuery("#Sector" + id).focus();
+    jQuery("#Puesto" + id).focus();
 }
-function agregarFilaPoblacion(titulo, alert, Idselec) {
+function agregarFilafuncion(titulo, alert, Idselec) {
     var Sector = jQuery("#" + Idselec);
-    var tabla = jQuery("#lista_poblacion tbody");
+    var tabla = jQuery("#lista_puestoBrigada tbody");
     var hasnext = true;
-    var nextsector = Sector.next();
-    while (!nextsector.hasClass('seccionPoblacion')) {
-        nextsector = nextsector.next();
-        if (nextsector.length == 0) {
+    var nextpuesto = Sector.next();
+    while (!nextpuesto.hasClass('seccionPuesto')) {
+        nextpuesto = nextpuesto.next();
+        if (nextpuesto.length == 0) {
             hasnext = false;
             break;
         }
@@ -49,18 +49,10 @@ function agregarFilaPoblacion(titulo, alert, Idselec) {
         id = (parseInt(id[1]) + 1);
     }
     var fila = '<tr id="fil-' + id + '">' +
-            '<td> <input  type="text"    class="form-control requerido cambios" id="nombreOficina' + id + '" value="" ></td>' +
-            '<td> <input  type="number"    min="0" class="form-control requerido  cambios" id="capacidadPermanente' + id + '" value="0" ></td>' +
-            '<td> <input  type="number"   min="0"  class="form-control requerido cambios" id="capacidadTemporal' + id + '" value="0" ></td>' +
-            '<td> <input  type="text"     class="form-control requerido cambios" id="representanteComite' + id + '" value="" ></td>' +
-            '<td> <input  type="text"    class="form-control requerido cambios" id="representanteBrigadaEfectiva' + id + '" value="" ></td>' +
-            '<td> <input  type="text"    class="form-control requerido cambios" id="representantePrimerosAuxilios' + id + '" value="" ></td>' +
-            '<td> <input  type="text"     class="form-control requerido  cambios" id="telefonoOficina' + id + '" value="" ></td>' +
-            '<td> <input  type="text"    class="form-control requerido cambios" id="contactoEmergencia' + id + '" value="" ></td>' +
-            '<td> <input  type="text"    class="form-control requerido cambios" id="telefonoPersonal' + id + '" value="" ></td>' +
-            '<td> <input  type="text"    class="form-control requerido cambios" id="correoElectronico' + id + '" value="" ></td>' +
+            '<td> <textarea  rows="1" type="text"   class="form-control requerido cambios" id="funcion'+id+'" ></textarea></td>'+
+            '<td> <textarea  rows="1" type="text"    class="form-control requerido  cambios" id="plazo'+id+'" ></textarea></td>'+
             '<td>' +
-            '<a class="puntero cambios"  onClick="javascript:eliminarFilaPoblacion(this);">' +
+            '<a class="puntero cambios"  onClick="javascript:eliminarFilafuncion(this);">' +
             '<div class="text-center"><i class="fa fa-close  text-danger" title="' + titulo + '"></i></div>' +
             ' </a>' +
             ' </td>' +
@@ -68,21 +60,21 @@ function agregarFilaPoblacion(titulo, alert, Idselec) {
 
     '</tr>'
     if (hasnext) {
-        nextsector.before(fila);
+        nextpuesto.before(fila);
     } else {
         tabla.append(fila);
     }
     IniciarGuardarCambios(alert);
-    jQuery("#nombreOficina" + id).focus();
+    jQuery("#plazo" + id).focus();
 }
 
-function eliminarFilaPoblacion(event) {
+function eliminarFilafuncion(event) {
     jQuery(event).trigger('change');
     var row = jQuery(event).parents("tr:first");
     row.remove();
 
 }
-function validate_InventarioPoblacion(tabla) {
+function validate_InventarioPuesto(tabla) {
     var filas = jQuery(tabla + " tbody").children();
     for (var i = 0; i < filas.length; i++) {
         var inputs = jQuery(filas[i]).children("td").children(".requerido");
@@ -100,7 +92,7 @@ function validate_InventarioPoblacion(tabla) {
     return true;
 }
 
-function validadoPoblacion(tabla) {
+function validadoPuesto(tabla) {
     var filas = jQuery(tabla + " tbody").children();
     for (var i = 0; i < filas.length; i++) {
         var inputs = jQuery(filas[i]).children("td").children(".requerido");
@@ -114,41 +106,36 @@ function validadoPoblacion(tabla) {
 
 }
 
-function guardarPoblacion(idPlanEmergencia, pasar) {
-    if (validate_InventarioPoblacion("#lista_poblacion")) {
-        validadoPoblacion("#lista_poblacion");
+function guardarPuestoBrigada(idPlanEmergencia, pasar) {
+    if (validate_InventarioPuesto("#lista_puestoBrigada")) {
+        validadoPuesto("#lista_puestoBrigada");
         var loading = document.getElementById('loading_container');
         loading.innerHTML = cargando_bar;
         var ajax = NuevoAjax();
         var id;
-        var sectorActual = "";
-        var sector;
+        var puestoActual = "";
+        var puesto;
         var lista = new Array();       
-        var body =  jQuery("#lista_poblacion tbody")[0];
+        var body =  jQuery("#lista_puestoBrigada tbody")[0];
         var fila = body.firstElementChild;
         var count = 0;
         while (fila != null) {
             id = fila.id;
             id = id.split('-');
             count=id[1];
-            if (id[0] == "Sec") {
-                sector = jQuery("#Sector" + count).val();                
+            if (id[0] == "Pues") {
+                puesto = jQuery("#Puesto" + count).val();                
                 fila = fila.nextElementSibling;
                 id = fila.id;
                 id = id.split('-');
                 count=id[1];
-                if (sector != sectorActual) {
+                if (puesto != puestoActual) {
 
-                    sectorActual = sector;
+                    puestoActual = puesto;
                 }
             }
-            lista.push({"nombreOficina": jQuery("#nombreOficina" + count).val(), "capacidadPermanente": jQuery("#capacidadPermanente" + count).val(),
-                "capacidadTemporal": jQuery("#capacidadTemporal" + count).val(), "representanteComite": jQuery("#representanteComite" + count).val(),
-                "representanteBrigadaEfectiva": jQuery("#representanteBrigadaEfectiva" + count).val(),
-                "representantePrimerosAuxilios": jQuery("#representantePrimerosAuxilios" + count).val(),
-                "telefonoOficina": jQuery("#telefonoOficina" + count).val(), "contactoEmergencia": jQuery("#contactoEmergencia" + count).val(),
-                "telefonoPersonal": jQuery("#telefonoPersonal" + count).val(), "correoElectronico": jQuery("#correoElectronico" + count).val(),
-                "sector": sectorActual});
+            lista.push({"funcion": jQuery("#funcion" + count).val(), "plazo": jQuery("#plazo" + count).val(),
+                "Puesto": puestoActual});
             fila = fila.nextElementSibling;
         }
         var formData = new FormData();
@@ -157,7 +144,7 @@ function guardarPoblacion(idPlanEmergencia, pasar) {
         var _values_send =
                 'idPlanEmergencia=' + idPlanEmergencia;
 
-        var _URL_ = "mod/planEmergencia/ajax_poblacion.php?";
+        var _URL_ = "mod/planEmergencia/ajax_puestos_brigada.php?";
         //alert(_URL_ + _values_send); //DEBUG
         ajax.open("POST", _URL_ + "&" + _values_send, true);
         ajax.onreadystatechange = function () {
@@ -186,3 +173,4 @@ function guardarPoblacion(idPlanEmergencia, pasar) {
         loading.innerHTML = "";
     }
 }
+

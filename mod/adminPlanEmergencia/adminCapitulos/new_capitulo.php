@@ -23,7 +23,7 @@ $user_rol = $mySessionController->getVar("rol");
 
                 <!-- This container will become the editable. -->
                 <div id="editor">
-                    <p>This is the initial editor content.</p>
+                    <p></p>
                 </div>
                 <p class="help-block"><small><?= $vocab["capitulo_Descripcion"] ?></small></p> 
             </div>            
