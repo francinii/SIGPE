@@ -19,7 +19,7 @@ if (count($res) <= 0) {
 }
 ?>
 <div class="well well-sm">
-    <p><b><?= $vocab["plan_de_accion_title"] ?></b></p>
+    <h2><?= $vocab["rutas_evacuacion"] ?></h2>
     <div align="right" style = "padding-right:0.5%;">
         <?php if ($editar) { ?>
             <span class="text-center" >
@@ -88,7 +88,7 @@ if (count($res) <= 0) {
     <div class="text-center">
         <?php if ($editar) { ?>
             <span class="text-center">
-                <a class="btn btn-warning"  onclick="javascript:guardarRutasEvacuacion('<?= $idPlanEmergencia ?>', 0, '<?= $tablaID ?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["plan_de_accion"] ?></a>
+                <a class="btn btn-warning"  onclick="javascript:guardarRutasEvacuacion('<?= $idPlanEmergencia ?>', 0, '<?= $tablaID ?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["rutas_evacuacion"] ?></a>
             </span>         
         <?php } ?>
     </div>

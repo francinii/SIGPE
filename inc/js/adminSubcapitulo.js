@@ -56,7 +56,7 @@ function guardarOrdenSubcapitulo(lista) {
     var loading = document.getElementById('loading_container');
     loading.innerHTML = cargando_bar;
     //Obtener Valores
-    var select_tipo = jQuery("#select_capitulos").val();
+    var select_tipo = jQuery("#select_subcapitulos").val();
     var ajax = NuevoAjax();
     var _values_send =
             'lista=' + JSON.stringify(lista);
@@ -216,14 +216,15 @@ function new_subcapitulo() {
         var select_tipo = document.getElementById('subcapitulo_capitulo').value;
         var descripcion = CKEDITOR.instances['Subcapitulo_Descripcion'].getData();
         var ajax = NuevoAjax();
+        var formData = new FormData();
+        formData.append('descripcion',descripcion);
         var _values_send =
                 'titulo=' + titulo +
                 '&inlineCheckbox=' + activo +
-                '&select_tipo=' + select_tipo +
-                '&descripcion=' + descripcion;
+                '&select_tipo=' + select_tipo;
         var _URL_ = "mod/adminPlanEmergencia/adminSubcapitulos/ajax_new_subcapitulo.php?";
         //alert(_URL_ + _values_send); //DEBUG
-        ajax.open("GET", _URL_ + _values_send, true);
+        ajax.open("POST", _URL_ + _values_send, true);
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 1) {
 
@@ -243,7 +244,7 @@ function new_subcapitulo() {
                 }
             }
         };
-        ajax.send(null);
+        ajax.send(formData);
         loading.innerHTML = "";
     }
 }
@@ -260,14 +261,16 @@ function update_subcapitulo(id) {
         var select_tipo = document.getElementById('subcapitulo_capitulo').value;
         var descripcion = CKEDITOR.instances['Subcapitulo_Descripcion'].getData();
         var ajax = NuevoAjax();
+          var formData = new FormData();
+        formData.append('descripcion',descripcion);
+        
         var _values_send =
                 'id=' + id +
                 '&titulo=' + titulo +
-                '&select_tipo=' + select_tipo +
-                '&descripcion=' + descripcion;
+                '&select_tipo=' + select_tipo;
         var _URL_ = "mod/adminPlanEmergencia/adminSubcapitulos/ajax_edit_subcapitulo.php?";
         //alert(_URL_ + _values_send); //DEBUG
-        ajax.open("GET", _URL_ + _values_send, true);
+        ajax.open("POST", _URL_ + _values_send, true);
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 1) {
 
@@ -287,7 +290,7 @@ function update_subcapitulo(id) {
                 }
             }
         };
-        ajax.send(null);
+        ajax.send(formData);
         loading.innerHTML = "";
     }
 

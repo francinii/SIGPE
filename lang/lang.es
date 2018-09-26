@@ -407,7 +407,7 @@ $vocab["zona_seguridad_sector"]             ="Sector(es) que descargan a esa zon
 
 
 //***********     plan de emergencia formulario rutas de evacuación ***********************//
-$vocab["rutas_evacuacion"]            = "rutas de evacuación";
+$vocab["rutas_evacuacion"]            = "Rutas de evacuación";
 $vocab["rutas_evacuacion_nombre"]            = "Nombre de área";
 $vocab["rutas_evacuacion_personas_permanentes"]            = "Personas permanentes";
 $vocab["rutas_evacuacion_personas_flotantes"]            = "Personas flotantes";
@@ -419,6 +419,7 @@ $vocab["rutas_evacuacion_distancia2"]            = "Distancia R2 (m) Se mide en 
 $vocab["rutas_evacuacion_tiempo2"]            = "Tiempo R2 (min)";
 
 //***********     plan de emergencia formulario brigadistas ***********************// 
+$vocab["brigadista_title"]            = "Brigadistas";
 $vocab["brigadista_nombre"]            = "brigadistas/número";
 $vocab["brigadista_punto_partida"]            = "Punto de  partida (zona habitual)";
 $vocab["brigadista_zona_asignada"]            = "Zona asignada a evacuar";
@@ -491,6 +492,7 @@ $vocab["poblacion_telefono_oficina"]                   ="Teléfonos de la oficin
 $vocab["poblacion_contactoEmergencia"]                 ="Persona contacto en caso de emergencia";
 $vocab["poblacion_telefono_personal"]                  ="Teléfono personal en caso de emergencia";
 $vocab["poblacion_correo"]                             ="Correo electrónico en caso de emergencia";
+$vocab["poblacion_sectorNuevo"]                             ="Sector nuevo";
 
 
 //***********     plan de emergencia  Ingresos ***********************//
@@ -515,4 +517,19 @@ $vocab["ingreso_caseta"]                         ="Casetas:";
 $vocab["ingreso_plumas"]                         ="Plumas:";
 $vocab["ingreso_ancho"]                          ="Ancho libre:";
 $vocab["ingreso_protocolo"]                      ="Protocolos de coordinación con seguridad institucional";
+
+
+//***********     plan de emergencia  puestos de la brigada ***********************//
+$vocab["puestos_brigada_title"]                       ="Puestos de la brigada";
+$vocab["puestos_brigada_puesto"]                      ="Puesto";
+$vocab["puestos_brigada_funciones"]                   ="Funciones";
+$vocab["puestos_brigada_plazos_ejecución"]            ="Plazos de ejecución";
+$vocab["puestos_brigada_ejemplo1"]               ="Autoridades Universitarias";
+$vocab["puestos_brigada_ejemplo2"]               ="Comité emergencias";
+$vocab["puestos_brigada_ejemplo3"]               ="Brigada de primeros auxilios";
+$vocab["puestos_brigada_ejemplo4"]               ="Brigada de evacuación";
+$vocab["puestos_brigada_ejemplo5"]               ="Brigada de extinción";
+$vocab["puestos_brigada_ejemplo6"]               ="Brigada de vigilancia";
+$vocab["puestos_brigada_ejemplo7"]               ="Brigada de efectiva";
+$vocab["puestos_brigada_puestoNuevo"]               ="Puesto nuevo";
 ?>

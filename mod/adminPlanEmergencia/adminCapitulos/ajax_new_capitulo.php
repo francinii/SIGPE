@@ -6,7 +6,7 @@ include("../../../inc/db/db.php");
 
 $titulo = $_GET['titulo'];
 $activo = $_GET['inlineCheckbox'];
-$descripcion= $_GET['descripcion'];
+$descripcion= $_POST['descripcion'];
 
 $sql_a = "CALL insert_capitulo('$titulo','$activo','$descripcion',@res);";
 $sql_b = "SELECT @res as res;";

@@ -27,6 +27,7 @@ drop table  ZonaSeguridad;
 drop table  IdentificacionPeligro;
 drop table  PlanAccion;
 drop table  FormularioPoblacion;
+drop table  FormularioPuestoBrigada;
 drop table  RutaEvacuacion;
 drop table  Brigada;
 drop table IngresoCuerpoSocorro;
@@ -369,6 +370,17 @@ create table FormularioPoblacion(
     FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
 )ENGINE=InnoDB;
 
+create table FormularioPuestoBrigada(
+    id int NOT NULL AUTO_INCREMENT,
+    FKidPlanEmergencias int,
+    puesto varchar(150),
+    funcion text, 
+    plazoEjecucion text,
+    PRIMARY KEY(id),
+    FOREIGN KEY(FKidPlanEmergencias) REFERENCES PlanEmergencia(id)
+)ENGINE=InnoDB;
+
+
 create table IdentificacionPeligro(
     id int NOT NULL AUTO_INCREMENT,
     FKidPlanEmergencias int,
@@ -459,8 +471,10 @@ INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (6,'Iden
 INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (7,'Poblacion',1);
 INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (8,'Ruta de evacuacion',1);
 INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (9,'Brigadistas',1);
-INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (10,'Ingreso',1);
-INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (11,'Plan de accion',1);
+INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (10,'Ingreso Cuerpos de socorro',1);
+-- INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (11,'Plan de accion',1);
+INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (11,'Puestos de la brigada',1);
+INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (12,'informacion extra de los capitulos y subcapitulos',1);
 
 INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',1);
 INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',2);
@@ -1734,7 +1748,7 @@ BEGIN
 	END; 
 
         START TRANSACTION;       
-       INSERT INTO `equipomovil`( `FKidPlanEmergencias`, `cantidad`, `capacidad`, `tipo`, `caracteristicas`, `contacto`, `ubicacion`, `categoria`)
+       INSERT INTO `EquipoMovil`( `FKidPlanEmergencias`, `cantidad`, `capacidad`, `tipo`, `caracteristicas`, `contacto`, `ubicacion`, `categoria`)
         VALUES (p_FKidPlanEmergencias,p_cantidad,p_capacidad,p_tipo,p_caracteristicas,p_contacto,p_ubicacion,p_categoria);
          
         COMMIT;
@@ -1766,7 +1780,7 @@ BEGIN
 	END; 
 
         START TRANSACTION;       
-       DELETE FROM `equipomovil` WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias;
+       DELETE FROM `EquipoMovil` WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias;
          
         COMMIT;
         -- SUCCESS         
@@ -1803,7 +1817,7 @@ BEGIN
 	END; 
 
         START TRANSACTION;       
-        INSERT INTO `recursohumanos`( `FKidPlanEmergencias`, `cantidad`, `profesion`, `categorias`, `localizacion`, `contacto`) 
+        INSERT INTO `RecursoHumanos`( `FKidPlanEmergencias`, `cantidad`, `profesion`, `categorias`, `localizacion`, `contacto`) 
         VALUES (p_FKidPlanEmergencias,p_cantidad,p_profesion,p_categorias,p_localizacion,p_contacto);
          
         COMMIT;
@@ -2125,7 +2139,7 @@ BEGIN
 	END; 
 
         START TRANSACTION;       
-        INSERT INTO `formulariopoblacion`(`FKidPlanEmergencias`, `nombreOficina`, `capacidadPermanente`, `capacidadTemporal`, `representanteComite`,
+        INSERT INTO `FormularioPoblacion`(`FKidPlanEmergencias`, `nombreOficina`, `capacidadPermanente`, `capacidadTemporal`, `representanteComite`,
      `representanteBrigadaEfectiva`, `representantePrimerosAuxilios`, `telefonoOficina`, `contactoEmergencia`, `telefonoPersonal`, `correoElectronico`, `sector`) 
         VALUES (p_FKidPlanEmergencias,p_nombreOficina,p_capacidadPermanente,p_capacidadTemporal,p_representanteComite,p_representanteBrigadaEfectiva,p_representantePrimerosAuxilios
       ,p_telefonoOficina,p_contactoEmergencia,p_telefonoPersonal,p_correoElectronico,sector);
@@ -2352,6 +2366,72 @@ BEGIN
         COMMIT;
         -- SUCCESS         
    END IF;
+         SET res = 0;
+END
+;;
+DELIMITER ;
+
+
+-- ----------------------------
+-- Proceso insertar puestos brigadas
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `insert_puestoBrigada`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_puestoBrigada`(IN p_FKidPlanEmergencias int,
+IN p_puesto varchar(150), IN p_funcion text,
+IN  p_plazoEjecucion  text,OUT `res` TINYINT  UNSIGNED)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+        START TRANSACTION;       
+        INSERT INTO `FormularioPuestoBrigada`(`FKidPlanEmergencias`, `puesto`, `funcion`, `plazoEjecucion`) 
+        VALUES (p_FKidPlanEmergencias,p_puesto,p_funcion,p_plazoEjecucion);
+
+        COMMIT;
+        -- SUCCESS         
+
+         SET res = 0;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Proceso eliminar puestos brigadas
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `delete_puestoBrigada`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_puestoBrigada`(IN `p_FKidPlanEmergencias` int,OUT `res` TINYINT  UNSIGNED)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+        START TRANSACTION;       
+       DELETE FROM `FormularioPuestoBrigada` WHERE `FKidPlanEmergencias`=p_FKidPlanEmergencias;
+         
+        COMMIT;
+        -- SUCCESS         
+
          SET res = 0;
 END
 ;;

@@ -7,7 +7,7 @@ include("../../../inc/db/db.php");
 $titulo = $_GET['titulo'];
 $activo = $_GET['inlineCheckbox'];
 $fkcapitulo = $_GET['select_tipo'];// llave foranea del capitulo
-$descripcion= $_GET['descripcion'];
+$descripcion= $_POST['descripcion'];
 
 $sql_a = "CALL insert_subcapitulo('$titulo','$activo','$fkcapitulo','$descripcion',@res);";
 $sql_b = "SELECT @res as res;";

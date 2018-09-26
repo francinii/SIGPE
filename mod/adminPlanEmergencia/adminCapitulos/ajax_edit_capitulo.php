@@ -5,7 +5,7 @@ include("../../../inc/db/db.php");
 
 $id = $_GET['id'];
 $titulo = $_GET['titulo'];
-$descripcion= $_GET['descripcion'];
+$descripcion= $_POST['descripcion'];
 
 $sql_a = "CALL update_capitulo('$id','$titulo','$descripcion',@res);";
 $sql_b = "SELECT @res as res;";
