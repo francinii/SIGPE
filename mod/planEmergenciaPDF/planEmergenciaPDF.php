@@ -724,8 +724,7 @@ $respuesta = seleccion($sql);
                 . '<th>' . $res['zonaEvacuar'] . '</th>'
                 . '<td>' . $res['numPersonasEvacuar'] . '</td>'
                 . '<td>' . $res['distancia'] . '</td>'
-                . '<td>' . $res['tiempo'] . '</td>'
-  
+                . '<td>' . $res['tiempo'] . '</td>'  
                 . '</tr>';
     }
     $html .= '</tbody></table>';
