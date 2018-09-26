@@ -3,6 +3,7 @@ include("../../login/check.php");
 include("../../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
+ $_SESSION['ckfinder_baseUrl']='img/';
 ?>
 <div class="container">
     <div class="well well-sm">

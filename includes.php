@@ -30,6 +30,7 @@
 <!-- adminCapitulos  -->
 
 <script type="text/javascript" src="lib/ckeditor/ckeditor.js"></script>
+<!--<script type="text/javascript" src="lib/ckeditor/ckfinder/ckfinder.js"></script>-->
 <script language="JavaScript" type="text/javascript" src="inc/js/adminCapitulos.js"></script>
 
 

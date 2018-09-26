@@ -10,6 +10,7 @@ $editar = (check_permiso($mod5, $act4, $user_rol) || check_permiso($mod5, $act3,
 $sql = "SELECT  `id` FROM `PlanEmergencia`  WHERE `FKidZonaTrabajo`=" . $idCentro;
 $resid = seleccion($sql);
 
+
 if (count($resid) > 0) {
     $idPlanEmergencia = $resid[0]['id'];
 }

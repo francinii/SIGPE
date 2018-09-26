@@ -177,8 +177,14 @@ function delete_capitulo_action(id) {
 
 //*****+*+ new capitulo********+
 function CrearEditorCapitulos() {
-
-    editor = CKEDITOR.replace('capitulo_Descripcion');
+    //CKFinder.setupCKEditor();
+    var lib ='img/'
+    editor = CKEDITOR.replace('capitulo_Descripcion',{ 
+   filebrowserBrowseUrl : 'lib/ckeditor/ckfinder/ckfinder.html?type=Image',
+   filebrowserImageUploadUrl:'lib/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files'
+    });
+   
+   
     editor.addCommand("mySimpleCommand", {
         exec: function (edt) {
             edt.insertText(" <&nombreZonaTrabajo&> ");

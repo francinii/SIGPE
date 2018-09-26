@@ -3,6 +3,7 @@ error_reporting(0);
 include("mod/login/check.php");
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
+global  $direccionCKfinder;
 ?>
 <!DOCTYPE html>
 <html>
