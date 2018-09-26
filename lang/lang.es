@@ -433,7 +433,7 @@ $vocab["recurso_humano_titulo_desc"]        ="Profesíon u oficio: Ingeniero, ar
 $vocab["recurso_humano_Cantidad"]           ="Cantidad"; 
 $vocab["recurso_humano_Profesion"]          ="Profesíon";
 $vocab["recurso_humano_categoria"]          ="Categoria";
-$vocab["recurso_humano_Localizacion"]       ="Localizacíon";       
+$vocab["recurso_humano_Localizacion"]       ="Localización";       
 $vocab["recurso_humano_Contacto"]           ="Contacto";       
         
 //***********     plan de emergencia  Inventario ***********************//

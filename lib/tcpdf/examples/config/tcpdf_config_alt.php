@@ -104,17 +104,17 @@ define ('PDF_CREATOR', 'TCPDF');
 /**
  * Document author.
  */
-define ('PDF_AUTHOR', 'TCPDF');
+define ('PDF_AUTHOR', 'CIEUNA');
 
 /**
  * Header title.
  */
-define ('PDF_HEADER_TITLE', 'TCPDF Example');
+define ('PDF_HEADER_TITLE', 'Comisión Institucional para la preparación y atención de emergencias Universidad Nacional');
 
 /**
  * Header description string.
  */
-define ('PDF_HEADER_STRING', "by Nicola Asuni - Tecnick.com\nwww.tcpdf.org");
+define ('PDF_HEADER_STRING', "");
 
 /**
  * Document unit of measure [pt=point, mm=millimeter, cm=centimeter, in=inch].
@@ -124,32 +124,32 @@ define ('PDF_UNIT', 'mm');
 /**
  * Header margin.
  */
-define ('PDF_MARGIN_HEADER', 5);
+define ('PDF_MARGIN_HEADER', 10.4);
 
 /**
  * Footer margin.
  */
-define ('PDF_MARGIN_FOOTER', 10);
+define ('PDF_MARGIN_FOOTER', 25.4);
 
 /**
  * Top margin.
  */
-define ('PDF_MARGIN_TOP', 27);
+define ('PDF_MARGIN_TOP', 25.4);
 
 /**
  * Bottom margin.
  */
-define ('PDF_MARGIN_BOTTOM', 25);
+define ('PDF_MARGIN_BOTTOM', 25.4);
 
 /**
  * Left margin.
  */
-define ('PDF_MARGIN_LEFT', 15);
+define ('PDF_MARGIN_LEFT', 25.4);
 
 /**
  * Right margin.
  */
-define ('PDF_MARGIN_RIGHT', 15);
+define ('PDF_MARGIN_RIGHT', 25.4);
 
 /**
  * Default main font name.
@@ -174,7 +174,7 @@ define ('PDF_FONT_SIZE_DATA', 8);
 /**
  * Default monospaced font name.
  */
-define ('PDF_FONT_MONOSPACED', 'courier');
+define ('PDF_FONT_MONOSPACED', 'helvetica');
 
 /**
  * Ratio used to adjust the conversion of pixels to user units.
