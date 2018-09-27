@@ -18,8 +18,8 @@ function flechasCapitulos() {
         } else {
             var texto = row.children(".numeroCapitulo").text();
             if (row.next().length > 0) {
-            row.children(".numeroCapitulo").text(row.next().children(".numeroCapitulo").text());
-            row.next().children(".numeroCapitulo").text(texto);
+                row.children(".numeroCapitulo").text(row.next().children(".numeroCapitulo").text());
+                row.next().children(".numeroCapitulo").text(texto);
             }
             row.insertAfter(row.next());
         }
@@ -176,15 +176,27 @@ function delete_capitulo_action(id) {
 }
 
 //*****+*+ new capitulo********+
-function CrearEditorCapitulos() {
+function CrearEditorCapitulos(modo) {
     //CKFinder.setupCKEditor();
-    var lib ='img/'
-    editor = CKEDITOR.replace('capitulo_Descripcion',{ 
-   filebrowserBrowseUrl : 'lib/ckeditor/ckfinder/ckfinder.html?type=Image',
-   filebrowserImageUploadUrl:'lib/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files'
-    });
-   
-   
+    if (modo) {
+        editor = CKEDITOR.replace('capitulo_Descripcion', {
+            filebrowserBrowseUrl: 'lib/ckeditor/ckfinder/ckfinder.html?type=Images',
+            filebrowserImageUploadUrl: 'lib/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files'
+        });
+    } else {
+        editor = CKEDITOR.replace('capitulo_Descripcion',
+                {
+                    on:
+                            {
+                                instanceReady: function (evt)
+                                {
+                                    // Hide the editor top bar.
+                                    jQuery('.cke_top').css('display','none');
+                                }
+                            }
+                });
+    }
+
     editor.addCommand("mySimpleCommand", {
         exec: function (edt) {
             edt.insertText(" <&nombreZonaTrabajo&> ");
@@ -218,12 +230,25 @@ function new_capitulo() {
         var titulo = document.getElementById('capitulo_title').value;
         var activo = 1;
         var descripcion = CKEDITOR.instances['capitulo_Descripcion'].getData();
+        var isdescripcion = 0;
+        var descripcionUsuario = "";
+        if (document.getElementById('inlineCheckbox1').checked)
+            isdescripcion = 1;
+        else
+            isdescripcion = 0;
+
+        if (isdescripcion) {
+            descripcionUsuario = document.getElementById('capitulo_Descripcion_usuario').value
+        }
+
         var ajax = NuevoAjax();
-          var formData = new FormData();
-        formData.append('descripcion',descripcion);
+        var formData = new FormData();
+        formData.append('descripcion', descripcion);
         var _values_send =
                 'titulo=' + titulo +
-                '&inlineCheckbox=' + activo;
+                '&inlineCheckbox=' + activo +
+                '&isdescripcion=' + isdescripcion +
+                '&descripcionUsuario=' + descripcionUsuario;
         var _URL_ = "mod/adminPlanEmergencia/adminCapitulos/ajax_new_capitulo.php?";
         //alert(_URL_ + _values_send); //DEBUG
         ajax.open("POST", _URL_ + _values_send, true);
@@ -260,12 +285,24 @@ function update_capitulo(id) {
         //Obtener Valores
         var titulo = document.getElementById('capitulo_title').value;
         var descripcion = CKEDITOR.instances['capitulo_Descripcion'].getData();
+        var isdescripcion = 0;
+        var descripcionUsuario = "";
+        if (document.getElementById('inlineCheckbox1').checked)
+            isdescripcion = 1;
+        else
+            isdescripcion = 0;
+
+        if (isdescripcion) {
+            descripcionUsuario = document.getElementById('capitulo_Descripcion_usuario').value
+        }
         var ajax = NuevoAjax();
-          var formData = new FormData();
-        formData.append('descripcion',descripcion);        
+        var formData = new FormData();
+        formData.append('descripcion', descripcion);
         var _values_send =
                 'id=' + id +
-                '&titulo=' + titulo;
+                '&titulo=' + titulo +
+                '&isdescripcion=' + isdescripcion +
+                '&descripcionUsuario=' + descripcionUsuario;
         var _URL_ = "mod/adminPlanEmergencia/adminCapitulos/ajax_edit_capitulo.php?";
         //alert(_URL_ + _values_send); //DEBUG
         ajax.open("POST", _URL_ + _values_send, true);
@@ -294,3 +331,15 @@ function update_capitulo(id) {
 
 }
 
+function activarDescripcionUsuarioCapitulo(activar, tutilo, subtitulo) {
+    if (activar) {
+        var texto = jQuery("#div-capitulo_Descripcion_usuario").html();
+        if (texto === "") {
+            jQuery("#div-capitulo_Descripcion_usuario").html('<label  for="capitulo_Descripcion">' + tutilo + '</label>' +
+                    '<textarea class="form-control"  id="capitulo_Descripcion_usuario" name="capitulo_Descripcion_usuario" ></textarea>' +
+                    '<p class="help-block"><small>' + subtitulo + '</small></p>')
+        }
+    } else {
+        jQuery("#div-capitulo_Descripcion_usuario").html("");
+    }
+}

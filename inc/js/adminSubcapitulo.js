@@ -180,8 +180,25 @@ function delete_subcapitulo_action(id, select) {
 }
 
 // crear subcapitulo
-function CrearEditorSubcapitulos() {
-    editor = CKEDITOR.replace('Subcapitulo_Descripcion');
+function CrearEditorSubcapitulos(modo) {
+    if(modo){
+    editor = CKEDITOR.replace('Subcapitulo_Descripcion', {
+        filebrowserBrowseUrl: 'lib/ckeditor/ckfinder/ckfinder.html?type=Images',
+        filebrowserImageUploadUrl: 'lib/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files'
+    });
+    } else {
+        editor = CKEDITOR.replace('Subcapitulo_Descripcion',
+                {
+                    on:
+                            {
+                                instanceReady: function (evt)
+                                {
+                                    // Hide the editor top bar.
+                                    jQuery('.cke_top').css('display','none');;
+                                }
+                            }
+                });
+    }
     editor.addCommand("mySimpleCommand", {
         exec: function (edt) {
             edt.insertText(" <&nombreZonaTrabajo&> ");
@@ -215,13 +232,25 @@ function new_subcapitulo() {
         var activo = 1;
         var select_tipo = document.getElementById('subcapitulo_capitulo').value;
         var descripcion = CKEDITOR.instances['Subcapitulo_Descripcion'].getData();
+        var isdescripcion = 0;
+        var descripcionUsuario = "";
+        if (document.getElementById('inlineCheckbox1').checked)
+            isdescripcion = 1;
+        else
+            isdescripcion = 0;
+
+        if (isdescripcion) {
+            descripcionUsuario = document.getElementById('subcapitulo_Descripcion_usuario').value
+        }
         var ajax = NuevoAjax();
         var formData = new FormData();
-        formData.append('descripcion',descripcion);
+        formData.append('descripcion', descripcion);
         var _values_send =
                 'titulo=' + titulo +
                 '&inlineCheckbox=' + activo +
-                '&select_tipo=' + select_tipo;
+                '&select_tipo=' + select_tipo +
+                '&isdescripcion=' + isdescripcion +
+                '&descripcionUsuario=' + descripcionUsuario;
         var _URL_ = "mod/adminPlanEmergencia/adminSubcapitulos/ajax_new_subcapitulo.php?";
         //alert(_URL_ + _values_send); //DEBUG
         ajax.open("POST", _URL_ + _values_send, true);
@@ -260,14 +289,27 @@ function update_subcapitulo(id) {
         var activo = 1;
         var select_tipo = document.getElementById('subcapitulo_capitulo').value;
         var descripcion = CKEDITOR.instances['Subcapitulo_Descripcion'].getData();
+        var isdescripcion = 0;
+        var descripcionUsuario = "";
+        if (document.getElementById('inlineCheckbox1').checked)
+            isdescripcion = 1;
+        else
+            isdescripcion = 0;
+
+        if (isdescripcion) {
+            descripcionUsuario = document.getElementById('subcapitulo_Descripcion_usuario').value
+        }
+
         var ajax = NuevoAjax();
-          var formData = new FormData();
-        formData.append('descripcion',descripcion);
-        
+        var formData = new FormData();
+        formData.append('descripcion', descripcion);
+
         var _values_send =
                 'id=' + id +
                 '&titulo=' + titulo +
-                '&select_tipo=' + select_tipo;
+                '&select_tipo=' + select_tipo +
+                '&isdescripcion=' + isdescripcion +
+                '&descripcionUsuario=' + descripcionUsuario;
         var _URL_ = "mod/adminPlanEmergencia/adminSubcapitulos/ajax_edit_subcapitulo.php?";
         //alert(_URL_ + _values_send); //DEBUG
         ajax.open("POST", _URL_ + _values_send, true);
@@ -296,3 +338,15 @@ function update_subcapitulo(id) {
 
 }
 
+function activarDescripcionUsuarioSubCapitulo(activar, tutilo, subtitulo) {
+    if (activar) {
+        var texto = jQuery("#div-subcapitulo_Descripcion_usuario").html();
+        if (texto === "") {
+            jQuery("#div-subcapitulo_Descripcion_usuario").html('<label  for="subcapitulo_Descripcion_usuario">' + tutilo + '</label>' +
+                    '<textarea class="form-control"  id="subcapitulo_Descripcion_usuario" name="subcapitulo_Descripcion_usuario" ></textarea>' +
+                    '<p class="help-block"><small>' + subtitulo + '</small></p>')
+        }
+    } else {
+        jQuery("#div-subcapitulo_Descripcion_usuario").html("");
+    }
+}

@@ -6,11 +6,10 @@ $user_rol = $mySessionController->getVar("rol");
 
 
 $view_mode = $_GET['view_mode'];
-$id_cap= $_GET['id_cap'];
-$sql = "SELECT  id, descripcion,titulo
+$id_cap = $_GET['id_cap'];
+$sql = "SELECT  id, descripcion,isDescripcionParaUsuario,descripcionParaUsuario,titulo
         FROM Capitulo  WHERE id =" . $id_cap;
 $res = seleccion($sql);
-
 ?>
 <div class="container">
     <div class="well well-sm">
@@ -28,8 +27,33 @@ $res = seleccion($sql);
                 <label  for="capitulo_Descripcion"><?= $vocab["symbol_desc"] ?> </label>                
                 <textarea <?= ($view_mode == 0) ? "readonly" : ""; ?>  class="ckeditor form-control" id="capitulo_Descripcion" name="capitulo_Descripcion" ><?= $res[0]['descripcion'] ?></textarea>
                 <p class="help-block"><small><?= $vocab["capitulo_Descripcion"] ?></small></p> 
-            </div>            
-                       <?php
+            </div>
+            <div class="form-group">
+                <label for="type-radio"><?= $vocab["capitulo_requiere_Descripcion_usuario"] ?> </label>                    
+                <div class="radio radio_efect">
+                    <label class="radio-inline">
+                        <input <?= ($view_mode == 0) ? "disabled" : ""; ?> <?= ($res[0]["isDescripcionParaUsuario"] == 1) ? "checked" : ""; ?> onclick="activarDescripcionUsuarioCapitulo(1,'<?= $vocab["capitulo_Descripcion_usuario"] ?>','<?= $vocab["capitulo_Descripcion_usuario_desc"] ?>');"id="inlineCheckbox1" name="inlineCheckbox" type="radio" value="1" checked> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                        <?= $vocab["isActivo"] ?>  
+                    </label>
+                    <label class="radio-inline">
+                        <input <?= ($view_mode == 0) ? "disabled" : ""; ?> <?= ($res[0]["isDescripcionParaUsuario"] == 0) ? "checked" : ""; ?> onclick="activarDescripcionUsuarioCapitulo(0,'','');" id="inlineCheckbox2" name="inlineCheckbox" type="radio" value="0"> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 
+                        <?= $vocab["isInactivo"] ?> 
+                    </label>
+                </div> 
+                <p class="help-block"><small><?= $vocab["capitulo_requiere_Descripcion_usuario_desc"] ?></small></p> 
+            </div>
+            <div id="div-capitulo_Descripcion_usuario" class="form-group">
+                <?php if($res[0]["isDescripcionParaUsuario"] == 1){ ?>
+                <label  for="capitulo_Descripcion"><?= $vocab["capitulo_Descripcion_usuario"] ?> </label>                
+                <textarea  <?= ($view_mode == 0) ? "readonly" : ""; ?> class="form-control"  id="capitulo_Descripcion_usuario" name="capitulo_Descripcion_usuario" ><?= $res[0]["descripcionParaUsuario"] ?></textarea>
+                <p class="help-block"><small><?= $vocab["capitulo_Descripcion_usuario_desc"] ?></small></p> 
+                <?php }else{ ?>
+                <script>
+                jQuery("#div-capitulo_Descripcion_usuario").html("");
+                </script> 
+               <?php } ?>
+            </div>             
+            <?php
             if ($view_mode == 1) {
                 if (check_permiso($mod4, $act4, $user_rol)) {
                     ?>
@@ -48,11 +72,11 @@ $res = seleccion($sql);
                     <a class="btn btn-warning btn-group-justified"  name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/list_capitulos.php?', '');"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_return"] ?></a>
                 </div>
             <?php } ?>
-            
+
         </form>
     </div>
 </div>
 <script>
-CrearEditorCapitulos();
+    CrearEditorCapitulos(<?=$view_mode?>);
 </script>
 

@@ -179,13 +179,17 @@ $vocab["list_capitulo_id"]          = "Id";
 $vocab["list_capitulo_orden"]       = "orden";
 $vocab["list_capitulo_ordenar"]       = "ordenar";
 
-$vocab["capitulo_capitulo"]         = "Capitulo";
-$vocab["capitulo_capitulo_Desc"]    = "Capitulos del reporte";
-$vocab["capitulo_title"]            = "Titulo";
-$vocab["capitulo_title_Desc"]       = "Titulo del capitulo";
-$vocab["capitulo_id"]               = "Id";
-$vocab["capitulo_id_Desc"]          = "Id del capitulo";
-$vocab["capitulo_Descripcion"]      = "Descripción del capitulo";
+$vocab["capitulo_capitulo"]             = "Capitulo";
+$vocab["capitulo_capitulo_Desc"]        = "Capitulos del reporte";
+$vocab["capitulo_title"]                = "Titulo";
+$vocab["capitulo_title_Desc"]           = "Titulo del capitulo";
+$vocab["capitulo_id"]                   = "Id";
+$vocab["capitulo_id_Desc"]              = "Id del capitulo";
+$vocab["capitulo_Descripcion"]          = "Descripción del capitulo";
+$vocab["capitulo_Descripcion_usuario"]  = "Descripción para el usuario";
+$vocab["capitulo_Descripcion_usuario_desc"]  = "guia para el usuario";
+$vocab["capitulo_requiere_Descripcion_usuario"]  = "Requiere descripción del usuario";
+$vocab["capitulo_requiere_Descripcion_usuario_desc"]  = "permite al usuario agregar una descripción";
 
 //***************************** Modulo administrar subcapitulos ******************************//
 $vocab["list_subcapitulo"]                = "Lista de subcapitulos";
@@ -202,6 +206,10 @@ $vocab["subcapitulo_title_Desc"]          = "Titulo del subcapitulo";
 $vocab["subcapitulo_capitulo"]            = "Capitulo";
 $vocab["subcapitulo_capitulo_Desc"]       = "Capitulo al que pertenece";
 $vocab["subcapitulo_Descripcion"]         = "Descripción del subcapitulo";
+$vocab["subcapitulo_Descripcion_usuario"]  = "Descripción para el usuario";
+$vocab["subcapitulo_Descripcion_usuario_desc"]  = "guia para el usuario";
+$vocab["subcapitulo_requiere_Descripcion_usuario"]  = "Requiere descripción del usuario";
+$vocab["subcapitulo_requiere_Descripcion_usuario_desc"]  = "permite al usuario agregar una descripción";
 
 //***************************** Modulo administrar formulario ******************************//
 $vocab["formulario_admin"]             = "Administrar formularios";
@@ -532,4 +540,14 @@ $vocab["puestos_brigada_ejemplo5"]               ="Brigada de extinción";
 $vocab["puestos_brigada_ejemplo6"]               ="Brigada de vigilancia";
 $vocab["puestos_brigada_ejemplo7"]               ="Brigada de efectiva";
 $vocab["puestos_brigada_puestoNuevo"]               ="Puesto nuevo";
+
+//***********     plan de emergencia  capitulos y subcapitulos ***********************//
+$vocab["capitulos_subcapitulos_title"]                       ="Informacion extra capitulos y subcapitulos";
+$vocab["capitulos_subcapitulos_title_desc"]                       ="Informacion extra requedia en los capitulos y subcapitulos. El usuario debe escribir redaccion";
+$vocab["capitulos_subcapitulos_capitulo"]                    = "Capitulo:";
+$vocab["capitulos_subcapitulos_subcapitulo"]                 = "Subcapitulo:";
+$vocab["capitulos_subcapitulos_info_admin"]                  = "Informacion del admin:";
+$vocab["capitulos_subcapitulos_indicaciones"]                  = "Indicaciones:";
+$vocab["capitulos_subcapitulos_info_usuario"]                  = "Redaccion del usuario:";
+$vocab["capitulos_subcapitulos_formularios"]                  = "Formularios asociados:";
 ?>

@@ -25,10 +25,10 @@ $comb = seleccion($sql);
                 <select id= "subcapitulo_capitulo" name="subcapitulo_capitulo" class="form-control">
                     <?php
                     if (count($comb) > 0) {
-                        for ($i = 0; $i < count($comb); $i++) {               
-                                ?>
-                                <option value='<?= $comb[$i]['id'] ?>' selected><?= $comb[$i]['titulo'] ?></option>
-                                <?php                             
+                        for ($i = 0; $i < count($comb); $i++) {
+                            ?>
+                            <option value='<?= $comb[$i]['id'] ?>' selected><?= $comb[$i]['titulo'] ?></option>
+                            <?php
                         }
                     }
                     ?>
@@ -40,7 +40,25 @@ $comb = seleccion($sql);
                 <textarea class="ckeditor form-control" id="Subcapitulo_Descripcion" name="Subcapitulo_Descripcion" ></textarea>
                 <p class="help-block"><small><?= $vocab["subcapitulo_Descripcion"] ?></small></p> 
             </div>            
-
+            <div class="form-group">
+                <label for="type-radio"><?= $vocab["subcapitulo_requiere_Descripcion_usuario"] ?> </label>                    
+                <div class="radio radio_efect">
+                    <label class="radio-inline">
+                        <input id="inlineCheckbox1" onclick="activarDescripcionUsuarioSubCapitulo(1, '<?= $vocab["subcapitulo_Descripcion_usuario"] ?>','<?= $vocab["subcapitulo_Descripcion_usuario_desc"] ?>');" name="inlineCheckbox" type="radio" value="1" checked> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 
+                        <?= $vocab["isActivo"] ?>  
+                    </label>
+                    <label class="radio-inline">
+                        <input id="inlineCheckbox2" onclick="activarDescripcionUsuarioSubCapitulo(0,'', '');" name="inlineCheckbox" type="radio" value="0"> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 
+                        <?= $vocab["isInactivo"] ?> 
+                    </label>
+                </div> 
+                <p class="help-block"><small><?= $vocab["subcapitulo_requiere_Descripcion_usuario_desc"] ?></small></p> 
+            </div>
+            <div id="div-subcapitulo_Descripcion_usuario" class="form-group">
+                <label  for="subcapitulo_Descripcion_usuario"><?= $vocab["subcapitulo_Descripcion_usuario"] ?> </label>                
+                <textarea class="form-control"  id="subcapitulo_Descripcion_usuario" name="subcapitulo_Descripcion_usuario" ></textarea>
+                <p class="help-block"><small><?= $vocab["subcapitulo_Descripcion_usuario_desc"] ?></small></p> 
+            </div> 
             <?php if (check_permiso($mod4, $act3, $user_rol)) { ?>
                 <div class="text-center"><a class="btn btn-success"  name="submit" onclick="new_subcapitulo();"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] . " " . $vocab["add_subcapitulo"] ?>  </a></div>
             <?php } ?>
@@ -50,5 +68,5 @@ $comb = seleccion($sql);
     </div>
 </div>
 <script>
-    CrearEditorSubcapitulos();
+    CrearEditorSubcapitulos(1);
 </script>

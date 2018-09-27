@@ -3,7 +3,7 @@ include("../../login/check.php");
 include("../../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
- $_SESSION['ckfinder_baseUrl']='img/';
+$_SESSION['ckfinder_baseUrl'] = 'img/';
 ?>
 <div class="container">
     <div class="well well-sm">
@@ -27,6 +27,25 @@ $user_rol = $mySessionController->getVar("rol");
                     <p></p>
                 </div>
                 <p class="help-block"><small><?= $vocab["capitulo_Descripcion"] ?></small></p> 
+            </div>
+            <div class="form-group">
+                <label for="type-radio"><?= $vocab["capitulo_requiere_Descripcion_usuario"] ?> </label>                    
+                <div class="radio radio_efect">
+                    <label class="radio-inline">
+                        <input id="inlineCheckbox1" onclick="activarDescripcionUsuarioCapitulo(1,'<?= $vocab["capitulo_Descripcion_usuario"] ?>','<?= $vocab["capitulo_Descripcion_usuario_desc"] ?>');" name="inlineCheckbox" type="radio" value="1" checked> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                        <?= $vocab["isActivo"] ?>  
+                    </label>
+                    <label class="radio-inline">
+                        <input id="inlineCheckbox2" onclick="activarDescripcionUsuarioCapitulo(0,'','');" name="inlineCheckbox" type="radio" value="0"> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 
+                        <?= $vocab["isInactivo"] ?> 
+                    </label>
+                </div> 
+                <p class="help-block"><small><?= $vocab["capitulo_requiere_Descripcion_usuario_desc"] ?></small></p> 
+            </div>
+            <div id="div-capitulo_Descripcion_usuario" class="form-group">
+                <label  for="capitulo_Descripcion_usuario"><?= $vocab["capitulo_Descripcion_usuario"] ?> </label>                
+                <textarea class="form-control"  id="capitulo_Descripcion_usuario" name="capitulo_Descripcion_usuario" ></textarea>
+                <p class="help-block"><small><?= $vocab["capitulo_Descripcion_usuario_desc"] ?></small></p> 
             </div>            
 
             <?php if (check_permiso($mod4, $act3, $user_rol)) { ?>
@@ -37,5 +56,5 @@ $user_rol = $mySessionController->getVar("rol");
     </div>
 </div>
 <script>
-    CrearEditorCapitulos();
+    CrearEditorCapitulos(1);
 </script>

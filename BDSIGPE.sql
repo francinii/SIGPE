@@ -176,6 +176,8 @@ create table Matriz (
 create table Capitulo(
 id int NOT NULL AUTO_INCREMENT,
 descripcion text,
+descripcionParaUsuario text,
+isDescripcionParaUsuario int,
 isActivo int,
 titulo varchar(150),
 orden int,
@@ -185,6 +187,8 @@ orden int,
 create table SubCapitulo(
 id int NOT NULL AUTO_INCREMENT,
 descripcion text,
+descripcionParaUsuario text,
+isDescripcionParaUsuario int,
 titulo varchar(150),
 isActivo int,
 FKidCapitulo int,
@@ -442,25 +446,25 @@ INSERT INTO `BDSIGPE`.`TipoAmenaza` (`descripcion`,`isActivo`,FkidOrigen) VALUES
 INSERT INTO `BDSIGPE`.`TipoAmenaza` (`descripcion`,`isActivo`,FkidOrigen) VALUES ('Antrópica',1,3);
 
 
-INSERT INTO `Capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'PRESENTACIÓN',1);
-INSERT INTO `Capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'INFORMACIÓN GENERAL DE LA ORGANIZACIÓN',2);
-INSERT INTO `Capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'VALORACIÓN DEL RIESGO',3);
-INSERT INTO `Capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'POLÍTICA DE GESTIÓN DE RIESGOS',4);
-INSERT INTO `Capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'ORGANIZACIÓN PARA LOS PREPARATIVOS Y RESPUESTA',5);
-INSERT INTO `Capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'PLAN DE ACCIÓN',6);
-INSERT INTO `Capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'MECANISMOS DE ACTIVACIÓN',7);
-INSERT INTO `Capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'PROCEDIMIENTOS OPERATIVOS DE RESPUESTA',8);
-INSERT INTO `Capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'EVALUACIÓN DEL PLAN DE PREPARATIVOS Y RESPUESTA',9);
-INSERT INTO `Capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'DEFINICIONES Y TÉRMINOS',10);
-INSERT INTO `Capitulo`(`descripcion`, `isActivo`, `titulo`, `orden`) VALUES ('',1,'ANEXO',11);
+INSERT INTO `Capitulo`(`descripcion`, `descripcionParaUsuario`, `isDescripcionParaUsuario`, `isActivo`, `titulo`, `orden`) VALUES ('','',1,1,'PRESENTACIÓN',1);
+INSERT INTO `Capitulo`(`descripcion`, `descripcionParaUsuario`, `isDescripcionParaUsuario`, `isActivo`, `titulo`, `orden`) VALUES ('','',1,1,'INFORMACIÓN GENERAL DE LA ORGANIZACIÓN',2);
+INSERT INTO `Capitulo`(`descripcion`, `descripcionParaUsuario`, `isDescripcionParaUsuario`, `isActivo`, `titulo`, `orden`) VALUES ('','',1,1,'VALORACIÓN DEL RIESGO',3);
+INSERT INTO `Capitulo`(`descripcion`, `descripcionParaUsuario`, `isDescripcionParaUsuario`, `isActivo`, `titulo`, `orden`) VALUES ('','',1,1,'POLÍTICA DE GESTIÓN DE RIESGOS',4);
+INSERT INTO `Capitulo`(`descripcion`, `descripcionParaUsuario`, `isDescripcionParaUsuario`, `isActivo`, `titulo`, `orden`) VALUES ('','',1,1,'ORGANIZACIÓN PARA LOS PREPARATIVOS Y RESPUESTA',5);
+INSERT INTO `Capitulo`(`descripcion`, `descripcionParaUsuario`, `isDescripcionParaUsuario`, `isActivo`, `titulo`, `orden`) VALUES ('','',1,1,'PLAN DE ACCIÓN',6);
+INSERT INTO `Capitulo`(`descripcion`, `descripcionParaUsuario`, `isDescripcionParaUsuario`, `isActivo`, `titulo`, `orden`) VALUES ('','',1,1,'MECANISMOS DE ACTIVACIÓN',7);
+INSERT INTO `Capitulo`(`descripcion`, `descripcionParaUsuario`, `isDescripcionParaUsuario`, `isActivo`, `titulo`, `orden`) VALUES ('','',1,1,'PROCEDIMIENTOS OPERATIVOS DE RESPUESTA',8);
+INSERT INTO `Capitulo`(`descripcion`, `descripcionParaUsuario`, `isDescripcionParaUsuario`, `isActivo`, `titulo`, `orden`) VALUES ('','',1,1,'EVALUACIÓN DEL PLAN DE PREPARATIVOS Y RESPUESTA',9);
+INSERT INTO `Capitulo`(`descripcion`, `descripcionParaUsuario`, `isDescripcionParaUsuario`, `isActivo`, `titulo`, `orden`) VALUES ('','',1,1,'DEFINICIONES Y TÉRMINOS',10);
+INSERT INTO `Capitulo`(`descripcion`, `descripcionParaUsuario`, `isDescripcionParaUsuario`, `isActivo`, `titulo`, `orden`) VALUES ('','',1,1,'ANEXO',11);
 
 
-INSERT INTO `SubCapitulo` (`descripcion`,`titulo`,`isActivo`,`FKidCapitulo`,`orden`) VALUES ('<p style=\"text-align:justify\">Es la condición o resultado cuantificable que debe ser alcanzado y mantenido, con la aplicación del procedimiento y que refleja el valor o beneficio que obtiene el usuario. El propósito debe redactarse en forma breve y concisa; especificará los resultados o condiciones que se desean lograr, iniciará con un verbo en infinitivo y, en lo posible, se evitará utilizar gerundios y adjetivos calificativos. <u><strong>El propósito debe quedar escrito en prosa, únicamente para la redacción de este se facilita la siguiente tabla, que no deberá incorporarse en el manual respectivo:</strong></u></p><table align=\"center\" border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:500px\"><tbody><tr><td colspan=\"1\" rowspan=\"2\" style=\"text-align:center\"><strong>Qué se hace</strong></td><td colspan=\"1\" rowspan=\"2\" style=\"text-align:center\"><strong>En qué función o campo de especialidad se hace</strong></td><td colspan=\"2\" rowspan=\"1\" style=\"text-align:center\"><strong>Justificación Razón de ser</strong></td></tr><tr><td style=\"text-align:center\"><strong>Para qué se hace</strong></td><td style=\"text-align:center\"><strong>Para quién se hace</strong></td></tr><tr><td style=\"text-align:center\">Acción<br />expresada en<br />verbo</td><td style=\"text-align:center\">Campo de especialidad<br />principal</td><td style=\"text-align:center\">Resultado</td><td style=\"text-align:center\">Usuario final</td></tr></tbody></table><p>','Propósito',1,1,1);
-INSERT INTO `SubCapitulo` (`descripcion`,`titulo`,`isActivo`,`FKidCapitulo`,`orden`) VALUES ('<p style=\"text-align:justify\">En este apartado se describe brevemente el área o campo de aplicación del procedimiento; es decir, a quiénes afecta o qué límites o influencia tiene, representa la esfera de acción que cubren los procedimientos.</p>','Alcance',1,1,2);
-INSERT INTO `SubCapitulo` (`descripcion`,`titulo`,`isActivo`,`FKidCapitulo`,`orden`) VALUES ('<p>Aquí se registra el compendio de normas aplicables al procedimiento, conforme a la secuencia lógica de las etapas del mismo. Es decir aquellas disposiciones internas que:</p><p style=\"margin-left:40px\">a) Tienen como propósito regular la interacción entre los individuos en una organización y las actividades de una unidad responsable.<br />b) Marcan responsabilidades y límites generales y específicos, dentro de los cuales se realizan legítimamente las actividades en distintas áreas de acción.<br />c) Se aplican a todas las situaciones similares.<br />d) Dan orientaciones claras hacia donde deben dirigirse todas las actividades de un mismo tipo.<br />e) Facilitan la toma de decisiones en actividades rutinarias.<br />f) Describen lo que la dirección desea que se haga en cada situación definida.</p>','Marco normativo',1,1,3);
-INSERT INTO `SubCapitulo` (`descripcion`,`titulo`,`isActivo`,`FKidCapitulo`,`orden`) VALUES ('<p style=\"margin-left:40px\"><strong>a) Secuencia de etapas</strong></p><p style=\"margin-left:80px\">i. Son las partes en que se divide el procedimiento, y cada una de ellas integra<br />un conjunto afín de actividades.<br />ii. La redacción de la etapa, iniciará con un verbo conjugado en el tiempo<br />presente de la tercera persona del singular.</p><p style=\"margin-left:40px\"><strong>b) Descripción de las actividades</strong></p><p style=\"margin-left:80px\">i. Es la descripción detallada de las actividades; de manera tal que permita al<br />personal comprenderlas, seguirlas y aplicarlas, aun cuando sea de recién<br />ingreso al área.<br />ii. El número con que se registrará cada actividad, estará compuesto por el dígito<br />de la etapa correspondiente, seguido de un punto, y a la derecha de éste, del<br />número consecutivo respectivo.<br />iii. La redacción de la actividad, iniciará con un verbo conjugado en el tiempo<br />presente de la tercera persona del singular.<br />iv. Deberá considerarse en la redacción de las actividades, los elementos<br />necesarios para su realización; así como los productos que se generen.</p><p style=\"margin-left:40px\"><strong>c) Responsable</strong></p><p style=\"margin-left:80px\">i. Se refiere a los órganos o cargos de la estructura autorizada responsables de<br />la ejecución y cumplimiento de las actividades del procedimiento.<br />ii. En el caso del personal operativo habrá de señalarse el nombre del puesto por<br />funciones reales desempeñadas: analista, secretaria, mensajero, etcétera; y<br />no por el nombre de la plaza: coordinador de técnicos, secretaria ejecutiva,<br />entre otros.</p><p><strong>En la descripción se utilizará la siguiente forma:</strong></p><p>','Descripción del plan',1,1,4);
-INSERT INTO `SubCapitulo` (`descripcion`,`titulo`,`isActivo`,`FKidCapitulo`,`orden`) VALUES ('descripcion','Documentos de referencia',1,1,5);
-INSERT INTO `SubCapitulo` (`descripcion`,`titulo`,`isActivo`,`FKidCapitulo`,`orden`) VALUES ('','Datos Generales y actividades que desarrolla la organización',1,2,1);
+INSERT INTO `SubCapitulo` (`descripcion`, `descripcionParaUsuario`, `isDescripcionParaUsuario`,`titulo`,`isActivo`,`FKidCapitulo`,`orden`) VALUES ('<p style=\"text-align:justify\">Es la condición o resultado cuantificable que debe ser alcanzado y mantenido, con la aplicación del procedimiento y que refleja el valor o beneficio que obtiene el usuario. El propósito debe redactarse en forma breve y concisa; especificará los resultados o condiciones que se desean lograr, iniciará con un verbo en infinitivo y, en lo posible, se evitará utilizar gerundios y adjetivos calificativos. <u><strong>El propósito debe quedar escrito en prosa, únicamente para la redacción de este se facilita la siguiente tabla, que no deberá incorporarse en el manual respectivo:</strong></u></p><table align=\"center\" border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:500px\"><tbody><tr><td colspan=\"1\" rowspan=\"2\" style=\"text-align:center\"><strong>Qué se hace</strong></td><td colspan=\"1\" rowspan=\"2\" style=\"text-align:center\"><strong>En qué función o campo de especialidad se hace</strong></td><td colspan=\"2\" rowspan=\"1\" style=\"text-align:center\"><strong>Justificación Razón de ser</strong></td></tr><tr><td style=\"text-align:center\"><strong>Para qué se hace</strong></td><td style=\"text-align:center\"><strong>Para quién se hace</strong></td></tr><tr><td style=\"text-align:center\">Acción<br />expresada en<br />verbo</td><td style=\"text-align:center\">Campo de especialidad<br />principal</td><td style=\"text-align:center\">Resultado</td><td style=\"text-align:center\">Usuario final</td></tr></tbody></table><p>','',1,'Propósito',1,1,1);
+INSERT INTO `SubCapitulo` (`descripcion`, `descripcionParaUsuario`, `isDescripcionParaUsuario`,`titulo`,`isActivo`,`FKidCapitulo`,`orden`) VALUES ('<p style=\"text-align:justify\">En este apartado se describe brevemente el área o campo de aplicación del procedimiento; es decir, a quiénes afecta o qué límites o influencia tiene, representa la esfera de acción que cubren los procedimientos.</p>','',1,'Alcance',1,1,2);
+INSERT INTO `SubCapitulo` (`descripcion`, `descripcionParaUsuario`, `isDescripcionParaUsuario`,`titulo`,`isActivo`,`FKidCapitulo`,`orden`) VALUES ('<p>Aquí se registra el compendio de normas aplicables al procedimiento, conforme a la secuencia lógica de las etapas del mismo. Es decir aquellas disposiciones internas que:</p><p style=\"margin-left:40px\">a) Tienen como propósito regular la interacción entre los individuos en una organización y las actividades de una unidad responsable.<br />b) Marcan responsabilidades y límites generales y específicos, dentro de los cuales se realizan legítimamente las actividades en distintas áreas de acción.<br />c) Se aplican a todas las situaciones similares.<br />d) Dan orientaciones claras hacia donde deben dirigirse todas las actividades de un mismo tipo.<br />e) Facilitan la toma de decisiones en actividades rutinarias.<br />f) Describen lo que la dirección desea que se haga en cada situación definida.</p>','',1,'Marco normativo',1,1,3);
+INSERT INTO `SubCapitulo` (`descripcion`, `descripcionParaUsuario`, `isDescripcionParaUsuario`,`titulo`,`isActivo`,`FKidCapitulo`,`orden`) VALUES ('<p style=\"margin-left:40px\"><strong>a) Secuencia de etapas</strong></p><p style=\"margin-left:80px\">i. Son las partes en que se divide el procedimiento, y cada una de ellas integra<br />un conjunto afín de actividades.<br />ii. La redacción de la etapa, iniciará con un verbo conjugado en el tiempo<br />presente de la tercera persona del singular.</p><p style=\"margin-left:40px\"><strong>b) Descripción de las actividades</strong></p><p style=\"margin-left:80px\">i. Es la descripción detallada de las actividades; de manera tal que permita al<br />personal comprenderlas, seguirlas y aplicarlas, aun cuando sea de recién<br />ingreso al área.<br />ii. El número con que se registrará cada actividad, estará compuesto por el dígito<br />de la etapa correspondiente, seguido de un punto, y a la derecha de éste, del<br />número consecutivo respectivo.<br />iii. La redacción de la actividad, iniciará con un verbo conjugado en el tiempo<br />presente de la tercera persona del singular.<br />iv. Deberá considerarse en la redacción de las actividades, los elementos<br />necesarios para su realización; así como los productos que se generen.</p><p style=\"margin-left:40px\"><strong>c) Responsable</strong></p><p style=\"margin-left:80px\">i. Se refiere a los órganos o cargos de la estructura autorizada responsables de<br />la ejecución y cumplimiento de las actividades del procedimiento.<br />ii. En el caso del personal operativo habrá de señalarse el nombre del puesto por<br />funciones reales desempeñadas: analista, secretaria, mensajero, etcétera; y<br />no por el nombre de la plaza: coordinador de técnicos, secretaria ejecutiva,<br />entre otros.</p><p><strong>En la descripción se utilizará la siguiente forma:</strong></p><p>','',1,'Descripción del plan',1,1,4);
+INSERT INTO `SubCapitulo` (`descripcion`, `descripcionParaUsuario`, `isDescripcionParaUsuario`,`titulo`,`isActivo`,`FKidCapitulo`,`orden`) VALUES ('descripcion','',1,'Documentos de referencia',1,1,5);
+INSERT INTO `SubCapitulo` (`descripcion`, `descripcionParaUsuario`, `isDescripcionParaUsuario`,`titulo`,`isActivo`,`FKidCapitulo`,`orden`) VALUES ('','',1,'Datos Generales y actividades que desarrolla la organización',1,2,1);
 
 INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubCapitulos`) VALUES (1,'Datos generales',1);
 INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubCapitulos`) VALUES (2,'Población actividades',1);
@@ -973,7 +977,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `insert_capitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_capitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_descripcion` text,  OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_capitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_descripcion` text,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` text,  OUT `res` TINYINT  UNSIGNED)
 BEGIN
 declare ordenar Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION     
@@ -997,7 +1001,7 @@ declare ordenar Integer;
             END IF;           
             START TRANSACTION;
                      
-                    INSERT INTO `Capitulo`(descripcion,isActivo,titulo,orden) VALUES (p_descripcion, p_activo,p_titulo,ordenar);
+                    INSERT INTO `Capitulo`(descripcion,isDescripcionParaUsuario,descripcionParaUsuario,isActivo,titulo,orden) VALUES (p_descripcion,p_isDescripcionParaUsuario,p_descripcionParaUsuario, p_activo,p_titulo,ordenar);
             COMMIT;
             -- SUCCESS
             SET res = 0;
@@ -1014,7 +1018,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `insert_subcapitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_subcapitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_fkcapitulo` int,IN  `p_descripcion` text,  OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_subcapitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_fkcapitulo` int,IN  `p_descripcion` text,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` text,  OUT `res` TINYINT  UNSIGNED)
 BEGIN
 declare ordenar Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -1037,7 +1041,7 @@ declare ordenar Integer;
                 SET ordenar= ordenar +1;   
             END IF;  
             START TRANSACTION;
-                    INSERT INTO `SubCapitulo`(descripcion, titulo, isActivo, FKidCapitulo, orden) VALUES (p_descripcion, p_titulo,p_activo,p_fkcapitulo,ordenar);
+                    INSERT INTO `SubCapitulo`(descripcion,isDescripcionParaUsuario,descripcionParaUsuario, titulo, isActivo, FKidCapitulo, orden) VALUES (p_descripcion,p_isDescripcionParaUsuario,p_descripcionParaUsuario, p_titulo,p_activo,p_fkcapitulo,ordenar);
             COMMIT;
             -- SUCCESS
             SET res = 0;
@@ -1053,7 +1057,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_capitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_capitulo`(IN `p_id` int,IN `p_titulo` varchar(150), IN  `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_capitulo`(IN `p_id` int,IN `p_titulo` varchar(150), IN  `p_descripcion` text,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` text, OUT `res` TINYINT  UNSIGNED)
 BEGIN
         
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -1070,7 +1074,7 @@ BEGIN
     ROLLBACK;
 	END;
             START TRANSACTION;
-                   UPDATE `Capitulo` SET `descripcion`= p_descripcion ,`titulo`=p_titulo WHERE `id`=p_id;
+                   UPDATE `Capitulo` SET `descripcion`= p_descripcion ,`titulo`=p_titulo, `isDescripcionParaUsuario`=p_isDescripcionParaUsuario,`descripcionParaUsuario`=p_descripcionParaUsuario WHERE `id`=p_id;
             COMMIT;
             -- SUCCESS
             SET res = 0;
@@ -1087,7 +1091,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_subcapitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_subcapitulo`(IN `p_id` int,IN `p_titulo` varchar(150),IN `p_fkcapitulo` int, IN  `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_subcapitulo`(IN `p_id` int,IN `p_titulo` varchar(150),IN `p_fkcapitulo` int, IN  `p_descripcion` text,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` text, OUT `res` TINYINT  UNSIGNED)
 BEGIN   
         declare ordenar Integer;
         declare FKAntigua Integer;
@@ -1107,7 +1111,7 @@ BEGIN
             select FKidCapitulo into FKAntigua from SubCapitulo WHERE `id`=p_id;
             IF(FKAntigua = p_fkcapitulo) THEN
                   START TRANSACTION;
-                   UPDATE `SubCapitulo` SET `descripcion`= p_descripcion ,`titulo`=p_titulo, `FKidCapitulo`=p_fkcapitulo WHERE `id`=p_id;
+                   UPDATE `SubCapitulo` SET `descripcion`= p_descripcion ,`titulo`=p_titulo, `FKidCapitulo`=p_fkcapitulo,`isDescripcionParaUsuario`=p_isDescripcionParaUsuario,`descripcionParaUsuario`=p_descripcionParaUsuario WHERE `id`=p_id;
                  COMMIT;
                 -- SUCCESS
                 SET res = 0;
@@ -1119,7 +1123,7 @@ BEGIN
                   SET ordenar= ordenar +1;   
                 END IF;
                 START TRANSACTION;
-                   UPDATE `SubCapitulo` SET `descripcion`= p_descripcion ,`titulo`=p_titulo, `FKidCapitulo`=p_fkcapitulo,`orden`=ordenar WHERE `id`=p_id;
+                   UPDATE `SubCapitulo` SET `descripcion`= p_descripcion ,`titulo`=p_titulo, `FKidCapitulo`=p_fkcapitulo,`orden`=ordenar,`isDescripcionParaUsuario`=p_isDescripcionParaUsuario,`descripcionParaUsuario`=p_descripcionParaUsuario WHERE `id`=p_id;
                  COMMIT;
                  -- SUCCESS
                SET res = 0;

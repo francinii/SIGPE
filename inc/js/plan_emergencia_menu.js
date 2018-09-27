@@ -57,8 +57,8 @@ function cambiarMenu(numero, idCentro, nombreCentro) {
          case 11:
             OpcionMenu('mod/planEmergencia/plan_emergiancia_puestos_brigada.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
         break;
-        case 11:
-            OpcionMenu('mod/planEmergencia/plan_emergiancia_puestos_brigada.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
+        case 12:
+            OpcionMenu('mod/planEmergencia/plan_emergencia_capitulos_subcapitulos.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
         break;
      
     }

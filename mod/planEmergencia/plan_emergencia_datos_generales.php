@@ -4,9 +4,6 @@ include("../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
 
-
-?>
-<?php
 include("plan_emergencia_menu.php");
 $sql = "SELECT `actividad`,`direccion`,`personaContactoGeneral`,`numeroTelefono`,`numeroFax`,`correo`,`categoriaNFPA`,"
         . "`usoInstalaciones`,`horarioJornada`,`seguridadInstitucional`,`servicioConsegeria`,`personalAdministrativo`,"
