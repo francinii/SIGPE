@@ -7,7 +7,7 @@ include("plan_emergencia_menu.php");
 ?>
 <!------------------------------------  Recurso Humano ----------------------------------- ------------------- ----------->
 <?php
-$sql = "SELECT `puesto`, `funcion`, `plazoEjecucion` FROM `formulariopuestobrigada` WHERE `FKidPlanEmergencias`=" . $idPlanEmergencia . " order by `puesto` ";
+$sql = "SELECT `puesto`, `funcion`, `plazoEjecucion` FROM `FormularioPuestoBrigada` WHERE `FKidPlanEmergencias`=" . $idPlanEmergencia . " order by `puesto` ";
 $res = seleccion($sql);
 
 if (count($res) <= 0) {

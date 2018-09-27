@@ -404,7 +404,7 @@ $vocab["zona_seguridad_nombre"]             ="Nombre";
 $vocab["zona_seguridad_ubicacion"]          ="Ubicacion";  
 $vocab["zona_seguridad_capacidad"]          ="Capacidad";  
 $vocab["zona_seguridad_observaciones"]      ="Observaciones";  
-$vocab["zona_seguridad_sector"]             ="Sector(es) que descargan a esa zona de seguidad";  
+$vocab["zona_seguridad_sector"]             ="Sector(es) que descargan a esa zona de seguridad";  
 //$vocab["zona_seguridad_responsable"]      ="Responsable";  
 
 //$vocab["plan_de_accion_interior"]      ="Interior";  
@@ -518,6 +518,7 @@ $vocab["ingreso_transito"]                      ="Tránsito";
 
 
 $vocab["ingreso_subtitulo"]                      ="Descripción de ingreso de los cuerpos de socorro";
+$vocab["ingreso_descripcion"]                    ="Descripción:";
 $vocab["ingreso_Condiciones"]                    ="Condiciones de análisis";
 $vocab["ingreso_dimensiones"]                    ="Dimensiones de áreas de acceso:";
 $vocab["ingreso_radio"]                          ="Radios de giro:";
@@ -525,6 +526,8 @@ $vocab["ingreso_caseta"]                         ="Casetas:";
 $vocab["ingreso_plumas"]                         ="Plumas:";
 $vocab["ingreso_ancho"]                          ="Ancho libre:";
 $vocab["ingreso_protocolo"]                      ="Protocolos de coordinación con seguridad institucional";
+    
+
 
 
 //***********     plan de emergencia  puestos de la brigada ***********************//
