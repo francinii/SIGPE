@@ -607,7 +607,7 @@ function formularioPoblacion($idPlanEmergencia, $vocab) {
             . ",`correoElectronico`,`sector` FROM `FormularioPoblacion` WHERE `FKidPlanEmergencias`=" . $idPlanEmergencia . " order by `sector` ";
     $respuesta = seleccion($sql);
 
-
+    $sector = $respuesta[0]['sector'];
     $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
             . '<thead><tr style = "text-align:center;">'
             . '<th>' . $vocab['poblacion_oficina'] . '</th>'
@@ -621,7 +621,14 @@ function formularioPoblacion($idPlanEmergencia, $vocab) {
             . '<th>' . $vocab['poblacion_telefono_personal'] . '</th>'
             . '<th>' . $vocab['poblacion_correo'] . '</th>'
             . '</tr></thead><tbody>';
+
+    //pintamos el primer sector
+    $html .= '<tr style = "text-align:center;" ><td colspan = "10"><b>' . $respuesta[0]['sector'] . '</b></td></tr>';
     foreach ($respuesta as $res) {
+        if ($res['sector'] != $sector) {
+            $html .= '<tr  style = "text-align:center;"><td colspan = "10"><b>' . $res['sector'] . '</b></td></tr>';
+            $sector = $res['sector'];
+        }
         $html .= '<tr style = "text-align:center;">'
                 . '<td>' . $res['nombreOficina'] . '</td>'
                 . '<td>' . $res['capacidadPermanente'] . '</td>'
@@ -673,12 +680,11 @@ function formularioRutaEvacuacion($idPlanEmergencia, $vocab) {
     return $html;
 }
 
-
 //Formulario de rutas de evaciocion
 function formularioBrigadistas($idPlanEmergencia, $vocab) {
-   $sql = "SELECT  `id`, `FKidPlanEmergencias`, `brigadista`, `puntoPartida`,"
-        . " `zonaEvacuar`,`numPersonasEvacuar`,`distancia`,`tiempo` FROM `Brigada` WHERE `FKidPlanEmergencias`=$idPlanEmergencia";
-$respuesta = seleccion($sql);
+    $sql = "SELECT  `id`, `FKidPlanEmergencias`, `brigadista`, `puntoPartida`,"
+            . " `zonaEvacuar`,`numPersonasEvacuar`,`distancia`,`tiempo` FROM `Brigada` WHERE `FKidPlanEmergencias`=$idPlanEmergencia";
+    $respuesta = seleccion($sql);
     $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
             . '<thead><tr style = "text-align:center;">'
             . '<th>' . $vocab['brigadista_nombre'] . '</th>'
@@ -696,40 +702,123 @@ $respuesta = seleccion($sql);
                 . '<td>' . $res['numPersonasEvacuar'] . '</td>'
                 . '<td>' . $res['distancia'] . '</td>'
                 . '<td>' . $res['tiempo'] . '</td>'
-  
                 . '</tr>';
     }
     $html .= '</tbody></table>';
     return $html;
 }
 
-//Formulario de rutas de evaciocion
-function formularioAtencionEmergencias($idPlanEmergencia, $vocab) {
-   $sql = "SELECT  `id`, `FKidPlanEmergencias`, `brigadista`, `puntoPartida`,"
-        . " `zonaEvacuar`,`numPersonasEvacuar`,`distancia`,`tiempo` FROM `Brigada` WHERE `FKidPlanEmergencias`=$idPlanEmergencia";
-$respuesta = seleccion($sql);
+//Formulario de atnción de emergencias
+function formularioIngresoAtencionEmergencias($idPlanEmergencia, $vocab) {
+    $sql = "SELECT  `tipo`, `ubicacion`, `Distancia`, `Tiempo`"
+            . " FROM `CuerposScorro` WHERE `FKidPlanEmergencias`=" . $idPlanEmergencia;
+    $respuesta = seleccion($sql);
     $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
             . '<thead><tr style = "text-align:center;">'
-            . '<th>' . $vocab['brigadista_nombre'] . '</th>'
-            . '<th>' . $vocab['brigadista_punto_partida'] . '</th>'
-            . '<th>' . $vocab['brigadista_zona_asignada'] . '</th>'
-            . '<th>' . $vocab['brigadista_numero_personas'] . '</th>'
-            . '<th>' . $vocab['brigadista_distancia_total'] . '</th>'
-            . '<th>' . $vocab['brigadista_tiempo_evacuacion'] . '</th>'
+            . '<th>' . $vocab['ingreso_cuerpoRespuesta'] . '</th>'
+            . '<th>' . $vocab['ingreso_ubicación'] . '</th>'
+            . '<th>' . $vocab['ingreso_recorrido'] . '</th>'
+            . '<th>' . $vocab['ingreso_tiempoRespuesta'] . '</th>'
             . '</tr></thead><tbody>';
     foreach ($respuesta as $res) {
         $html .= '<tr style = "text-align:center;">'
-                . '<td>' . $res['brigadista'] . '</td>'
-                . '<td>' . $res['puntoPartida'] . '</td>'
-                . '<th>' . $res['zonaEvacuar'] . '</th>'
-                . '<td>' . $res['numPersonasEvacuar'] . '</td>'
-                . '<td>' . $res['distancia'] . '</td>'
-                . '<td>' . $res['tiempo'] . '</td>'  
+                . '<td>' . $res['tipo'] . '</td>'
+                . '<td>' . $res['ubicacion'] . '</td>'
+                . '<th>' . $res['Distancia'] . '</th>'
+                . '<td>' . $res['Tiempo'] . '</td>'
                 . '</tr>';
     }
     $html .= '</tbody></table>';
     return $html;
 }
+
+//Formulario de cuerpos de socorro
+function formularioIngresoCuerposSocorro($idPlanEmergencia, $vocab) {
+    $sql = "SELECT `dimensionAreaAcceso`, `radioGiro`, `caseta`, `plumas`, `anchoLibre` FROM `IngresoCuerpoSocorro` WHERE `FKidPlanEmergencias`=" . $idPlanEmergencia;
+    $res = seleccion($sql);
+    $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
+            . '<thead><tr style = "text-align:center;">'
+            . '<th><b>' . $vocab['ingreso_Condiciones'] . '</b></th>'
+            . '<th><b>' . $vocab['ingreso_descripcion'] . '</b></th>'
+            . '</tr></thead><tbody>';
+    //foreach ($respuesta as $res) {
+    $html .= '<tr style = "text-align:center;">'
+            . '<td>' . $vocab['ingreso_dimensiones'] . '</td>'
+            . '<td>' . $res[0]['dimensionAreaAcceso'] . '</td>'
+            . '</tr><tr style = "text-align:center;">'
+            . '<td>' . $vocab['ingreso_radio'] . '</td>'
+            . '<td>' . $res[0]['radioGiro'] . '</td>'
+            . '</tr><tr style = "text-align:center;">'
+            . '<td>' . $vocab['ingreso_caseta'] . '</td>'
+            . '<td>' . $res[0]['caseta'] . '</td>'
+            . '</tr><tr style = "text-align:center;">'
+            . '<td>' . $vocab['ingreso_plumas'] . '</td>'
+            . '<td>' . $res[0]['plumas'] . '</td>'
+            . '</tr><tr style = "text-align:center;">'
+            . '<td>' . $vocab['ingreso_ancho'] . '</td>'
+            . '<td>' . $res[0]['anchoLibre'] . '</td>'
+            . '</tr>';
+    // }
+    $html .= '</tbody></table>';
+    return $html;
+}
+
+//Formulario de puestos de brigada
+function formularioPuestoBrigada($idPlanEmergencia, $vocab) {
+    $sql = "SELECT `puesto`, `funcion`, `plazoEjecucion` FROM `FormularioPuestoBrigada` WHERE `FKidPlanEmergencias`=" . $idPlanEmergencia . " order by `puesto` ";
+    $respuesta = seleccion($sql);
+
+    $puesto = $respuesta[0]['puesto'];
+    $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
+            . '<thead><tr style = "text-align:center;">'
+            . '<th>' . $vocab['puestos_brigada_funciones'] . '</th>'
+            . '<th>' . $vocab['puestos_brigada_plazos_ejecución'] . '</th>'
+            . '</tr></thead><tbody>';
+
+    //pintamos el primer sector
+    $html .= '<tr style = "text-align:center;" ><td colspan = "10"><b>' . $respuesta[0]['puesto'] . '</b></td></tr>';
+    foreach ($respuesta as $res) {
+        if ($res['puesto'] != $puesto) {
+            $html .= '<tr  style = "text-align:center;"><td colspan = "10"><b>' . $res['puesto'] . '</b></td></tr>';
+            $puesto = $res['sector'];
+        }
+        $html .= '<tr style = "text-align:center;">'
+                . '<td>' . $res['funcion'] . '</td>'
+                . '<td>' . $res['plazoEjecucion'] . '</td>'
+                . '</tr>';
+    }
+    $html .= '</tbody></table>';
+    return $html;
+}
+
+
+//Formulario de zonas de seguridad
+function formularioZonaSeguridad($idPlanEmergencia, $vocab) {
+    $sql = "SELECT  `id`, `FKidPlanEmergencias`, `Nombre`, `ubicacion`,"
+        . " `capacidad`,`observaciones`,`sector` FROM `ZonaSeguridad` WHERE `FKidPlanEmergencias`=$idPlanEmergencia";
+    $respuesta = seleccion($sql);
+    $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
+            . '<thead><tr style = "text-align:center;">'
+            . '<th>' . $vocab['zona_seguridad_nombre'] . '</th>'
+            . '<th>' . $vocab['zona_seguridad_ubicacion'] . '</th>'
+            . '<th>' . $vocab['zona_seguridad_capacidad'] . '</th>'
+            . '<th>' . $vocab['zona_seguridad_observaciones'] . '</th>'
+            . '<th>' . $vocab['zona_seguridad_sector'] . '</th>'
+            . '</tr></thead><tbody>';
+    foreach ($respuesta as $res) {
+        $html .= '<tr style = "text-align:center;">'
+                . '<td>' . $res['Nombre'] . '</td>'
+                . '<td>' . $res['ubicacion'] . '</td>'
+                . '<th>' . $res['capacidad'] . '</th>'
+                . '<td>' . $res['observaciones'] . '</td>'
+                . '<td>' . $res['sector'] . '</td>'
+                . '</tr>';
+    }
+    $html .= '</tbody></table>';
+    return $html;
+}
+
+
 
 
 function listarFormularios($id, $formularios, $resPlan, $resTipoPoblacion, $vocab, $idPlanEmergencia) {
@@ -796,17 +885,27 @@ function formularioSeleccionada($id, $form, $resPlan, $resTipoPoblacion, $vocab,
             $html .= formularioPoblacion($idPlanEmergencia, $vocab);
             $html .= '<div></div>';
         } else if ($idForm == 8) { //Formulario de rutas de evacuación
-              $html .= formularioRutaEvacuacion($idPlanEmergencia, $vocab);
-              $html .= '<div></div>';
+            $html .= formularioRutaEvacuacion($idPlanEmergencia, $vocab);
+            $html .= '<div></div>';
         } else if ($idForm == 9) { //Formulario de brigadistas
-            $html .= formularioBrigadistas($idPlanEmergencia, $vocab) ;
-              $html .= '<div></div>';
+            $html .= formularioBrigadistas($idPlanEmergencia, $vocab);
+            $html .= '<div></div>';
             //  $html .= '<div></div>';
         } else if ($idForm == 10) { //Formulario de ingreso
-            //  $html .= '<div></div>';
+            $html .= formularioIngresoAtencionEmergencias($idPlanEmergencia, $vocab);
+            $html .= '<div></div>';
+            $html .= formularioIngresoCuerposSocorro($idPlanEmergencia, $vocab);
+            $html .= '<div></div>';
         } else if ($idForm == 11) { //Formulario de zona de seguridad
-            //  $html .= '<div></div>';
+            $html .= formularioPuestoBrigada($idPlanEmergencia, $vocab);
+              $html .= '<div></div>';
+        }else if ($idForm == 12) { //Formulario de zona de seguridad
+            $html .=  formularioZonaSeguridad($idPlanEmergencia, $vocab);
+              $html .= '<div></div>';
         }
+        
+        
+       
     }
     return $html;
 }
