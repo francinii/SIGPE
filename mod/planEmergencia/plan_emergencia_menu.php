@@ -7,13 +7,8 @@ $idCentro = $_GET['idCentro'];
 $nombreCentro = $_GET['nombreCentro'];
 $editar = (check_permiso($mod5, $act4, $user_rol) || check_permiso($mod5, $act3, $user_rol) );
 
-$sql = "SELECT  `id` FROM `PlanEmergencia`  WHERE `FKidZonaTrabajo`=" . $idCentro;
-$resid = seleccion($sql);
+    $idPlanEmergencia = $idCentro;
 
-
-if (count($resid) > 0) {
-    $idPlanEmergencia = $resid[0]['id'];
-}
 ?>
 <script>
     var idCentro =<?= $idCentro ?>;

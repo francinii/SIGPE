@@ -13,7 +13,7 @@ $sql = "SELECT `instalacionesDensidadOcupacion`, `instalacionesAreaConstruccion`
         . "`elementosConstructivosCielos`, `elementosConstructivosPisos`, `elementosConstructivosAreaParqueo`, "
         . "`elementosConstructivosSistemaAguaPotable`, `elementosConstructivosAlcantarilladoSanitario`, `elementosConstructivosAlcantarilladoPluvial`,"
         . " `elementosConstructivosSistemaElectrico`, `elementosConstructivosSistemaTelefonico`, "
-        . "`elementosConstructivosOtros` FROM `PlanEmergencia` WHERE `FKidZonaTrabajo`=".$idCentro;
+        . "`elementosConstructivosOtros` FROM `ZonaTrabajo` WHERE `id`=".$idCentro;
 $res = seleccion($sql);
 ?>
 <div class="container">

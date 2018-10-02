@@ -8,7 +8,7 @@ include("plan_emergencia_menu.php");
 <!------------------------------------  Recurso Humano ----------------------------------- ------------------- ----------->
 <?php
 $sql = "SELECT  `cantidad`, `profesion`, `categorias`, `localizacion`,"
-        . " `contacto` FROM `RecursoHumanos` WHERE `FKidPlanEmergencias`=" . $idPlanEmergencia;
+        . " `contacto` FROM `RecursoHumanos` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
 $res = seleccion($sql);
 
 if (count($res) <= 0) {
@@ -80,7 +80,7 @@ if (count($res) <= 0) {
 <!--------------------------------- Inventario equipo movil------------------------------- ------------------------------------->
 <?php
 $sql = "SELECT `cantidad`, `capacidad`, `tipo`, `caracteristicas`,"
-        . " `contacto`, `ubicacion`, `categoria` FROM `EquipoMovil` WHERE `FKidPlanEmergencias`=" . $idPlanEmergencia;
+        . " `contacto`, `ubicacion`, `categoria` FROM `EquipoMovil` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
 $res = seleccion($sql);
 
 if (count($res) <= 0) {
@@ -162,7 +162,7 @@ if (count($res) <= 0) {
 <!---------------------------------Recurso intalaciones------------------------------- ------------------------------------->
 <?php
 $sql = "SELECT `tipo`, `cantidad`, `tamaño`, `distribucion`,"
-        . " `contacto`, `ubicacion` FROM `RecursoIntalaciones` WHERE `FKidPlanEmergencias`=" . $idPlanEmergencia;
+        . " `contacto`, `ubicacion` FROM `RecursoIntalaciones` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
 $res = seleccion($sql);
 
 if (count($res) <= 0) {
@@ -239,7 +239,7 @@ $categoria='telecomunicaciones';
 $prefijo='T-';
 $tablaID="lista_telecomunicaciones";
 $sql = "SELECT  `cantidad`, `tipo`, `caracteristicas`, `contacto`,"
-        . " `ubicacion`,`categoria`,`observaciones` FROM `InventarioOtros` WHERE `FKidPlanEmergencias`=$idPlanEmergencia and `categoria`='$categoria' ";
+        . " `ubicacion`,`categoria`,`observaciones` FROM `InventarioOtros` WHERE `FKidZonaTrabajo`=$idPlanEmergencia and `categoria`='$categoria' ";
 $res = seleccion($sql);
 
 if (count($res) <= 0) {
@@ -315,7 +315,7 @@ $categoria='repuestos';
 $prefijo='R-';
 $tablaID="lista_repuestos";
 $sql = "SELECT  `cantidad`, `tipo`, `caracteristicas`, `contacto`,"
-        . " `ubicacion`,`categoria`,`observaciones` FROM `InventarioOtros` WHERE `FKidPlanEmergencias`=$idPlanEmergencia and `categoria`='$categoria' ";
+        . " `ubicacion`,`categoria`,`observaciones` FROM `InventarioOtros` WHERE `FKidZonaTrabajo`=$idPlanEmergencia and `categoria`='$categoria' ";
 $res = seleccion($sql);
 
 if (count($res) <= 0) {
@@ -390,7 +390,7 @@ $categoria='recursosAgua';
 $prefijo='RA-';
 $tablaID="lista_repuestosAgua";
 $sql = "SELECT  `cantidad`, `tipo`, `caracteristicas`, `contacto`,"
-        . " `ubicacion`,`categoria`,`observaciones` FROM `InventarioOtros` WHERE `FKidPlanEmergencias`=$idPlanEmergencia and `categoria`='$categoria' ";
+        . " `ubicacion`,`categoria`,`observaciones` FROM `InventarioOtros` WHERE `FKidZonaTrabajo`=$idPlanEmergencia and `categoria`='$categoria' ";
 $res = seleccion($sql);
 
 if (count($res) <= 0) {
@@ -465,7 +465,7 @@ $categoria='recursosEnergia';
 $prefijo='RE-';
 $tablaID="lista_recursosEnergia";
 $sql = "SELECT  `cantidad`, `tipo`, `caracteristicas`, `contacto`,"
-        . " `ubicacion`,`categoria`,`observaciones` FROM `InventarioOtros` WHERE `FKidPlanEmergencias`=$idPlanEmergencia and `categoria`='$categoria' ";
+        . " `ubicacion`,`categoria`,`observaciones` FROM `InventarioOtros` WHERE `FKidZonaTrabajo`=$idPlanEmergencia and `categoria`='$categoria' ";
 $res = seleccion($sql);
 
 if (count($res) <= 0) {
@@ -540,7 +540,7 @@ $categoria='sistemasIncendios';
 $prefijo='SI-';
 $tablaID="lista_sistemasIncendios";
 $sql = "SELECT  `cantidad`, `tipo`, `caracteristicas`, `contacto`,"
-        . " `ubicacion`,`categoria`,`observaciones` FROM `InventarioOtros` WHERE `FKidPlanEmergencias`=$idPlanEmergencia and `categoria`='$categoria' ";
+        . " `ubicacion`,`categoria`,`observaciones` FROM `InventarioOtros` WHERE `FKidZonaTrabajo`=$idPlanEmergencia and `categoria`='$categoria' ";
 $res = seleccion($sql);
 
 if (count($res) <= 0) {
@@ -615,7 +615,7 @@ $categoria='EquipoPrimeraRespuesta';
 $prefijo='EPR-';
 $tablaID="lista_EquipoPrimeraRespuesta";
 $sql = "SELECT  `cantidad`, `tipo`, `caracteristicas`, `contacto`,"
-        . " `ubicacion`,`categoria`,`observaciones` FROM `InventarioOtros` WHERE `FKidPlanEmergencias`=$idPlanEmergencia and `categoria`='$categoria' ";
+        . " `ubicacion`,`categoria`,`observaciones` FROM `InventarioOtros` WHERE `FKidZonaTrabajo`=$idPlanEmergencia and `categoria`='$categoria' ";
 $res = seleccion($sql);
 
 if (count($res) <= 0) {
@@ -690,7 +690,7 @@ $categoria='señalizacion';
 $prefijo='S-';
 $tablaID="lista_señalizacion";
 $sql = "SELECT  `cantidad`, `tipo`, `caracteristicas`, `contacto`,"
-        . " `ubicacion`,`categoria`,`observaciones` FROM `InventarioOtros` WHERE `FKidPlanEmergencias`=$idPlanEmergencia and `categoria`='$categoria' ";
+        . " `ubicacion`,`categoria`,`observaciones` FROM `InventarioOtros` WHERE `FKidZonaTrabajo`=$idPlanEmergencia and `categoria`='$categoria' ";
 $res = seleccion($sql);
 
 if (count($res) <= 0) {

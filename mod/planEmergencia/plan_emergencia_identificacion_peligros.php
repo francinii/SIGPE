@@ -5,10 +5,7 @@ $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
 include("plan_emergencia_menu.php");
 
-$sql = "SELECT  `id` FROM `PlanEmergencia`  WHERE `FKidZonaTrabajo`=" . $idCentro;
-$res = seleccion($sql);
-$idPlanEmergencia = $res[0]['id'];
-$sql = "SELECT  `id`, `peligro`, `presente`,`ubicacion`,`recomendacion`, `fecha`, `responsable`, `priorizacion` FROM `IdentificacionPeligro`  WHERE `FKidPlanEmergencias`=" . $idPlanEmergencia;
+$sql = "SELECT  `id`, `peligro`, `presente`,`ubicacion`,`recomendacion`, `fecha`, `responsable`, `priorizacion` FROM `IdentificacionPeligro`  WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
 $res = seleccion($sql);
 
 if (count($res) <= 0) {

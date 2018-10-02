@@ -8,7 +8,7 @@ include("plan_emergencia_menu.php");
 
 
     $sql = "SELECT  `tipoPoblacion`, `descripcion`, `total`, `representacionDe` FROM 
-    `TipoPoblacion` WHERE  `FKidPlanEmergencias`=" . $idPlanEmergencia;
+    `TipoPoblacion` WHERE  `FKidZonaTrabajo`=" . $idPlanEmergencia;
     $res = seleccion($sql);
 
 if (count($res) <= 0) {

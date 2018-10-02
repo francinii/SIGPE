@@ -9,7 +9,7 @@ include("plan_emergencia_menu.php");
 <?php
 $sql = "SELECT  `nombreOficina`, `capacidadPermanente`, `capacidadTemporal`, `representanteComite`,"
         . " `representanteBrigadaEfectiva`,`representantePrimerosAuxilios`,`telefonoOficina`,`contactoEmergencia`,`telefonoPersonal`,`correoElectronico`"
-        . ",`correoElectronico`,`sector` FROM `FormularioPoblacion` WHERE `FKidPlanEmergencias`=" . $idPlanEmergencia . " order by `sector` ";
+        . ",`correoElectronico`,`sector` FROM `FormularioPoblacion` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia . " order by `sector` ";
 $res = seleccion($sql);
 
 if (count($res) <= 0) {

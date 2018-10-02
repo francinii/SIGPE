@@ -10,8 +10,8 @@ include("plan_emergencia_menu.php");
 //$categoria = 'telecomunicaciones';
 //$prefijo = 'PA-';
 $tablaID = "lista_plan_accion";
-$sql = "SELECT  `id`, `FKidPlanEmergencias`, `Nombre`, `ubicacion`,"
-        . " `capacidad`,`observaciones`,`sector` FROM `ZonaSeguridad` WHERE `FKidPlanEmergencias`=$idPlanEmergencia";
+$sql = "SELECT  `id`, `FKidZonaTrabajo`, `Nombre`, `ubicacion`,"
+        . " `capacidad`,`observaciones`,`sector` FROM `ZonaSeguridad` WHERE `FKidZonaTrabajo`=$idPlanEmergencia";
 $res = seleccion($sql);
 
 if (count($res) <= 0) {
@@ -20,7 +20,7 @@ if (count($res) <= 0) {
 ?>
 
 <div class="well well-sm">
-    <p><b><?= $vocab["plan_de_accion_title"] ?></b></p>
+    <p><b><?= $vocab["zona_seguridad_title"] ?></b></p>
     <div align="right" style = "padding-right:0.5%;">
         <?php if ($editar) { ?>
             <span class="text-center" >
@@ -71,7 +71,7 @@ if (count($res) <= 0) {
     <div class="text-center">
         <?php if ($editar) { ?>
             <span class="text-center">
-                <a class="btn btn-warning"  onclick="javascript:guardarZonaSeguridad('<?= $idPlanEmergencia ?>', 0, '<?= $tablaID ?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["plan_de_accion"] ?></a>
+                <a class="btn btn-warning"  onclick="javascript:guardarZonaSeguridad('<?= $idPlanEmergencia ?>', 0, '<?= $tablaID ?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["zona_seguridad"] ?></a>
             </span>         
         <?php } ?>
     </div>

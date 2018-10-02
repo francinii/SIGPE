@@ -10,8 +10,8 @@ include("plan_emergencia_menu.php");
 //$categoria = 'telecomunicaciones';
 //$prefijo = 'PA-';
 $tablaID = "lista_plan_accion";
-$sql = "SELECT  `id`, `FKidPlanEmergencias`, `brigadista`, `puntoPartida`,"
-        . " `zonaEvacuar`,`numPersonasEvacuar`,`distancia`,`tiempo` FROM `Brigada` WHERE `FKidPlanEmergencias`=$idPlanEmergencia";
+$sql = "SELECT  `id`, `FKidZonaTrabajo`, `brigadista`, `puntoPartida`,"
+        . " `zonaEvacuar`,`numPersonasEvacuar`,`distancia`,`tiempo` FROM `Brigada` WHERE `FKidZonaTrabajo`=$idPlanEmergencia";
 $res = seleccion($sql);
 if (count($res) <= 0) {
     $res = array('0');

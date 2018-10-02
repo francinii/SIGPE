@@ -28,7 +28,7 @@ $electrico = $_GET['electrico'];
 $telefonico = $_GET['pluvial'];
 $InstalacionesOtros = $_GET['electrico'];
 
-$sql_a = "CALL datos_Instalaciones($idCentro,'$Densidad','$area','$instalaciones','$zona','$topografica','$terreno','$colindantes','$tipo','$antiguedad',"
+$sql_a = "CALL update_datos_Instalaciones($idCentro,'$Densidad','$area','$instalaciones','$zona','$topografica','$terreno','$colindantes','$tipo','$antiguedad',"
         . "'$cimientos','$estructura','$Entrepiso','$paredes','$techo','$cielo','$pisos','$parqueo','$aguaPotable','$sanitario',"
         . "'$pluvial','$electrico','$telefonico','$InstalacionesOtros',@res);";
 $sql_b = "SELECT @res as res;";

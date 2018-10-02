@@ -399,7 +399,7 @@ $vocab["peligro_37"] = "Hay cilindros de gas vacíos, tirados o sin proteger.";
 
 //***********     plan de emergencia formulario plan de accion ***********************//
 $vocab["zona_seguridad"]                    = "zona de seguridad";
-$vocab["zona_seguridad_title"]              = "";
+$vocab["zona_seguridad_title"]              = "Zona de seguridad";
 $vocab["zona_seguridad_nombre"]             ="Nombre";  
 $vocab["zona_seguridad_ubicacion"]          ="Ubicacion";  
 $vocab["zona_seguridad_capacidad"]          ="Capacidad";  
@@ -547,8 +547,8 @@ $vocab["puestos_brigada_puestoNuevo"]               ="Puesto nuevo";
 //***********     plan de emergencia  capitulos y subcapitulos ***********************//
 $vocab["capitulos_subcapitulos_title"]                       ="Informacion extra capitulos y subcapitulos";
 $vocab["capitulos_subcapitulos_title_desc"]                       ="Informacion extra requedia en los capitulos y subcapitulos. El usuario debe escribir redaccion";
-$vocab["capitulos_subcapitulos_capitulo"]                    = "Capitulo:";
-$vocab["capitulos_subcapitulos_subcapitulo"]                 = "Subcapitulo:";
+$vocab["capitulos_subcapitulos_capitulo"]                    = "Capitulo";
+$vocab["capitulos_subcapitulos_subcapitulo"]                 = "Subcapitulo";
 $vocab["capitulos_subcapitulos_info_admin"]                  = "Informacion del admin:";
 $vocab["capitulos_subcapitulos_indicaciones"]                  = "Indicaciones:";
 $vocab["capitulos_subcapitulos_info_usuario"]                  = "Redaccion del usuario:";

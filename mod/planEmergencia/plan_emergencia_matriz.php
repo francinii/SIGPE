@@ -108,12 +108,9 @@ function calcularCriterioAlertaColor($registro, $vocab) {
 }
 
 $origenes = seleccion(consultaOrigenes());
-$sql = "SELECT matriz.id, matriz.FKidCategoriaTipoAmenaza, matriz.FKidPlanEmergencias, 
-matriz.fuente, matriz.probabilidad, matriz.gravedad, matriz.consecuenciaAmenaza FROM
-(SELECT id FROM PlanEmergencia where FKidZonaTrabajo = $idCentro ) plan,
-(SELECT id, FKidCategoriaTipoAmenaza, FKidPlanEmergencias, fuente,
- probabilidad,gravedad,consecuenciaAmenaza FROM Matriz) matriz
- where matriz.FKidPlanEmergencias = plan.id";
+$sql = "SELECT id, FKidCategoriaTipoAmenaza, FKidZonaTrabajo, fuente,
+ probabilidad,gravedad,consecuenciaAmenaza FROM Matriz 
+WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
 $matriz = seleccion($sql);
 ?>
 

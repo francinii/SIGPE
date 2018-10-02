@@ -6,7 +6,7 @@ $user_rol = $mySessionController->getVar("rol");
 include("plan_emergencia_menu.php");
 
 $sql = "SELECT  `tipo`, `ubicacion`, `Distancia`, `Tiempo`"
-        . " FROM `CuerposScorro` WHERE `FKidPlanEmergencias`=" . $idPlanEmergencia;
+        . " FROM `CuerposScorro` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
 $res = seleccion($sql);
 
 if (count($res) <= 0) {
@@ -92,7 +92,7 @@ if (count($res) <= 0) {
 
 <!------------------------------------------- Tabla increso cuerpos de socorro----------------------------------------------->
 <?php
-$sql = "SELECT `dimensionAreaAcceso`, `radioGiro`, `caseta`, `plumas`, `anchoLibre` FROM `IngresoCuerpoSocorro` WHERE `FKidPlanEmergencias`=" . $idPlanEmergencia;
+$sql = "SELECT `dimensionAreaAcceso`, `radioGiro`, `caseta`, `plumas`, `anchoLibre` FROM `IngresoCuerpoSocorro` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
 $res = seleccion($sql);
 ?>
 
