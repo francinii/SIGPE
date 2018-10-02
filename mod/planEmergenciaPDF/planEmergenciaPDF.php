@@ -31,7 +31,7 @@ $user_rol = $mySessionController->getVar("rol");
 include_once('../../lib/tcpdf/examples/tcpdf_include.php');
 
 $id = $_GET['idCentro'];
-$sqlPlan = "(SELECT `id`, `FKidZonaTrabajo`, `revisadoPor`, `codigoZonaTrabajo`, `actividad`, `direccion`, `personaContactoGeneral`, `numeroTelefono`, `numeroFax`, `correo`, `categoriaNFPA`, `usoInstalaciones`, `horarioJornada`, `seguridadInstitucional`, `servicioConsegeria`, `personalAdministrativo`, `personalAcademico`, `presenciaEstudiantil`, `instalacionesDensidadOcupacion`, `instalacionesAreaConstruccion`, `instalacionesInstalaciones`, `instalacionesCaracteristicasZona`, `instalacionesTopografia`, `instalacionesNivelTerreno`, `instalacionesColindates`, `elementosConstructivosTipoConstruccion`, `elementosConstructivosAntiguedad`, `elementosConstructivosCimientos`, `elementosConstructivosEstructura`, `elementosConstructivosParedes`, `elementosConstructivosEntrepiso`, `elementosConstructivosTecho`, `elementosConstructivosCielos`, `elementosConstructivosPisos`, `elementosConstructivosAreaParqueo`, `elementosConstructivosSistemaAguaPotable`, `elementosConstructivosAlcantarilladoSanitario`, `elementosConstructivosAlcantarilladoPluvial`, `elementosConstructivosSistemaElectrico`, `elementosConstructivosSistemaTelefonico`, `elementosConstructivosOtros` FROM `PlanEmergencia` where FKidZonaTrabajo =" . $id . ")";
+$sqlPlan = "(SELECT `id`, `revisadoPor`, `codigoZonaTrabajo`, `actividad`, `direccion`, `personaContactoGeneral`, `numeroTelefono`, `numeroFax`, `correo`, `categoriaNFPA`, `usoInstalaciones`, `horarioJornada`, `seguridadInstitucional`, `servicioConsegeria`, `personalAdministrativo`, `personalAcademico`, `presenciaEstudiantil`, `instalacionesDensidadOcupacion`, `instalacionesAreaConstruccion`, `instalacionesInstalaciones`, `instalacionesCaracteristicasZona`, `instalacionesTopografia`, `instalacionesNivelTerreno`, `instalacionesColindates`, `elementosConstructivosTipoConstruccion`, `elementosConstructivosAntiguedad`, `elementosConstructivosCimientos`, `elementosConstructivosEstructura`, `elementosConstructivosParedes`, `elementosConstructivosEntrepiso`, `elementosConstructivosTecho`, `elementosConstructivosCielos`, `elementosConstructivosPisos`, `elementosConstructivosAreaParqueo`, `elementosConstructivosSistemaAguaPotable`, `elementosConstructivosAlcantarilladoSanitario`, `elementosConstructivosAlcantarilladoPluvial`, `elementosConstructivosSistemaElectrico`, `elementosConstructivosSistemaTelefonico`, `elementosConstructivosOtros` FROM `ZonaTrabajo` where id =" . $id . ")";
 $sqlCapitulos = "(SELECT  id, descripcion, orden,titulo,isActivo FROM Capitulo ORDER BY orden)";
 
 
@@ -45,12 +45,11 @@ $sql = "(SELECT  tipoPoblacion, descripcion, total, representacionDe FROM TipoPo
 $resTipoPoblacion = seleccion($sql);
 
 
-$sql = "SELECT  `id` FROM `PlanEmergencia`  WHERE `FKidZonaTrabajo`=" . $id;
-$resid = seleccion($sql);
 
-if (count($resid) > 0) {
-    $idPlanEmergencia = $resid[0]['id'];
-}
+
+
+    $idPlanEmergencia = $id;
+
 
 
 //$res = seleccion($sql);
@@ -450,7 +449,7 @@ function formularioInstalaciones($resPlan, $vocab) {
 function formularioRecursosHumanos($idPlanEmergencia, $vocab) {
     //Recursos Humanos
     $sql = "SELECT  `cantidad`, `profesion`, `categorias`, `localizacion`,"
-            . " `contacto` FROM `RecursoHumanos` WHERE `FKidPlanEmergencias`=" . $idPlanEmergencia;
+            . " `contacto` FROM `RecursoHumanos` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
     $respuesta = seleccion($sql);
 
     $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
@@ -478,7 +477,7 @@ function formularioRecursosHumanos($idPlanEmergencia, $vocab) {
 function formularioEquipoMovil($idPlanEmergencia, $vocab, $categoria) {
 //Equipo movil
     $sql = "SELECT `cantidad`, `capacidad`, `tipo`, `caracteristicas`,"
-            . " `contacto`, `ubicacion`, `categoria` FROM `EquipoMovil` WHERE  `categoria`= '" . $categoria . "' and `FKidPlanEmergencias`=" . $idPlanEmergencia;
+            . " `contacto`, `ubicacion`, `categoria` FROM `EquipoMovil` WHERE  `categoria`= '" . $categoria . "' and `FKidZonaTrabajo`=" . $idPlanEmergencia;
     $respuesta = seleccion($sql);
 
     $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
@@ -508,7 +507,7 @@ function formularioEquipoMovil($idPlanEmergencia, $vocab, $categoria) {
 function formularioRecursosInstalaciones($idPlanEmergencia, $vocab) {
 //Recurso de instalaciones
     $sql = "SELECT `tipo`, `cantidad`, `tamaño`, `distribucion`,"
-            . " `contacto`, `ubicacion` FROM `RecursoIntalaciones` WHERE `FKidPlanEmergencias`=" . $idPlanEmergencia;
+            . " `contacto`, `ubicacion` FROM `RecursoIntalaciones` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
     $respuesta = seleccion($sql);
 
 
@@ -539,7 +538,7 @@ function formularioRecursosInstalaciones($idPlanEmergencia, $vocab) {
 function formularioInventarioOtros($idPlanEmergencia, $vocab, $categoria) {
 //Recursos de telecomunicaciones
     $sql = "SELECT  `cantidad`, `tipo`, `caracteristicas`, `contacto`,"
-            . " `ubicacion`,`categoria`,`observaciones` FROM `InventarioOtros` WHERE `FKidPlanEmergencias`=$idPlanEmergencia and `categoria`='$categoria' ";
+            . " `ubicacion`,`categoria`,`observaciones` FROM `InventarioOtros` WHERE `FKidZonaTrabajo`=$idPlanEmergencia and `categoria`='$categoria' ";
     $respuesta = seleccion($sql);
 
     $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
@@ -567,7 +566,7 @@ function formularioInventarioOtros($idPlanEmergencia, $vocab, $categoria) {
 
 //Formulario de peligros identificados
 function formularioPeligrosIdentificados($idPlanEmergencia, $vocab) {
-    $sql = "SELECT  `id`, `peligro`, `presente`,`ubicacion`,`recomendacion`, `fecha`, `responsable`, `priorizacion` FROM `IdentificacionPeligro`  WHERE `presente`  = 1 and `FKidPlanEmergencias`=" . $idPlanEmergencia . " order by  priorizacion ASC";
+    $sql = "SELECT  `id`, `peligro`, `presente`,`ubicacion`,`recomendacion`, `fecha`, `responsable`, `priorizacion` FROM `IdentificacionPeligro`  WHERE `presente`  = 1 and `FKidZonaTrabajo`=" . $idPlanEmergencia . " order by  priorizacion ASC";
     $respuesta = seleccion($sql);
 
     $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
@@ -605,7 +604,7 @@ function formularioPeligrosIdentificados($idPlanEmergencia, $vocab) {
 function formularioPoblacion($idPlanEmergencia, $vocab) {
     $sql = "SELECT  `nombreOficina`, `capacidadPermanente`, `capacidadTemporal`, `representanteComite`,"
             . " `representanteBrigadaEfectiva`,`representantePrimerosAuxilios`,`telefonoOficina`,`contactoEmergencia`,`telefonoPersonal`,`correoElectronico`"
-            . ",`correoElectronico`,`sector` FROM `FormularioPoblacion` WHERE `FKidPlanEmergencias`=" . $idPlanEmergencia . " order by `sector` ";
+            . ",`correoElectronico`,`sector` FROM `FormularioPoblacion` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia . " order by `sector` ";
     $respuesta = seleccion($sql);
 
     $sector = $respuesta[0]['sector'];
@@ -649,8 +648,8 @@ function formularioPoblacion($idPlanEmergencia, $vocab) {
 
 //Formulario de rutas de evaciocion
 function formularioRutaEvacuacion($idPlanEmergencia, $vocab) {
-    $sql = "SELECT  `id`, `FKidPlanEmergencias`, `nombreArea`, `personaPermanente`,"
-            . " `personaFlotante`,`ruta1`,`distancia1`,`tiempo1`,`ruta2`,`distancia2`,`tiempo2` FROM `RutaEvacuacion` WHERE `FKidPlanEmergencias`=$idPlanEmergencia";
+    $sql = "SELECT  `id`, `FKidZonaTrabajo`, `nombreArea`, `personaPermanente`,"
+            . " `personaFlotante`,`ruta1`,`distancia1`,`tiempo1`,`ruta2`,`distancia2`,`tiempo2` FROM `RutaEvacuacion` WHERE `FKidZonaTrabajo`=$idPlanEmergencia";
     $respuesta = seleccion($sql);
     $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
             . '<thead><tr style = "text-align:center;">'
@@ -683,8 +682,8 @@ function formularioRutaEvacuacion($idPlanEmergencia, $vocab) {
 
 //Formulario de rutas de evaciocion
 function formularioBrigadistas($idPlanEmergencia, $vocab) {
-    $sql = "SELECT  `id`, `FKidPlanEmergencias`, `brigadista`, `puntoPartida`,"
-            . " `zonaEvacuar`,`numPersonasEvacuar`,`distancia`,`tiempo` FROM `Brigada` WHERE `FKidPlanEmergencias`=$idPlanEmergencia";
+    $sql = "SELECT  `id`, `FKidZonaTrabajo`, `brigadista`, `puntoPartida`,"
+            . " `zonaEvacuar`,`numPersonasEvacuar`,`distancia`,`tiempo` FROM `Brigada` WHERE `FKidZonaTrabajo`=$idPlanEmergencia";
     $respuesta = seleccion($sql);
     $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
             . '<thead><tr style = "text-align:center;">'
@@ -712,7 +711,7 @@ function formularioBrigadistas($idPlanEmergencia, $vocab) {
 //Formulario de atnción de emergencias
 function formularioIngresoAtencionEmergencias($idPlanEmergencia, $vocab) {
     $sql = "SELECT  `tipo`, `ubicacion`, `Distancia`, `Tiempo`"
-            . " FROM `CuerposScorro` WHERE `FKidPlanEmergencias`=" . $idPlanEmergencia;
+            . " FROM `CuerposScorro` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
     $respuesta = seleccion($sql);
     $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
             . '<thead><tr style = "text-align:center;">'
@@ -735,7 +734,7 @@ function formularioIngresoAtencionEmergencias($idPlanEmergencia, $vocab) {
 
 //Formulario de cuerpos de socorro
 function formularioIngresoCuerposSocorro($idPlanEmergencia, $vocab) {
-    $sql = "SELECT `dimensionAreaAcceso`, `radioGiro`, `caseta`, `plumas`, `anchoLibre` FROM `IngresoCuerpoSocorro` WHERE `FKidPlanEmergencias`=" . $idPlanEmergencia;
+    $sql = "SELECT `dimensionAreaAcceso`, `radioGiro`, `caseta`, `plumas`, `anchoLibre` FROM `IngresoCuerpoSocorro` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
     $res = seleccion($sql);
     $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
             . '<thead><tr style = "text-align:center;">'
@@ -766,7 +765,7 @@ function formularioIngresoCuerposSocorro($idPlanEmergencia, $vocab) {
 
 //Formulario de puestos de brigada
 function formularioPuestoBrigada($idPlanEmergencia, $vocab) {
-    $sql = "SELECT `puesto`, `funcion`, `plazoEjecucion` FROM `FormularioPuestoBrigada` WHERE `FKidPlanEmergencias`=" . $idPlanEmergencia . " order by `puesto` ";
+    $sql = "SELECT `puesto`, `funcion`, `plazoEjecucion` FROM `FormularioPuestoBrigada` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia . " order by `puesto` ";
     $respuesta = seleccion($sql);
 
     $puesto = $respuesta[0]['puesto'];
@@ -794,8 +793,8 @@ function formularioPuestoBrigada($idPlanEmergencia, $vocab) {
 
 //Formulario de zonas de seguridad
 function formularioZonaSeguridad($idPlanEmergencia, $vocab) {
-    $sql = "SELECT  `id`, `FKidPlanEmergencias`, `Nombre`, `ubicacion`,"
-            . " `capacidad`,`observaciones`,`sector` FROM `ZonaSeguridad` WHERE `FKidPlanEmergencias`=$idPlanEmergencia";
+    $sql = "SELECT  `id`, `FKidZonaTrabajo`, `Nombre`, `ubicacion`,"
+            . " `capacidad`,`observaciones`,`sector` FROM `ZonaSeguridad` WHERE `FKidZonaTrabajo`=$idPlanEmergencia";
     $respuesta = seleccion($sql);
     $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
             . '<thead><tr style = "text-align:center;">'
@@ -819,7 +818,7 @@ function formularioZonaSeguridad($idPlanEmergencia, $vocab) {
 }
 
 function formularioMatriz($idPlanEmergencia, $vocab, $pdf) {
-    $sql = "SELECT `probabilidad`, `gravedad`, `consecuenciaAmenaza` FROM `Matriz` WHERE `FKidPlanEmergencias`=" . $idPlanEmergencia;
+    $sql = "SELECT `probabilidad`, `gravedad`, `consecuenciaAmenaza` FROM `Matriz` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
     $respuesta = seleccion($sql);
     $cantidad = array(
         ['color' => 'Ninguna', 'cantidad' => 0],
