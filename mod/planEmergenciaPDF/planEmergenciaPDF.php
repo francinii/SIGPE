@@ -209,9 +209,10 @@ function subCapitulos($pdf, $id, $ordenCapitulo, $resPlan, $resTipoPoblacion, $f
         $html = '<h3><b>' . $ordenCapitulo . "." . $sub['orden'] . " " . $sub['titulo'] . '</b></h3>';
         $html .= $sub['descripcion'];
         $pdf->writeHTML($html, true, false, true, false, '');
-        $html = listarFormularios($sub['id'], $formularios, $resPlan, $resTipoPoblacion, $vocab, $idPlanEmergencia);
+        //$html =
+        listarFormularios($sub['id'], $formularios, $resPlan, $resTipoPoblacion, $vocab, $idPlanEmergencia, $pdf);
         // $html .= '<div></div>';
-        $pdf->writeHTML($html, true, false, true, false, '');
+        //$pdf->writeHTML($html, true, false, true, false, '');
     }
 }
 
@@ -817,7 +818,7 @@ function formularioZonaSeguridad($idPlanEmergencia, $vocab) {
     return $html;
 }
 
-function formularioMatriz($idPlanEmergencia, $vocab) {
+function formularioMatriz($idPlanEmergencia, $vocab, $pdf) {
     $sql = "SELECT `probabilidad`, `gravedad`, `consecuenciaAmenaza` FROM `Matriz` WHERE `FKidPlanEmergencias`=" . $idPlanEmergencia;
     $respuesta = seleccion($sql);
     $cantidad = array(
@@ -859,7 +860,7 @@ function formularioMatriz($idPlanEmergencia, $vocab) {
     }
     $html .= '</tbody></table>';
     $colores = array($vocab["criterio_ninguna"], $vocab["criterio_verde"],
-    $vocab["criterio_amarilla"], $vocab["criterio_roja"]);
+        $vocab["criterio_amarilla"], $vocab["criterio_roja"]);
     //global $datosCabecera;
     $color = JSON_encode($colores);
     $color = str_replace('"', "'", $color);
@@ -867,25 +868,61 @@ function formularioMatriz($idPlanEmergencia, $vocab) {
     //$html .= '<img src= "' .  $datosCabecera['logoUNA'] . '" width="60" height="60" />';
     //mod/planEmergencia/grafico.php?criterios=[3,2,2,1]&colores=['NINGUNA','VERDE','AMARILLA','ROJA']
     //mod/planEmergencia/grafico.php?criterios=[3,2,2,1]&colores=['NINGUNA','VERDE','AMARILLA','ROJA']&time=1538079371
-    $html .= '<img alt="Aqui estoy!!" width="600px" height = "600px"   src="img/grafico.php?criterios=' . $valores . '&colores=' . $color . '&time=' . time() . '"/>';
+    //'<img alt="Aqui estoy!!" width="600px" height = "600px"   src="/grafico.php?criterios=' . $valores . '&colores=' . $color . '&time=' . time() . '"/>';
+    //  $html .= '<div height: 500px;></div>'; 
+    include('grafico.php?criterios=' . $valores . '&colores=' . $color . '&time=' . time() . '');
+    //include('grafico.php?criterios=' . $valores . '&colores=' . $color . '&time=' . time() . '');
+   
 
-    return $html;
+    $pdf->writeHTML($html, true, false, true, false, '');
+    //  $pdf->Image('*/mod/planEmergencia/grafico.php?criterios=' . $valores . '&colores=' . $color . '&time=' . time() . '', '', '', 40, 40, '', '', 'T', false, 300, '', false, false, 1, false, false, false);
+    // $pdf->SetXY(10, 10);
+    $pdf->SetXY(50, 80);
+    $pdf->Image('grafica1.png', '', '', 40, 40, '', '', 'T', false, 300, '', false, false, 1, false, false, false);
+    //  $pdf->Image('grafica1.png', '', '', 40, 40, '', '', 'T', false, 300, '', false, false, 1, false, false, false);
+
+    return '';
 }
+
+//function crearGrafico($pdf) {
+//    $xc = 105;
+//    $yc = 80;
+//    $r = 30;
+//    $pdf->SetFillColor(130, 130, 130);  //#828282 gris #5cb85c v #f0ad4e a, rojo #d9534f
+//    $pdf->PieSector($xc, $yc, $r, 20, 120, 'FD', false, 0, 2);
+//
+//    $pdf->SetFillColor(9, 184, 92);
+//    $pdf->PieSector($xc, $yc, $r, 120, 250, 'FD', false, 0, 2);
+//
+//    $pdf->SetFillColor(240, 173, 78);
+//    $pdf->PieSector($xc, $yc, $r, 250, 20, 'FD', false, 0, 2);
+//
+//    $pdf->SetFillColor(217, 83, 79);
+//    $pdf->PieSector($xc, $yc, $r, 250, 20, 'FD', false, 0, 2);
+//
+//
+//
+//    // $pdf->SetTextColor(255, 255, 255);
+//    $pdf->Text(105, 65, 'BLUE');
+//    $pdf->Text(60, 75, 'GREEN');
+//    $pdf->Text(120, 115, 'RED');
+//}
 
 function calcularPorcentajeAmenaza($cantidadPorTipo, $cantidad) {
     $cantidadTotal = $cantidad[0]['cantidad'] + $cantidad[1]['cantidad'] + $cantidad[2]['cantidad'] + $cantidad[3]['cantidad'];
     return ($cantidadPorTipo / $cantidadTotal) * 100;
 }
 
-function listarFormularios($id, $formularios, $resPlan, $resTipoPoblacion, $vocab, $idPlanEmergencia) {
-    $html = "";
+function listarFormularios($id, $formularios, $resPlan, $resTipoPoblacion, $vocab, $idPlanEmergencia, $pdf) {
+    //$html = "";
     foreach ($formularios as $form) {
-        $html .= formularioSeleccionada($id, $form, $resPlan, $resTipoPoblacion, $vocab, $idPlanEmergencia);
+        // $html .=
+        formularioSeleccionada($id, $form, $resPlan, $resTipoPoblacion, $vocab, $idPlanEmergencia, $pdf);
     }
-    return $html;
+    //   return $html;
 }
 
-function formularioSeleccionada($id, $form, $resPlan, $resTipoPoblacion, $vocab, $idPlanEmergencia) {
+function formularioSeleccionada($id, $form, $resPlan, $resTipoPoblacion, $vocab, $idPlanEmergencia, $pdf) {
     $html = "";
     if ($form['FKidSubcapitulos'] == $id) {
         $idForm = $form['id'];
@@ -894,14 +931,15 @@ function formularioSeleccionada($id, $form, $resPlan, $resTipoPoblacion, $vocab,
             $html .= '<div></div>';
         } else if ($idForm == 2) { //Formulario de actividades
             $html = formularioActividades($resTipoPoblacion, $vocab);
+
             $html .= '<div></div>';
         } else if ($idForm == 3) { // Formulario de instalaciones
             $html .= formularioInstalaciones($resPlan, $vocab);
             $html .= '<div></div>';
             //  $html .= '<div></div>';
         } else if ($idForm == 4) { //Formulario Matriz de riesgos 
-            $html .= formularioMatriz($idPlanEmergencia, $vocab);
-            $html .= '<div></div>';
+            $html .= formularioMatriz($idPlanEmergencia, $vocab, $pdf);
+            //  $html .= '<div></div>';
         } else if ($idForm == 5) { //Formulario Inventario
             $html .= '<div>' . $vocab["recurso_humano_titulo"] . '</div>';
             $html .= formularioRecursosHumanos($idPlanEmergencia, $vocab);
@@ -961,7 +999,9 @@ function formularioSeleccionada($id, $form, $resPlan, $resTipoPoblacion, $vocab,
             $html .= '<div></div>';
         }
     }
-    return $html;
+    // return $html;
+
+    $pdf->writeHTML($html, true, false, true, false, '');
 }
 
 function cargarNuevaPagina($pdf) {
@@ -971,7 +1011,8 @@ function cargarNuevaPagina($pdf) {
 
 // ---------------------------------------------------------
 //Close and output PDF document
-$pdf->Output('planEmergencias.pdf', 'I');
+ob_clean();
+$pdf->Output('../planEmergencias.pdf', 'F');
 
 //============================================================+
 // END OF FILE
