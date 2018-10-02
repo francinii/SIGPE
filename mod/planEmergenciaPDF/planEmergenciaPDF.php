@@ -375,7 +375,7 @@ function formularioInstalaciones($resPlan, $vocab) {
             . '<td>' . $resPlan[0]['instalacionesColindates'] . '</td>'
             . '</tr>'
             . '<tr>'
-            . '<td colspan = "2"><b>' . $res['instalaciones_subTitulo2'] . '</b></td>'
+            . '<td colspan = "2"><b>' . $vocab['instalaciones_subTitulo2'] . '</b></td>'
             . '</tr>'
             . '<tr>'
             . '<td>' . $vocab['instalaciones_Tipo'] . '</td>'
