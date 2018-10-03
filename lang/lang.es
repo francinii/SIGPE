@@ -217,9 +217,12 @@ $vocab["formulario_admin_Desc"]        = "Colocar la información de los formula
 $vocab["list_formulario"]              = "Lista de formularios";
 $vocab["formulario_id"]                = "id";
 $vocab["formulario_formulario"]        = "Formulario";
+$vocab["formulario_titulo"]        = "Titulo";
+$vocab["formulario_titulo_desc"]        = "Titulo del formulario";
+$vocab["formulario_formulario_desc"]   = "Descripción que llevara el formulario";
 $vocab["formulario_subcapitulo"]        = "subcapitulo(CAPITULO)";
-
-
+$vocab["formulario_descripcion_arriba"]  = "Descripción arriba del formulario";
+$vocab["formulario_descripcion_abajo"]  = "Descripción abajo del formulario";
 //***********     Modulo Formulario matriz de riesgos    ***********************//
 $vocab["matriz_title"]               = "Matriz de riesgos";
 $vocab["td_origen"]                      = "Origen";
