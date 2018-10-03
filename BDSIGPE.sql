@@ -2425,3 +2425,88 @@ BEGIN
 END
 ;;
 DELIMITER ;
+
+
+-- ------------------------------
+--  insertar informacion de usuario en el capitulo
+-- ------------------------------
+DROP PROCEDURE IF EXISTS `insertar_info_usuario_capitulo`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertar_info_usuario_capitulo`(IN `p_FKidZonaTrabajo` int, IN `p_FKidCapitulo` int,
+ IN `p_descripcion` varchar(150),OUT `res` TINYINT  UNSIGNED)
+BEGIN   
+    declare existe Integer;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+      set existe = null;
+      select count(`p_FKidZonaTrabajo`) into existe from CapituloPlan WHERE  `FKidCapitulo`=p_FKidCapitulo and `FKidZonaTrabajo`=p_FKidZonaTrabajo;
+         IF(existe = 1) THEN
+         START TRANSACTION;
+        UPDATE `CapituloPlan` SET `descripcion`=p_descripcion WHERE `FKidCapitulo`=p_FKidCapitulo and `FKidZonaTrabajo`=p_FKidZonaTrabajo ;
+        COMMIT;
+        -- SUCCESS       
+     ELSE
+        START TRANSACTION;       
+       INSERT INTO `CapituloPlan`(`FKidCapitulo`, `FKidZonaTrabajo`, `descripcion`) 
+       VALUES (p_FKidCapitulo,p_FKidZonaTrabajo,p_descripcion);
+         
+        COMMIT;
+        -- SUCCESS         
+   END IF;
+         SET res = 0;
+END
+;;
+DELIMITER ;
+
+-- ------------------------------
+--  insertar informacion de usuario en el subcapitulo
+-- ------------------------------
+DROP PROCEDURE IF EXISTS `insertar_info_usuario_subcapitulo`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertar_info_usuario_subcapitulo`(IN `p_FKidZonaTrabajo` int, IN `p_FKidSubCapitulo` int,
+ IN `p_descripcion` varchar(150),OUT `res` TINYINT  UNSIGNED)
+BEGIN   
+    declare existe Integer;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	-- ERROR
+    SET res = 1;
+    ROLLBACK;
+    END;
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+	-- ERROR
+            SET res = 2;
+            ROLLBACK;
+	END; 
+
+      set existe = null;
+      select count(`p_FKidZonaTrabajo`) into existe from SubCapituloPlan WHERE  `FKidSubCapitulo`=p_FKidSubCapitulo and `FKidZonaTrabajo`=p_FKidZonaTrabajo;
+         IF(existe = 1) THEN
+         START TRANSACTION;
+        UPDATE `SubCapituloPlan` SET `descripcion`=p_descripcion WHERE `FKidSubCapitulo`=p_FKidSubCapitulo and `FKidZonaTrabajo`=p_FKidZonaTrabajo ;
+        COMMIT;
+        -- SUCCESS       
+     ELSE
+        START TRANSACTION;       
+       INSERT INTO `SubCapituloPlan`(`FKidSubCapitulo`, `FKidZonaTrabajo`, `descripcion`) 
+       VALUES (p_FKidSubCapitulo,p_FKidZonaTrabajo,p_descripcion);
+         
+        COMMIT;
+        -- SUCCESS         
+   END IF;
+         SET res = 0;
+END
+;;
+DELIMITER ;
