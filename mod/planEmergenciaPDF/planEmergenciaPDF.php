@@ -26,9 +26,13 @@
  */
 include("../login/check.php");
 include("../../functions.php");
+include_once('../../lib/tcpdf/examples/tcpdf_include.php');
+require_once ('../../lib/jpgraph/src/jpgraph.php');
+require_once ('../../lib/jpgraph/src/jpgraph_pie.php');
+
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
-include_once('../../lib/tcpdf/examples/tcpdf_include.php');
+
 
 $id = $_GET['idCentro'];
 $sqlPlan = "(SELECT `id`, `revisadoPor`, `codigoZonaTrabajo`, `actividad`, `direccion`, `personaContactoGeneral`, `numeroTelefono`, `numeroFax`, `correo`, `categoriaNFPA`, `usoInstalaciones`, `horarioJornada`, `seguridadInstitucional`, `servicioConsegeria`, `personalAdministrativo`, `personalAcademico`, `presenciaEstudiantil`, `instalacionesDensidadOcupacion`, `instalacionesAreaConstruccion`, `instalacionesInstalaciones`, `instalacionesCaracteristicasZona`, `instalacionesTopografia`, `instalacionesNivelTerreno`, `instalacionesColindates`, `elementosConstructivosTipoConstruccion`, `elementosConstructivosAntiguedad`, `elementosConstructivosCimientos`, `elementosConstructivosEstructura`, `elementosConstructivosParedes`, `elementosConstructivosEntrepiso`, `elementosConstructivosTecho`, `elementosConstructivosCielos`, `elementosConstructivosPisos`, `elementosConstructivosAreaParqueo`, `elementosConstructivosSistemaAguaPotable`, `elementosConstructivosAlcantarilladoSanitario`, `elementosConstructivosAlcantarilladoPluvial`, `elementosConstructivosSistemaElectrico`, `elementosConstructivosSistemaTelefonico`, `elementosConstructivosOtros` FROM `ZonaTrabajo` where id =" . $id . ")";
@@ -48,7 +52,7 @@ $resTipoPoblacion = seleccion($sql);
 
 
 
-    $idPlanEmergencia = $id;
+$idPlanEmergencia = $id;
 
 
 
@@ -780,7 +784,7 @@ function formularioPuestoBrigada($idPlanEmergencia, $vocab) {
     foreach ($respuesta as $res) {
         if ($res['puesto'] != $puesto) {
             $html .= '<tr  style = "text-align:center;"><td colspan = "10"><b>' . $res['puesto'] . '</b></td></tr>';
-            $puesto = $res['sector'];
+            $puesto = $res['puesto'];
         }
         $html .= '<tr style = "text-align:center;">'
                 . '<td>' . $res['funcion'] . '</td>'
@@ -821,10 +825,10 @@ function formularioMatriz($idPlanEmergencia, $vocab, $pdf) {
     $sql = "SELECT `probabilidad`, `gravedad`, `consecuenciaAmenaza` FROM `Matriz` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
     $respuesta = seleccion($sql);
     $cantidad = array(
-        ['color' => 'Ninguna', 'cantidad' => 0],
-        ['color' => 'Verde', 'cantidad' => 0],
-        ['color' => 'Amarilla', 'cantidad' => 0],
-        ['color' => 'Roja', 'cantidad' => 0]);
+            ['color' => 'Ninguna', 'cantidad' => 0],
+            ['color' => 'Verde', 'cantidad' => 0],
+            ['color' => 'Amarilla', 'cantidad' => 0],
+            ['color' => 'Roja', 'cantidad' => 0]);
 
     foreach ($respuesta as $res) {
         $valor = $res['probabilidad'] * ($res['gravedad'] + $res['consecuenciaAmenaza']);
@@ -863,16 +867,19 @@ function formularioMatriz($idPlanEmergencia, $vocab, $pdf) {
     //global $datosCabecera;
     $color = JSON_encode($colores);
     $color = str_replace('"', "'", $color);
+
+    $valores[0] = (($valores[0] + $valores[1] + $valores[2] + $valores[3]) == 0) ? 1 : $valores[0];
     $valores = JSON_encode($valores);
     //$html .= '<img src= "' .  $datosCabecera['logoUNA'] . '" width="60" height="60" />';
     //mod/planEmergencia/grafico.php?criterios=[3,2,2,1]&colores=['NINGUNA','VERDE','AMARILLA','ROJA']
     //mod/planEmergencia/grafico.php?criterios=[3,2,2,1]&colores=['NINGUNA','VERDE','AMARILLA','ROJA']&time=1538079371
     //'<img alt="Aqui estoy!!" width="600px" height = "600px"   src="/grafico.php?criterios=' . $valores . '&colores=' . $color . '&time=' . time() . '"/>';
     //  $html .= '<div height: 500px;></div>'; 
-    include('grafico.php?criterios=' . $valores . '&colores=' . $color . '&time=' . time() . '');
-    //include('grafico.php?criterios=' . $valores . '&colores=' . $color . '&time=' . time() . '');
-   
-
+    //include_path'../grafico.php?criterios=' . $valores . '&colores=' . $color . '&time=' . time() . '');
+    // ini_set('include_path', 'grafico.php?criterios=' . $valores . '&colores=' . $color . '&time=' . time() . '');
+    //echo'<script>location.href ="grafico.php?criterios=' . $valores . '&colores=' . $color . '&time=' . time() . '";</script>';
+    //include('../grafico.php?criterios=' . $valores . '&colores=' . $color . '&time=' . time() . '');
+    crearGrafico($valores, $color);
     $pdf->writeHTML($html, true, false, true, false, '');
     //  $pdf->Image('*/mod/planEmergencia/grafico.php?criterios=' . $valores . '&colores=' . $color . '&time=' . time() . '', '', '', 40, 40, '', '', 'T', false, 300, '', false, false, 1, false, false, false);
     // $pdf->SetXY(10, 10);
@@ -909,7 +916,10 @@ function formularioMatriz($idPlanEmergencia, $vocab, $pdf) {
 
 function calcularPorcentajeAmenaza($cantidadPorTipo, $cantidad) {
     $cantidadTotal = $cantidad[0]['cantidad'] + $cantidad[1]['cantidad'] + $cantidad[2]['cantidad'] + $cantidad[3]['cantidad'];
-    return ($cantidadPorTipo / $cantidadTotal) * 100;
+    if ($cantidadTotal != 0) {
+        return ($cantidadPorTipo / $cantidadTotal) * 100;
+    }
+    return 1;
 }
 
 function listarFormularios($id, $formularios, $resPlan, $resTipoPoblacion, $vocab, $idPlanEmergencia, $pdf) {
@@ -1008,11 +1018,53 @@ function cargarNuevaPagina($pdf) {
     $pdf->AddPage();
 }
 
+function crearGrafico($criterios, $colores) {
+    $apr = 40;
+    $rpr = 40;
+    $rj = 50;
+    $nsp = 50;
+
+//$criterios = $_GET['criterios'];
+    $criterios = str_replace("'", '"', $criterios);
+    $data = JSON_decode($criterios);
+
+//$colores = $_GET['colores'];
+    $colores = str_replace("'", '"', $colores);
+    $criterios = JSON_decode($colores);
+    $legend = JSON_decode($colores);
+
+//$data = array($apr, $rpr, $rj, $nsp);
+//$legend = array("APR", "RPR", "RJ", "NSP");
+    $colors = array("#828282", "#5cb85c", "#f0ad4e", "#d9534f");
+
+    $graph = new PieGraph(350, 350);
+    $graph->SetShadow();
+
+    $graph->title->Set("Tipos de amenazas");
+//$graph->title->SetFont(FF_FONT1,FS_BOLD);
+
+    $p1 = new PiePlot($data);
+    $p1->SetLegends($legend);
+
+
+    $graph->Add($p1);
+    $p1->SetSliceColors($colors);
+
+    $graph->Stroke(_IMG_HANDLER);
+
+    $fileName = "grafica1.png";
+    $graph->img->Stream($fileName);
+
+// Mandarlo al navegador
+    //$graph->img->Headers();
+    //$graph->img->Stream();
+}
+
 // ---------------------------------------------------------
 //Close and output PDF document
-ob_clean();
-$pdf->Output('../planEmergencias.pdf', 'F');
 
+
+$pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/planEmergencias.pdf', 'F');
 //============================================================+
 // END OF FILE
 //============================================================+
