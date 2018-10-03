@@ -17,7 +17,7 @@ $ip .= $mySessionController->getVar("cds_locate");
 
 /* * ********************************************************************************************** */
 $start = "0";
-$sql = "SELECT  id, descripcion,FKidSubcapitulos 
+$sql = "SELECT  id, titulo,FKidSubcapitulos 
         FROM Formulario ORDER BY id";
 $res = seleccion($sql);
 
@@ -41,9 +41,14 @@ for ($i = 0; $i < count($cap); $i++) {
         <thead>
             <tr>
                 <th  width="10%"><?= $vocab["formulario_id"] ?></th>
-                <th width="50%"><?= $vocab["formulario_formulario"] ?></th>                
-                <th width="30%"><?= $vocab["formulario_subcapitulo"] ?></th>
-
+                <th width="20%"><?= $vocab["formulario_formulario"] ?></th>                
+                <th width="40%"><?= $vocab["formulario_subcapitulo"] ?></th>
+                <?php if (check_permiso($mod4, $act1, $user_rol)) { ?>
+                    <th width="5%"><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
+                <?php } ?>
+                <?php if (check_permiso($mod4, $act4, $user_rol)) { ?>
+                    <th width="5%"><div class="text-center"><i class="fa fa-pencil fa-2x text-success puntero" title="<?= $vocab["symbol_edit"] ?>"></i></div></th>
+                <?php } ?>
             </tr>
         </thead>
         <tbody>
@@ -54,9 +59,9 @@ for ($i = 0; $i < count($cap); $i++) {
                     ?>
                     <tr id="fila<?= $i ?>"  align='center'>
                         <td><?= $res[$i]['id'] ?></td>                    
-                        <td><?= $res[$i]['descripcion'] ?></td> 
+                        <td><?= $res[$i]['titulo'] ?></td> 
                         <?php if (check_permiso($mod4, $act4, $user_rol)) { ?>
-                            <td><select  id="select<?= $res[$i]['id']; ?>"  onchange="javascript:odenarFomulario(<?= $res[$i]['id']; ?>, '<?= $res[$i]['descripcion']; ?>')" class="form-control selectpicker" data-live-search="true">
+                            <td><select  id="select<?= $res[$i]['id']; ?>"  onchange="javascript:odenarFomulario(<?= $res[$i]['id']; ?>, '<?= $res[$i]['titulo']; ?>')" class="form-control selectpicker" data-live-search="true">
                                     <?php for ($a = 0; $a < count($cap); $a++) { ?>                           
                                         <optgroup label="<?= $cap[$a]['titulo'] ?>">         
                                             <?php
@@ -91,6 +96,20 @@ for ($i = 0; $i < count($cap); $i++) {
                             <?php } ?>
 
                         <?php } ?>
+                        <?php if (check_permiso($mod4, $act1, $user_rol)) { ?>
+                            <td>                      
+                                <a class="puntero" onClick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminFormularios/edit_formulario.php?', 'id_for=<?= $res[$i]["id"] ?>&view_mode=0');">                                     
+                                    <div class="text-center"><i class="fa fa-eye text-primary" title="<?= $vocab["symbol_view"] ?>"></i></div>                                  
+                                </a>                                  
+                            </td>
+                        <?php } ?>
+                        <?php if (check_permiso($mod4, $act4, $user_rol)) { ?>
+                            <td>                           
+                                <a class="puntero"  onClick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminFormularios/edit_formulario.php?', 'id_for=<?= $res[$i]["id"] ?>&view_mode=1');">                                      
+                                    <div class="text-center"><i class="fa fa-pencil text-success" title="<?= $vocab["symbol_edit"] ?>"></i></div>                                    
+                                </a>
+                            </td>
+                        <?php } ?>
                     </tr>
                 <?php } ?>
             <?php } else { ?>
@@ -104,7 +123,12 @@ for ($i = 0; $i < count($cap); $i++) {
                 <th width="10%"><?= $vocab["formulario_id"] ?></th>
                 <th width="50%"><?= $vocab["formulario_formulario"] ?></th>                
                 <th width="30%"><?= $vocab["formulario_subcapitulo"] ?></th>            
-
+                <?php if (check_permiso($mod4, $act1, $user_rol)) { ?>
+                    <th><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
+                <?php } ?>
+                <?php if (check_permiso($mod4, $act4, $user_rol)) { ?>
+                    <th width="5%"><div class="text-center"><i class="fa fa-pencil fa-2x text-success puntero" title="<?= $vocab["symbol_edit"] ?>"></i></div></th>
+                        <?php } ?>
             </tr>
         </tfoot>
     </table>

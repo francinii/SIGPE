@@ -212,9 +212,9 @@ function CrearEditorCapitulos(modo) {
 }
 
 function validate_capitulo() {
-    var titulo = document.getElementById('capitulo_title');
+    var titulo = document.getElementById('formulario_title');
     if (titulo.value == "") {
-        jAlert("Ingrese el titulo del capitulo", "Dato Requerido");
+        jAlert("Ingrese el titulo del formulario", "Dato Requerido");
         titulo.setAttribute("style", "background-color:#EDF0FF");
         titulo.focus();
         return false;

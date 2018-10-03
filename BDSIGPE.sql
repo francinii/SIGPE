@@ -190,8 +190,10 @@ FOREIGN KEY (FKidCapitulo) REFERENCES Capitulo(id)
 
 create table Formulario(
 id int NOT NULL AUTO_INCREMENT,
-descripcion text,
 FKidSubcapitulos int,
+titulo text,
+descripcionArriba text,
+descripcionAbajo text,
 PRIMARY KEY(id),
 FOREIGN KEY (FKidSubcapitulos) REFERENCES SubCapitulo(id)
 )ENGINE=InnoDB;
@@ -452,19 +454,19 @@ INSERT INTO `SubCapitulo` (`descripcion`, `descripcionParaUsuario`, `isDescripci
 INSERT INTO `SubCapitulo` (`descripcion`, `descripcionParaUsuario`, `isDescripcionParaUsuario`,`titulo`,`isActivo`,`FKidCapitulo`,`orden`) VALUES ('descripcion','',1,'Documentos de referencia',1,1,5);
 INSERT INTO `SubCapitulo` (`descripcion`, `descripcionParaUsuario`, `isDescripcionParaUsuario`,`titulo`,`isActivo`,`FKidCapitulo`,`orden`) VALUES ('','',1,'Datos Generales y actividades que desarrolla la organización',1,2,1);
 
-INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubCapitulos`) VALUES (1,'Datos generales',1);
-INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubCapitulos`) VALUES (2,'Población actividades',1);
-INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (3,'Instalaciones',1);
-INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (4,'Matriz de riesgo',1);
-INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (5,'Inventario',1);
-INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (6,'Identificacion de peligros',1);
-INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (7,'Poblacion',1);
-INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (8,'Ruta de evacuacion',1);
-INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (9,'Brigadistas',1);
-INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (10,'Ingreso Cuerpos de socorro',1); 
-INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (11,'Puestos de la brigada',1);
-INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (12,'Zona de seguridad',1);
-INSERT INTO `Formulario`(`id`,`descripcion`, `FKidSubcapitulos`) VALUES (13,'informacion extra de los capitulos y subcapitulos',1);
+INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubCapitulos`) VALUES (1,'Datos generales',1);
+INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubCapitulos`) VALUES (2,'Población actividades',1);
+INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (3,'Instalaciones',1);
+INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (4,'Matriz de riesgo',1);
+INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (5,'Inventario',1);
+INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (6,'Identificacion de peligros',1);
+INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (7,'Poblacion',1);
+INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (8,'Ruta de evacuacion',1);
+INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (9,'Brigadistas',1);
+INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (10,'Ingreso Cuerpos de socorro',1); 
+INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (11,'Puestos de la brigada',1);
+INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (12,'Zona de seguridad',1);
+INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (13,'informacion extra de los capitulos y subcapitulos',1);
 
 
 
@@ -2507,6 +2509,37 @@ BEGIN
         -- SUCCESS         
    END IF;
          SET res = 0;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Proceso actualizar formulario
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `update_formulario`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_formulario`(IN `p_id` int,IN `p_titulo` varchar(150), IN  `p_descripcionArriba` text, IN  `p_descripcionAbajo` text,OUT `res` TINYINT  UNSIGNED)
+BEGIN
+        
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;
+            START TRANSACTION;
+                   UPDATE `Formulario` SET `titulo`=p_titulo  ,`descripcionArriba`= p_descripcionArriba, `descripcionAbajo`=p_descripcionAbajo WHERE `id`=p_id;
+            COMMIT;
+            -- SUCCESS
+            SET res = 0;
+            -- Existe usuario
 END
 ;;
 DELIMITER ;

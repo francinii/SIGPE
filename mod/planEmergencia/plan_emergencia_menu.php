@@ -1,6 +1,6 @@
 <?php
 $start = "0";
-$sql = "SELECT `id`, `descripcion` FROM `Formulario` order by id";
+$sql = "SELECT `id`, `titulo` FROM `Formulario` order by id";
 
 $res = seleccion($sql);
 $idCentro = $_GET['idCentro'];
@@ -29,7 +29,7 @@ $editar = (check_permiso($mod5, $act4, $user_rol) || check_permiso($mod5, $act3,
             if (count($res) > 0) {
                 for ($i = 0; $i < count($res); $i++) {
                     ?>
-                    <a href="#" onclick="javascript: cambiarMenu(<?= $res[$i]['id'] ?>, <?= $idCentro ?>, '<?= $nombreCentro ?>');"  class="btn btn-primary"><?= $res[$i]["descripcion"] ?></a>
+                    <a href="#" onclick="javascript: cambiarMenu(<?= $res[$i]['id'] ?>, <?= $idCentro ?>, '<?= $nombreCentro ?>');"  class="btn btn-primary"><?= $res[$i]["titulo"] ?></a>
 
                     <?php
                 }

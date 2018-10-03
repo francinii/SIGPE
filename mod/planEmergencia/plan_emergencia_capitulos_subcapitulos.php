@@ -10,17 +10,20 @@ $sql = "SELECT `id`, `descripcion`, `descripcionParaUsuario`, `isDescripcionPara
 
 $cap = seleccion($sql);
 
-function capitulo($cap, $vocab, $idPlanEmergencia, $i) {
+function capitulo($cap, $vocab, $idPlanEmergencia, $i,$editar) {
     ?>  
     <div class="well well-sm">
         <div class='row'>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <label  for="subcapitulo_Descripcion_usuario"><?= $vocab["capitulos_subcapitulos_capitulo"] ?> <?= ($i == 0) ? "Inicio" : ($i) ?>: <?= $cap['titulo'] ?> </label>
             </div>
+            
             <div align="right" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <?php if($editar){?>
                 <span class="text-center">
                     <a class="btn btn-warning"  onclick="javascript:guardarCapituloUsuario('<?= $idPlanEmergencia ?>', '<?= $cap['id'] ?>',<?= $i ?>, 0)" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> </a>
                 </span>
+                <?php }?>
             </div>
         </div>
         <div class='row'>
@@ -41,7 +44,7 @@ function capitulo($cap, $vocab, $idPlanEmergencia, $i) {
             </div> 
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <label  for="subcapitulo_Descripcion_usuario"> <?= $vocab['capitulos_subcapitulos_info_usuario'] ?> </label>
-                <textarea class="form-control cambios"  id="capitulo_Descripcion_usuario<?= $i ?>" name="subcapitulo_Descripcion_usuario" ><?= descripcionCapitulo($cap['id'], $idPlanEmergencia) ?></textarea>
+                <textarea   <?= (!$editar) ? "readonly" : ""; ?> class="form-control cambios"  id="capitulo_Descripcion_usuario<?= $i ?>" name="subcapitulo_Descripcion_usuario" ><?= descripcionCapitulo($cap['id'], $idPlanEmergencia) ?></textarea>
             </div> 
         </div>
     </div>
@@ -54,7 +57,7 @@ function capitulo($cap, $vocab, $idPlanEmergencia, $i) {
     <?php
 }
 
-function subcapitulo($subcap, $listaFormularios, $vocab, $idPlanEmergencia, $i, $j) {
+function subcapitulo($subcap, $listaFormularios, $vocab, $idPlanEmergencia, $i, $j,$editar) {
     ?>  
     <div class="well well-sm" >
         <div class='row'>
@@ -62,9 +65,11 @@ function subcapitulo($subcap, $listaFormularios, $vocab, $idPlanEmergencia, $i, 
                 <label  for="capitulo_Descripcion_usuario"><?= $vocab["capitulos_subcapitulos_subcapitulo"] ?> <?= ($i == 0) ? "Inicio" : ($i ) ?>.<?= $j + 1 ?>: <?= $subcap['titulo'] ?> </label>
             </div>
             <div align="right" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <?php if($editar){?>
                 <span class="text-center">
                     <a class="btn btn-warning   "  onclick="javascript:guardarSubCapituloUsuario('<?= $idPlanEmergencia ?>', '<?= $subcap['id'] ?>', '<?= $i ?>.<?= $j ?>', 0)" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> </a>
                 </span>
+                 <?php }?>
             </div>
         </div>
         <div class='row'>
@@ -91,7 +96,7 @@ function subcapitulo($subcap, $listaFormularios, $vocab, $idPlanEmergencia, $i, 
             </div> 
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <label  for="capitulo_Descripcion_usuario"> <?= $vocab['capitulos_subcapitulos_info_usuario'] ?> </label>
-                <textarea class="form-control cambios"  id="subcapitulo_Descripcion_usuario<?= $i ?>.<?= $j ?>" name="capitulo_Descripcion_usuario" ><?= descripcionSubcapitulo($subcap['id'], $idPlanEmergencia) ?></textarea>
+                <textarea   <?= (!$editar) ? "readonly" : ""; ?> class="form-control cambios"  id="subcapitulo_Descripcion_usuario<?= $i ?>.<?= $j ?>" name="capitulo_Descripcion_usuario" ><?= descripcionSubcapitulo($subcap['id'], $idPlanEmergencia) ?></textarea>
             </div> 
         </div>
     </div>
@@ -129,7 +134,7 @@ function subcapitulos($id) {
 }
 
 function listaFormularios($id) {
-    $sql = "SELECT `id`, `descripcion` FROM `Formulario` WHERE `FKidSubcapitulos`=" . $id;
+    $sql = "SELECT `id`, `titulo` FROM `Formulario` WHERE `FKidSubcapitulos`=" . $id;
     return seleccion($sql);
 }
 ?>
@@ -147,14 +152,14 @@ function listaFormularios($id) {
             if ($cap[$i]['isDescripcionParaUsuario'] == 1) {
                 
                 ?>
-                <?= capitulo($cap[$i], $vocab, $idPlanEmergencia, $i) ?>
+                <?= capitulo($cap[$i], $vocab, $idPlanEmergencia, $i,$editar) ?>
                 <?php
             }
             for ($j = 0; $j < count($subcap); $j++) {
                 if ($subcap[$j]['isDescripcionParaUsuario'] == 1) {
                     $listaFormularios = listaFormularios($subcap[$j]['id'])
                     ?>
-                    <?= subcapitulo($subcap[$j], $listaFormularios, $vocab, $idPlanEmergencia, $i, $j) ?>
+                    <?= subcapitulo($subcap[$j], $listaFormularios, $vocab, $idPlanEmergencia, $i, $j,$editar) ?>
                     <?php
                 }
             }
