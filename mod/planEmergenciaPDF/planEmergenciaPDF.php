@@ -29,6 +29,7 @@ include("../../functions.php");
 include_once('../../lib/tcpdf/examples/tcpdf_include.php');
 require_once ('../../lib/jpgraph/src/jpgraph.php');
 require_once ('../../lib/jpgraph/src/jpgraph_pie.php');
+//echo barraCargar(10);
 
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
@@ -49,13 +50,7 @@ $sql = "(SELECT  tipoPoblacion, descripcion, total, representacionDe FROM TipoPo
 $resTipoPoblacion = seleccion($sql);
 
 
-
-
-
 $idPlanEmergencia = $id;
-
-
-
 //$res = seleccion($sql);
 $resPlan = seleccion($sqlPlan);
 $rescapitulos = seleccion($sqlCapitulos);
@@ -229,29 +224,19 @@ function portada($pdf) {
     $y = $pdf->getY();
 
     $pdf->writeHTMLCell(150, '', '', $y, $logo, 0, 0, false, true, 'J', true);
-    $pdf->writeHTMLCell(30, '', '', '', $logo2, 0, 1, false, true, 'right', true);
-//    $html = '<div style = "height: 100px;"><div>
-//        <div  style = "background-color:blue;">
-//        <span align="right">
-//            <img src= "' . $datosCabecera['logoUNA'] . '"  width="100" height="100" >
-//        </span> 
-//        <span> &nbsp </span>
-//        <span align="right">
-//            <img src= "' . $datosCabecera['logoUNA'] . '"  width="100" height="100" >
-//        </span>
-//        </div>';
+    $pdf->writeHTMLCell(30, '', '155', '', $logo2, 0, 1, false, true, '', true);
 
-    $html = '<div style = "text-align:center;">
-            <h2>PLAN DE PREPARATIVOS DE RESPUESTA ANTE EMERGENCIAS</h2>
-            <h2>' . $datosCabecera["centroTrabajo"] . ' </h2>
-            <h2>   UNIVERSIDAD NACIONAL DE COSTA RICA </h2>
-             <img src= "' . $datosCabecera['logoCentro'] . '" width="400" height="400" >
-            <h2>' . $datosCabecera["centroTrabajo"] . ' </h2>
-            <h2>   Fecha </h2>
-            <h6 style="border: 1px solid black; padding: 20px; text-align: center;">
+    $html = '<div style = "text-align:center;"><br>
+            <h2>PLAN DE PREPARATIVOS DE RESPUESTA ANTE EMERGENCIAS</h2><br>
+            <h3>' . $datosCabecera["centroTrabajo"] . ' </h3><br>
+            <h3>   UNIVERSIDAD NACIONAL DE COSTA RICA </h3><br>
+             <img src= "' . $datosCabecera['logoCentro'] . '" width="250" height="250" >
+            <h3>   Fecha </h3><br>
+            <div>
+            <h6 style="border: 1px solid black; padding: 10px 20px 30px 40px; text-align: center;">
             Este documento tiene como objeto cumplir con los requisitos y contenidos que debe
             cumplir un plan de preparativos y respuesta ante emergencias en centros laborales y 
-            de ocupación pública. Se basa en la Norma CNE-NA- INTE-DN-01:2014, la cual se sustenta 
+            de ocupación pública. Se basa en la Norma <br> CNE-NA- INTE-DN-01:2014, la cual se sustenta 
             en el artículo 12 de la Ley Nacional de Emergencias y Prevención del Riesgo Nº 8488 y 
             el artículo 4 de la Ley del Benemérito Cuerpo de Bomberos de Costa Rica Nº 8228
             </h6>
@@ -825,10 +810,10 @@ function formularioMatriz($idPlanEmergencia, $vocab, $pdf) {
     $sql = "SELECT `probabilidad`, `gravedad`, `consecuenciaAmenaza` FROM `Matriz` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
     $respuesta = seleccion($sql);
     $cantidad = array(
-            ['color' => 'Ninguna', 'cantidad' => 0],
-            ['color' => 'Verde', 'cantidad' => 0],
-            ['color' => 'Amarilla', 'cantidad' => 0],
-            ['color' => 'Roja', 'cantidad' => 0]);
+        ['color' => 'Ninguna', 'cantidad' => 0],
+        ['color' => 'Verde', 'cantidad' => 0],
+        ['color' => 'Amarilla', 'cantidad' => 0],
+        ['color' => 'Roja', 'cantidad' => 0]);
 
     foreach ($respuesta as $res) {
         $valor = $res['probabilidad'] * ($res['gravedad'] + $res['consecuenciaAmenaza']);
@@ -1060,11 +1045,20 @@ function crearGrafico($criterios, $colores) {
     //$graph->img->Stream();
 }
 
+function barraCargar($completado) {
+    return '<div class = "progress progress-striped active">
+    <div class = "progress-bar progress-bar-danger" role = "progressbar"
+    aria-valuenow = "' . $completado . '" aria-valuemin = "0" aria-valuemax = "100"
+    style = "width: 80%">
+    <span class = "sr-only">' . $completado . '% completado </span>
+    </div>
+    </div>';
+}
+
 // ---------------------------------------------------------
 //Close and output PDF document
-
-
-$pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/planEmergencias.pdf', 'F');
+$pdf->Output('planEmergencias.pdf', 'I');
+//$pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/planEmergencias.pdf', 'F');
 //============================================================+
 // END OF FILE
 //============================================================+
