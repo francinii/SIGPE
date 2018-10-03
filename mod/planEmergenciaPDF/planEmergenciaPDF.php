@@ -182,7 +182,7 @@ function tablaContenidos($pdf) {
     $pdf->endTOCPage();
 }
 
-function capitulos($pdf, $capitulos, $resPlan, $resTipoPoblacion, $formularios, $vocab, $idPlanEmergencia, $numeroCapitulo) {
+function capitulos($pdf, $capitulos, $resPlan, $resTipoPoblacion, $formularios, $vocab, $idPlanEmergencia) {
     $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP + PDF_MARGIN_HEADER, PDF_MARGIN_RIGHT);
     //Empieza a mostrar el header
     $pdf->setPrintHeader(true);
