@@ -26,7 +26,7 @@ $config = array();
 // https://docs.ckeditor.com/ckfinder/ckfinder3-php/configuration.html#configuration_options_authentication
 
 $config['authentication'] = function () {
-    return true;
+    return false;
 };
 
 /*============================ License Key ============================================*/
@@ -49,7 +49,6 @@ $config['privateDir'] = array(
 /*============================ Images and Thumbnails ==================================*/
 // https://docs.ckeditor.com/ckfinder/ckfinder3-php/configuration.html#configuration_options_images
 
-
 $config['images'] = array(
     'maxWidth'  => 1600,
     'maxHeight' => 1200,
@@ -63,7 +62,6 @@ $config['images'] = array(
 
 /*=================================== Backends ========================================*/
 // https://docs.ckeditor.com/ckfinder/ckfinder3-php/configuration.html#configuration_options_backends
-
 
 $config['backends'][] = array(
     'name'         => 'default',
