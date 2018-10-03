@@ -29,9 +29,11 @@ if (count($res) <= 0) {
     <p><?= $vocab["identifica_peligro_Titulo_Desc"] ?></p>
 </div>
 <div style="padding-right:0.5%;" align="right">
+    <?php if ($editar) { ?>
     <span class="text-center">
         <a class="btn btn-success" onclick="javascript: agregarFilaIdentificacionPeligro('Eliminar');"><i class=" fa fa-plus text-success"></i> Agregar</a>
     </span>
+    <?php } ?>
 </div>
 <div class="dataTables_wrapper dt-bootstrap" style=overflow-x:auto;"> 
     <table style = "width: 99%;" id="lista_identificacion_peligros" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable text-center" >
@@ -70,11 +72,11 @@ if (count($res) <= 0) {
                     <?= (is_array($res[$i])) ? $res[$i]['peligro'] : $res[$i]; ?>
                 <?php } else { ?>
                 <td>
-                    <textarea class="form-control requerido  cambios" id = "peligro<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['peligro'] : $res[$i]; ?></textarea>
+                    <textarea  <?= (!$editar) ? "readonly" : ""; ?> class="form-control requerido  cambios" id = "peligro<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['peligro'] : $res[$i]; ?></textarea>
                 <?php } ?>
                 </td>
                 <td>    
-                <select name="presente"  id ="presente<?= $i ?>">
+                <select name="presente"   <?= (!$editar) ? 'disabled  style="cursor: not-allowed;"' : ""; ?> id ="presente<?= $i ?>">
                     <?php if (is_array($res[$i])) { ?>
                         <option <?= ($res[$i]['presente'] == 1) ? "selected" : ""; ?> >SI</option>
                         <option <?= ($res[$i]['presente'] == 0) ? "selected" : ""; ?> >NO</option> 
@@ -97,7 +99,7 @@ if (count($res) <= 0) {
                 <input id ="responsable<?= $i ?>" type="text"   <?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios" value="<?= (is_array($res[$i])) ? $res[$i]['responsable'] : ""; ?>"> 
             </td> 
             <td>  
-                <select id ="priorizacion<?= $i ?>" name="priorizacion">
+                <select  <?= (!$editar) ? 'disabled  style="cursor: not-allowed;"' : ""; ?> id ="priorizacion<?= $i ?>" name="priorizacion">
                     <?php if (is_array($res[$i])) { ?>
                         <option <?= ($res[$i]['priorizacion'] == 1) ? "selected" : ""; ?> >1</option>
                         <option <?= ($res[$i]['priorizacion'] == 2) ? "selected" : ""; ?> >2</option> 
@@ -109,12 +111,12 @@ if (count($res) <= 0) {
                     <?php } ?>
                 </select>    
             </td>
-            <?php if ($i < 37) { ?>
+            <?php if ($i < 37 || !$editar) { ?>
                 <td style="background-color: #ededed;"><a style="cursor: not-allowed;"  class="puntero ">
                         <div class="text-center"><i class="fa fa-close  text-danger" title="Eliminar fila"></i></div>
                     </a>
                 </td>
-            <?php } else { ?>
+            <?php } else  { ?>
                 <td><a class="puntero" onclick="javascript:eliminarFilaPeligros(this,'<?= $idPlanEmergencia ?>');">
                         <div class="text-center"><i class="fa fa-close  text-danger" title="Eliminar fila"></i></div>
                     </a>
