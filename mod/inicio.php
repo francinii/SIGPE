@@ -105,11 +105,12 @@ foreach ($res as $value) {
             <?php } ?>
             <br/>
             <br/>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                 <?php if (check_permiso($mod5, $act1, $user_rol) || check_permiso($mod5, $act2, $user_rol)) { ?>
                     <a class="btn btn-success btn-group-justified" onclick="javascript:OpcionInicio(0);" name="submit" > <?= $vocab["inicio_Empezar"] ?></a>
                 <?php } ?>
             </div>
+<<<<<<< HEAD
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <?php if (check_permiso($mod4, $act6, $user_rol)) { ?>
                     <a class="btn btn-warning btn-group-justified" onclick="javascript:OpcionInicio(2);"
@@ -117,6 +118,17 @@ foreach ($res as $value) {
                 <?php } else if (check_permiso($mod5, $act6, $user_rol)) { ?>
                     <a class="btn btn-warning btn-group-justified" onclick="javascript:OpcionInicio(1);"
                        name="" ><i class="fa fa-print"></i> <?= $vocab["inicio_Imprimir"] ?></a>
+=======
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <?php if (check_permiso($mod4, $act3, $user_rol) && check_permiso($mod4, $act4, $user_rol) && check_permiso($mod4, $act5, $user_rol)) { ?>
+                    <a class="btn btn-info btn-group-justified" onclick="javascript:nuevaVersionPlan();" name="submit" > <?= $vocab["inicio_Nueva_version"] ?></a>
+                <?php } ?>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <?php if (check_permiso($mod5, $act6, $user_rol)) { ?>
+                <a class="btn btn-warning btn-group-justified" onclick="javascript:OpcionInicio(1);"
+                      name="" ><i class="fa fa-print" title="<?= $vocab["symbol_print"] ?>"></i> <?= $vocab["inicio_Imprimir"] ?></a>
+>>>>>>> origin/master
                 <?php } ?>
             </div>                
         </form>
