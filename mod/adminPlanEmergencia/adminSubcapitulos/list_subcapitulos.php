@@ -1,50 +1,10 @@
 <?php
-/** Develop Info
- * IMPORTANTE !!!
- *    Utilice este archivo como ejemplo para crear las tablas de nuevos modulos.
- * 
- * Este archivo genera una tabla utilizando la libreria DataTables,
- * para esto necesitamos 3 componentes principales:
- *  1. El origen de los datos: es otro archivo php que nos traer un JSON con los
- *      datos para mostrar, Data Tables controla la paginación, navegación, busqueda
- *      y el orden.  Para más información 
- *  2. La inicialización de la tabla
- *  3. La estructura de la tabla en HTML
- * 
- */
+
 include("../../login/check.php");
 include("../../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
 
-/* * *************************************************************************************** */
-//Informacion requerida obtenida de la sesion
-$ip = $mySessionController->getVar("cds_domain");
-$ip .= $mySessionController->getVar("cds_locate");
-
-
-// para realizar la busqueda
-//$sql = "SELECT COUNT(idCapitulo) AS cant
-//        FROM capitulo";
-//
-//$find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
-//if ($find_key != "") {
-//    $sql.=" WHERE titulo LIKE  '%" . $find_key . "%'";
-//}
-//$sql.=";";
-//$res_cant = seleccion($sql);
-//
-//$cant_pagi = ceil((int) $res_cant[0]['cant'] / (int) $page_cant);
-//$page = (isset($_GET["page"])) ? $_GET["page"] : "1";
-//if (!$page) {
-//    $start = 0;
-//    $page = 1;
-//} else {
-//    $start = (isset($_GET["start"])) ? $_GET["start"] : "0";
-//}
-
-/* * ********************************************************************************************** */
-$start = "0";
 
 
 // select para llenar el combo
@@ -120,6 +80,7 @@ $capituloNumero = 0;
 
     </div>
 </div>
+<br>
 <div class="dataTables_wrapper form-inline dt-bootstrap">
     <table id="lista_subcapitulos" cellpadding="0" cellspacing="0" border="0" class="table table-bordered " >
         <thead>
@@ -221,7 +182,7 @@ $capituloNumero = 0;
     <?php /*     * ***************************************************************************************** */ ?>
     <br/>
     <?php if (check_permiso($mod4, $act3, $user_rol)) { ?>
-        <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminSubcapitulos/new_subcapitulo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["add_subcapitulo"] ?></a></div>
+        <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminSubcapitulos/new_subcapitulo.php?', 'find_key=' + jQuery('#select_subcapitulos').val());"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["add_subcapitulo"] ?></a></div>
     <?php } ?>
 </div>
 

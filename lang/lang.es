@@ -47,6 +47,7 @@ $vocab["menu_admin_zona_trabajo"]      = "Centro de trabajo";
 $vocab["menu_admin_formulario"]        = "Formulario";
 $vocab["menu_planes_emergencia"]       = "Plan de emergencia";
 $vocab["menu_admin_sede"]              = "Sedes";
+$vocab["menu_admin_historial"]         = "Historial de planes";
 
 //***************************** Home *****************************************//
 $vocab["home_title"]               = "Simbolog&iacute;a";
@@ -258,7 +259,7 @@ $vocab["inicio_Subtitulo"]                   = "CIEUNA";
 $vocab["inicio_Titulo_Desc"]                 = "seleccione el plan de emergencia que desea trabajar";
 $vocab["inicio_Empezar"]                     = "Empeza";
 $vocab["inicio_Imprimir"]                    = "Imprimir";
-$vocab["inicio_Imprimir"]                    = "Imprimir";
+$vocab["inicio_Nueva_version"]               = "Nueva versión";
 $vocab["incio_labe"]                         ="Plan de emergencia";
 
 //***********    Menu plan de emergencia    ***********************//
@@ -556,4 +557,12 @@ $vocab["capitulos_subcapitulos_info_admin"]                  = "Informacion del 
 $vocab["capitulos_subcapitulos_indicaciones"]                  = "Indicaciones:";
 $vocab["capitulos_subcapitulos_info_usuario"]                  = "Redaccion del usuario:";
 $vocab["capitulos_subcapitulos_formularios"]                  = "Formularios asociados:";
+
+//***********     plan de emergencia  historial***********************//
+$vocab["historial_titulo"]       ="Historial";
+$vocab["historial_titulo_desc"]  ="Planes de emergencia antiguos por centro de trabajo";
+$vocab["historial_sede"]         ="Sede";
+$vocab["historial_centro"]       ="Centro de trabajo";
+$vocab["historial_version"]       ="Versión";
+
 ?>

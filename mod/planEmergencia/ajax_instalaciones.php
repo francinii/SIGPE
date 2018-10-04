@@ -26,7 +26,7 @@ $sanitario= $_GET['sanitario'];
 $pluvial = $_GET['pluvial'];
 $electrico = $_GET['electrico'];
 $telefonico = $_GET['pluvial'];
-$InstalacionesOtros = $_GET['electrico'];
+$InstalacionesOtros = $_GET['InstalacionesOtros'];
 
 $sql_a = "CALL update_datos_Instalaciones($idCentro,'$Densidad','$area','$instalaciones','$zona','$topografica','$terreno','$colindantes','$tipo','$antiguedad',"
         . "'$cimientos','$estructura','$Entrepiso','$paredes','$techo','$cielo','$pisos','$parqueo','$aguaPotable','$sanitario',"

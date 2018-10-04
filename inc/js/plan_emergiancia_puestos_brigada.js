@@ -1,5 +1,5 @@
 
-function agregarFilaPuesto(titulo, alert, agregar,descripcion) {
+function agregarFilaPuesto(titulo, alert, agregar,descripcion,nombrepuesto) {
     var tabla = jQuery("#lista_puestoBrigada tbody");
     var id = tabla.children().last().attr('id');
     if (typeof id == 'undefined') {
@@ -10,7 +10,8 @@ function agregarFilaPuesto(titulo, alert, agregar,descripcion) {
     }
     var fila = '<tr class="seccionPuesto" id="Pues-' + id + '">' +
             '<td  style="align-items:center; background-color:lightblue" colspan="2">' +
-            '<input style="width:40%; margin: 0 auto;" type="text"  class="form-control requerido cambios" id="Puesto' + id + '" value="'+descripcion+'" ></td>' +
+            '<label style="text-align:right; margin: 0 auto; " for="Sector' +id +'" class="col-sm-3 col-form-label">'+nombrepuesto+':</label>'+
+            '<input style="width:40%;" type="text"  class="form-control requerido cambios" id="Puesto' + id + '" value="'+descripcion+'" ></td>' +
             '<td  style="background-color:lightblue">' +
             '<a class="puntero cambios"  onClick="javascript:eliminarFilafuncion(this);">' +
             '<div class="text-center"><i class="fa fa-close  text-danger" title="' + titulo + '"></i></div>' +
@@ -65,7 +66,7 @@ function agregarFilafuncion(titulo, alert, Idselec) {
         tabla.append(fila);
     }
     IniciarGuardarCambios(alert);
-    jQuery("#plazo" + id).focus();
+    jQuery("#funcion" + id).focus();
 }
 
 function eliminarFilafuncion(event) {

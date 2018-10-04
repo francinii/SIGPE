@@ -79,7 +79,7 @@ function subcapitulo($subcap, $listaFormularios, $vocab, $idPlanEmergencia, $i, 
                         <?php
                         for ($a = 0; $a < count($listaFormularios); $a++) {
                             ?>                    
-                            <?= $a + 1 ?>. <?= $listaFormularios[$a]['descripcion'] ?><br>
+                            <?= $a + 1 ?>. <?= $listaFormularios[$a]['titulo'] ?><br>
                         <?php }
                         ?>
                     </p>

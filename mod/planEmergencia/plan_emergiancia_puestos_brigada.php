@@ -20,7 +20,7 @@ if (count($res) <= 0) {
     <div align="right" style = "padding-right:0.5%;">
         <?php if ($editar) { ?>
             <span class="text-center" >
-                <a class="btn btn-info" onclick="javascript: agregarFilaPuesto('<?= $vocab["symbol_delete"] ?>', '<?= $vocab["Menu_Datos_sin_guardar"] ?>','<?= $vocab["symbol_add"] ?>','<?= $vocab["puestos_brigada_puestoNuevo"] ?>');"><i class=" fa fa-plus text-info"></i> <?= $vocab["menu_add"] ?> <?= $vocab["puestos_brigada_puesto"] ?>  </a>
+                <a class="btn btn-info" onclick="javascript: agregarFilaPuesto('<?= $vocab["symbol_delete"] ?>', '<?= $vocab["Menu_Datos_sin_guardar"] ?>','<?= $vocab["symbol_add"] ?>','<?= $vocab["puestos_brigada_puestoNuevo"] ?>','<?= $vocab["puestos_brigada_puesto"] ?>');"><i class=" fa fa-plus text-info"></i> <?= $vocab["menu_add"] ?> <?= $vocab["puestos_brigada_puesto"] ?>  </a>
             </span>            
         <?php } ?>
     </div>
@@ -51,7 +51,8 @@ if (count($res) <= 0) {
                             ?>
                             <tr class="seccionPuesto" id="Pues-<?= $id ?>">                   
                                 <td style="align-items:center; background-color:lightblue" colspan="2">
-                                    <input style="width: 40%; margin: 0 auto;" type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="Puesto<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['puesto'] : $res[$i] ?>" >
+                                     <label style="text-align:right; margin: 0 auto; " for="Puesto<?= $id ?>" class="col-sm-3 col-form-label"><?= $vocab["puestos_brigada_puesto"] ?>:</label>
+                                    <input style="width: 40%;" type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="Puesto<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['puesto'] : $res[$i] ?>" >
                                 </td>                                
                                 <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
                                     <td  style="background-color:lightblue">              

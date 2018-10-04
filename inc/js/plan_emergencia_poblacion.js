@@ -1,5 +1,5 @@
 
-function agregarFilaSector(titulo, alert, agregar,descripcion) {
+function agregarFilaSector(titulo, alert, agregar,descripcion,nombresector) {
     var tabla = jQuery("#lista_poblacion tbody");
     var id = tabla.children().last().attr('id');
     if (typeof id == 'undefined') {
@@ -10,7 +10,8 @@ function agregarFilaSector(titulo, alert, agregar,descripcion) {
     }
     var fila = '<tr class="seccionPoblacion" id="Sec-' + id + '">' +
             '<td  style="align-items:center; background-color:lightblue" colspan="10">' +
-            '<input style="width:40%; margin: 0 auto;" type="text"  class="form-control requerido cambios" id="Sector' + id + '" value="'+descripcion+'" ></td>' +
+            '<label style="text-align:right; margin: 0 auto; " for="Sector' +id +'" class="col-sm-3 col-form-label">'+nombresector+':</label>'+
+            '<input style="width:40%; " type="text"  class="form-control requerido cambios" id="Sector' + id + '" value="'+descripcion+'" ></td>' +
             '<td  style="background-color:lightblue">' +
             '<a class="puntero cambios"  onClick="javascript:eliminarFila(this);">' +
             '<div class="text-center"><i class="fa fa-close  text-danger" title="' + titulo + '"></i></div>' +
