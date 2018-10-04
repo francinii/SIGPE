@@ -14,7 +14,7 @@ function validate_aprobacion() {
     return true;
 }
 
-function update_aprobacion(id) {
+function update_aprobacion(id,centro,version) {
     if (validate_aprobacion()) {
         var loading = document.getElementById('loading_container');
         loading.innerHTML = cargando_bar;
@@ -48,6 +48,7 @@ function update_aprobacion(id) {
                 }
             }
         };
+       window.open("mod/planEmergenciaPDF/planEmergenciaPDF.php?idCentro= " + id + " &version= " + version + " &nombreCentro= " + centro, '_blank');
         ajax.send(null);
         loading.innerHTML = "";
     }

@@ -35,6 +35,11 @@ $user_rol = $mySessionController->getVar("rol");
 
 
 $id = $_GET['idCentro'];
+
+if (isset($_GET['version'])) {
+    $version = $_GET['version'];
+}
+
 $sqlPlan = "(SELECT `id`, `revisadoPor`, `codigoZonaTrabajo`, `actividad`, `direccion`, `personaContactoGeneral`, `numeroTelefono`, `numeroFax`, `correo`, `categoriaNFPA`, `usoInstalaciones`, `horarioJornada`, `seguridadInstitucional`, `servicioConsegeria`, `personalAdministrativo`, `personalAcademico`, `presenciaEstudiantil`, `instalacionesDensidadOcupacion`, `instalacionesAreaConstruccion`, `instalacionesInstalaciones`, `instalacionesCaracteristicasZona`, `instalacionesTopografia`, `instalacionesNivelTerreno`, `instalacionesColindates`, `elementosConstructivosTipoConstruccion`, `elementosConstructivosAntiguedad`, `elementosConstructivosCimientos`, `elementosConstructivosEstructura`, `elementosConstructivosParedes`, `elementosConstructivosEntrepiso`, `elementosConstructivosTecho`, `elementosConstructivosCielos`, `elementosConstructivosPisos`, `elementosConstructivosAreaParqueo`, `elementosConstructivosSistemaAguaPotable`, `elementosConstructivosAlcantarilladoSanitario`, `elementosConstructivosAlcantarilladoPluvial`, `elementosConstructivosSistemaElectrico`, `elementosConstructivosSistemaTelefonico`, `elementosConstructivosOtros` FROM `ZonaTrabajo` where id =" . $id . ")";
 $sqlCapitulos = "(SELECT  id, descripcion, orden,titulo,isActivo FROM Capitulo where isActivo = 1 ORDER BY orden)";
 
@@ -1120,7 +1125,8 @@ function crearGrafico($criterios, $colores) {
 // ---------------------------------------------------------
 //Close and output PDF document
 if (check_permiso($mod4, $act6, $user_rol)) {
-    $pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/planEmergencias.pdf', 'F');
+    $nombreDoc = $id + $version;
+    $pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/'.$nombreDoc.'.pdf', 'F');
 } else if (check_permiso($mod5, $act6, $user_rol)) {
     $pdf->Output('planEmergencias.pdf', 'D');
 } 

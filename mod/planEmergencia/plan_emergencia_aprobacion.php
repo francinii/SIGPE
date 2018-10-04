@@ -8,11 +8,16 @@ if (isset($_GET['idCentro'])) {
     $id = $_GET['idCentro'];
 }
 if (isset($_GET['nombreCentro'])) {
-    $id = $_GET['nombreCentro'];
+    $centro = $_GET['nombreCentro'];
 }
 
+if (isset($_GET['version'])) {
+    $version = $_GET['version'];
+}
+$sqlZonas = "(SELECT  id, version, FROM ZonaTrabajo where id =" . $id . ")";
+$zonas = seleccion($sqlZonas);
+$version = $zonas[0]['version']
 ?>
-
 
 <div class="container">
     <div class="well well-sm">
@@ -33,12 +38,12 @@ if (isset($_GET['nombreCentro'])) {
             </div>   
             <?php if (check_permiso($mod4, $act3, $user_rol)) { ?>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <a class="btn btn-success btn-group-justified"  name="submit" onclick="update_aprobacion(<?=$id?>);"><i class="fa fa-save fa-inverse"> </i> <?= $vocab["symbol_save"]  ?>  </a>
+                    <a class="btn btn-success btn-group-justified"  name="submit" onclick="javascript:update_aprobacion(<?=$id ?>,'<?=$centro?>',<?=$version?>);"><i class="fa fa-save fa-inverse"> </i> <?= $vocab["symbol_save"]  ?>  </a>
                 </div>
             <?php } ?> 
             <?php if (check_permiso($mod4, $act6, $user_rol)) { ?>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <a class="btn btn-info btn-group-justified"  name="submit" onclick="javascript:OpcionInicio(1);"><i class="fa fa-save fa-inverse"> </i> <?= $vocab["symbol_save"]  ?>  </a>
+                    <a class="btn btn-info btn-group-justified"  name="submit" onclick="javascript:OpcionInicio(1);"><i class="fa fa-print fa-inverse"> </i> <?= $vocab["symbol_print"]  ?>  </a>
                 </div>
             <?php } ?>  
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
