@@ -97,14 +97,13 @@
 <!-- Plan de emergencia puesto brigadas -->
 <script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_capitulos_subcapitulo.js"></script>
 
-<<<<<<< HEAD
 <!-- Plan de emergencia aprobación-->
 <script language="JavaScript" type="text/javascript"  src="inc/js/plan_emergencia_aprobacion.js"></script>
-=======
+
 <!-- Plan de emergencia puesto brigadas -->
 <script language="JavaScript" type="text/javascript"  src="inc/js/adminHistorial.js"></script>
 
->>>>>>> origin/master
+
 
 <!-- Bootstrap + Font-Awesome + Estilo -->
 <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
