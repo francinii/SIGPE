@@ -72,7 +72,10 @@ if (count($res) <= 0) {
         <?php if ($editar) { ?>
             <span class="text-center">
                 <a class="btn btn-warning"  onclick="javascript:guardarZonaSeguridad('<?= $idPlanEmergencia ?>', 0, '<?= $tablaID ?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["zona_seguridad"] ?></a>
-            </span>         
+            </span> 
+ <span class="text-center">
+                <a class="btn btn-success"  onclick="javascript:guardarZonaSeguridad('<?= $idPlanEmergencia ?>', 1, '<?= $tablaID ?>')" name="submit" ><i class="fa fa-rotate-right"></i> <?= $vocab["symbol_save"] . " " . $vocab["datos_generares_siguente"] ?></a>
+            </span>        
         <?php } ?>
     </div>
 </div>

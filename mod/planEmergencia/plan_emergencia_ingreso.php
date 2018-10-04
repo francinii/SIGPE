@@ -144,7 +144,7 @@ $res = seleccion($sql);
                         <a class="btn btn-warning"  onclick="javascript:guardarIncresoCuerpoSocorro('<?= $idPlanEmergencia ?>', 0)" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["inventario_Datos"] ?></a>
                     </span>
                     <span class="text-center">
-                        <a class="btn btn-success"  onclick="javascript:guardarIncresoCuerpoSocorro('<?= $idPlanEmergencia ?>', 1)" name="submit"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_save"] . " " . $vocab["datos_generares_siguente"] ?></a>
+                        <a class="btn btn-success"  onclick="javascript:guardarIncresoCuerpoSocorro('<?= $idPlanEmergencia ?>', 1)" name="submit"><i class="fa fa-rotate-right"></i> <?= $vocab["symbol_save"] . " " . $vocab["datos_generares_siguente"] ?></a>
                     </span>        
                 <?php } ?>
             </div>

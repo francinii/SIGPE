@@ -89,7 +89,10 @@ if (count($res) <= 0) {
         <?php if ($editar) { ?>
             <span class="text-center">
                 <a class="btn btn-warning"  onclick="javascript:guardarRutasEvacuacion('<?= $idPlanEmergencia ?>', 0, '<?= $tablaID ?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["rutas_evacuacion"] ?></a>
-            </span>         
+            </span>   
+        <span class="text-center">
+                <a class="btn btn-success"  onclick="javascript:guardarRutasEvacuacion('<?= $idPlanEmergencia ?>', 1, '<?= $tablaID ?>')" name="submit" ><i class="fa fa-rotate-right fa-inverse"></i> <?= $vocab["symbol_save"] . " " . $vocab["datos_generares_siguente"] ?></a>
+            </span>  
         <?php } ?>
     </div>
 </div>

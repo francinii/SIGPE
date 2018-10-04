@@ -59,7 +59,7 @@ if (count($res) <= 0) {
                 <a class="btn btn-warning   "  onclick="javascript:guardarDatosActividades('<?= $idPlanEmergencia ?>', 0,<?= count($res) ?>)" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["actividades_Titulo"] ?></a>
             </span>
             <span class="text-center">
-                <a class="btn  btn-success"  onclick="javascript:guardarDatosActividades('<?= $idPlanEmergencia ?>', 1,<?= count($res) ?>)" name="submit"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_save"] . " " . $vocab["datos_generares_siguente"] ?></a>
+                <a class="btn  btn-success"  onclick="javascript:guardarDatosActividades('<?= $idPlanEmergencia ?>', 1,<?= count($res) ?>)" name="submit"><i class="fa fa-rotate-right"></i> <?= $vocab["symbol_save"] . " " . $vocab["datos_generares_siguente"] ?></a>
             </span>
 
         <?php } ?>
