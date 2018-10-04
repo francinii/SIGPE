@@ -42,7 +42,7 @@ $sqlCapitulos = "(SELECT  id, descripcion, orden,titulo,isActivo FROM Capitulo w
 $sqlZonas = "(SELECT  id, nombreZonaTrabajo, logo FROM ZonaTrabajo where id =" . $id . ")";
 $zonas = seleccion($sqlZonas);
 
-$sql = "(SELECT  id, FKidSubcapitulos FROM Formulario)";
+$sql = "(SELECT  id, descripcionArriba, descripcionAbajo, FKidSubcapitulos FROM Formulario)";
 $formularios = seleccion($sql);
 
 $sql = "(SELECT  tipoPoblacion, descripcion, total, representacionDe FROM TipoPoblacion)";
@@ -138,6 +138,12 @@ capitulos($pdf, $rescapitulos, $resPlan, $resTipoPoblacion, $formularios, $vocab
 
 tablaContenidos($pdf);
 
+function remplazar($cadena) {
+    global $datosCabecera;
+    $centro = $datosCabecera['centroTrabajo'];
+    return str_replace("&lt;&amp;nombreZonaTrabajo&amp;&gt;", $centro, $cadena);
+}
+
 function tablaContenidos($pdf) {
     $pdf->setPrintHeader(false);
 // add a new page for TOC
@@ -199,7 +205,12 @@ function capitulos($pdf, $capitulos, $resPlan, $resTipoPoblacion, $formularios, 
         }
         // $pdf->Cell(0, 10, $cap['orden'] . ". " . $cap['titulo'], 0, 1, 'L');
 
-        $html .= $cap['descripcion'];
+        $html .= remplazar($cap['descripcion']);
+
+        $sql = "(SELECT  FKidCapitulo, FKidZonaTrabajo,descripcion FROM CapituloPlan where FKidCapitulo = " . $cap['id'] . " and FKidZonaTrabajo = " . $idPlanEmergencia . " )";
+        $infoUsuario = seleccion($sql);
+        $html .= "<p>".remplazar($infoUsuario[0]['descripcion'])."</p>";
+
         $pdf->writeHTML($html, true, false, false, false, '');
 
         subCapitulos($pdf, $cap['id'], $orden, $resPlan, $resTipoPoblacion, $formularios, $vocab, $idPlanEmergencia);
@@ -215,20 +226,17 @@ function subCapitulos($pdf, $id, $ordenCapitulo, $resPlan, $resTipoPoblacion, $f
     foreach ($subcapitulos as $sub) {
         if ($ordenCapitulo == 0) {
             $pdf->Bookmark($sub['titulo'], 1, 0, '', '', array(128, 0, 0));
-            $html = '<h3><b>'.$sub['titulo'] . '</b></h3>';
-        }else{
-             $pdf->Bookmark($ordenCapitulo . "." . $subOrden . " " . $sub['titulo'], 1, 0, '', '', array(128, 0, 0));
+            $html = '<h3><b>' . $sub['titulo'] . '</b></h3>';
+        } else {
+            $pdf->Bookmark($ordenCapitulo . "." . $subOrden . " " . $sub['titulo'], 1, 0, '', '', array(128, 0, 0));
             $html = '<h3><b>' . $ordenCapitulo . "." . $subOrden . " " . $sub['titulo'] . '</b></h3>';
         }
-
-//        $pdf->Cell(0, 10, $ordenCapitulo . "." . $sub['orden'] . " " . $sub['titulo'], 0, 1, 'L');
-
-        $html .= $sub['descripcion'];
+        $html .= remplazar($sub['descripcion']);
+        $sql = "(SELECT  FKidSubCapitulo, FKidZonaTrabajo,descripcion FROM SubCapituloPlan where FKidSubCapitulo = " . $sub['id'] . " and FKidZonaTrabajo = " . $idPlanEmergencia . " )";
+        $infoUsuario = seleccion($sql);
+        $html .= "<p>".remplazar($infoUsuario[0]['descripcion'])."</p>";
         $pdf->writeHTML($html, true, false, false, false, '');
-        //$html =
         listarFormularios($sub['id'], $formularios, $resPlan, $resTipoPoblacion, $vocab, $idPlanEmergencia, $pdf);
-        // $html .= '<div></div>';
-        //$pdf->writeHTML($html, true, false, true, false, '');
         $subOrden += 1;
     }
 }
@@ -883,15 +891,17 @@ function formularioMatriz($idPlanEmergencia, $vocab, $pdf) {
     // ini_set('include_path', 'grafico.php?criterios=' . $valores . '&colores=' . $color . '&time=' . time() . '');
     //echo'<script>location.href ="grafico.php?criterios=' . $valores . '&colores=' . $color . '&time=' . time() . '";</script>';
     //include('../grafico.php?criterios=' . $valores . '&colores=' . $color . '&time=' . time() . '');
-    crearGrafico($valores, $color);
-    $pdf->writeHTML($html, true, false, true, false, '');
+    $nombreGrafico = crearGrafico($valores, $color);
+    // $pdf->writeHTML($html, true, false, true, false, '');
     //  $pdf->Image('*/mod/planEmergencia/grafico.php?criterios=' . $valores . '&colores=' . $color . '&time=' . time() . '', '', '', 40, 40, '', '', 'T', false, 300, '', false, false, 1, false, false, false);
     // $pdf->SetXY(10, 10);
-    $pdf->SetXY(50, 80);
-    $pdf->Image('grafica1.png', '', '', 40, 40, '', '', 'T', false, 300, '', false, false, 1, false, false, false);
+    // $pdf->SetXY(50, 80);
+    $html .= '<div style="text-align:center"><img alt="Gráfico de la matriz de riesgos" width="250px" height = "250px"   src="' . $nombreGrafico . '"/></div>';
+    //$pdf->Image('grafica1.png', '', '', 40, 40, '', '', 'T', false, 300, '', false, false, 1, false, false, false);
     //  $pdf->Image('grafica1.png', '', '', 40, 40, '', '', 'T', false, 300, '', false, false, 1, false, false, false);
-
-    return '';
+    $pdf->writeHTML($html, true, false, false, false, '');
+    unlink($nombreGrafico);
+    //return '';
 }
 
 function calcularPorcentajeAmenaza($cantidadPorTipo, $cantidad) {
@@ -915,77 +925,135 @@ function formularioSeleccionada($id, $form, $resPlan, $resTipoPoblacion, $vocab,
     $html = "";
     if ($form['FKidSubcapitulos'] == $id) {
         $idForm = $form['id'];
-        if ($idForm == 1) {  //Formulario de datos generales
-            $html = formularioDatosGenerales($resPlan, $vocab);
-            //  $html .= '<div></div>';
-        } else if ($idForm == 2) { //Formulario de actividades
-            $html = formularioActividades($resTipoPoblacion, $vocab);
-//            $html .= '<div></div>';
-        } else if ($idForm == 3) { // Formulario de instalaciones
-            $html = formularioInstalaciones($resPlan, $vocab);
-            //    $html .= '<div></div>';
-            //  $html .= '<div></div>';
-        } else if ($idForm == 4) { //Formulario Matriz de riesgos 
-            $html .= formularioMatriz($idPlanEmergencia, $vocab, $pdf);
-            //  $html .= '<div></div>';
-        } else if ($idForm == 5) { //Formulario Inventario
-            $html .= '<div>' . $vocab["recurso_humano_titulo"] . '</div>';
-            $html .= formularioRecursosHumanos($idPlanEmergencia, $vocab);
+        $html .= "<p>".$form['descripcionArriba']."</p>";
+        switch ($idForm) {
+            case 1: 
+                $html .= formularioDatosGenerales($resPlan, $vocab);
+                break;
+            case 2: 
+                $html = formularioActividades($resTipoPoblacion, $vocab);
+                break;
+            case 3: 
+                $html = formularioInstalaciones($resPlan, $vocab);
+                break;
+            case 4: 
+                formularioMatriz($idPlanEmergencia, $vocab, $pdf);
+                break;
+            case 5:
+                $html .= '<div>' . $vocab["recurso_humano_titulo"] . '</div>';
+                $html .= formularioRecursosHumanos($idPlanEmergencia, $vocab);
 
-            $html .= '<div>' . $vocab["recurso_humano_titulo"] . '</div>';
-            $html .= formularioEquipoMovil($idPlanEmergencia, $vocab, "Aereo");
+                $html .= '<div>' . $vocab["recurso_humano_titulo"] . '</div>';
+                $html .= formularioEquipoMovil($idPlanEmergencia, $vocab, "Aereo");
 
-            $html .= '<div>' . $vocab["instalaciones_titulo"] . '</div>';
-            $html .= formularioRecursosInstalaciones($idPlanEmergencia, $vocab);
+                $html .= '<div>' . $vocab["instalaciones_titulo"] . '</div>';
+                $html .= formularioRecursosInstalaciones($idPlanEmergencia, $vocab);
 
-            $html .= '<div>' . $vocab["otros_recursos_Telecomunicacion"] . '</div>';
-            $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "telecomunicaciones");
+                $html .= '<div>' . $vocab["otros_recursos_Telecomunicacion"] . '</div>';
+                $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "telecomunicaciones");
 
-            $html .= '<div>' . $vocab["otros_recursos_equipo_repuestos"] . '</div>';
-            $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "repuestos");
+                $html .= '<div>' . $vocab["otros_recursos_equipo_repuestos"] . '</div>';
+                $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "repuestos");
 
-            $html .= '<div>' . $vocab["otros_recursos_equipo_repuestosAgua"] . '</div>';
-            $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "recursosAgua");
+                $html .= '<div>' . $vocab["otros_recursos_equipo_repuestosAgua"] . '</div>';
+                $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "recursosAgua");
 
-            $html .= '<div>' . $vocab["otros_recursos_Equipo_primeraRespuesta"] . '</div>';
-            $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "EquipoPrimeraRespuesta");
+                $html .= '<div>' . $vocab["otros_recursos_Equipo_primeraRespuesta"] . '</div>';
+                $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "EquipoPrimeraRespuesta");
 
-            $html .= '<div>' . $vocab["otros_recursos_Señalizacion"] . '</div>';
-            $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "señalizacion");
+                $html .= '<div>' . $vocab["otros_recursos_Señalizacion"] . '</div>';
+                $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "señalizacion");
 
-            $html .= '<div>' . $vocab["otros_recursos_sistemas_insendios"] . '</div>';
-            $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "sistemasIncendios");
+                $html .= '<div>' . $vocab["otros_recursos_sistemas_insendios"] . '</div>';
+                $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "sistemasIncendios");
 
-            $html .= '<div>' . $vocab["otros_recursos_equipo_repuestosEnergia"] . '</div>';
-            $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "recursosEnergia");
-            // $html .= '<div></div>';
-            //  $html .= '<div></div>';
-        } else if ($idForm == 6) { //Formulario Identificacion de peligros
-            $html .= formularioPeligrosIdentificados($idPlanEmergencia, $vocab);
-            //   $html .= '<div></div>';
-            //  $html .= '<div></div>';
-        } else if ($idForm == 7) { //Formulario de población
-            $html .= formularioPoblacion($idPlanEmergencia, $vocab);
-            //   $html .= '<div></div>';
-        } else if ($idForm == 8) { //Formulario de rutas de evacuación
-            $html .= formularioRutaEvacuacion($idPlanEmergencia, $vocab);
-            //    $html .= '<div></div>';
-        } else if ($idForm == 9) { //Formulario de brigadistas
-            $html .= formularioBrigadistas($idPlanEmergencia, $vocab);
-            //   $html .= '<div></div>';
-            //  $html .= '<div></div>';
-        } else if ($idForm == 10) { //Formulario de ingreso
-            $html .= formularioIngresoAtencionEmergencias($idPlanEmergencia, $vocab);
-            // $html .= '<div></div>';
-            $html .= formularioIngresoCuerposSocorro($idPlanEmergencia, $vocab);
-            // $html .= '<div></div>';
-        } else if ($idForm == 11) { //Formulario de zona de seguridad
-            $html .= formularioPuestoBrigada($idPlanEmergencia, $vocab);
-            //  $html .= '<div></div>';
-        } else if ($idForm == 12) { //Formulario de zona de seguridad
-            $html .= formularioZonaSeguridad($idPlanEmergencia, $vocab);
-            //  $html .= '<div></div>';
+                $html .= '<div>' . $vocab["otros_recursos_equipo_repuestosEnergia"] . '</div>';
+                $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "recursosEnergia");
+                break;
+            case 6:
+                break;
+            case 7: 
+                $html .= formularioPoblacion($idPlanEmergencia, $vocab);
+                break;
+            case 8: 
+                $html .= formularioRutaEvacuacion($idPlanEmergencia, $vocab);
+                break;
+            case 9: 
+                $html .= formularioBrigadistas($idPlanEmergencia, $vocab);
+                break;
+            case 10:
+                $html .= formularioIngresoAtencionEmergencias($idPlanEmergencia, $vocab);
+                $html .= formularioIngresoCuerposSocorro($idPlanEmergencia, $vocab);
+                break;
+            case 11: 
+                $html .= formularioPuestoBrigada($idPlanEmergencia, $vocab);
+                break;
+            case 12: 
+                $html .= formularioZonaSeguridad($idPlanEmergencia, $vocab);
+                break;
         }
+//        if ($idForm == 1) {  //Formulario de datos generales            
+//            $html .= formularioDatosGenerales($resPlan, $vocab);
+//
+//            //  $html .= '<div></div>';
+//        } else if ($idForm == 2) { //Formulario de actividades
+//            $html = formularioActividades($resTipoPoblacion, $vocab);
+////            $html .= '<div></div>';
+//        } else if ($idForm == 3) { // Formulario de instalaciones
+//            $html = formularioInstalaciones($resPlan, $vocab);
+//            //    $html .= '<div></div>';
+//            //  $html .= '<div></div>';
+//        } else if ($idForm == 4) { //Formulario Matriz de riesgos 
+//            formularioMatriz($idPlanEmergencia, $vocab, $pdf);
+//            //  $html .= '<div></div>';
+//        } else if ($idForm == 5) { //Formulario Inventario
+//            $html .= '<div>' . $vocab["recurso_humano_titulo"] . '</div>';
+//            $html .= formularioRecursosHumanos($idPlanEmergencia, $vocab);
+//
+//            $html .= '<div>' . $vocab["recurso_humano_titulo"] . '</div>';
+//            $html .= formularioEquipoMovil($idPlanEmergencia, $vocab, "Aereo");
+//
+//            $html .= '<div>' . $vocab["instalaciones_titulo"] . '</div>';
+//            $html .= formularioRecursosInstalaciones($idPlanEmergencia, $vocab);
+//
+//            $html .= '<div>' . $vocab["otros_recursos_Telecomunicacion"] . '</div>';
+//            $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "telecomunicaciones");
+//
+//            $html .= '<div>' . $vocab["otros_recursos_equipo_repuestos"] . '</div>';
+//            $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "repuestos");
+//
+//            $html .= '<div>' . $vocab["otros_recursos_equipo_repuestosAgua"] . '</div>';
+//            $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "recursosAgua");
+//
+//            $html .= '<div>' . $vocab["otros_recursos_Equipo_primeraRespuesta"] . '</div>';
+//            $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "EquipoPrimeraRespuesta");
+//
+//            $html .= '<div>' . $vocab["otros_recursos_Señalizacion"] . '</div>';
+//            $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "señalizacion");
+//
+//            $html .= '<div>' . $vocab["otros_recursos_sistemas_insendios"] . '</div>';
+//            $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "sistemasIncendios");
+//
+//            $html .= '<div>' . $vocab["otros_recursos_equipo_repuestosEnergia"] . '</div>';
+//            $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "recursosEnergia");
+//        } else if ($idForm == 6) { //Formulario Identificacion de peligros
+//            $html .= formularioPeligrosIdentificados($idPlanEmergencia, $vocab);
+//        } else if ($idForm == 7) { //Formulario de población
+//            $html .= formularioPoblacion($idPlanEmergencia, $vocab);
+//        } else if ($idForm == 8) { //Formulario de rutas de evacuación
+//            $html .= formularioRutaEvacuacion($idPlanEmergencia, $vocab);
+//        } else if ($idForm == 9) { //Formulario de brigadistas
+//            $html .= formularioBrigadistas($idPlanEmergencia, $vocab);
+//        } else if ($idForm == 10) { //Formulario de ingreso
+//            $html .= formularioIngresoAtencionEmergencias($idPlanEmergencia, $vocab);
+//
+//            $html .= formularioIngresoCuerposSocorro($idPlanEmergencia, $vocab);
+//        } else if ($idForm == 11) { //Formulario de zona de seguridad
+//            $html .= formularioPuestoBrigada($idPlanEmergencia, $vocab);
+//        } else if ($idForm == 12) { //Formulario de zona de seguridad
+//            $html .= formularioZonaSeguridad($idPlanEmergencia, $vocab);
+//        }
+        $html .= $form['descripcionAbajo'];
     }
     // return $html;
 
@@ -1030,9 +1098,10 @@ function crearGrafico($criterios, $colores) {
     $p1->SetSliceColors($colors);
 
     $graph->Stroke(_IMG_HANDLER);
-
-    $fileName = "grafica1.png";
+    $aleatorio = rand(1000, 9999);
+    $fileName = "grafica" . $aleatorio . ".png";
     $graph->img->Stream($fileName);
+    return $fileName;
 
 // Mandarlo al navegador
     //$graph->img->Headers();
