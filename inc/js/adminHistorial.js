@@ -16,7 +16,7 @@ function cambiarHistorial() {
         }
     });
 }
-
+/// pruebaa
 function delete_historial_action(id,direccion) {
     var find_key = jQuery("#selectHistorialsede").val();
     var find_keyCentro = jQuery("#selectHistorialcentro").val();
