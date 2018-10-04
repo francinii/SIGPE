@@ -556,4 +556,11 @@ $vocab["capitulos_subcapitulos_info_admin"]                  = "Informacion del 
 $vocab["capitulos_subcapitulos_indicaciones"]                  = "Indicaciones:";
 $vocab["capitulos_subcapitulos_info_usuario"]                  = "Redaccion del usuario:";
 $vocab["capitulos_subcapitulos_formularios"]                  = "Formularios asociados:";
+
+//***********     Plan de emergencia aprobacion del documento ***********************//
+$vocab["aprobado_por"]                  = "Aprobado por";
+$vocab["aprobado_plan_desc"]             = "Persona encargar de aprobar el plan de emergencia";
+$vocab["codigo_plan"]                  = "Código del plan de emergencias";
+$vocab["codigo_plan_desc"]             = "Número de versión";
+
 ?>

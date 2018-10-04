@@ -209,7 +209,7 @@ function capitulos($pdf, $capitulos, $resPlan, $resTipoPoblacion, $formularios, 
 
         $sql = "(SELECT  FKidCapitulo, FKidZonaTrabajo,descripcion FROM CapituloPlan where FKidCapitulo = " . $cap['id'] . " and FKidZonaTrabajo = " . $idPlanEmergencia . " )";
         $infoUsuario = seleccion($sql);
-        $html .= "<p>".remplazar($infoUsuario[0]['descripcion'])."</p>";
+        $html .= "<p>" . remplazar($infoUsuario[0]['descripcion']) . "</p>";
 
         $pdf->writeHTML($html, true, false, false, false, '');
 
@@ -234,7 +234,7 @@ function subCapitulos($pdf, $id, $ordenCapitulo, $resPlan, $resTipoPoblacion, $f
         $html .= remplazar($sub['descripcion']);
         $sql = "(SELECT  FKidSubCapitulo, FKidZonaTrabajo,descripcion FROM SubCapituloPlan where FKidSubCapitulo = " . $sub['id'] . " and FKidZonaTrabajo = " . $idPlanEmergencia . " )";
         $infoUsuario = seleccion($sql);
-        $html .= "<p>".remplazar($infoUsuario[0]['descripcion'])."</p>";
+        $html .= "<p>" . remplazar($infoUsuario[0]['descripcion']) . "</p>";
         $pdf->writeHTML($html, true, false, false, false, '');
         listarFormularios($sub['id'], $formularios, $resPlan, $resTipoPoblacion, $vocab, $idPlanEmergencia, $pdf);
         $subOrden += 1;
@@ -925,18 +925,18 @@ function formularioSeleccionada($id, $form, $resPlan, $resTipoPoblacion, $vocab,
     $html = "";
     if ($form['FKidSubcapitulos'] == $id) {
         $idForm = $form['id'];
-        $html .= "<p>".$form['descripcionArriba']."</p>";
+        $html .= "<p>" . remplazar($form['descripcionArriba']) . "</p>";
         switch ($idForm) {
-            case 1: 
+            case 1:
                 $html .= formularioDatosGenerales($resPlan, $vocab);
                 break;
-            case 2: 
+            case 2:
                 $html = formularioActividades($resTipoPoblacion, $vocab);
                 break;
-            case 3: 
+            case 3:
                 $html = formularioInstalaciones($resPlan, $vocab);
                 break;
-            case 4: 
+            case 4:
                 formularioMatriz($idPlanEmergencia, $vocab, $pdf);
                 break;
             case 5:
@@ -972,23 +972,23 @@ function formularioSeleccionada($id, $form, $resPlan, $resTipoPoblacion, $vocab,
                 break;
             case 6:
                 break;
-            case 7: 
+            case 7:
                 $html .= formularioPoblacion($idPlanEmergencia, $vocab);
                 break;
-            case 8: 
+            case 8:
                 $html .= formularioRutaEvacuacion($idPlanEmergencia, $vocab);
                 break;
-            case 9: 
+            case 9:
                 $html .= formularioBrigadistas($idPlanEmergencia, $vocab);
                 break;
             case 10:
                 $html .= formularioIngresoAtencionEmergencias($idPlanEmergencia, $vocab);
                 $html .= formularioIngresoCuerposSocorro($idPlanEmergencia, $vocab);
                 break;
-            case 11: 
+            case 11:
                 $html .= formularioPuestoBrigada($idPlanEmergencia, $vocab);
                 break;
-            case 12: 
+            case 12:
                 $html .= formularioZonaSeguridad($idPlanEmergencia, $vocab);
                 break;
         }
@@ -1053,7 +1053,7 @@ function formularioSeleccionada($id, $form, $resPlan, $resTipoPoblacion, $vocab,
 //        } else if ($idForm == 12) { //Formulario de zona de seguridad
 //            $html .= formularioZonaSeguridad($idPlanEmergencia, $vocab);
 //        }
-        $html .= $form['descripcionAbajo'];
+        $html .= "<p>" . remplazar($form['descripcionAbajo']) . "</p>";
     }
     // return $html;
 
@@ -1119,8 +1119,12 @@ function crearGrafico($criterios, $colores) {
 //}
 // ---------------------------------------------------------
 //Close and output PDF document
-//$pdf->Output('planEmergencias.pdf', 'I');
-$pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/planEmergencias.pdf', 'F');
+if (check_permiso($mod4, $act6, $user_rol)) {
+    $pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/planEmergencias.pdf', 'F');
+} else if (check_permiso($mod5, $act6, $user_rol)) {
+    $pdf->Output('planEmergencias.pdf', 'D');
+} 
+//$pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/planEmergencias.pdf', 'F');
 //============================================================+
 // END OF FILE
 //============================================================+

@@ -2543,3 +2543,35 @@ BEGIN
 END
 ;;
 DELIMITER ;
+
+
+
+-- ----------------------------
+-- Proceso actualizar zona de trabajo
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `update_aprobacion`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_aprobacion`(IN `p_id` int,IN `p_aprobado` varchar(150),IN `p_codigoZonaTrabajo` varchar(150), OUT `res` TINYINT  UNSIGNED)
+BEGIN   
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;           
+        START TRANSACTION;
+        UPDATE `ZonaTrabajo` SET `revisadoPor`= p_aprobado,codigoZonaTrabajo = p_codigoZonaTrabajo WHERE `id`= p_id;
+        COMMIT;
+        -- SUCCESS
+        SET res = 0;
+       
+END
+;;
+DELIMITER ;

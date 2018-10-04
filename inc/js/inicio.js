@@ -5,12 +5,12 @@ function OpcionInicio(opc) {
     if (selecion != null) {
         if (opc == 0) {
             OpcionMenu('mod/planEmergencia/plan_emergencia_datos_generales.php?', 'idCentro=' + selecion + '&nombreCentro=' + centro);
-        } else {
-            window.open("mod/planEmergenciaPDF/planEmergenciaPDF.php?idCentro= "+ selecion +" &nombreCentro= "+ centro, '_blank');
-         //   location.href ="mod/planEmergenciaPDF/planEmergenciaPDF.php?idCentro= "+ selecion +" &nombreCentro= "+ centro;
-
-
-        }
+        } else if (opc == 1) {
+            window.open("mod/planEmergenciaPDF/planEmergenciaPDF.php?idCentro= " + selecion + " &nombreCentro= " + centro, '_blank');
+            //   location.href ="mod/planEmergenciaPDF/planEmergenciaPDF.php?idCentro= "+ selecion +" &nombreCentro= "+ centro;
+        } else if (opc == 2) {
+             OpcionMenu('mod/planEmergencia/plan_emergencia_aprobacion.php?', 'idCentro=' + selecion + '&nombreCentro=' + centro);
+       }
     }
 }
 

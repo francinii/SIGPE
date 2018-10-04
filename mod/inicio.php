@@ -27,23 +27,23 @@ $centros = Array();
 $find_key;
 if (count($res) > 0) {
     $sedeId = $res[0]['idSede'];
-    if(isset($_GET['find_key'])){
-        $find_key=$_GET['find_key'];
-    }else{
-          $find_key =$res[0]['idSede'];
-    }  
+    if (isset($_GET['find_key'])) {
+        $find_key = $_GET['find_key'];
+    } else {
+        $find_key = $res[0]['idSede'];
+    }
     $sede = Array('id' => $res[0]['idSede'], 'nombreSede' => $res[0]['nombreSede']);
-    $sedes[]=$sede;
+    $sedes[] = $sede;
 }
 foreach ($res as $value) {
     if ($sedeId != $value['idSede']) {
         $sede = Array('id' => $value['idSede'], 'nombreSede' => $value['nombreSede']);
-        $sedes []=$sede;
-        $sedeId=$value['idSede'];
+        $sedes [] = $sede;
+        $sedeId = $value['idSede'];
     }
 
-    $centro = Array('id' => $value['idZona'], 'nombreZonaTrabajo' => $value['nombreZonaTrabajo'],'idSede'=>$sedeId);
-    $centros[]=$centro;
+    $centro = Array('id' => $value['idZona'], 'nombreZonaTrabajo' => $value['nombreZonaTrabajo'], 'idSede' => $sedeId);
+    $centros[] = $centro;
 }
 ?>
 <!--  ****** Titulo ***** -->
@@ -92,10 +92,10 @@ foreach ($res as $value) {
                         <?php
                         if (count($centros) > 0) {
                             for ($i = 0; $i < count($centros); $i++) {
-                                if($centros[$i]['idSede']===$find_key){
-                                ?>
-                                <option value='<?= $centros[$i]['id'] ?>' selected><?= $centros[$i]['nombreZonaTrabajo'] ?></option>
-                                <?php
+                                if ($centros[$i]['idSede'] === $find_key) {
+                                    ?>
+                                    <option value='<?= $centros[$i]['id'] ?>' selected><?= $centros[$i]['nombreZonaTrabajo'] ?></option>
+                                    <?php
                                 }
                             }
                         }
@@ -111,9 +111,12 @@ foreach ($res as $value) {
                 <?php } ?>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <?php if (check_permiso($mod5, $act6, $user_rol)) { ?>
-                <a class="btn btn-warning btn-group-justified" onclick="javascript:OpcionInicio(1);"
-                      name="" ><i class="fa fa-print"></i> <?= $vocab["inicio_Imprimir"] ?></a>
+                <?php if (check_permiso($mod4, $act6, $user_rol)) { ?>
+                    <a class="btn btn-warning btn-group-justified" onclick="javascript:OpcionInicio(2);"
+                       name="" ><i class="fa fa-print"></i> <?= $vocab["inicio_Imprimir"] ?></a>
+                <?php } else if (check_permiso($mod5, $act6, $user_rol)) { ?>
+                    <a class="btn btn-warning btn-group-justified" onclick="javascript:OpcionInicio(1);"
+                       name="" ><i class="fa fa-print"></i> <?= $vocab["inicio_Imprimir"] ?></a>
                 <?php } ?>
             </div>                
         </form>
