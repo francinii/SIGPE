@@ -257,13 +257,13 @@ function portada($pdf) {
 
     $pdf->writeHTMLCell(150, '', '', $y, $logo, 0, 0, false, true, 'J', true);
     $pdf->writeHTMLCell(30, '', '155', '', $logo2, 0, 1, false, true, '', true);
-
+    $hoy = date("d-m-Y");
     $html = '<div style = "text-align:center;"><br>
             <h2>PLAN DE PREPARATIVOS DE RESPUESTA ANTE EMERGENCIAS</h2><br>
             <h3>' . $datosCabecera["centroTrabajo"] . ' </h3><br>
             <h3>   UNIVERSIDAD NACIONAL DE COSTA RICA </h3><br>
              <img src= "' . $datosCabecera['logoCentro'] . '" width="250" height="250" >
-            <h3>   Fecha </h3><br>
+            <h3>   Fecha:  ' . $hoy . ' </h3><br>
             <div>
             <h6 style="border: 1px solid black; padding: 10px 20px 30px 40px; text-align: center;">
             Este documento tiene como objeto cumplir con los requisitos y contenidos que debe
@@ -1124,9 +1124,12 @@ function crearGrafico($criterios, $colores) {
 //}
 // ---------------------------------------------------------
 //Close and output PDF document
-if (check_permiso($mod4, $act6, $user_rol)) {
-    $nombreDoc = $id + $version;
-    $pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/'.$nombreDoc.'.pdf', 'F');
+
+
+
+if (check_permiso($mod4, $act6, $user_rol) && !isset($_GET['visualizarpdf'])) {
+    $nombreDoc = $id . "-" . $version;
+    $pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/' . $nombreDoc . '.pdf', 'FD');
 } else if (check_permiso($mod5, $act6, $user_rol)) {
     $pdf->Output('planEmergencias.pdf', 'D');
 } 
