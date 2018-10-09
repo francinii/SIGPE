@@ -73,7 +73,7 @@ function guardarOrdenCapitulo(lista) {
             } else if (response == 1 || response == 2) {
                 jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
             } else if (response == 3) {
-                jAlert("el orden ya existe.\n Consulte a la USTDS", "Usuario ya existe");
+                jAlert("el orden ya existe.\n Consulte a la USTDS", "orden ya existe");
             } else {
                 jAlert("Ocurrio un error inesperado.\n Consulte a la USTDS", "Error inesperado");
             }
@@ -93,7 +93,7 @@ function active_capitulo(id, isActivo, titulo) {
         estado = "activar ";
         isActivo = 1;
     }
-    jConfirm("Desea " + estado + " el capitulo: " + titulo, "Cambiar estado de actividad", function (r) {
+    jConfirm("Desea " + estado + " el capitulo: " + titulo, "Cambiar estado del capitulo", function (r) {
         if (r) {
             active_capitulo_action(id, isActivo);
         }
@@ -161,7 +161,7 @@ function delete_capitulo_action(id) {
             var response = ajax.responseText;
             //alert(response); //DEBUG
             if (response == 0) {
-                jAlert('El Capitulo  se a eliminado correctamente!', 'Exito');
+                jAlert('El capitulo  se a eliminado correctamente!', 'Exito');
 
             } else if (response == 1 || response == 2) {
                 jAlert('Ha ocurrido un error en la Base de Datos Intentelo Nuevamente\n Si el problema continua comuniquese con la USTDS', 'Error');
@@ -265,7 +265,7 @@ function new_capitulo() {
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else if (response == 3) {
-                    jAlert("El Capitulo ya existe.\n Consulte a la USTDS", "Usuario ya existe");
+                    jAlert("El Capitulo ya existe.\n Consulte a la USTDS", "Capitulo ya existe");
                 } else {
                     jAlert("Ocurrio un error inesperado.\n Consulte a la USTDS", "Error inesperado");
                 }

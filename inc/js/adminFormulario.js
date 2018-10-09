@@ -52,7 +52,7 @@ function guardarOrdenFormulario(id, subcapitulo, select) {
                 jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 reCargarAdminFormulario(select);
             } else if (response == 3) {
-                jAlert("el orden ya existe.\n Consulte a la USTDS", "Usuario ya existe");
+                jAlert("el orden ya existe.\n Consulte a la USTDS", "Orden ya existe");
                 reCargarAdminFormulario(select);
                 ;
             } else {
@@ -175,7 +175,7 @@ function update_formulario(id) {
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else if (response == 3) {
-                    jAlert("El Capitulo ya existe.\n Consulte a la USTDS", "Usuario ya existe");
+                    jAlert("El Formulario ya existe.\n Consulte a la USTDS", "Formulario ya existe");
                 } else {
                     jAlert("Ocurrio un error inesperado.\n Consulte a la USTDS", "Error inesperado");
                 }

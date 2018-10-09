@@ -14,7 +14,7 @@ if (isset($_GET['nombreCentro'])) {
 if (isset($_GET['version'])) {
     $version = $_GET['version'];
 }
-$sqlZonas = "(SELECT  id, version, FROM ZonaTrabajo where id =" . $id . ")";
+$sqlZonas = "SELECT  id, version FROM ZonaTrabajo where id =" . $id . "";
 $zonas = seleccion($sqlZonas);
 $version = $zonas[0]['version']
 ?>

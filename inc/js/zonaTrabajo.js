@@ -11,7 +11,7 @@ function cambiarCentro(){
 function validate_zona_trabajo() {
     var nombre = document.getElementById('nombre');
     if (nombre.value == "") {
-        jAlert("Ingrese el nombre de la zona de trabajo", "Dato Requerido");
+        jAlert("Ingrese el nombre del centro de trabajo", "Dato Requerido");
         nombre.setAttribute("style", "background-color:#EDF0FF");
         nombre.focus();
         return false;
@@ -98,12 +98,12 @@ function new_zona_trabajo() {
                 var response = ajax.responseText;
                 //alert(response); //DEBUG
                 if (response == 0) {
-                    jAlert("Origen añadido con exito", "Exito");
+                    jAlert("Centro añadido con exito", "Exito");
                     OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', 'find_key='+sede);
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else if (response == 3) {
-                    jAlert("El origen ya existe.\n Consulte a la USTDS", "Usuario ya existe");
+                    jAlert("El centro ya existe.\n Consulte a la USTDS", "Centro ya existe");
                 } else {
                     jAlert("Ocurrio un error inesperado.\n Consulte a la USTDS", "Error inesperado");
                 }
@@ -132,7 +132,7 @@ function delete_zona_trabajo_action(id) {
             var response = ajax.responseText;
             //alert(response); //DEBUG
             if (response == 0) {
-                jAlert('El origen de amenaza se a eliminado correctamente!', 'Exito');
+                jAlert('El centro se a eliminado correctamente!', 'Exito');
             } else if (response == 1 || response == 2) {
                 jAlert('Ha ocurrido un error en la Base de Datos Intentelo Nuevamente\n Si el problema continua comuniquese con la USTDS', 'Error');
             } else {
@@ -150,7 +150,7 @@ function delete_zona_trabajo_action(id) {
  * @param {type} id_zona_trabajo
  * @returns {undefined}
  */function delete_zona_trabajo(id_zona_trabajo) {
-    jConfirm("Desea eliminar la zona de trabajo:" + id_zona_trabajo, "Eliminar zona de trabajo", function (r) {
+    jConfirm("Desea eliminar el centro de trabajo:" + id_zona_trabajo, "Eliminar centro de trabajo", function (r) {
         if (r) {
             delete_zona_trabajo_action(id_zona_trabajo);
         }
@@ -208,12 +208,12 @@ function update_zona_trabajo(id) {
                 var response = ajax.responseText;
                 //alert(response); //DEBUG
                 if (response == 0) {
-                    jAlert("Origen actualizado con exito", "Exito");
+                    jAlert("centro actualizado con exito", "Exito");
                     OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', 'find_key='+sede);
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else if (response == 3) {
-                    jAlert("El categoria ya existe.\n Consulte a la USTDS", "Usuario ya existe");
+                    jAlert("El centro ya existe.\n Consulte a la USTDS", "centro ya existe");
                 } else {
                     jAlert("Ocurrio un error inesperado.\n Consulte a la USTDS", "Error inesperado");
                 }

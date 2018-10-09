@@ -7,7 +7,7 @@ require 'functions.php';
 
         <div class="navbar-header col-sm-8">
             <a href="#" class="navbar-brand" id="tituloGeneral"></a>   
-            <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+            <button id="boton_menu_principal" aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
                 <span class="sr-only">Alternar Navegación</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>

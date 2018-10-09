@@ -41,8 +41,8 @@ global  $direccionCKfinder;
             var $target = jQuery('#navbar');
 
             if ($target.hasClass('in')) {
-
-                $target.removeClass('in').height(0).css('overflow', 'hidden');
+               jQuery("#boton_menu_principal").trigger('click');
+                
             }
 
         });

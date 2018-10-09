@@ -76,7 +76,7 @@ function guardarOrdenSubcapitulo(lista) {
             } else if (response == 1 || response == 2) {
                 jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
             } else if (response == 3) {
-                jAlert("el orden ya existe.\n Consulte a la USTDS", "Usuario ya existe");
+                jAlert("el orden ya existe.\n Consulte a la USTDS", "orden ya existe");
             } else {
                 jAlert("Ocurrio un error inesperado.\n Consulte a la USTDS", "Error inesperado");
             }
@@ -97,7 +97,7 @@ function active_subcapitulo(id, isActivo, titulo, select) {
         estado = "activar ";
         isActivo = 1;
     }
-    jConfirm("Desea " + estado + " el subcapitulo: " + titulo, "Cambiar estado de actividad", function (r) {
+    jConfirm("Desea " + estado + " el subcapitulo: " + titulo, "Cambiar estado del subcapitulo", function (r) {
         if (r) {
             active_subcapitulo_action(id, isActivo, select);
         }
@@ -142,7 +142,7 @@ function active_subcapitulo_action(id, isActivo, select) {
  * @param {type} id_origen_amenaza
  * @returns {undefined}
  */function delete_subcapitulo(id, titulo, select) {
-    jConfirm("Desea eliminar el subcapitulo:" + titulo, "Eliminar capitulo", function (r) {
+    jConfirm("Desea eliminar el subcapitulo:" + titulo, "Eliminar subcapitulo", function (r) {
         if (r) {
             delete_subcapitulo_action(id, select);
         }
@@ -165,7 +165,7 @@ function delete_subcapitulo_action(id, select) {
             var response = ajax.responseText;
             //alert(response); //DEBUG
             if (response == 0) {
-                jAlert('El Capitulo  se a eliminado correctamente!', 'Exito');
+                jAlert('El subcapitulo  se a eliminado correctamente!', 'Exito');
 
             } else if (response == 1 || response == 2) {
                 jAlert('Ha ocurrido un error en la Base de Datos Intentelo Nuevamente\n Si el problema continua comuniquese con la USTDS', 'Error');
@@ -267,7 +267,7 @@ function new_subcapitulo() {
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else if (response == 3) {
-                    jAlert("El Subcapitulo ya existe.\n Consulte a la USTDS", "Usuario ya existe");
+                    jAlert("El Subcapitulo ya existe.\n Consulte a la USTDS", "Subcapitulo ya existe");
                 } else {
                     jAlert("Ocurrio un error inesperado.\n Consulte a la USTDS", "Error inesperado");
                 }
@@ -326,7 +326,7 @@ function update_subcapitulo(id) {
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else if (response == 3) {
-                    jAlert("El Subcapitulo ya existe.\n Consulte a la USTDS", "Usuario ya existe");
+                    jAlert("El Subcapitulo ya existe.\n Consulte a la USTDS", "Subcapitulo ya existe");
                 } else {
                     jAlert("Ocurrio un error inesperado.\n Consulte a la USTDS", "Error inesperado");
                 }

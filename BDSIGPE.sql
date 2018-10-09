@@ -73,7 +73,7 @@ nombreZonaTrabajo varchar(150),
 descripcion text,
 logo varchar(150),
 ubicacion varchar(150),
-`isActivo` int, 
+version int,
 revisadoPor varchar(150),
 codigoZonaTrabajo varchar(150),
 actividad varchar(150),
@@ -425,11 +425,11 @@ INSERT INTO `Sede`(`isActivo`, `nombreSede`, `descripcion`) VALUES (1,'Heredia',
 INSERT INTO `Sede`(`isActivo`, `nombreSede`, `descripcion`) VALUES (1,'San Jose','San Jose');
 INSERT INTO `Sede`(`isActivo`, `nombreSede`, `descripcion`) VALUES (1,'Alajuela','Alajuela');
 
-INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`version`,`isActivo`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,1,1,'Escuala de informatica','Zona ubicada en la region de limon');
-INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`version`,`isActivo`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (2,1,1,'central','Zona ubicada en la region de Heredia');
-INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`version`,`isActivo`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (2,1,1,'side','Zona ubicada en la region de Guanacaste');
-INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`version`,`isActivo`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (3,1,1,'Sede alajuela','Zona ubicada en la region de Alajuela');
-INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`version`,`isActivo`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,1,1,'Sede Cartago','Zona ubicada en la region de Cartago');
+INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`version`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,1,1,'Escuala de informatica','Zona ubicada en la region de limon');
+INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`version`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (2,1,1,'central','Zona ubicada en la region de Heredia');
+INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`version`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (2,1,1,'side','Zona ubicada en la region de Guanacaste');
+INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`version`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (3,1,1,'Sede alajuela','Zona ubicada en la region de Alajuela');
+INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`version`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,1,1,'Sede Cartago','Zona ubicada en la region de Cartago');
 
 
 INSERT INTO `BDSIGPE`.`OrigenAmenaza` (`descripcion`,`isActivo`) VALUES ('Natural',1);
@@ -2555,9 +2555,6 @@ END
 ;;
 DELIMITER ;
 
-<<<<<<< HEAD
-
-
 -- ----------------------------
 -- Proceso actualizar zona de trabajo
 -- ----------------------------
@@ -2587,7 +2584,7 @@ BEGIN
 END
 ;;
 DELIMITER ;
-=======
+
 -- ----------------------------
 -- Proceso Eliminar historial
 -- ----------------------------
@@ -2647,4 +2644,4 @@ BEGIN
 END
 ;;
 DELIMITER ;
->>>>>>> origin/master
+

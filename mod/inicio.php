@@ -49,7 +49,7 @@ foreach ($res as $value) {
 <!--  ****** Titulo ***** -->
 <br/><br/>
 <div style="text-align: center;" class=" well-sm">
-    <img style="align-items: center;" src="img/logocieuna.png" class="img-rounded" alt="Cinque Terre"> 
+    <img style="align-items: center; width:100%"  src="img/logocieuna.png" class="img-rounded" alt="Cinque Terre"> 
     <br/>
     <h1 style="text-align: center;"><?= $vocab["inicio_Bienvenido"] ?></h1>
     <br/>
@@ -59,14 +59,14 @@ foreach ($res as $value) {
 <br/>
 <!-- div original anterior a integración bootstrap3 
 <div style=" width: 800px; margin: 0 auto;"  class="ex_highlight_row"> -->
-<div class="container">
-    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
 
-    </div>
-    <div class="col-lg-6 col-md-6 col-sm-9 col-xs-10">
-        <form method="post" action="">
+<div  style="text-align: center;" >
+    <form method="post" action="">
+        <h2 style="text-align: center;"><?= $vocab["incio_labe"] ?></h2>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+        
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
             <div class="form-group">
-                <h2 style="text-align: center;"><?= $vocab["incio_labe"] ?></h2>
                 <br/>
                 <?php if (check_permiso($mod5, $act1, $user_rol) || check_permiso($mod5, $act2, $user_rol)) { ?>
                     <h3 style="text-align: center;"><?= $vocab["zona_trabajo_sede"] ?></h3>
@@ -105,33 +105,35 @@ foreach ($res as $value) {
             <?php } ?>
             <br/>
             <br/>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+             
+            <div style="margin-bottom:1%" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <?php if (check_permiso($mod5, $act1, $user_rol) || check_permiso($mod5, $act2, $user_rol)) { ?>
                     <a class="btn btn-success btn-group-justified" onclick="javascript:OpcionInicio(0);" name="submit" > <?= $vocab["inicio_Empezar"] ?></a>
                 <?php } ?>
             </div>
 
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <div style="margin-bottom:1%" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <?php if (check_permiso($mod4, $act3, $user_rol) && check_permiso($mod4, $act4, $user_rol) && check_permiso($mod4, $act5, $user_rol)) { ?>
-                    <a class="btn btn-info btn-group-justified" onclick="javascript:nuevaVersionPlan();" name="submit" > <?= $vocab["inicio_Nueva_version"] ?></a>
+                    <a class="btn btn-info btn-group-justified" onclick="javascript:nuevaVersionPlan();" name="submit" ><?= $vocab["inicio_Nueva_version"] ?></a>
                 <?php } ?>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <div style="margin-bottom:1%" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <?php if (check_permiso($mod4, $act6, $user_rol)) { ?>
                     <a class="btn btn-warning btn-group-justified" onclick="javascript:OpcionInicio(2);"
                        name="" ><i class="fa fa-print"></i> <?= $vocab["inicio_Imprimir"] ?></a>
-                <?php } else if (check_permiso($mod5, $act6, $user_rol)) { ?>
+                   <?php } else if (check_permiso($mod5, $act6, $user_rol)) { ?>
                     <a class="btn btn-warning btn-group-justified" onclick="javascript:OpcionInicio(1);"
                        name="" ><i class="fa fa-print"></i> <?= $vocab["inicio_Imprimir"] ?></a>
 
                 <?php } ?>
-            </div>                
-        </form>
-        <?php /*         * ***************************************************************************************** */ ?>
-        <br/>
-    </div>
-
+            </div> 
+        </div> 
+    </form>
+    <?php /*     * ***************************************************************************************** */ ?>
+    <br/>
 </div>
+
+
 
 
 

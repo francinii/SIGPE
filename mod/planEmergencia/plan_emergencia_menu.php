@@ -24,14 +24,20 @@ $editar = (check_permiso($mod5, $act4, $user_rol) || check_permiso($mod5, $act3,
 </div>
 <div class="container">
     <div class="row" align="center">
-        <div   class="btn-group btn-breadcrumb">
+        <div   class="btn-group btn-group-justified">
             <?php
             if (count($res) > 0) {
                 for ($i = 0; $i < count($res); $i++) {
+                    if($i%5==0){
+                        
+                    }
                     ?>
                     <a href="#" onclick="javascript: cambiarMenu(<?= $res[$i]['id'] ?>, <?= $idCentro ?>, '<?= $nombreCentro ?>');"  class="btn btn-primary"><?= $res[$i]["titulo"] ?></a>
 
                     <?php
+                     if($i%5==0){
+                        
+                    }
                 }
             }
             ?>
