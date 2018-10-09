@@ -54,3 +54,7 @@ function update_aprobacion(id,centro,version) {
     }
 }
 
+function visualizarPDF(id, centro){    
+    window.open("mod/planEmergenciaPDF/planEmergenciaPDF.php?visualizarpdf=1&idCentro=" + id + "&nombreCentro=" + centro, '_blank');
+ 
+}

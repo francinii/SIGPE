@@ -62,7 +62,7 @@ function guardarDatosIdentificacionPeligros(idPlanEmergencia, pasar) {
                 jAlert("Guardado  con exito", "Exito");
                 if (pasar) {
                     OpcionMenu('mod/planEmergencia/plan_emergencia_identificacion_peligros.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
-                }else{
+                } else {
                     OpcionMenu('mod/planEmergencia/plan_emergencia_identificacion_peligros.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
                 }
             } else if (response == 1 || response == 2) {
@@ -131,7 +131,7 @@ function eliminarFilaPeligros(event, idPlan) {
     ajax.open("GET", _URL_ + "&" + _values_send, true);
     ajax.onreadystatechange = function () {
         if (ajax.readyState == 1) {
-           // page.innerHTML = cargando;
+            // page.innerHTML = cargando;
         } else if (ajax.readyState == 4) {
             var response = ajax.responseText;
             //alert(response); //DEBUG
@@ -150,10 +150,44 @@ function eliminarFilaPeligros(event, idPlan) {
 
         }
     };
-    
+
     ajax.send(null);
-loading.innerHTML = "";
+    loading.innerHTML = "";
 
 }
 
+function calcularPriorizacion2(prioridad, priorizacion) {
+    var prorizaciontd = document.getElementById(priorizacion);
+    if (prioridad != null) {
+        if (prioridad == 1) {
+            prorizaciontd.style.backgroundColor = "#d9534f";
+        } else if (prioridad == 2) {
+            prorizaciontd.style.backgroundColor = "#f0ad4e";
 
+        } else if (prioridad == 3) {
+            prorizaciontd.style.backgroundColor = "#5cb85c";
+        } else {
+             prorizaciontd.style.backgroundColor = "#5cb85c";
+        }
+    } else {
+          prorizaciontd.style.backgroundColor = "#5cb85c";
+    }
+}
+
+
+
+
+function cambiarCalcularPriorizacion2(event, priorizacion) {
+    var prioridad = event.value; //selector
+    calcularPriorizacion2(prioridad, priorizacion);
+}
+
+function calcularSiPresente(){
+    var celdas = "";
+  var rows =  jQuery('#lista_identificacion_peligros tbody').children('tr.trInformacion');
+          rows.each(function() {
+                celdas = jQuery(this).children('td');
+            });
+        
+    
+}

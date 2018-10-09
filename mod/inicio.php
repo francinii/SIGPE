@@ -18,7 +18,7 @@ $ip .= $mySessionController->getVar("cds_locate");
 if (check_permiso($mod4, $act2, $user_rol)) {
     $sql = "select sede.id as idSede, sede.nombreSede, ZonaTrabajo.id as idZona, ZonaTrabajo.nombreZonaTrabajo from ZonaTrabajo ,(SELECT `id`,`nombreSede`  FROM `Sede` WHERE `isActivo`=1) sede where  ZonaTrabajo.FKidSede = sede.id  and isActivo=1 order by idSede";
 } else {
-    $sql = "SELECT sede.id as idSede, sede.nombreSede,zona.id as idZona, zona.nombreZonaTrabajo FROM `Sede`,(SELECT `id`, `nombreZonaTrabajo`,`FKidSede` FROM `ZonaTrabajo`,(SELECT `FKidZona` From UsuarioZona where `FKidUsuario` = '$user_id') UsuZona WHERE ZonaTrabajo.id = UsuZona.FKidZona  and isActivo=1) zona  where sede.`id`= zona.FKidSede and isActivo=1 order by idSede";
+    $sql = "SELECT Sede.id as idSede, Sede.nombreSede,zona.id as idZona, zona.nombreZonaTrabajo FROM `Sede`,(SELECT `id`, `nombreZonaTrabajo`,`FKidSede` FROM `ZonaTrabajo`,(SELECT `FKidZona` From UsuarioZona where `FKidUsuario` = '$user_id') UsuZona WHERE ZonaTrabajo.id = UsuZona.FKidZona  and isActivo=1) zona  where Sede.`id`= zona.FKidSede and isActivo=1 order by idSede";
 }
 $res = seleccion($sql);
 $sedes = Array();
@@ -111,11 +111,13 @@ foreach ($res as $value) {
                 <?php } ?>
             </div>
 
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            
                 <?php if (check_permiso($mod4, $act3, $user_rol) && check_permiso($mod4, $act4, $user_rol) && check_permiso($mod4, $act5, $user_rol)) { ?>
-                    <a class="btn btn-info btn-group-justified" onclick="javascript:nuevaVersionPlan();" name="submit" > <?= $vocab["inicio_Nueva_version"] ?></a>
-                <?php } ?>
-            </div>
+                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <a class="btn btn-info btn-group-justified" onclick="javascript:nuevaVersionPlan();" name="submit" > <?= $vocab["inicio_Nueva_version"] ?></a>
+                 </div>
+                     <?php } ?>
+           
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                 <?php if (check_permiso($mod4, $act6, $user_rol)) { ?>
                     <a class="btn btn-warning btn-group-justified" onclick="javascript:OpcionInicio(2);"

@@ -14,7 +14,7 @@ if (isset($_GET['nombreCentro'])) {
 if (isset($_GET['version'])) {
     $version = $_GET['version'];
 }
-$sqlZonas = "(SELECT  id, version, FROM ZonaTrabajo where id =" . $id . ")";
+$sqlZonas = "(SELECT  id, version FROM ZonaTrabajo where id =" . $id . ")";
 $zonas = seleccion($sqlZonas);
 $version = $zonas[0]['version']
 ?>
@@ -43,7 +43,7 @@ $version = $zonas[0]['version']
             <?php } ?> 
             <?php if (check_permiso($mod4, $act6, $user_rol)) { ?>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <a class="btn btn-info btn-group-justified"  name="submit" onclick="javascript:OpcionInicio(1);"><i class="fa fa-print fa-inverse"> </i> <?= $vocab["symbol_print"]  ?>  </a>
+                    <a class="btn btn-info btn-group-justified"  name="submit" onclick="javascript:visualizarPDF(<?=$id?>, '<?=$centro?>');"><i class="fa fa-print fa-inverse"> </i> <?= $vocab["symbol_print"]  ?>  </a>
                 </div>
             <?php } ?>  
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
