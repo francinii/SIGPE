@@ -6,10 +6,12 @@ function OpcionInicio(opc) {
         if (opc == 0) {
             OpcionMenu('mod/planEmergencia/plan_emergencia_datos_generales.php?', 'idCentro=' + selecion + '&nombreCentro=' + centro);
         } else if (opc == 1) {
-            window.open("mod/planEmergenciaPDF/planEmergenciaPDF.php?idCentro=" + selecion + "&nombreCentro=" + centro, '_blank');
+            imprimirPlanVistazo(centro,selecion);
+            //window.open("mod/planEmergenciaPDF/planEmergenciaPDF.php?idCentro=" + selecion + "&nombreCentro=" + centro, '_blank');
             //   location.href ="mod/planEmergenciaPDF/planEmergenciaPDF.php?idCentro= "+ selecion +" &nombreCentro= "+ centro;
         } else if (opc == 2) {
-             OpcionMenu('mod/planEmergencia/plan_emergencia_aprobacion.php?', 'idCentro=' + selecion + '&nombreCentro=' + centro);
+            
+            OpcionMenu('mod/planEmergencia/plan_emergencia_aprobacion.php?', 'idCentro=' + selecion + '&nombreCentro=' + centro);
        }
     }
 }
@@ -59,4 +61,57 @@ function cambiarCentroInicio() {
     OpcionMenu('mod/inicio.php?', 'find_key=' + find_key)
 }
 
+function imprimirPlanVistazo(centro,selecion){
+     var loading = document.getElementById('loading_container');
+    loading.innerHTML = cargando_bar;
+    //Obtener Valores
 
+    var ajax = NuevoAjax();
+    var _values_send ='visualizarpdf=1&idCentro=' + selecion + '&nombreCentro=' + centro;
+    var _URL_ = "mod/planEmergenciaPDF/planEmergenciaPDF.php?";
+    //alert(_URL_ + _values_send); //DEBUG
+    jAlert("cargando..");
+    ajax.open("GET", _URL_ + _values_send, true);
+    ajax.onreadystatechange = function () {
+        if (ajax.readyState == 1) {
+
+            //Nada
+        } else if (ajax.readyState == 4) {
+            var response = ajax.responseText;
+            //alert(response); //DEBUG
+          window.open('mod/versionesPDF/'+response, '_blank');
+          EliminarPlanVistazo(response);  
+           
+        }
+    };
+    ajax.send(null);
+    loading.innerHTML = "";    
+}
+function EliminarPlanVistazo(ruta){
+     var loading = document.getElementById('loading_container');
+    loading.innerHTML = cargando_bar;
+    //Obtener Valores
+
+    var ajax = NuevoAjax();
+    var _values_send ='ruta=' + ruta ;
+    var _URL_ = "mod/planEmergencia/ajax_eliminarArchivo?";
+    //alert(_URL_ + _values_send); //DEBUG
+    ajax.open("GET", _URL_ + _values_send, true);
+    ajax.onreadystatechange = function () {
+        if (ajax.readyState == 1) {
+
+            //Nada
+        } else if (ajax.readyState == 4) {
+            var response = ajax.responseText;
+            if (response == true) {
+                jAlert("Generado corractamente");
+            } else if (response==false) {
+                jAlert("Error en el proceso, intente nuevamente.\n Si persiste informe a la USTDS", "Error");                
+            }
+                
+           
+        }
+    };
+    ajax.send(null);
+    loading.innerHTML = "";    
+}

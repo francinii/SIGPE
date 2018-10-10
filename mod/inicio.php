@@ -115,12 +115,13 @@ foreach ($res as $value) {
                     <a class="btn btn-success btn-group-justified" onclick="javascript:OpcionInicio(0);" name="submit" > <?= $vocab["inicio_Empezar"] ?></a>
                 <?php } ?>
             </div>
+            <?php if (check_permiso($mod4, $act3, $user_rol) && check_permiso($mod4, $act4, $user_rol) && check_permiso($mod4, $act5, $user_rol)) { ?>
+                <div style="margin-bottom:1%" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 
-            <div style="margin-bottom:1%" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                <?php if (check_permiso($mod4, $act3, $user_rol) && check_permiso($mod4, $act4, $user_rol) && check_permiso($mod4, $act5, $user_rol)) { ?>
                     <a class="btn btn-info btn-group-justified" onclick="javascript:nuevaVersionPlan();" name="submit" ><?= $vocab["inicio_Nueva_version"] ?></a>
-                <?php } ?>
-            </div>
+
+                </div>
+            <?php } ?>
             <div style="margin-bottom:1%" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <?php if (check_permiso($mod4, $act6, $user_rol)) { ?>
                     <a class="btn btn-warning btn-group-justified" onclick="javascript:OpcionInicio(2);"

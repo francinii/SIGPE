@@ -2654,6 +2654,7 @@ DROP PROCEDURE IF EXISTS `insert_historial`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_historial`(IN `p_FKidZona` int,IN `p_version` varchar(150), IN `p_direccion` varchar(150),OUT `res` TINYINT  UNSIGNED)
 BEGIN  
+        declare existe Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 		-- ERROR
@@ -2667,10 +2668,15 @@ BEGIN
     SET res = 2;
     ROLLBACK;
 	END;
-            START TRANSACTION;  
-                INSERT INTO `historial`( `FKidZona`, `version`, `direccion`) VALUES (p_FKidZona,p_version,p_direccion);               
+            START TRANSACTION;
+                set existe = null;
+      select count(`FKidZona`) into existe from Historial WHERE  `direccion`=p_direccion;
+         IF(existe != 1) THEN
+  
+                INSERT INTO `Historial`( `FKidZona`, `version`, `direccion`) VALUES (p_FKidZona,p_version,p_direccion);               
 
             COMMIT;
+        END IF;
             -- SUCCESS
             SET res = 0;
             -- Existe usuario

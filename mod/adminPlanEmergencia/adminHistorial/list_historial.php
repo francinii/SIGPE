@@ -34,7 +34,7 @@ foreach ($res as $value) {
     $centros[] = $centro;
 }
 // select lista
-$sql = "SELECT `id`, `FKidZona`, `nombre`, `direccion` FROM `Historial`";
+$sql = "SELECT `id`, `FKidZona`, `version`, `direccion` FROM `Historial`";
 $find_keyCentro = '0';
 if ((isset($_GET['find_keyCentro']))) {
     $find_keyCentro = $_GET['find_keyCentro'];
@@ -137,7 +137,7 @@ $capituloNumero = 0;
                     <tr id="fila<?= $i ?>"  align='center'>
                         <td hidden><?= $res[$i]['id'] ?></td>                     
 
-                        <td><?= $res[$i]['nombre'] ?></td>                     
+                        <td><?= $res[$i]['version'] ?></td>                     
                         <?php if (check_permiso($mod4, $act1, $user_rol)) { ?>
                             <td>                      
                                 <a class="puntero" onClick="javascript:imprimierVersion('<?=$res[$i]['direccion']?>');">                                     
@@ -147,7 +147,7 @@ $capituloNumero = 0;
                         <?php } ?>                       
                         <?php if (check_permiso($mod4, $act5, $user_rol)) { ?>
                             <td>              
-                                <a class="puntero"  onClick="javascript:delete_historial(<?= $res[$i]['id']?> ,'<?= $res[$i]['nombre']?>','<?= $res[$i]['direccion']?>');">                                 
+                                <a class="puntero"  onClick="javascript:delete_historial(<?= $res[$i]['id']?> ,'<?= $res[$i]['version']?>','<?= $res[$i]['direccion']?>');">                                 
                                     <div class="text-center"><i class="fa fa-close text-danger" title="<?= $vocab["symbol_delete"] ?>"></i></div>                                       
                                 </a>                             
                             </td>

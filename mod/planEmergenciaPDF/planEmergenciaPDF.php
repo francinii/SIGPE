@@ -1140,13 +1140,16 @@ function crearGrafico($criterios, $colores) {
 
 if (check_permiso($mod4, $act6, $user_rol) && !isset($_GET['visualizarpdf'])) {
     $nombreDoc = $id . "-" . $version. '.pdf';
-    $pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/' . $nombreDoc , 'FD');
+    $pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/' . $nombreDoc , 'F');
     $sql_a = "CALL insert_historial('$id','$version','$nombreDoc',@res);";
     $sql_b = "SELECT @res as res;";
     $res = transaccion_verificada($sql_a, $sql_b);    
-    
+    echo  $nombreDoc;    
 } else if (check_permiso($mod5, $act6, $user_rol)) {
-    $pdf->Output('planEmergencias.pdf', 'D');
+    $vistado=rand ( 1 , 100 );
+    $nombreDoc = 'planEmergencias' . $vistado. '.pdf';   
+    $pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/' . $nombreDoc , 'F');
+   echo   $nombreDoc;
 } 
 //$pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/planEmergencias.pdf', 'F');
 //============================================================+
