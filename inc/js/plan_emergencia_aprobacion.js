@@ -37,7 +37,7 @@ function update_aprobacion(id,centro,version) {
                 var response = ajax.responseText;
                 //alert(response); //DEBUG
                 if (response == 0) {
-                    jAlert("Plan de acción actualizado con éxito", "Exito");
+                   // jAlert("Plan de acción actualizado con éxito", "Exito");
                    imprimirPDF(id,centro,version);
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
@@ -68,7 +68,7 @@ function imprimirPDF(id,centro,version){
                       '&version='+version;
     var _URL_ = "mod/planEmergenciaPDF/planEmergenciaPDF.php?";
     //alert(_URL_ + _values_send); //DEBUG
-    jAlert("cargando..");
+     jQuery('#CargandoModal').modal('show');
     ajax.open("GET", _URL_ + _values_send, true);
     ajax.onreadystatechange = function () {
         if (ajax.readyState == 1) {
@@ -76,7 +76,7 @@ function imprimirPDF(id,centro,version){
             //Nada
         } else if (ajax.readyState == 4) {
             var response = ajax.responseText;
-            //alert(response); //DEBUG
+            jQuery('#CargandoModal').modal('hide');
             jAlert("Generado corractamente");
           window.open('mod/versionesPDF/'+response, '_blank');          
            
