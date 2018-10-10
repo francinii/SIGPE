@@ -1339,13 +1339,20 @@ DROP PROCEDURE IF EXISTS `delete_subcapitulo`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_subcapitulo`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
 BEGIN
-	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+
+    
+   DECLARE EXIT HANDLER FOR 1451
+   BEGIN
+		-- ERROR
+    SET res = 4;
+    ROLLBACK;
+	END;
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 		-- ERROR
     SET res = 1;
     ROLLBACK;
 	END;
-
   DECLARE EXIT HANDLER FOR SQLWARNING
 	BEGIN
 		-- ERROR
@@ -2262,13 +2269,14 @@ DELIMITER ;
  IN `p_ruta2` varchar(1500), IN `p_distancia2` float, IN `p_tiempo2` float,
  OUT `res` TINYINT  UNSIGNED)
  BEGIN
+    
      DECLARE EXIT HANDLER FOR SQLEXCEPTION
      BEGIN
     -- ERROR
      SET res = 1;
      ROLLBACK;
     END;
-   DECLARE EXIT HANDLER FOR SQLWARNING
+    DECLARE EXIT HANDLER FOR SQLWARNING
  	BEGIN
 	-- ERROR
             SET res = 2;

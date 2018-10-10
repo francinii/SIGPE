@@ -149,7 +149,7 @@ require 'functions.php';
                             <?php } ?>
                               <!-- ADMINISTRAR  formulario-->
                             <?php if (check_permiso($mod4, $act1, $user_rol)) { ?>
-                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminFormularios/list_formulario.php?', '');"><span><i class="fa fa-sitemap text-warning"></i> <?= $vocab["menu_admin_formulario"] ?></span></a></li>
+                            <li><a class="Menuprincipal"  onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminFormularios/list_formulario.php?', '');"><span><i class="fa fa-sitemap text-warning"></i> <?= $vocab["menu_admin_formulario"] ?></span></a></li>
                             
                             <?php } ?>
                             <!-- ADMINISTRAR MATRIZ DE RIESGOS -->
@@ -168,14 +168,15 @@ require 'functions.php';
                                         <?php } ?>
                                     </ul>
                                 <?php } ?>
+                                     <!--admin historial-->
                                 <?php if (check_permiso($mod4, $act1, $user_rol)) { ?>
 
-                                <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminHistorial/list_historial.php?', '');"><span><i class="fa fa-list text-primary"></i> <?= $vocab["menu_admin_historial"] ?></span></a></li>
+                                <li><a class="Menuprincipal" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminHistorial/list_historial.php?', '');"><span><i class="fa fa-list text-primary"></i> <?= $vocab["menu_admin_historial"] ?></span></a></li>
 
                             <?php } ?>
                         </ul>
                     </li>
-                     <!--admin historial-->
+                    
                 <?php } ?>
                 <li><a  class="Menuprincipal"  onclick="javascript:OpcionMenu('home.php?', '');"><span><i class="fa fa-question fa-inverse"></i> <?= $vocab["menu_help"] ?></span></a></li>
             <!--<li><a href="http://www.soporteinf.una.ac.cr" target="_blank"><span><i class="fa fa-question fa-inverse"></i> <?= $vocab["menu_help"] ?></span></a></li>-->

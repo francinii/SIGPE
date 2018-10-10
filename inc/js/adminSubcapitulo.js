@@ -167,9 +167,12 @@ function delete_subcapitulo_action(id, select) {
             if (response == 0) {
                 jAlert('El subcapitulo  se a eliminado correctamente!', 'Exito');
 
-            } else if (response == 1 || response == 2) {
+            } else if (response == 1 || response == 2)  {
                 jAlert('Ha ocurrido un error en la Base de Datos Intentelo Nuevamente\n Si el problema continua comuniquese con la USTDS', 'Error');
-            } else {
+            }else if ( response == 4){
+                jAlert('El subcapítulo no se puede eliminar, tiene formularios asociados')
+            }
+            else {
                 jAlert('Ha ocurrido un error inesperado intentelo más tarde!', 'Error');
             }
             OpcionMenu('mod/adminPlanEmergencia/adminSubcapitulos/list_subcapitulos.php?', 'find_key=' + select);
