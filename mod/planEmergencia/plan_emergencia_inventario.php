@@ -46,11 +46,11 @@ if (count($res) <= 0) {
                     for ($i = 0; $i < count($res); $i++) {
                         ?>
                         <tr id="H-<?= $i ?>">
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="H-profesion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['profesion'] : ""; ?>" ></td>
-                            <td> <input  type="number"  <?= (!$editar) ? "readonly" : ""; ?>  min="0" class="form-control requerido  cambios" id="H-cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>   class="form-control requerido cambios" id="H-categoria<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['categorias'] : ""; ?>" ></td>
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>   class="form-control requerido cambios" id="H-localizacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['localizacion'] : ""; ?>" ></td>                            
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="H-contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="H-profesion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['profesion'] : ""; ?>" ></td>
+                            <td> <input  type="number"  <?= (!$editar) ? "disabled" : ""; ?>  min="0" class="form-control requerido  cambios" id="H-cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control requerido cambios" id="H-categoria<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['categorias'] : ""; ?>" ></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control requerido cambios" id="H-localizacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['localizacion'] : ""; ?>" ></td>                            
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="H-contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>
 
                             <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
                                 <td>              
@@ -124,12 +124,12 @@ if (count($res) <= 0) {
                     for ($i = 0; $i < count($res); $i++) {
                         ?>
                         <tr id="E-<?= $i ?>">
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="E-tipoEquipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
-                            <td> <input  type="number"  <?= (!$editar) ? "readonly" : ""; ?>  min="0" class="form-control requerido  cambios" id="E-cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
-                            <td> <input  type="number"  <?= (!$editar) ? "readonly" : ""; ?>  min="0" class="form-control requerido cambios" id="E-capacidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['capacidad'] : "0"; ?>" ></td>
-                            <td><textarea rows="1" style ="width: 100%;"  type="text" <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="E-caracteristica<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>   class="form-control  requerido cambios" id="E-contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?> class="form-control  requerido cambios" id="E-ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="E-tipoEquipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
+                            <td> <input  type="number"  <?= (!$editar) ? "disabled" : ""; ?>  min="0" class="form-control requerido  cambios" id="E-cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
+                            <td> <input  type="number"  <?= (!$editar) ? "disabled" : ""; ?>  min="0" class="form-control requerido cambios" id="E-capacidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['capacidad'] : "0"; ?>" ></td>
+                            <td><textarea rows="1" style ="width: 100%;"  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="E-caracteristica<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control  requerido cambios" id="E-contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?> class="form-control  requerido cambios" id="E-ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
                             <td> <select id="E-categoria<?= $i ?>" <?= (!$editar) ? "Disabled" : ""; ?> name="select_subcapitulos" class="form-control cambios"></select></td>
                     <script>
                         selectEquipos(<?= $i ?>, combo, '<?= (is_array($res[$i])) ? $res[$i]['categoria'] : 'nada'; ?>');
@@ -202,12 +202,12 @@ if (count($res) <= 0) {
                     for ($i = 0; $i < count($res); $i++) {
                         ?>
                         <tr id="I-<?= $i ?>">
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="I-tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
-                            <td> <input  type="number"  <?= (!$editar) ? "readonly" : ""; ?>  min="0" class="form-control requerido  cambios" id="I-cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
-                            <td> <input  type="number"  <?= (!$editar) ? "readonly" : ""; ?>  min="0" class="form-control requerido cambios" id="I-tamano<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tamaño'] : "0"; ?>" ></td>                                                      
-                           <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>   class="form-control  requerido cambios" id="I-distribucion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['distribucion'] : ""; ?>" ></td>
-                            <td><textarea rows="1" style ="width: 100%;"  type="text" <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="I-contacto<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?></textarea></td>
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?> class="form-control  requerido cambios" id="I-ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="I-tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
+                            <td> <input  type="number"  <?= (!$editar) ? "disabled" : ""; ?>  min="0" class="form-control requerido  cambios" id="I-cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
+                            <td> <input  type="number"  <?= (!$editar) ? "disabled" : ""; ?>  min="0" class="form-control requerido cambios" id="I-tamano<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tamaño'] : "0"; ?>" ></td>                                                      
+                           <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control  requerido cambios" id="I-distribucion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['distribucion'] : ""; ?>" ></td>
+                            <td><textarea rows="1" style ="width: 100%;"  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="I-contacto<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?></textarea></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?> class="form-control  requerido cambios" id="I-ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
                                                                                   
                     <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
                         <td>              
@@ -278,12 +278,12 @@ if (count($res) <= 0) {
                     for ($i = 0; $i < count($res); $i++) {
                         ?>
                         <tr id="<?= $prefijo.$i ?>">
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
-                            <td> <input  type="number"  <?= (!$editar) ? "readonly" : ""; ?>  min="0" class="form-control requerido  cambios" id="<?= $prefijo ?>cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
-                             <td><textarea rows="1"   type="text" <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>   class="form-control requerido cambios" id="<?= $prefijo ?>contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>                            
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
-                             <td><textarea rows="1"  type="text" <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
+                            <td> <input  type="number"  <?= (!$editar) ? "disabled" : ""; ?>  min="0" class="form-control requerido  cambios" id="<?= $prefijo ?>cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
+                             <td><textarea rows="1"   type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control requerido cambios" id="<?= $prefijo ?>contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>                            
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
+                             <td><textarea rows="1"  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
 
                             <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
                                 <td>              
@@ -354,12 +354,12 @@ if (count($res) <= 0) {
                     for ($i = 0; $i < count($res); $i++) {
                         ?>
                         <tr id="<?= $prefijo.$i ?>">
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
-                            <td> <input  type="number"  <?= (!$editar) ? "readonly" : ""; ?>  min="0" class="form-control requerido  cambios" id="<?= $prefijo ?>cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
-                             <td><textarea rows="1"   type="text" <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>   class="form-control requerido cambios" id="<?= $prefijo ?>contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>                            
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
-                             <td><textarea rows="1"  type="text" <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
+                            <td> <input  type="number"  <?= (!$editar) ? "disabled" : ""; ?>  min="0" class="form-control requerido  cambios" id="<?= $prefijo ?>cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
+                             <td><textarea rows="1"   type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control requerido cambios" id="<?= $prefijo ?>contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>                            
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
+                             <td><textarea rows="1"  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
 
                             <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
                                 <td>              
@@ -429,12 +429,12 @@ if (count($res) <= 0) {
                     for ($i = 0; $i < count($res); $i++) {
                         ?>
                         <tr id="<?= $prefijo.$i ?>">
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
-                            <td> <input  type="number"  <?= (!$editar) ? "readonly" : ""; ?>  min="0" class="form-control requerido  cambios" id="<?= $prefijo ?>cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
-                             <td><textarea rows="1"   type="text" <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>   class="form-control requerido cambios" id="<?= $prefijo ?>contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>                            
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
-                             <td><textarea rows="1"  type="text" <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
+                            <td> <input  type="number"  <?= (!$editar) ? "disabled" : ""; ?>  min="0" class="form-control requerido  cambios" id="<?= $prefijo ?>cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
+                             <td><textarea rows="1"   type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control requerido cambios" id="<?= $prefijo ?>contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>                            
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
+                             <td><textarea rows="1"  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
 
                             <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
                                 <td>              
@@ -504,12 +504,12 @@ if (count($res) <= 0) {
                     for ($i = 0; $i < count($res); $i++) {
                         ?>
                         <tr id="<?= $prefijo.$i ?>">
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
-                            <td> <input  type="number"  <?= (!$editar) ? "readonly" : ""; ?>  min="0" class="form-control requerido  cambios" id="<?= $prefijo ?>cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
-                             <td><textarea rows="1"   type="text" <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>   class="form-control requerido cambios" id="<?= $prefijo ?>contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>                            
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
-                             <td><textarea rows="1"  type="text" <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
+                            <td> <input  type="number"  <?= (!$editar) ? "disabled" : ""; ?>  min="0" class="form-control requerido  cambios" id="<?= $prefijo ?>cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
+                             <td><textarea rows="1"   type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control requerido cambios" id="<?= $prefijo ?>contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>                            
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
+                             <td><textarea rows="1"  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
 
                             <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
                                 <td>              
@@ -579,12 +579,12 @@ if (count($res) <= 0) {
                     for ($i = 0; $i < count($res); $i++) {
                         ?>
                         <tr id="<?= $prefijo.$i ?>">
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
-                            <td> <input  type="number"  <?= (!$editar) ? "readonly" : ""; ?>  min="0" class="form-control requerido  cambios" id="<?= $prefijo ?>cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
-                             <td><textarea rows="1"   type="text" <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>   class="form-control requerido cambios" id="<?= $prefijo ?>contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>                            
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
-                             <td><textarea rows="1"  type="text" <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
+                            <td> <input  type="number"  <?= (!$editar) ? "disabled" : ""; ?>  min="0" class="form-control requerido  cambios" id="<?= $prefijo ?>cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
+                             <td><textarea rows="1"   type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control requerido cambios" id="<?= $prefijo ?>contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>                            
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
+                             <td><textarea rows="1"  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
 
                             <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
                                 <td>              
@@ -654,12 +654,12 @@ if (count($res) <= 0) {
                     for ($i = 0; $i < count($res); $i++) {
                         ?>
                         <tr id="<?= $prefijo.$i ?>">
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
-                            <td> <input  type="number"  <?= (!$editar) ? "readonly" : ""; ?>  min="0" class="form-control requerido  cambios" id="<?= $prefijo ?>cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
-                             <td><textarea rows="1"   type="text" <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>   class="form-control requerido cambios" id="<?= $prefijo ?>contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>                            
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
-                             <td><textarea rows="1"  type="text" <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
+                            <td> <input  type="number"  <?= (!$editar) ? "disabled" : ""; ?>  min="0" class="form-control requerido  cambios" id="<?= $prefijo ?>cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
+                             <td><textarea rows="1"   type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control requerido cambios" id="<?= $prefijo ?>contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>                            
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
+                             <td><textarea rows="1"  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
 
                             <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
                                 <td>              
@@ -729,12 +729,12 @@ if (count($res) <= 0) {
                     for ($i = 0; $i < count($res); $i++) {
                         ?>
                         <tr id="<?= $prefijo.$i ?>">
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
-                            <td> <input  type="number"  <?= (!$editar) ? "readonly" : ""; ?>  min="0" class="form-control requerido  cambios" id="<?= $prefijo ?>cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
-                             <td><textarea rows="1"   type="text" <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>   class="form-control requerido cambios" id="<?= $prefijo ?>contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>                            
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
-                             <td><textarea rows="1"  type="text" <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
+                            <td> <input  type="number"  <?= (!$editar) ? "disabled" : ""; ?>  min="0" class="form-control requerido  cambios" id="<?= $prefijo ?>cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
+                             <td><textarea rows="1"   type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control requerido cambios" id="<?= $prefijo ?>contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>                            
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
+                             <td><textarea rows="1"  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
 
                             <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
                                 <td>              

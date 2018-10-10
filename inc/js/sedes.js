@@ -43,12 +43,12 @@ function update_sede(id) {
                 var response = ajax.responseText;
                 //alert(response); //DEBUG
                 if (response == 0) {
-                    jAlert("Origen actualizado con exito", "Exito");
+                    jAlert("Sede actualizada con exito", "Exito");
                     OpcionMenu('mod/adminPlanEmergencia/adminSedes/list_sedes.php?', '');
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else if (response == 3) {
-                    jAlert("El categoria ya existe.\n Consulte a la USTDS", "Usuario ya existe");
+                    jAlert("La Sede ya existe.\n Consulte a la USTDS", "Sede ya existe");
                 } else {
                     jAlert("Ocurrio un error inesperado.\n Consulte a la USTDS", "Error inesperado");
                 }
@@ -80,7 +80,7 @@ function delete_sedes_action(id) {
             var response = ajax.responseText;
             //alert(response); //DEBUG
             if (response == 0) {
-                jAlert('El origen de amenaza se a eliminado correctamente!', 'Exito');
+                jAlert('La sede se a eliminada correctamente!', 'Exito');
             } else if (response == 1 || response == 2) {
                 jAlert('Ha ocurrido un error en la Base de Datos Intentelo Nuevamente\n Si el problema continua comuniquese con la USTDS', 'Error');
             } else {
@@ -137,12 +137,12 @@ function new_sede() {
                 var response = ajax.responseText;
                 //alert(response); //DEBUG
                 if (response == 0) {
-                    jAlert("Origen añadido con exito", "Exito");
+                    jAlert("Sede añadida con exito", "Exito");
                     OpcionMenu('mod/adminPlanEmergencia/adminSedes/list_sedes.php?', '');
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else if (response == 3) {
-                    jAlert("El origen ya existe.\n Consulte a la USTDS", "Usuario ya existe");
+                    jAlert("La Sede ya existe.\n Consulte a la USTDS", "Sede ya existe");
                 } else {
                     jAlert("Ocurrio un error inesperado.\n Consulte a la USTDS", "Error inesperado");
                 }

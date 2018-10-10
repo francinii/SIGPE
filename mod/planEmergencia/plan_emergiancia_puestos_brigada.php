@@ -51,7 +51,7 @@ if (count($res) <= 0) {
                             ?>
                             <tr class="seccionPuesto" id="Pues-<?= $id ?>">                   
                                 <td style="align-items:center; background-color:lightblue" colspan="2">
-                                    <input style="width: 40%; margin: 0 auto;" type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="Puesto<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['puesto'] : $res[$i] ?>" >
+                                    <input style="width: 40%; margin: 0 auto;" type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="Puesto<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['puesto'] : $res[$i] ?>" >
                                 </td>                                
                                 <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
                                     <td  style="background-color:lightblue">              
@@ -75,8 +75,8 @@ if (count($res) <= 0) {
                         ?>
 
                         <tr id="fil-<?= $id ?>">
-                            <td> <textarea  rows="1" type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="funcion<?= $id ?>" ><?= (is_array($res[$i])) ? $res[$i]['funcion'] : ""; ?></textarea></td>
-                            <td> <textarea rows="1" type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido  cambios" id="plazo<?= $id ?>" ><?= (is_array($res[$i])) ? $res[$i]['plazoEjecucion'] : ""; ?></textarea></td>
+                            <td> <textarea  rows="1" type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="funcion<?= $id ?>" ><?= (is_array($res[$i])) ? $res[$i]['funcion'] : ""; ?></textarea></td>
+                            <td> <textarea rows="1" type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido  cambios" id="plazo<?= $id ?>" ><?= (is_array($res[$i])) ? $res[$i]['plazoEjecucion'] : ""; ?></textarea></td>
                            
 
                             <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>

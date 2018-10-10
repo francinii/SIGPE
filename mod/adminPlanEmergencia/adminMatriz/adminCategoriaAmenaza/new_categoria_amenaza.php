@@ -7,6 +7,11 @@ $user_rol = $mySessionController->getVar("rol");
 
 $sql = "SELECT id, descripcion FROM TipoAmenaza";
 $comb = seleccion($sql);
+
+$find_key = '';
+if ((isset($_GET['find_key']))) {
+    $find_key = $_GET['find_key'];
+}
 ?>
 <div class="container">
     <div class="well well-sm">
@@ -27,7 +32,7 @@ $comb = seleccion($sql);
                     if (count($comb) > 0) {
                         for ($i = 0; $i < count($comb); $i++) {
                             ?>
-                            <option value='<?= $comb[$i]['id'] ?>' selected><?= $comb[$i]['descripcion'] ?></option>
+                            <option value='<?= $comb[$i]['id'] ?>' <?=($find_key==$comb[$i]['id'])? 'selected': '' ?> ><?= $comb[$i]['descripcion'] ?></option>
                             <?php
                         }
                     }

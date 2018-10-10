@@ -38,7 +38,7 @@ function update_aprobacion(id,centro,version) {
                 //alert(response); //DEBUG
                 if (response == 0) {
                     jAlert("Plan de acción actualizado con éxito", "Exito");
-                   // OpcionMenu('mod/adminPlanEmergencia/adminSedes/list_sedes.php?', '');
+                   imprimirPDF(id,centro,version);
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else if (response == 3) {
@@ -48,13 +48,41 @@ function update_aprobacion(id,centro,version) {
                 }
             }
         };
-       window.open("mod/planEmergenciaPDF/planEmergenciaPDF.php?idCentro= " + id + " &version= " + version + " &nombreCentro= " + centro, '_blank');
+      
         ajax.send(null);
         loading.innerHTML = "";
     }
 }
 
 function visualizarPDF(id, centro){    
-    window.open("mod/planEmergenciaPDF/planEmergenciaPDF.php?visualizarpdf=1&idCentro=" + id + "&nombreCentro=" + centro, '_blank');
- 
+imprimirPlanVistazo(centro,id);
+}
+
+function imprimirPDF(id,centro,version){
+    var loading = document.getElementById('loading_container');
+    loading.innerHTML = cargando_bar;
+    //Obtener Valores
+
+    var ajax = NuevoAjax();
+    var _values_send ='idCentro=' + id + '&nombreCentro=' + centro+
+                      '&version='+version;
+    var _URL_ = "mod/planEmergenciaPDF/planEmergenciaPDF.php?";
+    //alert(_URL_ + _values_send); //DEBUG
+    jAlert("cargando..");
+    ajax.open("GET", _URL_ + _values_send, true);
+    ajax.onreadystatechange = function () {
+        if (ajax.readyState == 1) {
+
+            //Nada
+        } else if (ajax.readyState == 4) {
+            var response = ajax.responseText;
+            //alert(response); //DEBUG
+            jAlert("Generado corractamente");
+          window.open('mod/versionesPDF/'+response, '_blank');          
+           
+        }
+    };
+    ajax.send(null);
+    loading.innerHTML = ""; 
+    
 }

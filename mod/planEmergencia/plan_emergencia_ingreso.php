@@ -57,13 +57,13 @@ if (count($res) <= 0) {
                                 <?php
                             } else {
                                 ?>
-                                <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control  cambios" id="tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : $res[$i]; ?>" ></td>
+                                <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control  cambios" id="tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : $res[$i]; ?>" ></td>
                                 <?php
                             }
                             ?>
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>   class="form-control cambios" id="ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
-                            <td> <input  type="number"  min="0" <?= (!$editar) ? "readonly" : ""; ?>   class="form-control requerido cambios" id="Distancia<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['Distancia'] : "0"; ?>" ></td>                            
-                            <td> <input  type="number"  min="0" <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="Tiempo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['Tiempo'] : "0"; ?>" ></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control cambios" id="ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
+                            <td> <input  type="number"  min="0" <?= (!$editar) ? "disabled" : ""; ?>   class="form-control requerido cambios" id="Distancia<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['Distancia'] : "0"; ?>" ></td>                            
+                            <td> <input  type="number"  min="0" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="Tiempo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['Tiempo'] : "0"; ?>" ></td>
 
                             <?php if (check_permiso($mod5, $act5, $user_rol)) {
                                 ?>
@@ -106,31 +106,31 @@ $res = seleccion($sql);
         <div class="form-group row">
             <label for="area" class="col-sm-3 col-form-label"><?= $vocab["ingreso_dimensiones"] ?></label>
             <div class="col-sm-9">
-                <input type="text"   <?= (!$editar) ? "readonly" : ""; ?> class="form-control cambios" id="dimensionAreaAcceso" value="<?= ( count($res) > 0) ? $res[0]['dimensionAreaAcceso'] : ""; ?>">                                 
+                <input type="text"   <?= (!$editar) ? "disabled" : ""; ?> class="form-control cambios" id="dimensionAreaAcceso" value="<?= ( count($res) > 0) ? $res[0]['dimensionAreaAcceso'] : ""; ?>">                                 
             </div>
         </div>
         <div class="form-group row">
             <label for="instalaciones" class="col-sm-3 col-form-label"><?= $vocab["ingreso_radio"] ?></label>
             <div class="col-sm-9">
-                <input type="text"   <?= (!$editar) ? "readonly" : ""; ?> class="form-control cambios" id="radioGiro" value="<?= ( count($res) > 0) ? $res[0]['radioGiro'] : ""; ?>">                                 
+                <input type="text"   <?= (!$editar) ? "disabled" : ""; ?> class="form-control cambios" id="radioGiro" value="<?= ( count($res) > 0) ? $res[0]['radioGiro'] : ""; ?>">                                 
             </div>
         </div>
         <div class="form-group row">
             <label for="zona" class="col-sm-3 col-form-label"><?= $vocab["ingreso_caseta"] ?></label>
             <div class="col-sm-9">
-                <input type="text"  <?= (!$editar) ? "readonly" : ""; ?> class="form-control cambios" id="caseta" value="<?= ( count($res) > 0) ? $res[0]['caseta'] : ""; ?>">                                 
+                <input type="text"  <?= (!$editar) ? "disabled" : ""; ?> class="form-control cambios" id="caseta" value="<?= ( count($res) > 0) ? $res[0]['caseta'] : ""; ?>">                                 
             </div>
         </div>
         <div class="form-group row">
             <label for="topografica" class="col-sm-3 col-form-label"><?= $vocab["ingreso_plumas"] ?></label>
             <div class="col-sm-9">
-                <input type="text"  <?= (!$editar) ? "readonly" : ""; ?> class="form-control cambios" id="plumas" value="<?= ( count($res) > 0) ? $res[0]['plumas'] : ""; ?>">                                 
+                <input type="text"  <?= (!$editar) ? "disabled" : ""; ?> class="form-control cambios" id="plumas" value="<?= ( count($res) > 0) ? $res[0]['plumas'] : ""; ?>">                                 
             </div>
         </div>
         <div class="form-group row">
             <label for="terreno" class="col-sm-3 col-form-label"><?= $vocab["ingreso_ancho"] ?></label>
             <div class="col-sm-9">
-                <input type="text"  <?= (!$editar) ? "readonly" : ""; ?> class="form-control cambios" id="anchoLibre" value="<?= ( count($res) > 0) ? $res[0]['anchoLibre'] : ""; ?>">                                 
+                <input type="text"  <?= (!$editar) ? "disabled" : ""; ?> class="form-control cambios" id="anchoLibre" value="<?= ( count($res) > 0) ? $res[0]['anchoLibre'] : ""; ?>">                                 
             </div>
         </div>        
         <h4><?= $vocab["ingreso_protocolo"] ?></h4>

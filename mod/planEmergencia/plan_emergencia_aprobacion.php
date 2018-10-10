@@ -14,9 +14,12 @@ if (isset($_GET['nombreCentro'])) {
 if (isset($_GET['version'])) {
     $version = $_GET['version'];
 }
-$sqlZonas = "(SELECT  id, version FROM ZonaTrabajo where id =" . $id . ")";
+$sqlZonas = "(SELECT  id, version,revisadoPor,codigoZonaTrabajo FROM ZonaTrabajo where id =" . $id . ")";
 $zonas = seleccion($sqlZonas);
-$version = $zonas[0]['version']
+$version = $zonas[0]['version'];
+        
+ 
+        
 ?>
 
 <div class="container">
@@ -28,12 +31,12 @@ $version = $zonas[0]['version']
            
             <div class="form-group">
                  <label  for="aprobadoPor"><?= $vocab["aprobado_por"] ?></label>
-                 <input id="aprobadoPor" name="aprobado_por" class="form-control" type="text" value=""/> 
+                 <input id="aprobadoPor" name="aprobado_por" class="form-control" type="text" value="<?=(count($zonas)>0)? $zonas[0]['revisadoPor']:"" ?>"/> 
                 <p class="help-block"><small><?= $vocab["aprobado_plan_desc"] ?></small></p> 
             </div>  
              <div class="form-group">
                   <label  for="codigoZona"><?= $vocab["codigo_plan"] ?></label>
-                  <input  id="codigoZona" name="codigoZona" class="form-control" type="text" value=""/> 
+                  <input  id="codigoZona" name="codigoZona" class="form-control" type="text" value="<?=(count($zonas)>0)? $zonas[0]['codigoZonaTrabajo']:"" ?>"/> 
                 <p class="help-block"><small><?= $vocab["codigo_plan_desc"] ?></small></p> 
             </div>   
             <?php if (check_permiso($mod4, $act3, $user_rol)) { ?>

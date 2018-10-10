@@ -116,7 +116,7 @@ function guardarIncreso(idPlanEmergencia, pasar) {
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else if (response == 3) {
-                    jAlert("el orden ya existe.\n Consulte a la USTDS", "Usuario ya existe");
+                    jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else {
                     jAlert("Ocurrio un error inesperado.\n Consulte a la USTDS", "Error inesperado");
                 }
@@ -170,7 +170,7 @@ function guardarIncresoCuerpoSocorro(idPlanEmergencia, pasar) {
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else if (response == 3) {
-                    jAlert("el orden ya existe.\n Consulte a la USTDS", "Usuario ya existe");
+                    jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else {
                     jAlert("Ocurrio un error inesperado.\n Consulte a la USTDS", "Error inesperado");
                 }

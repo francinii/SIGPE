@@ -180,7 +180,7 @@ $matriz = seleccion($sql);
 
                                     <?php $registroMatriz = buscarRegistro($matriz, $categoriasPorTipo[$k]['id']); ?>  
                                     <td> <div class="form-group">                                            
-                                            <input <?= (!$editar) ? "readonly" : ""; ?> id="type-text" name="type-text" class="form-control fuente cambios" placeholder="fuente"value ="<?= $registroMatriz['fuente'] ?>"  title="propiedad title" type="text">
+                                            <input <?= (!$editar) ? "disabled" : ""; ?> id="type-text" name="type-text" class="form-control fuente cambios" placeholder="fuente"value ="<?= $registroMatriz['fuente'] ?>"  title="propiedad title" type="text">
                                         </div>
                                     </td>
                                     <td class = "criterioProbabilidad" > <?= selectorMatriz(0, $registroMatriz['probabilidad'], $editar); ?></td>

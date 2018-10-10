@@ -20,12 +20,12 @@ $res = seleccion($sql);
         <form method="post" action="">            
             <div class="form-group">
                 <label  for="capitulo_title"><?= $vocab["capitulo_title"] ?></label>
-                <input <?= ($view_mode == 0) ? "readonly" : ""; ?>  id="capitulo_title" name="capitulo_title" class="form-control" type="text" value="<?= $res[0]['titulo'] ?>"/> 
+                <input <?= ($view_mode == 0) ? "disabled" : ""; ?>  id="capitulo_title" name="capitulo_title" class="form-control" type="text" value="<?= $res[0]['titulo'] ?>"/> 
                 <p class="help-block"><small><?= $vocab["capitulo_title_Desc"] ?></small></p> 
             </div>
             <div class="form-group">
                 <label  for="capitulo_Descripcion"><?= $vocab["symbol_desc"] ?> </label>                
-                <textarea <?= ($view_mode == 0) ? "readonly" : ""; ?>  class="ckeditor form-control" id="capitulo_Descripcion" name="capitulo_Descripcion" ><?= $res[0]['descripcion'] ?></textarea>
+                <textarea <?= ($view_mode == 0) ? "disabled" : ""; ?>  class="ckeditor form-control" id="capitulo_Descripcion" name="capitulo_Descripcion" ><?= $res[0]['descripcion'] ?></textarea>
                 <p class="help-block"><small><?= $vocab["capitulo_Descripcion"] ?></small></p> 
             </div>
             <div class="form-group">
@@ -45,7 +45,7 @@ $res = seleccion($sql);
             <div id="div-capitulo_Descripcion_usuario" class="form-group">
                 <?php if($res[0]["isDescripcionParaUsuario"] == 1){ ?>
                 <label  for="capitulo_Descripcion"><?= $vocab["capitulo_Descripcion_usuario"] ?> </label>                
-                <textarea  <?= ($view_mode == 0) ? "readonly" : ""; ?> class="form-control"  id="capitulo_Descripcion_usuario" name="capitulo_Descripcion_usuario" ><?= $res[0]["descripcionParaUsuario"] ?></textarea>
+                <textarea  <?= ($view_mode == 0) ? "disabled" : ""; ?> class="form-control"  id="capitulo_Descripcion_usuario" name="capitulo_Descripcion_usuario" ><?= $res[0]["descripcionParaUsuario"] ?></textarea>
                 <p class="help-block"><small><?= $vocab["capitulo_Descripcion_usuario_desc"] ?></small></p> 
                 <?php }else{ ?>
                 <script>
@@ -58,7 +58,7 @@ $res = seleccion($sql);
                 if (check_permiso($mod4, $act4, $user_rol)) {
                     ?>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <a <?= ($view_mode == 0) ? "readonly" : ""; ?> class="btn btn-success btn-group-justified"  name="submit" onclick="update_capitulo(<?= $res[0]['id'] ?>);"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_update"] . " " . $vocab["permits_title"] ?></a>
+                        <a <?= ($view_mode == 0) ? "disabled" : ""; ?> class="btn btn-success btn-group-justified"  name="submit" onclick="update_capitulo(<?= $res[0]['id'] ?>);"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_update"] . " " . $vocab["permits_title"] ?></a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <a class="btn btn-warning btn-group-justified"  name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/list_capitulos.php?', '');"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_return"] ?></a>

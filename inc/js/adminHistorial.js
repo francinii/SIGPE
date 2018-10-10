@@ -38,7 +38,7 @@ function delete_historial_action(id,direccion) {
             var response = ajax.responseText;
             //alert(response); //DEBUG
             if (response == 0) {
-                jAlert('El historial  se a eliminado correctamente!', 'Exito');
+                jAlert('El plan  se a eliminado correctamente del historial!', 'Exito');
 
             } else if (response == 1 || response == 2) {
                 jAlert('Ha ocurrido un error en la Base de Datos Intentelo Nuevamente\n Si el problema continua comuniquese con la USTDS', 'Error');

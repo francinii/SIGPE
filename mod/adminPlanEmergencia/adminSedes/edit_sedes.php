@@ -17,12 +17,12 @@ $res = seleccion($sql);
         <form method="post" action="">            
             <div class="form-group">
                 <label  for="sede_title"><?= $vocab["sede_title"] ?></label>
-                <input <?= ($view_mode == 0) ? "readonly" : ""; ?> id="nombre" name="sede_title" class="form-control" type="text" value="<?= $res[0]["nombreSede"] ?>" /> 
+                <input <?= ($view_mode == 0) ? "disabled" : ""; ?> id="nombre" name="sede_title" class="form-control" type="text" value="<?= $res[0]["nombreSede"] ?>" /> 
                 <p class="help-block"><small><?= $vocab["sede_title_Desc"] ?></small></p> 
             </div>
             <div class="form-group">
                 <label  for="descripcion"><?= $vocab["symbol_desc"] ?> </label>                
-                <textarea <?= ($view_mode == 0) ? "readonly" : ""; ?> class="ckeditor form-control" id="descripcion" name="descripcion" ><?= $res[0]["descripcion"] ?></textarea>
+                <textarea <?= ($view_mode == 0) ? "disabled" : ""; ?> class="ckeditor form-control" id="descripcion" name="descripcion" ><?= $res[0]["descripcion"] ?></textarea>
                 <p class="help-block"><small><?= $vocab["sede_Descripcion"] ?></small></p> 
             </div>   
             <div class="form-group">
@@ -44,7 +44,7 @@ $res = seleccion($sql);
                 if (check_permiso($mod4, $act4, $user_rol)) {
                     ?>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <a <?= ($view_mode == 0) ? "readonly" : ""; ?> class="btn btn-success btn-group-justified"  name="submit" onclick="javascript:update_sede(<?= $res[0]['id'] ?>);" > 
+                        <a <?= ($view_mode == 0) ? "disabled" : ""; ?> class="btn btn-success btn-group-justified"  name="submit" onclick="javascript:update_sede(<?= $res[0]['id'] ?>);" > 
                             <i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_update"] . " " . $vocab["permits_title"] ?>
                         </a>
                     </div>
