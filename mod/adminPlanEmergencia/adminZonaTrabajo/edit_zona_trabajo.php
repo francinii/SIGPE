@@ -34,7 +34,7 @@ $find_key = $res[0]['FKidSede'];
         <form method="post" action="" enctype="multipart/form-data">            
             <div class="form-group">
                 <label  for="zona_trabajo_title"><?= $vocab["zona_trabajo_title"] ?></label>
-                <input <?= ($view_mode == 0) ? "readonly" : ""; ?> id="nombre" name="zona_trabajo_title" class="form-control" type="text" value="<?= $res[0]["nombreZonaTrabajo"] ?>" /> 
+                <input <?= ($view_mode == 0) ? "disabled" : ""; ?> id="nombre" name="zona_trabajo_title" class="form-control" type="text" value="<?= $res[0]["nombreZonaTrabajo"] ?>" /> 
                 <p class="help-block"><small><?= $vocab["zona_trabajo_title_Desc"] ?></small></p> 
             </div>
             <div class="form-group">
@@ -53,7 +53,7 @@ $find_key = $res[0]['FKidSede'];
                 <input  id="type-file" value="<?= $res[0]['logo'] ?>" accept="image/*" name="type-file" class="form-control filestyle"  type="file" placeholder="propiedad placeholder" title="propiedad title"/>
                     
                 <?php } else { ?>
-                    <input readonly id="type-file" name="type-file" class="form-control" type="text" value="<?= $res[0]["logo"] ?>" /> 
+                    <input disabled id="type-file" name="type-file" class="form-control" type="text" value="<?= $res[0]["logo"] ?>" /> 
                 <?php } ?>
                 <p class="help-block"><?= $vocab["zona_trabajo_logo_desc"] ?></p>
             </div>
@@ -66,7 +66,7 @@ $find_key = $res[0]['FKidSede'];
                     <input  id="type-file-ubicacion" value="<?= $res[0]['ubicacion'] ?>" accept="image/*" name="type-file" class="form-control filestyle"  type="file" placeholder="propiedad placeholder" title="propiedad title"/>
 
                 <?php } else { ?>
-                    <input readonly id="type-file" name="type-file" class="form-control" type="text" value="<?= $res[0]["ubicacion"] ?>" /> 
+                    <input disabled id="type-file" name="type-file" class="form-control" type="text" value="<?= $res[0]["ubicacion"] ?>" /> 
                 <?php } ?>
                 <p class="help-block"><?= $vocab["zona_trabajo_Ubicacion_desc"] ?></p>
             </div>
@@ -76,7 +76,7 @@ $find_key = $res[0]['FKidSede'];
 
             <div class="form-group">
                 <label  for="descripcion"><?= $vocab["symbol_desc"] ?> </label>                
-                <textarea <?= ($view_mode == 0) ? "readonly" : ""; ?> class="ckeditor form-control" id="descripcion" name="descripcion" ><?= $res[0]["descripcion"] ?></textarea>
+                <textarea <?= ($view_mode == 0) ? "disabled" : ""; ?> class="ckeditor form-control" id="descripcion" name="descripcion" ><?= $res[0]["descripcion"] ?></textarea>
                 <p class="help-block"><small><?= $vocab["zona_trabajo_Descripcion"] ?></small></p> 
             </div>   
             <div class="form-group">
@@ -133,7 +133,7 @@ $find_key = $res[0]['FKidSede'];
                 if (check_permiso($mod4, $act4, $user_rol)) {
                     ?>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <a <?= ($view_mode == 0) ? "readonly" : ""; ?> class="btn btn-success btn-group-justified"  name="submit" onclick="update_zona_trabajo(<?= $res[0]['id'] ?>);"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_update"] . " " . $vocab["permits_title"] ?></a>
+                        <a  class="btn btn-success btn-group-justified"  name="submit" onclick="update_zona_trabajo(<?= $res[0]['id'] ?>);"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_update"] . " " . $vocab["permits_title"] ?></a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <a class="btn btn-warning btn-group-justified"  name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', 'find_key=' +<?= $find_key ?>);"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_return"] ?></a>

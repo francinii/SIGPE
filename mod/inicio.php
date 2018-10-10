@@ -49,7 +49,11 @@ foreach ($res as $value) {
 <!--  ****** Titulo ***** -->
 <br/><br/>
 <div style="text-align: center;" class=" well-sm">
-    <img style="align-items: center; width:100%"  src="img/logocieuna.png" class="img-rounded" alt="Cinque Terre"> 
+    <div class="row" align="center">
+        <div  style="align-items: center; width:60%">
+            <img  style="align-items: center; width:100%"  src="img/logocieuna.png" class="img-rounded" alt="Cinque Terre"> 
+        </div>
+    </div>
     <br/>
     <h1 style="text-align: center;"><?= $vocab["inicio_Bienvenido"] ?></h1>
     <br/>
@@ -64,7 +68,7 @@ foreach ($res as $value) {
     <form method="post" action="">
         <h2 style="text-align: center;"><?= $vocab["incio_labe"] ?></h2>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
-        
+
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
             <div class="form-group">
                 <br/>
@@ -105,7 +109,7 @@ foreach ($res as $value) {
             <?php } ?>
             <br/>
             <br/>
-             
+
             <div style="margin-bottom:1%" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <?php if (check_permiso($mod5, $act1, $user_rol) || check_permiso($mod5, $act2, $user_rol)) { ?>
                     <a class="btn btn-success btn-group-justified" onclick="javascript:OpcionInicio(0);" name="submit" > <?= $vocab["inicio_Empezar"] ?></a>

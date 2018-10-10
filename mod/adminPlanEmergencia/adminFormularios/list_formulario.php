@@ -36,8 +36,8 @@ for ($i = 0; $i < count($cap); $i++) {
 </div>
 <!-- div original anterior a integración bootstrap3 
 <div style=" width: 800px; margin: 0 auto;"  class="ex_highlight_row"> -->
-<div class="dataTables_wrapper form-inline dt-bootstrap">
-    <table id="lista_capitulos" cellpadding="0" cellspacing="0" border="0" class="table  table-bordered " >
+<div class="dataTables_wrapper form-inline dt-bootstrap"  style=overflow-x:auto;">
+    <table  style = "width: 99%;" id="lista_capitulos" cellpadding="0" cellspacing="0" border="0" class="table  table-bordered " >
         <thead>
             <tr>
                 <th  width="10%"><?= $vocab["formulario_id"] ?></th>

@@ -61,7 +61,7 @@ if (count($res) <= 0) {
                             ?>
                             <tr class="seccionPoblacion" id="Sec-<?= $id ?>">                   
                                 <td style="align-items:center; background-color:lightblue" colspan="10">
-                                    <input style="width:40%; margin: 0 auto;" type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="Sector<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['sector'] : $vocab["poblacion_sectorNuevo"] ?>" >
+                                    <input style="width:40%; margin: 0 auto;" type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="Sector<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['sector'] : $vocab["poblacion_sectorNuevo"] ?>" >
                                 </td>                                
                                 <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
                                     <td  style="background-color:lightblue">              
@@ -85,16 +85,16 @@ if (count($res) <= 0) {
                         ?>
 
                         <tr id="fil-<?= $id ?>">
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="nombreOficina<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['nombreOficina'] : ""; ?>" ></td>
-                            <td> <input  type="number"  <?= (!$editar) ? "readonly" : ""; ?>  min="0" class="form-control requerido  cambios" id="capacidadPermanente<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['capacidadPermanente'] : "0"; ?>" ></td>
-                            <td> <input  type="number"  <?= (!$editar) ? "readonly" : ""; ?> min="0"  class="form-control requerido cambios" id="capacidadTemporal<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['capacidadTemporal'] : "0"; ?>" ></td>
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>   class="form-control requerido cambios" id="representanteComite<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['representanteComite'] : ""; ?>" ></td>                            
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="representanteBrigadaEfectiva<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['representanteBrigadaEfectiva'] : ""; ?>" ></td>
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="representantePrimerosAuxilios<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['representantePrimerosAuxilios'] : ""; ?>" ></td>
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>   class="form-control requerido  cambios" id="telefonoOficina<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['telefonoOficina'] : ""; ?>" ></td>
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>   class="form-control requerido cambios" id="contactoEmergencia<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contactoEmergencia'] : ""; ?>" ></td>
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>   class="form-control requerido cambios" id="telefonoPersonal<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['telefonoPersonal'] : ""; ?>" ></td>                            
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="correoElectronico<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['correoElectronico'] : ""; ?>" ></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="nombreOficina<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['nombreOficina'] : ""; ?>" ></td>
+                            <td> <input  type="number"  <?= (!$editar) ? "disabled" : ""; ?>  min="0" class="form-control requerido  cambios" id="capacidadPermanente<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['capacidadPermanente'] : "0"; ?>" ></td>
+                            <td> <input  type="number"  <?= (!$editar) ? "disabled" : ""; ?> min="0"  class="form-control requerido cambios" id="capacidadTemporal<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['capacidadTemporal'] : "0"; ?>" ></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control requerido cambios" id="representanteComite<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['representanteComite'] : ""; ?>" ></td>                            
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="representanteBrigadaEfectiva<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['representanteBrigadaEfectiva'] : ""; ?>" ></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="representantePrimerosAuxilios<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['representantePrimerosAuxilios'] : ""; ?>" ></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control requerido  cambios" id="telefonoOficina<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['telefonoOficina'] : ""; ?>" ></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control requerido cambios" id="contactoEmergencia<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contactoEmergencia'] : ""; ?>" ></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control requerido cambios" id="telefonoPersonal<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['telefonoPersonal'] : ""; ?>" ></td>                            
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="correoElectronico<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['correoElectronico'] : ""; ?>" ></td>
 
                             <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
                                 <td>              

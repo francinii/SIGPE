@@ -214,10 +214,11 @@ function capitulos($pdf, $capitulos, $resPlan, $resTipoPoblacion, $formularios, 
 
         $sql = "(SELECT  FKidCapitulo, FKidZonaTrabajo,descripcion FROM CapituloPlan where FKidCapitulo = " . $cap['id'] . " and FKidZonaTrabajo = " . $idPlanEmergencia . " )";
         $infoUsuario = seleccion($sql);
-        $html .= "<p>" . remplazar($infoUsuario[0]['descripcion']) . "</p>";
-
-        $pdf->writeHTML($html, true, false, false, false, '');
-
+        if (count($infoUsuario) > 0) {
+            $html .= "<p>" . remplazar($infoUsuario[0]['descripcion']) . "</p>";
+         } 
+       $pdf->writeHTML($html, true, false, false, false, '');
+        
         subCapitulos($pdf, $cap['id'], $orden, $resPlan, $resTipoPoblacion, $formularios, $vocab, $idPlanEmergencia);
 
         $orden += 1;
@@ -239,8 +240,11 @@ function subCapitulos($pdf, $id, $ordenCapitulo, $resPlan, $resTipoPoblacion, $f
         $html .= remplazar($sub['descripcion']);
         $sql = "(SELECT  FKidSubCapitulo, FKidZonaTrabajo,descripcion FROM SubCapituloPlan where FKidSubCapitulo = " . $sub['id'] . " and FKidZonaTrabajo = " . $idPlanEmergencia . " )";
         $infoUsuario = seleccion($sql);
-        $html .= "<p>" . remplazar($infoUsuario[0]['descripcion']) . "</p>";
+        if (count($infoUsuario) > 0) {
+            $html .= "<p>" . remplazar($infoUsuario[0]['descripcion']) . "</p>";
+             }
         $pdf->writeHTML($html, true, false, false, false, '');
+       
         listarFormularios($sub['id'], $formularios, $resPlan, $resTipoPoblacion, $vocab, $idPlanEmergencia, $pdf);
         $subOrden += 1;
     }
@@ -627,8 +631,7 @@ function formularioPoblacion($idPlanEmergencia, $vocab) {
             . " `representanteBrigadaEfectiva`,`representantePrimerosAuxilios`,`telefonoOficina`,`contactoEmergencia`,`telefonoPersonal`,`correoElectronico`"
             . ",`correoElectronico`,`sector` FROM `FormularioPoblacion` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia . " order by `sector` ";
     $respuesta = seleccion($sql);
-
-    $sector = $respuesta[0]['sector'];
+    $html = "";
     $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
             . '<thead><tr style = "text-align:center;">'
             . '<th>' . $vocab['poblacion_oficina'] . '</th>'
@@ -644,7 +647,10 @@ function formularioPoblacion($idPlanEmergencia, $vocab) {
             . '</tr></thead><tbody>';
 
     //pintamos el primer sector
-    $html .= '<tr style = "text-align:center;" ><td colspan = "10"><b>' . $respuesta[0]['sector'] . '</b></td></tr>';
+    if (count($respuesta) > 0) {
+        $sector = $respuesta[0]['sector'];
+        $html .= '<tr style = "text-align:center;" ><td colspan = "10"><b>' . $respuesta[0]['sector'] . '</b></td></tr>';
+    }
     foreach ($respuesta as $res) {
         if ($res['sector'] != $sector) {
             $html .= '<tr  style = "text-align:center;"><td colspan = "10"><b>' . $res['sector'] . '</b></td></tr>';
@@ -664,6 +670,7 @@ function formularioPoblacion($idPlanEmergencia, $vocab) {
                 . '</tr>';
     }
     $html .= '</tbody></table>';
+
     return $html;
 }
 
@@ -763,23 +770,24 @@ function formularioIngresoCuerposSocorro($idPlanEmergencia, $vocab) {
             . '<th><b>' . $vocab['ingreso_descripcion'] . '</b></th>'
             . '</tr></thead><tbody>';
     //foreach ($respuesta as $res) {
-    $html .= '<tr style = "text-align:center;">'
-            . '<td>' . $vocab['ingreso_dimensiones'] . '</td>'
-            . '<td>' . $res[0]['dimensionAreaAcceso'] . '</td>'
-            . '</tr><tr style = "text-align:center;">'
-            . '<td>' . $vocab['ingreso_radio'] . '</td>'
-            . '<td>' . $res[0]['radioGiro'] . '</td>'
-            . '</tr><tr style = "text-align:center;">'
-            . '<td>' . $vocab['ingreso_caseta'] . '</td>'
-            . '<td>' . $res[0]['caseta'] . '</td>'
-            . '</tr><tr style = "text-align:center;">'
-            . '<td>' . $vocab['ingreso_plumas'] . '</td>'
-            . '<td>' . $res[0]['plumas'] . '</td>'
-            . '</tr><tr style = "text-align:center;">'
-            . '<td>' . $vocab['ingreso_ancho'] . '</td>'
-            . '<td>' . $res[0]['anchoLibre'] . '</td>'
-            . '</tr>';
-    // }
+    if (count($res) > 0) {
+        $html .= '<tr style = "text-align:center;">'
+                . '<td>' . $vocab['ingreso_dimensiones'] . '</td>'
+                . '<td>' . $res[0]['dimensionAreaAcceso'] . '</td>'
+                . '</tr><tr style = "text-align:center;">'
+                . '<td>' . $vocab['ingreso_radio'] . '</td>'
+                . '<td>' . $res[0]['radioGiro'] . '</td>'
+                . '</tr><tr style = "text-align:center;">'
+                . '<td>' . $vocab['ingreso_caseta'] . '</td>'
+                . '<td>' . $res[0]['caseta'] . '</td>'
+                . '</tr><tr style = "text-align:center;">'
+                . '<td>' . $vocab['ingreso_plumas'] . '</td>'
+                . '<td>' . $res[0]['plumas'] . '</td>'
+                . '</tr><tr style = "text-align:center;">'
+                . '<td>' . $vocab['ingreso_ancho'] . '</td>'
+                . '<td>' . $res[0]['anchoLibre'] . '</td>'
+                . '</tr>';
+    }
     $html .= '</tbody></table>';
     return $html;
 }
@@ -789,7 +797,7 @@ function formularioPuestoBrigada($idPlanEmergencia, $vocab) {
     $sql = "SELECT `puesto`, `funcion`, `plazoEjecucion` FROM `FormularioPuestoBrigada` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia . " order by `puesto` ";
     $respuesta = seleccion($sql);
 
-    $puesto = $respuesta[0]['puesto'];
+
     $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
             . '<thead><tr style = "text-align:center;">'
             . '<th>' . $vocab['puestos_brigada_funciones'] . '</th>'
@@ -797,7 +805,10 @@ function formularioPuestoBrigada($idPlanEmergencia, $vocab) {
             . '</tr></thead><tbody>';
 
     //pintamos el primer sector
-    $html .= '<tr style = "text-align:center;" ><td colspan = "10"><b>' . $respuesta[0]['puesto'] . '</b></td></tr>';
+    if (count($respuesta) > 0) {
+        $puesto = $respuesta[0]['puesto'];
+        $html .= '<tr style = "text-align:center;" ><td colspan = "10"><b>' . $respuesta[0]['puesto'] . '</b></td></tr>';
+    }
     foreach ($respuesta as $res) {
         if ($res['puesto'] != $puesto) {
             $html .= '<tr  style = "text-align:center;"><td colspan = "10"><b>' . $res['puesto'] . '</b></td></tr>';
@@ -842,10 +853,10 @@ function formularioMatriz($idPlanEmergencia, $vocab, $pdf) {
     $sql = "SELECT `probabilidad`, `gravedad`, `consecuenciaAmenaza` FROM `Matriz` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
     $respuesta = seleccion($sql);
     $cantidad = array(
-        ['color' => 'Ninguna', 'cantidad' => 0],
-        ['color' => 'Verde', 'cantidad' => 0],
-        ['color' => 'Amarilla', 'cantidad' => 0],
-        ['color' => 'Roja', 'cantidad' => 0]);
+            ['color' => 'Ninguna', 'cantidad' => 0],
+            ['color' => 'Verde', 'cantidad' => 0],
+            ['color' => 'Amarilla', 'cantidad' => 0],
+            ['color' => 'Roja', 'cantidad' => 0]);
 
     foreach ($respuesta as $res) {
         $valor = $res['probabilidad'] * ($res['gravedad'] + $res['consecuenciaAmenaza']);
@@ -1128,8 +1139,12 @@ function crearGrafico($criterios, $colores) {
 
 
 if (check_permiso($mod4, $act6, $user_rol) && !isset($_GET['visualizarpdf'])) {
-    $nombreDoc = $id . "-" . $version;
-    $pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/' . $nombreDoc . '.pdf', 'FD');
+    $nombreDoc = $id . "-" . $version. '.pdf';
+    $pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/' . $nombreDoc , 'FD');
+    $sql_a = "CALL insert_historial('$id','$version','$nombreDoc',@res);";
+    $sql_b = "SELECT @res as res;";
+    $res = transaccion_verificada($sql_a, $sql_b);    
+    
 } else if (check_permiso($mod5, $act6, $user_rol)) {
     $pdf->Output('planEmergencias.pdf', 'D');
 } 

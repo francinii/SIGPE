@@ -120,7 +120,7 @@ FOREIGN KEY(FKidSede) REFERENCES Sede(id)
 create table Historial(
 id int NOT NULL AUTO_INCREMENT,
 FKidZona int,
-nombre   varchar(150),
+version   varchar(150),
 direccion varchar(150),
 PRIMARY KEY(id),
 FOREIGN KEY(FKidZona) REFERENCES ZonaTrabajo(id)
@@ -2617,6 +2617,7 @@ END
 DELIMITER ;
 
 
+
 DROP PROCEDURE IF EXISTS `new_version`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `new_version`(OUT `res` TINYINT  UNSIGNED)
@@ -2645,3 +2646,34 @@ END
 ;;
 DELIMITER ;
 
+-- ----------------------------
+-- Proceso insertar historial
+-- ----------------------------
+
+DROP PROCEDURE IF EXISTS `insert_historial`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_historial`(IN `p_FKidZona` int,IN `p_version` varchar(150), IN `p_direccion` varchar(150),OUT `res` TINYINT  UNSIGNED)
+BEGIN  
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		-- ERROR
+    SET res = 1;
+    ROLLBACK;
+	END;
+
+  DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		-- ERROR
+    SET res = 2;
+    ROLLBACK;
+	END;
+            START TRANSACTION;  
+                INSERT INTO `historial`( `FKidZona`, `version`, `direccion`) VALUES (p_FKidZona,p_version,p_direccion);               
+
+            COMMIT;
+            -- SUCCESS
+            SET res = 0;
+            -- Existe usuario
+END
+;;
+DELIMITER ;

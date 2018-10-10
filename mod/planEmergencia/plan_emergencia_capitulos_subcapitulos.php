@@ -40,11 +40,11 @@ function capitulo($cap, $vocab, $idPlanEmergencia, $i,$editar) {
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">                    
 
                 <label  for="subcapitulo_Descripcion_usuario"> <?= $vocab['capitulos_subcapitulos_info_admin'] ?> </label>
-                <textarea class="form-control"  readonly id="capitulo_Descripcion_admin<?= $i ?>" name="subcapitulo_Descripcion_admin" ><?= $cap['descripcion'] ?></textarea>
+                <textarea class="form-control"  disabled id="capitulo_Descripcion_admin<?= $i ?>" name="subcapitulo_Descripcion_admin" ><?= $cap['descripcion'] ?></textarea>
             </div> 
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <label  for="subcapitulo_Descripcion_usuario"> <?= $vocab['capitulos_subcapitulos_info_usuario'] ?> </label>
-                <textarea   <?= (!$editar) ? "readonly" : ""; ?> class="form-control cambios"  id="capitulo_Descripcion_usuario<?= $i ?>" name="subcapitulo_Descripcion_usuario" ><?= descripcionCapitulo($cap['id'], $idPlanEmergencia) ?></textarea>
+                <textarea   <?= (!$editar) ? "disabled" : ""; ?> class="form-control cambios"  id="capitulo_Descripcion_usuario<?= $i ?>" name="subcapitulo_Descripcion_usuario" ><?= descripcionCapitulo($cap['id'], $idPlanEmergencia) ?></textarea>
             </div> 
         </div>
     </div>
@@ -92,11 +92,11 @@ function subcapitulo($subcap, $listaFormularios, $vocab, $idPlanEmergencia, $i, 
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">                    
 
                 <label  for="capitulo_Descripcion_usuario"> <?= $vocab['capitulos_subcapitulos_info_admin'] ?> </label>
-                <textarea class="form-control"  readonly id="subcapitulo_Descripcion_admin<?= $i ?>.<?= $j ?>" name="capitulo_Descripcion_usuario" ><?= $subcap['descripcion'] ?></textarea>
+                <textarea class="form-control"  disabled id="subcapitulo_Descripcion_admin<?= $i ?>.<?= $j ?>" name="capitulo_Descripcion_usuario" ><?= $subcap['descripcion'] ?></textarea>
             </div> 
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <label  for="capitulo_Descripcion_usuario"> <?= $vocab['capitulos_subcapitulos_info_usuario'] ?> </label>
-                <textarea   <?= (!$editar) ? "readonly" : ""; ?> class="form-control cambios"  id="subcapitulo_Descripcion_usuario<?= $i ?>.<?= $j ?>" name="capitulo_Descripcion_usuario" ><?= descripcionSubcapitulo($subcap['id'], $idPlanEmergencia) ?></textarea>
+                <textarea   <?= (!$editar) ? "disabled" : ""; ?> class="form-control cambios"  id="subcapitulo_Descripcion_usuario<?= $i ?>.<?= $j ?>" name="capitulo_Descripcion_usuario" ><?= descripcionSubcapitulo($subcap['id'], $idPlanEmergencia) ?></textarea>
             </div> 
         </div>
     </div>

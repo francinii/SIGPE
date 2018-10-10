@@ -48,11 +48,11 @@ if (count($res) <= 0) {
                     for ($i = 0; $i < count($res); $i++) {
                         ?>
                         <tr id="<?= $i ?>">                             
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="nombre<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['Nombre'] : ""; ?>" ></td>
-                            <td> <input  type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
-                            <td> <input  type="number" min ="0"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="capacidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['capacidad'] : "0"; ?>" ></td>
-                            <td><textarea rows="1"   type="text" <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
-                            <td> <input  type="text" <?= (!$editar) ? "readonly" : ""; ?>  class="form-control requerido cambios" id="sector<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['sector'] : ""; ?>" ></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="nombre<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['Nombre'] : ""; ?>" ></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
+                            <td> <input  type="number" min ="0"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="capacidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['capacidad'] : "0"; ?>" ></td>
+                            <td><textarea rows="1"   type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
+                            <td> <input  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="sector<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['sector'] : ""; ?>" ></td>
                             <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
                                 <td>              
                                     <a class="puntero cambios"  onClick="javascript:eliminarFilaZonaSeguridad(this);">                                 

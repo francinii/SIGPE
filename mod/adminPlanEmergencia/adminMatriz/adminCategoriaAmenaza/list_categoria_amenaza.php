@@ -180,7 +180,7 @@ $res = seleccion($sql);
     <?php /*     * ***************************************************************************************** */ ?>
     <br/>
     <?php if (check_permiso($mod4, $act3, $user_rol)) { ?>
-        <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/new_categoria_amenaza.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["categoria_amenaza_title"] ?></a></div>
+        <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/new_categoria_amenaza.php?', 'find_key=<?= $find_key ?>');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["categoria_amenaza_title"] ?></a></div>
     <?php } ?>
 </div>
 
