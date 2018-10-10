@@ -560,6 +560,8 @@ $vocab["capitulos_subcapitulos_formularios"]                  = "Formularios aso
 
 
 //***********     Plan de emergencia aprobacion del documento ***********************//
+
+$vocab["aprobacion_title"]                  = "Aprobado del plan de emergencia";
 $vocab["aprobado_por"]                  = "Aprobado por";
 $vocab["aprobado_plan_desc"]             = "Persona encargar de aprobar el plan de emergencia";
 $vocab["codigo_plan"]                  = "Código del plan de emergencias";

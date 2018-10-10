@@ -68,7 +68,7 @@ if (count($res) <= 0) {
             <input type ="hidden" id ="idPeligro<?= $i ?>" value ="<?= (is_array($res[$i])) ? $res[$i]['id'] : -1; ?>" >
 
             <?php if ($i < 37) { ?>
-                <td id = "peligro<?= $i ?>"> 
+                <td  id = "peligro<?= $i ?>"> 
                     <?= (is_array($res[$i])) ? $res[$i]['peligro'] : $res[$i]; ?>
                 <?php } else { ?>
                 <td>
@@ -76,7 +76,7 @@ if (count($res) <= 0) {
                 <?php } ?>
                 </td>
                 <td>    
-                <select onchange ="calcularSiPresente()" name="presente"   <?= (!$editar) ? 'disabled  style="cursor: not-allowed;"' : ""; ?> id ="presente<?= $i ?>">
+                <select class="form-control" onchange ="cambioCalcularSiPresente(this)" name="presente"   <?= (!$editar) ? 'disabled  style="cursor: not-allowed;"' : ""; ?> id ="presente<?= $i ?>">
                     <?php if (is_array($res[$i])) { ?>
                         <option <?= ($res[$i]['presente'] == 1) ? "selected" : ""; ?> >SI</option>
                         <option <?= ($res[$i]['presente'] == 0) ? "selected" : ""; ?> >NO</option> 
@@ -87,20 +87,20 @@ if (count($res) <= 0) {
                 </select>    
             </td>
             <td>  
-                <input  id ="ubicacion<?= $i ?>" type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>">
+                <input class = "habilitar form-control" id ="ubicacion<?= $i ?>" type="text"  <?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>">
             </td>
             <td>
-                <textarea  id ="recomendacion<?= $i ?>"  type="text"<?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios"> <?= (is_array($res[$i])) ? $res[$i]['recomendacion'] : ""; ?></textarea>
+                <textarea class = "habilitar form-control"  id ="recomendacion<?= $i ?>"  type="text"<?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios"> <?= (is_array($res[$i])) ? $res[$i]['recomendacion'] : ""; ?></textarea>
             </td> 
             <td>
-                <input  id ="fecha<?= $i ?>" type="date"   <?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios" value="<?= (is_array($res[$i])) ? $res[$i]['fecha'] : "1900-01-01"; ?>">
+                <input class = "habilitar form-control" id ="fecha<?= $i ?>" type="date"   <?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios" value="<?= (is_array($res[$i])) ? $res[$i]['fecha'] : "1900-01-01"; ?>">
             </td> 
             <td>
-                <input  id ="responsable<?= $i ?>" type="text"   <?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios" value="<?= (is_array($res[$i])) ? $res[$i]['responsable'] : ""; ?>"> 
+                <input class = "habilitar form-control" id ="responsable<?= $i ?>" type="text"   <?= (!$editar) ? "readonly" : ""; ?>  class="form-control cambios" value="<?= (is_array($res[$i])) ? $res[$i]['responsable'] : ""; ?>"> 
             </td> 
           
-            <td id ='priorizaciontd<?=$i?>' >  
-                <select  onchange="cambiarCalcularPriorizacion2(this,'<?= 'priorizaciontd'.$i?>')" <?= (!$editar) ? 'disabled  style="cursor: not-allowed;"' : ""; ?> id ="priorizacion<?= $i ?>" name="priorizacion">
+            <td  id ='priorizaciontd<?=$i?>' >  
+                <select  class = "habilitar form-control"  onchange="cambiarCalcularPriorizacion2(this,'<?= 'priorizaciontd'.$i?>')" <?= (!$editar) ? 'disabled  style="cursor: not-allowed;"' : ""; ?> id ="priorizacion<?= $i ?>" name="priorizacion">
                     <?php if (is_array($res[$i])) { ?>
                         <option <?= ($res[$i]['priorizacion'] == 1) ? "selected" : ""; ?> >1</option>
                         <option <?= ($res[$i]['priorizacion'] == 2) ? "selected" : ""; ?> >2</option> 
@@ -118,7 +118,7 @@ if (count($res) <= 0) {
             </td>
       <script> 
           calcularPriorizacion2(<?= (is_array($res[$i]))? $res[$i]['priorizacion']: 3?>, '<?= 'priorizaciontd'.$i?>');
-            calcularSiPresente();
+        
       </script>
             <?php if ($i < 37 || !$editar) { ?>
                 <td style="background-color: #ededed;"><a style="cursor: not-allowed;"  class="puntero ">
@@ -138,6 +138,9 @@ if (count($res) <= 0) {
             }
         }
         ?>
+                <script>
+                    calcularSiPresente();
+                </script>
         </tbody>
     </table> 
 </div>

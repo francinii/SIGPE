@@ -81,9 +81,10 @@ function guardarDatosIdentificacionPeligros(idPlanEmergencia, pasar) {
 
 function agregarFilaIdentificacionPeligro(titulo) {
     var tabla = jQuery("#lista_identificacion_peligros tbody");
-    var id = tabla.children().last().attr('id');
+    ;
+    var id = tabla.children('tr').last().attr('id');
     if (id == "trfinal") {
-        id = tabla.children().last().prev().attr('id');
+        id = tabla.children('tr').last().prev().attr('id');
     }
     var cadena = id.slice(2);
     // alert(cadena);
@@ -111,6 +112,7 @@ function agregarFilaIdentificacionPeligro(titulo) {
 
     '</tr>'
     tabla.append(fila);
+    jQuery("#peligro" + id).focus();
 //        
 }
 
@@ -167,10 +169,10 @@ function calcularPriorizacion2(prioridad, priorizacion) {
         } else if (prioridad == 3) {
             prorizaciontd.style.backgroundColor = "#5cb85c";
         } else {
-             prorizaciontd.style.backgroundColor = "#5cb85c";
+            prorizaciontd.style.backgroundColor = "#5cb85c";
         }
     } else {
-          prorizaciontd.style.backgroundColor = "#5cb85c";
+        prorizaciontd.style.backgroundColor = "#5cb85c";
     }
 }
 
@@ -182,12 +184,52 @@ function cambiarCalcularPriorizacion2(event, priorizacion) {
     calcularPriorizacion2(prioridad, priorizacion);
 }
 
-function calcularSiPresente(){
-    var celdas = "";
-  var rows =  jQuery('#lista_identificacion_peligros tbody').children('tr.trInformacion');
-          rows.each(function() {
-                celdas = jQuery(this).children('td');
-            });
-        
-    
+function calcularSiPresente() {
+    var celda = "";
+    var rows = jQuery('#lista_identificacion_peligros tbody').children('tr.trInformacion');
+    var i = 0;
+    rows.each(function () {
+        var input = jQuery(this).find('td .habilitar');
+        jQuery(this).find('td .habilitar').each(function () {
+            celda = jQuery('#presente' + i).val();
+
+            var valor = jQuery(this);
+
+            if (celda == 'NO') {
+                var cambio = jQuery(this).prop('disabled', true);
+                //var hijos= cambio.children('td:first-child').prop('disabled', true);
+                //   hijos.prop('disabled', true);
+            }
+
+        });
+        i += 1;
+    });
+
+
+}
+
+function cambioCalcularSiPresente(event) {
+    var tr = "";
+    var td = "";
+
+    tr = event.parentElement.parentElement;
+//       var ubicacion =  tr.firstElementChild.nextElementSibling.nextElementSibling;
+//       var recomendacion = ubicacion.nextElementSibling;
+//        var fecha = recomendacion.nextElementSibling;
+//        var responsable = fecha.nextElementSibling;
+//        var priorizacion = responsable.nextElementSibling;
+//         var recomendacion = priorizacion.nextElementSibling;
+//    if(event.selected == "SI"){        
+//        jQuery(ubicacion.firstElementChild).prop('disabled', true);
+//    }
+    jQuery(tr).find('td .habilitar').each(function () {
+        var valor = jQuery(this);
+        if (event.options[event.selectedIndex].value == 'NO') {
+            jQuery(this).prop('disabled', true);
+        } else {
+            jQuery(this).prop('disabled', false);
+        }
+
+    });
+
 }

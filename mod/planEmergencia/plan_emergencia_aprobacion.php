@@ -21,7 +21,7 @@ $version = $zonas[0]['version']
 
 <div class="container">
     <div class="well well-sm">
-        <h2><?= $vocab["sede_title"] ?></h2>        
+        <h2><?= $vocab["aprobacion_title"] ?></h2>        
     </div>
     <div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
         <form method="post" action="">           
