@@ -4,10 +4,16 @@
  */
 function validate_sede() {
     var nombre = document.getElementById('nombre');
+    var descripcion = document.getElementById('descripcion');
     if (nombre.value == "") {
         jAlert("Ingrese el nombre de sede", "Dato Requerido");
         nombre.setAttribute("style", "background-color:#EDF0FF");
         nombre.focus();
+        return false;
+    }else if(descripcion.value == ""){
+        jAlert("Ingrese la descripción", "Dato Requerido");
+        descripcion.setAttribute("style", "background-color:#EDF0FF");
+        descripcion.focus();
         return false;
     }
     return true;

@@ -90,10 +90,10 @@ require 'functions.php';
                     <li class="dropdown">
                         <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#"><span><i class="fa fa-gears fa-inverse"></i> <?= $vocab["menu_admin_planes_emergencia"] ?></span> <span class="caret"></span></a>
                         <ul class="dropdown-menu"> 
-                            <!-- ADMINISTRAR cedes DE TRABAJO -->
+                            <!-- ADMINISTRAR sedes DE TRABAJO -->
                             <?php if (check_permiso($mod4, $act1, $user_rol)) { ?>
                                 <li class="dropdown-submenu">
-                                    <a href="#"><span><i class="fa fa-puzzle-piece text-danger"></i> <?= $vocab["menu_admin_sede"] ?></span></a>
+                                    <a href="#"><span><i class="fa fa-map text-primary"></i> <?= $vocab["menu_admin_sede"] ?></span></a>
                                     <ul class="dropdown-menu">
                                         <?php if (check_permiso($mod4, $act2, $user_rol)) { ?>
                                             <li><a  class="Menuprincipal"  onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminSedes/list_sedes.php?', '');"><span> <i class="fa fa-list text-primary"></i>  <?= $vocab["menu_list"] ?></span></a></li>
@@ -107,7 +107,7 @@ require 'functions.php';
                             <!-- ADMINISTRAR ZONAS DE TRABAJO -->
                             <?php if (check_permiso($mod4, $act1, $user_rol)) { ?>
                                 <li class="dropdown-submenu">
-                                    <a href="#"><span><i class="fa fa-puzzle-piece text-danger"></i> <?= $vocab["menu_admin_zona_trabajo"] ?></span></a>
+                                    <a href="#"><span><i class="fa fa-briefcase text-success"></i> <?= $vocab["menu_admin_zona_trabajo"] ?></span></a>
                                     <ul class="dropdown-menu">
                                         <?php if (check_permiso($mod4, $act2, $user_rol)) { ?>
                                             <li><a  class="Menuprincipal"  onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', '');"><span> <i class="fa fa-list text-primary"></i>  <?= $vocab["menu_list"] ?></span></a></li>
@@ -122,7 +122,7 @@ require 'functions.php';
                             <!-- ADMINISTRAR CAPITULOS -->
                             <?php if (check_permiso($mod4, $act1, $user_rol)) { ?>
                                 <li class="dropdown-submenu">
-                                    <a href="#"><span><i class="fa fa-puzzle-piece text-danger"></i> <?= $vocab["menu_admin_capitulos"] ?></span></a>
+                                    <a href="#"><span><i class="fa fa-bookmark text-danger"></i> <?= $vocab["menu_admin_capitulos"] ?></span></a>
                                     <ul class="dropdown-menu">
                                         <?php if (check_permiso($mod4, $act2, $user_rol)) { ?>
                                             <li><a  class="Menuprincipal"  onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminCapitulos/list_capitulos.php?', '');"><span> <i class="fa fa-list text-primary"></i>  <?= $vocab["menu_list"] ?></span></a></li>
@@ -136,7 +136,7 @@ require 'functions.php';
                             <!-- ADMINISTRAR  SUBCAPITULOS-->
                             <?php if (check_permiso($mod4, $act1, $user_rol)) { ?>
                                 <li class="dropdown-submenu">
-                                    <a href="#"><span><i class="fa fa-sitemap text-warning"></i> <?= $vocab["menu_admin_subcapitulos"] ?></span></a>
+                                    <a href="#"><span><i class="fa  fa-bookmark text-info"></i> <?= $vocab["menu_admin_subcapitulos"] ?></span></a>
                                     <ul class="dropdown-menu">
                                         <?php if (check_permiso($mod4, $act2, $user_rol)) { ?>
                                             <li><a  class="Menuprincipal"  onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminSubcapitulos/list_subcapitulos.php?', '');"><span> <i class="fa fa-list text-primary"></i>  <?= $vocab["menu_list"] ?></span></a></li>
@@ -149,28 +149,28 @@ require 'functions.php';
                             <?php } ?>
                               <!-- ADMINISTRAR  formulario-->
                             <?php if (check_permiso($mod4, $act1, $user_rol)) { ?>
-                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminFormularios/list_formulario.php?', '');"><span><i class="fa fa-sitemap text-warning"></i> <?= $vocab["menu_admin_formulario"] ?></span></a></li>
+                            <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminFormularios/list_formulario.php?', '');"><span><i class="fa fa-file-text text-success"></i> <?= $vocab["menu_admin_formulario"] ?></span></a></li>
                             
                             <?php } ?>
                             <!-- ADMINISTRAR MATRIZ DE RIESGOS -->
                             <?php if (check_permiso($mod4, $act1, $user_rol)) { ?>
                                 <li class="dropdown-submenu">
-                                    <a href="#"><span><i class="fa fa-users text-primary"></i> <?= $vocab["menu_matriz_riesgos"] ?></span></span></a>
+                                    <a href="#"><span><i class="fa fa-fire-extinguisher text-danger"></i> <?= $vocab["menu_matriz_riesgos"] ?></span></span></a>
                                     <ul class="dropdown-menu">
                                         <?php if (check_permiso($mod4, $act2, $user_rol)) { ?>
-                                            <li><a  class="Menuprincipal"  onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/list_origen_amenaza.php?', '');"><span> <i class="fa fa-list text-primary"></i>  <?= $vocab["menu_admin_origen_amenaza"] ?></span></a></li>
+                                            <li><a  class="Menuprincipal"  onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminOrigenAmenaza/list_origen_amenaza.php?', '');"><span> <i class="fa fa-fire text-success"></i>  <?= $vocab["menu_admin_origen_amenaza"] ?></span></a></li>
                                         <?php } ?>
                                         <?php if (check_permiso($mod4, $act2, $user_rol)) { ?>
-                                            <li><a  class="Menuprincipal"  onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminTipoAmenaza/list_tipo_amenaza.php?', '');"><span><i class="fa fa-plus text-success"></i> <?= $vocab["menu_admin_tipo_amenaza"] ?></span></a></li>
+                                            <li><a  class="Menuprincipal"  onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminTipoAmenaza/list_tipo_amenaza.php?', '');"><span><i class="fa fa-fire text-danger"></i> <?= $vocab["menu_admin_tipo_amenaza"] ?></span></a></li>
                                         <?php } ?>
                                         <?php if (check_permiso($mod4, $act2, $user_rol)) { ?>
-                                            <li><a  class="Menuprincipal"  onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/list_categoria_amenaza.php?', '');"><span><i class="fa fa-plus text-success"></i> <?= $vocab["menu_admin_categoria_amenaza"] ?></span></a></li>
+                                            <li><a  class="Menuprincipal"  onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/list_categoria_amenaza.php?', '');"><span><i class="fa fa-fire text-warning"></i> <?= $vocab["menu_admin_categoria_amenaza"] ?></span></a></li>
                                         <?php } ?>
                                     </ul>
                                 <?php } ?>
                                 <?php if (check_permiso($mod4, $act1, $user_rol)) { ?>
 
-                                <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminHistorial/list_historial.php?', '');"><span><i class="fa fa-list text-primary"></i> <?= $vocab["menu_admin_historial"] ?></span></a></li>
+                                <li><a onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminHistorial/list_historial.php?', '');"><span><i class="fa fa-file text-primary"></i> <?= $vocab["menu_admin_historial"] ?></span></a></li>
 
                             <?php } ?>
                         </ul>
