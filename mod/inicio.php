@@ -140,6 +140,22 @@ foreach ($res as $value) {
 
 
 
+<!-- Modal -->
+<div class="modal fade" id="CargandoModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">                
+                <h3 class="modal-title" id="exampleModalLabel"><?= $vocab['cargando_plan'] ?></h3>
+
+            </div>
+            <div class="modal-body">
+                <img  width="100%" src="img/espera.gif" alt="cargando...">
+            </div>      
+        </div>
+    </div>
+</div>
+
+
 
 
 

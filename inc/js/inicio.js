@@ -70,7 +70,7 @@ function imprimirPlanVistazo(centro,selecion){
     var _values_send ='visualizarpdf=1&idCentro=' + selecion + '&nombreCentro=' + centro;
     var _URL_ = "mod/planEmergenciaPDF/planEmergenciaPDF.php?";
     //alert(_URL_ + _values_send); //DEBUG
-    jAlert("cargando..");
+    jQuery('#CargandoModal').modal('show')
     ajax.open("GET", _URL_ + _values_send, true);
     ajax.onreadystatechange = function () {
         if (ajax.readyState == 1) {
@@ -103,12 +103,13 @@ function EliminarPlanVistazo(ruta){
             //Nada
         } else if (ajax.readyState == 4) {
             var response = ajax.responseText;
+              jQuery('#CargandoModal').modal('hide')
             if (response == true) {
                 jAlert("Generado corractamente");
             } else if (response==false) {
                 jAlert("Error en el proceso, intente nuevamente.\n Si persiste informe a la USTDS", "Error");                
             }
-                
+               
            
         }
     };
