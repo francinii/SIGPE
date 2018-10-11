@@ -12,4 +12,4 @@ $res = transaccion_verificada($sql_a, $sql_b);
 
 
 
-echo $res1[0]['res'];
+echo $res[0]['res'];

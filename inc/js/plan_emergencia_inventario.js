@@ -394,7 +394,7 @@ function guardarOtrosInventario(idPlanEmergencia, pasar,pref,categoria,idtable) 
                     datosGuardados();
                     jAlert("Guardado  con exito", "Exito");
                     if (pasar) {
-                        OpcionMenu('mod/planEmergencia/plan_emergencia_instalaciones.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
+                        OpcionMenu('mod/planEmergencia/plan_emergencia_identificacion_peligros.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
                     }
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");

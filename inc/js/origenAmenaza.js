@@ -81,6 +81,8 @@ function delete_origen_action(id) {
                 jAlert('El origen de amenaza se a eliminado correctamente!', 'Exito');
             } else if (response == 1 || response == 2) {
                 jAlert('Ha ocurrido un error en la Base de Datos Intentelo Nuevamente\n Si el problema continua comuniquese con la USTDS', 'Error');
+            }else if ( response == 3){
+                jAlert( 'tiene tipos de amenaza asociados','El origen de amenaza no se puede eliminar');
             } else {
                 jAlert('Ha ocurrido un error inesperado intentelo más tarde!', 'Error');
             }
