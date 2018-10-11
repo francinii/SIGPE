@@ -3,7 +3,7 @@
  * @returns {boolean}
  */
 function validate_aprobacion() {
- 
+
     var aprobadoPor = document.getElementById('aprobadoPor');
     if (aprobadoPor.value == "") {
         jAlert("Ingrese el nombre de la persona encargada", "Dato Requerido");
@@ -14,18 +14,18 @@ function validate_aprobacion() {
     return true;
 }
 
-function update_aprobacion(id,centro,version) {
+function update_aprobacion(id, centro, version) {
     if (validate_aprobacion()) {
         var loading = document.getElementById('loading_container');
         loading.innerHTML = cargando_bar;
         //Obtener Valores
-  
+
         var aprobadoPor = document.getElementById('aprobadoPor').value;
         var codigoZona = document.getElementById('codigoZona').value;
         var ajax = NuevoAjax();
         var _values_send =
-                'id=' + id +        
-                 '&codigoZona=' + codigoZona +               
+                'id=' + id +
+                '&codigoZona=' + codigoZona +
                 '&aprobadoPor=' + aprobadoPor;
         var _URL_ = "mod/planEmergencia/ajax_plan_emergencia_aprobacion.php?";
         //alert(_URL_ + _values_send); //DEBUG
@@ -37,8 +37,8 @@ function update_aprobacion(id,centro,version) {
                 var response = ajax.responseText;
                 //alert(response); //DEBUG
                 if (response == 0) {
-                   // jAlert("Plan de acción actualizado con éxito", "Exito");
-                   imprimirPDF(id,centro,version);
+                    // jAlert("Plan de acción actualizado con éxito", "Exito");
+                    imprimirPDF(id, centro, version);
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else if (response == 3) {
@@ -48,41 +48,44 @@ function update_aprobacion(id,centro,version) {
                 }
             }
         };
-      
+
         ajax.send(null);
         loading.innerHTML = "";
     }
 }
 
-function visualizarPDF(id, centro){    
-imprimirPlanVistazo(centro,id);
+function visualizarPDF(id, centro) {
+    imprimirPlanVistazo(centro, id);
 }
 
-function imprimirPDF(id,centro,version){
+function imprimirPDF(id, centro, version) {
     var loading = document.getElementById('loading_container');
     loading.innerHTML = cargando_bar;
-    //Obtener Valores
+   // var random =  Math.floor(Math.random() * 1001); 
+    jQuery('#CargandoModal').modal('show');
+    jQuery.ajax({
+        data: {"idCentro": id, "nombreCentro": centro, "version": version},
+        url: 'mod/planEmergenciaPDF/planEmergenciaPDF.php',
+        type: "GET",
 
-    var ajax = NuevoAjax();
-    var _values_send ='idCentro=' + id + '&nombreCentro=' + centro+
-                      '&version='+version;
-    var _URL_ = "mod/planEmergenciaPDF/planEmergenciaPDF.php?";
-    //alert(_URL_ + _values_send); //DEBUG
-     jQuery('#CargandoModal').modal('show');
-    ajax.open("GET", _URL_ + _values_send, true);
-    ajax.onreadystatechange = function () {
-        if (ajax.readyState == 1) {
+        success: function (data) {
+            //someOtherFunc(data.leader);
+//            var response = data;
+//            
+//            jAlert("Generado corractamente");
+//            window.open('mod/versionesPDF/' + response, '_blank');
+        },
+        error: function (data) {
+//            alert("error "+data);
 
-            //Nada
-        } else if (ajax.readyState == 4) {
-            var response = ajax.responseText;
-            jQuery('#CargandoModal').modal('hide');
-            jAlert("Generado corractamente");
-          window.open('mod/versionesPDF/'+response, '_blank');          
-           
+        },
+        complete: function(data){
+            //alert("completo"+data);
+//            jQuery('#CargandoModal').modal('hide');
+        ver(id,version,0);
         }
-    };
-    ajax.send(null);
-    loading.innerHTML = ""; 
-    
+        
+    });
+    loading.innerHTML = "";
+
 }

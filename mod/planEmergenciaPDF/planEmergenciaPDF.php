@@ -38,8 +38,12 @@ $id = $_GET['idCentro'];
 
 if (isset($_GET['version'])) {
     $version = $_GET['version'];
+    $nombreDoc = $id . "-" . $version. '.pdf';
+    unlink($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/' . $nombreDoc);
 }
-
+if (isset($_GET['random'])) {
+    $random = $_GET['random'];
+}
 $sqlPlan = "(SELECT `id`, `revisadoPor`, `codigoZonaTrabajo`, `actividad`, `direccion`, `personaContactoGeneral`, `numeroTelefono`, `numeroFax`, `correo`, `categoriaNFPA`, `usoInstalaciones`, `horarioJornada`, `seguridadInstitucional`, `servicioConsegeria`, `personalAdministrativo`, `personalAcademico`, `presenciaEstudiantil`, `instalacionesDensidadOcupacion`, `instalacionesAreaConstruccion`, `instalacionesInstalaciones`, `instalacionesCaracteristicasZona`, `instalacionesTopografia`, `instalacionesNivelTerreno`, `instalacionesColindates`, `elementosConstructivosTipoConstruccion`, `elementosConstructivosAntiguedad`, `elementosConstructivosCimientos`, `elementosConstructivosEstructura`, `elementosConstructivosParedes`, `elementosConstructivosEntrepiso`, `elementosConstructivosTecho`, `elementosConstructivosCielos`, `elementosConstructivosPisos`, `elementosConstructivosAreaParqueo`, `elementosConstructivosSistemaAguaPotable`, `elementosConstructivosAlcantarilladoSanitario`, `elementosConstructivosAlcantarilladoPluvial`, `elementosConstructivosSistemaElectrico`, `elementosConstructivosSistemaTelefonico`, `elementosConstructivosOtros` FROM `ZonaTrabajo` where id =" . $id . ")";
 $sqlCapitulos = "(SELECT  id, descripcion, orden,titulo,isActivo FROM Capitulo where isActivo = 1 ORDER BY orden)";
 
@@ -134,7 +138,6 @@ $pdf->setPageUnit(PDF_UNIT);
 //Llamada de las funciones que crean el pdf
 //Portada del documento
 portada($pdf);
-
 
 //Creación de los capítulos del documento
 capitulos($pdf, $rescapitulos, $resPlan, $resTipoPoblacion, $formularios, $vocab, $idPlanEmergencia);
@@ -1136,22 +1139,25 @@ function crearGrafico($criterios, $colores) {
 // ---------------------------------------------------------
 //Close and output PDF document
 
-
-
+//ob_clean();
+$nombreDoc="prueba";
 if (check_permiso($mod4, $act6, $user_rol) && !isset($_GET['visualizarpdf'])) {
-    $nombreDoc = $id . "-" . $version. '.pdf';
+   $nombreDoc = $id . "-" . $version. '.pdf';
+    
     $pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/' . $nombreDoc , 'F');
     $sql_a = "CALL insert_historial('$id','$version','$nombreDoc',@res);";
     $sql_b = "SELECT @res as res;";
     $res = transaccion_verificada($sql_a, $sql_b);    
-    echo  $nombreDoc;    
-} else if (check_permiso($mod5, $act6, $user_rol)) {
-    $vistado=rand ( 1 , 100 );
-    $nombreDoc = 'planEmergencias' . $vistado. '.pdf';   
+     
+} else if (check_permiso($mod5, $act6, $user_rol)) {    
+    $nombreDoc = 'planEmergencias' . $random. '.pdf';   
     $pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/' . $nombreDoc , 'F');
-   echo   $nombreDoc;
+ 
 } 
+//ob_clean();
+ echo  $nombreDoc;  
 //$pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/planEmergencias.pdf', 'F');
 //============================================================+
 // END OF FILE
 //============================================================+
+?>

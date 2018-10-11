@@ -8,7 +8,7 @@ $user_rol = $mySessionController->getVar("rol");
 $view_mode = $_GET['view_mode'];
 $id_for = $_GET['id_for'];
 $sql = "SELECT  `id`,`titulo`, `descripcionArriba`, `descripcionAbajo` "
-        . "FROM `formulario` WHERE id =" . $id_for;
+        . "FROM `Formulario` WHERE id =" . $id_for;
 $res = seleccion($sql);
 ?>
 <div class="container">

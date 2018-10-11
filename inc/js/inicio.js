@@ -61,31 +61,35 @@ function cambiarCentroInicio() {
     OpcionMenu('mod/inicio.php?', 'find_key=' + find_key)
 }
 
-function imprimirPlanVistazo(centro,selecion){
+function imprimirPlanVistazo(centro,id){
      var loading = document.getElementById('loading_container');
     loading.innerHTML = cargando_bar;
-    //Obtener Valores
+    var random =  Math.floor(Math.random() * 1001); 
+    jQuery('#CargandoModal').modal('show');
+    jQuery.ajax({
+        data: {"idCentro": id, "nombreCentro": centro,'visualizarpdf':1,'random':random},
+        url: 'mod/planEmergenciaPDF/planEmergenciaPDF.php',
+        type: "GET",
 
-    var ajax = NuevoAjax();
-    var _values_send ='visualizarpdf=1&idCentro=' + selecion + '&nombreCentro=' + centro;
-    var _URL_ = "mod/planEmergenciaPDF/planEmergenciaPDF.php?";
-    //alert(_URL_ + _values_send); //DEBUG
-    jQuery('#CargandoModal').modal('show')
-    ajax.open("GET", _URL_ + _values_send, true);
-    ajax.onreadystatechange = function () {
-        if (ajax.readyState == 1) {
+        success: function (data) {
+            //someOtherFunc(data.leader);
+//            var response = data;
+//            
+//            jAlert("Generado corractamente");
+//            window.open('mod/versionesPDF/' + response, '_blank');
+        },
+        error: function (data) {
+//            alert("error "+data);
 
-            //Nada
-        } else if (ajax.readyState == 4) {
-            var response = ajax.responseText;
-            //alert(response); //DEBUG
-          window.open('mod/versionesPDF/'+response, '_blank');
-          EliminarPlanVistazo(response);  
-           
+        },
+        complete: function(data){
+            //alert("completo"+data);
+//            jQuery('#CargandoModal').modal('hide');
+        ver(id,random,1);
         }
-    };
-    ajax.send(null);
-    loading.innerHTML = "";    
+        
+    });
+    loading.innerHTML = "";   
 }
 function EliminarPlanVistazo(ruta){
      var loading = document.getElementById('loading_container');
@@ -99,11 +103,11 @@ function EliminarPlanVistazo(ruta){
     ajax.open("GET", _URL_ + _values_send, true);
     ajax.onreadystatechange = function () {
         if (ajax.readyState == 1) {
-
+         //window.open('mod/versionesPDF/' + ruta, '_blank');  
             //Nada
         } else if (ajax.readyState == 4) {
             var response = ajax.responseText;
-              jQuery('#CargandoModal').modal('hide')
+             
             if (response == true) {
                 jAlert("Generado corractamente");
             } else if (response==false) {
@@ -113,6 +117,38 @@ function EliminarPlanVistazo(ruta){
            
         }
     };
+    ajax.
     ajax.send(null);
     loading.innerHTML = "";    
+}
+function ver(id,version,borrar){
+    if(borrar){
+        var nombreDoc='planEmergencias' + version+ '.pdf'; 
+         
+    }else{
+          var nombreDoc=id+'-'+version+'.pdf'; 
+    }
+
+   jQuery.ajax({
+    url:'mod/versionesPDF/' + nombreDoc,
+    type:'HEAD',
+    error: function()
+    {
+         setTimeout (  ver(id,version,borrar),100000); 
+       
+    },
+    success: function()
+    {
+        jQuery('#CargandoModal').modal('hide');
+        
+    window.open('mod/versionesPDF/' + nombreDoc, '_blank');  
+       if(borrar){
+       EliminarPlanVistazo(nombreDoc);
+       }
+            
+      
+    }
+}); 
+
+    
 }
