@@ -61,7 +61,7 @@ function guardarDatosIdentificacionPeligros(idPlanEmergencia, pasar) {
                 datosGuardados();
                 jAlert("Guardado  con exito", "Exito");
                 if (pasar) {
-                    OpcionMenu('mod/planEmergencia/plan_emergencia_identificacion_peligros.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
+                    OpcionMenu('mod/planEmergencia/plan_emergencia_poblacion.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
                 } else {
                     OpcionMenu('mod/planEmergencia/plan_emergencia_identificacion_peligros.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
                 }

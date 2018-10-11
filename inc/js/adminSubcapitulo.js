@@ -169,8 +169,8 @@ function delete_subcapitulo_action(id, select) {
 
             } else if (response == 1 || response == 2)  {
                 jAlert('Ha ocurrido un error en la Base de Datos Intentelo Nuevamente\n Si el problema continua comuniquese con la USTDS', 'Error');
-            }else if ( response == 4){
-                jAlert('El subcapítulo no se puede eliminar, tiene formularios asociados')
+            }else if ( response == 3){
+                jAlert( 'tiene formularios asociados','El subcapítulo no se puede eliminar');
             }
             else {
                 jAlert('Ha ocurrido un error inesperado intentelo más tarde!', 'Error');

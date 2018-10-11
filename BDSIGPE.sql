@@ -517,6 +517,7 @@ BEGIN
                     INSERT INTO `Sede`(nombreSede,isActivo, descripcion) VALUES (p_nombre, p_activo,p_descripcion);
             COMMIT;
             -- SUCCESS
+SET res = 0;
 END
 ;;
 DELIMITER ;
@@ -546,6 +547,7 @@ BEGIN
                                     
             COMMIT;
             -- SUCCESS
+SET res = 0;
 END
 ;;
 DELIMITER ;
@@ -753,6 +755,15 @@ DROP PROCEDURE IF EXISTS `delete_sede`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_sede`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
 BEGIN
+
+        DECLARE EXIT HANDLER FOR 1451
+      BEGIN
+                   -- ERROR
+       SET res = 3;
+       ROLLBACK;
+           END;
+
+
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 		-- ERROR
@@ -785,6 +796,13 @@ DROP PROCEDURE IF EXISTS `delete_zona_trabajo`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_zona_trabajo`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
 BEGIN
+
+    DECLARE EXIT HANDLER FOR 1451
+    BEGIN
+                 -- ERROR
+     SET res = 3;
+     ROLLBACK;
+         END;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 		-- ERROR
@@ -817,6 +835,14 @@ DROP PROCEDURE IF EXISTS `delete_origen_amenaza`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_origen_amenaza`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
 BEGIN
+        DECLARE EXIT HANDLER FOR 1451
+        BEGIN
+                     -- ERROR
+         SET res = 3;
+         ROLLBACK;
+             END;
+
+
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 		-- ERROR
@@ -849,6 +875,13 @@ DROP PROCEDURE IF EXISTS `delete_tipo_amenaza`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_tipo_amenaza`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
 BEGIN
+
+        DECLARE EXIT HANDLER FOR 1451
+        BEGIN
+                     -- ERROR
+         SET res = 3;
+         ROLLBACK;
+             END;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 		-- ERROR
@@ -882,6 +915,12 @@ DROP PROCEDURE IF EXISTS `delete_categoria_amenaza`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_categoria_amenaza`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
 BEGIN
+        DECLARE EXIT HANDLER FOR 1451
+        BEGIN
+                     -- ERROR
+         SET res = 3;
+         ROLLBACK;
+             END;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 		-- ERROR
@@ -1307,6 +1346,12 @@ DROP PROCEDURE IF EXISTS `delete_capitulo`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_capitulo`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
 BEGIN
+        DECLARE EXIT HANDLER FOR 1451
+        BEGIN
+                     -- ERROR
+         SET res = 3;
+         ROLLBACK;
+             END;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 		-- ERROR
@@ -1344,7 +1389,7 @@ BEGIN
    DECLARE EXIT HANDLER FOR 1451
    BEGIN
 		-- ERROR
-    SET res = 4;
+    SET res = 3;
     ROLLBACK;
 	END;
 DECLARE EXIT HANDLER FOR SQLEXCEPTION

@@ -1146,7 +1146,7 @@ if (check_permiso($mod4, $act6, $user_rol) && !isset($_GET['visualizarpdf'])) {
     $res = transaccion_verificada($sql_a, $sql_b);    
     echo  $nombreDoc;    
 } else if (check_permiso($mod5, $act6, $user_rol)) {
-    $vistado=rand ( 1 , 100 );
+    $vistado=rand ( 1 , 1000);
     $nombreDoc = 'planEmergencias' . $vistado. '.pdf';   
     $pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/' . $nombreDoc , 'F');
    echo   $nombreDoc;

@@ -81,10 +81,12 @@ function cambiarTipoAmenaza() {
 
 
 function delete_categoria_action(id) {
+     var find_key = document.getElementById("select_tipo_amenaza").value;
     var page = document.getElementById('container');
     page.innerHTML = cargando;
     var ajax = NuevoAjax();
     //Preparacion  llamada AJAX
+   
     var _values_send = 'id=' + id;
     var _URL_ = "mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/ajax_del_categoria_amenaza.php?";
     //alert(_URL_ + _values_send); //DEBUG
@@ -99,6 +101,8 @@ function delete_categoria_action(id) {
                 jAlert('La categoria de amenaza se a eliminado correctamente!', 'Exito');
             } else if (response == 1 || response == 2) {
                 jAlert('Ha ocurrido un error en la Base de Datos Intentelo Nuevamente\n Si el problema continua comuniquese con la USTDS', 'Error');
+              } else if (response == 3) {
+                     jAlert( 'tiene datos  asociados','El categoria de amenaza no se puede eliminar');
             } else {
                 jAlert('Ha ocurrido un error inesperado intentelo más tarde!', 'Error');
             }

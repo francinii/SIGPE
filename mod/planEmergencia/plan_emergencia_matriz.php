@@ -216,7 +216,7 @@ $matriz = seleccion($sql);
     <?php if ($criterios != null) { ?> 
     <?php if ($editar) { ?>  
         <span class="text-center"><a class="btn btn-warning" name="submit" onclick="javascript:generaVectorMatriz('<?= $nombreCentro ?>', '<?= $idCentro ?>', '0', <?= $editar ?>);"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["matriz_title"] ?></a></span>
-        <span class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:generaVectorMatriz('<?= $nombreCentro ?>', '<?= $idCentro ?>', '2', <?= $editar ?>);"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_siguente"] ?></a></span>
+        <span class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:generaVectorMatriz('<?= $nombreCentro ?>', '<?= $idCentro ?>', '2', <?= $editar ?>);"><i class='fa fa-rotate-right fa-inverse'></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_siguente"] ?></a></span>
     <?php } ?>
       
         <span class="text-center"><a class="btn btn-warning" name="" onclick="javascript:generaVectorMatriz('<?= $nombreCentro ?>', '<?= $idCentro ?>', '1', <?= $editar ?>);"><i class='fa fa-plus fa-inverse'></i>  <?= $vocab["graficar_matriz"] ?></a></span>
