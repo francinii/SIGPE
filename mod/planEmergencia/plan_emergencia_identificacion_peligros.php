@@ -40,12 +40,12 @@ if (count($res) <= 0) {
         <thead>
             <tr>
                 <th  style= "width:30%"><?= $vocab["identifica_peligro_lugar"] ?></th>
-                <th  style= "width:5%"><?= $vocab["identifica_peligro_presente"] ?></th>
+                <th  style= "width:8%"><?= $vocab["identifica_peligro_presente"] ?></th>
                 <th  style= "width:10%"><?= $vocab["identifica_peligro_ubicacion"] ?></th>                
                 <th style= "width:15%"><?= $vocab["identifica_peligro_recomendacion"] ?></th> 
                 <th style= "width:15%"><?= $vocab["identifica_peligro_fecha"] ?></th> 
-                <th  style= "width:14%"><?= $vocab["identifica_peligro_responsable"] ?></th>
-                <th style= "width:5%"><?= $vocab["identifica_peligro_priorizacion"] ?></th> 
+                <th  style= "width:15%"><?= $vocab["identifica_peligro_responsable"] ?></th>
+                <th style= "width:2%"><?= $vocab["identifica_peligro_priorizacion"] ?></th> 
                 <?php if ($editar) { ?>
                     <th style= "width:5%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
                 <?php } ?>

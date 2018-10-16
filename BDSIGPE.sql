@@ -469,11 +469,11 @@ INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubCapitulos`) VALUES (2,'Població
 INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (3,'Instalaciones',1);
 INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (4,'Matriz de riesgo',1);
 INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (5,'Inventario',1);
-INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (6,'Identificacion de peligros',1);
-INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (7,'Poblacion',1);
-INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (8,'Ruta de evacuacion',1);
+INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (6,'Identificación de peligros',1);
+INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (7,'Población',1);
+INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (8,'Ruta de evacuación',1);
 INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (9,'Brigadistas',1);
-INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (10,'Ingreso Cuerpos de socorro',1); 
+INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (10,'Ingreso cuerpos de socorro',1); 
 INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (11,'Puestos de la brigada',1);
 INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (12,'Zona de seguridad',1);
 INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (13,'informacion extra de los capitulos y subcapitulos',1);
