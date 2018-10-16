@@ -25,7 +25,7 @@ $vocab["login_but_start"]           = "Iniciar Sesi&oacute;n";
 //***************************** Menu *****************************************//
 $vocab["menu_home"]                 = "Inicio";
 $vocab["menu_admin"]                = "Administraci&oacute;n";
-$vocab["menu_mod"]                  = "Modulos";
+$vocab["menu_mod"]                  = "Módulos";
 $vocab["menu_roll"]                 = "Roles";
 $vocab["menu_user"]                 = "Usuarios";
 $vocab["menu_list"]                 = "Listar";
@@ -34,7 +34,7 @@ $vocab["menu_help"]                 = "Ayuda";
 $vocab["menu_logout"]               = "Salir";
 $vocab["menu_perfil"]               = "Perfil";
 $vocab["menu_continue"]             = "Continuar";
-$vocab["menu_pram"]                 = "Parametros";
+$vocab["menu_pram"]                 = "Parámetros";
 
 $vocab["menu_admin_planes_emergencia"] = "Administraci&oacute;n planes de emergencia";
 $vocab["menu_matriz_riesgos"]          = "Matriz de riesgos";
@@ -65,8 +65,8 @@ $vocab["symbol_save"]              = "Guardar";
 $vocab["symbol_update"]            = "Actualizar";
 $vocab["symbol_return"]            = "Regresar";
 $vocab["symbol_search"]            = "Buscar";
-$vocab["symbol_show_search"]       = "Mostrar Busqueda";
-$vocab["symbol_hide_search"]       = "Ocultar Busqueda";
+$vocab["symbol_show_search"]       = "Mostrar Búsqueda";
+$vocab["symbol_hide_search"]       = "Ocultar Búsqueda";
 $vocab["symbol_no_data"]           = "No Hay Datos que Mostrar";
 $vocab["symbol_order_label"]       = "<strong>Nota: </strong>Para ordenar la lista dar click sobre los encabezados";
 $vocab["symbol_page"]              = "P&aacute;gina";
@@ -76,12 +76,12 @@ $vocab["symbol_loading"]           = "Cargando";
 
 
 //***************************** Modulo permits *******************************//
-$vocab["permits_title"]            = "Modulo";
-$vocab["permits_title_desc"]       = "Informaci&oacute;n general de un modulo";
-$vocab["permits_name_desc"]        = "Nombre del modulo";
-$vocab["permits_desc_desc"]        = "Descripci&oacute;n general de la función del modulo";
-$vocab["permits_list_title"]       = "Lista de Modulos";
-$vocab["permits_list_title_desc"]  = "Nombre del modulo a buscar";
+$vocab["permits_title"]            = "Módulo";
+$vocab["permits_title_desc"]       = "Informaci&oacute;n general de un módulo";
+$vocab["permits_name_desc"]        = "Nombre del módulo";
+$vocab["permits_desc_desc"]        = "Descripci&oacute;n general de la función del módulo";
+$vocab["permits_list_title"]       = "Lista de módulos";
+$vocab["permits_list_title_desc"]  = "Nombre del módulo a buscar";
 
 //***************************** Modulo roles *********************************//
 $vocab["rols"]                     = "Rol";
@@ -90,7 +90,7 @@ $vocab["rols_title_desc"]          = "Permite administrar los roles y sus respec
 $vocab["rols_name_desc"]           = "Nombre del rol";
 $vocab["rols_desc_desc"]           = "Descripci&oacute;n general del rol";
 $vocab["rols_action_desc"]         = "Opciones del modulo";
-$vocab["rols_list_title"]          = "Lista de Roles";
+$vocab["rols_list_title"]          = "Lista de roles";
 $vocab["rols_list_title_desc"]     = "Nombre del rol a buscar";
 $vocab["rols_for_user"]            = "Seleccione el rol del usuario";
 $vocab["rols_level"]               = "Rol";//agregado
@@ -98,14 +98,14 @@ $vocab["rols_level"]               = "Rol";//agregado
 //***************************** Modulo usuarios ******************************//
 $vocab["user_title"]            = "Usuarios";
 $vocab["user_title_desc"]       = "Informaci&oacute;n de usuario del sistema";
-$vocab["user_list_title"]       = "Lista de Usuarios";
+$vocab["user_list_title"]       = "Lista de usuarios";
 $vocab["user_id"]               = "C&eacute;dula / ID";
 $vocab["user_id_desc"]          = "Escriba la c&eacute;dula o id del usuario";
 $vocab["user_name_desc"]        = "El nombre se obtiene del servidor LDAP";
 $vocab["user_mail"]             = "Correo electr&oacutenico";
 $vocab["user_mail_desc"]        = "El correo electr&oacute;nico se obtiene de LDAP";
 $vocab["user_tel"]              = "Tel&eacute;fono de contacto";
-$vocab["user_tel_desc"]         = "Ingese el numero de telefono";
+$vocab["user_tel_desc"]         = "Ingese el número de teléfono";
 $vocab["user_perfil_desc"]      = "Información de usuario personal";
 
 
@@ -122,7 +122,7 @@ $vocab["desc_origen_isActivo"]                  = "Active o desactive el origen"
 $vocab["nombre_origen_amenaza"]                 = "Nombre del origen de la amenaza";
 $vocab["nombre_desc_origen_amenaza"]            = "Escriba el nombre de la nueva amenaza";
 
-$vocab["tipo_amenaza_title"]                    = "Tipo de la amenaza";
+$vocab["tipo_amenaza_title"]                    = "Tipo de amenaza";
 $vocab["list_tipo_amenaza_title"]               = "Tipo de amenaza";
 $vocab["list_tipo_amenaza_id"]                  = "Id";
 $vocab["list_tipo_amenaza_descripcion"]         = "Tipo de amenaza";
@@ -131,14 +131,14 @@ $vocab["desc_tipo_isActivo"]                  = "Active o desactive el tipo de a
 $vocab["nombre_tipo_amenaza"]                 = "Nombre del tipo de amenaza";
 $vocab["nombre_desc_tipo_amenaza"]            = "Escriba el nombre del nuevo tipo de amenaza";
 
-$vocab["categoria_amenaza_title"]               = "Categoria";
+$vocab["categoria_amenaza_title"]               = "Categoría";
 $vocab["list_categoria_amenaza_title"]          = "Categor&iacute;a de amenaza";
 $vocab["list_categoria_amenaza_id"]             = "Id";
-$vocab["list_categoria_amenaza_descripcion"]    = "Informaci&oacute;n de la categoria";
-$vocab["list_categoria_amenaza_isActivo"]          = "Activar categoria de amenaza";
-$vocab["desc_categoria_isActivo"]                  = "Active o desactive la categoria de amenaza";
-$vocab["nombre_categoria_amenaza"]                 = "Nombre de la categoria de amenaza";
-$vocab["nombre_desc_categoria_amenaza"]            = "Escriba el nombre de la nueva categoria de amenaza";
+$vocab["list_categoria_amenaza_descripcion"]    = "Informaci&oacute;n de la categoría";
+$vocab["list_categoria_amenaza_isActivo"]          = "Activar categoría de amenaza";
+$vocab["desc_categoria_isActivo"]                  = "Active o desactive la categoría de amenaza";
+$vocab["nombre_categoria_amenaza"]                 = "Nombre de la categoría de amenaza";
+$vocab["nombre_desc_categoria_amenaza"]            = "Escriba el nombre de la nueva categoría de amenaza";
 
 
 
@@ -150,85 +150,84 @@ $vocab["list_zona_trabajo_descripcion"]   = "Centro de trabajo";
 
 $vocab["zona_trabajo_title_Desc"]        = "Titulo del centro de trabajo";
 $vocab["zona_trabajo_id"]                = "Id";
-$vocab["zona_trabajo_id_Desc"]           = "Id del capitulo";
+$vocab["zona_trabajo_id_Desc"]           = "Id del capítulo";
 $vocab["zona_trabajo_Descripcion"]       = "Descripción del centro de trabajo";
 $vocab["zona_trabajo_activar"]           = "Activar centro de trabajo";
 $vocab["desc_zona_trabajo_isActivo"]     = "Active o desactive el centro de trabajo";
 $vocab["zona_trabajo_sede"]              = "Sede";
 $vocab["zona_trabajo_sede_Desc"]         = "Sede a la que pertenece el centro";
-$vocab["zona_trabajo_logo"]               = "Logo ";
-$vocab["zona_trabajo_logo_desc"]           = "Cambiar Logo del centro";
-$vocab["zona_trabajo_Ubicacion"]               = "Ubicacion ";
-$vocab["zona_trabajo_Ubicacion_desc"]           = "Ubicación según google georeferenciada";
+$vocab["zona_trabajo_logo"]              = "Logo ";
+$vocab["zona_trabajo_logo_desc"]         = "Cambiar Logo del centro";
+$vocab["zona_trabajo_Ubicacion"]         = "Ubicación ";
+$vocab["zona_trabajo_Ubicacion_desc"]    = "Ubicación según georeferencia de Google";
 //***************************** Modulo Sedes******************************//
 $vocab["sede_title"]               = "Sedes";
 $vocab["list_sede_title"]          = "Sedes";
 $vocab["list_sede_id"]             = "Id";
 $vocab["list_sede_descripcion"]    = "Sedes";
 
-$vocab["sede_title_Desc"]       = "Titulo de la sede";
+$vocab["sede_title_Desc"]       = "Título de la sede";
 $vocab["sede_id"]               = "Id";
 $vocab["sede_id_Desc"]          = "Id de la sede";
 $vocab["sede_Descripcion"]      = "Descripción de la sede";
-$vocab["sede_activar"]      = "Activar sede";
-$vocab["desc_sede_isActivo"]   = "Active o desactive la sede";
+$vocab["sede_activar"]          = "Activar sede";
+$vocab["desc_sede_isActivo"]    = "Active o desactive la sede";
 //***************************** Modulo administrar capitulos ******************************//
-$vocab["list_capitulo"]             = "Lista de capitulos";
-$vocab["add_capitulo"]              = "capitulos";
+$vocab["list_capitulo"]             = "Lista de capítulos";
+$vocab["add_capitulo"]              = "Capítulos";
 $vocab["list_capitulo_title"]       = "Titulo";
 $vocab["list_capitulo_id"]          = "Id";
-$vocab["list_capitulo_orden"]       = "orden";
-$vocab["list_capitulo_ordenar"]       = "ordenar";
-
-$vocab["capitulo_capitulo"]             = "Capitulo";
-$vocab["capitulo_capitulo_Desc"]        = "Capitulos del reporte";
-$vocab["capitulo_title"]                = "Titulo";
-$vocab["capitulo_title_Desc"]           = "Titulo del capitulo";
+$vocab["list_capitulo_orden"]       = "Orden";
+$vocab["list_capitulo_ordenar"]     = "ordenar";
+$vocab["capitulo_capitulo"]             = "Capítulo";
+$vocab["capitulo_capitulo_Desc"]        = "Capítulos del reporte";
+$vocab["capitulo_title"]                = "Título";
+$vocab["capitulo_title_Desc"]           = "Título del capítulo";
 $vocab["capitulo_id"]                   = "Id";
-$vocab["capitulo_id_Desc"]              = "Id del capitulo";
-$vocab["capitulo_Descripcion"]          = "Descripción del capitulo";
+$vocab["capitulo_id_Desc"]              = "Id del capítulo";
+$vocab["capitulo_Descripcion"]          = "Descripción del capítulo";
 $vocab["capitulo_Descripcion_usuario"]  = "Descripción para el usuario";
-$vocab["capitulo_Descripcion_usuario_desc"]  = "guia para el usuario";
+$vocab["capitulo_Descripcion_usuario_desc"]  = "Guía para el usuario";
 $vocab["capitulo_requiere_Descripcion_usuario"]  = "Requiere descripción del usuario";
-$vocab["capitulo_requiere_Descripcion_usuario_desc"]  = "permite al usuario agregar una descripción";
+$vocab["capitulo_requiere_Descripcion_usuario_desc"]  = "Permite al usuario agregar una descripción";
 
 //***************************** Modulo administrar subcapitulos ******************************//
-$vocab["list_subcapitulo"]                = "Lista de subcapitulos";
-$vocab["add_subcapitulo"]                 = "subcapitulos";
+$vocab["list_subcapitulo"]                = "Lista de subcapítulos";
+$vocab["add_subcapitulo"]                 = "Subcapítulos";
 $vocab["list_subcapitulo_title"]          = "Titulo";
 $vocab["list_subcapitulo_id"]             = "Id";
 $vocab["list_subcapitulo_orden"]          = "orden";
 $vocab["list_subcapitulo_Descripcion"]    = "Descripcion";
 
-$vocab["subcapitulo_subcapitulo"]         = "Subcapitulo";
-$vocab["subcapitulo_subcapitulo_Desc"]    = "Subcapitulos pertenecientes a un capitulo del reporte";
+$vocab["subcapitulo_subcapitulo"]         = "Subcapítulo";
+$vocab["subcapitulo_subcapitulo_Desc"]    = "Subcapítulos pertenecientes a un capítulo del reporte";
 $vocab["subcapitulo_title"]               = "Titulo";
-$vocab["subcapitulo_title_Desc"]          = "Titulo del subcapitulo";
-$vocab["subcapitulo_capitulo"]            = "Capitulo";
-$vocab["subcapitulo_capitulo_Desc"]       = "Capitulo al que pertenece";
-$vocab["subcapitulo_Descripcion"]         = "Descripción del subcapitulo";
+$vocab["subcapitulo_title_Desc"]          = "Titulo del subcapítulo";
+$vocab["subcapitulo_capitulo"]            = "Capítulo";
+$vocab["subcapitulo_capitulo_Desc"]       = "Capítulo al que pertenece";
+$vocab["subcapitulo_Descripcion"]         = "Descripción del subcapítulo";
 $vocab["subcapitulo_Descripcion_usuario"]  = "Descripción para el usuario";
-$vocab["subcapitulo_Descripcion_usuario_desc"]  = "guia para el usuario";
+$vocab["subcapitulo_Descripcion_usuario_desc"]  = "Guía para el usuario";
 $vocab["subcapitulo_requiere_Descripcion_usuario"]  = "Requiere descripción del usuario";
 $vocab["subcapitulo_requiere_Descripcion_usuario_desc"]  = "permite al usuario agregar una descripción";
 
 //***************************** Modulo administrar formulario ******************************//
 $vocab["formulario_admin"]             = "Administrar formularios";
-$vocab["formulario_admin_Desc"]        = "Colocar la información de los formularios en un subcapitulo";
+$vocab["formulario_admin_Desc"]        = "Colocar la información de los formularios en un subcapítulo";
 $vocab["list_formulario"]              = "Lista de formularios";
 $vocab["formulario_id"]                = "id";
 $vocab["formulario_formulario"]        = "Formulario";
-$vocab["formulario_titulo"]        = "Titulo";
-$vocab["formulario_titulo_desc"]        = "Titulo del formulario";
+$vocab["formulario_titulo"]            = "Título";
+$vocab["formulario_titulo_desc"]       = "Título del formulario";
 $vocab["formulario_formulario_desc"]   = "Descripción que llevara el formulario";
-$vocab["formulario_subcapitulo"]        = "subcapitulo(CAPITULO)";
-$vocab["formulario_descripcion_arriba"]  = "Descripción arriba del formulario";
+$vocab["formulario_subcapitulo"]       = "subcapitulo(CAPITULO)";
+$vocab["formulario_descripcion_arriba"] = "Descripción arriba del formulario";
 $vocab["formulario_descripcion_abajo"]  = "Descripción abajo del formulario";
 //***********     Modulo Formulario matriz de riesgos    ***********************//
 $vocab["matriz_title"]               = "Matriz de riesgos";
 $vocab["td_origen"]                      = "Origen";
 $vocab["td_tipo"]                        = "Tipo";
-$vocab["td_categoria"]                   = "Categoria";
+$vocab["td_categoria"]                   = "Categoría";
 $vocab["td_fuente"]                      = "Fuente";
 $vocab["td_probabilidad"]                = "Probabilidad";
 $vocab["td_gravedad"]                    = "Gravedad";
@@ -245,24 +244,25 @@ $vocab["graficar_matriz"]                = "Graficar";
 
 //***********     Matriz cuadro resumen   ***********************//
 $vocab["tipo_alerta_nombre"]               = "Tipo de alerta";
-$vocab["tipo_alerta_cantidad"]               = "QTY";
-$vocab["tipo_alerta_porcentaje"]               = "%";
-$vocab["tipo_alerta_amenaza"]               = "Amenaza identificada";
-$vocab["tipo_alerta_total"]               = "Amenaza identificada";
+$vocab["tipo_alerta_cantidad"]             = "QTY";
+$vocab["tipo_alerta_porcentaje"]           = "%";
+$vocab["tipo_alerta_amenaza"]              = "Amenaza identificada";
+$vocab["tipo_alerta_total"]                = "Amenaza identificada";
 
 
 
 //***********    Incio plan de emergencia    ***********************//
-$vocab["inicio_Bienvenido"]                  ="Bienvenido";
+$vocab["inicio_Bienvenido"]                  ="Bienvenidos";
 $vocab["inicio_Titulo"]                      = "SIGPE";
+$vocab["inicio_Titulo_Sistema"]              = "Sistema Gestor de planes de emergencia";
 $vocab["inicio_Subtitulo"]                   = "CIEUNA";
 $vocab["inicio_Titulo_Desc"]                 = "seleccione el plan de emergencia que desea trabajar";
 $vocab["inicio_Empezar"]                     = "Empeza";
 $vocab["inicio_Imprimir"]                    = "Imprimir";
 $vocab["inicio_Nueva_version"]               = "Nueva versión";
 $vocab["incio_labe"]                         ="Plan de emergencia";
-$vocab["cargando_plan"]                       ="Generando pdf, por favor espere..";
-$vocab["inicio_save_print"]                       ="e imprimir";
+$vocab["cargando_plan"]                      ="Generando pdf, por favor espere..";
+$vocab["inicio_save_print"]                  ="e imprimir";
 
 //***********    Menu plan de emergencia    ***********************//
 $vocab["Menu_Datos_sin_guardar"]            ="Datos sin guardar";
@@ -270,7 +270,7 @@ $vocab["Menu_Datos_Plan"]                   ="Plan de emergencia:";
 
 //***********     plan de emergencia  datos generales  ***********************//
 $vocab["datos_generares_Titulo"]             ="Datos generales";
-$vocab["datos_generares_Desc"]               ="Datos generales de la empresa";
+$vocab["datos_generares_Desc"]               ="Datos generales de la organización: llene los siguientes espacios con la información solicitada";
 $vocab["datos_generares_nombre"]             ="Nombre de la institución:";
 $vocab["datos_generares_actividad"]          ="Actividad:";
 $vocab["datos_generares_dirección"]          ="Dirección:";
@@ -280,21 +280,21 @@ $vocab["datos_generares_fax"]                ="Número de fax:";
 $vocab["datos_generares_Correo"]             ="Correo electrónico para notificaciones:";
 $vocab["datos_generares_NFPA"]               ="Categoría NFPA:";
 $vocab["datos_generares_instalaciones"]      ="Uso principal de las instalaciones:";
-$vocab["datos_generares_Horarios"]           ="Horarios o Jornadas:";
-$vocab["datos_generares_Seguridad"]          ="Seguridad Insitucional:";
+$vocab["datos_generares_Horarios"]           ="Horarios o jornadas:";
+$vocab["datos_generares_Seguridad"]          ="Seguridad insitucional:";
 $vocab["datos_generares_Servicio"]           ="Servicio de Conserjería:";
-$vocab["datos_generares_Administrativo"]     ="Personal Administrativo:";
-$vocab["datos_generares_Académico"]          ="Personal Académico:";
-$vocab["datos_generares_Estudiantil"]        ="Presencia Estudiantil:";
+$vocab["datos_generares_Administrativo"]     ="Personal administrativo:";
+$vocab["datos_generares_Académico"]          ="Personal académico:";
+$vocab["datos_generares_Estudiantil"]        ="Presencia estudiantil:";
 $vocab["datos_generares_siguente"]           ="y pasar el siguiente";
 $vocab["datos_generares_datos"]              ="Datos";
 
 //***********     plan de emergencia  datos generales  ***********************//
 $vocab["actividades_Titulo"]             ="Tipo de población";
-$vocab["actividades_Titulo_Desc"]        ="Tipo de poblacion en las actividades";
+$vocab["actividades_Titulo_Desc"]        ="Tipo de población en las actividades";
 $vocab["actividades_Descripcion"]        ="Descripción";
 $vocab["actividades_total"]              ="Total aproximado";
-$vocab["actividades_Discapacidad"]        ="Representación de personas con discapacidad identificadas(detalle tipo de discapacidad)";
+$vocab["actividades_Discapacidad"]       ="Representación de personas con discapacidad identificadas(detalle tipo de discapacidad)";
 $vocab["actividades_administrativo"]     ="Personal administrativo";
 $vocab["actividades_académico"]          ="Personal académico";
 $vocab["actividades_Estudiantes"]        ="Estudiantes";
@@ -303,8 +303,8 @@ $vocab["actividades_Visitantes"]         ="Visitantes";
 
 //***********     plan de emergencia  instalaciones ***********************//
 $vocab["instalaciones_Titulo"]              ="Instalaciones";
-$vocab["instalaciones_Titulo_Desc"]         ="características propias de la edificación:";
-$vocab["instalaciones_subTitulo1"]          ="Características de las Instalaciones";
+$vocab["instalaciones_Titulo_Desc"]         ="Características propias de la edificación: llene los siguientes espacios con la información solicitada";
+$vocab["instalaciones_subTitulo1"]          ="Características de las instalaciones";
 $vocab["instalaciones_Densidad"]            ="Densidad de ocupación:";
 $vocab["instalaciones_Area"]                ="Área de construcción:";
 $vocab["instalaciones_Instalaciones"]       ="Instalaciones:";
@@ -314,21 +314,21 @@ $vocab["instalaciones_terreno"]             ="Nivel del terreno:";
 $vocab["instalaciones_Colindantes"]         ="Colindantes:";
 $vocab["instalaciones_subTitulo2"]          ="Elementos constructivos";
 $vocab["instalaciones_Tipo"]                ="Tipo de construcción:";
-$vocab["instalaciones_Antiguedad"]          ="Antigûedad:";
+$vocab["instalaciones_Antiguedad"]          ="Antiguedad:";
 $vocab["instalaciones_Cimientos"]           ="Cimientos:";
 $vocab["instalaciones_Estructura"]          ="Estructura:";
 $vocab["instalaciones_Paredes"]             ="Paredes:";
-$vocab["instalaciones_Entrepiso"]         ="Entrepiso:";
-$vocab["instalaciones_Techo"]             ="Techo:";
-$vocab["instalaciones_Cielos"]            ="Cielos:";
-$vocab["instalaciones_Pisos"]             ="Pisos:";
-$vocab["instalaciones_parqueo"]           ="Área de parqueo:";
-$vocab["instalaciones_aguapotable"]       ="Sistema de agua potable:";
-$vocab["instalaciones_sanitario"]         ="Sistema de alcantarillado sanitario:";
-$vocab["instalaciones_pluvial"]           ="Sistema de alcantarillado pluvial:";
-$vocab["instalaciones_electrico"]         ="Sistema electrico:";
-$vocab["instalaciones_telefónico"]        ="Sistema telefónico:";
-$vocab["instalaciones_Otros"]             ="Otros:";
+$vocab["instalaciones_Entrepiso"]           ="Entrepiso:";
+$vocab["instalaciones_Techo"]               ="Techo:";
+$vocab["instalaciones_Cielos"]              ="Cielos:";
+$vocab["instalaciones_Pisos"]               ="Pisos:";
+$vocab["instalaciones_parqueo"]             ="Área de parqueo:";
+$vocab["instalaciones_aguapotable"]         ="Sistema de agua potable:";
+$vocab["instalaciones_sanitario"]           ="Sistema de alcantarillado sanitario:";
+$vocab["instalaciones_pluvial"]             ="Sistema de alcantarillado pluvial:";
+$vocab["instalaciones_electrico"]           ="Sistema eléctrico:";
+$vocab["instalaciones_telefónico"]          ="Sistema telefónico:";
+$vocab["instalaciones_Otros"]               ="Otros:";
 
 //***********     plan de emergencia  equipos moviles  ***********************//
 $vocab["equipo_moviles_titulo"]             ="Recurso equipo móvil";
@@ -340,24 +340,24 @@ $vocab["equipo_moviles_contacto"]           ="Contacto";
 $vocab["equipo_moviles_ubicacion"]          ="Ubicación";
 $vocab["equipo_moviles_categoria"]          ="Categoría";
 $vocab["equipo_moviles_terrestre"]          ="Terrestre";
-$vocab["equipo_moviles_titulo_desc"]        ="Equipo móvil terrestres: jeep,camión,tractor,otros. <br>Equipo móvil acuático: Lancha,bote,Panga,otros. <br>Equipo móvil aereo: avioneta,helicoptero,otros.";
+$vocab["equipo_moviles_titulo_desc"]        ="Equipo móvil terrestres: jeep,camión,tractor,otros. <br>Equipo móvil acuático: Lancha,bote,Panga,otros. <br>Equipo móvil aéreo: avioneta,helicóptero,otros.";
 $vocab["equipo_moviles_Acuático"]           ="Acuático";
-$vocab["equipo_moviles_Aereo"]              ="Aereo";
+$vocab["equipo_moviles_Aereo"]              ="Aéreo";
 
 //***********     plan de emergencia  identificacion de peligros  ***********************//
-$vocab["identifica_peligro_Titulo"] = "Identificacion de peligros";
-$vocab["identifica_peligro_Titulo_Desc"] = "Identificacion de peligros";
+$vocab["identifica_peligro_Titulo"]        = "Identificación de peligros";
+$vocab["identifica_peligro_Titulo_Desc"]   = "Identificación de peligros en el centro de trabajo o aulas";
 $vocab["identifica_peligro_lugar"]         = "Peligro identificado";
 $vocab["identifica_peligro_aula"]          = "Peligro en el aula oficina o laboratorio";
 $vocab["identifica_peligro_edificio"]      = "Peligro en el edificio";
 $vocab["identifica_peligro_electrica"]     = "Peligro en instalaciones eléctricas";
 $vocab["identifica_peligro_agua"]          = "Peligro en instalaciones de agua";
-$vocab["identifica_peligro_gas"]          = "Peligro en instalaciones de gas";
-$vocab["identifica_peligro_adicionales"]          = "Peligro adicionales identificados";
+$vocab["identifica_peligro_gas"]           = "Peligro en instalaciones de gas";
+$vocab["identifica_peligro_adicionales"]   = "Peligro adicionales identificados";
 $vocab["identifica_peligro_presente"]      = "Presente";
 $vocab["identifica_peligro_ubicacion"]     = "Ubicación";
 $vocab["identifica_peligro_presente"]      = "Presente";
-$vocab["identifica_peligro_recomendacion"] = "Recomendacion de solución";
+$vocab["identifica_peligro_recomendacion"] = "Recomendación de solución";
 $vocab["identifica_peligro_fecha"]         = "Fecha de ejecución";
 $vocab["identifica_peligro_responsable"]   = "Responsable";
 $vocab["identifica_peligro_priorizacion"]  = "Priorización";
@@ -375,7 +375,7 @@ $vocab["peligro_8"] = "Existen cilindros de gas.";
 $vocab["peligro_9"] = "Hay escritorios o pupitres cerca de las ventanas de vidrio obstruyendo posibles salidas.";
 $vocab["peligro_10"] = "Las paredes presentan reventaduras o desprendimientos de repello.";
 $vocab["peligro_11"] = "Hay almacenamiento innecesario de material (combustible, papel, químicos, madera, etc.).";
-$vocab["peligro_5"] = "Existe en su laboratorio cañería expuesta.";
+$vocab["peligro_5"]  = "Existe en su laboratorio cañería expuesta.";
 $vocab["peligro_12"] = "Existen los pasillos en su oficina con el espacio cerrado.";
 $vocab["peligro_13"] = "Hay basura que obstruye el paso en pasillos o rutas de salida.";
 $vocab["peligro_14"] = "Hay huecos o zanjas descubiertas.";
@@ -407,7 +407,7 @@ $vocab["peligro_37"] = "Hay cilindros de gas vacíos, tirados o sin proteger.";
 $vocab["zona_seguridad"]                    = "zona de seguridad";
 $vocab["zona_seguridad_title"]              = "Zona de seguridad";
 $vocab["zona_seguridad_nombre"]             ="Nombre";  
-$vocab["zona_seguridad_ubicacion"]          ="Ubicacion";  
+$vocab["zona_seguridad_ubicacion"]          ="Ubicación";  
 $vocab["zona_seguridad_capacidad"]          ="Capacidad";  
 $vocab["zona_seguridad_observaciones"]      ="Observaciones";  
 $vocab["zona_seguridad_sector"]             ="Sector(es) que descargan a esa zona de seguridad";  
@@ -421,25 +421,25 @@ $vocab["zona_seguridad_sector"]             ="Sector(es) que descargan a esa zon
 
 
 //***********     plan de emergencia formulario rutas de evacuación ***********************//
-$vocab["rutas_evacuacion"]            = "Rutas de evacuación";
-$vocab["rutas_evacuacion_nombre"]            = "Nombre de área";
-$vocab["rutas_evacuacion_personas_permanentes"]            = "Personas permanentes";
-$vocab["rutas_evacuacion_personas_flotantes"]            = "Personas flotantes";
-$vocab["rutas_evacuacion_ruta1"]            = "Ruta ev 1.(Nombre salida)";
-$vocab["rutas_evacuacion_distancia1"]            = "Distancia R1 (m) Se mide con cronograma a velocidad de caminado normal";
-$vocab["rutas_evacuacion_tiempo1"]            = "Tiempo R1 (min)";
-$vocab["rutas_evacuacion_ruta2"]            = "Ruta ev 2.(Nombre salida)";
-$vocab["rutas_evacuacion_distancia2"]            = "Distancia R2 (m) Se mide en los planitos por medio de las cotas";
-$vocab["rutas_evacuacion_tiempo2"]            = "Tiempo R2 (min)";
+$vocab["rutas_evacuacion"]                          = "Rutas de evacuación";
+$vocab["rutas_evacuacion_nombre"]                   = "Nombre de área";
+$vocab["rutas_evacuacion_personas_permanentes"]     = "Personas permanentes";
+$vocab["rutas_evacuacion_personas_flotantes"]       = "Personas flotantes";
+$vocab["rutas_evacuacion_ruta1"]                    = "Ruta ev 1.(Nombre salida)";
+$vocab["rutas_evacuacion_distancia1"]               = "Distancia R1 (m) Se mide con cronograma a velocidad de caminado normal";
+$vocab["rutas_evacuacion_tiempo1"]                  = "Tiempo R1 (min)";
+$vocab["rutas_evacuacion_ruta2"]                    = "Ruta ev 2.(Nombre salida)";
+$vocab["rutas_evacuacion_distancia2"]               = "Distancia R2 (m) Se mide en los planitos por medio de las cotas";
+$vocab["rutas_evacuacion_tiempo2"]                  = "Tiempo R2 (min)";
 
 //***********     plan de emergencia formulario brigadistas ***********************// 
-$vocab["brigadista_title"]            = "Brigadistas";
-$vocab["brigadista_nombre"]            = "brigadistas/número";
-$vocab["brigadista_punto_partida"]            = "Punto de  partida (zona habitual)";
-$vocab["brigadista_zona_asignada"]            = "Zona asignada a evacuar";
-$vocab["brigadista_numero_personas"]            = "Número de personas a evacuar";
-$vocab["brigadista_distancia_total"]            = "Distancia total a recorrer (m)";
-$vocab["brigadista_tiempo_evacuacion"]            = "Tiempo de evacuación (min)";
+$vocab["brigadista_title"]              = "Brigadistas";
+$vocab["brigadista_nombre"]             = "brigadistas/número";
+$vocab["brigadista_punto_partida"]      = "Punto de  partida (zona habitual)";
+$vocab["brigadista_zona_asignada"]      = "Zona asignada a evacuar";
+$vocab["brigadista_numero_personas"]    = "Número de personas a evacuar";
+$vocab["brigadista_distancia_total"]    = "Distancia total a recorrer (m)";
+$vocab["brigadista_tiempo_evacuacion"]  = "Tiempo de evacuación (min)";
 
 
 //***********     plan de emergencia  recurso humano ***********************//
@@ -447,14 +447,14 @@ $vocab["recurso_humano_titulo"]             ="Recurso Humano";
 $vocab["recurso_humano_titulo_desc"]        ="Profesíon u oficio: Ingeniero, arquitecto, enfermera, medico, otros";    
 $vocab["recurso_humano_Cantidad"]           ="Cantidad"; 
 $vocab["recurso_humano_Profesion"]          ="Profesión";
-$vocab["recurso_humano_categoria"]          ="Categoria";
+$vocab["recurso_humano_categoria"]          ="Categoría";
 $vocab["recurso_humano_Localizacion"]       ="Localización";       
 $vocab["recurso_humano_Contacto"]           ="Contacto";       
         
 //***********     plan de emergencia  Inventario ***********************//
-$vocab["inventario_fila"]           ="fila";    
-$vocab["inventario_sector"]           ="sector";
-$vocab["inventario_Datos"]           ="Datos";
+$vocab["inventario_fila"]                ="Fila";    
+$vocab["inventario_sector"]              ="Sector";
+$vocab["inventario_Datos"]               ="Datos";
 
 //***********     plan de emergencia  instalaciones ***********************//
 $vocab["instalaciones_titulo"]        ="Recurso de instalaciones";
@@ -484,14 +484,14 @@ $vocab["otros_recursos_sistemas_insendios_desc"]       ="Sistema fijo contra inc
 $vocab["otros_recursos_Equipo_primeraRespuesta"]       ="Equipo de primera respuesta";
 $vocab["otros_recursos_Equipo_primeraRespuesta_desc"]  ="cuarto de primeros auxilios, botiquines, ferula de espalda/araña/extremidades/cuello/sujetador de cabeza, otros.";
 $vocab["otros_recursos_Señalizacion"]                  ="Señalización";
-$vocab["otros_recursos_Señalizacion_desc"]             ="Evacuación, salvamneto, combate de incendios, accesibilidad universal, prohibición, otros.";
+$vocab["otros_recursos_Señalizacion_desc"]             ="Evacuación, salvamento, combate de incendios, accesibilidad universal, prohibición, otros.";
 $vocab["otros_recursos_tipo"]                          ="Tipo de equipo";
 $vocab["otros_recursos_cantidad"]                      ="Cantidad";
 $vocab["otros_recursos_caracteristicas"]               ="Características";
 $vocab["otros_recursos_contacto"]                      ="Contacto";
 $vocab["otros_recursos_ubicacion"]                     ="Ubicación";
 $vocab["otros_recursos_categoria"]                     ="Categoría";
-$vocab["otros_recursos_observaciones"]                 ="Detalles/ Observacion";
+$vocab["otros_recursos_observaciones"]                 ="Detalles/Observación";
 
 //***********     plan de emergencia  poblacion ***********************//
 $vocab["poblacion_titulo"]                             ="Conformación de comité y brigadas de emergencia por oficinas, ubicación por sectores.";
@@ -506,23 +506,19 @@ $vocab["poblacion_telefono_oficina"]                   ="Teléfonos de la oficin
 $vocab["poblacion_contactoEmergencia"]                 ="Persona contacto en caso de emergencia";
 $vocab["poblacion_telefono_personal"]                  ="Teléfono personal en caso de emergencia";
 $vocab["poblacion_correo"]                             ="Correo electrónico en caso de emergencia";
-$vocab["poblacion_sectorNuevo"]                             ="Sector nuevo";
+$vocab["poblacion_sectorNuevo"]                        ="Sector nuevo";
 
 
 //***********     plan de emergencia  Ingresos ***********************//
 $vocab["ingreso_titulo"]                               ="Análisis de tiempo de respuesta de cuerpos de atención de emergencias";
-
 $vocab["ingreso_cuerpoRespuesta"]                      ="Cuerpo de respuesta";
 $vocab["ingreso_ubicación"]                            ="Ubicación";
 $vocab["ingreso_recorrido"]                            ="Distancia de recorrido";
 $vocab["ingreso_ubicación"]                            ="Ubicación";
 $vocab["ingreso_tiempoRespuesta"]                      ="Tiempo de respuesta";
-$vocab["ingreso_cruzRoja"]                      ="Cruz Roja";
-$vocab["ingreso_Bomberos"]                      ="Benemérito cuerpo de bomberos";
-$vocab["ingreso_transito"]                      ="Tránsito";
-
-
-
+$vocab["ingreso_cruzRoja"]                             ="Cruz Roja";
+$vocab["ingreso_Bomberos"]                             ="Benemérito cuerpo de bomberos";
+$vocab["ingreso_transito"]                             ="Tránsito";
 $vocab["ingreso_subtitulo"]                      ="Descripción de ingreso de los cuerpos de socorro";
 $vocab["ingreso_descripcion"]                    ="Descripción:";
 $vocab["ingreso_Condiciones"]                    ="Condiciones de análisis";
@@ -531,49 +527,48 @@ $vocab["ingreso_radio"]                          ="Radios de giro:";
 $vocab["ingreso_caseta"]                         ="Casetas:";
 $vocab["ingreso_plumas"]                         ="Plumas:";
 $vocab["ingreso_ancho"]                          ="Ancho libre:";
-$vocab["ingreso_protocolo"]                      ="Protocolos de coordinación con seguridad institucional";
-    
+$vocab["ingreso_protocolo"]                      ="Protocolos de coordinación con seguridad institucional";  
 
 
 
 //***********     plan de emergencia  puestos de la brigada ***********************//
-$vocab["puestos_brigada_title"]                       ="Puestos de la brigada";
-$vocab["puestos_brigada_puesto"]                      ="Puesto";
-$vocab["puestos_brigada_funciones"]                   ="Funciones";
-$vocab["puestos_brigada_plazos_ejecución"]            ="Plazos de ejecución";
-$vocab["puestos_brigada_ejemplo1"]               ="Autoridades Universitarias";
-$vocab["puestos_brigada_ejemplo2"]               ="Comité emergencias";
+$vocab["puestos_brigada_title"]                  ="Puestos de la brigada";
+$vocab["puestos_brigada_puesto"]                 ="Puesto";
+$vocab["puestos_brigada_funciones"]              ="Funciones";
+$vocab["puestos_brigada_plazos_ejecución"]       ="Plazos de ejecución";
+$vocab["puestos_brigada_ejemplo1"]               ="Autoridades universitarias";
+$vocab["puestos_brigada_ejemplo2"]               ="Comité de emergencias";
 $vocab["puestos_brigada_ejemplo3"]               ="Brigada de primeros auxilios";
 $vocab["puestos_brigada_ejemplo4"]               ="Brigada de evacuación";
 $vocab["puestos_brigada_ejemplo5"]               ="Brigada de extinción";
 $vocab["puestos_brigada_ejemplo6"]               ="Brigada de vigilancia";
 $vocab["puestos_brigada_ejemplo7"]               ="Brigada de efectiva";
-$vocab["puestos_brigada_puestoNuevo"]               ="Puesto nuevo";
+$vocab["puestos_brigada_puestoNuevo"]            ="Puesto nuevo";
 
 //***********     plan de emergencia  capitulos y subcapitulos ***********************//
-$vocab["capitulos_subcapitulos_title"]                       ="Informacion extra capitulos y subcapitulos";
-$vocab["capitulos_subcapitulos_title_desc"]                       ="Informacion extra requedia en los capitulos y subcapitulos. El usuario debe escribir redaccion";
-$vocab["capitulos_subcapitulos_capitulo"]                    = "Capitulo";
-$vocab["capitulos_subcapitulos_subcapitulo"]                 = "Subcapitulo";
-$vocab["capitulos_subcapitulos_info_admin"]                  = "Informacion del admin:";
-$vocab["capitulos_subcapitulos_indicaciones"]                  = "Indicaciones:";
-$vocab["capitulos_subcapitulos_info_usuario"]                  = "Redaccion del usuario:";
-$vocab["capitulos_subcapitulos_formularios"]                  = "Formularios asociados:";
+$vocab["capitulos_subcapitulos_title"]                       ="Información extra capítulos y subcapítulos";
+$vocab["capitulos_subcapitulos_title_desc"]                  ="Información extra requerida en los capítulos y subcapítulos. Se requiere prosa del usuario";
+$vocab["capitulos_subcapitulos_capitulo"]                    = "Capítulo";
+$vocab["capitulos_subcapitulos_subcapitulo"]                 = "Subcapítulo";
+$vocab["capitulos_subcapitulos_info_admin"]                  = "Información del admin:";
+$vocab["capitulos_subcapitulos_indicaciones"]                = "Indicaciones:";
+$vocab["capitulos_subcapitulos_info_usuario"]                = "Prosa del usuario:";
+$vocab["capitulos_subcapitulos_formularios"]                 = "Formularios asociados:";
 
 
 //***********     Plan de emergencia aprobacion del documento ***********************//
 
-$vocab["aprobacion_title"]                  = "Aprobado del plan de emergencia";
-$vocab["aprobado_por"]                  = "Aprobado por";
-$vocab["aprobado_plan_desc"]             = "Persona encargar de aprobar el plan de emergencia";
-$vocab["codigo_plan"]                  = "Código del plan de emergencias";
-$vocab["codigo_plan_desc"]             = "Número de versión";
+$vocab["aprobacion_title"]          = "Aprobación del plan de emergencia";
+$vocab["aprobado_por"]              = "Aprobado por";
+$vocab["aprobado_plan_desc"]        = "Persona encargar de aprobar el plan de emergencia";
+$vocab["codigo_plan"]               = "Código del plan de emergencias";
+$vocab["codigo_plan_desc"]          = "Número de versión";
 //***********     plan de emergencia  historial***********************//
 $vocab["historial_titulo"]       ="Historial";
 $vocab["historial_titulo_desc"]  ="Planes de emergencia antiguos por centro de trabajo";
 $vocab["historial_sede"]         ="Sede";
 $vocab["historial_centro"]       ="Centro de trabajo";
-$vocab["historial_version"]       ="Versión";
+$vocab["historial_version"]      ="Versión";
 
 
 ?>

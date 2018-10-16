@@ -51,13 +51,13 @@ foreach ($res as $value) {
 <div style="text-align: center;" class=" well-sm">
     <div class="row" align="center">
         <div  style="align-items: center; width:60%">
-            <img  style="align-items: center; width:100%"  src="img/logocieuna.png" class="img-rounded" alt="Cinque Terre"> 
+            <img  style="align-items: center; width:25%"  src="img/logocieuna.png" class="img-rounded" alt="Cinque Terre"> 
         </div>
     </div>
     <br/>
-    <h1 style="text-align: center;"><?= $vocab["inicio_Bienvenido"] ?></h1>
-    <br/>
-    <h2 style="text-align: center;"><?= $vocab["inicio_Titulo"] ?></h2>
+    <h1 style="text-align: center;"><?= $vocab["inicio_Bienvenido"] ?></h1>        
+    <h3 style="text-align: center;"><?= $vocab["inicio_Titulo_Sistema"] ?></h3>
+    <h3 style="text-align: center;"><?= $vocab["inicio_Titulo"] ?></h3>
 
 </div>
 <br/>
@@ -66,15 +66,13 @@ foreach ($res as $value) {
 
 <div  style="text-align: center;" >
     <form method="post" action="">
-        <h2 style="text-align: center;"><?= $vocab["incio_labe"] ?></h2>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
-
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-            <div class="form-group">
+            <div class="form-group row">
                 <br/>
                 <?php if (check_permiso($mod5, $act1, $user_rol) || check_permiso($mod5, $act2, $user_rol)) { ?>
-                    <h3 style="text-align: center;"><?= $vocab["zona_trabajo_sede"] ?></h3>
-
+                    <h4 class="col-sm-3"><?= $vocab["zona_trabajo_sede"] ?></h4>
+                    <div class="col-sm-9">
                     <select id="selectIniciosede" class="form-control" onchange="javascript: cambiarCentroInicio();">
                         <?php
                         if (count($sede) > 0) {
@@ -87,24 +85,27 @@ foreach ($res as $value) {
                         }
                         ?>
                     </select>
+                    </div>
                 <?php } ?>
             </div>
             <?php if (check_permiso($mod5, $act1, $user_rol) || check_permiso($mod5, $act2, $user_rol)) { ?>
-                <div class="form-group">                
-                    <h3 style="text-align: center;"><?= $vocab["zona_trabajo_title"] ?></h3>
-                    <select id="selectInicio" class="form-control">
-                        <?php
-                        if (count($centros) > 0) {
-                            for ($i = 0; $i < count($centros); $i++) {
-                                if ($centros[$i]['idSede'] === $find_key) {
-                                    ?>
-                                    <option value='<?= $centros[$i]['id'] ?>' selected><?= $centros[$i]['nombreZonaTrabajo'] ?></option>
-                                    <?php
+                <div class="form-group row">                
+                    <h4 class="col-sm-3"><?= $vocab["zona_trabajo_title"] ?></h4>
+                    <div class="col-sm-9">
+                        <select id="selectInicio" class="form-control">
+                            <?php
+                            if (count($centros) > 0) {
+                                for ($i = 0; $i < count($centros); $i++) {
+                                    if ($centros[$i]['idSede'] === $find_key) {
+                                        ?>
+                                        <option value='<?= $centros[$i]['id'] ?>' selected><?= $centros[$i]['nombreZonaTrabajo'] ?></option>
+                                        <?php
+                                    }
                                 }
                             }
-                        }
-                        ?>
-                    </select>
+                            ?>
+                        </select>
+                    </div>
                 </div>
             <?php } ?>
             <br/>
