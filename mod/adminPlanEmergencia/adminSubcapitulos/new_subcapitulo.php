@@ -36,6 +36,11 @@ if ((isset($_GET['find_key']))) {
                     <option value='<?= $comb[$i]['id'] ?>' <?=($find_key==$comb[$i]['id'])? 'selected': '' ?> ><?= $comb[$i]['titulo'] ?></option>
                             <?php
                         }
+                    }else{?>
+                    <script>                    
+                    jAlert("No hay capitulos en el sistema, debe agregar uno", "Dato Requerido");
+                    </script>
+                    <?php
                     }
                     ?>
                 </select>

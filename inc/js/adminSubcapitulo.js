@@ -223,6 +223,13 @@ function validate_subcapitulo() {
         titulo.focus();
         return false;
     }
+      var capitulo = document.getElementById('subcapitulo_capitulo');
+    if (capitulo.value == "") {
+        jAlert("No hay capitulos en el sistema, debe agregar uno", "Dato Requerido");
+        capitulo.setAttribute("style", "background-color:#EDF0FF");
+        capitulo.focus();
+        return false;
+    }
     return true;
 }
 

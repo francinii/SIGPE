@@ -544,10 +544,11 @@ BEGIN
 	END;
             START TRANSACTION;
                     INSERT INTO `ZonaTrabajo`(FKidSede,version,nombreZonaTrabajo,isActivo, descripcion,logo,ubicacion) VALUES (p_FKidSede,1,p_nombre, p_activo,p_descripcion,p_logo,p_ubicacion);
+                    SELECT  MAX(id) into res from ZonaTrabajo ;
                                     
             COMMIT;
             -- SUCCESS
-SET res = 0;
+
 END
 ;;
 DELIMITER ;

@@ -7,8 +7,8 @@ function validate_aprobacion() {
     var aprobadoPor = document.getElementById('aprobadoPor');
     if (aprobadoPor.value == "") {
         jAlert("Ingrese el nombre de la persona encargada", "Dato Requerido");
-        nombre.setAttribute("style", "background-color:#EDF0FF");
-        nombre.focus();
+        aprobadoPor.setAttribute("style", "background-color:#EDF0FF");
+        aprobadoPor.focus();
         return false;
     }
     return true;
@@ -61,7 +61,7 @@ function visualizarPDF(id, centro) {
 function imprimirPDF(id, centro, version) {
     var loading = document.getElementById('loading_container');
     loading.innerHTML = cargando_bar;
-   // var random =  Math.floor(Math.random() * 1001); 
+    // var random =  Math.floor(Math.random() * 1001); 
     jQuery('#CargandoModal').modal('show');
     jQuery.ajax({
         data: {"idCentro": id, "nombreCentro": centro, "version": version},
@@ -69,22 +69,23 @@ function imprimirPDF(id, centro, version) {
         type: "GET",
 
         success: function (data) {
-            //someOtherFunc(data.leader);
-//            var response = data;
-//            
-//            jAlert("Generado corractamente");
-//            window.open('mod/versionesPDF/' + response, '_blank');
-        },
-        error: function (data) {
-//            alert("error "+data);
+            if (data == 'Generado') {
+                var nombreDoc = id + '-' + version + '.pdf';
+                
+                window.open('mod/versionesPDF/' + nombreDoc, '_blank');
+            }
 
         },
-        complete: function(data){
+        error: function (data,error,algomas) {
+            alert("error "+error);
+
+        },
+        complete: function (data) {
             //alert("completo"+data);
-//            jQuery('#CargandoModal').modal('hide');
-        ver(id,version,0);
+            jQuery('#CargandoModal').modal('hide');
+           // ver(id, version, 0);
         }
-        
+
     });
     loading.innerHTML = "";
 

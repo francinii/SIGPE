@@ -39,7 +39,7 @@ $id = $_GET['idCentro'];
 if (isset($_GET['version'])) {
     $version = $_GET['version'];
     $nombreDoc = $id . "-" . $version. '.pdf';
-    unlink($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/' . $nombreDoc);
+    //unlink($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/' . $nombreDoc);
 }
 if (isset($_GET['random'])) {
     $random = $_GET['random'];
@@ -208,7 +208,7 @@ function capitulos($pdf, $capitulos, $resPlan, $resTipoPoblacion, $formularios, 
             $pdf->Bookmark($cap['titulo'], 0, 0, '', 'B', array(0, 64, 128));
             $html = '<h2><b>' . $cap['titulo'] . '</b></h2>';
         } else {
-            $pdf->Bookmark($orden . ". " . $cap['titulo'], 0, 0, '', 'B', array(0, 64, 128));
+           $pdf->Bookmark($orden . ". " . $cap['titulo'], 0, 0, '', 'B', array(0, 64, 128));
             $html = '<h2><b>' . $orden . ". " . $cap['titulo'] . '</b></h2>';
         }
         // $pdf->Cell(0, 10, $cap['orden'] . ". " . $cap['titulo'], 0, 1, 'L');
@@ -876,6 +876,7 @@ function formularioMatriz($idPlanEmergencia, $vocab, $pdf) {
 
     $i = 0;
     $valores = array();
+    $html = "";
     $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
             . '<thead><tr style = "text-align:center;">'
             . '<th>' . $vocab['tipo_alerta_nombre'] . '</th>'
@@ -901,26 +902,12 @@ function formularioMatriz($idPlanEmergencia, $vocab, $pdf) {
 
     $valores[0] = (($valores[0] + $valores[1] + $valores[2] + $valores[3]) == 0) ? 1 : $valores[0];
     $valores = JSON_encode($valores);
-    //$html .= '<img src= "' .  $datosCabecera['logoUNA'] . '" width="60" height="60" />';
-    //mod/planEmergencia/grafico.php?criterios=[3,2,2,1]&colores=['NINGUNA','VERDE','AMARILLA','ROJA']
-    //mod/planEmergencia/grafico.php?criterios=[3,2,2,1]&colores=['NINGUNA','VERDE','AMARILLA','ROJA']&time=1538079371
-    //'<img alt="Aqui estoy!!" width="600px" height = "600px"   src="/grafico.php?criterios=' . $valores . '&colores=' . $color . '&time=' . time() . '"/>';
-    //  $html .= '<div height: 500px;></div>'; 
-    //include_path'../grafico.php?criterios=' . $valores . '&colores=' . $color . '&time=' . time() . '');
-    // ini_set('include_path', 'grafico.php?criterios=' . $valores . '&colores=' . $color . '&time=' . time() . '');
-    //echo'<script>location.href ="grafico.php?criterios=' . $valores . '&colores=' . $color . '&time=' . time() . '";</script>';
-    //include('../grafico.php?criterios=' . $valores . '&colores=' . $color . '&time=' . time() . '');
-    $nombreGrafico = crearGrafico($valores, $color);
-    // $pdf->writeHTML($html, true, false, true, false, '');
-    //  $pdf->Image('*/mod/planEmergencia/grafico.php?criterios=' . $valores . '&colores=' . $color . '&time=' . time() . '', '', '', 40, 40, '', '', 'T', false, 300, '', false, false, 1, false, false, false);
-    // $pdf->SetXY(10, 10);
-    // $pdf->SetXY(50, 80);
-    $html .= '<div style="text-align:center"><img alt="Gráfico de la matriz de riesgos" width="250px" height = "250px"   src="' . $nombreGrafico . '"/></div>';
-    //$pdf->Image('grafica1.png', '', '', 40, 40, '', '', 'T', false, 300, '', false, false, 1, false, false, false);
-    //  $pdf->Image('grafica1.png', '', '', 40, 40, '', '', 'T', false, 300, '', false, false, 1, false, false, false);
-    $pdf->writeHTML($html, true, false, false, false, '');
+  $nombreGrafico = crearGrafico($valores, $color);
+
+    $html .= '<div><p dir="ltr" style="text-align:center"><span style="font-family:Arial; font-size:11pt">&nbsp;<img alt="Gráfico de la matriz de riesgos" width="250px" height = "250px"   src="' . $nombreGrafico . '"/></span></p></div>';
+   $pdf->writeHTML($html, true, false, false, false, '');
     unlink($nombreGrafico);
-    //return '';
+
 }
 
 function calcularPorcentajeAmenaza($cantidadPorTipo, $cantidad) {
@@ -963,6 +950,12 @@ function formularioSeleccionada($id, $form, $resPlan, $resTipoPoblacion, $vocab,
                 $html .= formularioRecursosHumanos($idPlanEmergencia, $vocab);
 
                 $html .= '<div>' . $vocab["recurso_humano_titulo"] . '</div>';
+                $html .= formularioEquipoMovil($idPlanEmergencia, $vocab, "Terrestre");
+                
+                $html .= '<div>' . $vocab["recurso_humano_titulo"] . '</div>';
+                $html .= formularioEquipoMovil($idPlanEmergencia, $vocab, "Acuático");
+                
+                $html .= '<div>' . $vocab["recurso_humano_titulo"] . '</div>';
                 $html .= formularioEquipoMovil($idPlanEmergencia, $vocab, "Aereo");
 
                 $html .= '<div>' . $vocab["instalaciones_titulo"] . '</div>';
@@ -990,6 +983,7 @@ function formularioSeleccionada($id, $form, $resPlan, $resTipoPoblacion, $vocab,
                 $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "recursosEnergia");
                 break;
             case 6:
+                $html .= formularioPeligrosIdentificados($idPlanEmergencia, $vocab);                
                 break;
             case 7:
                 $html .= formularioPoblacion($idPlanEmergencia, $vocab);
@@ -1140,7 +1134,7 @@ function crearGrafico($criterios, $colores) {
 //Close and output PDF document
 
 //ob_clean();
-$nombreDoc="prueba";
+$return="Generado";
 if (check_permiso($mod4, $act6, $user_rol) && !isset($_GET['visualizarpdf'])) {
    $nombreDoc = $id . "-" . $version. '.pdf';
     
@@ -1155,7 +1149,7 @@ if (check_permiso($mod4, $act6, $user_rol) && !isset($_GET['visualizarpdf'])) {
  
 } 
 //ob_clean();
- echo  $nombreDoc;  
+ echo  $return;  
 //$pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/planEmergencias.pdf', 'F');
 //============================================================+
 // END OF FILE

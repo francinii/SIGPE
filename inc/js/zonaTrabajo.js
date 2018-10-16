@@ -16,6 +16,13 @@ function validate_zona_trabajo() {
         nombre.focus();
         return false;
     }
+     var sede = document.getElementById('select_sede');
+    if (sede.value == "") {
+        jAlert("No hay sedes en el sistema, debe agregar una", "Dato Requerido");
+        sede.setAttribute("style", "background-color:#EDF0FF");
+        sede.focus();
+        return false;
+    }
     return true;
 }
 
@@ -135,6 +142,8 @@ function delete_zona_trabajo_action(id) {
                 jAlert('El centro se a eliminado correctamente!', 'Exito');
             } else if (response == 1 || response == 2) {
                 jAlert('Ha ocurrido un error en la Base de Datos Intentelo Nuevamente\n Si el problema continua comuniquese con la USTDS', 'Error');
+           } else if (response == 3) {
+                jAlert('El centro de trabajo tiene Usuarios o Datos asociados', 'No se puede eliminar');
             } else {
                 jAlert('Ha ocurrido un error inesperado intentelo más tarde!', 'Error');
             }
