@@ -1,4 +1,12 @@
-
+/**
+ * agrega una sector a la tabla
+ *  llamado en  pla_emergencia_poblacion.php
+ * @param {String} titulo el boton de eliminar
+ * @param {String} alert mensage de alerta
+ * @param {String} agregar titulo del boton de agregar
+ * @param {String} descripcion del sector incial
+ * @returns {undefined}
+ */
 function agregarFilaSector(titulo, alert, agregar,descripcion) {
     var tabla = jQuery("#lista_poblacion tbody");
     var id = tabla.children().last().attr('id');
@@ -27,6 +35,15 @@ function agregarFilaSector(titulo, alert, agregar,descripcion) {
     IniciarGuardarCambios(alert);
     jQuery("#Sector" + id).focus();
 }
+
+/**
+ * agrega una fila  a un secto
+ *  llamado en  pla_emergencia_poblacion.php
+ * @param {String} titulo el boton de eliminar
+ * @param {String} alert mensage de alerta
+ * @param {int} Idselec id del selector 
+ * @returns {undefined}
+ */
 function agregarFilaPoblacion(titulo, alert, Idselec) {
     var Sector = jQuery("#" + Idselec);
     var tabla = jQuery("#lista_poblacion tbody");
