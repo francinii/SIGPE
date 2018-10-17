@@ -1,3 +1,10 @@
+/**
+ * guarda los datos de identificaicon de peligros del plan de emergencia , conecta con el servidor
+ * llamado en  plan_emergencia_identificacion_peligros.php  
+ * @param {int} idPlanEmergencia del plan de emergancia
+ * @param {int} pasar al sigueinte formulario(1,0)   
+ * @returns {undefined} 
+ */
 function guardarDatosIdentificacionPeligros(idPlanEmergencia, pasar) {
     var loading = document.getElementById('loading_container');
     loading.innerHTML = cargando_bar;
@@ -79,6 +86,13 @@ function guardarDatosIdentificacionPeligros(idPlanEmergencia, pasar) {
     loading.innerHTML = "";
 }
 
+
+/**
+ * agrega un nuevo campo en la tabla
+ * llamado en  plan_emergencia_identificacion_peligros.php  
+ * @param {String} titulo mensaje para el boton de eliminar    
+ * @returns {undefined} 
+ */
 function agregarFilaIdentificacionPeligro(titulo) {
     var tabla = jQuery("#lista_identificacion_peligros tbody");
     ;
@@ -116,6 +130,14 @@ function agregarFilaIdentificacionPeligro(titulo) {
 //        
 }
 
+
+/**
+ * elimina filas  de tipos de peligro 
+ * llamado en  plan_emergencia_identificacion_peligros.php  
+ * @param {elemento HTML} event en el que se dio la accion  
+ * @param {int} idPlan id del plan de emergencia 
+ * @returns {undefined} 
+ */
 
 function eliminarFilaPeligros(event, idPlan) {
     var loading = document.getElementById('loading_container');
@@ -157,7 +179,13 @@ function eliminarFilaPeligros(event, idPlan) {
     loading.innerHTML = "";
 
 }
-
+/**
+ * coloca el color dependiendo de la prioridad 
+ * llamado en  plan_emergencia_identificacion_peligros.php  
+ * @param {int} prioridad del campo  
+ * @param {String} priorizacion id del td que resive la accion 
+ * @returns {undefined} 
+ */
 function calcularPriorizacion2(prioridad, priorizacion) {
     var prorizaciontd = document.getElementById(priorizacion);
     if (prioridad != null) {
@@ -176,13 +204,23 @@ function calcularPriorizacion2(prioridad, priorizacion) {
     }
 }
 
-
-
-
+/**
+ * coloca el color dependiendo de la prioridad 
+ * llamado en  plan_emergencia_identificacion_peligros.php  
+ * @param {Elemento html} event que resive la accion
+ * @param {String} priorizacion id del td que resive la accion 
+ * @returns {undefined} 
+ */
 function cambiarCalcularPriorizacion2(event, priorizacion) {
     var prioridad = event.value; //selector
     calcularPriorizacion2(prioridad, priorizacion);
 }
+
+/**
+ * desabilita los campos de los peligros que no estan presentes
+ * llamado en  plan_emergencia_identificacion_peligros.php  
+ * @returns {undefined} 
+ */
 
 function calcularSiPresente() {
     var celda = "";
@@ -208,6 +246,12 @@ function calcularSiPresente() {
 
 }
 
+/**
+ * deshabilita/habilita  los campos de los peligros que no estan presentes
+ * llamado en  plan_emergencia_identificacion_peligros.php  
+ * @param {Elemento html} event que resive la accion
+ * @returns {undefined} 
+ */
 function cambioCalcularSiPresente(event) {
     var tr = "";
     var td = "";

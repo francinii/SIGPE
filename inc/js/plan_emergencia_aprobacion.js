@@ -1,6 +1,7 @@
 /**
- *  Valida la información de la zona de la amenaza
- * @returns {boolean}
+ * valida de infromacion de aprovacion del plan de emergancia
+ *  llamado en  plan_emergencia_aprobacion.php
+ * @returns {Boolean} 
  */
 function validate_aprobacion() {
 
@@ -13,7 +14,14 @@ function validate_aprobacion() {
     }
     return true;
 }
-
+/**
+ * actualiza los datos de aprobacion del plan de emergancia, conecta con el servidor
+ *  llamado en  plan_emergencia_aprobacion.php
+ * @param {int} id del plan de emergencia
+ * @param {String} centro nombre del centro de trabajo
+ * @param {int} version del plan de emergencia
+ * @returns {undefined} llama al metodo imprimirPDF()
+ */
 function update_aprobacion(id, centro, version) {
     if (validate_aprobacion()) {
         var loading = document.getElementById('loading_container');
@@ -54,10 +62,27 @@ function update_aprobacion(id, centro, version) {
     }
 }
 
+/**
+ * llama al metodo para visualizar un pdf tempral del incio.js
+ *  llamado en  plan_emergencia_aprobacion.php
+ * @param {int} id del plan de emergencia
+ * @param {String} centro nombre del centro de trabajo
+ * @param {int} version del plan de emergencia
+ * @returns {undefined} llama al metodo imprimirPDF()
+ */
+
 function visualizarPDF(id, centro) {
     imprimirPlanVistazo(centro, id);
 }
 
+/**
+ * metodo para generar un pdf definitivo
+ * llamado en  plan_emergencia_aprobacion.php
+ * @param {int} id del plan de emergencia
+ * @param {String} centro nombre del centro de trabajo
+ * @param {int} version del plan de emergencia
+ * @returns {undefined} abre un pdf
+ */
 function imprimirPDF(id, centro, version) {
     var loading = document.getElementById('loading_container');
     loading.innerHTML = cargando_bar;
@@ -71,19 +96,19 @@ function imprimirPDF(id, centro, version) {
         success: function (data) {
             if (data == 'Generado') {
                 var nombreDoc = id + '-' + version + '.pdf';
-                
+
                 window.open('mod/versionesPDF/' + nombreDoc, '_blank');
             }
 
         },
-        error: function (data,error,algomas) {
-            alert("error "+error);
+        error: function (data, error, algomas) {
+            alert("error " + error);
 
         },
         complete: function (data) {
             //alert("completo"+data);
             jQuery('#CargandoModal').modal('hide');
-           // ver(id, version, 0);
+            // ver(id, version, 0);
         }
 
     });

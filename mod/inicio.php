@@ -1,6 +1,6 @@
 <?php
 /**
- * Lista los roles del sistema, no utilizar este tipo de tablas para los modulos
+ * Menu principal del sistema 
  */
 include("login/check.php");
 include("../functions.php");
@@ -14,7 +14,7 @@ $ip .= $mySessionController->getVar("cds_locate");
 
 
 
-/* * ********************************************************************************************** */
+/* * ****************************** select de sedes y centros ************************************ */
 if (check_permiso($mod4, $act2, $user_rol)) {
     $sql = "select sede.id as idSede, sede.nombreSede, ZonaTrabajo.id as idZona, ZonaTrabajo.nombreZonaTrabajo from ZonaTrabajo ,(SELECT `id`,`nombreSede`  FROM `Sede` WHERE `isActivo`=1) sede where  ZonaTrabajo.FKidSede = sede.id  and isActivo=1 order by idSede";
 } else {
@@ -141,7 +141,7 @@ foreach ($res as $value) {
 
 
 
-<!-- Modal -->
+<!--/* * ****************************** Modal cargando para el pdf ************************************ */-->
 <div class="modal fade" id="CargandoModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">

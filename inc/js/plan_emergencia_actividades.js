@@ -1,5 +1,11 @@
-
-
+/**
+ * actualiza los datos de poblacion de actividades  del plan de emergencia , conecta con el servidor
+ * llamado en  plan_emergencia_actividades.php  
+ * @param {int} idPlanEmergencia del plan de emergancia
+ * @param {int} pasar al sigueinte formulario(1,0)
+ * @param {int} count cantidad de filas   
+ * @returns {undefined} 
+ */
 function guardarDatosActividades(idPlanEmergencia, pasar,count) {
     var loading = document.getElementById('loading_container');
     loading.innerHTML = cargando_bar;

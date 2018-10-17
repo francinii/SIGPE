@@ -1,3 +1,10 @@
+/**
+ * guarda los datos de las instalaciones  del plan de emergencia , conecta con el servidor
+ * llamado en  plan_emergencia_instalaciones.php  
+ * @param {int} idCentro id del plan de emergancia
+ * @param {int} pasar al sigueinte formulario(1,0)
+ * @returns {undefined} 
+ */
 function guardarDatosInstalaciones(idCentro, pasar) {
     var loading = document.getElementById('loading_container');
     loading.innerHTML = cargando_bar;

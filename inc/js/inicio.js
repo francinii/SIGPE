@@ -1,3 +1,9 @@
+/**
+ * Opciones del inicio para los botones
+ *  llamado en  inicio.php
+ * @param {int} opc opcion del Inicio selecionada
+ * @returns {undefined} redirrige la pagina dependiendo de la opcion
+ */
 function OpcionInicio(opc) {
     var selecion = jQuery("#selectInicio").val();
     var centro = jQuery('#selectInicio option:selected').text();
@@ -16,6 +22,11 @@ function OpcionInicio(opc) {
     }
 }
 
+/**
+ * COnfirma el inicio de una nueva version
+ *  llamado en  inicio.php
+ * @returns {undefined}
+ */
 function nuevaVersionPlan(){
     jConfirm("Al crear una nueva versión, la anterior queda obsoleta, ¿Desea continuar?", "Nueva versión", function (r) {
         if (r) {
@@ -23,6 +34,11 @@ function nuevaVersionPlan(){
         } 
     });    
 }
+/**
+ *  inicia una nueva version, conecta con el servidor
+ *  llamado en  inicio.php
+ * @returns {undefined}
+ */
 function nuevaVersionPlan_accion(){
      var loading = document.getElementById('loading_container');
     loading.innerHTML = cargando_bar;
@@ -56,11 +72,23 @@ function nuevaVersionPlan_accion(){
     loading.innerHTML = "";    
 }
 
+/**
+ *  cambia el centro en base a la sede
+ *  llamado en  inicio.php
+ * @returns {undefined}
+ */
 function cambiarCentroInicio() {
     var find_key = jQuery("#selectIniciosede").val();
     OpcionMenu('mod/inicio.php?', 'find_key=' + find_key)
 }
 
+/**
+ *  imprime el pdf temporal o para simplemente para visualizar una vez , conecta con servidor
+ *  llamado en  inicio.php y plan_emergencia_aprobacion.php
+ *  @param {String} centro nombre del centro seleccionado
+ *  @param {int} id del centro seleccionado
+ * @returns {undefined} abre un pdf
+ */
 function imprimirPlanVistazo(centro,id){
      var loading = document.getElementById('loading_container');
     loading.innerHTML = cargando_bar;
@@ -93,6 +121,13 @@ function imprimirPlanVistazo(centro,id){
     });
     loading.innerHTML = "";   
 }
+
+/**
+ *  Elimina el pdf temporar , conecta con el servidor
+ *  llamado en  inicio.php y plan_emergencia_aprobacion.php
+ *  @param {String} ruta  del pdf a eliminar
+ * @returns {undefined} abre un pdf
+ */
 function EliminarPlanVistazo(ruta){
      var loading = document.getElementById('loading_container');
     loading.innerHTML = cargando_bar;

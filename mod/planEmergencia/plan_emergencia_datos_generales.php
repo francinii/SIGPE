@@ -1,15 +1,18 @@
 <?php
+/*
+ * Datos generales del plan de emergencia 
+ * */
+
 include("../login/check.php");
 include("../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
-
+/************************* select  datos del plan de emergencia ****************** */
 include("plan_emergencia_menu.php");
 $sql = "SELECT `actividad`,`direccion`,`personaContactoGeneral`,`numeroTelefono`,`numeroFax`,`correo`,`categoriaNFPA`,"
         . "`usoInstalaciones`,`horarioJornada`,`seguridadInstitucional`,`servicioConsegeria`,`personalAdministrativo`,"
-        . "`personalAcademico`, `presenciaEstudiantil` from ZonaTrabajo WHERE `id`=".$idCentro;
+        . "`personalAcademico`, `presenciaEstudiantil` from ZonaTrabajo WHERE `id`=" . $idCentro;
 $res = seleccion($sql);
-
 ?>
 
 <div class="container">
@@ -22,7 +25,7 @@ $res = seleccion($sql);
             <div class="form-group row">
                 <label for="institucion" class="col-sm-3 col-form-label"><?= $vocab["datos_generares_nombre"] ?></label>
                 <div class="col-sm-9">
-                    <input type="text"  class="form-control cambios" id="institucion" disabled value="<?=$nombreCentro ?>">                                 
+                    <input type="text"  class="form-control cambios" id="institucion" disabled value="<?= $nombreCentro ?>">                                 
                 </div>
             </div>
             <div class="form-group row">
@@ -110,16 +113,16 @@ $res = seleccion($sql);
                 </div>
             </div>
 
-
+        <!--************************ guarda los datos *****************-->
             <?php if ($editar) { ?>
-             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <a class="btn  btn-warning  btn-group-justified"  onclick="javascript:guardarDatosGenerales('<?=$idPlanEmergencia?>',0)" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"]?> <?= $vocab["datos_generares_Titulo"]?></a>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <a class="btn  btn-success btn-group-justified"  onclick="javascript:guardarDatosGenerales('<?=$idPlanEmergencia?>',1)" name="submit"><i class="fa fa-rotate-right"></i> <?= $vocab["symbol_save"] . " " . $vocab["datos_generares_siguente"] ?></a>
-                    </div>
-            
-         
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <a class="btn  btn-warning  btn-group-justified"  onclick="javascript:guardarDatosGenerales('<?= $idPlanEmergencia ?>', 0)" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_Titulo"] ?></a>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <a class="btn  btn-success btn-group-justified"  onclick="javascript:guardarDatosGenerales('<?= $idPlanEmergencia ?>', 1)" name="submit"><i class="fa fa-rotate-right"></i> <?= $vocab["symbol_save"] . " " . $vocab["datos_generares_siguente"] ?></a>
+                </div>
+
+
             <?php } ?>
 
         </form>
