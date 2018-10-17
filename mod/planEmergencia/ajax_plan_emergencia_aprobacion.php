@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * guarda los datos de aprrobacion del plan en la base
+ */
 include("../login/check.php");
 include("../../inc/db/db.php");
 

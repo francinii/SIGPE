@@ -1,3 +1,11 @@
+/**
+ * agrega una nueva fila a la tabla de equipo
+ * llamado en  plan_emergencia_inventario.php  
+ * @param {String} titulo mensaje de alerta
+ * @param {Array} combo de opciones para el sellect de la fila
+ * @param {String} alert cantidad de filas   
+ * @returns {undefined} 
+ */
 function agregarFilaEquipo(titulo, combo,alert) {
     var tabla = jQuery("#lista_equipos tbody");
     var id = tabla.children().last().attr('id')

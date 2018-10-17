@@ -1,4 +1,8 @@
 <?php
+/*
+ * Matriz de Riesgo administrable
+ * 
+ */
 include("../login/check.php");
 include("../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
@@ -13,19 +17,37 @@ $page_cant = $mySessionController->getVar("page_cant");
 
 include("plan_emergencia_menu.php");
 
+/**
+ * seleciona los origenes de las amenazas
+ * @returns {array} 
+ */
 function consultaOrigenes() {
     return "SELECT id, descripcion, isActivo FROM OrigenAmenaza where isActivo = 1";
 }
 
+
+/*
+ * selecciona los tipos de amenaza
+ * @param {int} $idOrigen id del origen de la amenaza
+ * @returns {array} 
+ */
 function consultaTipos($idOrigen) {
     return "SELECT id, descripcion, FkidOrigen, isActivo FROM TipoAmenaza where FkidOrigen=$idOrigen and isActivo = 1";
 }
-
+/*
+ * selecciona los categorias de amenaza por tipo
+ * @param {int} $idTipo id del tipo de la amenaza
+ * @returns {array} 
+ */
 function consultaCategoriasPorTipo($idTipo) {
     return "SELECT  id, descripcion, FKidTipoAmenaza,isActivo FROM CategoriaTipoAmenaza where FKidTipoAmenaza=$idTipo and isActivo = 1";
 }
 
-//Pasar esto a una vista
+/*
+ * selecciona los categorias de amenaza por origen
+ * @param {int} $idOrigen id del origen de la amenaza
+ * @returns {array} 
+ */
 function consultaCategoriasPorOrigen($idOrigen) {
     return "SELECT  categoria.id as idCategoria FROM
 (SELECT  id, FkidOrigen FROM TipoAmenaza where isActivo = 1 ) tipo,
@@ -34,8 +56,13 @@ function consultaCategoriasPorOrigen($idOrigen) {
 where tipo.FkidOrigen = origen.id and tipo.id = categoria.FKidTipoAmenaza and tipo.FkidOrigen = $idOrigen;";
 }
 
-// Funcion que genera un selector de valor para la matriz
-// cod corresponde al valor de  probabilidad (0) o consecuecia/gravedad (1)
+/*
+ * Funcion que genera un selector de valor para la matriz
+ * @param {int} $cod corresponde al valor de  probabilidad (0) o consecuecia/gravedad (1)
+ * @param {int} $opcion  selecionada
+ * @param {int} $editar  estado en que esta la pagina 
+ * @returns {String} HTML
+ */
 function selectorMatriz($cod, $opcion, $editar) {
     $valor = '<select    ' . (($editar) ? '' : 'disabled') . ' class="form-control cambios" onchange = "javascript:cambiarCriterio(this,' . $cod . ')">';
     $valor .= '  <option ' . (($opcion == 1) ? 'selected' : '') . '> 1</option>';
@@ -47,6 +74,7 @@ function selectorMatriz($cod, $opcion, $editar) {
     $valor .= ' </select>';
     return $valor;
 }
+
 
 function buscarRegistro($matriz, $categoria) {
     for ($i = 0; $i < count($matriz); $i++) {

@@ -5,7 +5,7 @@ $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
 include("plan_emergencia_menu.php");
 ?>
-<!------------------------------------  Recurso Humano ----------------------------------- ------------------- ----------->
+<!------------------------------------ seleciona los datos  ----------------------------------- ------------------- ----------->
 <?php
 $sql = "SELECT  `nombreOficina`, `capacidadPermanente`, `capacidadTemporal`, `representanteComite`,"
         . " `representanteBrigadaEfectiva`,`representantePrimerosAuxilios`,`telefonoOficina`,`contactoEmergencia`,`telefonoPersonal`,`correoElectronico`"

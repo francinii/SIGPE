@@ -1,5 +1,10 @@
-
-
+/**
+ * actualiza los datos generales del plan de emergencia , conecta con el servidor
+ * llamado en  plan_emergencia_datos_generales.php  
+ * @param {int} idCentro del plan de emergancia
+ * @param {int} pasar al sigueinte formulario(1,0)   
+ * @returns {undefined} 
+ */
 function guardarDatosGenerales(idCentro, pasar) {
     var loading = document.getElementById('loading_container');
     loading.innerHTML = cargando_bar;

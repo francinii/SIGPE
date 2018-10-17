@@ -1,10 +1,16 @@
 <?php
+/*
+ * Formulario identificacion de peligro
+ */
 include("../login/check.php");
 include("../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
 include("plan_emergencia_menu.php");
 
+/*
+ * select identificacion de peligros
+ */
 $sql = "SELECT  `id`, `peligro`, `presente`,`ubicacion`,`recomendacion`, `fecha`, `responsable`, `priorizacion` FROM `IdentificacionPeligro`  WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
 $res = seleccion($sql);
 

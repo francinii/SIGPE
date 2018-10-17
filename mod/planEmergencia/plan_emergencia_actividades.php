@@ -1,4 +1,7 @@
 <?php
+/**
+tipo de poblacion de las actividades 
+ */
 include("../login/check.php");
 include("../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
@@ -6,7 +9,7 @@ $user_rol = $mySessionController->getVar("rol");
 
 include("plan_emergencia_menu.php");
 
-
+/************************* select datos tipo de poblacion de actividades ****************** */
     $sql = "SELECT  `tipoPoblacion`, `descripcion`, `total`, `representacionDe` FROM 
     `TipoPoblacion` WHERE  `FKidZonaTrabajo`=" . $idPlanEmergencia;
     $res = seleccion($sql);
@@ -53,6 +56,7 @@ if (count($res) <= 0) {
         </tbody>
     </table> 
 </div>
+ <!--************************ guarda los datos ******************-->
     <div class="text-center">
         <?php if ($editar) { ?>
             <span class="text-center">

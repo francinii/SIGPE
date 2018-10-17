@@ -1,4 +1,7 @@
 <?php
+/**
+ * pagina de aprovacion de plan de emergencia
+ */
 include("../login/check.php");
 include("../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
