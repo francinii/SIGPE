@@ -91,8 +91,8 @@ function agregarFilaIdentificacionPeligro(titulo) {
     var id = (parseInt(cadena) + 1);
     var fila = '<tr class = "trInformacion" id="tr' + id + '">' +
             '<input type ="hidden" id ="idPeligro' + id + '" value ="-1">' +
-            '<td><textarea class="form-control requerido cambios" id="peligro' + id + '" ></textarea></td>' +
-            '<td> <select id= "presente' + id + '"  >' +
+            '<td><textarea class="form-control habilitar requerido cambios" id="peligro' + id + '" ></textarea></td>' +
+            '<td> <select id= "presente' + id + '" class = "form-control" onchange="cambioCalcularSiPresente(this)"   >' +
             '<option> SI</option>' +
             '<option> NO</option>' +
             '</select> ' +
@@ -100,7 +100,7 @@ function agregarFilaIdentificacionPeligro(titulo) {
             '<td> <input type="text" class="form-control requerido cambios" id="recomendacion' + id + '"  ></td>' +
             '<td> <input type="date" class="form-control requerido cambios" id = "fecha' + id + '" value ="1900-01-01"></td>' +
             '<td> <input type="text" class="form-control requerido cambios" id = "responsable' + id + '" ></td>' +
-            '<td> <select id= "priorizacion' + id + '"  >' +
+            '<td id ="priorizaciontd' + id + '"> <select class="form-control cambios" id= "priorizacion' + id + '"   onchange="cambiarCalcularPriorizacion2(this,\'priorizaciontd'+id+'\')" >' +
             '<option> 1</option>' +
             '<option> 2</option>' +
             '<option> 3</option>' +

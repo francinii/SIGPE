@@ -72,7 +72,7 @@ if (count($res) <= 0) {
                     <?= (is_array($res[$i])) ? $res[$i]['peligro'] : $res[$i]; ?>
                 <?php } else { ?>
                 <td>
-                    <textarea  <?= (!$editar) ? "readonly" : ""; ?> class="form-control requerido  cambios" id = "peligro<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['peligro'] : $res[$i]; ?></textarea>
+                    <textarea  <?= (!$editar) ? "readonly" : ""; ?> class="form-control habilitar requerido  cambios" id = "peligro<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['peligro'] : $res[$i]; ?></textarea>
                 <?php } ?>
                 </td>
                 <td>    
