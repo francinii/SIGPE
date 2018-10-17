@@ -1,6 +1,6 @@
 <?php
 /**
- * Lista los roles del sistema, no utilizar este tipo de tablas para los modulos
+ * Lista de las categorias de amenazas
  */
 include("../../../login/check.php");
 include("../../../../functions.php");
@@ -13,25 +13,6 @@ $ip = $mySessionController->getVar("cds_domain");
 $ip .= $mySessionController->getVar("cds_locate");
 
 $page_cant = $mySessionController->getVar("page_cant");
-
-//
-//$sql = "SELECT COUNT(id) AS cant FROM CategoriaTipoAmenaza";
-//
-//$find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
-//if ($find_key != "") {
-//    $sql .= " WHERE descripcion LIKE  '%" . $find_key . "%'";
-//}
-//$sql .= ";";
-//$res_cant = seleccion($sql);
-//
-//$cant_pagi = ceil((int) $res_cant[0]['cant'] / (int) $page_cant);
-//$page = (isset($_GET["page"])) ? $_GET["page"] : "1";
-//if (!$page) {
-//    $start = 0;
-//    $page = 1;
-//} else {
-//    $start = (isset($_GET["start"])) ? $_GET["start"] : "0";
-//}
 
 
 /* * ********************************************************************************************** */
@@ -51,19 +32,11 @@ if ((isset($_GET['find_key']))) {
 if ($find_key != "") {
     $sql .= "  WHERE FKidTipoAmenaza =" . $find_key . "";
 }
-//$order_key = (isset($_GET['order_key'])) ? $_GET['order_key'] : '';
-//if ($order_key != "") {
-//    $sql .= " ORDER BY " . $order_key;
-//} else {
-//    $sql .= " ORDER BY id";
-//}
-//$sql .= " limit " . (int) $start . "," . (int) $page_cant . ";";
-$res = seleccion($sql);
+$res=seleccion($sql);
 ?>
 <!--  ****** Titulo ***** -->
 <div class="well well-sm"><h1><?= $vocab["list_categoria_amenaza_title"] ?></h1></div>
-<!-- div original anterior a integración bootstrap3 
-<div style=" width: 800px; margin: 0 auto;"  class="ex_highlight_row"> -->
+
 <div class="row">
     <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -94,6 +67,7 @@ $res = seleccion($sql);
     </div>
 </div>
 <div class="dataTables_wrapper form-inline dt-bootstrap">
+<!--/* * *****************tabla categorias de amenaza*********************************** */-->    
     <table id="lista_usuarios" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable" >
         <thead>
             <tr>
@@ -148,7 +122,7 @@ $res = seleccion($sql);
                             </td>
                         <?php } ?>
                         <?php if (check_permiso($mod4, $act5, $user_rol)) { ?>
-                            <td><a class="puntero" onClick="javascript:delete_categoria_amenaza(<?= $res[$i]['id'] ?>);"><div class="text-center"><i class="fa fa-close text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></a></td>
+                            <td><a class="puntero" onClick="javascript:delete_categoria_amenaza(<?= $res[$i]['id'] ?>,'<?= $res[$i]['descripcion'] ?>');"><div class="text-center"><i class="fa fa-close text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></a></td>
                         <?php } ?>
                     </tr>  
                 <?php } ?>                 
@@ -179,6 +153,7 @@ $res = seleccion($sql);
     </table>
     <?php /*     * ***************************************************************************************** */ ?>
     <br/>
+    <!--/*     * ****************************Agregar nueva categoria************************************* */-->
     <?php if (check_permiso($mod4, $act3, $user_rol)) { ?>
         <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/new_categoria_amenaza.php?', 'find_key=<?= $find_key ?>');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["categoria_amenaza_title"] ?></a></div>
     <?php } ?>

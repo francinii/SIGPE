@@ -1,12 +1,20 @@
-/// list_subcapitulo
+/**
+ * cambia los subcapitulos en base al capitulo
+ *  llamado en  list_subcapitulos.php
+ * @returns {undefined}  recarga la pagina  list_subcapitulos.php
+ */
 function cambiarSubcapitulos() {
     var find_key = jQuery("#select_subcapitulos").val();
     OpcionMenu('mod/adminPlanEmergencia/adminSubcapitulos/list_subcapitulos.php?', 'find_key=' + find_key)
 }
 
-var rowPreSubCapitulo = null;
+/**
+ * agrega la funcion de ordenar subcapitulos, accion de las flechas
+ *  llamado en  list_subcapitulos.php     
+ * @returns {undefined} 
+ */
 function flechasSubCapitulos() {
-
+var rowPreSubCapitulo = null;
     jQuery(".up,.down").click(function () {
         var row = jQuery(this).parents("tr:first");
         if (rowPreSubCapitulo != null) {
@@ -34,6 +42,11 @@ function flechasSubCapitulos() {
     });
 
 }
+/**
+ * conforma el orden de los subcapitulos
+ *  llamado en  list_subcapitulos.php
+ * @returns {undefined} llama al metodo guardarOrdenSubcapitulo() o cancela
+ */
 function ordenarSubCapitulos() {
     jConfirm("Desea reordenar los subcapitulos ", "Ordenar", function (r) {
         if (r) {
@@ -51,7 +64,12 @@ function ordenarSubCapitulos() {
     });
 
 }
-
+/**
+ * actualiza el orden de los subcapitulos , conecta con el servidor
+ *  llamado en  list_subcapitulos.php
+ * @param {Array} lista en orden de los subcapitulos
+ * @returns {undefined} recarga la pagina a list_subcapitulos.php
+ */
 function guardarOrdenSubcapitulo(lista) {
     var loading = document.getElementById('loading_container');
     loading.innerHTML = cargando_bar;
@@ -86,7 +104,15 @@ function guardarOrdenSubcapitulo(lista) {
     loading.innerHTML = "";
 
 }
-
+/**
+ * confirma la activacion o desactivacion de un subcapitulo
+ *  llamado en  list_subcapitulos.php
+ * @param {id} id del subcapitulo
+ *  @param {id} isActivo estado del subcapitulo (1,0)
+ *  @param {String} titulo del subcapitulo
+ *  @param {int} select del  capitulo
+ * @returns {undefined} llama al metodo active_subcapitulo_action() o cancela
+ */
 
 function active_subcapitulo(id, isActivo, titulo, select) {
     var estado;
@@ -105,6 +131,15 @@ function active_subcapitulo(id, isActivo, titulo, select) {
 
 }
 
+
+/**
+ *  la activacion o desactivacion de un subcapitulo,conecta con el servidor
+ *  llamado en  list_subcapitulos.php
+ * @param {id} id del subcapitulo
+ *  @param {id} isActivo estado del subcapitulo (1,0)
+ *  @param {int} select del  capitulo
+ * @returns {undefined} recarga la pagina a list_subcapitulos.php
+ */
 function active_subcapitulo_action(id, isActivo, select) {
     var page = document.getElementById('container');
     page.innerHTML = cargando;
@@ -138,16 +173,29 @@ function active_subcapitulo_action(id, isActivo, select) {
 
 
 /**
- *
- * @param {type} id_origen_amenaza
- * @returns {undefined}
- */function delete_subcapitulo(id, titulo, select) {
+ *  confirma la eliminacion de un subcapitulo
+ *  llamado en  list_capitulos.php
+ * @param {id} id del subcapitulo
+ * @param {String} titulo  del capitulo 
+ * @param {int} select del  capitulo
+ * @returns {undefined} llama al metodo delete_subcapitulo_action() o cancela
+ */
+function delete_subcapitulo(id, titulo, select) {
     jConfirm("Desea eliminar el subcapitulo:" + titulo, "Eliminar subcapitulo", function (r) {
         if (r) {
             delete_subcapitulo_action(id, select);
         }
     });
 }
+
+/**
+ *  eliminacion de un subcapitulo,conecta con el servidor
+ *  llamado en  list_subcapitulos.php
+ * @param {id} id del subcapitulo
+ *   * @param {int} select del  capitulo
+ * @returns {undefined} recarga la pagina a list_subcapitulos.php
+ */
+
 
 function delete_subcapitulo_action(id, select) {
     var page = document.getElementById('container');
@@ -182,7 +230,12 @@ function delete_subcapitulo_action(id, select) {
     ajax.send(null);
 }
 
-// crear subcapitulo
+/**
+ *  agregar el editor CKEDITOR a un texarea
+ *  llamado en  new_subcapitulos.php y en edit_subcapitulos.php
+ * @param {Boolean} modo en qe esta la pagina (edicion o no)
+ * @returns {undefined} 
+ */
 function CrearEditorSubcapitulos(modo) {
     if(modo){
     editor = CKEDITOR.replace('Subcapitulo_Descripcion', {
@@ -214,7 +267,11 @@ function CrearEditorSubcapitulos(modo) {
         icon: 'samples/img/casaIcono.PNG'
     });
 }
-
+/**
+ *  valida la infromacion de los subcapitulos
+ *  llamado en  new_subcapitulos.php y en edit_subcapitulos.php
+ * @returns {Boolean} 
+ */
 function validate_subcapitulo() {
     var titulo = document.getElementById('subcapitulo_title');
     if (titulo.value == "") {
@@ -232,7 +289,11 @@ function validate_subcapitulo() {
     }
     return true;
 }
-
+/**
+ *  agrega un nuevo subcapitulo al sistema, conecta con el servidor
+ *  llamado en  new_subcapitulos.php 
+ * @returns {undefined}  redirecciona a list_subcapitulos.php
+ */
 function new_subcapitulo() {
     if (validate_subcapitulo()) {
         var loading = document.getElementById('loading_container');
@@ -288,8 +349,12 @@ function new_subcapitulo() {
     }
 }
 
-
-//**** actualizar subcapitulo****
+/**
+ *  actualiza un subcapitulo del sistema, conecta con el servidor
+ *  llamado en  edit_subcapitulos.php
+ *  @param {int} id del subcapitulo ha actualizar 
+ * @returns {undefined}  redirecciona a list_subcapitulos.php
+ */
 function update_subcapitulo(id) {
     if (validate_subcapitulo()) {
         var loading = document.getElementById('loading_container');
@@ -347,7 +412,14 @@ function update_subcapitulo(id) {
     }
 
 }
-
+/**
+ *  activa o desactia el campo para la descricion de usuario
+ *  llamado en  edit_subcapitulos.php y new__subcapitulos.php
+ *  @param {boolean} activar estado en que esta el campo 
+ *  @param {String} titulo del campo  
+ *  @param {String} subtitulo del campo 
+ * @returns {undefined} 
+ */
 function activarDescripcionUsuarioSubCapitulo(activar, tutilo, subtitulo) {
     if (activar) {
         var texto = jQuery("#div-subcapitulo_Descripcion_usuario").html();

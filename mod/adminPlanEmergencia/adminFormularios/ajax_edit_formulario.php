@@ -1,4 +1,7 @@
 <?php
+/**
+ * actualiza   los formulario en la base 
+ * */
 include("../../login/check.php");
 include("../../../inc/db/db.php");
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Lista los roles del sistema, no utilizar este tipo de tablas para los modulos
+ * Lista las sedes del sistema
  */
 include("../../login/check.php");
 include("../../../functions.php");
@@ -14,7 +14,7 @@ $ip .= $mySessionController->getVar("cds_locate");
 
 $page_cant = $mySessionController->getVar("page_cant");
 
-/* * ********************************************************************************************** */
+/* * ********************************** selecccion de las sedes************************************************************ */
 $sql = "SELECT  id, nombreSede, isActivo FROM Sede";
 
 $find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
@@ -35,6 +35,7 @@ $res = seleccion($sql);
 <!--  ****** Titulo ***** -->
 <div class="well well-sm"><h1><?= $vocab["list_sede_title"] ?></h1></div>
 <div class="dataTables_wrapper form-inline dt-bootstrap">
+  <!--* ********************************** Cuerpo de la tabla *******************************-->    
     <table id="lista_usuarios" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable" >
         <thead>
             <tr>
@@ -71,7 +72,7 @@ $res = seleccion($sql);
                         <?php } ?>
 
                         <?php if (check_permiso($mod4, $act5, $user_rol)) { ?>
-                            <td><a class="puntero" onClick="javascript:delete_sedes(<?= $res[$i]['id'] ?>);"><div class="text-center"><i class="fa fa-close text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></a></td>
+                            <td><a class="puntero" onClick="javascript:delete_sedes(<?= $res[$i]['id'] ?>,'<?= $res[$i]['nombreSede'] ?>');"><div class="text-center"><i class="fa fa-close text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></a></td>
                         <?php } ?>
                     </tr>  
                 <?php } ?>                 
@@ -99,6 +100,7 @@ $res = seleccion($sql);
     </table>
     <?php /*     * ***************************************************************************************** */ ?>
     <br/>
+    <!--* ********************************** boton de agregar nuevas sedes *******************************-->
     <?php if (check_permiso($mod4, $act3, $user_rol)) { ?>
         <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminSedes/new_sedes.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["sede_title"] ?></a></div>
     <?php } ?>

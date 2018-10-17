@@ -1,6 +1,6 @@
 <?php
 /**
- * Lista los roles del sistema, no utilizar este tipo de tablas para los modulos
+ * Lista los formulario del sistema
  */
 include("../../login/check.php");
 include("../../../functions.php");
@@ -15,12 +15,13 @@ $ip .= $mySessionController->getVar("cds_locate");
 
 
 
-/* * ********************************************************************************************** */
+/* * ****************************** select formularios del sistema **************************************** */
 $start = "0";
 $sql = "SELECT  id, titulo,FKidSubcapitulos 
         FROM Formulario ORDER BY id";
 $res = seleccion($sql);
 
+/* * ****************************** select capitulos y subcapitulos del sistema **************************************** */
 $sql = "SELECT id,titulo FROM Capitulo WHERE isActivo=1";
 $cap = seleccion($sql);
 for ($i = 0; $i < count($cap); $i++) {
@@ -34,9 +35,9 @@ for ($i = 0; $i < count($cap); $i++) {
 
 
 </div>
-<!-- div original anterior a integración bootstrap3 
-<div style=" width: 800px; margin: 0 auto;"  class="ex_highlight_row"> -->
+
 <div class="dataTables_wrapper form-inline dt-bootstrap" >
+    <!--************** tabla de formularios *********************-->
     <table   id="lista_capitulos" cellpadding="0" cellspacing="0" border="0" class="table  table-bordered " >
         <thead>
             <tr>
@@ -63,13 +64,13 @@ for ($i = 0; $i < count($cap); $i++) {
                         <?php if (check_permiso($mod4, $act4, $user_rol)) { ?>
                             <td><select  id="select<?= $res[$i]['id']; ?>"  onchange="javascript:odenarFomulario(<?= $res[$i]['id']; ?>, '<?= $res[$i]['titulo']; ?>')" class="form-control selectpicker" data-live-search="true">
                                     <?php for ($a = 0; $a < count($cap); $a++) { ?>                           
-                                        <optgroup label="<?= $cap[$a]['titulo'] ?>">         
+                                        <optgroup label="<?=$a ?>-<?= $cap[$a]['titulo'] ?>">         
                                             <?php
                                             $subcapi = $Cap[$a][0];
                                             if (count($subcapi) > 0) {
                                                 for ($j = 0; $j < count($subcapi); $j++) {
                                                     ?>                                      
-                                                    <option value="<?= $subcapi[$j]['id']; ?>"  <?= ($subcapi[$j]['id'] == $find_key) ? "selected " : ""; ?> data-tokens="<?= $subcapi[$j]['titulo'] ?>"><?= $subcapi[$j]['titulo'] ?> (<?= $cap[$a]['titulo'] ?>)</option>                         
+                                                    <option value="<?= $subcapi[$j]['id']; ?>"  <?= ($subcapi[$j]['id'] == $find_key) ? "selected " : ""; ?> data-tokens="<?=$a ?>.<?=$j+1?>-<?= $subcapi[$j]['titulo'] ?> (<?=$cap[$a]["titulo"]?>)"><?=$a ?>.<?=$j+1?>-<?= $subcapi[$j]['titulo'] ?></option>                         
                                                     <?php
                                                 }
                                             }

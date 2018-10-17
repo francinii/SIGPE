@@ -1,10 +1,25 @@
+
+
+/**
+ * cambia los select normales por seleckpicker
+ *  llamado en list_formulario.php
+ * @returns {undefined}
+ */
 var selectAnteriorFormulario = null;
 function cargoAdminFormulario() {
+    
     jQuery('.selectpicker').selectpicker();
     jQuery(".selectpicker").on("shown.bs.select", function (e, a) {
         selectAnteriorFormulario = e.currentTarget.value;
     });
 }
+
+/**
+ * cancela el cambio de subcapitulo
+ *  llamado en  list_formulario.php
+ * @param {elemento html} select que sufrio la accion
+ * @returns {undefined} 
+ */
 function reCargarAdminFormulario(select) {
     select.value = selectAnteriorFormulario;
     selectAnteriorFormulario = null;
@@ -14,6 +29,15 @@ function reCargarAdminFormulario(select) {
         selectAnteriorFormulario = e.currentTarget.value;
     });
 }
+
+/**
+ * Cambia el formulario de subcapitulo
+ *  llamado en  list_formulario.php
+ * @param {int} numero de selec que resivio la accion
+ * @param {String} titulo del formulario
+ * @returns {undefined}  llama al metood guardarOrdenFormulario()
+ */
+
 function odenarFomulario(numero, titulo) {
     var select = document.getElementById('select' + numero);
     var opcion = select[select.selectedIndex].text;
@@ -25,6 +49,15 @@ function odenarFomulario(numero, titulo) {
         }
     });
 }
+
+/**
+ * Cambia el formulario de subcapitulo, conecta con el servidor
+ *  llamado en  list_formulario.php
+ * @param {int} id formulario
+ * @param {int} subcapitulo  id del subcapitulo
+ * @param {elemento html} select  que resivio la accion
+ * @returns {undefined}  
+ */
 
 function guardarOrdenFormulario(id, subcapitulo, select) {
     var loading = document.getElementById('loading_container');
@@ -65,6 +98,13 @@ function guardarOrdenFormulario(id, subcapitulo, select) {
     loading.innerHTML = "";
 
 }
+
+/**
+ *  agregar el editor CKEDITOR a un texarea
+ *  llamado en   edit_formulario.php
+ * @param {Boolean} modo en qe esta la pagina (edicion o no)
+ * @returns {undefined} 
+ */
 
 function CrearEditorFormulario(modo) {
     //CKFinder.setupCKEditor();
@@ -131,6 +171,12 @@ function CrearEditorFormulario(modo) {
     });
 }
 
+
+/**
+ *  valida la infromacion del formulario
+ *  llamado en  edit_formulario.php
+ * @returns {boolean}  
+ */
 function validate_formulario() {
     var titulo = document.getElementById('formulario_title');
     if (titulo.value == "") {
@@ -141,6 +187,13 @@ function validate_formulario() {
     }
     return true;
 }
+
+/**
+ *  actualiza la informacion del formulario, conecta con el servidor
+ *  llamado en  edit_formulario.php
+ *  @param {int} id del formulario
+ *  @returns {undefined} redirecciona a list_formulario.php 
+ */
 
 function update_formulario(id) {
     if (validate_formulario()) {

@@ -1,5 +1,6 @@
 /**
- *  Valida la información del categoria de la amenaza
+ * valida la informacion del la categoria de anemazas
+ *  llamado en  new_categoria_amenaza.php y edit_categoria_amenaza.php
  * @returns {boolean}
  */
 function validate_categoria_amenaza() {
@@ -23,9 +24,9 @@ function validate_categoria_amenaza() {
 }
 
 /**
- * Añade el nuevo usuario a la base de datos.
- * @param {int} status verifica si se usa LDAP 0 = No, 1 =Si
- * @returns {undefined} redirecciona a la lista de usuarios
+ * agrega una nueva categoria de amenaza , conecta con el servidor
+ *  llamado en  new_categoria_amenaza.php 
+ * @returns {undefined}  redireccion a list_categoria_amenaza.php
  */
 function new_categoria_amenaza() {
     if (validate_categoria_amenaza()) {
@@ -72,14 +73,22 @@ function new_categoria_amenaza() {
         loading.innerHTML = "";
     }
 }
-
-
+/**
+ * cambia las categorias de amenasas dependiendo de el tipo de amenasa 
+ * llamado en  list_categoria_amenaza.php
+ * @returns {undefined} recarga la pagina a list_categoria_amenaza.php
+ */
 function cambiarTipoAmenaza() {
     var find_key = document.getElementById("select_tipo_amenaza").value;
     OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/list_categoria_amenaza.php?', 'find_key=' + find_key);
 }
 
-
+/**
+ * elimina  una categoria de amenaza, conecta con el servidor
+ * llamado en  list_categoria_amenaza.php
+ * @param {int} id de la categoria de amenaza
+ * @returns {undefined} recarga la pagina a list_categoria_amenaza.php
+ */
 function delete_categoria_action(id) {
      var find_key = document.getElementById("select_tipo_amenaza").value;
     var page = document.getElementById('container');
@@ -113,11 +122,14 @@ function delete_categoria_action(id) {
     ajax.send(null);
 }
 /**
- * 
- * @param {type} id_categoria_amenaza
- * @returns {undefined}
- */function delete_categoria_amenaza(id_categoria_amenaza) {
-    jConfirm("Desea eliminar la categoria:" + id_categoria_amenaza, "Eliminar categoria de amenaza", function (r) {
+ * confirma la eliminacion de   una categoria de amenaza
+ * llamado en  list_categoria_amenaza.php
+ * @param {int} id_categoria_amenaza id  de la categoria de amenaza
+ * @param {String} titulo de la categoria de amenaza
+ * @returns {undefined} llama al metodo delete_categoria_action() o cancela
+ */
+function delete_categoria_amenaza(id_categoria_amenaza,titulo) {
+    jConfirm("Desea eliminar la categoria:" + titulo, "Eliminar categoria de amenaza", function (r) {
         if (r) {
             delete_categoria_action(id_categoria_amenaza);
         }
@@ -125,7 +137,13 @@ function delete_categoria_action(id) {
 }
 
 
-
+/**
+ * Activa/desactiva  una categoria de amenaza
+ * llamado en  list_categoria_amenaza.php
+ * @param {int} id  de la categoria de amenaza
+ * @param {int} activo estado de la categoria de amenaza (1,0)
+ * @returns {undefined} recarga la pagina a list_categoria_amenaza.php
+ */
 function active_categoria_action(id,activo) {
     var page = document.getElementById('container');
     var fkid = document.getElementById('select_tipo_amenaza').value;
@@ -158,11 +176,13 @@ function active_categoria_action(id,activo) {
 }
 
 /**
- * 
- * @param {type} id_categoria_amenaza
- * @param {type} activo
- * @returns {undefined}
- */function active_categoria_amenaza(id_categoria_amenaza, activo) {
+ * confirmacion de Activa/desactiva  una categoria de amenaza
+ * llamado en  list_categoria_amenaza.php
+ * @param {int} id_categoria_amenaza  id  de la categoria de amenaza
+ * @param {int} activo estado de la categoria de amenaza (1,0)
+ * @returns {undefined} llama al metodo active_categoria_action() o cancela 
+ */
+function active_categoria_amenaza(id_categoria_amenaza, activo) {
     var estado;
     if (activo == 1) {
         estado = "desactivar ";
@@ -180,7 +200,12 @@ function active_categoria_action(id,activo) {
 
 
 
-//ACTUALIZAR ESTE METODO
+/**
+ * actualiza  una categoria de amenaza,conecta con el servidor
+ * llamado en  list_categoria_amenaza.php
+ * @param {int} id_categoria_amenaza  id  de la categoria de amenaza
+ * @returns {undefined} redirecciona a list_categoria_amenaza.php
+ */
 function update_categoria_amenaza(id){
      if (validate_categoria_amenaza()) {
         var loading = document.getElementById('loading_container');

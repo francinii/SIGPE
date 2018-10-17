@@ -1,6 +1,6 @@
 <?php
 /**
- * Lista los roles del sistema, no utilizar este tipo de tablas para los modulos
+ * Lista las zonas o centros de trabajo
  */
 include("../../login/check.php");
 include("../../../functions.php");
@@ -14,33 +14,14 @@ $ip .= $mySessionController->getVar("cds_locate");
 
 $page_cant = $mySessionController->getVar("page_cant");
 
-//
-//$sql = "SELECT COUNT(id) AS cant
-//        FROM ZonaTrabajo";
-//
-//$find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
-//if ($find_key != "") {
-//    $sql .= " WHERE roll_name LIKE  '%" . $find_key . "%'";
-//}
-//$sql .= ";";
-//$res_cant = seleccion($sql);
-//
-//$cant_pagi = ceil((int) $res_cant[0]['cant'] / (int) $page_cant);
-//$page = (isset($_GET["page"])) ? $_GET["page"] : "1";
-//if (!$page) {
-//    $start = 0;
-//    $page = 1;
-//} else {
-//    $start = (isset($_GET["start"])) ? $_GET["start"] : "0";
-//}
 
-/* * ********************************************************************************************** */
+/* * ************************Selecciona las sedes ******************************************** */
 $sql = "SELECT id, nombreSede FROM Sede where isActivo=1";
 $comb = seleccion($sql);
 
 
 
-
+/* * ************************Selecciona las zonas o centros de trabajo ******************************************** */
 $sql = "SELECT  id, nombreZonaTrabajo FROM ZonaTrabajo";
 
 $find_key='0';
@@ -91,6 +72,7 @@ $res = seleccion($sql);
     </div>
 </div>
 <div class="dataTables_wrapper form-inline dt-bootstrap">
+    <!--************************cuerpo de la table de zonas o centros de trabajo*************-->
     <table id="lista_usuarios" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable" >
         <thead>
             <tr>
@@ -127,7 +109,7 @@ $res = seleccion($sql);
                         <?php } ?>
 
                         <?php if (check_permiso($mod4, $act5, $user_rol)) { ?>
-                            <td><a class="puntero" onClick="javascript:delete_zona_trabajo(<?= $res[$i]['id'] ?>);"><div class="text-center"><i class="fa fa-close text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></a></td>
+                            <td><a class="puntero" onClick="javascript:delete_zona_trabajo(<?= $res[$i]['id'] ?>,'<?=$res[$i]['nombreZonaTrabajo']?>');"><div class="text-center"><i class="fa fa-close text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></a></td>
                         <?php } ?>
                     </tr>  
                 <?php } ?>                 
@@ -155,6 +137,7 @@ $res = seleccion($sql);
     </table>
     <?php /*     * ***************************************************************************************** */ ?>
     <br/>
+    <!--************************agregar zonas o centros de trabajo*************-->
     <?php if (check_permiso($mod4, $act3, $user_rol)) { ?>
         <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/new_zona_trabajo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["zona_trabajo_title"] ?></a></div>
     <?php } ?>

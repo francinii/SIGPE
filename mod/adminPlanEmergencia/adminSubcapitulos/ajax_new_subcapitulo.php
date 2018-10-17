@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * agrega nuevos  subcapitulos en la  base
+ */
 include("../../login/check.php");
 include("../../../inc/db/db.php");
 

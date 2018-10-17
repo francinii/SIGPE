@@ -1,4 +1,8 @@
 <?php
+/**
+ * actualiza las  zonas o centros de trabajo
+ */
+
 include("../../login/check.php");
 include("../../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
@@ -151,6 +155,12 @@ $find_key = $res[0]['FKidSede'];
     </div>
 </div>
 <script>
+     /**
+     * carga el carchivo subido como logo
+     * llamado en  new_zona_trabajo.php
+     * @param {elemento html} evt  evento que realiza la accion
+     * @returns {undefined} 
+     */
     function archivoLogo(evt) {
         var files = evt.target.files; // FileList object
 
@@ -173,6 +183,12 @@ $find_key = $res[0]['FKidSede'];
             reader.readAsDataURL(f);
         }
     }
+     /**
+     * carga el carchivo subido como logo
+     * llamado en  new_zona_trabajo.php
+     * @param {elemento html} evt  evento que realiza la accion
+     * @returns {undefined} 
+     */
     function archivoUbicacion(evt) {
         var files = evt.target.files; // FileList object
 

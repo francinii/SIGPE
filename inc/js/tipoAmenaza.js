@@ -1,6 +1,7 @@
 /**
- *  Valida la información del tipo de la amenaza
- * @returns {boolean}
+ *  valida la informacion del tipo de amenaza
+ *  llamado en  new_tipo_amenaza.php y edit_tipo_amenaza.php
+ * @returns {Boolean} 
  */
 function validate_tipo_amenaza() {
     var nombre = document.getElementById('nombre');
@@ -23,9 +24,9 @@ function validate_tipo_amenaza() {
 }
 
 /**
- * Añade el nuevo usuario a la base de datos.
- * @param {int} status verifica si se usa LDAP 0 = No, 1 =Si
- * @returns {undefined} redirecciona a la lista de usuarios
+ *  Agrega un nuevo  tipo de amenaza, conecta con el servidor
+ *  llamado en  new_tipo_amenaza.php   
+ * @returns {undefined} redirreciona list_tipo_amenaza.php  
  */
 function new_tipo_amenaza() {
     if (validate_tipo_amenaza()) {
@@ -71,7 +72,12 @@ function new_tipo_amenaza() {
         loading.innerHTML = "";
     }
 }
-
+/**
+ *  Elimina un  tipo de amenaza, conecta con el servidor
+ *  llamado en  list_tipo_amenaza.php 
+ *   @param {int} id del tipo de amenaza 
+ * @returns {undefined} redirreciona list_tipo_amenaza.php  
+ */
 function delete_tipo_action(id) {
     var page = document.getElementById('container');
     page.innerHTML = cargando;
@@ -104,17 +110,26 @@ function delete_tipo_action(id) {
 }
 
 /**
- * 
- * @param {type} id_tipo_amenaza
- * @returns {undefined}
- */function delete_tipo_amenaza(id_tipo_amenaza) {
-    jConfirm("Desea eliminar el tipo:" + id_tipo_amenaza, "Eliminar tipo de amenaza", function (r) {
+ *  confirma elimininacion de un  tipo de amenaza
+ *  llamado en  list_tipo_amenaza.php 
+ *  @param {int} id_tipo_amenaza id del tipo de amenaza 
+ *  @param {String} titulo del tipo de amenaza 
+ * @returns {undefined} llama al metodo delete_tipo_action() o cancela
+ */
+function delete_tipo_amenaza(id_tipo_amenaza,titulo) {
+    jConfirm("Desea eliminar el tipo:" + titulo, "Eliminar tipo de amenaza", function (r) {
         if (r) {
             delete_tipo_action(id_tipo_amenaza);
         }
     });
 }
-
+/**
+ *  activa/desactiva  tipo de amenaza,conecta con el servidor
+ *  llamado en  list_tipo_amenaza.php 
+ *  @param {int} id_tipo_amenaza id del tipo de amenaza 
+ *  @param {int} activo  estado del tipo de amenaza (1,0)
+ * @returns {undefined} redirreciona list_tipo_amenaza.php  
+ */
 function active_tipo_action(id,activo) {
     var page = document.getElementById('container');
     page.innerHTML = cargando;
@@ -146,11 +161,13 @@ function active_tipo_action(id,activo) {
 }
 
 /**
- * 
- * @param {type} id_tipo_amenaza
- * @param {type} activo
- * @returns {undefined}
- */function active_tipo_amenaza(id_tipo_amenaza, activo) {
+ *  confirma activa/desactiva  tipo de amenaza
+ *  llamado en  list_tipo_amenaza.php 
+ *  @param {int} id_tipo_amenaza id del tipo de amenaza 
+ *  @param {int} activo  estado del tipo de amenaza (1,0)
+ * @returns {undefined} redirreciona list_tipo_amenaza.php  
+ */
+function active_tipo_amenaza(id_tipo_amenaza, activo) {
     var estado;
     if (activo == 1) {
         estado = "desactivar ";
@@ -166,7 +183,12 @@ function active_tipo_action(id,activo) {
     });
 }
 
-//ACTUALIZAR ESTE METODO
+/**
+ *  actualizar tipo de amenaza, conecta con el servidor
+ *  llamado en  edit_tipo_amenaza.php 
+ *  @param {int} id id del tipo de amenaza 
+ * @returns {undefined} redirreciona list_tipo_amenaza.php  
+ */
 function update_tipo_amenaza(id) {
     if (validate_tipo_amenaza()) {
         var loading = document.getElementById('loading_container');

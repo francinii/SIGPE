@@ -1,4 +1,7 @@
 <?php
+/**
+ *agrega nuevas categorias de amenazas en el sistema
+ */
 include("../../../login/check.php");
 include("../../../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
@@ -34,9 +37,15 @@ if ((isset($_GET['find_key']))) {
                             ?>
                             <option value='<?= $comb[$i]['id'] ?>' <?=($find_key==$comb[$i]['id'])? 'selected': '' ?> ><?= $comb[$i]['descripcion'] ?></option>
                             <?php
-                        }
+                        }                    
+                     }else{?>
+                    <script>                    
+                    jAlert("No hay tipo de amenazas en el sistema, debe agregar una", "Dato Requerido");
+                    </script>
+                    <?php
                     }
                     ?>
+                    
                 </select>
             </div>
             <div class="form-group">

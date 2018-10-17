@@ -1,4 +1,7 @@
 <?php
+/**
+ * edita  los formulario del sistema
+ */
 include("../../login/check.php");
 include("../../../functions.php");
 $vocab = $mySessionController->getVar("vocab");

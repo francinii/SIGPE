@@ -1,16 +1,6 @@
 <?php
-/** Develop Info
- * IMPORTANTE !!!
- *    Utilice este archivo como ejemplo para crear las tablas de nuevos modulos.
- * 
- * Este archivo genera una tabla utilizando la libreria DataTables,
- * para esto necesitamos 3 componentes principales:
- *  1. El origen de los datos: es otro archivo php que nos traer un JSON con los
- *      datos para mostrar, Data Tables controla la paginación, navegación, busqueda
- *      y el orden.  Para más información 
- *  2. La inicialización de la tabla
- *  3. La estructura de la tabla en HTML
- * 
+/**
+ * Lista los subcapitulos del sistema
  */
 include("../../login/check.php");
 include("../../../functions.php");
@@ -22,32 +12,11 @@ $user_rol = $mySessionController->getVar("rol");
 $ip = $mySessionController->getVar("cds_domain");
 $ip .= $mySessionController->getVar("cds_locate");
 
-
-// para realizar la busqueda
-//$sql = "SELECT COUNT(idCapitulo) AS cant
-//        FROM capitulo";
-//
-//$find_key = (isset($_GET['find_key'])) ? $_GET['find_key'] : '';
-//if ($find_key != "") {
-//    $sql.=" WHERE titulo LIKE  '%" . $find_key . "%'";
-//}
-//$sql.=";";
-//$res_cant = seleccion($sql);
-//
-//$cant_pagi = ceil((int) $res_cant[0]['cant'] / (int) $page_cant);
-//$page = (isset($_GET["page"])) ? $_GET["page"] : "1";
-//if (!$page) {
-//    $start = 0;
-//    $page = 1;
-//} else {
-//    $start = (isset($_GET["start"])) ? $_GET["start"] : "0";
-//}
-
 /* * ********************************************************************************************** */
 $start = "0";
 
 
-// select para llenar el combo
+// ********************************select de capitulos para llenar el combo********************************
 $sql = "SELECT id,titulo FROM Capitulo WHERE isActivo=1";
 
 
@@ -61,7 +30,7 @@ if ($order_key != "") {
 
 $comb = seleccion($sql);
 
-// select lista
+// ********************************select de sucapitulos********************************
 $sql = "SELECT  id, orden,titulo,isActivo
         FROM SubCapitulo";
 $find_key = '0';
@@ -85,9 +54,6 @@ $capituloNumero = 0;
 <!--***** Titulo ***** -->
 <div class="well well-sm"><h1><?= $vocab["list_subcapitulo"] ?></h1></div>
 
-<!-- div original anterior a integración bootstrap3 
-<div style=" width: 800px; margin: 0 auto;"  class="ex_highlight_row"> -->
-
 <div class="row">
     <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -99,7 +65,7 @@ $capituloNumero = 0;
                     if (count($comb) > 0) {
                         for ($i = 0; $i < count($comb); $i++) {
                             ?>
-                            <option  <?= ($comb[$i]['id'] == $find_key) ? "selected " : ""; ?> value='<?= $comb[$i]['id'] ?>' ><?= $comb[$i]['titulo'] ?></option>
+                            <option  <?= ($comb[$i]['id'] == $find_key) ? "selected " : ""; ?> value='<?= $comb[$i]['id'] ?>' ><?=$i?>-<?= $comb[$i]['titulo'] ?></option>
 
                             <?php
                             if ($comb[$i]['id'] == $find_key) {
@@ -121,6 +87,7 @@ $capituloNumero = 0;
     </div>
 </div>
 <div class="dataTables_wrapper form-inline dt-bootstrap">
+     <!--********************************tabla  de sucapitulos********************************-->
     <table id="lista_subcapitulos" cellpadding="0" cellspacing="0" border="0" class="table table-bordered " >
         <thead>
             <tr>
@@ -218,7 +185,7 @@ $capituloNumero = 0;
             </tr>
         </tfoot>
     </table>
-    <?php /*     * ***************************************************************************************** */ ?>
+    <?php /*     * **************************Agregar subcapitulos******************************************** */ ?>
     <br/>
     <?php if (check_permiso($mod4, $act3, $user_rol)) { ?>
         <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminSubcapitulos/new_subcapitulo.php?', 'find_key=<?= $find_key ?>');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["add_subcapitulo"] ?></a></div>

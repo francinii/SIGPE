@@ -1,6 +1,6 @@
 <?php
 /**
- * Lista los roles del sistema, no utilizar este tipo de tablas para los modulos
+ * Lista los origenes de amenaza
  */
 include("../../../login/check.php");
 include("../../../../functions.php");
