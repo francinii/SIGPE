@@ -289,7 +289,7 @@ $vocab["datos_generares_Servicio"]           ="Servicio de conserjería:";
 $vocab["datos_generares_Administrativo"]     ="Personal administrativo:";
 $vocab["datos_generares_Académico"]          ="Personal académico:";
 $vocab["datos_generares_Estudiantil"]        ="Presencia estudiantil:";
-$vocab["datos_generares_siguente"]           ="y pasar el siguiente";
+$vocab["datos_generares_siguente"]           ="y pasar al siguiente";
 $vocab["datos_generares_datos"]              ="Datos";
 
 //***********     plan de emergencia  datos generales  ***********************//
