@@ -1,4 +1,7 @@
 <?php
+/**
+ * actualiza  los origenes de amenaza al sistema 
+ */
 include("../../../login/check.php");
 include("../../../../functions.php");
 $vocab = $mySessionController->getVar("vocab");

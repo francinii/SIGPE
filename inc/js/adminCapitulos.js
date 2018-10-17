@@ -1,7 +1,10 @@
-//******* list_capitulo********
-var rowPreCapitulo = null;
+/**
+ * agrega la funcion de ordenar capitulos, accion de las flechas
+ *  llamado en  list_capitulos.php     
+ * @returns {undefined} 
+ */
 function flechasCapitulos() {
-
+    var rowPreCapitulo = null;
     jQuery(".up,.down").click(function () {
         var row = jQuery(this).parents("tr:first");
         if (rowPreCapitulo != null) {
@@ -31,6 +34,11 @@ function flechasCapitulos() {
     });
 
 }
+/**
+ * conforma el orden de los capitulos
+ *  llamado en  list_capitulos.php
+ * @returns {undefined} llama al metodo guardarOrdenCapitulo() o cancela
+ */
 function ordenarCapitulos() {
     jConfirm("Desea reordenar los capitulos ", "Ordenar", function (r) {
         if (r) {
@@ -48,7 +56,12 @@ function ordenarCapitulos() {
     });
 
 }
-
+/**
+ * actualiza el orden de los capitulos , conecta con el servidor
+ *  llamado en  list_capitulos.php
+ * @param {Array} lista en orden de los capitulos
+ * @returns {undefined} recarga la pagina a list_capitulos.php
+ */
 function guardarOrdenCapitulo(lista) {
     var loading = document.getElementById('loading_container');
     loading.innerHTML = cargando_bar;
@@ -84,6 +97,14 @@ function guardarOrdenCapitulo(lista) {
 
 }
 
+/**
+ * confirma la activacion o desactivacion de un capitulo
+ *  llamado en  list_capitulos.php
+ * @param {id} id del capitulo
+ * * @param {id} isActivo estado del capitulo (1,0)
+ * * @param {String} titulo del capitulo
+ * @returns {undefined} llama al metodo active_capitulo_action() o cancela
+ */
 function active_capitulo(id, isActivo, titulo) {
     var estado;
     if (isActivo == 1) {
@@ -100,7 +121,13 @@ function active_capitulo(id, isActivo, titulo) {
     });
 
 }
-
+/**
+ *  la activacion o desactivacion de un capitulo,conecta con el servidor
+ *  llamado en  list_capitulos.php
+ * @param {id} id del capitulo
+ * * @param {id} isActivo estado del capitulo (1,0)
+ * @returns {undefined} recarga la pagina a list_capitulos.php
+ */
 function active_capitulo_action(id, isActivo) {
     var page = document.getElementById('container');
     page.innerHTML = cargando;
@@ -134,16 +161,27 @@ function active_capitulo_action(id, isActivo) {
 
 
 /**
- * 
- * @param {type} id_origen_amenaza
- * @returns {undefined}
- */function delete_capitulo(id, titulo) {
+ *  confirma la eliminacion de un capitulo
+ *  llamado en  list_capitulos.php
+ * @param {id} id del capitulo
+ * @param {String} titulo  del capitulo 
+ * @returns {undefined} llama al metodo delete_capitulo_action() o cancela
+ */
+function delete_capitulo(id, titulo) {
     jConfirm("Desea eliminar el capitulo:" + titulo, "Eliminar capitulo", function (r) {
         if (r) {
             delete_capitulo_action(id);
         }
     });
 }
+
+
+/**
+ *  eliminacion de un capitulo,conecta con el servidor
+ *  llamado en  list_capitulos.php
+ * @param {id} id del capitulo
+ * @returns {undefined} recarga la pagina a list_capitulos.php
+ */
 
 function delete_capitulo_action(id) {
     var page = document.getElementById('container');
@@ -165,10 +203,10 @@ function delete_capitulo_action(id) {
 
             } else if (response == 1 || response == 2) {
                 jAlert('Ha ocurrido un error en la Base de Datos Intentelo Nuevamente\n Si el problema continua comuniquese con la USTDS', 'Error');
-           
-            }else if ( response == 3){
-                jAlert( 'tiene subcapítulos asociados','El capítulo no se puede eliminar');
-            
+
+            } else if (response == 3) {
+                jAlert('tiene subcapítulos asociados', 'El capítulo no se puede eliminar');
+
             } else {
                 jAlert('Ha ocurrido un error inesperado intentelo más tarde!', 'Error');
             }
@@ -179,7 +217,13 @@ function delete_capitulo_action(id) {
     ajax.send(null);
 }
 
-//*****+*+ new capitulo********+
+/**
+ *  agregar el editor CKEDITOR a un texarea
+ *  llamado en  new_capitulos.php y en edit_capitulos.php
+ * @param {Boolean} modo en qe esta la pagina (edicion o no)
+ * @returns {undefined} 
+ */
+
 function CrearEditorCapitulos(modo) {
     //CKFinder.setupCKEditor();
     if (modo) {
@@ -195,7 +239,7 @@ function CrearEditorCapitulos(modo) {
                                 instanceReady: function (evt)
                                 {
                                     // Hide the editor top bar.
-                                    jQuery('.cke_top').css('display','none');
+                                    jQuery('.cke_top').css('display', 'none');
                                 }
                             }
                 });
@@ -215,6 +259,12 @@ function CrearEditorCapitulos(modo) {
 
 }
 
+/**
+ *  valida la infromacion de los capitulos
+ *  llamado en  new_capitulos.php y en edit_capitulos.php
+ * @returns {Boolean} 
+ */
+
 function validate_capitulo() {
     var titulo = document.getElementById('capitulo_title');
     if (titulo.value == "") {
@@ -225,6 +275,14 @@ function validate_capitulo() {
     }
     return true;
 }
+
+
+/**
+ *  agrega un nuevo capitulo al sistema, conecta con el servidor
+ *  llamado en  new_capitulos.php 
+ * @returns {undefined}  redirecciona a list_capitulos.php
+ */
+
 
 function new_capitulo() {
     if (validate_capitulo()) {
@@ -280,7 +338,12 @@ function new_capitulo() {
     }
 }
 
-//*****+*+ editar y ver capitulo********+
+/**
+ *  actualiza un capitulo del sistema, conecta con el servidor
+ *  llamado en  edit_capitulos.php
+ *  @param {int} id del capitulo ha actualizar 
+ * @returns {undefined}  redirecciona a list_capitulos.php
+ */
 
 function update_capitulo(id) {
     if (validate_capitulo()) {
@@ -335,11 +398,20 @@ function update_capitulo(id) {
 
 }
 
-function activarDescripcionUsuarioCapitulo(activar, tutilo, subtitulo) {
+/**
+ *  activa o desactia el campo para la descricion de usuario
+ *  llamado en  edit_capitulos.php y new__capitulos.php
+ *  @param {boolean} activar estado en que esta el campo 
+ *  @param {String} titulo del campo  
+ *  @param {String} subtitulo del campo 
+ * @returns {undefined} 
+ */
+
+function activarDescripcionUsuarioCapitulo(activar, titulo, subtitulo) {
     if (activar) {
         var texto = jQuery("#div-capitulo_Descripcion_usuario").html();
         if (texto === "") {
-            jQuery("#div-capitulo_Descripcion_usuario").html('<label  for="capitulo_Descripcion">' + tutilo + '</label>' +
+            jQuery("#div-capitulo_Descripcion_usuario").html('<label  for="capitulo_Descripcion">' + titulo + '</label>' +
                     '<textarea class="form-control"  id="capitulo_Descripcion_usuario" name="capitulo_Descripcion_usuario" ></textarea>' +
                     '<p class="help-block"><small>' + subtitulo + '</small></p>')
         }

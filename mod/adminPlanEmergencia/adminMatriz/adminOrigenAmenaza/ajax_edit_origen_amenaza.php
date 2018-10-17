@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * actualiza  los origenes de amenaza en  la base
+ */
 include("../../../login/check.php");
 include("../../../../inc/db/db.php");
 

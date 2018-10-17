@@ -1,4 +1,7 @@
 <?php
+/**
+ * agrega nuevas zonas o centros de trabajo
+ */
 include("../../login/check.php");
 include("../../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
@@ -29,12 +32,14 @@ $sede = seleccion($sql);
                         for ($i = 0; $i < count($sede); $i++) {
                             ?>
                             <option value='<?= $sede[$i]['id'] ?>' selected><?= $sede[$i]['nombreSede'] ?></option>
-                        <?php }
-                    }else{?>
-                          <script>                    
+                        <?php
+                        }
+                    } else {
+                        ?>
+                        <script>
                             jAlert("No hay sedes en el sistema, debe agregar una", "Dato Requerido");
-                    </script>
-                     <?php       
+                        </script>
+                        <?php
                     }
                     ?>
                 </select>
@@ -69,11 +74,11 @@ $sede = seleccion($sql);
                 <div class="radio radio_efect">
                     <label class="radio-inline">
                         <input id="inlineCheckbox1" name="inlineCheckbox" type="radio" value="1" checked> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-<?= $vocab["isActivo"] ?>  
+                        <?= $vocab["isActivo"] ?>  
                     </label>
                     <label class="radio-inline">
                         <input id="inlineCheckbox2" name="inlineCheckbox" type="radio" value="0"> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 
-<?= $vocab["isInactivo"] ?> 
+                        <?= $vocab["isInactivo"] ?> 
                     </label>
                 </div> 
                 <p class="help-block"><small><?= $vocab["desc_zona_trabajo_isActivo"] ?></small></p> 
@@ -107,6 +112,12 @@ $sede = seleccion($sql);
     </div>
 </div>
 <script>
+    /**
+     * carga el carchivo subido como logo
+     * llamado en  new_zona_trabajo.php
+     * @param {elemento html} evt  evento que realiza la accion
+     * @returns {undefined} 
+     */
     function archivoLogo(evt) {
         var files = evt.target.files; // FileList object
 
@@ -129,6 +140,12 @@ $sede = seleccion($sql);
             reader.readAsDataURL(f);
         }
     }
+    /**
+     * carga el carchivo subido como Ubicacion
+     * llamado en  new_zona_trabajo.php
+     * @param {elemento html} evt  evento que realiza la accion
+     * @returns {undefined} 
+     */
     function archivoUbicacion(evt) {
         var files = evt.target.files; // FileList object
 

@@ -1,13 +1,17 @@
 /**
- *  Valida la información de la zona de la amenaza
- * @returns {boolean}
+ * cambia los centro en base a las sedes
+ * llamado en  list_zona_trabajo.php
+ * @returns {undefined} recarga la pagina list_zonas_trabajo.php 
  */
 function cambiarCentro(){
     var find_key = jQuery("#select_sede").val();
     OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', 'find_key='+find_key)
 }
-
-
+/**
+ * valida la informacion de los centros
+ * llamado en  edit_zona_trabajo.php y new_zona_trabajo.php
+ * @returns {boolean} 
+ */
 function validate_zona_trabajo() {
     var nombre = document.getElementById('nombre');
     if (nombre.value == "") {
@@ -27,9 +31,9 @@ function validate_zona_trabajo() {
 }
 
 /**
- * Añade una nueva zona de trabajo a la base de datos.
- * @param {int} status verifica si se usa LDAP 0 = No, 1 =Si
- * @returns {undefined} redirecciona a la lista de usuarios
+ * valida las imagenes cargadas de los centros
+ * llamado en  edit_zona_trabajo.php y new_zona_trabajo.php
+ * @returns {boolean} 
  */
 function validarImagen(){
     var file2 = document.getElementById("type-file")
@@ -52,6 +56,12 @@ function validarImagen(){
    }
    return true;
 }
+
+/**
+ * agrega los nuevos centros de trabajo, conecta con el servidor
+ * llamado en   new_zona_trabajo.php
+ * @returns {undefined} redirecciona la pagina list_zonas_trabajo.php 
+ */
 
 function new_zona_trabajo() {
     if (validate_zona_trabajo() && validarImagen()) {
@@ -120,6 +130,12 @@ function new_zona_trabajo() {
         loading.innerHTML = "";
     }
 }
+/**
+ * elimina  centros de trabajo, conecta con el servidor
+ * llamado en   list_zonas_trabajo.php 
+ * @param {int} id del  centro  ha eliminar
+ * @returns {undefined} recarga la pagina list_zonas_trabajo.php 
+ */
 
 function delete_zona_trabajo_action(id) {
     var page = document.getElementById('container');
@@ -155,17 +171,26 @@ function delete_zona_trabajo_action(id) {
 }
 
 /**
- * 
- * @param {type} id_zona_trabajo
- * @returns {undefined}
- */function delete_zona_trabajo(id_zona_trabajo) {
-    jConfirm("Desea eliminar el centro de trabajo:" + id_zona_trabajo, "Eliminar centro de trabajo", function (r) {
+ * confirma la elimina  centros de trabajo
+ * llamado en   list_zonas_trabajo.php 
+ * @param {int}id_zona_trabajo id  del  centro  ha eliminar
+ *  * @param {String}titulo  del  centro  ha eliminar
+ * @returns {undefined} llama al metodo delete_zona_trabajo_action o cancela
+ */
+function delete_zona_trabajo(id_zona_trabajo,titulo) {
+    jConfirm("Desea eliminar el centro de trabajo:" + titulo, "Eliminar centro de trabajo", function (r) {
         if (r) {
             delete_zona_trabajo_action(id_zona_trabajo);
         }
     });
 }
 
+/**
+ * actualiza el centros de trabajo,conecta con el servidor
+ * llamado en   edit_zonas_trabajo.php 
+ * @param {int}id  del  centro  ha eliminar
+ * @returns {undefined} redireciona a  la pagina list_zonas_trabajo.php 
+ */
 function update_zona_trabajo(id) {
     if (validate_zona_trabajo() && validarImagen()) {
         var loading = document.getElementById('loading_container');
@@ -234,7 +259,11 @@ function update_zona_trabajo(id) {
 
 }
 
-
+/**
+ * asocia usuarios  al centros de trabajo
+ * llamado en   edit_zonas_trabajo.php y new_zonas_trabajo.php 
+ * @returns {undefined} 
+ */
 function asociar_usuario_zona_trabajo() {
     var cedula = document.getElementById('select_usuario').value;
     var nombre = jQuery('#select_usuario option:selected').text();
@@ -243,7 +272,11 @@ function asociar_usuario_zona_trabajo() {
         jQuery("#tabla_usuario_zona tbody").append("<tr id = '" + cedula + "'><td>" + cedula + "</td><td>" + nombre + "</td><td onclick = 'eliminar_usuario_zona(" + cedula + ");'><i class='fa fa-close text-danger puntero' title='Eliminar'></i></td></tr>");
     }
 }
-
+/**
+ * elimina usuarios  acociados al centros de trabajo
+ * llamado en   edit_zonas_trabajo.php y new_zonas_trabajo.php 
+ * @returns {undefined} 
+ */
 function eliminar_usuario_zona(cedula) {
     var elementoCedula = jQuery('#' + cedula);
     elementoCedula.remove();

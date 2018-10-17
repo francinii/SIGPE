@@ -1,5 +1,5 @@
 <?php
-
+// agrega las nuevas sedes a la base de datos
 include("../../login/check.php");
 include("../../../inc/db/db.php");
 

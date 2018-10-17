@@ -1,4 +1,7 @@
 <?php
+/**
+ * agrega tipo de amenaza al sistema
+ */
 include("../../../login/check.php");
 include("../../../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
@@ -30,6 +33,13 @@ $comb = seleccion($sql);
                             <?php
                         }
                     }
+                     else{?>
+                    <script>                    
+                    jAlert("No hay origen de amenazas en el sistema, debe agregar una", "Dato Requerido");
+                    </script>
+                    <?php
+                    }
+                   
                     ?>
                 </select>
             </div>

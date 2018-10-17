@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Activa/desactiva una  categorias de amenazas en la base
+ */
 include("../../../login/check.php");
 include("../../../../inc/db/db.php");
 

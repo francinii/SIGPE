@@ -37,10 +37,7 @@ require 'functions.php';
                 <?php if (check_permiso($mod1, $act1, $user_rol)) { ?>
                     <li class="dropdown">
                         <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#"><span><i class="fa fa-gears fa-inverse"></i> <?= $vocab["menu_admin"] ?></span> <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <?php if (check_permiso($mod1, $act4, $user_rol)) { ?>
-                                <li><a onclick="javascript:OpcionMenu('mod/admin/param/edit_param.php?', '');"><span><i class="fa fa-gg text-warning"></i> <?= $vocab["menu_pram"] ?></span></a></li>
-                            <?php } ?> 
+                        <ul class="dropdown-menu">                            
                             <!-- MODULOS -->
                             <?php if (check_permiso($mod1, $act1, $user_rol)) { ?>
                                 <li class="dropdown-submenu">

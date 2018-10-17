@@ -1,9 +1,12 @@
 <?php
+/**
+ * historial de los palnes de emergencia
+ */
 include("../../login/check.php");
 include("../../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
-// select para llenar el combo
+/* * **************************select para llenar el combo de los centros de trabajo******************** */
 if (check_permiso($mod4, $act2, $user_rol)) {
     $sql = "select sede.id as idSede, sede.nombreSede, ZonaTrabajo.id as idZona, ZonaTrabajo.nombreZonaTrabajo from ZonaTrabajo ,(SELECT `id`,`nombreSede`  FROM `Sede` WHERE `isActivo`=1) sede where  ZonaTrabajo.FKidSede = sede.id  and isActivo=1 order by idSede";
 } else {
@@ -33,7 +36,7 @@ foreach ($res as $value) {
     $centro = Array('id' => $value['idZona'], 'nombreZonaTrabajo' => $value['nombreZonaTrabajo'], 'idSede' => $sedeId);
     $centros[] = $centro;
 }
-// select lista
+/* * **************************select lista de historiales ******************** */
 $sql = "SELECT `id`, `FKidZona`, `version`, `direccion` FROM `Historial`";
 $find_keyCentro = '0';
 if ((isset($_GET['find_keyCentro']))) {
@@ -115,6 +118,7 @@ $capituloNumero = 0;
 </div>
 <br>
 <div class="dataTables_wrapper form-inline dt-bootstrap">
+    <!--/* * **************************Tabla de historiales ******************** */-->
     <table id="lista_subcapitulos" cellpadding="0" cellspacing="0" border="0" class="table table-bordered " >
         <thead>
             <tr>

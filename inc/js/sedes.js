@@ -1,5 +1,6 @@
 /**
- *  Valida la información de la zona de la amenaza
+ * Valida la informacion de la sedes
+ * llamado en new_sedes.php y  edit_sedes.php
  * @returns {boolean}
  */
 function validate_sede() {
@@ -18,7 +19,12 @@ function validate_sede() {
     }
     return true;
 }
-
+/**
+ * actualiza la informacion de la sedes , conecta con el servidor
+ *  llamado en  edit_sedes.php
+ * @param {int} id del la sede ha actualizar
+ * @returns {undefined} redirecciona la pagina a list_sedes.php
+ */
 function update_sede(id) {
     if (validate_sede()) {
         var loading = document.getElementById('loading_container');
@@ -66,9 +72,10 @@ function update_sede(id) {
 }
 
 /**
- * 
- * @param {type} id
- * @returns {undefined}
+ * elimina  la sede del sistema  , conecta con el servidor
+ * llamado en  list_sedes.php
+ * @param {int} id del la sede ha eliminar
+ * @returns {undefined} recarga la pagina list_sedes.php
  */
 function delete_sedes_action(id) {
     var page = document.getElementById('container');
@@ -102,12 +109,14 @@ function delete_sedes_action(id) {
 }
 
 /**
- * 
- * @param {type} id_sede
- * @returns {undefined}
+ * confirma la eliminacion de una sede
+ * llamado en  list_sedes.php
+ * @param {int} id_sede  id del la sede ha eliminar
+ * @param {String} titulo  la sede ha eliminar
+ * @returns {undefined} llama al metodo delete_sedes_action o cancela 
  */
-function delete_sedes(id_sede) {
-    jConfirm("Desea eliminar la sede:" + id_sede, "Eliminar sede", function (r) {
+function delete_sedes(id_sede,titulo) {
+    jConfirm("Desea eliminar la sede:" + titulo, "Eliminar sede", function (r) {
         if (r) {
             delete_sedes_action(id_sede);
         }
@@ -115,8 +124,9 @@ function delete_sedes(id_sede) {
 }
 
 /**
- * Añade una nueva sede a la base de datos. * 
- * @returns {undefined} redirecciona a la lista de usuarios
+ * agrega una nueva  sede, conecta con el servidor 
+ * llamado en  new_sedes.php
+ * @returns {undefined} redireciona la pagina a list_sedes.php
  */
 function new_sede() {
     if (validate_sede()) {

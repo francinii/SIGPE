@@ -1,5 +1,5 @@
 <?php
-
+// actualiza  zonas o centro de trabajo en la base de datos
 include("../../login/check.php");
 include("../../../inc/db/db.php");
 
