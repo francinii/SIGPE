@@ -93,6 +93,7 @@ $capituloNumero = 0;
                 </div>
          
         </div>
+        <div>&nbsp;</div>
          <div class="form-group">
             <label class="control-label col-sm-3" for="select_subcapitulos"><?= $vocab["historial_centro"] ?></label>
             

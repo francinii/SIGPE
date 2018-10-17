@@ -29,7 +29,7 @@ $res = seleccion($sql);
                 <p class="help-block"><small><?= $vocab["nombre_desc_tipo_amenaza"] ?></small></p> 
             </div>
             <div class="form-group">
-                <label  for="select_tipo"><?= $vocab["nombre_tipo_amenaza"] ?> </label>
+                <label  for="select_tipo"><?= $vocab["select_origen_amenaza"] ?> </label>
                 <select <?= ($view_mode == 0) ? "disabled" : ""; ?> id="select_tipo" name ="select_tipo" class="form-control">                                  
                     <?php
                     if (count($comb) > 0) {
@@ -41,6 +41,7 @@ $res = seleccion($sql);
                     }
                     ?>
                 </select>
+                 <p class="help-block"><small><?= $vocab["select_origen_amenaza"] ?></small></p> 
             </div>
             <div class="form-group">
                 <label for="type-radio"><?= $vocab["list_tipo_amenaza_isActivo"] ?> </label>   
