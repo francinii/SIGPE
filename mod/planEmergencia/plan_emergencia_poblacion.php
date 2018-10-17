@@ -17,7 +17,7 @@ if (count($res) <= 0) {
 }
 ?>
 <div class="well well-sm">
-    <h2><?= $vocab["poblacion_titulo"] ?></h2>
+    <h3><?= $vocab["poblacion_titulo"] ?></h3>
     <p><?= $vocab["poblacion_titulo_desc"] ?></p>
     <div align="right" style = "padding-right:0.5%;">
         <?php if ($editar) { ?>

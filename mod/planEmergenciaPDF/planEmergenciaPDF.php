@@ -2,43 +2,30 @@
 
 //============================================================+
 // File name   : planEmergenciaPDP.php
-// Begin       : 2018-08-17
-// Last Update : 2013-05-14
+// Begin       : 2018-07-23
+// Last Update : 2013-11-13
 //
 // Description : Creacion de un plan de emergencias
 //
-// Author: Nicola Asuni
+// Author: Francini Corrales & Danny Valerio
 //
-// (c) Copyright:
-//               Nicola Asuni
-//               Tecnick.com LTD
-//               www.tecnick.com
-//               info@tecnick.com
 //============================================================+
 
-/**
- * Creates an example PDF TEST document using TCPDF
- * @package com.tecnick.tcpdf
- * @abstract TCPDF - Example: Custom Header and Footer
- * @author Nicola Asuni
- * @since 2008-03-04
- */
 include("../login/check.php");
 include("../../functions.php");
 include_once('../../lib/tcpdf/examples/tcpdf_include.php');
 require_once ('../../lib/jpgraph/src/jpgraph.php');
 require_once ('../../lib/jpgraph/src/jpgraph_pie.php');
-//echo barraCargar(10);
+
 
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
-
 
 $id = $_GET['idCentro'];
 
 if (isset($_GET['version'])) {
     $version = $_GET['version'];
-    $nombreDoc = $id . "-" . $version. '.pdf';
+    $nombreDoc = $id . "-" . $version . '.pdf';
     //unlink($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/' . $nombreDoc);
 }
 if (isset($_GET['random'])) {
@@ -82,6 +69,8 @@ $datosCabecera = array(
 class MYPDF extends TCPDF {
 
     public function Header() {
+        $a = $this->getAliasNbPages();
+        $b = $this->getAliasNumPage() ;
         global $datosCabecera;
         $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
                 . '<tr style = "text-align:center;">'
@@ -95,7 +84,8 @@ class MYPDF extends TCPDF {
                 . '<td><b>Revisado por:</b><br>' . $datosCabecera['revisado'] . '</td>'
                 . '</tr>'
                 . '<tr style = "text-align:center;">'
-                . '<td><b>Página </b>' . $this->getAliasNumPage() . ' de ' . $this->getAliasNbPages() . '</td>'
+                
+                . '<td><b>Página: </b>' . $this->getAliasNumPage() . ' de ' . $this->getAliasNbPages() . '</td>'
                 . '</tr>'
                 . '</table>';
         //  . '<div style = "height: 250px;"></div>';
@@ -123,8 +113,7 @@ $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set auto page breaks
-$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-
+//$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 $font = array(PDF_FONT_MONOSPACED, '', 9);
 $pdf->SetHeaderFont($font);
 // set image scale factor
@@ -141,9 +130,8 @@ portada($pdf);
 
 //Creación de los capítulos del documento
 capitulos($pdf, $rescapitulos, $resPlan, $resTipoPoblacion, $formularios, $vocab, $idPlanEmergencia);
+
 //Creación de la tabla de contenidos
-
-
 tablaContenidos($pdf);
 
 function remplazar($cadena) {
@@ -160,22 +148,7 @@ function tablaContenidos($pdf) {
     $pdf->SetFont(PDF_FONT_MONOSPACED, 'B', 16);
     $pdf->MultiCell(0, 0, 'Tabla de contenido', 0, 'L', 0, 1, '', '', true, 0);
     $pdf->Ln();
-
-    //$pdf->SetFont(PDF_FONT_MONOSPACED, '', 10);
-// define styles for various bookmark levels
     $bookmark_templates = array();
-    /*
-     * The key of the $bookmark_templates array represent the bookmark level (from 0 to n).
-     * The following templates will be replaced with proper content:
-     *     #TOC_DESCRIPTION#    this will be replaced with the bookmark description;
-     *     #TOC_PAGE_NUMBER#    this will be replaced with page number.
-     *
-     * NOTES:
-     *     If you want to align the page number on the right you have to use a monospaced font like courier, otherwise you can left align using any font type.
-     *     The following is just an example, you can get various styles by combining various HTML elements.
-     */
-// A monospaced font for the page number is mandatory to get the right alignment
-
     $bookmark_templates[0] = '<table border="0" cellpadding="0" cellspacing="0"><tr>'
             . '<td width="145mm"><span style="font-family:helvetica;font-weight:bold;font-size:12pt;color:black;">#TOC_DESCRIPTION#</span></td>'
             . '<td width="13mm"><span style="font-family:courier;font-weight:bold;font-size:11pt;color:black;" align="right">#TOC_PAGE_NUMBER#</span></td></tr></table>';
@@ -187,9 +160,6 @@ function tablaContenidos($pdf) {
             . '<td width="10mm">&nbsp;</td> '
             . '<td width="135mm"><span style="font-family:helvetica;font-size:10pt;color:#666666;"><i>#TOC_DESCRIPTION#</i></span></td> '
             . '<td width="13mm"><span style="font-family:courier;font-weight:bold;font-size:11pt;color:#666666;" align="right">#TOC_PAGE_NUMBER#</span></td></tr></table>';
-// add other bookmark level templates here ...
-// add table of content at page 1
-// (check the example n. 45 for a text-only TOC
     $pdf->addHTMLTOC(2, 'Indice', $bookmark_templates, true, 'B', array(128, 0, 0));
 
 // end of TOC page
@@ -203,32 +173,29 @@ function capitulos($pdf, $capitulos, $resPlan, $resTipoPoblacion, $formularios, 
     $orden = 0;
     // $html = '<div style = "height: 250px;"><div>';
     foreach ($capitulos as $cap) {
+        //carga una nueva página
         cargarNuevaPagina($pdf);
         if ($orden == 0) {
-            $pdf->Bookmark($cap['titulo'], 0, 0, '', 'B', array(0, 64, 128));
+            $pdf->Bookmark($cap['titulo'], 0, 0, '', '', array(0, 64, 128));
             $html = '<h2><b>' . $cap['titulo'] . '</b></h2>';
         } else {
-           $pdf->Bookmark($orden . ". " . $cap['titulo'], 0, 0, '', 'B', array(0, 64, 128));
+            $pdf->Bookmark($orden . ". " . $cap['titulo'], 0, 0, '', '', array(0, 64, 128));
             $html = '<h2><b>' . $orden . ". " . $cap['titulo'] . '</b></h2>';
         }
-        // $pdf->Cell(0, 10, $cap['orden'] . ". " . $cap['titulo'], 0, 1, 'L');
-
         $html .= remplazar($cap['descripcion']);
-
         $sql = "(SELECT  FKidCapitulo, FKidZonaTrabajo,descripcion FROM CapituloPlan where FKidCapitulo = " . $cap['id'] . " and FKidZonaTrabajo = " . $idPlanEmergencia . " )";
         $infoUsuario = seleccion($sql);
         if (count($infoUsuario) > 0) {
-            $html .= "<p>" . remplazar($infoUsuario[0]['descripcion']) . "</p>";
-         } 
-       $pdf->writeHTML($html, true, false, false, false, '');
-        
+            $html .= remplazar($infoUsuario[0]['descripcion']);
+        }
+        $pdf->writeHTML($html, true, false, false, false, '');
         subCapitulos($pdf, $cap['id'], $orden, $resPlan, $resTipoPoblacion, $formularios, $vocab, $idPlanEmergencia);
-
         $orden += 1;
     }
 }
 
 function subCapitulos($pdf, $id, $ordenCapitulo, $resPlan, $resTipoPoblacion, $formularios, $vocab, $idPlanEmergencia) {
+   // $pdf->SetFont(PDF_FONT_MONOSPACED, '', 12);
     $sql = "(SELECT  id, descripcion, orden,titulo,isActivo FROM SubCapitulo where FKidCapitulo = $id and isActivo = 1 ORDER BY orden)";
     $subcapitulos = seleccion($sql);
     $subOrden = 1;
@@ -244,10 +211,10 @@ function subCapitulos($pdf, $id, $ordenCapitulo, $resPlan, $resTipoPoblacion, $f
         $sql = "(SELECT  FKidSubCapitulo, FKidZonaTrabajo,descripcion FROM SubCapituloPlan where FKidSubCapitulo = " . $sub['id'] . " and FKidZonaTrabajo = " . $idPlanEmergencia . " )";
         $infoUsuario = seleccion($sql);
         if (count($infoUsuario) > 0) {
-            $html .= "<p>" . remplazar($infoUsuario[0]['descripcion']) . "</p>";
-             }
+            $html .= remplazar($infoUsuario[0]['descripcion']);
+        }
         $pdf->writeHTML($html, true, false, false, false, '');
-       
+
         listarFormularios($sub['id'], $formularios, $resPlan, $resTipoPoblacion, $vocab, $idPlanEmergencia, $pdf);
         $subOrden += 1;
     }
@@ -856,10 +823,10 @@ function formularioMatriz($idPlanEmergencia, $vocab, $pdf) {
     $sql = "SELECT `probabilidad`, `gravedad`, `consecuenciaAmenaza` FROM `Matriz` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
     $respuesta = seleccion($sql);
     $cantidad = array(
-            ['color' => 'Ninguna', 'cantidad' => 0],
-            ['color' => 'Verde', 'cantidad' => 0],
-            ['color' => 'Amarilla', 'cantidad' => 0],
-            ['color' => 'Roja', 'cantidad' => 0]);
+        ['color' => 'Ninguna', 'cantidad' => 0],
+        ['color' => 'Verde', 'cantidad' => 0],
+        ['color' => 'Amarilla', 'cantidad' => 0],
+        ['color' => 'Roja', 'cantidad' => 0]);
 
     foreach ($respuesta as $res) {
         $valor = $res['probabilidad'] * ($res['gravedad'] + $res['consecuenciaAmenaza']);
@@ -902,12 +869,11 @@ function formularioMatriz($idPlanEmergencia, $vocab, $pdf) {
 
     $valores[0] = (($valores[0] + $valores[1] + $valores[2] + $valores[3]) == 0) ? 1 : $valores[0];
     $valores = JSON_encode($valores);
-  $nombreGrafico = crearGrafico($valores, $color);
+    $nombreGrafico = crearGrafico($valores, $color);
 
     $html .= '<div><p dir="ltr" style="text-align:center"><span style="font-family:Arial; font-size:11pt">&nbsp;<img alt="Gráfico de la matriz de riesgos" width="250px" height = "250px"   src="' . $nombreGrafico . '"/></span></p></div>';
-   $pdf->writeHTML($html, true, false, false, false, '');
+    $pdf->writeHTML($html, true, false, false, false, '');
     unlink($nombreGrafico);
-
 }
 
 function calcularPorcentajeAmenaza($cantidadPorTipo, $cantidad) {
@@ -946,44 +912,44 @@ function formularioSeleccionada($id, $form, $resPlan, $resTipoPoblacion, $vocab,
                 formularioMatriz($idPlanEmergencia, $vocab, $pdf);
                 break;
             case 5:
-                $html .= '<div>' . $vocab["recurso_humano_titulo"] . '</div>';
+                $html .= '<br><div>' . $vocab["recurso_humano_titulo"] . '</div>';
                 $html .= formularioRecursosHumanos($idPlanEmergencia, $vocab);
 
-                $html .= '<div>' . $vocab["recurso_humano_titulo"] . '</div>';
+                $html .= '<br><div>' . $vocab["equipo_moviles"] . $vocab["equipo_moviles_terrestre"] . '</div>';
                 $html .= formularioEquipoMovil($idPlanEmergencia, $vocab, "Terrestre");
-                
-                $html .= '<div>' . $vocab["recurso_humano_titulo"] . '</div>';
+
+                $html .= '<br><div>' . $vocab["equipo_moviles"] . $vocab["equipo_moviles_Acuático"] . '</div>';
                 $html .= formularioEquipoMovil($idPlanEmergencia, $vocab, "Acuático");
-                
-                $html .= '<div>' . $vocab["recurso_humano_titulo"] . '</div>';
+
+                $html .= '<br><div>' . $vocab["equipo_moviles"] . $vocab["equipo_moviles_Aereo"] . '</div>';
                 $html .= formularioEquipoMovil($idPlanEmergencia, $vocab, "Aereo");
 
-                $html .= '<div>' . $vocab["instalaciones_titulo"] . '</div>';
+                $html .= '<br><div>' . $vocab["instalaciones_titulo"] . '</div>';
                 $html .= formularioRecursosInstalaciones($idPlanEmergencia, $vocab);
 
-                $html .= '<div>' . $vocab["otros_recursos_Telecomunicacion"] . '</div>';
+                $html .= '<br><div>' . $vocab["otros_recursos_Telecomunicacion"] . '</div>';
                 $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "telecomunicaciones");
 
-                $html .= '<div>' . $vocab["otros_recursos_equipo_repuestos"] . '</div>';
+                $html .= '<br><div>' . $vocab["otros_recursos_equipo_repuestos"] . '</div>';
                 $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "repuestos");
 
-                $html .= '<div>' . $vocab["otros_recursos_equipo_repuestosAgua"] . '</div>';
+                $html .= '<br><div>' . $vocab["otros_recursos_equipo_repuestosAgua"] . '</div>';
                 $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "recursosAgua");
 
-                $html .= '<div>' . $vocab["otros_recursos_Equipo_primeraRespuesta"] . '</div>';
+                $html .= '<br><div>' . $vocab["otros_recursos_Equipo_primeraRespuesta"] . '</div>';
                 $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "EquipoPrimeraRespuesta");
 
-                $html .= '<div>' . $vocab["otros_recursos_Señalizacion"] . '</div>';
+                $html .= '<br><div>' . $vocab["otros_recursos_Señalizacion"] . '</div>';
                 $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "señalizacion");
 
-                $html .= '<div>' . $vocab["otros_recursos_sistemas_insendios"] . '</div>';
+                $html .= '<br><div>' . $vocab["otros_recursos_sistemas_insendios"] . '</div>';
                 $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "sistemasIncendios");
 
-                $html .= '<div>' . $vocab["otros_recursos_equipo_repuestosEnergia"] . '</div>';
+                $html .= '<br><div>' . $vocab["otros_recursos_equipo_repuestosEnergia"] . '</div>';
                 $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "recursosEnergia");
                 break;
             case 6:
-                $html .= formularioPeligrosIdentificados($idPlanEmergencia, $vocab);                
+                $html .= formularioPeligrosIdentificados($idPlanEmergencia, $vocab);
                 break;
             case 7:
                 $html .= formularioPoblacion($idPlanEmergencia, $vocab);
@@ -1005,72 +971,12 @@ function formularioSeleccionada($id, $form, $resPlan, $resTipoPoblacion, $vocab,
                 $html .= formularioZonaSeguridad($idPlanEmergencia, $vocab);
                 break;
         }
-//        if ($idForm == 1) {  //Formulario de datos generales            
-//            $html .= formularioDatosGenerales($resPlan, $vocab);
-//
-//            //  $html .= '<div></div>';
-//        } else if ($idForm == 2) { //Formulario de actividades
-//            $html = formularioActividades($resTipoPoblacion, $vocab);
-////            $html .= '<div></div>';
-//        } else if ($idForm == 3) { // Formulario de instalaciones
-//            $html = formularioInstalaciones($resPlan, $vocab);
-//            //    $html .= '<div></div>';
-//            //  $html .= '<div></div>';
-//        } else if ($idForm == 4) { //Formulario Matriz de riesgos 
-//            formularioMatriz($idPlanEmergencia, $vocab, $pdf);
-//            //  $html .= '<div></div>';
-//        } else if ($idForm == 5) { //Formulario Inventario
-//            $html .= '<div>' . $vocab["recurso_humano_titulo"] . '</div>';
-//            $html .= formularioRecursosHumanos($idPlanEmergencia, $vocab);
-//
-//            $html .= '<div>' . $vocab["recurso_humano_titulo"] . '</div>';
-//            $html .= formularioEquipoMovil($idPlanEmergencia, $vocab, "Aereo");
-//
-//            $html .= '<div>' . $vocab["instalaciones_titulo"] . '</div>';
-//            $html .= formularioRecursosInstalaciones($idPlanEmergencia, $vocab);
-//
-//            $html .= '<div>' . $vocab["otros_recursos_Telecomunicacion"] . '</div>';
-//            $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "telecomunicaciones");
-//
-//            $html .= '<div>' . $vocab["otros_recursos_equipo_repuestos"] . '</div>';
-//            $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "repuestos");
-//
-//            $html .= '<div>' . $vocab["otros_recursos_equipo_repuestosAgua"] . '</div>';
-//            $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "recursosAgua");
-//
-//            $html .= '<div>' . $vocab["otros_recursos_Equipo_primeraRespuesta"] . '</div>';
-//            $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "EquipoPrimeraRespuesta");
-//
-//            $html .= '<div>' . $vocab["otros_recursos_Señalizacion"] . '</div>';
-//            $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "señalizacion");
-//
-//            $html .= '<div>' . $vocab["otros_recursos_sistemas_insendios"] . '</div>';
-//            $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "sistemasIncendios");
-//
-//            $html .= '<div>' . $vocab["otros_recursos_equipo_repuestosEnergia"] . '</div>';
-//            $html .= formularioInventarioOtros($idPlanEmergencia, $vocab, "recursosEnergia");
-//        } else if ($idForm == 6) { //Formulario Identificacion de peligros
-//            $html .= formularioPeligrosIdentificados($idPlanEmergencia, $vocab);
-//        } else if ($idForm == 7) { //Formulario de población
-//            $html .= formularioPoblacion($idPlanEmergencia, $vocab);
-//        } else if ($idForm == 8) { //Formulario de rutas de evacuación
-//            $html .= formularioRutaEvacuacion($idPlanEmergencia, $vocab);
-//        } else if ($idForm == 9) { //Formulario de brigadistas
-//            $html .= formularioBrigadistas($idPlanEmergencia, $vocab);
-//        } else if ($idForm == 10) { //Formulario de ingreso
-//            $html .= formularioIngresoAtencionEmergencias($idPlanEmergencia, $vocab);
-//
-//            $html .= formularioIngresoCuerposSocorro($idPlanEmergencia, $vocab);
-//        } else if ($idForm == 11) { //Formulario de zona de seguridad
-//            $html .= formularioPuestoBrigada($idPlanEmergencia, $vocab);
-//        } else if ($idForm == 12) { //Formulario de zona de seguridad
-//            $html .= formularioZonaSeguridad($idPlanEmergencia, $vocab);
-//        }
-        $html .= "<p>" . remplazar($form['descripcionAbajo']) . "</p>";
+        $html .= remplazar($form['descripcionAbajo']);
     }
     // return $html;
-
-    $pdf->writeHTML($html, true, false, false, false, '');
+    if ($html != "") {
+        $pdf->writeHTML($html, true, false, false, false, '');
+    }
 }
 
 function cargarNuevaPagina($pdf) {
@@ -1121,35 +1027,21 @@ function crearGrafico($criterios, $colores) {
     //$graph->img->Stream();
 }
 
-//function barraCargar($completado) {
-//    return '<div class = "progress progress-striped active">
-//    <div class = "progress-bar progress-bar-danger" role = "progressbar"
-//    aria-valuenow = "' . $completado . '" aria-valuemin = "0" aria-valuemax = "100"
-//    style = "width: 80%">
-//    <span class = "sr-only">' . $completado . '% completado </span>
-//    </div>
-//    </div>';
-//}
-// ---------------------------------------------------------
-//Close and output PDF document
-
 //ob_clean();
-$return="Generado";
+$return = "Generado";
 if (check_permiso($mod4, $act6, $user_rol) && !isset($_GET['visualizarpdf'])) {
-   $nombreDoc = $id . "-" . $version. '.pdf';
-    
-    $pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/' . $nombreDoc , 'F');
+    $nombreDoc = $id . "-" . $version . '.pdf';
+
+    $pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/' . $nombreDoc, 'F');
     $sql_a = "CALL insert_historial('$id','$version','$nombreDoc',@res);";
     $sql_b = "SELECT @res as res;";
-    $res = transaccion_verificada($sql_a, $sql_b);    
-     
-} else if (check_permiso($mod5, $act6, $user_rol)) {    
-    $nombreDoc = 'planEmergencias' . $random. '.pdf';   
-    $pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/' . $nombreDoc , 'F');
- 
-} 
+    $res = transaccion_verificada($sql_a, $sql_b);
+} else if (check_permiso($mod5, $act6, $user_rol)) {
+    $nombreDoc = 'planEmergencias' . $random . '.pdf';
+    $pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/' . $nombreDoc, 'F');
+}
 //ob_clean();
- echo  $return;  
+echo $return;
 //$pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/planEmergencias.pdf', 'F');
 //============================================================+
 // END OF FILE

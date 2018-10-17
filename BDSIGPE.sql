@@ -2500,7 +2500,7 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS `insertar_info_usuario_capitulo`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insertar_info_usuario_capitulo`(IN `p_FKidZonaTrabajo` int, IN `p_FKidCapitulo` int,
- IN `p_descripcion` varchar(150),OUT `res` TINYINT  UNSIGNED)
+ IN `p_descripcion` text,OUT `res` TINYINT  UNSIGNED)
 BEGIN   
     declare existe Integer;
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -2542,7 +2542,7 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS `insertar_info_usuario_subcapitulo`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insertar_info_usuario_subcapitulo`(IN `p_FKidZonaTrabajo` int, IN `p_FKidSubCapitulo` int,
- IN `p_descripcion` varchar(150),OUT `res` TINYINT  UNSIGNED)
+ IN `p_descripcion` text,OUT `res` TINYINT  UNSIGNED)
 BEGIN   
     declare existe Integer;
     DECLARE EXIT HANDLER FOR SQLEXCEPTION

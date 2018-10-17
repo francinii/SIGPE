@@ -20,6 +20,7 @@ if (count($res) <= 0) {
 ?>
 <div class="well well-sm">
     <h2><?= $vocab["rutas_evacuacion"] ?></h2>
+    <p><?= $vocab["rutas_evacuacion_desc"] ?></p>
     <div align="right" style = "padding-right:0.5%;">
         <?php if ($editar) { ?>
             <span class="text-center" >

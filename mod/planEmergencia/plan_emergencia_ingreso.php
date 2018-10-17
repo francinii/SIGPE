@@ -15,6 +15,8 @@ if (count($res) <= 0) {
 ?>
 <div class="well well-sm">
     <h2><?= $vocab["ingreso_titulo"] ?></h2>
+    <p><?= $vocab["ingreso_titulo_desc"] ?></p>
+    
 
     <div align="right" style = "padding-right:0.5%;">
         <?php if ($editar) { ?>
@@ -99,6 +101,7 @@ $res = seleccion($sql);
 
 <div class="well well-sm">
     <h2><?= $vocab["ingreso_subtitulo"] ?></h2>
+    <p><?= $vocab["ingreso_cuerpo_socorro_desc"] ?></p>
 
     <form method="post" action="">
         <h4><?= $vocab["ingreso_Condiciones"] ?></h4>

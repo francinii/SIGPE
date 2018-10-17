@@ -343,6 +343,7 @@ $vocab["equipo_moviles_terrestre"]          ="Terrestre";
 $vocab["equipo_moviles_titulo_desc"]        ="Equipo móvil terrestre: jeep, camión, tractor, otros. <br>Equipo móvil acuático: lancha, bote, panga, otros. <br>Equipo móvil aéreo: avioneta, helicóptero, otros.";
 $vocab["equipo_moviles_Acuático"]           ="Acuático";
 $vocab["equipo_moviles_Aereo"]              ="Aéreo";
+$vocab["equipo_moviles"]              ="Equipo móvil: ";
 
 //***********     plan de emergencia  identificacion de peligros  ***********************//
 $vocab["identifica_peligro_Titulo"]        = "Identificación de peligros";
@@ -406,6 +407,7 @@ $vocab["peligro_37"] = "Hay cilindros de gas vacíos, tirados o sin proteger.";
 
 //***********     plan de emergencia formulario plan de accion ***********************//
 $vocab["zona_seguridad"]                    = "zona de seguridad";
+$vocab["zona_seguridad_dsc"]                = "Llene los siguientes espacios con la información solicitada. Si desea agregar más zonas de seguridad, proceda a agregar una fila nueva.";
 $vocab["zona_seguridad_title"]              = "Zona de seguridad";
 $vocab["zona_seguridad_nombre"]             ="Nombre";  
 $vocab["zona_seguridad_ubicacion"]          ="Ubicación";  
@@ -423,19 +425,21 @@ $vocab["zona_seguridad_sector"]             ="Sector(es) que descargan a esa zon
 
 //***********     plan de emergencia formulario rutas de evacuación ***********************//
 $vocab["rutas_evacuacion"]                          = "Rutas de evacuación";
+$vocab["rutas_evacuacion_desc"]                      = "Rutas de evacuación: llene los siguientes espacios con la información solicitada. Si desea agregar más áreas, proceda a agregar una fila nueva.";
 $vocab["rutas_evacuacion_nombre"]                   = "Nombre de área";
 $vocab["rutas_evacuacion_personas_permanentes"]     = "Personas permanentes";
 $vocab["rutas_evacuacion_personas_flotantes"]       = "Personas flotantes";
-$vocab["rutas_evacuacion_ruta1"]                    = "Ruta ev 1.(Nombre salida)";
-$vocab["rutas_evacuacion_distancia1"]               = "Distancia R1 (m) Se mide con cronograma a velocidad de caminado normal";
+$vocab["rutas_evacuacion_ruta1"]                    = "Ruta ev1. (Nombre salida)";
+$vocab["rutas_evacuacion_distancia1"]               = "Distancia R1 (m) Se mide con cronómetro a velocidad de caminado normal";
 $vocab["rutas_evacuacion_tiempo1"]                  = "Tiempo R1 (min)";
-$vocab["rutas_evacuacion_ruta2"]                    = "Ruta ev 2.(Nombre salida)";
+$vocab["rutas_evacuacion_ruta2"]                    = "Ruta ev2. (Nombre salida)";
 $vocab["rutas_evacuacion_distancia2"]               = "Distancia R2 (m) Se mide en los planitos por medio de las cotas";
 $vocab["rutas_evacuacion_tiempo2"]                  = "Tiempo R2 (min)";
 
 //***********     plan de emergencia formulario brigadistas ***********************// 
 $vocab["brigadista_title"]              = "Brigadistas";
-$vocab["brigadista_nombre"]             = "brigadistas/número";
+$vocab["brigadista_title_desc"]         = "Brigadistas: llene los siguientes espacios con la información solicitada. Si desea agregar más brigadistas, procede a agregar una fila nueva."; 
+$vocab["brigadista_nombre"]             = "Brigadistas/número";
 $vocab["brigadista_punto_partida"]      = "Punto de  partida (zona habitual)";
 $vocab["brigadista_zona_asignada"]      = "Zona asignada a evacuar";
 $vocab["brigadista_numero_personas"]    = "Número de personas a evacuar";
@@ -492,11 +496,12 @@ $vocab["otros_recursos_caracteristicas"]               ="Características";
 $vocab["otros_recursos_contacto"]                      ="Contacto";
 $vocab["otros_recursos_ubicacion"]                     ="Ubicación";
 $vocab["otros_recursos_categoria"]                     ="Categoría";
-$vocab["otros_recursos_observaciones"]                 ="Detalles/Observación";
+$vocab["otros_recursos_observaciones"]                 ="Detalles/ Observación";
 
 //***********     plan de emergencia  poblacion ***********************//
 $vocab["poblacion_titulo"]                             ="Conformación de comité y brigadas de emergencia por oficinas, ubicación por sectores.";
-$vocab["poblacion_titulo_desc"]                        ="INSTRUCCIONES: Completar el cuadro con el nombre completo de los funcionarios que pertenecerán al comité de emergencia, brigadistas de primeros auxilios capacitados anteriormente, e interesados en llevar el curso(poner un asterisco * en interesados que no hayan llevado el curso de primeros auxilios), brigadistas para la brigada efectiva(evacuación, vigilancia, extinción), contactos en caso de emergencia.";
+$vocab["poblacion_titulo_desc"]                        ="INSTRUCCIONES: Completar el cuadro con el nombre completo de los funcionarios que pertenecerán al comité de emergencia, brigadistas de primeros auxilios capacitados anteriormente, e interesados en llevar el curso(poner un asterisco * en interesados que no hayan llevado el curso de primeros auxilios), brigadistas para la brigada efectiva(evacuación, vigilancia, extinción), contactos en caso de emergencia.<br>"
+                                                       . "Llene los siguientes espacios con la información solicitada. Si desea agregar sectores, seleccione el botón agregar sector. Si desea agregar oficinas a un sector, seleccione el signo de más ubicado en la fila del sector donde desee agregarla";
 $vocab["poblacion_oficina"]                            ="Nombre de oficina";
 $vocab["poblacion_ocuapcional"]                        ="Capacidad ocupacional permanente";
 $vocab["poblacion_temporal"]                           ="Capacidad ocupacional temporal ";
@@ -511,7 +516,8 @@ $vocab["poblacion_sectorNuevo"]                        ="Sector nuevo";
 
 
 //***********     plan de emergencia  Ingresos ***********************//
-$vocab["ingreso_titulo"]                               ="Análisis de tiempo de respuesta de cuerpos de atención de emergencias";
+$vocab["ingreso_titulo"]                               ="Análisis del tiempo de respuesta de cuerpos de atención de emergencias";
+$vocab["ingreso_titulo_desc"]                          ="Llene los siguientes espacios con la información solicitada. Si desea agregar más cuerpos de respuesta, proceda a agregar una fila nueva.";
 $vocab["ingreso_cuerpoRespuesta"]                      ="Cuerpo de respuesta";
 $vocab["ingreso_ubicación"]                            ="Ubicación";
 $vocab["ingreso_recorrido"]                            ="Distancia de recorrido";
@@ -521,6 +527,7 @@ $vocab["ingreso_cruzRoja"]                             ="Cruz Roja";
 $vocab["ingreso_Bomberos"]                             ="Benemérito cuerpo de bomberos";
 $vocab["ingreso_transito"]                             ="Tránsito";
 $vocab["ingreso_subtitulo"]                      ="Descripción de ingreso de los cuerpos de socorro";
+$vocab["ingreso_cuerpo_socorro_desc"]            ="Llene los siguientes espacios con la información solicitada.";
 $vocab["ingreso_descripcion"]                    ="Descripción:";
 $vocab["ingreso_Condiciones"]                    ="Condiciones de análisis";
 $vocab["ingreso_dimensiones"]                    ="Dimensiones de áreas de acceso:";
@@ -534,6 +541,7 @@ $vocab["ingreso_protocolo"]                      ="Protocolos de coordinación c
 
 //***********     plan de emergencia  puestos de la brigada ***********************//
 $vocab["puestos_brigada_title"]                  ="Puestos de la brigada";
+$vocab["puestos_brigada_desc"]                   ="Llene los siguientes espacios con la información solicitada. Si desea agregar puestos de brigada, seleccione el botón agregar puesto. Si desea agregar nuevas funciones a un puesto, seleccione el signo de más ubicado en la fila del puesto donde desee agregarla";
 $vocab["puestos_brigada_puesto"]                 ="Puesto";
 $vocab["puestos_brigada_funciones"]              ="Funciones";
 $vocab["puestos_brigada_plazos_ejecución"]       ="Plazos de ejecución";
@@ -548,7 +556,7 @@ $vocab["puestos_brigada_puestoNuevo"]            ="Puesto nuevo";
 
 //***********     plan de emergencia  capitulos y subcapitulos ***********************//
 $vocab["capitulos_subcapitulos_title"]                       ="Información extra capítulos y subcapítulos";
-$vocab["capitulos_subcapitulos_title_desc"]                  ="Información extra requerida en los capítulos y subcapítulos. Se requiere prosa del usuario";
+$vocab["capitulos_subcapitulos_title_desc"]                  ="Información extra requerida en los capítulos y subcapítulos. Se requiere prosa del usuario. <br> Intrucciones: En los siguientes formularios proceda a rellenar los cuadros del lado derecho con la información que se le indique.";
 $vocab["capitulos_subcapitulos_capitulo"]                    = "Capítulo";
 $vocab["capitulos_subcapitulos_subcapitulo"]                 = "Subcapítulo";
 $vocab["capitulos_subcapitulos_info_admin"]                  = "Información del admin:";

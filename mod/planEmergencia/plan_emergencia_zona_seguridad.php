@@ -20,7 +20,9 @@ if (count($res) <= 0) {
 ?>
 
 <div class="well well-sm">
-    <p><b><?= $vocab["zona_seguridad_title"] ?></b></p>
+    <h2><?= $vocab["zona_seguridad_title"] ?></h2>
+    <p><?= $vocab["zona_seguridad_dsc"] ?></p>    
+            
     <div align="right" style = "padding-right:0.5%;">
         <?php if ($editar) { ?>
             <span class="text-center" >
