@@ -21,7 +21,7 @@ $res = seleccion($sql);
         <p><?= $vocab["datos_generares_Desc"] ?></p>
     </div>
     <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
-        <form method="post" action="">
+        <form class="formulario" id="datos_generales" method="post" action="">
             <div class="form-group row">
                 <label for="institucion" class="col-sm-3 col-form-label"><?= $vocab["datos_generares_nombre"] ?></label>
                 <div class="col-sm-9">

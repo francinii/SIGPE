@@ -25,7 +25,7 @@ $res = seleccion($sql);
         <p><?= $vocab["instalaciones_Titulo_Desc"] ?></p>
     </div>
     <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
-        <form method="post" action="">
+        <form  class="formulario" id="instalaciones" method="post" action="">
             <h3><?= $vocab["instalaciones_subTitulo1"] ?></h3>
             <div class="form-group row">
                 <label for="Densidad" class="col-sm-3 col-form-label"><?= $vocab["instalaciones_Densidad"] ?></label>

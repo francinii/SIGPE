@@ -1,14 +1,17 @@
 <?php
+/*
+ * Formulario brigadistas
+ * 
+ */
 include("../login/check.php");
 include("../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
 include("plan_emergencia_menu.php");
 ?>
-<!------------------------------------  Recurso telecomunicaciones ----------------------------------- ------------------- ----------->
+
 <?php
-//$categoria = 'telecomunicaciones';
-//$prefijo = 'PA-';
+/************** select de los datos del formulario brigadistas ****/
 $tablaID = "lista_plan_accion";
 $sql = "SELECT  `id`, `FKidZonaTrabajo`, `brigadista`, `puntoPartida`,"
         . " `zonaEvacuar`,`numPersonasEvacuar`,`distancia`,`tiempo` FROM `Brigada` WHERE `FKidZonaTrabajo`=$idPlanEmergencia";
@@ -29,7 +32,7 @@ if (count($res) <= 0) {
         <?php } ?>
     </div>
     <div   class="dataTables_wrapper dt-bootstrap" style = "overflow-x:auto;">
-        <table style = "width: 99%;" id="<?= $tablaID ?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center" >
+        <table  style = "width: 99%;" id="<?= $tablaID ?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
             <thead style="background-color: lightblue;">
                 <tr>
                     <th  width="5%"><?= $vocab["brigadista_nombre"] ?></th>
@@ -78,6 +81,7 @@ if (count($res) <= 0) {
         </table>
     </div>  
     <div class="text-center">
+        <!--/************** guardar datos ****/-->
         <?php if ($editar) { ?>
             <span class="text-center">
                 <a class="btn btn-warning"  onclick="javascript:guardarBrigadistas('<?= $idPlanEmergencia ?>', 0, '<?= $tablaID ?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["brigadista_title"] ?></a>

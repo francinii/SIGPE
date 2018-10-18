@@ -1,5 +1,5 @@
 <?php
-
+/*** guarda los datos de la tabla recursos instalaciones de inventario en la base */
 include("../login/check.php");
 include("../../inc/db/db.php");
 $idPlanEmergencia = $_GET['idPlanEmergencia'];

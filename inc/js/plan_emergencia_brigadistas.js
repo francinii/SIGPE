@@ -1,4 +1,13 @@
-function agregarBrigadistas(titulo, idtabla, alert, comboArea,comboAccion) {
+
+/**
+ *  agrega una fila a la tabla
+ *  llamado en  pla_emergencia_brigadistas.php
+ * @param {String} titulo el boton de eliminar
+ * @param {String} idtabla de la tabla
+ * @param {String} alert  mensage de alerta
+ * @returns {undefined}
+ */
+function agregarBrigadistas(titulo, idtabla, alert) {
     var tabla = jQuery(idtabla + " tbody");
     var id = tabla.children().last().attr('id');
     if (typeof id == 'undefined') {
@@ -25,14 +34,24 @@ function agregarBrigadistas(titulo, idtabla, alert, comboArea,comboAccion) {
     llenarSelect(id, 'nada',1);
     IniciarGuardarCambios(alert);
 }
-
+/**
+ *  Elimina una fila de la tabla
+ *  llamado en  pla_emergencia_brigadistas.php
+ * @param {elemento HTML} event  elemento que resive la accion
+ * @returns {undefined}
+ */
 function eliminarFilaBrigadistas(event) {
     jQuery(event).trigger('change');
     var row = jQuery(event).parents("tr:first");
     row.remove();
 
 }
-
+/**
+ *  Valida la informacion de la tabla 
+ *  llamado en  pla_emergencia_brigadistas.php
+ * @param {String} tabla id de la tabla 
+ * @returns {boolean}
+ */
 function validate_brigada(tabla) {
     var filas = jQuery(tabla + " tbody").children();
     for (var i = 0; i < filas.length; i++) {
@@ -50,7 +69,12 @@ function validate_brigada(tabla) {
     }
     return true;
 }
-
+/**
+ *  Quita el color azul de los campos validados
+ *  llamado en  pla_emergencia_brigadistas.php
+ * @param {String} tabla id de la tabla 
+ * @returns {undefined}
+ */
 function validado(tabla) {
     var filas = jQuery(tabla + " tbody").children();
     for (var i = 0; i < filas.length; i++) {
@@ -64,7 +88,13 @@ function validado(tabla) {
     }
 
 }
-
+/**
+ *  Guarda los datos del formulario POblacion , conecta con el servidor
+ *  llamado en  pla_emergencia_brigadistas.php
+ * @param {int} pasar al siguiente formulario(1,0)
+ * @param {int} idPlanEmergencia id del plan de emergencia 
+ * @returns {undefined}
+ */
 function guardarBrigadistas(idPlanEmergencia, pasar, idtable) {
     if (validate_brigada("#" + idtable)) {
         validado("#" + idtable);
@@ -102,7 +132,7 @@ function guardarBrigadistas(idPlanEmergencia, pasar, idtable) {
                 var response = ajax.responseText;
                 //alert(response); //DEBUG
                 if (response == 0) {
-                    datosGuardados();
+                    datosGuardados(idtable);
                     jAlert("Guardado  con exito", "Exito");
                     if (pasar) {
                         OpcionMenu('mod/planEmergencia/plan_emergencia_ingreso.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);

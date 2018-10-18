@@ -29,7 +29,7 @@ if (count($res) <= 0) {
 </div>
 
 <div class="dataTables_wrapper form-inline dt-bootstrap" style=overflow-x:auto;"> 
-    <table style = "width: 99%;" id="lista_usuarios" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable text-center" >
+    <table   style = "width: 99%;" id="lista_usuarios" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable text-center formulario" >
         <thead>
             <tr>
                 <th rowspan="2" width="10%"><?= $vocab["actividades_Titulo"] ?></th>

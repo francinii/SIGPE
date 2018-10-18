@@ -191,7 +191,7 @@ $matriz = seleccion($sql);
     <h1><?= $vocab["matriz_title"] ?></h1></div>
 
 <div class="dataTables_wrapper form-inline dt-bootstrap" style=overflow-x:auto;">
-    <table style = "width: 99%;" id="matriz_riesgos" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable text-center" >
+    <table style = "width: 99%;" id="matriz_riesgos" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable text-center formulario" >
         <thead>
             <tr>
                 <th rowspan="2" width="10%"><?= $vocab["td_origen"] ?></th>

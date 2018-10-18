@@ -1,10 +1,14 @@
 <?php
+/*
+ * Formulario ingreso cuerpos de socorro
+ */
 include("../login/check.php");
 include("../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
 include("plan_emergencia_menu.php");
 
+/*  ********************************  select de los datos del formulario ingreso cuerpos de socorro**********/
 $sql = "SELECT  `tipo`, `ubicacion`, `Distancia`, `Tiempo`"
         . " FROM `CuerposScorro` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
 $res = seleccion($sql);
@@ -26,7 +30,7 @@ if (count($res) <= 0) {
         <?php } ?>
     </div>
     <div   class="dataTables_wrapper   dt-bootstrap" style = "overflow-x:auto;">
-        <table style = "width: 99%;" id="lista_ingreso" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center" >
+        <table style = "width: 99%;" id="lista_ingreso" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
             <thead style="background-color: lightblue;">
                 <tr>
                     <th  width="5%"><?= $vocab["ingreso_cuerpoRespuesta"] ?></th>
@@ -82,7 +86,8 @@ if (count($res) <= 0) {
                 ?>
             </tbody>
         </table>
-    </div>  
+    </div> 
+    <!--/*  ********************************  Guarda datos de la tabla de tiempo de respuesta **********/-->
     <div class="text-center">
         <?php if ($editar) { ?>
             <span class="text-center">
@@ -92,7 +97,7 @@ if (count($res) <= 0) {
     </div>
 </div>
 
-<!------------------------------------------- Tabla increso cuerpos de socorro----------------------------------------------->
+ <!--********** Tabla increso cuerpos de socorro**************************************-->
 <?php
 $sql = "SELECT `dimensionAreaAcceso`, `radioGiro`, `caseta`, `plumas`, `anchoLibre` FROM `IngresoCuerpoSocorro` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
 $res = seleccion($sql);
@@ -103,7 +108,7 @@ $res = seleccion($sql);
     <h2><?= $vocab["ingreso_subtitulo"] ?></h2>
     <p><?= $vocab["ingreso_cuerpo_socorro_desc"] ?></p>
 
-    <form method="post" action="">
+    <form class="formulario" id="lista_ingreso_cuerposocorro" method="post" action="">
         <h4><?= $vocab["ingreso_Condiciones"] ?></h4>
 
         <div class="form-group row">
@@ -139,7 +144,7 @@ $res = seleccion($sql);
         <h4><?= $vocab["ingreso_protocolo"] ?></h4>
 
 
-
+ <!--/*  ********************************  Guarda datos del formulario descripcion del ingreso **********/-->
         <?php if ($editar) { ?>
             <div class="text-center">
                 <?php if ($editar) { ?>

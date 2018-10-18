@@ -31,7 +31,7 @@ if (count($res) <= 0) {
         <?php } ?>
     </div>
     <div   class="dataTables_wrapper dt-bootstrap" style = "overflow-x:auto;">
-        <table style = "width: 99%;" id="<?= $tablaID ?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center" >
+        <table style = "width: 99%;" id="<?= $tablaID ?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
             <thead style="background-color: lightblue;">
                 <tr>
                     <th  width="5%"><?= $vocab["zona_seguridad_nombre"] ?></th>

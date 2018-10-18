@@ -1,4 +1,8 @@
 <?php
+/*
+ * Guarda los datos del formulario brigadistas en la base
+ * 
+ */
 include("../login/check.php");
 include("../../inc/db/db.php");
 $idPlanEmergencia = $_GET['idPlanEmergencia'];

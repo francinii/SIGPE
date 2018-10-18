@@ -1,9 +1,18 @@
-var cambios = 0;
+/*
+ * Variable gobla que detecta cambios en los datos del formulario
+ */
+var cambios = new Array();
+/**
+ * agrega la funcion que detecta los cambios en los datos del formulario
+ * activa una notificacion en el sistema
+ *  llamado en  todos los formularios del sistema
+ * @param {String } alert mensaje de datos sin guardar
+ * @returns {undefined}
+ */
 function IniciarGuardarCambios(alert) {
     jQuery(".cambios").change(function (event) {
-        jQuery(event.currentTarget).css("background-color", "#ffeb8e");
-        if (cambios == 0) {
-            cambios = 1;
+        jQuery(event.currentTarget).css("background-color", "#fcf7e0");
+        if (cambios.length == 0) {
             jQuery("#divalertaDatosSinGuardar").addClass("panel panel-warning ");
             jQuery("#divalertaDatosSinGuardar").css("position", "fixed");
             jQuery("#divalertaDatosSinGuardar").css("bottom", "0");
@@ -12,15 +21,35 @@ function IniciarGuardarCambios(alert) {
             jQuery("#divalertaDatosSinGuardar").css("z-index", "1030");
             jQuery("#alertaDatosSinGuardar").append("<p>" + alert + "</p>");
         }
+        var formulario = jQuery(event.currentTarget).parents(".formulario");
+        if (!cambios.includes(formulario[0].id)) {
+            cambios.push(formulario[0].id);
+        }
     });
 }
 
-function datosGuardados() {
-    cambios = 0;
-    jQuery(".cambios").css("background-color", "#fff");
+
+/**
+ *  desactiva la notificacion de datos si guardar
+ *  llamado en  todos los formularios del sistema
+ * @returns {undefined}
+ */
+function datosGuardados(idformulario) {
+    var pos=cambios.indexOf(idformulario);
+    cambios.splice(pos, 1);
+    jQuery("#" + idformulario + " .cambios").css("background-color", "#fff");
+    if (cambios.length == 0) {
     jQuery("#divalertaDatosSinGuardar").removeClass("panel panel-warning");
     jQuery("#alertaDatosSinGuardar").html("");
+    }
 }
+
+/**
+ *  Menu del plan de emergencia, cambia entre los planes de emergencia 
+ *  los ID de los planes son fijos en la base dependiendo del ID va al php
+ *  llamado en  todos los formularios del sistema
+ * @returns {undefined} redirreciona la  pagina dependiendo del ID
+ */
 function cambiarMenu(numero, idCentro, nombreCentro) {
     switch (numero) {
         case 1:
@@ -46,24 +75,24 @@ function cambiarMenu(numero, idCentro, nombreCentro) {
             break;
         case 8:
             OpcionMenu('mod/planEmergencia/plan_emergencia_rutas_evacuacion.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
-        break;
+            break;
         case 9:
             OpcionMenu('mod/planEmergencia/plan_emergencia_brigadistas.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
-        break;
+            break;
         case 10:
-             OpcionMenu('mod/planEmergencia/plan_emergencia_ingreso.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
-      
-       break;
-         case 11:
+            OpcionMenu('mod/planEmergencia/plan_emergencia_ingreso.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
+
+            break;
+        case 11:
             OpcionMenu('mod/planEmergencia/plan_emergiancia_puestos_brigada.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
-        break;
+            break;
         case 12:
             OpcionMenu('mod/planEmergencia/plan_emergencia_zona_seguridad.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
-        break;
+            break;
         case 13:
             OpcionMenu('mod/planEmergencia/plan_emergencia_capitulos_subcapitulos.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
-        break;
-     
+            break;
+
     }
 
 }

@@ -1,5 +1,5 @@
 <?php
-
+/* **** guarda la descripcion del usuario en los capitulos y subcapitulos e la base */
 include("../login/check.php");
 include("../../inc/db/db.php");
 

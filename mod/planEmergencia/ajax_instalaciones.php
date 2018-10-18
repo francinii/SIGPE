@@ -1,5 +1,5 @@
 <?php
-
+/* Guarda los datos del formulacion instalaciones*/
 include("../login/check.php");
 include("../../inc/db/db.php");
 

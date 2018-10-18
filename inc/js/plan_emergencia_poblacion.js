@@ -1,13 +1,14 @@
 /**
- * agrega una sector a la tabla
- *  llamado en  pla_emergencia_poblacion.php
+ * agrega una fila a la tabla
+ *  llamado en  plan_emergencia_poblacion.php
  * @param {String} titulo el boton de eliminar
  * @param {String} alert mensage de alerta
  * @param {String} agregar titulo del boton de agregar
  * @param {String} descripcion del sector incial
+ * @param {String} labeSector labe del sector nuevo
  * @returns {undefined}
  */
-function agregarFilaSector(titulo, alert, agregar,descripcion) {
+function agregarFilaSector(titulo, alert, agregar,descripcion,labeSector) {
     var tabla = jQuery("#lista_poblacion tbody");
     var id = tabla.children().last().attr('id');
     if (typeof id == 'undefined') {
@@ -17,8 +18,9 @@ function agregarFilaSector(titulo, alert, agregar,descripcion) {
         var id = (parseInt(id[1]) + 1);
     }
     var fila = '<tr class="seccionPoblacion" id="Sec-' + id + '">' +
-            '<td  style="align-items:center; background-color:lightblue" colspan="10">' +
-            '<input style="width:40%; margin: 0 auto;" type="text"  class="form-control requerido cambios" id="Sector' + id + '" value="'+descripcion+'" ></td>' +
+            '<td  style="align-items:center; background-color:lightblue" class = " form-inline" colspan="10">' +
+            '<span>'+labeSector+':</span>'+
+            '<input style="width:40%;" type="text"  class="form-control requerido cambios" id="Sector' + id + '" value="'+descripcion+'" ></td>' +
             '<td  style="background-color:lightblue">' +
             '<a class="puntero cambios"  onClick="javascript:eliminarFila(this);">' +
             '<div class="text-center"><i class="fa fa-close  text-danger" title="' + titulo + '"></i></div>' +
@@ -38,7 +40,7 @@ function agregarFilaSector(titulo, alert, agregar,descripcion) {
 
 /**
  * agrega una fila  a un secto
- *  llamado en  pla_emergencia_poblacion.php
+ *  llamado en  plan_emergencia_poblacion.php
  * @param {String} titulo el boton de eliminar
  * @param {String} alert mensage de alerta
  * @param {int} Idselec id del selector 
@@ -93,12 +95,25 @@ function agregarFilaPoblacion(titulo, alert, Idselec) {
     jQuery("#nombreOficina" + id).focus();
 }
 
+/**
+ *  Elimina una fila de la tabla
+ *  llamado en  plan_emergencia_poblacion.php
+ * @param {elemento HTML} event  elemento que resive la accion
+ * @returns {undefined}
+ */
 function eliminarFilaPoblacion(event) {
     jQuery(event).trigger('change');
     var row = jQuery(event).parents("tr:first");
     row.remove();
 
 }
+
+/**
+ *  Valida la informacion de la tabla 
+ *  llamado en  plan_emergencia_poblacion.php
+ * @param {String} tabla id de la tabla 
+ * @returns {boolean}
+ */
 function validate_InventarioPoblacion(tabla) {
     var filas = jQuery(tabla + " tbody").children();
     for (var i = 0; i < filas.length; i++) {
@@ -117,6 +132,13 @@ function validate_InventarioPoblacion(tabla) {
     return true;
 }
 
+
+/**
+ *  Quita el color azul de los campos validados
+ *  llamado en  plan_emergencia_poblacion.php
+ * @param {String} tabla id de la tabla 
+ * @returns {undefined}
+ */
 function validadoPoblacion(tabla) {
     var filas = jQuery(tabla + " tbody").children();
     for (var i = 0; i < filas.length; i++) {
@@ -131,6 +153,14 @@ function validadoPoblacion(tabla) {
 
 }
 
+
+/**
+ *  Guarda los datos del formulario POblacion , conecta con el servidor
+ *  llamado en  plan_emergencia_poblacion.php
+ * @param {int} idPlanEmergencia id del plan de emergencia 
+ * @param {int} pasar al siguiente formulario(1,0) 
+ * @returns {undefined}
+ */
 function guardarPoblacion(idPlanEmergencia, pasar) {
     if (validate_InventarioPoblacion("#lista_poblacion")) {
         validadoPoblacion("#lista_poblacion");
@@ -184,7 +214,7 @@ function guardarPoblacion(idPlanEmergencia, pasar) {
                 var response = ajax.responseText;
                 //alert(response); //DEBUG
                 if (response == 0) {
-                    datosGuardados();
+                    datosGuardados('lista_poblacion');
                     jAlert("Guardado  con exito", "Exito");
                     if (pasar) {
                         OpcionMenu('mod/planEmergencia/plan_emergencia_rutas_evacuacion.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);

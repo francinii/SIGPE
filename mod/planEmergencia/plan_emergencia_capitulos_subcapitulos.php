@@ -1,15 +1,31 @@
 <?php
+/*
+ * Informacion extra que debe agregar un usuario en los capitulos y subcapitulos
+ * 
+ */
 include("../login/check.php");
 include("../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
 
+
+/**********************************  select de los capitulos ******************************************/
 include("plan_emergencia_menu.php");
 $sql = "SELECT `id`, `descripcion`, `descripcionParaUsuario`, `isDescripcionParaUsuario`, `titulo`, `orden`
         FROM Capitulo WHERE isActivo=1  ORDER BY orden";
 
 $cap = seleccion($sql);
 
+/**
+ * crea un capitulo en el html
+ *  llamado en  plan_emergencia_capitulos_subcapitulos.php
+ * @param {Array} $cap infromacion del capitulo
+ * @param {Array} $vocab lista de vocabulario del sistema
+ * @param {int} $idPlanEmergencia id del pan de emergencia
+ * @param {int} $i numero de capitulo
+ * @param {boolean} $editar estado en que esta la pagina 
+ * @returns {undefined} recarga la pagina a list_capitulos.php
+ */
 function capitulo($cap, $vocab, $idPlanEmergencia, $i,$editar) {
     ?>  
     <div class="well well-sm">
@@ -56,7 +72,18 @@ function capitulo($cap, $vocab, $idPlanEmergencia, $i,$editar) {
 
     <?php
 }
-
+/**
+ * crea un capitulo en el html
+ *  llamado en  plan_emergencia_capitulos_subcapitulos.php
+ * @param {Array} $cap infromacion del capitulo
+ * @param {Array} $listaFormularios lista de formularios asociados a un capitulo
+ * @param {Array} $vocab lista de vocabulario del sistema
+ * @param {int} $idPlanEmergencia id del pan de emergencia
+ * @param {int} $i numero de capitulo
+ * @param {int} $i numero de subcapitulo
+ * @param {boolean} $editar estado en que esta la pagina 
+ * @returns {undefined} recarga la pagina a list_capitulos.php
+ */
 function subcapitulo($subcap, $listaFormularios, $vocab, $idPlanEmergencia, $i, $j,$editar) {
     ?>  
     <div class="well well-sm" >
@@ -96,7 +123,7 @@ function subcapitulo($subcap, $listaFormularios, $vocab, $idPlanEmergencia, $i, 
             </div> 
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <label  for="capitulo_Descripcion_usuario"> <?= $vocab['capitulos_subcapitulos_info_usuario'] ?> </label>
-                <textarea   <?= (!$editar) ? "disabled" : ""; ?> class="form-control cambios"  id="subcapitulo_Descripcion_usuario<?= $i ?>.<?= $j ?>" name="capitulo_Descripcion_usuario" ><?= descripcionSubcapitulo($subcap['id'], $idPlanEmergencia) ?></textarea>
+                <textarea   style="background-color: yellowgreen;" <?= (!$editar) ? "disabled" : ""; ?> class="form-control cambios"  id="subcapitulo_Descripcion_usuario<?= $i ?>.<?= $j ?>" name="capitulo_Descripcion_usuario" ><?= descripcionSubcapitulo($subcap['id'], $idPlanEmergencia) ?></textarea>
             </div> 
         </div>
     </div>
@@ -109,6 +136,13 @@ function subcapitulo($subcap, $listaFormularios, $vocab, $idPlanEmergencia, $i, 
     <?php
 }
 
+/**
+ *  descripcion de los usuarios en los capitulos
+ *  llamado en  plan_emergencia_capitulos_subcapitulos.php
+ * @param {int} $idcapitulo id del capitulo
+ * @param {int} $idZona id de la zona de trabajo
+ * @returns {undefined} recarga la pagina a list_capitulos.php
+ */
 function descripcionCapitulo($idcapitulo, $idZona) {
     $sql = "SELECT `descripcion` FROM `CapituloPlan` WHERE  `FKidCapitulo`=" . $idcapitulo . " and `FKidZonaTrabajo`=" . $idZona;
     $res = seleccion($sql);
@@ -118,6 +152,13 @@ function descripcionCapitulo($idcapitulo, $idZona) {
     return "";
 }
 
+/**
+ *  descripcion de los usuarios en los subcapitulos
+ *  llamado en  plan_emergencia_capitulos_subcapitulos.php
+ * @param {int} $idcapitulo id del subcapitulo
+ * @param {int} $idZona id de la zona de trabajo
+ * @returns {undefined} recarga la pagina a list_capitulos.php
+ */
 function descripcionSubcapitulo($idSubcapitulo, $idZona) {
     $sql = "SELECT `descripcion` FROM `SubCapituloPlan` WHERE  `FKidSubCapitulo`=" . $idSubcapitulo . " and `FKidZonaTrabajo`=" . $idZona;
     $res = seleccion($sql);
@@ -127,12 +168,24 @@ function descripcionSubcapitulo($idSubcapitulo, $idZona) {
     return "";
 }
 
+
+/**
+ *  seleciona subcapitulos de la base
+ *  llamado en  plan_emergencia_capitulos_subcapitulos.php
+ * @param {int} $id id del capitulo
+ * @returns {Array} lista de subcapitulos
+ */
 function subcapitulos($id) {
     $sql = "SELECT `id`, `descripcion`, `descripcionParaUsuario`, `isDescripcionParaUsuario`, `titulo`, `isActivo`,"
             . " `FKidCapitulo`, `orden` FROM `SubCapitulo` WHERE `FKidCapitulo`=" . $id;
     return seleccion($sql);
 }
-
+/**
+ *  seleciona lista formularios de la base
+ *  llamado en  plan_emergencia_capitulos_subcapitulos.php
+ * @param {int} $id id del subcapitulo
+ * @returns {Array} lista de formularios
+ */
 function listaFormularios($id) {
     $sql = "SELECT `id`, `titulo` FROM `Formulario` WHERE `FKidSubcapitulos`=" . $id;
     return seleccion($sql);

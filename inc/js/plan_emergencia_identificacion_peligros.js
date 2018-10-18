@@ -65,7 +65,7 @@ function guardarDatosIdentificacionPeligros(idPlanEmergencia, pasar) {
             var response = ajax.responseText;
             //alert(response); //DEBUG
             if (response == 0) {
-                datosGuardados();
+                datosGuardados('lista_identificacion_peligros');
                 jAlert("Guardado  con exito", "Exito");
                 if (pasar) {
                     OpcionMenu('mod/planEmergencia/plan_emergencia_poblacion.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
@@ -106,7 +106,7 @@ function agregarFilaIdentificacionPeligro(titulo) {
     var fila = '<tr class = "trInformacion" id="tr' + id + '">' +
             '<input type ="hidden" id ="idPeligro' + id + '" value ="-1">' +
             '<td><textarea class="form-control habilitar requerido cambios" id="peligro' + id + '" ></textarea></td>' +
-            '<td> <select id= "presente' + id + '" class = "form-control" onchange="cambioCalcularSiPresente(this)"   >' +
+            '<td> <select id= "presente' + id + '" class = "form-control cambios" onchange="cambioCalcularSiPresente(this)"   >' +
             '<option> SI</option>' +
             '<option> NO</option>' +
             '</select> ' +

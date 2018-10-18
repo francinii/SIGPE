@@ -516,7 +516,7 @@ $vocab["poblacion_contactoEmergencia"]                 ="Persona contacto en cas
 $vocab["poblacion_telefono_personal"]                  ="Teléfono personal en caso de emergencia";
 $vocab["poblacion_correo"]                             ="Correo electrónico en caso de emergencia";
 $vocab["poblacion_sectorNuevo"]                        ="Sector nuevo";
-
+$vocab["poblacion_sector"]                             ="Sector";
 
 //***********     plan de emergencia  Ingresos ***********************//
 $vocab["ingreso_titulo"]                               ="Análisis del tiempo de respuesta de cuerpos de atención de emergencias";

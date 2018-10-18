@@ -1,4 +1,7 @@
 <?php
+/*
+ * Guarda los datos del formulario ingreso de curpos de socorro en la base
+ */
 include("../login/check.php");
 include("../../inc/db/db.php");
 

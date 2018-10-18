@@ -1,4 +1,13 @@
 
+/**
+ * agrega una fila a la tabla
+ *  llamado en  pla_emergencia_rutas_evacuacion.php
+ * @param {String} titulo el boton de eliminar
+ * @param {String} idtabla mensage de alerta
+ * @param {String} alert del datos sin guardar
+ * @returns {undefined}
+ */
+
 function agregarRutasEvacuacion(titulo, idtabla, alert) {
     var tabla = jQuery(idtabla + " tbody");
     var id = tabla.children().last().attr('id');
@@ -28,6 +37,13 @@ function agregarRutasEvacuacion(titulo, idtabla, alert) {
     IniciarGuardarCambios(alert);
 }
 
+/**
+ *  Elimina una fila de la tabla
+ *  llamado en  pla_emergencia_rutas_evacuacion.php
+ * @param {elemento HTML} event  elemento que resive la accion
+ * @returns {undefined}
+ */
+
 function eliminarFilaRutasEvacuacion(event) {
     jQuery(event).trigger('change');
     var row = jQuery(event).parents("tr:first");
@@ -35,6 +51,12 @@ function eliminarFilaRutasEvacuacion(event) {
 
 }
 
+/**
+ *  Valida la informacion de la tabla 
+ *  llamado en  pla_emergencia_rutas_evacuacion.php
+ * @param {String} tabla id de la tabla 
+ * @returns {boolean}
+ */
 function validate_Inventario(tabla) {
     var filas = jQuery(tabla + " tbody").children();
     for (var i = 0; i < filas.length; i++) {
@@ -52,7 +74,12 @@ function validate_Inventario(tabla) {
     }
     return true;
 }
-
+/**
+ *  Quita el color azul de los campos validados
+ *  llamado en  pla_emergencia_rutas_evacuacion.php
+ * @param {String} tabla id de la tabla 
+ * @returns {undefined}
+ */
 function validado(tabla) {
     var filas = jQuery(tabla + " tbody").children();
     for (var i = 0; i < filas.length; i++) {
@@ -68,7 +95,14 @@ function validado(tabla) {
 }
 
 
-
+/**
+ *  Guarda los datos del formulario rutas de evacuacion , conecta con el servidor
+ *  llamado en  pla_emergencia_poblacion.php
+ * @param {int} idPlanEmergencia id del plan de emergencia 
+ * @param {int} pasar al siguiente formulario(1,0) 
+ * @param {String} idtable de la tabla
+ * @returns {undefined}
+ */
 function guardarRutasEvacuacion(idPlanEmergencia, pasar, idtable) {
     if (validate_Inventario("#" + idtable)) {
         validado("#" + idtable);
@@ -108,7 +142,7 @@ function guardarRutasEvacuacion(idPlanEmergencia, pasar, idtable) {
                 var response = ajax.responseText;
                 //alert(response); //DEBUG
                 if (response == 0) {
-                    datosGuardados();
+                    datosGuardados(idtable);
                     jAlert("Guardado  con exito", "Exito");
                     if (pasar) {
                         OpcionMenu('mod/planEmergencia/plan_emergencia_brigadistas.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);

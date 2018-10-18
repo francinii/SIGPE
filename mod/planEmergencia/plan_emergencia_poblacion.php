@@ -22,13 +22,13 @@ if (count($res) <= 0) {
     <div align="right" style = "padding-right:0.5%;">
         <?php if ($editar) { ?>
             <span class="text-center" >
-                <a class="btn btn-info" onclick="javascript: agregarFilaSector('<?= $vocab["symbol_delete"] ?>', '<?= $vocab["Menu_Datos_sin_guardar"] ?>','<?= $vocab["symbol_add"] ?>','<?= $vocab["poblacion_sectorNuevo"]?>');"><i class=" fa fa-plus text-info"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_sector"] ?>  </a>
+                <a class="btn btn-info" onclick="javascript: agregarFilaSector('<?= $vocab["symbol_delete"] ?>', '<?= $vocab["Menu_Datos_sin_guardar"] ?>','<?= $vocab["symbol_add"] ?>','<?= $vocab["poblacion_sectorNuevo"]?>','<?= $vocab["poblacion_sector"] ?>');"><i class=" fa fa-plus text-info"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_sector"] ?>  </a>
             </span>            
         <?php } ?>
     </div>
 </div>
     <div   class="dataTables_wrapper   dt-bootstrap" style = "overflow-x:auto;">
-        <table  style = "width: 99%" id="lista_poblacion" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center" >
+        <table style = "width: 99%" id="lista_poblacion" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
             <thead >
                 <tr>
                     <th  width="10%"><?= $vocab["poblacion_oficina"] ?></th>
@@ -59,9 +59,13 @@ if (count($res) <= 0) {
                         if ($sectorActual != $sector) {
                             $sectorActual = $sector;
                             ?>
-                            <tr class="seccionPoblacion" id="Sec-<?= $id ?>">                   
-                                <td style="align-items:center; background-color:lightblue" colspan="10">
-                                    <input style="width:40%; margin: 0 auto;" type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="Sector<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['sector'] : $vocab["poblacion_sectorNuevo"] ?>" >
+                            <tr class="seccionPoblacion" id="Sec-<?= $id ?>">
+                                
+                                 
+                               
+                                <td style=" align-items:center; background-color:lightblue" class = " form-inline" colspan="10">
+                                    <span><?= $vocab["poblacion_sector"] ?>:</span>
+                                    <input style="width:40%" type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control form-inline requerido cambios" id="Sector<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['sector'] : $vocab["poblacion_sectorNuevo"] ?>" >
                                 </td>                                
                                 <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
                                     <td  style="background-color:lightblue">              

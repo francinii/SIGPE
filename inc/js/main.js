@@ -185,11 +185,17 @@ Array.prototype.map = function (fun)
 var cargando = '<div style="text-align:center; top: 50px;"><img src="img/loader_circle.gif"/><div>';
 var cargando_bar = '<div style="text-align:center"><img src="img/loader_bar.gif"/><div>';
 
+/*
+ * verifica si hay datos sin guardar en la pagina
+ * @param {Function} opcion de pagina a la cual se va a pasar
+ * @param {Function} parametros que se envian a la pagina
+ * @returns {undefined} llama al metodo OpcionMenuPasar()
+ */
 function OpcionMenu(opcion, parametros) {
-    if (cambios) {
+    if (cambios.length>0) {
         jConfirm("Desea continuar sin guardar los cambios", "cambios sin guardar", function (r) {
             if (r) {
-                cambios = 0;
+                cambios = new Array();
                 OpcionMenuPasar(opcion, parametros);
             }
         });
@@ -200,6 +206,12 @@ function OpcionMenu(opcion, parametros) {
 
 }
 
+/**
+ * recarga la pagina principal basandose en el menu
+ * @param {Function} opcion de pagina a la cual se va a pasar
+ * @param {Function} parametros que se envian a la pagina
+ * @returns {undefined} regarga la pagina
+ */
 function OpcionMenuPasar(opcion, parametros) {
    
     

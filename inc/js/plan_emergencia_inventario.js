@@ -3,7 +3,7 @@
  * llamado en  plan_emergencia_inventario.php  
  * @param {String} titulo mensaje de alerta
  * @param {Array} combo de opciones para el sellect de la fila
- * @param {String} alert cantidad de filas   
+ * @param {String} alert datos sin guardar    
  * @returns {undefined} 
  */
 function agregarFilaEquipo(titulo, combo,alert) {
@@ -36,6 +36,13 @@ function agregarFilaEquipo(titulo, combo,alert) {
     jQuery("#E-tipoEquipo" + id).focus();
 }
 
+/**
+ * agrega una nueva fila a la tabla de Recursos humanos
+ * llamado en  plan_emergencia_inventario.php  
+ * @param {String} titulo mensaje de alerta
+ * @param {String} alert datos sin guardar   
+ * @returns {undefined} 
+ */
 function agregarFilaRecursoHumano(titulo,alert) {
     var tabla = jQuery("#lista_recurso_humano tbody");
     var id = tabla.children().last().attr('id');
@@ -64,7 +71,13 @@ function agregarFilaRecursoHumano(titulo,alert) {
 }
 
 
-
+/**
+ * agrega una nueva fila a la tabla de Recursos instalaciones
+ * llamado en  plan_emergencia_inventario.php  
+ * @param {String} titulo mensaje de alerta
+ * @param {String} alert datos sin guardar   
+ * @returns {undefined} 
+ */
 function agregarFilaRecursoInstalaciones(titulo,alert) {
     var tabla = jQuery("#lista_Instalaciones tbody");
     var id = tabla.children().last().attr('id');
@@ -94,7 +107,15 @@ function agregarFilaRecursoInstalaciones(titulo,alert) {
 }
 
 
-
+/**
+ * agrega una nueva fila a las tablas de inventario, sin contar equipo movil , recuros humano, instalaciones 
+ * llamado en  plan_emergencia_inventario.php  
+ * @param {String} titulo mensaje de alerta
+ * @param {String} pref prefijo del id de la tabla
+ * @param {String} idtabla id de la tabla  
+ * @param {String} alert datos sin guardar       
+ * @returns {undefined} 
+ */
 function agregarOtrosInventario(titulo,pref, idtabla,alert) {
     var tabla = jQuery(idtabla+" tbody");
     var id = tabla.children().last().attr('id')
@@ -123,6 +144,12 @@ function agregarOtrosInventario(titulo,pref, idtabla,alert) {
     jQuery("#"+pref+"tipo" + id).focus();
 }
 
+/**
+ *  Elimina una fila de la tabla
+ *  llamado en  pla_emergencia_poblacion.php
+ * @param {elemento HTML} event  elemento que resive la accion
+ * @returns {undefined}
+ */
 function eliminarFila(event) {
     jQuery(event).trigger('change');
     var row = jQuery(event).parents("tr:first");
@@ -130,6 +157,12 @@ function eliminarFila(event) {
 
 }
 
+/**
+ *  Valida la informacion de la tabla 
+ *  llamado en  pla_emergencia_poblacion.php
+ * @param {String} tabla id de la tabla 
+ * @returns {boolean}
+ */
 function validate_Inventario(tabla) {
     var filas = jQuery(tabla + " tbody").children();
     for (var i = 0; i < filas.length; i++) {
@@ -147,7 +180,12 @@ function validate_Inventario(tabla) {
     }
     return true;
 }
-
+/**
+ *  Quita el color azul de los campos validados
+ *  llamado en  pla_emergencia_poblacion.php
+ * @param {String} tabla id de la tabla 
+ * @returns {undefined}
+ */
 function validado(tabla){
      var filas = jQuery(tabla + " tbody").children();
     for (var i = 0; i < filas.length; i++) {
@@ -161,7 +199,14 @@ function validado(tabla){
     }
   
 }
-
+/**
+ *  agrega un select la fila nueva de  la tabla recursos movil
+ *  llamado en  pla_emergencia_poblacion.php
+ * @param {int} id de la  td 
+ * @param {Array} combo opciones para el select
+ * @param {int} seleccion valoir a selecionar
+ * @returns {undefined}
+ */
 function selectEquipos(id, combo, seleccion) {
     var td = jQuery("#E-categoria" + id);
     var fila = '';
@@ -179,6 +224,14 @@ function selectEquipos(id, combo, seleccion) {
     td.append(fila);
 }
 
+
+/**
+ *  Guarda los datos de la tabla equipo movil , conecta con el servidor
+ *  llamado en  pla_emergencia_poblacion.php
+ * @param {int} idPlanEmergencia id del plan de emergencia 
+ * @param {int} pasar al siguiente formulario(1,0) 
+ * @returns {undefined}
+ */
 function guardarequipoMovil(idPlanEmergencia, pasar) {
     if (validate_Inventario("#lista_equipos")) {
          validado("#lista_equipos");
@@ -219,7 +272,7 @@ function guardarequipoMovil(idPlanEmergencia, pasar) {
                 var response = ajax.responseText;
                 //alert(response); //DEBUG
                 if (response == 0) {
-                    datosGuardados();
+                    datosGuardados('lista_equipos');
                     jAlert("Guardado  con exito", "Exito");
                     if (pasar) {
                         OpcionMenu('mod/planEmergencia/plan_emergencia_instalaciones.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
@@ -238,6 +291,14 @@ function guardarequipoMovil(idPlanEmergencia, pasar) {
         loading.innerHTML = "";
     }
 }
+
+/**
+ *  Guarda los datos de la tabla recursos humanos , conecta con el servidor
+ *  llamado en  pla_emergencia_poblacion.php
+ * @param {int} idPlanEmergencia id del plan de emergencia 
+ * @param {int} pasar al siguiente formulario(1,0) 
+ * @returns {undefined}
+ */
 
 function guardarRecursoHumano(idPlanEmergencia, pasar) {
     if (validate_Inventario("#lista_recurso_humano")) {
@@ -278,7 +339,7 @@ function guardarRecursoHumano(idPlanEmergencia, pasar) {
                 var response = ajax.responseText;
                 //alert(response); //DEBUG
                 if (response == 0) {
-                    datosGuardados();
+                    datosGuardados('lista_recurso_humano');
                     jAlert("Guardado  con exito", "Exito");
                     if (pasar) {
                         OpcionMenu('mod/planEmergencia/plan_emergencia_instalaciones.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
@@ -297,6 +358,14 @@ function guardarRecursoHumano(idPlanEmergencia, pasar) {
         loading.innerHTML = "";
     }
 }
+
+/**
+ *  Guarda los datos de la tabla recursos instalaciones , conecta con el servidor
+ *  llamado en  pla_emergencia_poblacion.php
+ * @param {int} idPlanEmergencia id del plan de emergencia 
+ * @param {int} pasar al siguiente formulario(1,0) 
+ * @returns {undefined}
+ */
 
 function guardarRecursoInstalaciones(idPlanEmergencia, pasar) {
     if (validate_Inventario("#lista_Instalaciones")) {
@@ -337,7 +406,7 @@ function guardarRecursoInstalaciones(idPlanEmergencia, pasar) {
                 var response = ajax.responseText;
                 //alert(response); //DEBUG
                 if (response == 0) {
-                    datosGuardados();
+                    datosGuardados('lista_Instalaciones');
                     jAlert("Guardado  con exito", "Exito");
                     if (pasar) {
                         OpcionMenu('mod/planEmergencia/plan_emergencia_instalaciones.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
@@ -357,7 +426,16 @@ function guardarRecursoInstalaciones(idPlanEmergencia, pasar) {
     }
 }
 
-
+/**
+ *  Guarda los datos de  las tablas de inventario, sin contar equipo movil , recuros humano, instalaciones 
+ *  llamado en  pla_emergencia_poblacion.php
+ * @param {int} idPlanEmergencia id del plan de emergencia 
+ * @param {int} pasar al siguiente formulario(1,0) 
+ * @param {String} pref prefijo de la tabla 
+ * @param {String} categoria de la tabla 
+ * @param {String} idtable id de la tabla
+ * @returns {undefined}
+ */
 
 function guardarOtrosInventario(idPlanEmergencia, pasar,pref,categoria,idtable) {
     if (validate_Inventario("#"+idtable)) {
@@ -399,7 +477,7 @@ function guardarOtrosInventario(idPlanEmergencia, pasar,pref,categoria,idtable) 
                 var response = ajax.responseText;
                 //alert(response); //DEBUG
                 if (response == 0) {
-                    datosGuardados();
+                    datosGuardados(idtable);
                     jAlert("Guardado  con exito", "Exito");
                     if (pasar) {
                         OpcionMenu('mod/planEmergencia/plan_emergencia_identificacion_peligros.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);

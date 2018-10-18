@@ -43,7 +43,7 @@ function guardarDatosActividades(idPlanEmergencia, pasar,count) {
             var response = ajax.responseText;
             //alert(response); //DEBUG
             if (response == 0) {
-                 datosGuardados();
+                 datosGuardados("lista_usuarios");
                 jAlert("Guardado  con exito", "Exito");
                 if (pasar) {
                     OpcionMenu('mod/planEmergencia/plan_emergencia_instalaciones.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
