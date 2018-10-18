@@ -1,5 +1,11 @@
-//Selector que cambia el valor del criterio
-
+/*
+ * Funcion que cambia el valor del criterio al hacer onchange en el selector
+ * @param {event} event recibe el evento onchange del selector de probabilidad
+ * o de gravedad o de consecuencia
+ * @param {int} cod  corresponde al valor que determina si el selector es el selector
+ * de probabilidad o el de consecuencia/gravedad: probabilidad (0) o consecuecia/gravedad (1)
+ * @returns {undefined} Llama al método calcularTipoAlerta
+ */
 function cambiarCriterio(event, cod) {
     var opcion = event.value; //selector
     var hermano = event.parentNode.nextElementSibling; //td hermano al td del selector
@@ -11,6 +17,12 @@ function cambiarCriterio(event, cod) {
     calcularTipoAlerta(event);
 }
 
+/*
+ * Funcion que cambia el criterio al hacer onchange en el selector de valor de probabilidad
+ * @param {int} opc recibe el valor del selector de probabilidad
+ * @returns {String} retorna el criterio de la probabilidad: BAJA MEDIA o ALTA. En caso
+ * de que opc no sea 1,2 o 3 retorna "".
+ */
 function selectorProbabilidad(opc) {
     if (opc == 1) {
         return "BAJA";
@@ -22,6 +34,13 @@ function selectorProbabilidad(opc) {
     return "";
 }
 
+/*
+ * Funcion que cambia el criterio al hacer onchange en el selector de valor Gravedad
+ * o consecuencia.
+ * @param {int} opc recibe el valor del selector de de gravedad o consecuena
+ * @returns {String} retorna el criterio de la probabilidad: NINGUNA, BAJA, MEDIA o ALTA. En caso
+ * de que opc no sea 1,2, 3 o 4 retorna "".
+ */
 function selectorGravedadConsecuencia(opc) {
     if (opc == 1) {
         return "NINGUNA";
@@ -35,12 +54,12 @@ function selectorGravedadConsecuencia(opc) {
     return "";
 }
 
-
-function obtenerCriterioAlerta() {
-    // var tr = JQuery("#matriz_riesgos tbody")
-    //var criterioTipoAlerta = tr.lastElementChild;
-}
-
+/*
+ * Funcion que calcula el valor tipo de alerta 
+ * @param {event} event recibe el evento onchange del selector de probabilidad
+ * o de gravedad o de consecuencia de amenaza
+ * @returns {undefined} Llama al método calcularCriterioTipoAlerta
+ */
 function calcularTipoAlerta(event) {
     var opcion = event.value;
     var tr = event.parentNode.parentNode; //td hermano al td del selector
@@ -57,6 +76,15 @@ function calcularTipoAlerta(event) {
     calcularCriterioTipoAlerta(criterioTipoAlerta, valorTipoAlerta);
 }
 
+/*
+ * Funcion que calcula el criterio del tipo de alerta y cambia el color al td de 
+ * criterio del tipo de alerta.
+ * @param {String} criterioTipoAlerta: corresponde al Elemento (td) Criterio del tipo
+ * de alerta.
+ * @param {int} valor recibe el valor del Tipo de alerta para el calculo del 
+ * criterio del tipo de alerta.
+ * @returns {undefined}
+ */
 function calcularCriterioTipoAlerta(criterioTipoAlerta, valor) {
     var valorTipoAlerta = valor.innerHTML;
     if (valorTipoAlerta <= 3) {
@@ -75,19 +103,33 @@ function calcularCriterioTipoAlerta(criterioTipoAlerta, valor) {
     }
 }
 
-//Crea un vector con los datos de la tabla correspondiente a los colores de la 
-//matriz
+
+/*
+ * Funcion que crea un vector con los datos de la tabla correspondiente a los
+ * colores de la matriz.
+ * @returns {Vector} retorna un vector con los criterio de los tipos de alerta 
+ * de la matriz
+ */
 function crearVectorValores() {
     var criterio = [];
     jQuery("td.criterioAlerta").each(function () {
         criterio.push(jQuery(this).text());
     }).get();
     return criterio;
-
 }
 
-//Crea un vector con los datos de la tabla correspondiente a los colores de la 
-//matriz
+/*
+ * Funcion que genera un arreglo con todos los registros de la matriz. y envia los
+ * datos por ajax
+ * @param {String} nombreCentro: corresponde al nombre del centro de trabajo
+ * @param {String} idCentro corresponde al id del centro
+ * @param {int} indica la pagina a la que sera redirigido.Pueden ser los valores
+ * 1 o 2 
+ * @param {String} idCentro corresponde al id del centro
+ * @param {String} editar estado en que esta la pagina 
+ * @returns {Undefined} 
+ * de la matriz
+ */
 function generaVectorMatriz(nombreCentro, idCentro, clave, editar) {
    if(editar){
     var matriz = jQuery("#matriz_riesgos tbody tr");
