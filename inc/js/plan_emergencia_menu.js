@@ -10,10 +10,16 @@ var cambios = new Array();
  * @returns {undefined}
  */
 function IniciarGuardarCambios(alert) {
+
     jQuery(".cambios").change(function (event) {
-        jQuery(event.currentTarget).css("background-color", "#fcf7e0");
+        var formulario = jQuery(event.currentTarget).parents(".formulario");
+        if ((formulario[0].id.indexOf('capitulo') > -1) || (formulario[0].id.indexOf('subcapitulo') > -1)) {
+            jQuery(formulario[0]).css("background-color", "#fcf7e0");
+        }
+            jQuery(event.currentTarget).css("background-color", "#fcf7e0");
+        
         if (cambios.length == 0) {
-            jQuery("#divalertaDatosSinGuardar").addClass("panel panel-warning ");
+            jQuery("#divalertaDatosSinGuardar").addClass("panel panel-warning");
             jQuery("#divalertaDatosSinGuardar").css("position", "fixed");
             jQuery("#divalertaDatosSinGuardar").css("bottom", "0");
             jQuery("#divalertaDatosSinGuardar").css("right", "0");
@@ -21,7 +27,7 @@ function IniciarGuardarCambios(alert) {
             jQuery("#divalertaDatosSinGuardar").css("z-index", "1030");
             jQuery("#alertaDatosSinGuardar").append("<p>" + alert + "</p>");
         }
-        var formulario = jQuery(event.currentTarget).parents(".formulario");
+
         if (!cambios.includes(formulario[0].id)) {
             cambios.push(formulario[0].id);
         }
@@ -35,12 +41,14 @@ function IniciarGuardarCambios(alert) {
  * @returns {undefined}
  */
 function datosGuardados(idformulario) {
-    var pos=cambios.indexOf(idformulario);
+    var pos = cambios.indexOf(idformulario);
     cambios.splice(pos, 1);
     jQuery("#" + idformulario + " .cambios").css("background-color", "#fff");
+    jQuery("#" + idformulario ).css("background-color", "");
+    
     if (cambios.length == 0) {
-    jQuery("#divalertaDatosSinGuardar").removeClass("panel panel-warning");
-    jQuery("#alertaDatosSinGuardar").html("");
+        jQuery("#divalertaDatosSinGuardar").removeClass("panel panel-warning");
+        jQuery("#alertaDatosSinGuardar").html("");
     }
 }
 

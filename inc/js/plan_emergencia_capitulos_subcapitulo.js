@@ -43,7 +43,7 @@ function CrearEditorCapitulosSubcapitulos(modo, id) {
  * @returns {undefined} 
  */
 
-function guardarCapituloUsuario(idPlanEmergencia, idCapitulo, id, pasar) {
+function guardarCapituloUsuario(idPlanEmergencia,idCapitulo , id, pasar) {
     var loading = document.getElementById('loading_container');
     loading.innerHTML = cargando_bar;
     var ajax = NuevoAjax();
@@ -67,7 +67,7 @@ function guardarCapituloUsuario(idPlanEmergencia, idCapitulo, id, pasar) {
             var response = ajax.responseText;
             //alert(response); //DEBUG
             if (response == 0) {
-                datosGuardados();
+                datosGuardados('capitulo'+idCapitulo);
                 jAlert("Guardado  con exito", "Exito");
                 if (pasar) {
                     OpcionMenu('mod/planEmergencia/plan_emergencia_instalaciones.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
@@ -121,7 +121,7 @@ function guardarSubCapituloUsuario(idPlanEmergencia, idSubcapitulo, id, pasar) {
             var response = ajax.responseText;
             //alert(response); //DEBUG
             if (response == 0) {
-                datosGuardados();
+                datosGuardados('subcapitulo'+idSubcapitulo);
                 jAlert("Guardado  con exito", "Exito");
                 if (pasar) {
                     OpcionMenu('mod/planEmergencia/plan_emergencia_instalaciones.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);

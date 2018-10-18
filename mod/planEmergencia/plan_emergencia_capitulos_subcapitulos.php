@@ -9,7 +9,7 @@ $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
 
 
-/**********************************  select de los capitulos ******************************************/
+/* * ********************************  select de los capitulos ***************************************** */
 include("plan_emergencia_menu.php");
 $sql = "SELECT `id`, `descripcion`, `descripcionParaUsuario`, `isDescripcionParaUsuario`, `titulo`, `orden`
         FROM Capitulo WHERE isActivo=1  ORDER BY orden";
@@ -26,42 +26,44 @@ $cap = seleccion($sql);
  * @param {boolean} $editar estado en que esta la pagina 
  * @returns {undefined} recarga la pagina a list_capitulos.php
  */
-function capitulo($cap, $vocab, $idPlanEmergencia, $i,$editar) {
+function capitulo($cap, $vocab, $idPlanEmergencia, $i, $editar) {
     ?>  
-    <div class="well well-sm">
-        <div class='row'>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <label  for="subcapitulo_Descripcion_usuario"><?= $vocab["capitulos_subcapitulos_capitulo"] ?> <?= ($i == 0) ? "Inicio" : ($i) ?>: <?= $cap['titulo'] ?> </label>
+    <div   class="well well-sm">
+        <div style = "padding:2%" id="capitulo<?= $cap['id'] ?>" class="formulario">    
+            <div class='row'>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <label  for="subcapitulo_Descripcion_usuario"><?= $vocab["capitulos_subcapitulos_capitulo"] ?> <?= ($i == 0) ? "Inicio" : ($i) ?>: <?= $cap['titulo'] ?> </label>
+                </div>
+
+                <div align="right" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <?php if ($editar) { ?>
+                        <span class="text-center">
+                            <a class="btn btn-warning"  onclick="javascript:guardarCapituloUsuario('<?= $idPlanEmergencia ?>', '<?= $cap['id'] ?>',<?= $i ?>, 0)" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> </a>
+                        </span>
+                    <?php } ?>
+                </div>
             </div>
-            
-            <div align="right" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <?php if($editar){?>
-                <span class="text-center">
-                    <a class="btn btn-warning"  onclick="javascript:guardarCapituloUsuario('<?= $idPlanEmergencia ?>', '<?= $cap['id'] ?>',<?= $i ?>, 0)" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> </a>
-                </span>
-                <?php }?>
-            </div>
-        </div>
-        <div class='row'>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class='row'>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 
 
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <label  for="subcapitulo_Descripcion_usuario"><?= $vocab["capitulos_subcapitulos_indicaciones"] ?> <?= $cap['descripcionParaUsuario'] ?> </label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <label  for="subcapitulo_Descripcion_usuario"><?= $vocab["capitulos_subcapitulos_indicaciones"] ?> <?= $cap['descripcionParaUsuario'] ?> </label>
 
+                </div>
             </div>
-        </div>
-        <div class='row'>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">                    
+            <div class='row'>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">                    
 
-                <label  for="subcapitulo_Descripcion_usuario"> <?= $vocab['capitulos_subcapitulos_info_admin'] ?> </label>
-                <textarea class="form-control"  disabled id="capitulo_Descripcion_admin<?= $i ?>" name="subcapitulo_Descripcion_admin" ><?= $cap['descripcion'] ?></textarea>
-            </div> 
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <label  for="subcapitulo_Descripcion_usuario"> <?= $vocab['capitulos_subcapitulos_info_usuario'] ?> </label>
-                <textarea   <?= (!$editar) ? "disabled" : ""; ?> class="form-control cambios"  id="capitulo_Descripcion_usuario<?= $i ?>" name="subcapitulo_Descripcion_usuario" ><?= descripcionCapitulo($cap['id'], $idPlanEmergencia) ?></textarea>
-            </div> 
+                    <label  for="subcapitulo_Descripcion_usuario"> <?= $vocab['capitulos_subcapitulos_info_admin'] ?> </label>
+                    <textarea class="form-control"  disabled id="capitulo_Descripcion_admin<?= $i ?>" name="subcapitulo_Descripcion_admin" ><?= $cap['descripcion'] ?></textarea>
+                </div> 
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <label  for="subcapitulo_Descripcion_usuario"> <?= $vocab['capitulos_subcapitulos_info_usuario'] ?> </label>
+                    <textarea   <?= (!$editar) ? "disabled" : ""; ?> class="form-control cambios"  id="capitulo_Descripcion_usuario<?= $i ?>" name="subcapitulo_Descripcion_usuario" ><?= descripcionCapitulo($cap['id'], $idPlanEmergencia) ?></textarea>
+                </div> 
+            </div>
         </div>
     </div>
     <script>
@@ -72,6 +74,7 @@ function capitulo($cap, $vocab, $idPlanEmergencia, $i,$editar) {
 
     <?php
 }
+
 /**
  * crea un capitulo en el html
  *  llamado en  plan_emergencia_capitulos_subcapitulos.php
@@ -84,47 +87,49 @@ function capitulo($cap, $vocab, $idPlanEmergencia, $i,$editar) {
  * @param {boolean} $editar estado en que esta la pagina 
  * @returns {undefined} recarga la pagina a list_capitulos.php
  */
-function subcapitulo($subcap, $listaFormularios, $vocab, $idPlanEmergencia, $i, $j,$editar) {
+function subcapitulo($subcap, $listaFormularios, $vocab, $idPlanEmergencia, $i, $j, $editar) {
     ?>  
-    <div class="well well-sm" >
-        <div class='row'>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <label  for="capitulo_Descripcion_usuario"><?= $vocab["capitulos_subcapitulos_subcapitulo"] ?> <?= ($i == 0) ? "Inicio" : ($i ) ?>.<?= $j + 1 ?>: <?= $subcap['titulo'] ?> </label>
+    <div  class="well well-sm" >
+        <div style = "padding:2%" id="<?= $subcap['id'] ?>" class="formulario" >
+            <div class='row'>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <label  for="capitulo_Descripcion_usuario"><?= $vocab["capitulos_subcapitulos_subcapitulo"] ?> <?= ($i == 0) ? "Inicio" : ($i ) ?>.<?= $j + 1 ?>: <?= $subcap['titulo'] ?> </label>
+                </div>
+                <div align="right" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <?php if ($editar) { ?>
+                        <span class="text-center">
+                            <a class="btn btn-warning   "  onclick="javascript:guardarSubCapituloUsuario('<?= $idPlanEmergencia ?>', '<?= $subcap['id'] ?>', '<?= $i ?>.<?= $j ?>', 0)" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> </a>
+                        </span>
+                    <?php } ?>
+                </div>
             </div>
-            <div align="right" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <?php if($editar){?>
-                <span class="text-center">
-                    <a class="btn btn-warning   "  onclick="javascript:guardarSubCapituloUsuario('<?= $idPlanEmergencia ?>', '<?= $subcap['id'] ?>', '<?= $i ?>.<?= $j ?>', 0)" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> </a>
-                </span>
-                 <?php }?>
+            <div class='row'>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <label  for="capitulo_Descripcion_usuario"><?= $vocab["capitulos_subcapitulos_formularios"] ?>
+                        <p>
+                            <?php
+                            for ($a = 0; $a < count($listaFormularios); $a++) {
+                                ?>                    
+                                <?= $a + 1 ?>. <?= $listaFormularios[$a]['titulo'] ?><br>
+                            <?php }
+                            ?>
+                        </p>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <label  for="capitulo_Descripcion_usuario"><?= $vocab["capitulos_subcapitulos_indicaciones"] ?> <?= $subcap['descripcionParaUsuario'] ?> </label>
+                </div>
             </div>
-        </div>
-        <div class='row'>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <label  for="capitulo_Descripcion_usuario"><?= $vocab["capitulos_subcapitulos_formularios"] ?>
-                    <p>
-                        <?php
-                        for ($a = 0; $a < count($listaFormularios); $a++) {
-                            ?>                    
-                            <?= $a + 1 ?>. <?= $listaFormularios[$a]['titulo'] ?><br>
-                        <?php }
-                        ?>
-                    </p>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <label  for="capitulo_Descripcion_usuario"><?= $vocab["capitulos_subcapitulos_indicaciones"] ?> <?= $subcap['descripcionParaUsuario'] ?> </label>
-            </div>
-        </div>
-        <div class='row'>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">                    
+            <div class='row'>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">                    
 
-                <label  for="capitulo_Descripcion_usuario"> <?= $vocab['capitulos_subcapitulos_info_admin'] ?> </label>
-                <textarea class="form-control"  disabled id="subcapitulo_Descripcion_admin<?= $i ?>.<?= $j ?>" name="capitulo_Descripcion_usuario" ><?= $subcap['descripcion'] ?></textarea>
-            </div> 
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <label  for="capitulo_Descripcion_usuario"> <?= $vocab['capitulos_subcapitulos_info_usuario'] ?> </label>
-                <textarea   style="background-color: yellowgreen;" <?= (!$editar) ? "disabled" : ""; ?> class="form-control cambios"  id="subcapitulo_Descripcion_usuario<?= $i ?>.<?= $j ?>" name="capitulo_Descripcion_usuario" ><?= descripcionSubcapitulo($subcap['id'], $idPlanEmergencia) ?></textarea>
-            </div> 
+                    <label  for="capitulo_Descripcion_usuario"> <?= $vocab['capitulos_subcapitulos_info_admin'] ?> </label>
+                    <textarea class="form-control"  disabled id="subcapitulo_Descripcion_admin<?= $i ?>.<?= $j ?>" name="capitulo_Descripcion_usuario" ><?= $subcap['descripcion'] ?></textarea>
+                </div> 
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <label  for="capitulo_Descripcion_usuario"> <?= $vocab['capitulos_subcapitulos_info_usuario'] ?> </label>
+                    <textarea   style="background-color: yellowgreen;" <?= (!$editar) ? "disabled" : ""; ?> class="form-control cambios"  id="subcapitulo_Descripcion_usuario<?= $i ?>.<?= $j ?>" name="capitulo_Descripcion_usuario" ><?= descripcionSubcapitulo($subcap['id'], $idPlanEmergencia) ?></textarea>
+                </div> 
+            </div>
         </div>
     </div>
     <script>
@@ -168,7 +173,6 @@ function descripcionSubcapitulo($idSubcapitulo, $idZona) {
     return "";
 }
 
-
 /**
  *  seleciona subcapitulos de la base
  *  llamado en  plan_emergencia_capitulos_subcapitulos.php
@@ -180,6 +184,7 @@ function subcapitulos($id) {
             . " `FKidCapitulo`, `orden` FROM `SubCapitulo` WHERE `FKidCapitulo`=" . $id;
     return seleccion($sql);
 }
+
 /**
  *  seleciona lista formularios de la base
  *  llamado en  plan_emergencia_capitulos_subcapitulos.php
@@ -198,21 +203,20 @@ function listaFormularios($id) {
         <h2><?= $vocab["capitulos_subcapitulos_title"] ?></h2>
         <p><?= $vocab["capitulos_subcapitulos_title_desc"] ?></p>
     </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <?php
         for ($i = 0; $i < count($cap); $i++) {
             $subcap = subcapitulos($cap[$i]['id']);
             if ($cap[$i]['isDescripcionParaUsuario'] == 1) {
-                
                 ?>
-                <?= capitulo($cap[$i], $vocab, $idPlanEmergencia, $i,$editar) ?>
+                <?= capitulo($cap[$i], $vocab, $idPlanEmergencia, $i, $editar) ?>
                 <?php
             }
             for ($j = 0; $j < count($subcap); $j++) {
                 if ($subcap[$j]['isDescripcionParaUsuario'] == 1) {
                     $listaFormularios = listaFormularios($subcap[$j]['id'])
                     ?>
-                    <?= subcapitulo($subcap[$j], $listaFormularios, $vocab, $idPlanEmergencia, $i, $j,$editar) ?>
+                    <?= subcapitulo($subcap[$j], $listaFormularios, $vocab, $idPlanEmergencia, $i, $j, $editar) ?>
                     <?php
                 }
             }
