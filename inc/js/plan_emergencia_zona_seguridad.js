@@ -1,14 +1,20 @@
-
+/**
+ * Funcion que agrega una nueva zona de seguridad a la tabla de zona de seguridad * 
+ * @param {String} titulo (title) para el botón de eliminar fila
+ * @param {String} idTabla corresponde al id de la tabla  
+ * @param {String} alert mensaje de alerta
+ * @returns {undefined} Llama al metodo IniciarGuardarCambios
+ */
 function agregarZonaSeguridad(titulo, idtabla, alert) {
     var tabla = jQuery(idtabla + " tbody");
     var id = tabla.children().last().attr('id');
     if (typeof id == 'undefined') {
         id = 0;
     } else {
-       // var id = id.split('-');
+        // var id = id.split('-');
         var id = (parseInt(id) + 1);
     }
-    var fila = '<tr id="' + id + '">' +   
+    var fila = '<tr id="' + id + '">' +
             '<td> <input  id="nombre' + id + '"  type="text" class="form-control requerido cambios" ></td>' +
             '<td> <input  id="ubicacion' + id + '"  type="text" class="form-control requerido cambios" ></td>' +
             '<td> <input  id="capacidad' + id + '"  type="number" min = "0" value = "0" class="form-control requerido cambios" ></td>' +
@@ -24,13 +30,22 @@ function agregarZonaSeguridad(titulo, idtabla, alert) {
     IniciarGuardarCambios(alert);
 }
 
+/**
+ * Funcion que elimina una fila en la tabla de zona de seguridad
+ * @param {Event} event para el botón de eliminar fila
+ * @returns {undefined} 
+ */
 function eliminarFilaZonaSeguridad(event) {
     jQuery(event).trigger('change');
     var row = jQuery(event).parents("tr:first");
     row.remove();
-
 }
 
+/**
+ * Funcion que valida los datos de los registros de la tabla
+ * @param {String} tabla corresponde al id de la tabla 
+ * @returns {Boolean} return false si los datos son inválidos, true en caso contrario 
+ */
 function validate_plan(tabla) {
     var filas = jQuery(tabla + " tbody").children();
     for (var i = 0; i < filas.length; i++) {
@@ -49,6 +64,11 @@ function validate_plan(tabla) {
     return true;
 }
 
+/**
+ * Funcion que elimina el color de los campos validados
+ * @param {String} tabla corresponde al id de la tabla 
+ * @returns {Undefined} 
+ */
 function validado(tabla) {
     var filas = jQuery(tabla + " tbody").children();
     for (var i = 0; i < filas.length; i++) {
@@ -58,15 +78,17 @@ function validado(tabla) {
             jQuery(input).css("background-color", "#fff");
 
         }
-
     }
-
 }
 
-
-
-
-
+/**
+ * Funcion que guarda los registros de las zonas de seguridad en la base de datos
+ * @param {int} idPlanEmergencia corresponde al id del plan de emergencia
+ * @param {int} pasar cooresponde a un valor que indica si se debe o no pasar
+ * al siguiente formulario
+ * @param {int} idtable corresonde al id de la tabla
+ * @returns {Undefined} Envia una solicitud ajax
+ */
 function guardarZonaSeguridad(idPlanEmergencia, pasar, idtable) {
     if (validate_plan("#" + idtable)) {
         validado("#" + idtable);
@@ -83,9 +105,9 @@ function guardarZonaSeguridad(idPlanEmergencia, pasar, idtable) {
             //count=id[1];
             lista.push({"nombre": jQuery("#" + "nombre" + count).val(),
                 "ubicacion": jQuery("#" + "ubicacion" + count).val(),
-                "capacidad": jQuery("#" + "capacidad" + count).val(), 
-                "observaciones": jQuery("#" +  "observaciones" + count).val(),
-                "sector": jQuery("#" +  "sector" + count).val()});
+                "capacidad": jQuery("#" + "capacidad" + count).val(),
+                "observaciones": jQuery("#" + "observaciones" + count).val(),
+                "sector": jQuery("#" + "sector" + count).val()});
 
             count++;
             fila = fila.nextElementSibling;

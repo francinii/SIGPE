@@ -66,11 +66,15 @@ $datosCabecera = array(
     "codigo" => $codigo,
     "revisado" => $revisadoPor);
 
+/**
+ * Clase MYPDF que hereda de la clase TCPDF
+ * Sobreescribre el método Header de la clase padre
+ */
 class MYPDF extends TCPDF {
 
     public function Header() {
         $a = $this->getAliasNbPages();
-        $b = $this->getAliasNumPage() ;
+        $b = $this->getAliasNumPage();
         global $datosCabecera;
         $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
                 . '<tr style = "text-align:center;">'
@@ -84,55 +88,76 @@ class MYPDF extends TCPDF {
                 . '<td><b>Revisado por:</b><br>' . $datosCabecera['revisado'] . '</td>'
                 . '</tr>'
                 . '<tr style = "text-align:center;">'
-                
                 . '<td><b>Página: </b>' . $this->getAliasNumPage() . ' de ' . $this->getAliasNbPages() . '</td>'
                 . '</tr>'
                 . '</table>';
-        //  . '<div style = "height: 250px;"></div>';
         $this->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $html, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'top', $autopadding = true);
     }
 
 }
 
-// create new PDF document
+/*
+ * Se crea un nuevo objeto de tipo MYPDF
+ */
 $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-//Modificar la informacion del documento
+
+
+/*
+ * Modificar la informacion general del documento
+ */
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Francini Corrales Garro & Danny Valerio Ramírez');
 $pdf->SetTitle('Plan de emergencias');
 $pdf->SetSubject('Plan de emergencias');
 $pdf->SetKeywords('Plan, PDF, emergencias, CIEUNA, UNA');
-// set default monospaced font
-$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-// Modificar margenes del documento
-$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP + PDF_MARGIN_HEADER, PDF_MARGIN_RIGHT);
-// 
-$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-//$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
-// set default monospaced font
+
+/*
+ * Modificar la fuente monospaced
+ */
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
-// set auto page breaks
-//$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+/*
+ * Modifica  margenes del documento
+ */
+$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP + PDF_MARGIN_HEADER, PDF_MARGIN_RIGHT); // 
+$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+
+/*
+ * Modifica  la fuente del documento
+ */
+$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 $font = array(PDF_FONT_MONOSPACED, '', 9);
 $pdf->SetHeaderFont($font);
-// set image scale factor
+
+/*
+ * Modifica la escala de las imagenes 
+ */
 $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
+/*
+ * Verifica si se debe imprimir o no el documento
+ */
 $pdf->setPrintFooter(false);
 
-//Modifica la unidad con la que el documento trabaja (modificado para trabajar en mm)
+/*
+ * Modifica la unidad con la que el documento trabaja (modificado para trabajar en mm)
+ */
 $pdf->setPageUnit(PDF_UNIT);
 
-//Llamada de las funciones que crean el pdf
-//Portada del documento
+
+/*
+ * Llamada de las funciones que crean el pdf: portada, capitulos y tabla de contenidos
+ *  */
 portada($pdf);
-
-//Creación de los capítulos del documento
 capitulos($pdf, $rescapitulos, $resPlan, $resTipoPoblacion, $formularios, $vocab, $idPlanEmergencia);
-
-//Creación de la tabla de contenidos
 tablaContenidos($pdf);
+
+
+/*
+ * Funcion que remplaza una cadena de caracteres por otra cadena 
+ * @param {String} $cadena corresponde a una cadena de caracteres
+ * @returns {String} $cadena con los datos remplzadados
+ */
 
 function remplazar($cadena) {
     global $datosCabecera;
@@ -140,11 +165,15 @@ function remplazar($cadena) {
     return str_replace("&lt;&amp;nombreZonaTrabajo&amp;&gt;", $centro, $cadena);
 }
 
+/*
+ * Funcion que crea la tabla de contenidos en el PDF 
+ * @param {MYPDF} $pdf corresponde a un objeto de la clase MYPDF
+ * @returns {Undefined}
+ */
+
 function tablaContenidos($pdf) {
     $pdf->setPrintHeader(false);
-// add a new page for TOC
     $pdf->addTOCPage();
-// write the TOC title and/or other elements on the TOC page
     $pdf->SetFont(PDF_FONT_MONOSPACED, 'B', 16);
     $pdf->MultiCell(0, 0, 'Tabla de contenido', 0, 'L', 0, 1, '', '', true, 0);
     $pdf->Ln();
@@ -165,6 +194,21 @@ function tablaContenidos($pdf) {
 // end of TOC page
     $pdf->endTOCPage();
 }
+
+/*
+ * Funcion que crea los capitulos en el PDF
+ * @param {MYPDF} $pdf corresponde a un objeto de la clase MYPDF
+ * @param {Array} $capitulos corresponde a un array asociativo con los registros 
+ * de los capítulos.
+ * @param {Array} $resPlan corresponde a un array asociativo con los registros del 
+ * plan de emergencia
+ * @param {Array} $resTipoPoblacion corresponde a un array asociativo con los registros del 
+ *  tipo de población de un plan de emergencia  
+ * @param {Array} $formularios corresponde a un array asociativo con los registros de la tabla Formulario
+ * @param {Array} $vocab corresponde al vocabulario del sistema
+ * @param {int} $idPlanEmergencia cooresponde al id del plan de emergencias
+ * @returns {Undefined}
+ */
 
 function capitulos($pdf, $capitulos, $resPlan, $resTipoPoblacion, $formularios, $vocab, $idPlanEmergencia) {
     $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP + PDF_MARGIN_HEADER, PDF_MARGIN_RIGHT);
@@ -194,8 +238,23 @@ function capitulos($pdf, $capitulos, $resPlan, $resTipoPoblacion, $formularios, 
     }
 }
 
+/*
+ * Funcion que crea los subcapitulos en el PDF
+ * @param {MYPDF} $pdf corresponde a un objeto de la clase MYPDF
+ * @param {int} $id corresponde al id del Capitulo
+ * @param {int} $ordenCapitulo corresponde al numero del orden del capitulo
+ * @param {Array} $resPlan corresponde a un array asociativo con los registros del 
+ * plan de emergencia
+ * @param {Array} $resTipoPoblacion corresponde a un array asociativo con los registros del 
+ *  tipo de población de un plan de emergencia  
+ * @param {Array} $formularios corresponde a un array asociativo con los registros de la tabla Formulario
+ * @param {Array} $vocab corresponde al vocabulario del sistema
+ * @param {int} $idPlanEmergencia cooresponde al id del plan de emergencias
+ * @returns {Undefined}
+ */
+
 function subCapitulos($pdf, $id, $ordenCapitulo, $resPlan, $resTipoPoblacion, $formularios, $vocab, $idPlanEmergencia) {
-   // $pdf->SetFont(PDF_FONT_MONOSPACED, '', 12);
+    // $pdf->SetFont(PDF_FONT_MONOSPACED, '', 12);
     $sql = "(SELECT  id, descripcion, orden,titulo,isActivo FROM SubCapitulo where FKidCapitulo = $id and isActivo = 1 ORDER BY orden)";
     $subcapitulos = seleccion($sql);
     $subOrden = 1;
@@ -219,6 +278,12 @@ function subCapitulos($pdf, $id, $ordenCapitulo, $resPlan, $resTipoPoblacion, $f
         $subOrden += 1;
     }
 }
+
+/*
+ * Funcion que creala portada en el PDF
+ * @param {MYPDF} $pdf corresponde a un objeto de la clase MYPDF
+ * @returns {Undefined}
+ */
 
 function portada($pdf) {
     $pdf->setPrintHeader(false);
@@ -250,7 +315,15 @@ function portada($pdf) {
     $pdf->writeHTML($html, true, false, true, false, '');
 }
 
-//Formulario idForm = 1 Formulario de datos generales
+/*
+ * Formulario idForm = 1 Formulario de datos generales
+ * Funcion que crea el formulario de datos generales en el plan * 
+ * @param {Array} $resPlan corresponde a un array asociativo con los registros del 
+ * plan de emergencia
+ * @param {Array} $vocab corresponde al vocabulario del sistema
+ * @returns {Undefined}
+ */
+
 function formularioDatosGenerales($resPlan, $vocab) {
     $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
             . '<tr>'
@@ -317,7 +390,15 @@ function formularioDatosGenerales($resPlan, $vocab) {
     return $html;
 }
 
-//Formulario idForm = 2 Formulario de actividades
+/*
+ * //Formulario idForm = 2 Formulario de actividades
+ * Funcion que crea el formulario de actividades * 
+ * @param {Array} $resTipoPoblacion corresponde a un array asociativo con los registros del 
+ * tipo de poblacion
+ * @param {Array} $vocab corresponde al vocabulario del sistema
+ * @returns {Undefined}
+ */
+
 function formularioActividades($resTipoPoblacion, $vocab) {
     $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
             . '<thead><tr style = "text-align:center;">'
@@ -338,7 +419,15 @@ function formularioActividades($resTipoPoblacion, $vocab) {
     return $html;
 }
 
-//Formulario idForm = 3 Formulario de instalaciones
+/*
+ * Formulario idForm = 3 Formulario de instalaciones
+ * Funcion que crea el formulario de instalaciones * 
+ * @param {Array} $resPlan corresponde a un array asociativo con los registros del 
+ * plan de emergencia
+ * @param {Array} $vocab corresponde al vocabulario del sistema
+ * @returns {Undefined}
+ */
+
 function formularioInstalaciones($resPlan, $vocab) {
     $html = '<table id ="table_header" cellspacing="0" cellpadding="1" border="1" >'
             . '<tr style = "text-align:center;">'
@@ -440,7 +529,14 @@ function formularioInstalaciones($resPlan, $vocab) {
     return $html;
 }
 
-//Formulario de recurso humano
+/*
+ * Formulario idForm = 5 Formulario de recursos humanos
+ * Funcion que crea el formulario de recursos humanos * 
+ * @param {int} $idPlanEmergencia corresponde al id del plna de emergencia
+ * @param {Array} $vocab corresponde al vocabulario del sistema
+ * @returns {Undefined}
+ */
+
 function formularioRecursosHumanos($idPlanEmergencia, $vocab) {
     //Recursos Humanos
     $sql = "SELECT  `cantidad`, `profesion`, `categorias`, `localizacion`,"
@@ -468,7 +564,16 @@ function formularioRecursosHumanos($idPlanEmergencia, $vocab) {
     return $html;
 }
 
-//Formulario para tabla de equipo movil de tipo aereo acuatico y terrestre
+/*
+ * Formulario idForm = 5 Formulario de equipo movil
+ * Funcion que crea el formulario de equipo movil de tipo aereo acuatico y terrestre* 
+ * @param {int} $idPlanEmergencia corresponde al id del plna de emergencia
+ * @param {Array} $vocab corresponde al vocabulario del sistema
+ * @param {String} $categoria corresponde a la categoria a la que pertenece el equipo
+ * (terrestre, aereo o acuatico)
+ * @returns {Undefined}
+ */
+
 function formularioEquipoMovil($idPlanEmergencia, $vocab, $categoria) {
 //Equipo movil
     $sql = "SELECT `cantidad`, `capacidad`, `tipo`, `caracteristicas`,"
@@ -499,6 +604,14 @@ function formularioEquipoMovil($idPlanEmergencia, $vocab, $categoria) {
 }
 
 //Formulario recursos instalaciones
+
+/*
+ * Formulario idForm = 5 Formulario de recursos de las intalaciones
+ * Funcion que crea el  Formulario de recursos de las intalaciones 
+ * @param {int} $idPlanEmergencia corresponde al id del plna de emergencia
+ * @param {Array} $vocab corresponde al vocabulario del sistema
+ * @returns {Undefined}
+ */
 function formularioRecursosInstalaciones($idPlanEmergencia, $vocab) {
 //Recurso de instalaciones
     $sql = "SELECT `tipo`, `cantidad`, `tamaño`, `distribucion`,"
@@ -529,7 +642,15 @@ function formularioRecursosInstalaciones($idPlanEmergencia, $vocab) {
     return $html;
 }
 
-//Formulario recursos instalaciones
+/*
+ * Formulario idForm = 5 Formulario de inventarioOtros
+ * Funcion que crea el  Formulario de otros inventarios 
+ * @param {int} $idPlanEmergencia corresponde al id del plna de emergencia
+ * @param {Array} $vocab corresponde al vocabulario del sistema
+ * @param {String} $categoria corresponde a la categoria a la que pertenece el equipo
+ * @returns {Undefined}
+ */
+
 function formularioInventarioOtros($idPlanEmergencia, $vocab, $categoria) {
 //Recursos de telecomunicaciones
     $sql = "SELECT  `cantidad`, `tipo`, `caracteristicas`, `contacto`,"
@@ -559,7 +680,14 @@ function formularioInventarioOtros($idPlanEmergencia, $vocab, $categoria) {
     return $html;
 }
 
-//Formulario de peligros identificados
+/*
+ * Formulario idForm = 6 Formulario de peligros identificados
+ * Funcion que crea el  Formulario de peligros identificados
+ * @param {int} $idPlanEmergencia corresponde al id del plna de emergencia
+ * @param {Array} $vocab corresponde al vocabulario del sistema
+ * @returns {Undefined}
+ */
+
 function formularioPeligrosIdentificados($idPlanEmergencia, $vocab) {
     $sql = "SELECT  `id`, `peligro`, `presente`,`ubicacion`,`recomendacion`, `fecha`, `responsable`, `priorizacion` FROM `IdentificacionPeligro`  WHERE `presente`  = 1 and `FKidZonaTrabajo`=" . $idPlanEmergencia . " order by  priorizacion ASC";
     $respuesta = seleccion($sql);
@@ -595,7 +723,14 @@ function formularioPeligrosIdentificados($idPlanEmergencia, $vocab) {
     return $html;
 }
 
-//Formulario de poblacion ///Aun falta agregar la LINEA DE SECTORES
+/*
+ * Formulario idForm = 7 Formulario de poblacion 
+ * Funcion que crea el  Formulario de poblacion 
+ * @param {int} $idPlanEmergencia corresponde al id del plna de emergencia
+ * @param {Array} $vocab corresponde al vocabulario del sistema
+ * @returns {Undefined}
+ */
+
 function formularioPoblacion($idPlanEmergencia, $vocab) {
     $sql = "SELECT  `nombreOficina`, `capacidadPermanente`, `capacidadTemporal`, `representanteComite`,"
             . " `representanteBrigadaEfectiva`,`representantePrimerosAuxilios`,`telefonoOficina`,`contactoEmergencia`,`telefonoPersonal`,`correoElectronico`"
@@ -644,7 +779,14 @@ function formularioPoblacion($idPlanEmergencia, $vocab) {
     return $html;
 }
 
-//Formulario de rutas de evaciocion
+/*
+ * Formulario idForm = 8 //Formulario de rutas de evaciocion 
+ * Funcion que crea el  //Formulario de rutas de evaciocion
+ * @param {int} $idPlanEmergencia corresponde al id del plna de emergencia
+ * @param {Array} $vocab corresponde al vocabulario del sistema
+ * @returns {Undefined}
+ */
+
 function formularioRutaEvacuacion($idPlanEmergencia, $vocab) {
     $sql = "SELECT  `id`, `FKidZonaTrabajo`, `nombreArea`, `personaPermanente`,"
             . " `personaFlotante`,`ruta1`,`distancia1`,`tiempo1`,`ruta2`,`distancia2`,`tiempo2` FROM `RutaEvacuacion` WHERE `FKidZonaTrabajo`=$idPlanEmergencia";
@@ -678,7 +820,14 @@ function formularioRutaEvacuacion($idPlanEmergencia, $vocab) {
     return $html;
 }
 
-//Formulario de rutas de evaciocion
+/*
+ * Formulario idForm = 9 //Formulario de rutas de evacuacion 
+ * Funcion que crea el  //Formulario de rutas de evacuacion
+ * @param {int} $idPlanEmergencia corresponde al id del plna de emergencia
+ * @param {Array} $vocab corresponde al vocabulario del sistema
+ * @returns {Undefined}
+ */
+
 function formularioBrigadistas($idPlanEmergencia, $vocab) {
     $sql = "SELECT  `id`, `FKidZonaTrabajo`, `brigadista`, `puntoPartida`,"
             . " `zonaEvacuar`,`numPersonasEvacuar`,`distancia`,`tiempo` FROM `Brigada` WHERE `FKidZonaTrabajo`=$idPlanEmergencia";
@@ -706,7 +855,14 @@ function formularioBrigadistas($idPlanEmergencia, $vocab) {
     return $html;
 }
 
-//Formulario de atnción de emergencias
+/*
+ * Formulario idForm = 10 //Formulario de atención de emergencias
+ * Funcion que crea el  //Formulario de atención de emergencias
+ * @param {int} $idPlanEmergencia corresponde al id del plna de emergencia
+ * @param {Array} $vocab corresponde al vocabulario del sistema
+ * @returns {Undefined}
+ */
+
 function formularioIngresoAtencionEmergencias($idPlanEmergencia, $vocab) {
     $sql = "SELECT  `tipo`, `ubicacion`, `Distancia`, `Tiempo`"
             . " FROM `CuerposScorro` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
@@ -730,7 +886,14 @@ function formularioIngresoAtencionEmergencias($idPlanEmergencia, $vocab) {
     return $html;
 }
 
-//Formulario de cuerpos de socorro
+/*
+ * Formulario idForm = 10 //Formulario de cuerpos de socorro
+ * Funcion que crea el  //Formulario de cuerpos de socorro
+ * @param {int} $idPlanEmergencia corresponde al id del plna de emergencia
+ * @param {Array} $vocab corresponde al vocabulario del sistema
+ * @returns {Undefined}
+ */
+
 function formularioIngresoCuerposSocorro($idPlanEmergencia, $vocab) {
     $sql = "SELECT `dimensionAreaAcceso`, `radioGiro`, `caseta`, `plumas`, `anchoLibre` FROM `IngresoCuerpoSocorro` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
     $res = seleccion($sql);
@@ -762,7 +925,14 @@ function formularioIngresoCuerposSocorro($idPlanEmergencia, $vocab) {
     return $html;
 }
 
-//Formulario de puestos de brigada
+
+/*
+ * Formulario idForm = 11 //Formulario de puestos de brigada
+ * Funcion que crea el  //Formulario de puestos de brigada
+ * @param {int} $idPlanEmergencia corresponde al id del plna de emergencia
+ * @param {Array} $vocab corresponde al vocabulario del sistema
+ * @returns {Undefined}
+ */
 function formularioPuestoBrigada($idPlanEmergencia, $vocab) {
     $sql = "SELECT `puesto`, `funcion`, `plazoEjecucion` FROM `FormularioPuestoBrigada` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia . " order by `puesto` ";
     $respuesta = seleccion($sql);
@@ -793,7 +963,13 @@ function formularioPuestoBrigada($idPlanEmergencia, $vocab) {
     return $html;
 }
 
-//Formulario de zonas de seguridad
+/*
+ * Formulario idForm = 12 //Formulario de zonas de seguridad
+ * Funcion que crea el  //Formulario de zonas de seguridad
+ * @param {int} $idPlanEmergencia corresponde al id del plna de emergencia
+ * @param {Array} $vocab corresponde al vocabulario del sistema
+ * @returns {Undefined}
+ */
 function formularioZonaSeguridad($idPlanEmergencia, $vocab) {
     $sql = "SELECT  `id`, `FKidZonaTrabajo`, `Nombre`, `ubicacion`,"
             . " `capacidad`,`observaciones`,`sector` FROM `ZonaSeguridad` WHERE `FKidZonaTrabajo`=$idPlanEmergencia";
@@ -818,6 +994,15 @@ function formularioZonaSeguridad($idPlanEmergencia, $vocab) {
     $html .= '</tbody></table>';
     return $html;
 }
+
+/*
+ * Formulario idForm = 4 //Formulario de matriz de riesgos
+ * Funcion que crea el  //Formulario de matriz de riesgos
+ * @param {int} $idPlanEmergencia corresponde al id del plna de emergencia
+ * @param {Array} $vocab corresponde al vocabulario del sistema
+ * @param {MYPDF} $pdf objeto de la tipo MYPDF
+ * @returns {Undefined}
+ */
 
 function formularioMatriz($idPlanEmergencia, $vocab, $pdf) {
     $sql = "SELECT `probabilidad`, `gravedad`, `consecuenciaAmenaza` FROM `Matriz` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
@@ -876,6 +1061,15 @@ function formularioMatriz($idPlanEmergencia, $vocab, $pdf) {
     unlink($nombreGrafico);
 }
 
+/*
+ * Funcion que calcula el porcentaje de amenaza para la creacion de un grafico que
+ * muestre los riesgos 
+ * @param {Array} $cantidadPorTipo array asociativo que tiene la cantidad por tipo
+ * (de acuerdo a los valores de los criteros)
+ *  * @param {int} $cantidad corresponde a la cantidad total de colores para graficar
+ * @returns {Undefined}
+ */
+
 function calcularPorcentajeAmenaza($cantidadPorTipo, $cantidad) {
     $cantidadTotal = $cantidad[0]['cantidad'] + $cantidad[1]['cantidad'] + $cantidad[2]['cantidad'] + $cantidad[3]['cantidad'];
     if ($cantidadTotal != 0) {
@@ -883,6 +1077,21 @@ function calcularPorcentajeAmenaza($cantidadPorTipo, $cantidad) {
     }
     return 1;
 }
+
+/*
+ * Funcion que manda a llamar a los formularios que pertenecen a un subcapitulo
+ * @param {MYPDF} $pdf corresponde a un objeto de la clase MYPDF
+ * @param {int} $id corresponde al id del subcapitulo
+ * @param {int} $idPlanEmergencia corresponde al id del plan de emergencias
+ * @param {Array} $resPlan corresponde a un array asociativo con los registros del 
+ * plan de emergencia
+ * @param {Array} $resTipoPoblacion corresponde a un array asociativo con los registros del 
+ *  tipo de población de un plan de emergencia  
+ * @param {Array} $formularios corresponde a un array asociativo con los registros de la tabla Formulario
+ * @param {Array} $vocab corresponde al vocabulario del sistema
+ * @param {int} $idPlanEmergencia cooresponde al id del plan de emergencias
+ * @returns {Undefined}
+ */
 
 function listarFormularios($id, $formularios, $resPlan, $resTipoPoblacion, $vocab, $idPlanEmergencia, $pdf) {
     //$html = "";
@@ -892,6 +1101,21 @@ function listarFormularios($id, $formularios, $resPlan, $resTipoPoblacion, $voca
     }
     //   return $html;
 }
+
+/*
+ * Funcion que elige por subcapitulo, los formularios a genera en dicho subcapitulo.
+ * @param {MYPDF} $pdf corresponde a un objeto de la clase MYPDF
+ * @param {int} $id corresponde al id del subcapitulo
+ * @param {int} $idPlanEmergencia corresponde al id del plan de emergencias
+ * @param {Array} $resPlan corresponde a un array asociativo con los registros del 
+ * plan de emergencia
+ * @param {Array} $resTipoPoblacion corresponde a un array asociativo con los registros del 
+ *  tipo de población de un plan de emergencia  
+ * @param {Array} $formularios corresponde a un array asociativo con los registros de la tabla Formulario
+ * @param {Array} $vocab corresponde al vocabulario del sistema
+ * @param {int} $idPlanEmergencia cooresponde al id del plan de emergencias
+ * @returns {Undefined}
+ */
 
 function formularioSeleccionada($id, $form, $resPlan, $resTipoPoblacion, $vocab, $idPlanEmergencia, $pdf) {
     $html = "";
@@ -962,6 +1186,7 @@ function formularioSeleccionada($id, $form, $resPlan, $resTipoPoblacion, $vocab,
                 break;
             case 10:
                 $html .= formularioIngresoAtencionEmergencias($idPlanEmergencia, $vocab);
+                $html .= "<br>";
                 $html .= formularioIngresoCuerposSocorro($idPlanEmergencia, $vocab);
                 break;
             case 11:
@@ -979,10 +1204,24 @@ function formularioSeleccionada($id, $form, $resPlan, $resTipoPoblacion, $vocab,
     }
 }
 
+/*
+ * Funcion que carga una nueva pagina en el pdf y modifica la fuente
+ * @param {MYPDF} $pdf corresponde a un objeto de la clase MYPDF
+ * @returns {Undefined}
+ */
+
 function cargarNuevaPagina($pdf) {
     $pdf->SetFont(PDF_FONT_MONOSPACED, '', 12);
     $pdf->AddPage();
 }
+
+/*
+ * Funcion que crea el grafico para mostrar en el pdf
+ * @param {Array} $criterios corresponde a los datos que se graficarán
+ *  * @param {Array} $colores array con los nombres de los colores que se colocarán
+ * como legendas en el gráfico
+ * @returns {String} con el nombre de la imagen generada
+ */
 
 function crearGrafico($criterios, $colores) {
     $apr = 40;
@@ -990,28 +1229,21 @@ function crearGrafico($criterios, $colores) {
     $rj = 50;
     $nsp = 50;
 
-//$criterios = $_GET['criterios'];
     $criterios = str_replace("'", '"', $criterios);
     $data = JSON_decode($criterios);
 
-//$colores = $_GET['colores'];
     $colores = str_replace("'", '"', $colores);
     $criterios = JSON_decode($colores);
     $legend = JSON_decode($colores);
 
-//$data = array($apr, $rpr, $rj, $nsp);
-//$legend = array("APR", "RPR", "RJ", "NSP");
     $colors = array("#828282", "#5cb85c", "#f0ad4e", "#d9534f");
 
     $graph = new PieGraph(350, 350);
     $graph->SetShadow();
 
     $graph->title->Set("Tipos de amenazas");
-//$graph->title->SetFont(FF_FONT1,FS_BOLD);
-
     $p1 = new PiePlot($data);
     $p1->SetLegends($legend);
-
 
     $graph->Add($p1);
     $p1->SetSliceColors($colors);
@@ -1021,10 +1253,6 @@ function crearGrafico($criterios, $colores) {
     $fileName = "grafica" . $aleatorio . ".png";
     $graph->img->Stream($fileName);
     return $fileName;
-
-// Mandarlo al navegador
-    //$graph->img->Headers();
-    //$graph->img->Stream();
 }
 
 //ob_clean();
@@ -1042,7 +1270,7 @@ if (check_permiso($mod4, $act6, $user_rol) && !isset($_GET['visualizarpdf'])) {
 }
 //ob_clean();
 echo $return;
-//$pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/planEmergencias.pdf', 'F');
+
 //============================================================+
 // END OF FILE
 //============================================================+

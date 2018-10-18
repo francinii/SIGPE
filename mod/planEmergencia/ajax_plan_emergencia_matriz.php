@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Actualiza los registros de la matriz de riesgos en la base de datos 
+ */
 include("../login/check.php");
 include("../../inc/db/db.php");
 

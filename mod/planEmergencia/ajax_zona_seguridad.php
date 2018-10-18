@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Agrega y actualiza los registros de la Zona de seguridad en la base de datos
+ */
 include("../login/check.php");
 include("../../inc/db/db.php");
 $idPlanEmergencia = $_GET['idPlanEmergencia'];

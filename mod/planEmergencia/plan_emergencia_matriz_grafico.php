@@ -12,15 +12,36 @@ $ip .= $mySessionController->getVar("cds_locate");
 $page_cant = $mySessionController->getVar("page_cant");
 
 $criterios = $_GET['criterios'];
-//$criterios = str_replace(" ", "", $criterios);
-//$criterios = str_replace("'", '"', $criterios);
 $criterios = JSON_decode($criterios);
+
+
+/*
+ * Funcion que calcula el porcentaje de amenaza
+ * @param {Array} $criterios corresonde a un array con los colores de los 
+ * criterios de tipo de alerta
+ * @param {Array} $color corresonde a un array con los colores "VERDE", "AMARILLA"
+ * "NINGUNA", "ROJA"
+ * @returns {} HTML
+ */
 
 function cacularPorcentajeAmenaza($color, $criterios) {
     $cantidadAmenazas = count($criterios);
     $totalPorTipoAmenaza = buscar($color, $criterios);
-    return ($totalPorTipoAmenaza / $cantidadAmenazas) * 100;
+    if ($cantidadAmenazas > 0) {
+        return ($totalPorTipoAmenaza / $cantidadAmenazas) * 100;
+    }
+    return 0;
 }
+
+/*
+ * Funcion que calcula el total de elementos que tienen un cierto color
+ * @param {Array} $criterios corresonde a un array con los colores de los 
+ * criterios de tipo de alerta
+ * @param {Array} $color corresonde a un array con los colores "VERDE", "AMARILLA"
+ * "NINGUNA", "ROJA"
+ * @returns {int} regresa el total al contar la cantidad de colores de un mismo tipo
+ * (Ej: cuantos "VERDE" hay: 2)
+ */
 
 function buscar($color, $criterios) {
     $total = 0;
@@ -45,7 +66,7 @@ function buscar($color, $criterios) {
                         <th width="10%"><?= $vocab["tipo_alerta_nombre"] ?></th>
                         <th width="5%"><?= $vocab["tipo_alerta_cantidad"] ?></th>    
                         <th width="5%"><?= $vocab["tipo_alerta_porcentaje"] ?></th>
-                        <th width="20%"><?= $vocab["tipo_alerta_amenaza"] ?></th>                
+                              
                     </tr>
                 </thead>
                 <tbody>
@@ -56,12 +77,11 @@ function buscar($color, $criterios) {
                         ?>
                         <tr>
                             <td><?= $colores[$i] ?></td>
-                            <?php $cantidad[] = buscar($colores[$i], $criterios); ?>
+    <?php $cantidad[] = buscar($colores[$i], $criterios); ?>
                             <td><?= $cantidad[$i] ?></td>
-                            <td><?= cacularPorcentajeAmenaza($colores[$i], $criterios); ?></td>
-                            <td></td>
+                            <td><?= cacularPorcentajeAmenaza($colores[$i], $criterios); ?></td>                            
                         </tr>
-                    <?php } ?>
+<?php } ?>
                 </tbody>
             </table>
         </div>
