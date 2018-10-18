@@ -639,8 +639,8 @@ CREATE TABLE `sis_login` (
 -- Records of sis_login
 -- ----------------------------
 INSERT INTO `sis_login` VALUES ('112170040', 'd41d8cd98f00b204e9800998ecf8427e', '1');
-INSERT INTO `sis_login` VALUES ('116650288', 'd41d8cd98f00b204e9800998ecf8427e', '2');
-INSERT INTO `sis_login` VALUES ('402340420', 'd41d8cd98f00b204e9800998ecf8427e', '2');
+INSERT INTO `sis_login` VALUES ('116650288', 'd41d8cd98f00b204e9800998ecf8427e', '1');
+INSERT INTO `sis_login` VALUES ('402340420', 'd41d8cd98f00b204e9800998ecf8427e', '1');
 
 -- ----------------------------
 -- Table structure for sis_mod
