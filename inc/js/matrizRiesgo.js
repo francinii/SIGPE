@@ -158,7 +158,7 @@ function generaVectorMatriz(nombreCentro, idCentro, clave, editar) {
             var response = ajax.responseText;
             //alert(response); //DEBUG
             if (response == 0) {
-                datosGuardados();
+                datosGuardados('matriz_riesgos');
                 jAlert("Matriz guardada con exito", "Exito");
                 if (clave == 1) {                    
                       OpcionMenu('mod/planEmergencia/plan_emergencia_matriz_grafico.php?', 'nombreCentro='+nombreCentro+'&idCentro='+idCentro+'&criterios=' + JSON.stringify(crearVectorValores()));
