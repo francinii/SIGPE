@@ -1,5 +1,13 @@
 <?php
-
+/*** guarda los datos de las siguentes tablas de inventario en la base 
+ * recursos de telecomunicaciones 
+ * recuros de equipo para repuestos
+ * recuros de equipo para repuestos:servicios capacidad de agua
+ * recuros de equipo para repuestos energia
+ *sistemas fijos contra incendios
+ * equipo de primera respuesta
+ * señalizacion
+ *  */
 include("../login/check.php");
 include("../../inc/db/db.php");
 $idPlanEmergencia = $_GET['idPlanEmergencia'];

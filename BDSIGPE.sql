@@ -8,6 +8,7 @@
  * Created: 26/07/2018
  */
 
+-- ---- drop para las tablas del base BDSIGPE
 drop table TipoPoblacion;
 drop table CapituloPlan;
 drop table SubCapituloPlan;
@@ -56,7 +57,12 @@ INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('4','4','2'
 INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('4','5','2');
 INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('4','6','2');
 
+-- *********************************************************************
 
+
+-- ----------------------------
+-- estructura de la tabla para sedes
+-- ----------------------------
 create table Sede(
 id int  NOT NULL AUTO_INCREMENT,
 isActivo int,
@@ -65,6 +71,9 @@ descripcion text,
 PRIMARY KEY(id)
 )ENGINE=InnoDB;
 
+-- ----------------------------
+-- estructura de la tabla para ZonaTrabajo
+-- ----------------------------
 create table ZonaTrabajo(
 id int  NOT NULL AUTO_INCREMENT,
 FKidSede int,
@@ -117,6 +126,10 @@ PRIMARY KEY(id),
 FOREIGN KEY(FKidSede) REFERENCES Sede(id)
 )ENGINE=InnoDB;
 
+-- ----------------------------
+-- estructura de la tabla para Historial
+-- ----------------------------
+
 create table Historial(
 id int NOT NULL AUTO_INCREMENT,
 FKidZona int,
@@ -126,11 +139,20 @@ PRIMARY KEY(id),
 FOREIGN KEY(FKidZona) REFERENCES ZonaTrabajo(id)
 ) ENGINE=InnoDB;
 
+-- ----------------------------
+-- estructura de la tabla para usuarios asociados a zonas
+-- ----------------------------
+
 create table UsuarioZona(
 FKidUsuario varchar(50),
 FKidZona int,
 FOREIGN KEY(FKidZona) REFERENCES ZonaTrabajo(id)
 ) ENGINE=InnoDB;
+
+-- ----------------------------
+-- estructura de la tabla para origen de las amenaza
+-- ----------------------------
+
 
 create table OrigenAmenaza(
     id int NOT NULL AUTO_INCREMENT,
@@ -139,7 +161,9 @@ create table OrigenAmenaza(
     PRIMARY KEY(id)
 )ENGINE=InnoDB;
 
-
+-- ----------------------------
+-- estructura de la tabla para tipo de las amenaza
+-- ----------------------------
 create table TipoAmenaza (
     id int NOT NULL AUTO_INCREMENT,  
     descripcion varchar(150),
@@ -149,6 +173,11 @@ create table TipoAmenaza (
     FOREIGN KEY(FKidOrigen) REFERENCES OrigenAmenaza(id)
 )ENGINE=InnoDB;
 
+
+-- ----------------------------
+-- estructura de la tabla para categoria de las amenaza
+-- ----------------------------
+
 create table CategoriaTipoAmenaza (
     id int NOT NULL AUTO_INCREMENT, 
     FKidTipoAmenaza int,   
@@ -157,6 +186,10 @@ create table CategoriaTipoAmenaza (
     PRIMARY KEY(id), 
     FOREIGN KEY(FKidTipoAmenaza) REFERENCES TipoAmenaza(id)
 )ENGINE=InnoDB;
+
+-- ----------------------------
+-- estructura de la tabla para la matriz de riesgo
+-- ----------------------------
 
 create table Matriz (
     id int NOT NULL AUTO_INCREMENT,  
@@ -172,7 +205,9 @@ create table Matriz (
 )ENGINE=InnoDB;
 
 
-
+-- ----------------------------
+-- estructura de la tabla para los capitulos
+-- ----------------------------
 
 create table Capitulo(
 id int NOT NULL AUTO_INCREMENT,
@@ -184,6 +219,10 @@ titulo varchar(150),
 orden int,
  PRIMARY KEY(id) 
 )ENGINE=InnoDB;
+
+-- ----------------------------
+-- estructura de la tabla para los subcapitulos
+-- ----------------------------
 
 create table SubCapitulo(
 id int NOT NULL AUTO_INCREMENT,
@@ -198,6 +237,11 @@ PRIMARY KEY(id),
 FOREIGN KEY (FKidCapitulo) REFERENCES Capitulo(id)
 )ENGINE=InnoDB;
 
+
+-- ----------------------------
+-- estructura de la tabla para la lista de formularios
+-- ----------------------------
+
 create table Formulario(
 id int NOT NULL AUTO_INCREMENT,
 FKidSubcapitulos int,
@@ -209,6 +253,10 @@ FOREIGN KEY (FKidSubcapitulos) REFERENCES SubCapitulo(id)
 )ENGINE=InnoDB;
 
 
+-- ----------------------------
+-- estructura de la tabla para la descripcion en el capitulo del  usuario en el plan
+-- ----------------------------
+
 create table CapituloPlan(
     FKidCapitulo int NOT NULL,
     FKidZonaTrabajo int NOT NULL,
@@ -218,6 +266,11 @@ descripcion text,
 
 ) ENGINE=InnoDB;
 
+
+-- ----------------------------
+-- estructura de la tabla para la descripcion en el subcapitulo del  usuario en el plan
+-- ----------------------------
+
 create table SubCapituloPlan(
     FKidSubCapitulo int NOT NULL,
     FKidZonaTrabajo int NOT NULL,
@@ -225,6 +278,11 @@ create table SubCapituloPlan(
     FOREIGN KEY (FKidSubCapitulo) REFERENCES SubCapitulo(id),
     FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 ) ENGINE=InnoDB;
+
+
+-- ----------------------------
+-- estructura de la tabla para formulario tipo de poblacion en actividades
+-- ----------------------------
 
 create table TipoPoblacion(
 id int NOT NULL AUTO_INCREMENT,
@@ -237,6 +295,10 @@ PRIMARY KEY(id),
 FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 ) ENGINE=InnoDB;
 
+-- ----------------------------
+-- estructura de la tabla para formulario de inventario recursos Humanos
+-- ----------------------------
+
 create table RecursoHumanos(
 id int NOT NULL AUTO_INCREMENT,
 FKidZonaTrabajo int,
@@ -248,6 +310,11 @@ contacto varchar(150),
 PRIMARY KEY(id),
 FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 ) ENGINE=InnoDB;
+
+
+-- ----------------------------
+-- estructura de la tabla para formulario de inventario equipo movil
+-- ----------------------------
 
 create table EquipoMovil(
 id int NOT NULL AUTO_INCREMENT,
@@ -263,6 +330,10 @@ PRIMARY KEY(id),
 FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 ) ENGINE=InnoDB;
 
+-- ----------------------------
+-- estructura de la tabla para formulario de inventario recursos instalacioes
+-- ----------------------------
+
 create table RecursoIntalaciones(
 id int NOT NULL AUTO_INCREMENT,
 FKidZonaTrabajo int,
@@ -276,6 +347,10 @@ PRIMARY KEY(id),
 FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 ) ENGINE=InnoDB;
 
+
+-- ----------------------------
+-- estructura de la tabla para formulario de inventario otros inventarios
+-- ----------------------------
 create table InventarioOtros(
 id int NOT NULL AUTO_INCREMENT,
 FKidZonaTrabajo int,
@@ -290,6 +365,10 @@ PRIMARY KEY(id),
 FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 ) ENGINE=InnoDB;
 
+-- ----------------------------
+-- estructura de la tabla para formulario de ingreso cuerpos de socorro analisis de tiempo
+-- ----------------------------
+
 create table CuerposScorro(
 id int NOT NULL AUTO_INCREMENT,
 FKidZonaTrabajo int,
@@ -300,6 +379,10 @@ Tiempo float,
 PRIMARY KEY(id),
 FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 ) ENGINE=InnoDB;
+
+-- ----------------------------
+-- estructura de la tabla para formulario de ingreso cuerpos de socorro descripncion del ingreso
+-- ----------------------------
 
 create table IngresoCuerpoSocorro(
     id int NOT NULL AUTO_INCREMENT,
@@ -312,10 +395,11 @@ create table IngresoCuerpoSocorro(
    PRIMARY KEY(id),
 FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id) 
 )ENGINE=InnoDB;
--- faltan 3 tablas increso cuerpo de socorro y  las rutas de evacuacion
 
-
--- No se a que corresponde esta tabla 
+-- ----------------------------
+-- estructura de la tabla para formulario de brigadistas
+-- ----------------------------
+ 
 create table Brigada(
     id int NOT NULL AUTO_INCREMENT, 
     FKidZonaTrabajo int,
@@ -329,6 +413,10 @@ create table Brigada(
     FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id) 
 ) ENGINE=InnoDB;
  
+
+-- ----------------------------
+-- estructura de la tabla para formulario de rutas de evacuacion
+-- ----------------------------
  
 create table RutaEvacuacion(
     id int NOT NULL AUTO_INCREMENT, 
@@ -347,6 +435,10 @@ create table RutaEvacuacion(
 ) ENGINE=InnoDB;
 
 
+-- ----------------------------
+-- estructura de la tabla para formulario de zona de seguridad
+-- ----------------------------
+
 create table ZonaSeguridad(
 id int NOT NULL AUTO_INCREMENT,
 FKidZonaTrabajo int,
@@ -358,6 +450,11 @@ sector varchar(1500),
 PRIMARY KEY(id),
 FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 ) ENGINE=InnoDB;
+
+
+-- ----------------------------
+-- estructura de la tabla para formulario de poblacion
+-- ----------------------------
 
 create table FormularioPoblacion(
     id int NOT NULL AUTO_INCREMENT,
@@ -377,6 +474,11 @@ create table FormularioPoblacion(
     FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 )ENGINE=InnoDB;
 
+
+-- ----------------------------
+-- estructura de la tabla para formulario de puestos de brigada
+-- ----------------------------
+
 create table FormularioPuestoBrigada(
     id int NOT NULL AUTO_INCREMENT,
     FKidZonaTrabajo int,
@@ -387,6 +489,10 @@ create table FormularioPuestoBrigada(
     FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 )ENGINE=InnoDB;
 
+
+-- ----------------------------
+-- estructura de la tabla para formulario de identificacion de peligros
+-- ----------------------------
 
 create table IdentificacionPeligro(
     id int NOT NULL AUTO_INCREMENT,
@@ -404,21 +510,6 @@ create table IdentificacionPeligro(
 
 
 
-create table PlanAccion(
-    id int NOT NULL AUTO_INCREMENT,
-    FKidZonaTrabajo int,
-    area varchar(150),
-    peligro text,
-    accionPorRealizar varchar(150),
-    recomendaciones text,
-    fechaEjecucion date,
-    responsable varchar(1500),
-    PRIMARY KEY(id),
-    FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
-) ENGINE=InnoDB;
-
-
-
 -- para wamp en cada tabla ENGINE=INNODB;
 
 -- INSERT INTO `Sede`(`isActivo`, `nombreSede`, `descripcion`) VALUES (1,'Heredia','Heredia');
@@ -431,7 +522,7 @@ create table PlanAccion(
 -- INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`version`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (3,1,1,'Sede alajuela','Zona ubicada en la region de Alajuela');
 -- INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`version`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,1,1,'Sede Cartago','Zona ubicada en la region de Cartago');
 
-
+-- ****************************** insert de prueba para la base ********************************
 INSERT INTO `BDSIGPE`.`OrigenAmenaza` (`descripcion`,`isActivo`) VALUES ('Natural',1);
 INSERT INTO `BDSIGPE`.`OrigenAmenaza` (`descripcion`,`isActivo`) VALUES ('Socio-Natural',1);
 INSERT INTO `BDSIGPE`.`OrigenAmenaza` (`descripcion`,`isActivo`) VALUES ('Antrópica',1);

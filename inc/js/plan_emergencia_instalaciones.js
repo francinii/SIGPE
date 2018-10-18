@@ -70,7 +70,7 @@ function guardarDatosInstalaciones(idCentro, pasar) {
             //alert(response); //DEBUG
             if (response == 0) {
                 jAlert("Guardado  con exito", "Exito");
-                datosGuardados();
+                datosGuardados("instalaciones");
                 if (pasar) {                    
                     OpcionMenu('mod/planEmergencia/plan_emergencia_matriz.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
                 }

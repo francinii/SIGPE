@@ -1,3 +1,11 @@
+
+/**
+ *  agregar el editor CKEDITOR a un textarea
+ *  llamado en  plan_emergencia_capitulos_subcapitulos.php
+ * @param {Boolean} modo en qe esta la pagina (edicion o no)
+ * @param {string} id del textarea
+ * @returns {undefined} 
+ */
 function CrearEditorCapitulosSubcapitulos(modo, id) {
     //CKFinder.setupCKEditor();
 
@@ -5,9 +13,10 @@ function CrearEditorCapitulosSubcapitulos(modo, id) {
         filebrowserBrowseUrl: 'lib/ckeditor/ckfinder/ckfinder.html?type=Images',
         filebrowserImageUploadUrl: 'lib/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files'
     });
-    editor.on('change', function() {
-        jQuery('#'+id).trigger('change');}
-            );
+    editor.on('change', function () {
+        jQuery('#' + id).trigger('change');
+    }
+    );
 
     editor.addCommand("mySimpleCommand", {
         exec: function (edt) {
@@ -22,6 +31,17 @@ function CrearEditorCapitulosSubcapitulos(modo, id) {
     });
 
 }
+
+
+/**
+ *  guarda la descripcion del usuario en el sistema , conect con el servidor
+ *  llamado en  plan_emergencia_capitulos_subcapitulos.php
+ * @param {int} idPlanEmergencia del plan de emergencia 
+ * @param {int} idCapitulo id del capitulo
+ *  @param {int} id del textarea
+ * @param {int} pasar al siguiente formulario (1,0)
+ * @returns {undefined} 
+ */
 
 function guardarCapituloUsuario(idPlanEmergencia, idCapitulo, id, pasar) {
     var loading = document.getElementById('loading_container');
@@ -66,6 +86,16 @@ function guardarCapituloUsuario(idPlanEmergencia, idCapitulo, id, pasar) {
     loading.innerHTML = "";
 
 }
+
+/**
+ *  guarda la descripcion del usuario en el sistema , conect con el servidor
+ *  llamado en  plan_emergencia_capitulos_subcapitulos.php
+ * @param {int} idPlanEmergencia del plan de emergencia 
+ * @param {int} idSubcapitulo id del subcapitulo
+ *  @param {int} id del textarea
+ * @param {int} pasar al siguiente formulario (1,0)
+ * @returns {undefined} 
+ */
 
 function guardarSubCapituloUsuario(idPlanEmergencia, idSubcapitulo, id, pasar) {
     var loading = document.getElementById('loading_container');

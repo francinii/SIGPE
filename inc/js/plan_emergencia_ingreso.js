@@ -1,3 +1,10 @@
+/**
+ * agrega una fila a la tabla
+ * llamado en  pla_emergencia_ingreso.php
+ * @param {String} titulo el boton de eliminar
+ * @param {String} alert mensage de alerta
+ * @returns {undefined}
+ */
 function agregarFilaIngresos(titulo, alert) {
     var tabla = jQuery("#lista_ingreso tbody");
     var id = tabla.children().last().attr('id')
@@ -24,6 +31,12 @@ function agregarFilaIngresos(titulo, alert) {
     IniciarGuardarCambios(alert);
     jQuery("#E-tipoEquipo" + id).focus();
 }
+/**
+ *  Elimina una fila de la tabla
+ *  llamado en  pla_emergencia_ingreso.php
+ * @param {elemento HTML} event  elemento que resive la accion
+ * @returns {undefined}
+ */
 function eliminarFilaIngreso(event) {
     jQuery(event).trigger('change');
     var row = jQuery(event).parents("tr:first");
@@ -31,6 +44,12 @@ function eliminarFilaIngreso(event) {
 
 }
 
+/**
+ *  Valida la informacion de la tabla 
+ *  llamado en  pla_emergencia_ingreso.php
+ * @param {String} tabla id de la tabla 
+ * @returns {boolean}
+ */
 function validate_Ingreso(tabla) {
     var filas = jQuery(tabla + " tbody").children();
     for (var i = 0; i < filas.length; i++) {
@@ -49,6 +68,12 @@ function validate_Ingreso(tabla) {
     return true;
 }
 
+/**
+ *  Quita el color azul de los campos validados
+ *  llamado en  pla_emergencia_ingreso.php
+ * @param {String} tabla id de la tabla 
+ * @returns {undefined}
+ */
 function validadoIngreso(tabla) {
     var filas = jQuery(tabla + " tbody").children();
     for (var i = 0; i < filas.length; i++) {
@@ -62,7 +87,13 @@ function validadoIngreso(tabla) {
     }
 
 }
-
+/**
+ *  Guarda los datos del la tabla analisis de tiempo , conecta con el servidor
+ *  llamado en  pla_emergencia_ingreso.php
+ * @param {int} idPlanEmergencia id del plan de emergencia 
+ * @param {int} pasar al siguiente formulario(1,0) 
+ * @returns {undefined}
+ */
 function guardarIncreso(idPlanEmergencia, pasar) {
     if (validate_Ingreso("#lista_ingreso")) {
         validadoIngreso("#lista_ingreso");
@@ -108,7 +139,7 @@ function guardarIncreso(idPlanEmergencia, pasar) {
                 var response = ajax.responseText;
                 //alert(response); //DEBUG
                 if (response == 0) {
-                    datosGuardados();
+                    datosGuardados('lista_ingreso');
                     jAlert("Guardado  con exito", "Exito");
                     if (pasar) {
                         OpcionMenu('mod/planEmergencia/plan_emergencia_instalaciones.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
@@ -129,10 +160,15 @@ function guardarIncreso(idPlanEmergencia, pasar) {
 
 }
 
-
+/**
+ *  Guarda los datos del formulario descripcion del increso , conecta con el servidor
+ *  llamado en  pla_emergencia_ingreso.php
+ * @param {int} idPlanEmergencia id del plan de emergencia 
+ * @param {int} pasar al siguiente formulario(1,0) 
+ * @returns {undefined}
+ */
 function guardarIncresoCuerpoSocorro(idPlanEmergencia, pasar) {
-    if (validate_Ingreso("#lista_ingreso")) {
-        validadoIngreso("#lista_ingreso");
+   
 
         var loading = document.getElementById('loading_container');
         loading.innerHTML = cargando_bar;
@@ -162,7 +198,7 @@ function guardarIncresoCuerpoSocorro(idPlanEmergencia, pasar) {
                 var response = ajax.responseText;
                 //alert(response); //DEBUG
                 if (response == 0) {
-                    datosGuardados();
+                    datosGuardados('lista_ingreso_cuerposocorro');
                     jAlert("Guardado  con exito", "Exito");
                     if (pasar) {
                         OpcionMenu('mod/planEmergencia/plan_emergiancia_puestos_brigada.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);
@@ -179,6 +215,6 @@ function guardarIncresoCuerpoSocorro(idPlanEmergencia, pasar) {
         };
         ajax.send(null);
         loading.innerHTML = "";
-    }
+  
 
 }

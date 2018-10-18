@@ -1,4 +1,11 @@
 <?php
+/*
+ * Menu de los formularios para el pna de emergencia
+ *  
+ */
+
+
+/* ****************** select de los formularios  ****/////////////////////
 $start = "0";
 $sql = "SELECT `id`, `titulo` FROM `Formulario` order by id";
 

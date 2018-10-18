@@ -1,4 +1,5 @@
 <?php
+/* guarda los datos del formulario identificacion de peligro de brigada en la base*/
 include("../login/check.php");
 include("../../inc/db/db.php");
 

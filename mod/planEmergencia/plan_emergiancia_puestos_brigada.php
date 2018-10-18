@@ -1,11 +1,15 @@
 <?php
+/*
+ * Formulario puestos de brigada 
+ *  
+ */
 include("../login/check.php");
 include("../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
 include("plan_emergencia_menu.php");
 ?>
-<!------------------------------------  Recurso Humano ----------------------------------- ------------------- ----------->
+<!--/********************************** selecionde los datos del formulario *******************************-->
 <?php
 $sql = "SELECT `puesto`, `funcion`, `plazoEjecucion` FROM `FormularioPuestoBrigada` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia . " order by `puesto` ";
 $res = seleccion($sql);
@@ -22,13 +26,13 @@ if (count($res) <= 0) {
     <div align="right" style = "padding-right:0.5%;">
         <?php if ($editar) { ?>
             <span class="text-center" >
-                <a class="btn btn-info" onclick="javascript: agregarFilaPuesto('<?= $vocab["symbol_delete"] ?>', '<?= $vocab["Menu_Datos_sin_guardar"] ?>','<?= $vocab["symbol_add"] ?>','<?= $vocab["puestos_brigada_puestoNuevo"] ?>');"><i class=" fa fa-plus text-info"></i> <?= $vocab["menu_add"] ?> <?= $vocab["puestos_brigada_puesto"] ?>  </a>
+                <a class="btn btn-info" onclick="javascript: agregarFilaPuesto('<?= $vocab["symbol_delete"] ?>', '<?= $vocab["Menu_Datos_sin_guardar"] ?>','<?= $vocab["symbol_add"] ?>','<?= $vocab["puestos_brigada_puestoNuevo"] ?>','<?= $vocab["puestos_brigada_puesto"] ?>');"><i class=" fa fa-plus text-info"></i> <?= $vocab["menu_add"] ?> <?= $vocab["puestos_brigada_puesto"] ?>  </a>
             </span>            
         <?php } ?>
     </div>
 </div>
     <div   class="dataTables_wrapper   dt-bootstrap" style = "overflow-x:auto;">
-        <table  style = "width: 99%" id="lista_puestoBrigada" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center" >
+        <table  style = "width: 99%" id="lista_puestoBrigada" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
             <thead >
                 <tr>
                     <th  width="45%"><?= $vocab["puestos_brigada_funciones"] ?></th>
@@ -52,8 +56,9 @@ if (count($res) <= 0) {
                             $puestoActual = $puesto;
                             ?>
                             <tr class="seccionPuesto" id="Pues-<?= $id ?>">                   
-                                <td style="align-items:center; background-color:lightblue" colspan="2">
-                                    <input style="width: 40%; margin: 0 auto;" type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="Puesto<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['puesto'] : $res[$i] ?>" >
+                                <td style="align-items:center; background-color:lightblue" class = " form-inline" colspan="2">
+                                    <span><?= $vocab["puestos_brigada_puesto"] ?>:</span>
+                                    <input style="width: 40%;" type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="Puesto<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['puesto'] : $res[$i] ?>" >
                                 </td>                                
                                 <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
                                     <td  style="background-color:lightblue">              
@@ -96,7 +101,8 @@ if (count($res) <= 0) {
                 ?>
             </tbody>
         </table>
-    </div>  
+    </div> 
+<!--/************************************************ Guarda los datos ************************************/-->
     <div class="text-center">
         <?php if ($editar) { ?>
             <span class="text-center">

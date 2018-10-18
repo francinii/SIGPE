@@ -105,7 +105,7 @@ function guardarZonaSeguridad(idPlanEmergencia, pasar, idtable) {
                 var response = ajax.responseText;
                 //alert(response); //DEBUG
                 if (response == 0) {
-                    datosGuardados();
+                    datosGuardados(idtable);
                     jAlert("Guardado  con exito", "Exito");
                     if (pasar) {
                         OpcionMenu('mod/planEmergencia/plan_emergencia_capitulos_subcapitulos.php?', 'idCentro=' + idCentro + '&nombreCentro=' + nombreCentro);

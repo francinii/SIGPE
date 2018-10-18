@@ -26,7 +26,7 @@ if (count($res) <= 0) {
         <?php } ?>
     </div>
     <div   class="dataTables_wrapper   dt-bootstrap" style = "overflow-x:auto;">
-        <table style = "width: 99%;" id="lista_recurso_humano" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center" >
+        <table   style = "width: 99%;" id="lista_recurso_humano" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
             <thead style="background-color: lightblue;">
                 <tr>
                     <th  width="5%"><?= $vocab["recurso_humano_Profesion"] ?></th>
@@ -103,7 +103,7 @@ if (count($res) <= 0) {
   <?php } ?>
     </div>
     <div   class="dataTables_wrapper   dt-bootstrap" style = "overflow-x:auto;">
-        <table style = "width: 99%;" id="lista_equipos" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center" >
+        <table  style = "width: 99%;" id="lista_equipos" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
             <thead style="background-color: lightblue;">
                 <tr>
                     <th  width="5%"><?= $vocab["equipo_moviles_tipo"] ?></th>
@@ -181,7 +181,7 @@ if (count($res) <= 0) {
 <?php } ?>
     </div>
     <div   class="dataTables_wrapper  dt-bootstrap" style = "overflow-x:auto;">
-        <table style = "width: 99%;" id="lista_Instalaciones" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center" >
+        <table  style = "width: 99%;" id="lista_Instalaciones" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
             <thead style="background-color: lightblue;">
                 <tr>
                     <th  width="5%"><?= $vocab["instalaciones_tipo"] ?></th>
@@ -257,7 +257,7 @@ if (count($res) <= 0) {
         <?php } ?>
     </div>
     <div   class="dataTables_wrapper dt-bootstrap" style = "overflow-x:auto;">
-        <table style = "width: 99%;" id="<?=$tablaID?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center" >
+        <table  style = "width: 99%;" id="<?=$tablaID?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
             <thead style="background-color: lightblue;">
                 <tr>
                     <th  width="5%"><?= $vocab["otros_recursos_tipo"] ?></th>
@@ -333,7 +333,7 @@ if (count($res) <= 0) {
         <?php } ?>
     </div>
     <div   class="dataTables_wrapper dt-bootstrap" style = "overflow-x:auto;">
-        <table style = "width: 99%;" id="<?=$tablaID?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center" >
+        <table  style = "width: 99%;" id="<?=$tablaID?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
             <thead style="background-color: lightblue;">
                 <tr>
                     <th  width="5%"><?= $vocab["otros_recursos_tipo"] ?></th>
@@ -408,7 +408,7 @@ if (count($res) <= 0) {
         <?php } ?>
     </div>
     <div   class="dataTables_wrapper dt-bootstrap" style = "overflow-x:auto;">
-        <table style = "width: 99%;" id="<?=$tablaID?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center" >
+        <table  style = "width: 99%;" id="<?=$tablaID?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
             <thead style="background-color: lightblue;">
                 <tr>
                     <th  width="5%"><?= $vocab["otros_recursos_tipo"] ?></th>
@@ -483,7 +483,7 @@ if (count($res) <= 0) {
         <?php } ?>
     </div>
     <div   class="dataTables_wrapper dt-bootstrap" style = "overflow-x:auto;">
-        <table style = "width: 99%;" id="<?=$tablaID?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center" >
+        <table  style = "width: 99%;" id="<?=$tablaID?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
             <thead style="background-color: lightblue;">
                 <tr>
                     <th  width="5%"><?= $vocab["otros_recursos_tipo"] ?></th>
@@ -558,7 +558,7 @@ if (count($res) <= 0) {
         <?php } ?>
     </div>
     <div   class="dataTables_wrapper dt-bootstrap" style = "overflow-x:auto;">
-        <table style = "width: 99%;" id="<?=$tablaID?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center" >
+        <table  style = "width: 99%;" id="<?=$tablaID?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
             <thead style="background-color: lightblue;">
                 <tr>
                     <th  width="5%"><?= $vocab["otros_recursos_tipo"] ?></th>
@@ -633,7 +633,7 @@ if (count($res) <= 0) {
         <?php } ?>
     </div>
     <div   class="dataTables_wrapper dt-bootstrap" style = "overflow-x:auto;">
-        <table style = "width: 99%;" id="<?=$tablaID?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center" >
+        <table  style = "width: 99%;" id="<?=$tablaID?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
             <thead style="background-color: lightblue;">
                 <tr>
                     <th  width="5%"><?= $vocab["otros_recursos_tipo"] ?></th>
@@ -708,7 +708,7 @@ if (count($res) <= 0) {
         <?php } ?>
     </div>
     <div   class="dataTables_wrapper dt-bootstrap" style = "overflow-x:auto;">
-        <table style = "width: 99%;" id="<?=$tablaID?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center" >
+        <table  style = "width: 99%;" id="<?=$tablaID?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
             <thead style="background-color: lightblue;">
                 <tr>
                     <th  width="5%"><?= $vocab["otros_recursos_tipo"] ?></th>

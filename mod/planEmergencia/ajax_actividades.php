@@ -1,5 +1,5 @@
 <?php
-
+/* guarda los datos del formulario tipo de pobalcion actividades de brigada en la base*/
 include("../login/check.php");
 include("../../inc/db/db.php");
 $idPlanEmergencia = $_GET['idPlanEmergencia'];
