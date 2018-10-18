@@ -39,7 +39,7 @@ if (count($res) <= 0) {
                     <th  width="45%"><?= $vocab["puestos_brigada_plazos_ejecución"] ?></th>                                       
                     <?php if ($editar) { ?>
                         <th width="1%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
-                        <th width="1%"><div class="text-center"><i class="fa fa-plus  fa-2x text-success puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
+                        <th width="1%"><div class="text-center"><i class="fa fa-plus  fa-2x text-success puntero" title="<?= $vocab["symbol_add"] ?>"></i></div></th>
                     <?php } ?>
 
                 </tr>
