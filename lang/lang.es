@@ -121,6 +121,9 @@ $vocab["list_origen_amenaza_isActivo"]          = "Activar origen de la amenaza"
 $vocab["desc_origen_isActivo"]                  = "Active o desactive el origen";
 $vocab["nombre_origen_amenaza"]                 = "Nombre del origen de la amenaza";
 $vocab["nombre_desc_origen_amenaza"]            = "Escriba el nombre de la nueva amenaza";
+$vocab["select_origen_amenaza"] = "Elija el origen de la amenaza";
+$vocab["select_tipo_amenaza"] = "Elija el tipo de la amenaza";
+        
 
 $vocab["tipo_amenaza_title"]                    = "Tipo de amenaza";
 $vocab["list_tipo_amenaza_title"]               = "Tipo de amenaza";
@@ -148,7 +151,7 @@ $vocab["list_zona_trabajo_title"]         = "Centro de trabajo";
 $vocab["list_zona_trabajo_id"]            = "Id";
 $vocab["list_zona_trabajo_descripcion"]   = "Centro de trabajo";
 
-$vocab["zona_trabajo_title_Desc"]        = "Titulo del centro de trabajo";
+$vocab["zona_trabajo_title_Desc"]        = "Título del centro de trabajo";
 $vocab["zona_trabajo_id"]                = "Id";
 $vocab["zona_trabajo_id_Desc"]           = "Id del capítulo";
 $vocab["zona_trabajo_Descripcion"]       = "Descripción del centro de trabajo";
@@ -175,7 +178,7 @@ $vocab["desc_sede_isActivo"]    = "Active o desactive la sede";
 //***************************** Modulo administrar capitulos ******************************//
 $vocab["list_capitulo"]             = "Lista de capítulos";
 $vocab["add_capitulo"]              = "Capítulos";
-$vocab["list_capitulo_title"]       = "Titulo";
+$vocab["list_capitulo_title"]       = "Título";
 $vocab["list_capitulo_id"]          = "Id";
 $vocab["list_capitulo_orden"]       = "Orden";
 $vocab["list_capitulo_ordenar"]     = "ordenar";
@@ -187,22 +190,22 @@ $vocab["capitulo_id"]                   = "Id";
 $vocab["capitulo_id_Desc"]              = "Id del capítulo";
 $vocab["capitulo_Descripcion"]          = "Descripción del capítulo";
 $vocab["capitulo_Descripcion_usuario"]  = "Descripción para el usuario";
-$vocab["capitulo_Descripcion_usuario_desc"]  = "Guía para el usuario";
+$vocab["capitulo_Descripcion_usuario_desc"]  = "Guía para el usuario. Escriba una pequeña descripción de lo que el usuario debe escribir en el capítulo";
 $vocab["capitulo_requiere_Descripcion_usuario"]  = "Requiere descripción del usuario";
 $vocab["capitulo_requiere_Descripcion_usuario_desc"]  = "Permite al usuario agregar una descripción";
 
 //***************************** Modulo administrar subcapitulos ******************************//
 $vocab["list_subcapitulo"]                = "Lista de subcapítulos";
 $vocab["add_subcapitulo"]                 = "Subcapítulos";
-$vocab["list_subcapitulo_title"]          = "Titulo";
+$vocab["list_subcapitulo_title"]          = "Título";
 $vocab["list_subcapitulo_id"]             = "Id";
 $vocab["list_subcapitulo_orden"]          = "orden";
 $vocab["list_subcapitulo_Descripcion"]    = "Descripcion";
 
 $vocab["subcapitulo_subcapitulo"]         = "Subcapítulo";
 $vocab["subcapitulo_subcapitulo_Desc"]    = "Subcapítulos pertenecientes a un capítulo del reporte";
-$vocab["subcapitulo_title"]               = "Titulo";
-$vocab["subcapitulo_title_Desc"]          = "Titulo del subcapítulo";
+$vocab["subcapitulo_title"]               = "Título";
+$vocab["subcapitulo_title_Desc"]          = "Título del subcapítulo";
 $vocab["subcapitulo_capitulo"]            = "Capítulo";
 $vocab["subcapitulo_capitulo_Desc"]       = "Capítulo al que pertenece";
 $vocab["subcapitulo_Descripcion"]         = "Descripción del subcapítulo";
@@ -220,7 +223,7 @@ $vocab["formulario_formulario"]        = "Formulario";
 $vocab["formulario_titulo"]            = "Título";
 $vocab["formulario_titulo_desc"]       = "Título del formulario";
 $vocab["formulario_formulario_desc"]   = "Descripción que llevara el formulario";
-$vocab["formulario_subcapitulo"]       = "subcapitulo(CAPITULO)";
+$vocab["formulario_subcapitulo"]       = "Subcapítulo";
 $vocab["formulario_descripcion_arriba"] = "Descripción arriba del formulario";
 $vocab["formulario_descripcion_abajo"]  = "Descripción abajo del formulario";
 //***********     Modulo Formulario matriz de riesgos    ***********************//
@@ -286,7 +289,7 @@ $vocab["datos_generares_Servicio"]           ="Servicio de conserjería:";
 $vocab["datos_generares_Administrativo"]     ="Personal administrativo:";
 $vocab["datos_generares_Académico"]          ="Personal académico:";
 $vocab["datos_generares_Estudiantil"]        ="Presencia estudiantil:";
-$vocab["datos_generares_siguente"]           ="y pasar el siguiente";
+$vocab["datos_generares_siguente"]           ="y pasar al siguiente";
 $vocab["datos_generares_datos"]              ="Datos";
 
 //***********     plan de emergencia  datos generales  ***********************//
@@ -571,7 +574,7 @@ $vocab["aprobacion_title"]          = "Aprobación del plan de emergencia";
 $vocab["aprobado_por"]              = "Aprobado por";
 $vocab["aprobado_plan_desc"]        = "Persona encargar de aprobar el plan de emergencia";
 $vocab["codigo_plan"]               = "Código del plan de emergencias";
-$vocab["codigo_plan_desc"]          = "Número de versión";
+$vocab["codigo_plan_desc"]          = "Código del al plan de emergencias";
 //***********     plan de emergencia  historial***********************//
 $vocab["historial_titulo"]       ="Historial";
 $vocab["historial_titulo_desc"]  ="Planes de emergencia antiguos por centro de trabajo";

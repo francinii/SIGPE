@@ -29,7 +29,7 @@ if ((isset($_GET['find_key']))) {
                 <p class="help-block"><small><?= $vocab["nombre_desc_categoria_amenaza"] ?></small></p> 
             </div>
             <div class="form-group">
-                <label  for="select_tipo"><?= $vocab["nombre_categoria_amenaza"] ?> </label>
+                <label  for="select_tipo"><?= $vocab["nombre_tipo_amenaza"] ?> </label>
                 <select id="select_tipo" name ="select_tipo" class="form-control">                                  
                     <?php
                     if (count($comb) > 0) {
@@ -47,6 +47,7 @@ if ((isset($_GET['find_key']))) {
                     ?>
                     
                 </select>
+                 <p class="help-block"><small><?= $vocab["select_tipo_amenaza"] ?></small></p> 
             </div>
             <div class="form-group">
                 <label for="type-radio"><?= $vocab["list_categoria_amenaza_isActivo"] ?> </label>                    

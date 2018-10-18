@@ -27,7 +27,7 @@ $page_cant = 10;
 
 $page_title = "SIGPE";
 
-$footer_title= "Sistema gestor de planes de emergencia<br/>USTDS";
+$footer_title= "Sistema gestor de planes de emergencia<br/>SIGPE";
 
 $act1 = 1; //Ver
 $act2 = 2; //Listar

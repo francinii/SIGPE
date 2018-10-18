@@ -337,9 +337,9 @@ FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 create table RecursoIntalaciones(
 id int NOT NULL AUTO_INCREMENT,
 FKidZonaTrabajo int,
-tipo int,
+tipo varchar(150),
 cantidad int,
-tamaño varchar(150),
+tamaño int,
 distribucion varchar(150),
 contacto text,
 ubicacion varchar(150),
@@ -2010,10 +2010,12 @@ DELIMITER ;
 -- Proceso insertar recursos instalaciones
 -- ----------------------------
 
+
 DROP PROCEDURE IF EXISTS `insert_RecursoInstalaciones`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_RecursoInstalaciones`(IN `p_FKidZonaTrabajo` int,IN `p_tipo` varchar(150),
-IN `p_cantidad` int,IN `p_tamaño` varchar(150),
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_RecursoInstalaciones`(IN `p_FKidZonaTrabajo` int,
+IN `p_tipo` varchar(150),
+IN `p_cantidad` int,IN `p_tamaño` int,
 IN `p_distribucion` varchar(150),IN `p_contacto` text,
 IN `p_ubicacion` varchar(150),OUT `res` TINYINT  UNSIGNED)
 BEGIN

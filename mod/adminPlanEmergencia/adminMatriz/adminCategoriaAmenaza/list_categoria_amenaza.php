@@ -137,7 +137,7 @@ $res=seleccion($sql);
                 <th><?= $vocab["list_categoria_amenaza_id"] ?></th>
                 <th><?= $vocab["list_categoria_amenaza_descripcion"] ?></th>
                 <?php if (check_permiso($mod4, $act4, $user_rol)) { ?>
-                    <th><?= $vocab["list_tipo_amenaza_isActivo"] ?></th>
+                    <th><?= $vocab["isActivo"] ?></th>
                 <?php } ?>
                 <?php if (check_permiso($mod4, $act1, $user_rol)) { ?>
                     <th><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>

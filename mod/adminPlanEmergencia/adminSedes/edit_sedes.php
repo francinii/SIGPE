@@ -49,7 +49,7 @@ $res = seleccion($sql);
                     ?>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <a <?= ($view_mode == 0) ? "disabled" : ""; ?> class="btn btn-success btn-group-justified"  name="submit" onclick="javascript:update_sede(<?= $res[0]['id'] ?>);" > 
-                            <i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_update"] . " " . $vocab["permits_title"] ?>
+                            <i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_update"] . " " . $vocab["sede_title"]?>
                         </a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

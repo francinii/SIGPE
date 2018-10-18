@@ -18,7 +18,7 @@ $ip .= $mySessionController->getVar("cds_locate");
 /* * ****************************** select formularios del sistema **************************************** */
 $start = "0";
 $sql = "SELECT  id, titulo,FKidSubcapitulos 
-        FROM Formulario ORDER BY id";
+        FROM Formulario where id != 13 ORDER BY id ";
 $res = seleccion($sql);
 
 /* * ****************************** select capitulos y subcapitulos del sistema **************************************** */

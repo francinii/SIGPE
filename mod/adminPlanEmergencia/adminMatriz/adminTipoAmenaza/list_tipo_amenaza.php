@@ -25,8 +25,8 @@ $res = seleccion($sql);
         <thead>
             <tr>
                 <th width="10%"><?= $vocab["list_tipo_amenaza_id"] ?></th>
-                <th width="50%"><?= $vocab["list_tipo_amenaza_descripcion"] ?></th> 
-                <th width="10%"><?= $vocab["list_tipo_amenaza_descripcion"] ?></th>
+                <th width="45%"><?= $vocab["list_tipo_amenaza_descripcion"] ?></th> 
+                <th width="15%"><?= $vocab["origen_amenaza_title"] ?></th>
                 <?php if (check_permiso($mod4, $act4, $user_rol)) { ?>
                     <th width="5%"><?= $vocab["isActivo"] ?></th>
                 <?php } ?>
@@ -90,8 +90,8 @@ $res = seleccion($sql);
         <tfoot>
             <tr>
                 <th><?= $vocab["list_tipo_amenaza_id"] ?></th>
-                <th width="50%"><?= $vocab["list_tipo_amenaza_descripcion"] ?></th>   
-                <th width="10%"><?= $vocab["origen_amenaza_title"] ?></th>
+                <th width="45%"><?= $vocab["list_tipo_amenaza_descripcion"] ?></th>   
+                <th width="15%"><?= $vocab["origen_amenaza_title"] ?></th>
                 <?php if (check_permiso($mod4, $act4, $user_rol)) { ?>
                     <th width="5%"><?= $vocab["isActivo"] ?></th>
                 <?php } ?>                
@@ -111,7 +111,7 @@ $res = seleccion($sql);
     <br/>
      <?php /*     * **************************Agrega uno tipo de amenaza ********************************* */ ?>
     <?php if (check_permiso($mod4, $act3, $user_rol)) { ?>
-        <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminTipoAmenaza/new_tipo_amenaza.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["origen_amenaza_title"] ?></a></div>
+        <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminTipoAmenaza/new_tipo_amenaza.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["tipo_amenaza_title"] ?></a></div>
     <?php } ?>
 </div>
 
