@@ -128,7 +128,7 @@ $res=seleccion($sql);
                 <?php } ?>                 
             <?php } else { ?>
                 <tr id="fila0" align='center'>
-                    <td colspan="4"><?= $vocab["symbol_no_data"] ?></td>
+                    <td colspan="7"><?= $vocab["symbol_no_data"] ?></td>
                 </tr>   
             <?php } ?>
         </tbody>
