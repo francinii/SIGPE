@@ -94,7 +94,7 @@ function buscar($color, $criterios) {
             ?>
             <img class="img_fix_grap" src="mod/planEmergencia/grafico.php?criterios=<?= $valores ?>&colores=<?= $color ?>&time=<?= time() ?>">
         </div>
-        <div class="text-center"><a class="btn btn-warning" name="" onclick="javascript:OpcionMenu('mod/planEmergencia/plan_emergencia_matriz.php?', 'nombreCentro=<?= $nombreCentro ?>&idCentro=<?= $idCentro ?>');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_return"] ?></a></div>
+        <div class="text-center"><a class="btn btn-warning" name="" onclick="javascript:OpcionMenu('mod/planEmergencia/plan_emergencia_matriz.php?', 'nombreCentro=<?= $nombreCentro ?>&idCentro=<?= $idCentro ?>');"><i class='fa fa-rotate-left fa-inverse'></i> <?= $vocab["symbol_return"] ?></a></div>
     </div>
 </div>
 

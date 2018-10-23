@@ -60,21 +60,24 @@ if (count($res) <= 0) {
                                     <span><?= $vocab["puestos_brigada_puesto"] ?>:</span>
                                     <input style="width: 40%;" type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="Puesto<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['puesto'] : $res[$i] ?>" >
                                 </td>                                
-                                <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
-                                    <td  style="background-color:lightblue">              
+                                
+                                    <td  style="background-color:lightblue"> 
+                                        <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
                                         <a class="puntero cambios"  onClick="javascript:eliminarFilafuncion(this);">                                 
                                             <div class="text-center"><i class="fa fa-close  text-danger " title="<?= $vocab["symbol_delete"] ?>"></i></div>                                       
-                                        </a>                             
+                                        </a> 
+                                          <?php
+                                    $id++;
+                                }
+                                 ?>
                                     </td>
                                     <td  style="background-color:lightblue">                                        
                                         <a class="puntero cambios"  onclick="javascript: agregarFilafuncion('<?= $vocab["symbol_delete"] ?>', '<?= $vocab["Menu_Datos_sin_guardar"] ?>','Pues-<?= $id ?>');">                                 
                                             <div class="text-center"><i class="fa fa-plus  text-success " title="<?= $vocab["symbol_add"] ?>"></i></div>                                       
                                         </a> 
                                     </td> 
-                                    <?php
-                                    $id++;
-                                }
-                                ?>
+                                  
+                               
                             </tr>
 
                             <?php

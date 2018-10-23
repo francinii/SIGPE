@@ -260,7 +260,7 @@ $vocab["inicio_Titulo"]                      = "SIGPE";
 $vocab["inicio_Titulo_Sistema"]              = "Sistema Gestor de planes de emergencia";
 $vocab["inicio_Subtitulo"]                   = "CIEUNA";
 $vocab["inicio_Titulo_Desc"]                 = "seleccione el plan de emergencia que desea trabajar";
-$vocab["inicio_Empezar"]                     = "Empeza";
+$vocab["inicio_Empezar"]                     = "Empezar";
 $vocab["inicio_Imprimir"]                    = "Imprimir";
 $vocab["inicio_Nueva_version"]               = "Nueva versión";
 $vocab["incio_labe"]                         ="Plan de emergencia";
@@ -500,6 +500,7 @@ $vocab["otros_recursos_contacto"]                      ="Contacto";
 $vocab["otros_recursos_ubicacion"]                     ="Ubicación";
 $vocab["otros_recursos_categoria"]                     ="Categoría";
 $vocab["otros_recursos_observaciones"]                 ="Detalles/ Observación";
+$vocab["otros_recursos_equipo_movil"]                 ="Detalles/ Observación";
 
 //***********     plan de emergencia  poblacion ***********************//
 $vocab["poblacion_titulo"]                             ="Conformación de comité y brigadas de emergencia por oficinas, ubicación por sectores.";

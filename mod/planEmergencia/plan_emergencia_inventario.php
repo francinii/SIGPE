@@ -70,7 +70,7 @@ if (count($res) <= 0) {
     <div class="text-center">
         <?php if ($editar) { ?>
             <span class="text-center">
-                <a class="btn btn-warning"  onclick="javascript:guardarRecursoHumano('<?= $idPlanEmergencia ?>', 0)" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["recurso_humano_titulo"] ?></a>
+                <a class="btn btn-warning"  onclick="javascript:guardarRecursoHumano('<?= $idPlanEmergencia ?>', 0)" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_datos"] ?></a>
             </span>         
         <?php } ?>
     </div>
@@ -113,7 +113,7 @@ if (count($res) <= 0) {
                     <th  width="5%"><?= $vocab["equipo_moviles_contacto"] ?></th>
                     <th  width="5%"><?= $vocab["equipo_moviles_ubicacion"] ?></th>                
                     <th  width="5%"><?= $vocab["equipo_moviles_categoria"] ?></th>
-                    <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
+                    <?php if ($editar) { ?>
                         <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
                     <?php } ?>
                 </tr>
@@ -152,7 +152,7 @@ if (count($res) <= 0) {
     <div class="text-center">
         <?php if ($editar) { ?>
             <span class="text-center">
-                <a class="btn btn-warning"  onclick="javascript:guardarequipoMovil('<?= $idPlanEmergencia ?>', 0)" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["equipo_moviles_titulo"] ?></a>
+                <a class="btn btn-warning"  onclick="javascript:guardarequipoMovil('<?= $idPlanEmergencia ?>', 0)" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_datos"] ?></a>
             </span>         
 
         <?php } ?>
@@ -227,7 +227,7 @@ if (count($res) <= 0) {
     <div class="text-center">
         <?php if ($editar) { ?>
             <span class="text-center">
-                <a class="btn btn-warning"  onclick="javascript:guardarRecursoInstalaciones('<?= $idPlanEmergencia ?>', 0)" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["instalaciones_titulo"] ?></a>
+                <a class="btn btn-warning"  onclick="javascript:guardarRecursoInstalaciones('<?= $idPlanEmergencia ?>', 0)" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_datos"] ?></a>
             </span>         
         <?php } ?>
     </div>
@@ -303,7 +303,7 @@ if (count($res) <= 0) {
     <div class="text-center">
         <?php if ($editar) { ?>
             <span class="text-center">
-                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0,'<?= $prefijo ?>','<?=$categoria?>','<?=$tablaID?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["otros_recursos_Telecomunicacion"] ?></a>
+                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0,'<?= $prefijo ?>','<?=$categoria?>','<?=$tablaID?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_datos"] ?></a>
             </span>         
         <?php } ?>
     </div>
@@ -379,7 +379,7 @@ if (count($res) <= 0) {
     <div class="text-center">
         <?php if ($editar) { ?>
             <span class="text-center">
-                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0,'<?= $prefijo ?>','<?=$categoria?>','<?=$tablaID?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["otros_recursos_Telecomunicacion"] ?></a>
+                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0,'<?= $prefijo ?>','<?=$categoria?>','<?=$tablaID?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_datos"] ?></a>
             </span>         
         <?php } ?>
     </div>
@@ -454,7 +454,7 @@ if (count($res) <= 0) {
     <div class="text-center">
         <?php if ($editar) { ?>
             <span class="text-center">
-                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0,'<?= $prefijo ?>','<?=$categoria?>','<?=$tablaID?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["otros_recursos_Telecomunicacion"] ?></a>
+                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0,'<?= $prefijo ?>','<?=$categoria?>','<?=$tablaID?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_datos"] ?></a>
             </span>         
         <?php } ?>
     </div>
@@ -529,7 +529,7 @@ if (count($res) <= 0) {
     <div class="text-center">
         <?php if ($editar) { ?>
             <span class="text-center">
-                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0,'<?= $prefijo ?>','<?=$categoria?>','<?=$tablaID?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["otros_recursos_Telecomunicacion"] ?></a>
+                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0,'<?= $prefijo ?>','<?=$categoria?>','<?=$tablaID?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_datos"] ?></a>
             </span>         
         <?php } ?>
     </div>
@@ -604,7 +604,7 @@ if (count($res) <= 0) {
     <div class="text-center">
         <?php if ($editar) { ?>
             <span class="text-center">
-                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0,'<?= $prefijo ?>','<?=$categoria?>','<?=$tablaID?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["otros_recursos_Telecomunicacion"] ?></a>
+                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0,'<?= $prefijo ?>','<?=$categoria?>','<?=$tablaID?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_datos"] ?></a>
             </span>         
         <?php } ?>
     </div>
@@ -679,7 +679,7 @@ if (count($res) <= 0) {
     <div class="text-center">
         <?php if ($editar) { ?>
             <span class="text-center">
-                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0,'<?= $prefijo ?>','<?=$categoria?>','<?=$tablaID?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["otros_recursos_Telecomunicacion"] ?></a>
+                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0,'<?= $prefijo ?>','<?=$categoria?>','<?=$tablaID?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_datos"] ?></a>
             </span>         
         <?php } ?>
     </div>
@@ -754,7 +754,7 @@ if (count($res) <= 0) {
     <div class="text-center">
         <?php if ($editar) { ?>
             <span class="text-center">
-                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0,'<?= $prefijo ?>','<?=$categoria?>','<?=$tablaID?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["otros_recursos_Telecomunicacion"] ?></a>
+                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0,'<?= $prefijo ?>','<?=$categoria?>','<?=$tablaID?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_datos"] ?></a>
             </span>
             <span class="text-center">
                 <a class="btn btn-success"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 1,'<?= $prefijo ?>','<?=$categoria?>','<?=$tablaID?>')" name="submit"><i class="fa fa-rotate-right"></i> <?= $vocab["symbol_save"] . " " . $vocab["datos_generares_siguente"] ?></a>
