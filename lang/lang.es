@@ -264,7 +264,7 @@ $vocab["inicio_Empezar"]                     = "Empeza";
 $vocab["inicio_Imprimir"]                    = "Imprimir";
 $vocab["inicio_Nueva_version"]               = "Nueva versión";
 $vocab["incio_labe"]                         ="Plan de emergencia";
-$vocab["cargando_plan"]                      ="Generando pdf, por favor espere..";
+$vocab["cargando_plan"]                      ="Generando pdf, esto puede durar varios minutos por favor espere...";
 $vocab["inicio_save_print"]                  ="e imprimir";
 
 //***********    Menu plan de emergencia    ***********************//
