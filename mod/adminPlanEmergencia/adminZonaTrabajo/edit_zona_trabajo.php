@@ -84,7 +84,7 @@ $find_key = $res[0]['FKidSede'];
                 <p class="help-block"><small><?= $vocab["zona_trabajo_Descripcion"] ?></small></p> 
             </div>   
             <div class="form-group">
-                <label for="type-radio"><?= $vocab["list_origen_amenaza_isActivo"] ?> </label>                    
+                <label for="type-radio"><?= $vocab["zona_trabajo_activar"] ?> </label>                    
                 <div class="radio radio_efect">
                     <label class="radio-inline">
                         <input <?= ($view_mode == 0) ? "disabled" : ""; ?><?= ($res[0]["isActivo"] == 1) ? "checked" : ""; ?> id="inlineCheckbox1" name="inlineCheckbox" type="radio" value="1" checked> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
@@ -95,26 +95,26 @@ $find_key = $res[0]['FKidSede'];
                         <?= $vocab["isInactivo"] ?> 
                     </label>
                 </div>  
-                <p class="help-block"><small><?= $vocab["desc_origen_isActivo"] ?></small></p> 
+                <p class="help-block"><small><?= $vocab["desc_zona_trabajo_isActivo"] ?></small></p> 
             </div> 
             <?php if ($view_mode != 0) { ?>
                 <div class="form-group"> 
-                    <div><label  for=""><?= $vocab["symbol_desc"] ?> </label></div> 
+                    <div><label  for=""><?= $vocab["zona_trabajo_usuario"] ?> </label></div> 
                     <select id = "select_usuario">
                         <?php for ($i = 0; $i < count($comb); $i++) { ?>
                             <option value='<?= $comb[$i]['id'] ?>' selected><?= $comb[$i]['nombre'] ?></option>
                         <?php } ?>
                     </select>
                     <span class="text-center"><a class="btn btn-success" onclick="asociar_usuario_zona_trabajo();"><i class="fa fa-save fa-inverse"></i>Add</a></span>
-                    <p class="help-block"><small><?= $vocab["zona_trabajo_Descripcion"] ?></small></p> 
+                    <p class="help-block"><small><?= $vocab["zona_trabajo_usuario_desc"] ?></small></p> 
                 </div> 
             <?php } ?>
             <div class="form-group"> 
-                <div><label  for=""><?= $vocab["symbol_desc"] ?> </label></div> 
+                <div><label  for=""><?= $vocab["zona_trabajo_usuario_lista"] ?> </label></div> 
                 <table <?= ($view_mode == 0) ? "disabled" : ""; ?> id = "tabla_usuario_zona" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable">
                     <thead>
-                    <th><?= $vocab["symbol_desc"] ?> </th>
-                    <th><?= $vocab["symbol_desc"] ?> </th>
+                    <th><?= $vocab["zona_trabajo_usuario_cedula"] ?> </th>
+                    <th><?= $vocab["zona_trabajo_usuario_nombre"] ?> </th>
                     <?php if ($view_mode != 0) { ?>
                         <th><i class="fa fa-close fa-2x text-danger" title="Eliminar"></i> </th>
                     <?php } ?>
@@ -137,7 +137,7 @@ $find_key = $res[0]['FKidSede'];
                 if (check_permiso($mod4, $act4, $user_rol)) {
                     ?>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <a  class="btn btn-success btn-group-justified"  name="submit" onclick="update_zona_trabajo(<?= $res[0]['id'] ?>);"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_update"] . " " . $vocab["permits_title"] ?></a>
+                        <a  class="btn btn-success btn-group-justified"  name="submit" onclick="update_zona_trabajo(<?= $res[0]['id'] ?>);"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_update"] ?></a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <a class="btn btn-warning btn-group-justified"  name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', 'find_key=' +<?= $find_key ?>);"><i class="fa fa-rotate-left"></i> <?= $vocab["symbol_return"] ?></a>

@@ -163,6 +163,12 @@ $vocab["zona_trabajo_logo"]              = "Logo ";
 $vocab["zona_trabajo_logo_desc"]         = "Cambiar Logo del centro";
 $vocab["zona_trabajo_Ubicacion"]         = "Ubicación ";
 $vocab["zona_trabajo_Ubicacion_desc"]    = "Ubicación según georeferencia de Google";
+$vocab["zona_trabajo_usuario"]           = "Asociar usuario a centro de trabajo";
+$vocab["zona_trabajo_usuario_desc"]    = "Seleccione los usuarios que desea asociar";
+$vocab["zona_trabajo_usuario_cedula"]    = "Cédula";
+$vocab["zona_trabajo_usuario_nombre"]    = "Nombre de usuario";
+$vocab["zona_trabajo_usuario_lista"]    = "Lista de usuarios asociados al centro de trabajo";
+
 //***************************** Modulo Sedes******************************//
 $vocab["sede_title"]               = "Sedes";
 $vocab["list_sede_title"]          = "Sedes";
@@ -264,8 +270,8 @@ $vocab["inicio_Empezar"]                     = "Empezar";
 $vocab["inicio_Imprimir"]                    = "Imprimir";
 $vocab["inicio_Nueva_version"]               = "Nueva versión";
 $vocab["incio_labe"]                         ="Plan de emergencia";
-$vocab["cargando_plan"]                      ="Generando pdf, esto puede durar varios minutos por favor espere...";
-$vocab["inicio_save_print"]                  ="e imprimir";
+$vocab["cargando_plan"]                      ="Generando pdf, esto podría durar varios minutos, por favor espere...";
+$vocab["inicio_save_print"]                  ="Imprimir plan aprobado";
 
 //***********    Menu plan de emergencia    ***********************//
 $vocab["Menu_Datos_sin_guardar"]            ="Datos sin guardar";
@@ -560,7 +566,9 @@ $vocab["puestos_brigada_puestoNuevo"]            ="Puesto nuevo";
 
 //***********     plan de emergencia  capitulos y subcapitulos ***********************//
 $vocab["capitulos_subcapitulos_title"]                       ="Información extra capítulos y subcapítulos";
-$vocab["capitulos_subcapitulos_title_desc"]                  ="Información extra requerida en los capítulos y subcapítulos. Se requiere prosa del usuario. <br> Intrucciones: En los siguientes formularios proceda a rellenar los cuadros del lado derecho con la información que se le indique.";
+$vocab["capitulos_subcapitulos_title_desc"]                  ="Información extra requerida en los capítulos y subcapítulos. Se requiere prosa del usuario. <br>"
+                                                                . " Intrucciones: En los siguientes formularios proceda a rellenar los cuadros del lado derecho con la información que se le indique.<br>"
+                                                                . "Utilice letra Arial 12";
 $vocab["capitulos_subcapitulos_capitulo"]                    = "Capítulo";
 $vocab["capitulos_subcapitulos_subcapitulo"]                 = "Subcapítulo";
 $vocab["capitulos_subcapitulos_info_admin"]                  = "Información del admin:";
@@ -575,7 +583,9 @@ $vocab["aprobacion_title"]          = "Aprobación del plan de emergencia";
 $vocab["aprobado_por"]              = "Aprobado por";
 $vocab["aprobado_plan_desc"]        = "Persona encargar de aprobar el plan de emergencia";
 $vocab["codigo_plan"]               = "Código del plan de emergencias";
-$vocab["codigo_plan_desc"]          = "Código del al plan de emergencias";
+$vocab["codigo_plan_desc"]          = "Código del plan de emergencias";
+$vocab["aprobacion_visualizar"]          = "Visualizar plan de emergencia";
+
 //***********     plan de emergencia  historial***********************//
 $vocab["historial_titulo"]       ="Historial";
 $vocab["historial_titulo_desc"]  ="Planes de emergencia antiguos por centro de trabajo";

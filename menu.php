@@ -39,14 +39,14 @@ require 'functions.php';
                         <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#"><span><i class="fa fa-gears fa-inverse"></i> <?= $vocab["menu_admin"] ?></span> <span class="caret"></span></a>
                         <ul class="dropdown-menu">                            
                             <!-- MODULOS -->
-                            <?php if (check_permiso($mod1, $act1, $user_rol)) { ?>
+                            <?php if (check_permiso($mod6, $act1, $user_rol)) { ?>
                                 <li class="dropdown-submenu">
                                     <a href="#"><span><i class="fa fa-puzzle-piece text-danger"></i> <?= $vocab["menu_mod"] ?></span></a>
                                     <ul class="dropdown-menu">
-                                        <?php if (check_permiso($mod1, $act2, $user_rol)) { ?>
+                                        <?php if (check_permiso($mod6, $act2, $user_rol)) { ?>
                                             <li><a  class="Menuprincipal"  onclick="javascript:OpcionMenu('mod/admin/permits/list_mod.php?', '');"><span> <i class="fa fa-list text-primary"></i> <?= $vocab["menu_list"] ?></span></a></li>
                                         <?php } ?>
-                                        <?php if (check_permiso($mod1, $act3, $user_rol)) { ?>
+                                        <?php if (check_permiso($mod6, $act3, $user_rol)) { ?>
                                             <li><a  class="Menuprincipal"  onclick="javascript:OpcionMenu('mod/admin/permits/new_mod.php?', '');"><span><i class="fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?></span></a></li>
                                         <?php } ?>
                                     </ul>

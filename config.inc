@@ -37,8 +37,9 @@ $act5 = 5; //Eliminar
 $act6 = 6; //Imprimir
 
 $mod1 = 1; // Administracion
-$mod2 = 2; // Modulos
+$mod2 = 2; // Roles
 $mod3 = 3; // Usuarios
 $mod4 = 4; // Administracion planes de emergencia
 $mod5 = 5; // Planes de emergencia
+$mod6 = 6; // Modulos del sistema
 ?>

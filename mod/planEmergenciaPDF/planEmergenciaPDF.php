@@ -732,6 +732,7 @@ function formularioPeligrosIdentificados($idPlanEmergencia, $vocab) {
  */
 
 function formularioPoblacion($idPlanEmergencia, $vocab) {
+
     $sql = "SELECT  `nombreOficina`, `capacidadPermanente`, `capacidadTemporal`, `representanteComite`,"
             . " `representanteBrigadaEfectiva`,`representantePrimerosAuxilios`,`telefonoOficina`,`contactoEmergencia`,`telefonoPersonal`,`correoElectronico`"
             . ",`correoElectronico`,`sector` FROM `FormularioPoblacion` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia . " order by `sector` ";
@@ -925,7 +926,6 @@ function formularioIngresoCuerposSocorro($idPlanEmergencia, $vocab) {
     return $html;
 }
 
-
 /*
  * Formulario idForm = 11 //Formulario de puestos de brigada
  * Funcion que crea el  //Formulario de puestos de brigada
@@ -933,6 +933,7 @@ function formularioIngresoCuerposSocorro($idPlanEmergencia, $vocab) {
  * @param {Array} $vocab corresponde al vocabulario del sistema
  * @returns {Undefined}
  */
+
 function formularioPuestoBrigada($idPlanEmergencia, $vocab) {
     $sql = "SELECT `puesto`, `funcion`, `plazoEjecucion` FROM `FormularioPuestoBrigada` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia . " order by `puesto` ";
     $respuesta = seleccion($sql);
@@ -970,6 +971,7 @@ function formularioPuestoBrigada($idPlanEmergencia, $vocab) {
  * @param {Array} $vocab corresponde al vocabulario del sistema
  * @returns {Undefined}
  */
+
 function formularioZonaSeguridad($idPlanEmergencia, $vocab) {
     $sql = "SELECT  `id`, `FKidZonaTrabajo`, `Nombre`, `ubicacion`,"
             . " `capacidad`,`observaciones`,`sector` FROM `ZonaSeguridad` WHERE `FKidZonaTrabajo`=$idPlanEmergencia";
@@ -1119,6 +1121,7 @@ function listarFormularios($id, $formularios, $resPlan, $resTipoPoblacion, $voca
 
 function formularioSeleccionada($id, $form, $resPlan, $resTipoPoblacion, $vocab, $idPlanEmergencia, $pdf) {
     $html = "";
+    $cargar = false;
     if ($form['FKidSubcapitulos'] == $id) {
         $idForm = $form['id'];
         $html .= "<p>" . remplazar($form['descripcionArriba']) . "</p>";
@@ -1176,17 +1179,22 @@ function formularioSeleccionada($id, $form, $resPlan, $resTipoPoblacion, $vocab,
                 $html .= formularioPeligrosIdentificados($idPlanEmergencia, $vocab);
                 break;
             case 7:
+                cargarNuevaPaginaHorizontal($pdf);
                 $html .= formularioPoblacion($idPlanEmergencia, $vocab);
+                $cargar = true;
+
                 break;
             case 8:
+                cargarNuevaPaginaHorizontal($pdf);
                 $html .= formularioRutaEvacuacion($idPlanEmergencia, $vocab);
+                $cargar = true;
                 break;
             case 9:
                 $html .= formularioBrigadistas($idPlanEmergencia, $vocab);
                 break;
             case 10:
                 $html .= formularioIngresoAtencionEmergencias($idPlanEmergencia, $vocab);
-                $html .= "<br>";
+                $html .= '<br><div></div>';
                 $html .= formularioIngresoCuerposSocorro($idPlanEmergencia, $vocab);
                 break;
             case 11:
@@ -1201,6 +1209,9 @@ function formularioSeleccionada($id, $form, $resPlan, $resTipoPoblacion, $vocab,
     // return $html;
     if ($html != "") {
         $pdf->writeHTML($html, true, false, false, false, '');
+        if ($cargar == true) {
+            cargarNuevaPagina($pdf);
+        }
     }
 }
 
@@ -1210,9 +1221,14 @@ function formularioSeleccionada($id, $form, $resPlan, $resTipoPoblacion, $vocab,
  * @returns {Undefined}
  */
 
+function cargarNuevaPaginaHorizontal($pdf) {
+    $pdf->SetFont(PDF_FONT_MONOSPACED, '', 12);
+    $pdf->AddPage('L', 'A4');
+}
+
 function cargarNuevaPagina($pdf) {
     $pdf->SetFont(PDF_FONT_MONOSPACED, '', 12);
-    $pdf->AddPage();
+    $pdf->AddPage('P', 'A4');
 }
 
 /*
