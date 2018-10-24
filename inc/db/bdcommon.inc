@@ -3,6 +3,6 @@
     $Host = "localhost";	
     $db_host = "localhost";
     $usuario = "root";
-    $clave = "";
+    $clave = "root";
     $DBMS="mysql";
 ?>
