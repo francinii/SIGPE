@@ -2,8 +2,6 @@
 /**
  * agrega nuevas zonas o centros de trabajo
  */
-    
-
 include("../../login/check.php");
 include("../../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
@@ -29,21 +27,21 @@ $sede = seleccion($sql);
             <div class="form-group">
                 <div><label  for=""><?= $vocab["zona_trabajo_sede"] ?> </label></div> 
                 <select class="form-control" id = "select_sede">
-                    <?php
-                    if (count($sede) > 0) {
-                        for ($i = 0; $i < count($sede); $i++) {
-                            ?>
+<?php
+if (count($sede) > 0) {
+    for ($i = 0; $i < count($sede); $i++) {
+        ?>
                             <option value='<?= $sede[$i]['id'] ?>' selected><?= $sede[$i]['nombreSede'] ?></option>
-                        <?php
+                            <?php
                         }
                     } else {
                         ?>
                         <script>
                             jAlert("No hay sedes en el sistema, debe agregar una", "Dato Requerido");
                         </script>
-                        <?php
-                    }
-                    ?>
+    <?php
+}
+?>
                 </select>
                 <p class="help-block"><small><?= $vocab["zona_trabajo_sede_Desc"] ?></small></p> 
             </div>
@@ -76,11 +74,11 @@ $sede = seleccion($sql);
                 <div class="radio radio_efect">
                     <label class="radio-inline">
                         <input id="inlineCheckbox1" name="inlineCheckbox" type="radio" value="1" checked> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                        <?= $vocab["isActivo"] ?>  
+<?= $vocab["isActivo"] ?>  
                     </label>
                     <label class="radio-inline">
                         <input id="inlineCheckbox2" name="inlineCheckbox" type="radio" value="0"> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 
-                        <?= $vocab["isInactivo"] ?> 
+<?= $vocab["isInactivo"] ?> 
                     </label>
                 </div> 
                 <p class="help-block"><small><?= $vocab["desc_zona_trabajo_isActivo"] ?></small></p> 
@@ -88,9 +86,9 @@ $sede = seleccion($sql);
             <div class="form-group"> 
                 <div><label  for=""><?= $vocab["symbol_desc"] ?> </label></div> 
                 <select  id = "select_usuario">
-                    <?php for ($i = 0; $i < count($comb); $i++) { ?>
+<?php for ($i = 0; $i < count($comb); $i++) { ?>
                         <option value='<?= $comb[$i]['id'] ?>' selected><?= $comb[$i]['nombre'] ?></option>
-<?php } ?>
+                    <?php } ?>
                 </select>
                 <span class="text-center"><a class="btn btn-success" onclick="asociar_usuario_zona_trabajo();"><i class="fa fa-save fa-inverse"></i>Add</a></span>
                 <p class="help-block"><small><?= $vocab["zona_trabajo_Descripcion"] ?></small></p> 
@@ -107,10 +105,23 @@ $sede = seleccion($sql);
                     </tbody>
                 </table>
             </div>  
-            <?php if (check_permiso($mod4, $act3, $user_rol)) { ?>
+<?php if (check_permiso($mod4, $act3, $user_rol)) { ?>
                 <div class="text-center"><a class="btn btn-success"  name="submit" onclick="new_zona_trabajo();"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] . " " . $vocab["zona_trabajo_title"] ?>  </a></div>
-<?php } ?>            
+            <?php } ?>            
         </form>
+    </div>
+</div>
+<!--/* * ****************************** Modal cargando para el pdf ************************************ */-->
+<div class="modal fade" id="CargandoModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header"> 
+                <h3><?= $vocab["symbol_loading"] ?></h3>
+            </div>
+            <div class="modal-body">
+                <img  width="100%" src="img/espera.gif" alt="cargando...">
+            </div>      
+        </div>
     </div>
 </div>
 <script>

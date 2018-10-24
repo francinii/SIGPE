@@ -2,7 +2,6 @@
 /**
  * actualiza las  zonas o centros de trabajo
  */
-
 include("../../login/check.php");
 include("../../../functions.php");
 $vocab = $mySessionController->getVar("vocab");
@@ -54,15 +53,15 @@ $find_key = $res[0]['FKidSede'];
             <div class="form-group">
                 <label for="type-file"><?= $vocab["zona_trabajo_logo"] ?></label>
                 <?php if ($view_mode == 1) { ?>
-                <input  id="type-file" value="<?= $res[0]['logo'] ?>" accept="image/*" name="type-file" class="form-control filestyle"  type="file" placeholder="propiedad placeholder" title="propiedad title"/>
-                    
+                    <input  id="type-file" value="<?= $res[0]['logo'] ?>" accept="image/*" name="type-file" class="form-control filestyle"  type="file" placeholder="propiedad placeholder" title="propiedad title"/>
+
                 <?php } else { ?>
                     <input disabled id="type-file" name="type-file" class="form-control" type="text" value="<?= $res[0]["logo"] ?>" /> 
                 <?php } ?>
                 <p class="help-block"><?= $vocab["zona_trabajo_logo_desc"] ?></p>
             </div>
             <div class="form-group" id="logo">
-                <img src="../SIGPE/mod/planEmergenciaPDF/img/imgPlanes/<?= $res[0]['logo'] ?>?time=<?= time() ?>" style="max-width:100%" class="img-rounded" alt="Sin logo"> 
+                <img src="mod/planEmergenciaPDF/img/imgPlanes/<?= $res[0]['logo'] ?>?time=<?= time() ?>" style="max-width:100%" class="img-rounded" alt="Sin logo"> 
             </div>
             <div class="form-group">
                 <label for="type-file-ubicacion"><?= $vocab["zona_trabajo_Ubicacion"] ?></label>
@@ -75,7 +74,7 @@ $find_key = $res[0]['FKidSede'];
                 <p class="help-block"><?= $vocab["zona_trabajo_Ubicacion_desc"] ?></p>
             </div>
             <div class="form-group" id="ubicacion">
-                <img src="../SIGPE/mod/planEmergenciaPDF/img/imgPlanes/<?= $res[0]['ubicacion'] ?>?time=<?= time() ?>"  style="max-width:100%" class="img-rounded" alt="Sin ubicación"> 
+                <img src="mod/planEmergenciaPDF/img/imgPlanes/<?= $res[0]['ubicacion'] ?>?time=<?= time() ?>"  style="max-width:100%" class="img-rounded" alt="Sin ubicación"> 
             </div>
 
             <div class="form-group">
@@ -154,8 +153,21 @@ $find_key = $res[0]['FKidSede'];
         </form>
     </div>
 </div>
+<!--/* * ****************************** Modal cargando para el pdf ************************************ */-->
+<div class="modal fade" id="CargandoModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">     
+                <h3><?= $vocab["symbol_loading"] ?></h3>
+            </div>
+            <div class="modal-body">
+                <img  width="100%" src="img/espera.gif" alt="cargando...">
+            </div>      
+        </div>
+    </div>
+</div>
 <script>
-     /**
+    /**
      * carga el carchivo subido como logo
      * llamado en  new_zona_trabajo.php
      * @param {elemento html} evt  evento que realiza la accion
@@ -183,7 +195,7 @@ $find_key = $res[0]['FKidSede'];
             reader.readAsDataURL(f);
         }
     }
-     /**
+    /**
      * carga el carchivo subido como logo
      * llamado en  new_zona_trabajo.php
      * @param {elemento html} evt  evento que realiza la accion

@@ -94,7 +94,7 @@ function new_zona_trabajo() {
         var formData = new FormData();
         formData.append('archivo1',archivo1);
         formData.append('archivo2',archivo2);
-        
+        jQuery('#CargandoModal').modal('show');
         var ajax = NuevoAjax();
         var _values_send =
                 '&lista=' + JSON.stringify(lista) +
@@ -107,7 +107,7 @@ function new_zona_trabajo() {
         var _URL_ = "mod/adminPlanEmergencia/adminZonaTrabajo/ajax_new_zona_trabajo.php?";
         //alert(_URL_ + _values_send); //DEBUG
         ajax.open("POST", _URL_ + _values_send, true);
-       
+       jQuery('#CargandoModal').modal('show');
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 1) {
                 //Nada
@@ -124,7 +124,9 @@ function new_zona_trabajo() {
                 } else {
                     jAlert("Ocurrio un error inesperado.\n Consulte a la USTDS", "Error inesperado");
                 }
+                
             }
+            jQuery('#CargandoModal').modal('hide');
         };
         ajax.send(formData);
         loading.innerHTML = "";
@@ -223,7 +225,7 @@ function update_zona_trabajo(id) {
         var formData = new FormData();
         formData.append('archivo1',archivo1);
         formData.append('archivo2',archivo2);
-
+        jQuery('#CargandoModal').modal('show');
         var ajax = NuevoAjax();
         var _values_send =
                 '&lista=' + JSON.stringify(lista) +
@@ -242,7 +244,8 @@ function update_zona_trabajo(id) {
                 var response = ajax.responseText;
                 //alert(response); //DEBUG
                 if (response == 0) {
-                    jAlert("centro actualizado con exito", "Exito");
+                    
+                    jAlert("Centro actualizado con éxito", "Exito");
                     OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/list_zona_trabajo.php?', 'find_key='+sede);
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
@@ -251,7 +254,9 @@ function update_zona_trabajo(id) {
                 } else {
                     jAlert("Ocurrio un error inesperado.\n Consulte a la USTDS", "Error inesperado");
                 }
+                ;
             }
+            jQuery('#CargandoModal').modal('hide')
         };
         ajax.send(formData);
         loading.innerHTML = "";
