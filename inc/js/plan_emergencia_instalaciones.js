@@ -11,7 +11,7 @@ function guardarDatosInstalaciones(idCentro, pasar) {
     var ajax = NuevoAjax();
     var Densidad = document.getElementById("Densidad").value;
     var area = document.getElementById("area").value;
-    var instalaciones = document.getElementById("instalaciones").value;
+    var instalaciones = document.getElementById("instalaciones_input").value;
     var zona = document.getElementById("zona").value;
     var topografica = document.getElementById("topografica").value;
     var terreno = document.getElementById("terreno").value;
@@ -26,7 +26,7 @@ function guardarDatosInstalaciones(idCentro, pasar) {
     var cielo = document.getElementById("cielo").value;
     var pisos = document.getElementById("pisos").value;
     var parqueo = document.getElementById("parqueo").value;
-    var aguaPotable = document.getElementById("aguaPotable").value
+    var aguaPotable = document.getElementById("aguaPotable").value;
     var sanitario = document.getElementById("sanitario").value;
     var pluvial = document.getElementById("pluvial").value;
     var electrico = document.getElementById("electrico").value;    

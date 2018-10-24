@@ -2,6 +2,8 @@
 /**
  * agrega nuevas zonas o centros de trabajo
  */
+    
+
 include("../../login/check.php");
 include("../../../functions.php");
 $vocab = $mySessionController->getVar("vocab");

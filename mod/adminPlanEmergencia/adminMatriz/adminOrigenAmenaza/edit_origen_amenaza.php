@@ -19,7 +19,7 @@ $res = seleccion($sql);
         <h2><?= $vocab["origen_amenaza_title"] ?></h2>
         <p><?= $vocab["list_origen_amenaza_descripcion"] ?></p>
     </div>
-    <div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
+    <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12">
         <form method="post" action="">
             <div class="form-group">
                 <label  for="nombre"><?= $vocab["nombre_origen_amenaza"] ?> </label>

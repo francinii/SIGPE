@@ -42,7 +42,7 @@ $res = seleccion($sql);
             <div class="form-group row">
                 <label for="instalaciones" class="col-sm-3 col-form-label"><?= $vocab["instalaciones_Instalaciones"] ?></label>
                 <div class="col-sm-9">
-                    <input type="text"   <?= (!$editar) ? "disabled" : ""; ?> class="form-control cambios" id="instalaciones" value="<?= ( count($res) > 0) ? $res[0]['instalacionesInstalaciones'] : ""; ?>">                                 
+                    <input type="text"   <?= (!$editar) ? "disabled" : ""; ?> class="form-control cambios" id="instalaciones_input" value="<?= ( count($res) > 0) ? $res[0]['instalacionesInstalaciones'] : ""; ?>">                                 
                 </div>
             </div>
             <div class="form-group row">

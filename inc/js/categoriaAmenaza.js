@@ -237,7 +237,7 @@ function update_categoria_amenaza(id){
                 //alert(response); //DEBUG
                 if (response == 0) {
                     jAlert("Tipo de amenaza actualizada con exito", "Exito");
-                    OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/list_categoria_amenaza.php?', 'find_key=' + find_key);
+                    OpcionMenu('mod/adminPlanEmergencia/adminMatriz/adminCategoriaAmenaza/list_categoria_amenaza.php?', 'find_key=' + fkid);
                 } else if (response == 1 || response == 2) {
                     jAlert("Error en la Base de Datos, intente nuevamente.\n Si persiste informe a la USTDS", "Error");
                 } else if (response == 3) {
