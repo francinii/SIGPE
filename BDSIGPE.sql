@@ -2092,7 +2092,7 @@ isActivo int,
 nombreSede varchar(150),
 descripcion text,
 PRIMARY KEY(id)
-)ENGINE=InnoDB;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- estructura de la tabla para ZonaTrabajo
@@ -2147,7 +2147,7 @@ elementosConstructivosSistemaTelefonico varchar(150),
 elementosConstructivosOtros text,
 PRIMARY KEY(id),
 FOREIGN KEY(FKidSede) REFERENCES Sede(id)
-)ENGINE=InnoDB;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- estructura de la tabla para Historial
@@ -2160,7 +2160,7 @@ version   varchar(150),
 direccion varchar(150),
 PRIMARY KEY(id),
 FOREIGN KEY(FKidZona) REFERENCES ZonaTrabajo(id)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- estructura de la tabla para usuarios asociados a zonas
@@ -2170,7 +2170,7 @@ create table UsuarioZona(
 FKidUsuario varchar(50),
 FKidZona int,
 FOREIGN KEY(FKidZona) REFERENCES ZonaTrabajo(id)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- estructura de la tabla para origen de las amenaza
@@ -2182,7 +2182,7 @@ create table OrigenAmenaza(
     descripcion varchar(150),
     isActivo int,
     PRIMARY KEY(id)
-)ENGINE=InnoDB;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- estructura de la tabla para tipo de las amenaza
@@ -2194,7 +2194,7 @@ create table TipoAmenaza (
     FkidOrigen int,
     PRIMARY KEY(id),
     FOREIGN KEY(FKidOrigen) REFERENCES OrigenAmenaza(id)
-)ENGINE=InnoDB;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 -- ----------------------------
@@ -2208,7 +2208,7 @@ create table CategoriaTipoAmenaza (
     descripcion varchar(150),    
     PRIMARY KEY(id), 
     FOREIGN KEY(FKidTipoAmenaza) REFERENCES TipoAmenaza(id)
-)ENGINE=InnoDB;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- estructura de la tabla para la matriz de riesgo
@@ -2225,7 +2225,7 @@ create table Matriz (
     PRIMARY KEY(id), 
     FOREIGN KEY(FKidCategoriaTipoAmenaza) REFERENCES CategoriaTipoAmenaza(id),
     FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
-)ENGINE=InnoDB;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 -- ----------------------------
@@ -2241,7 +2241,7 @@ isActivo int,
 titulo varchar(150),
 orden int,
  PRIMARY KEY(id) 
-)ENGINE=InnoDB;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- estructura de la tabla para los subcapitulos
@@ -2258,7 +2258,7 @@ FKidCapitulo int,
 orden int,
 PRIMARY KEY(id),
 FOREIGN KEY (FKidCapitulo) REFERENCES Capitulo(id)
-)ENGINE=InnoDB;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 -- ----------------------------
@@ -2273,7 +2273,7 @@ descripcionArriba text,
 descripcionAbajo text,
 PRIMARY KEY(id),
 FOREIGN KEY (FKidSubcapitulos) REFERENCES SubCapitulo(id)
-)ENGINE=InnoDB;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 -- ----------------------------
@@ -2287,7 +2287,7 @@ descripcion text,
     FOREIGN KEY (FKidCapitulo) REFERENCES Capitulo(id),
     FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 -- ----------------------------
@@ -2300,7 +2300,7 @@ create table SubCapituloPlan(
     descripcion text,
     FOREIGN KEY (FKidSubCapitulo) REFERENCES SubCapitulo(id),
     FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 -- ----------------------------
@@ -2316,7 +2316,7 @@ total int,
 representacionDe text,
 PRIMARY KEY(id),
 FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- estructura de la tabla para formulario de inventario recursos Humanos
@@ -2332,7 +2332,7 @@ localizacion varchar(150),
 contacto varchar(150),
 PRIMARY KEY(id),
 FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 -- ----------------------------
@@ -2351,7 +2351,7 @@ ubicacion varchar(150),
 categoria varchar(150),
 PRIMARY KEY(id),
 FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- estructura de la tabla para formulario de inventario recursos instalacioes
@@ -2368,7 +2368,7 @@ contacto text,
 ubicacion varchar(150),
 PRIMARY KEY(id),
 FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 -- ----------------------------
@@ -2386,7 +2386,7 @@ categoria varchar(150),
 observaciones text,
 PRIMARY KEY(id),
 FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- estructura de la tabla para formulario de ingreso cuerpos de socorro analisis de tiempo
@@ -2401,7 +2401,7 @@ Distancia float,
 Tiempo float,
 PRIMARY KEY(id),
 FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- estructura de la tabla para formulario de ingreso cuerpos de socorro descripncion del ingreso
@@ -2417,7 +2417,7 @@ create table IngresoCuerpoSocorro(
     anchoLibre varchar(150),
    PRIMARY KEY(id),
 FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id) 
-)ENGINE=InnoDB;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- estructura de la tabla para formulario de brigadistas
@@ -2434,7 +2434,7 @@ create table Brigada(
     tiempo float,
     PRIMARY KEY(id),
     FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id) 
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
  
 
 -- ----------------------------
@@ -2455,7 +2455,7 @@ create table RutaEvacuacion(
     tiempo2 float,
     PRIMARY KEY(id),
     FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id) 
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 -- ----------------------------
@@ -2472,7 +2472,7 @@ observaciones text,
 sector varchar(1500),
 PRIMARY KEY(id),
 FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 -- ----------------------------
@@ -2495,7 +2495,7 @@ create table FormularioPoblacion(
     sector varchar(150),
     PRIMARY KEY(id),
     FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
-)ENGINE=InnoDB;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 -- ----------------------------
@@ -2510,7 +2510,7 @@ create table FormularioPuestoBrigada(
     plazoEjecucion text,
     PRIMARY KEY(id),
     FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
-)ENGINE=InnoDB;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 -- ----------------------------
@@ -2529,7 +2529,7 @@ create table IdentificacionPeligro(
     priorizacion int,
     PRIMARY KEY(id),
     FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
-)ENGINE=InnoDB;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -4797,8 +4797,7 @@ BEGIN
     ROLLBACK;
 	END;
             START TRANSACTION;  
-                 UPDATE `zonatrabajo` SET `version`=`version`+1;               
-
+               UPDATE `ZonaTrabajo` SET  `version`=`version`+1, codigoZonaTrabajo='', revisadoPor='';               
             COMMIT;
             -- SUCCESS
             SET res = 0;
