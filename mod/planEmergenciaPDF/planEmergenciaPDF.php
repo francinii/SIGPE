@@ -55,9 +55,12 @@ $centroTrabajo = $zonas[0]["nombreZonaTrabajo"];
 $logoUNA = $dirImages . "logo_una.jpg";
 $logoCentro = $dirImages . "imgPlanes/" . $zonas[0]["logo"];
 $logoCIEUNA = $dirImages . "logo_cieuna.png";
+$codigo = "";
+$revisadoPor = "";
+if (check_permiso($mod4, $act2, $user_rol) && !isset($_GET['visualizarpdf'])) { 
 $codigo = $resPlan[0]['codigoZonaTrabajo'];
 $revisadoPor = $resPlan[0]['revisadoPor'];
-
+}
 $datosCabecera = array(
     "centroTrabajo" => $centroTrabajo,
     "logoUNA" => $logoUNA,
