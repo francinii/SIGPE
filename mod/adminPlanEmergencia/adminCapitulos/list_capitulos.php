@@ -62,7 +62,7 @@ $res = seleccion($sql);
                         <?php if (check_permiso($mod4, $act4, $user_rol)) { ?>
                             <td ><a href="#" class="up "><span id="up<?= $i ?>" class="glyphicon glyphicon-triangle-top"></span></a> <a href="#" class="down">&nbsp;&nbsp;&nbsp;<span id="down<?= $i ?>" class="glyphicon glyphicon-triangle-bottom"></span></a></td>
                         <?php } ?>
-                        <td class="numeroCapitulo"><?= ($i == 0) ? "Inicio" : $i; ?></td>
+                        <td class="numeroCapitulo"><?= ($i == 0) ? "INICIO" : $i; ?></td>
                         <td><?= $res[$i]['titulo'] ?></td>
                         <?php if (check_permiso($mod4, $act4, $user_rol)) { ?>
                             <?php

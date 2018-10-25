@@ -135,7 +135,7 @@ function EliminarPlanVistazo(ruta){
 
     var ajax = NuevoAjax();
     var _values_send ='ruta=' + ruta ;
-    var _URL_ = "mod/planEmergencia/ajax_eliminarArchivo?";
+    var _URL_ = "mod/planEmergencia/ajax_eliminarArchivo.php?";
     //alert(_URL_ + _values_send); //DEBUG
     ajax.open("GET", _URL_ + _values_send, true);
     ajax.onreadystatechange = function () {

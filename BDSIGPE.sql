@@ -1407,7 +1407,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `exploit`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `exploit`(INOUT `pcadena` varchar(5000),IN `separador` varchar(1),OUT `vtexto` varchar(5000))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `exploit`(INOUT `pcadena` varchar(1500),IN `separador` varchar(1),OUT `vtexto` varchar(1500))
 BEGIN
 
 
@@ -1543,15 +1543,15 @@ BEGIN
 
 
 
-	DECLARE vmodulo varchar(5000);
+	DECLARE vmodulo varchar(1500);
 
 
 
-  DECLARE vpermiso varchar(5000);
+  DECLARE vpermiso varchar(1500);
 
 
 
-  DECLARE vaccion varchar(5000);
+  DECLARE vaccion varchar(1500);
 
 
 
@@ -2089,7 +2089,7 @@ drop table IF EXISTS  Sede;
 create table Sede(
 id int  NOT NULL AUTO_INCREMENT,
 isActivo int,
-nombreSede varchar(150),
+nombreSede varchar(500),
 descripcion text,
 PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2101,49 +2101,49 @@ create table ZonaTrabajo(
 id int  NOT NULL AUTO_INCREMENT,
 FKidSede int,
 isActivo int,
-nombreZonaTrabajo varchar(150),
+nombreZonaTrabajo varchar(500),
 descripcion text,
-logo varchar(150),
-ubicacion varchar(150),
+logo varchar(500),
+ubicacion varchar(500),
 version int,
-revisadoPor varchar(150),
-codigoZonaTrabajo varchar(150),
-actividad varchar(150),
-direccion varchar(150),
-personaContactoGeneral varchar(150),
-numeroTelefono varchar(150),
-numeroFax varchar(150),
-correo varchar(150),
-categoriaNFPA varchar(150),
-usoInstalaciones varchar(150),
-horarioJornada varchar(150),
-seguridadInstitucional varchar(150),
-servicioConsegeria varchar(150),
-personalAdministrativo varchar(150),
-personalAcademico varchar(150),
-presenciaEstudiantil varchar(150),
-instalacionesDensidadOcupacion varchar(150),
-instalacionesAreaConstruccion varchar(150),
-instalacionesInstalaciones varchar(150),
-instalacionesCaracteristicasZona varchar(150),
-instalacionesTopografia varchar(150),
-instalacionesNivelTerreno varchar(150),
-instalacionesColindates varchar(150),
-elementosConstructivosTipoConstruccion varchar(150),
-elementosConstructivosAntiguedad varchar(150),
-elementosConstructivosCimientos varchar(150),
-elementosConstructivosEstructura varchar(150),
-elementosConstructivosParedes varchar(150),
-elementosConstructivosEntrepiso varchar(150),
-elementosConstructivosTecho varchar(150),
-elementosConstructivosCielos varchar(150),
-elementosConstructivosPisos varchar(150),
-elementosConstructivosAreaParqueo varchar(150),
-elementosConstructivosSistemaAguaPotable varchar(150),
-elementosConstructivosAlcantarilladoSanitario varchar(150),
-elementosConstructivosAlcantarilladoPluvial varchar(150),
-elementosConstructivosSistemaElectrico varchar(150),
-elementosConstructivosSistemaTelefonico varchar(150),
+revisadoPor varchar(500),
+codigoZonaTrabajo varchar(500),
+actividad varchar(500),
+direccion varchar(500),
+personaContactoGeneral varchar(500),
+numeroTelefono varchar(500),
+numeroFax varchar(500),
+correo varchar(500),
+categoriaNFPA varchar(500),
+usoInstalaciones varchar(500),
+horarioJornada varchar(500),
+seguridadInstitucional varchar(500),
+servicioConsegeria varchar(500),
+personalAdministrativo varchar(500),
+personalAcademico varchar(500),
+presenciaEstudiantil varchar(500),
+instalacionesDensidadOcupacion varchar(500),
+instalacionesAreaConstruccion varchar(500),
+instalacionesInstalaciones varchar(500),
+instalacionesCaracteristicasZona varchar(500),
+instalacionesTopografia varchar(500),
+instalacionesNivelTerreno varchar(500),
+instalacionesColindates varchar(500),
+elementosConstructivosTipoConstruccion varchar(500),
+elementosConstructivosAntiguedad varchar(500),
+elementosConstructivosCimientos varchar(500),
+elementosConstructivosEstructura varchar(500),
+elementosConstructivosParedes varchar(500),
+elementosConstructivosEntrepiso varchar(500),
+elementosConstructivosTecho varchar(500),
+elementosConstructivosCielos varchar(500),
+elementosConstructivosPisos varchar(500),
+elementosConstructivosAreaParqueo varchar(500),
+elementosConstructivosSistemaAguaPotable varchar(500),
+elementosConstructivosAlcantarilladoSanitario varchar(500),
+elementosConstructivosAlcantarilladoPluvial varchar(500),
+elementosConstructivosSistemaElectrico varchar(500),
+elementosConstructivosSistemaTelefonico varchar(500),
 elementosConstructivosOtros text,
 PRIMARY KEY(id),
 FOREIGN KEY(FKidSede) REFERENCES Sede(id)
@@ -2156,8 +2156,8 @@ FOREIGN KEY(FKidSede) REFERENCES Sede(id)
 create table Historial(
 id int NOT NULL AUTO_INCREMENT,
 FKidZona int,
-version   varchar(150),
-direccion varchar(150),
+version   varchar(500),
+direccion varchar(500),
 PRIMARY KEY(id),
 FOREIGN KEY(FKidZona) REFERENCES ZonaTrabajo(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2179,7 +2179,7 @@ FOREIGN KEY(FKidZona) REFERENCES ZonaTrabajo(id)
 
 create table OrigenAmenaza(
     id int NOT NULL AUTO_INCREMENT,
-    descripcion varchar(150),
+    descripcion varchar(500),
     isActivo int,
     PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2189,7 +2189,7 @@ create table OrigenAmenaza(
 -- ----------------------------
 create table TipoAmenaza (
     id int NOT NULL AUTO_INCREMENT,  
-    descripcion varchar(150),
+    descripcion varchar(500),
     isActivo int,
     FkidOrigen int,
     PRIMARY KEY(id),
@@ -2205,7 +2205,7 @@ create table CategoriaTipoAmenaza (
     id int NOT NULL AUTO_INCREMENT, 
     FKidTipoAmenaza int,   
     isActivo int,
-    descripcion varchar(150),    
+    descripcion varchar(500),    
     PRIMARY KEY(id), 
     FOREIGN KEY(FKidTipoAmenaza) REFERENCES TipoAmenaza(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2238,7 +2238,7 @@ descripcion text,
 descripcionParaUsuario text,
 isDescripcionParaUsuario int,
 isActivo int,
-titulo varchar(150),
+titulo varchar(500),
 orden int,
  PRIMARY KEY(id) 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2252,7 +2252,7 @@ id int NOT NULL AUTO_INCREMENT,
 descripcion text,
 descripcionParaUsuario text,
 isDescripcionParaUsuario int,
-titulo varchar(150),
+titulo varchar(500),
 isActivo int,
 FKidCapitulo int,
 orden int,
@@ -2310,7 +2310,7 @@ create table SubCapituloPlan(
 create table TipoPoblacion(
 id int NOT NULL AUTO_INCREMENT,
 FKidZonaTrabajo int,
-tipoPoblacion varchar(150),
+tipoPoblacion varchar(500),
 descripcion text,
 total int,
 representacionDe text,
@@ -2326,10 +2326,10 @@ create table RecursoHumanos(
 id int NOT NULL AUTO_INCREMENT,
 FKidZonaTrabajo int,
 cantidad int,
-profesion varchar(150),
-categorias varchar(150),
-localizacion varchar(150),
-contacto varchar(150),
+profesion varchar(500),
+categorias varchar(500),
+localizacion varchar(500),
+contacto varchar(500),
 PRIMARY KEY(id),
 FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2344,11 +2344,11 @@ id int NOT NULL AUTO_INCREMENT,
 FKidZonaTrabajo int,
 cantidad int,
 capacidad int,
-tipo varchar(150),
+tipo varchar(500),
 caracteristicas text,
-contacto varchar(150),
-ubicacion varchar(150),
-categoria varchar(150),
+contacto varchar(500),
+ubicacion varchar(500),
+categoria varchar(500),
 PRIMARY KEY(id),
 FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2360,12 +2360,12 @@ FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 create table RecursoIntalaciones(
 id int NOT NULL AUTO_INCREMENT,
 FKidZonaTrabajo int,
-tipo varchar(150),
+tipo varchar(500),
 cantidad int,
 tamaño int,
-distribucion varchar(150),
+distribucion varchar(500),
 contacto text,
-ubicacion varchar(150),
+ubicacion varchar(500),
 PRIMARY KEY(id),
 FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2378,11 +2378,11 @@ create table InventarioOtros(
 id int NOT NULL AUTO_INCREMENT,
 FKidZonaTrabajo int,
 cantidad int,
-tipo varchar(150),
+tipo varchar(500),
 caracteristicas text,
-contacto varchar(150),
-ubicacion varchar(150),
-categoria varchar(150),
+contacto varchar(500),
+ubicacion varchar(500),
+categoria varchar(500),
 observaciones text,
 PRIMARY KEY(id),
 FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
@@ -2395,8 +2395,8 @@ FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 create table CuerposScorro(
 id int NOT NULL AUTO_INCREMENT,
 FKidZonaTrabajo int,
-tipo varchar(150),
-ubicacion varchar(150),
+tipo varchar(500),
+ubicacion varchar(500),
 Distancia float,
 Tiempo float,
 PRIMARY KEY(id),
@@ -2410,11 +2410,11 @@ FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 create table IngresoCuerpoSocorro(
     id int NOT NULL AUTO_INCREMENT,
     FKidZonaTrabajo int,
-    dimensionAreaAcceso varchar(150),   
-    radioGiro varchar(150),
-    caseta varchar(150),
-    plumas varchar(150),
-    anchoLibre varchar(150),
+    dimensionAreaAcceso varchar(500),   
+    radioGiro varchar(500),
+    caseta varchar(500),
+    plumas varchar(500),
+    anchoLibre varchar(500),
    PRIMARY KEY(id),
 FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id) 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2482,17 +2482,17 @@ FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 create table FormularioPoblacion(
     id int NOT NULL AUTO_INCREMENT,
     FKidZonaTrabajo int,
-    nombreOficina varchar(150),
+    nombreOficina varchar(500),
     capacidadPermanente int, 
     capacidadTemporal int,
-    representanteComite varchar(150),
-    representanteBrigadaEfectiva varchar(150),
-    representantePrimerosAuxilios varchar(150),
-    telefonoOficina varchar(150),
-    contactoEmergencia varchar(150),
-    telefonoPersonal varchar(150),
-    correoElectronico varchar (150),
-    sector varchar(150),
+    representanteComite varchar(500),
+    representanteBrigadaEfectiva varchar(500),
+    representantePrimerosAuxilios varchar(500),
+    telefonoOficina varchar(500),
+    contactoEmergencia varchar(500),
+    telefonoPersonal varchar(500),
+    correoElectronico varchar (500),
+    sector varchar(500),
     PRIMARY KEY(id),
     FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2505,7 +2505,7 @@ create table FormularioPoblacion(
 create table FormularioPuestoBrigada(
     id int NOT NULL AUTO_INCREMENT,
     FKidZonaTrabajo int,
-    puesto varchar(150),
+    puesto varchar(500),
     funcion text, 
     plazoEjecucion text,
     PRIMARY KEY(id),
@@ -2525,7 +2525,7 @@ create table IdentificacionPeligro(
     ubicacion varchar(1500),
     recomendacion text,
     fecha date,
-    responsable varchar(150),
+    responsable varchar(500),
     priorizacion int,
     PRIMARY KEY(id),
     FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
@@ -2603,7 +2603,7 @@ INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (13,'informac
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_sede`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_sede`(IN `p_nombre` varchar(150),IN `p_activo` int, IN `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_sede`(IN `p_nombre` varchar(500),IN `p_activo` int, IN `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
 BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -2632,7 +2632,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_zona_trabajo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_zona_trabajo`(IN `p_nombre` varchar(150),IN `p_FKidSede` int,IN `p_activo` int,IN `p_logo` varchar(150), IN `p_ubicacion` varchar(150), IN `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_zona_trabajo`(IN `p_nombre` varchar(500),IN `p_FKidSede` int,IN `p_activo` int,IN `p_logo` varchar(500), IN `p_ubicacion` varchar(500), IN `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
 BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -2765,7 +2765,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_origen_amenaza`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_origen_amenaza`(IN `p_nombre` varchar(150),IN `p_activo` int, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_origen_amenaza`(IN `p_nombre` varchar(500),IN `p_activo` int, OUT `res` TINYINT  UNSIGNED)
 BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -2796,7 +2796,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_categoria_amenaza`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_categoria_amenaza`(IN `p_nombre` varchar(150),IN `p_activo` int, IN  `p_fkTipoAmenaza` int,  OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_categoria_amenaza`(IN `p_nombre` varchar(500),IN `p_activo` int, IN  `p_fkTipoAmenaza` int,  OUT `res` TINYINT  UNSIGNED)
 BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -2828,7 +2828,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_tipo_amenaza`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_tipo_amenaza`(IN `p_nombre` varchar(150),IN `p_activo` int, IN  `p_fkOrigenAmenaza` int,  OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_tipo_amenaza`(IN `p_nombre` varchar(500),IN `p_activo` int, IN  `p_fkOrigenAmenaza` int,  OUT `res` TINYINT  UNSIGNED)
 BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -3121,7 +3121,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `insert_capitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_capitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_descripcion` text,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` text,  OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_capitulo`(IN `p_titulo` varchar(500),IN `p_activo` int, IN  `p_descripcion` text,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` text,  OUT `res` TINYINT  UNSIGNED)
 BEGIN
 declare ordenar Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION     
@@ -3162,7 +3162,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `insert_subcapitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_subcapitulo`(IN `p_titulo` varchar(150),IN `p_activo` int, IN  `p_fkcapitulo` int,IN  `p_descripcion` text,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` text,  OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_subcapitulo`(IN `p_titulo` varchar(500),IN `p_activo` int, IN  `p_fkcapitulo` int,IN  `p_descripcion` text,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` text,  OUT `res` TINYINT  UNSIGNED)
 BEGIN
 declare ordenar Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -3201,7 +3201,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_capitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_capitulo`(IN `p_id` int,IN `p_titulo` varchar(150), IN  `p_descripcion` text,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` text, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_capitulo`(IN `p_id` int,IN `p_titulo` varchar(500), IN  `p_descripcion` text,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` text, OUT `res` TINYINT  UNSIGNED)
 BEGIN
         
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -3235,7 +3235,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_subcapitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_subcapitulo`(IN `p_id` int,IN `p_titulo` varchar(150),IN `p_fkcapitulo` int, IN  `p_descripcion` text,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` text, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_subcapitulo`(IN `p_id` int,IN `p_titulo` varchar(500),IN `p_fkcapitulo` int, IN  `p_descripcion` text,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` text, OUT `res` TINYINT  UNSIGNED)
 BEGIN   
         declare ordenar Integer;
         declare FKAntigua Integer;
@@ -3315,7 +3315,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_zona_trabajo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_zona_trabajo`(IN `p_id` int, IN `p_FKidSede` int,IN `p_nombre` varchar(150),IN `p_activo` int,IN `p_logo` varchar(150),IN `p_ubicacion` varchar(150), IN `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_zona_trabajo`(IN `p_id` int, IN `p_FKidSede` int,IN `p_nombre` varchar(500),IN `p_activo` int,IN `p_logo` varchar(500),IN `p_ubicacion` varchar(500), IN `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
 BEGIN            
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -3346,7 +3346,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_sede`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_sede`(IN `p_id` int, IN `p_nombre` varchar(150),IN `p_activo` int, IN `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_sede`(IN `p_id` int, IN `p_nombre` varchar(500),IN `p_activo` int, IN `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
 BEGIN   
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -3525,7 +3525,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_origen_amenaza`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_origen_amenaza`(IN `p_id` int, IN `p_nombre` varchar(150),IN `p_activo` int, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_origen_amenaza`(IN `p_id` int, IN `p_nombre` varchar(500),IN `p_activo` int, OUT `res` TINYINT  UNSIGNED)
 BEGIN   
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -3559,7 +3559,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_tipo_amenaza`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_tipo_amenaza`(IN `p_id` int, IN `p_nombre` varchar(150),IN `p_activo` int, IN `p_FkidOrigen` int, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_tipo_amenaza`(IN `p_id` int, IN `p_nombre` varchar(500),IN `p_activo` int, IN `p_FkidOrigen` int, OUT `res` TINYINT  UNSIGNED)
 BEGIN   
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -3590,7 +3590,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_categoria_amenaza`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_categoria_amenaza`(IN `p_id` int, IN `p_nombre` varchar(150),IN `p_activo` int, IN `p_FKidTipoAmenaza` int, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_categoria_amenaza`(IN `p_id` int, IN `p_nombre` varchar(500),IN `p_activo` int, IN `p_FKidTipoAmenaza` int, OUT `res` TINYINT  UNSIGNED)
 BEGIN   
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -3654,13 +3654,13 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_datos_generales`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_datos_generales`(IN `p_id` int, IN `p_actividad` varchar(150),
- IN `p_direccion` varchar(150), IN `p_personaContactoGeneral` varchar(150),IN `p_numeroTelefono` varchar(150),
- IN `p_numeroFax` varchar(150),IN `p_correo` varchar(150),
- IN `p_categoriaNFPA` varchar(150),IN `p_usoInstalaciones` varchar(150),
- IN `p_horarioJornada` varchar(150),IN `p_seguridadInstitucional` varchar(150),
- IN `p_servicioConsegeria` varchar(150),IN `p_personalAdministrativo` varchar(150),
- IN `p_personalAcademico` varchar(150),IN `p_presenciaEstudiantil` varchar(150),
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_datos_generales`(IN `p_id` int, IN `p_actividad` varchar(500),
+ IN `p_direccion` varchar(500), IN `p_personaContactoGeneral` varchar(500),IN `p_numeroTelefono` varchar(500),
+ IN `p_numeroFax` varchar(500),IN `p_correo` varchar(500),
+ IN `p_categoriaNFPA` varchar(500),IN `p_usoInstalaciones` varchar(500),
+ IN `p_horarioJornada` varchar(500),IN `p_seguridadInstitucional` varchar(500),
+ IN `p_servicioConsegeria` varchar(500),IN `p_personalAdministrativo` varchar(500),
+ IN `p_personalAcademico` varchar(500),IN `p_presenciaEstudiantil` varchar(500),
  OUT `res` TINYINT  UNSIGNED)
  BEGIN           
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -3698,7 +3698,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_tipo_poblacion`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_tipo_poblacion`(IN `p_FKidZonaTrabajo` int, IN `p_tipoPoblacion` varchar(150),
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_tipo_poblacion`(IN `p_FKidZonaTrabajo` int, IN `p_tipoPoblacion` varchar(500),
  IN `p_descripcion` text, IN `p_total` int, IN `p_representacionDe` text,
 OUT `res` TINYINT  UNSIGNED)
 BEGIN   
@@ -3743,7 +3743,7 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS `insert_identificacion_peligro`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_identificacion_peligro`(IN `p_FKidZonaTrabajo` int,IN `p_id` int,  IN `p_peligro` text,
- IN `p_presente` int, IN `p_ubicacion` varchar(1500), IN `p_recomendacion` text,IN `p_fecha` date, IN `p_responsable` varchar(150),  IN `p_priorizacion` int,
+ IN `p_presente` int, IN `p_ubicacion` varchar(1500), IN `p_recomendacion` text,IN `p_fecha` date, IN `p_responsable` varchar(500),  IN `p_priorizacion` int,
 OUT `res` TINYINT  UNSIGNED)
 BEGIN   
     declare existe Integer;
@@ -3788,18 +3788,18 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS `update_datos_Instalaciones`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `update_datos_Instalaciones`(
- IN `p_FKidZonaTrabajo` int, IN `p_instalacionesDensidadOcupacion` varchar(150),
- IN `p_instalacionesAreaConstruccion` varchar(150), IN `p_instalacionesInstalaciones` varchar(150),
- IN `p_instalacionesCaracteristicasZona` varchar(150), IN `p_instalacionesTopografia` varchar(150),
- IN `p_instalacionesNivelTerreno` varchar(150), IN `p_instalacionesColindates` varchar(150),
- IN `p_elementosConstructivosTipoConstruccion` varchar(150), IN `p_elementosConstructivosAntiguedad` varchar(150),
- IN `p_elementosConstructivosCimientos` varchar(150), IN `p_elementosConstructivosEstructura` varchar(150),
-IN `p_elementosConstructivosParedes` varchar(150), IN `p_elementosConstructivosEntrepiso` varchar(150),
-IN `p_elementosConstructivosTecho` varchar(150), IN `p_elementosConstructivosCielos` varchar(150),
-IN `p_elementosConstructivosPisos` varchar(150), IN `p_elementosConstructivosAreaParqueo` varchar(150),
-IN `p_elementosConstructivosSistemaAguaPotable` varchar(150), IN `p_elementosConstructivosAlcantarilladoSanitario` varchar(150),
-IN `p_elementosConstructivosAlcantarilladoPluvial` varchar(150), IN `p_elementosConstructivosSistemaElectrico` varchar(150),
-IN `p_elementosConstructivosSistemaTelefonico` varchar(150),
+ IN `p_FKidZonaTrabajo` int, IN `p_instalacionesDensidadOcupacion` varchar(500),
+ IN `p_instalacionesAreaConstruccion` varchar(500), IN `p_instalacionesInstalaciones` varchar(500),
+ IN `p_instalacionesCaracteristicasZona` varchar(500), IN `p_instalacionesTopografia` varchar(500),
+ IN `p_instalacionesNivelTerreno` varchar(500), IN `p_instalacionesColindates` varchar(500),
+ IN `p_elementosConstructivosTipoConstruccion` varchar(500), IN `p_elementosConstructivosAntiguedad` varchar(500),
+ IN `p_elementosConstructivosCimientos` varchar(500), IN `p_elementosConstructivosEstructura` varchar(500),
+IN `p_elementosConstructivosParedes` varchar(500), IN `p_elementosConstructivosEntrepiso` varchar(500),
+IN `p_elementosConstructivosTecho` varchar(500), IN `p_elementosConstructivosCielos` varchar(500),
+IN `p_elementosConstructivosPisos` varchar(500), IN `p_elementosConstructivosAreaParqueo` varchar(500),
+IN `p_elementosConstructivosSistemaAguaPotable` varchar(500), IN `p_elementosConstructivosAlcantarilladoSanitario` varchar(500),
+IN `p_elementosConstructivosAlcantarilladoPluvial` varchar(500), IN `p_elementosConstructivosSistemaElectrico` varchar(500),
+IN `p_elementosConstructivosSistemaTelefonico` varchar(500),
 IN `p_elementosConstructivosOtros` text, OUT `res` TINYINT  UNSIGNED)
  BEGIN           
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -3846,7 +3846,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_matriz`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_matriz`(IN `p_id` int,IN `p_idZona` int, IN `p_fuente` varchar(150), IN `p_probabilidad` int, IN `p_gravedad` int, IN `p_consecuencia` int, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_matriz`(IN `p_id` int,IN `p_idZona` int, IN `p_fuente` varchar(500), IN `p_probabilidad` int, IN `p_gravedad` int, IN `p_consecuencia` int, OUT `res` TINYINT  UNSIGNED)
 BEGIN
 	declare existe Integer;
    
@@ -3889,9 +3889,9 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS `insert_equipoMovil`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_equipoMovil`(IN `p_FKidZonaTrabajo` int,IN `p_cantidad` int,
-IN `p_capacidad` int, IN `p_tipo` varchar(150),
-IN `p_caracteristicas` text, IN `p_contacto` varchar(150),
-IN `p_ubicacion` varchar(150),IN `p_categoria` varchar(150),
+IN `p_capacidad` int, IN `p_tipo` varchar(500),
+IN `p_caracteristicas` text, IN `p_contacto` varchar(500),
+IN `p_ubicacion` varchar(500),IN `p_categoria` varchar(500),
 OUT `res` TINYINT  UNSIGNED)
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -3959,8 +3959,8 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS `insert_RecursoHumano`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_RecursoHumano`(IN `p_FKidZonaTrabajo` int,IN `p_cantidad` int,
-IN `p_profesion` varchar(150),IN `p_categorias` varchar(150),
-IN `p_localizacion` varchar(150),IN `p_contacto` varchar(150),
+IN `p_profesion` varchar(500),IN `p_categorias` varchar(500),
+IN `p_localizacion` varchar(500),IN `p_contacto` varchar(500),
 OUT `res` TINYINT  UNSIGNED)
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -4028,10 +4028,10 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS `insert_RecursoInstalaciones`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_RecursoInstalaciones`(IN `p_FKidZonaTrabajo` int,
-IN `p_tipo` varchar(150),
+IN `p_tipo` varchar(500),
 IN `p_cantidad` int,IN `p_tamaño` int,
-IN `p_distribucion` varchar(150),IN `p_contacto` text,
-IN `p_ubicacion` varchar(150),OUT `res` TINYINT  UNSIGNED)
+IN `p_distribucion` varchar(500),IN `p_contacto` text,
+IN `p_ubicacion` varchar(500),OUT `res` TINYINT  UNSIGNED)
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
@@ -4094,9 +4094,9 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS `insert_InventarioOtros`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_InventarioOtros`(IN `p_FKidZonaTrabajo` int,IN `p_cantidad` int,
-IN `p_tipo` varchar(150),IN `p_caracteristicas` text,
-IN `p_contacto` varchar(150),IN `p_ubicacion` varchar(150),
-IN `p_categoria` varchar(150),IN `p_observaciones` text,OUT `res` TINYINT  UNSIGNED)
+IN `p_tipo` varchar(500),IN `p_caracteristicas` text,
+IN `p_contacto` varchar(500),IN `p_ubicacion` varchar(500),
+IN `p_categoria` varchar(500),IN `p_observaciones` text,OUT `res` TINYINT  UNSIGNED)
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
@@ -4128,7 +4128,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `delete_InventarioOtros`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_InventarioOtros`(IN `p_FKidZonaTrabajo` int,IN `p_categoria` varchar(150),OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_InventarioOtros`(IN `p_FKidZonaTrabajo` int,IN `p_categoria` varchar(500),OUT `res` TINYINT  UNSIGNED)
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
@@ -4282,10 +4282,10 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_formularioPoblacion`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_formularioPoblacion`(IN p_FKidZonaTrabajo int ,IN p_nombreOficina varchar(150),
-IN p_capacidadPermanente int,IN p_capacidadTemporal int ,IN p_representanteComite varchar(150),IN p_representanteBrigadaEfectiva varchar(150),
-   IN p_representantePrimerosAuxilios varchar(150) ,IN p_telefonoOficina varchar(150),IN p_contactoEmergencia varchar(150) ,
-IN p_telefonoPersonal varchar(150),IN p_correoElectronico varchar(150),IN sector varchar(150),OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_formularioPoblacion`(IN p_FKidZonaTrabajo int ,IN p_nombreOficina varchar(500),
+IN p_capacidadPermanente int,IN p_capacidadTemporal int ,IN p_representanteComite varchar(500),IN p_representanteBrigadaEfectiva varchar(500),
+   IN p_representantePrimerosAuxilios varchar(500) ,IN p_telefonoOficina varchar(500),IN p_contactoEmergencia varchar(500) ,
+IN p_telefonoPersonal varchar(500),IN p_correoElectronico varchar(500),IN sector varchar(500),OUT `res` TINYINT  UNSIGNED)
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
@@ -4351,7 +4351,7 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS `insert_CuerposScorro`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_CuerposScorro`(IN p_FKidZonaTrabajo int,
-IN p_tipo varchar(150), IN p_ubicacion  varchar(150),IN  p_Distancia  float,
+IN p_tipo varchar(500), IN p_ubicacion  varchar(500),IN  p_Distancia  float,
  IN p_Tiempo  float ,OUT `res` TINYINT  UNSIGNED)
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -4495,8 +4495,8 @@ PROCEDURE `insert_brigadistas`(IN `p_FKidZonaTrabajo` int,IN `p_brigadista` varc
 -- 
 DROP PROCEDURE IF EXISTS `insert_IngresoCuerpoSocorro`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_IngresoCuerpoSocorro`(IN `p_FKidZonaTrabajo` int, IN `p_dimensionAreaAcceso` varchar(150),
- IN `p_radioGiro` varchar(150), IN `p_caseta` varchar(150), IN `p_plumas` varchar(150), IN `p_anchoLibre` varchar(150),
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_IngresoCuerpoSocorro`(IN `p_FKidZonaTrabajo` int, IN `p_dimensionAreaAcceso` varchar(500),
+ IN `p_radioGiro` varchar(500), IN `p_caseta` varchar(500), IN `p_plumas` varchar(500), IN `p_anchoLibre` varchar(500),
 OUT `res` TINYINT  UNSIGNED)
 BEGIN   
     declare existe Integer;
@@ -4541,7 +4541,7 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS `insert_puestoBrigada`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_puestoBrigada`(IN p_FKidZonaTrabajo int,
-IN p_puesto varchar(150), IN p_funcion text,
+IN p_puesto varchar(500), IN p_funcion text,
 IN  p_plazoEjecucion  text,OUT `res` TINYINT  UNSIGNED)
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -4690,7 +4690,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_formulario`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_formulario`(IN `p_id` int,IN `p_titulo` varchar(150), IN  `p_descripcionArriba` text, IN  `p_descripcionAbajo` text,OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_formulario`(IN `p_id` int,IN `p_titulo` varchar(500), IN  `p_descripcionArriba` text, IN  `p_descripcionAbajo` text,OUT `res` TINYINT  UNSIGNED)
 BEGIN
         
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -4721,7 +4721,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_aprobacion`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_aprobacion`(IN `p_id` int,IN `p_aprobado` varchar(150),IN `p_codigoZonaTrabajo` varchar(150), OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_aprobacion`(IN `p_id` int,IN `p_aprobado` varchar(500),IN `p_codigoZonaTrabajo` varchar(500), OUT `res` TINYINT  UNSIGNED)
 BEGIN   
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -4812,7 +4812,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `insert_historial`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_historial`(IN `p_FKidZona` int,IN `p_version` varchar(150), IN `p_direccion` varchar(150),OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_historial`(IN `p_FKidZona` int,IN `p_version` varchar(500), IN `p_direccion` varchar(500),OUT `res` TINYINT  UNSIGNED)
 BEGIN  
         declare existe Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION

@@ -1279,13 +1279,13 @@ $return = "Generado";
 if (check_permiso($mod4, $act6, $user_rol) && !isset($_GET['visualizarpdf'])) {
     $nombreDoc = $id . "-" . $version . '.pdf';
 
-    $pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/' . $nombreDoc, 'F');
+    $pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'mod/versionesPDF/' . $nombreDoc, 'F');
     $sql_a = "CALL insert_historial('$id','$version','$nombreDoc',@res);";
     $sql_b = "SELECT @res as res;";
     $res = transaccion_verificada($sql_a, $sql_b);
 } else if (check_permiso($mod5, $act6, $user_rol)) {
     $nombreDoc = 'planEmergencias' . $random . '.pdf';
-    $pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'SIGPE/mod/versionesPDF/' . $nombreDoc, 'F');
+    $pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'mod/versionesPDF/' . $nombreDoc, 'F');
 }
 //ob_clean();
 echo $return;

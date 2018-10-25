@@ -32,7 +32,7 @@ function capitulo($cap, $vocab, $idPlanEmergencia, $i, $editar) {
         <div style = "padding:2%" id="capitulo<?= $cap['id'] ?>" class="formulario">    
             <div class='row'>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <label  for="subcapitulo_Descripcion_usuario"><?= $vocab["capitulos_subcapitulos_capitulo"] ?> <?= ($i == 0) ? "Inicio" : ($i) ?>: <?= $cap['titulo'] ?> </label>
+                    <label  for="subcapitulo_Descripcion_usuario"><?= $vocab["capitulos_subcapitulos_capitulo"] ?> <?= ($i == 0) ? "INICIO" : ($i) ?>: <?= $cap['titulo'] ?> </label>
                 </div>
 
                 <div align="right" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -93,7 +93,7 @@ function subcapitulo($subcap, $listaFormularios, $vocab, $idPlanEmergencia, $i, 
         <div style = "padding:2%" id="<?= $subcap['id'] ?>" class="formulario" >
             <div class='row'>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <label  for="capitulo_Descripcion_usuario"><?= $vocab["capitulos_subcapitulos_subcapitulo"] ?> <?= ($i == 0) ? "Inicio" : ($i ) ?>.<?= $j + 1 ?>: <?= $subcap['titulo'] ?> </label>
+                    <label  for="capitulo_Descripcion_usuario"><?= $vocab["capitulos_subcapitulos_subcapitulo"] ?> <?= ($i == 0) ? "INICIO" : ($i ) ?>.<?= $j + 1 ?>: <?= $subcap['titulo'] ?> </label>
                 </div>
                 <div align="right" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <?php if ($editar) { ?>

@@ -64,13 +64,13 @@ for ($i = 0; $i < count($cap); $i++) {
                         <?php if (check_permiso($mod4, $act4, $user_rol)) { ?>
                             <td><select  id="select<?= $res[$i]['id']; ?>"  onchange="javascript:odenarFomulario(<?= $res[$i]['id']; ?>, '<?= $res[$i]['titulo']; ?>')" class="form-control selectpicker" data-live-search="true">
                                     <?php for ($a = 0; $a < count($cap); $a++) { ?>                           
-                                        <optgroup label="<?=$a ?>-<?= $cap[$a]['titulo'] ?>">         
+                                        <optgroup label="<?=($a==0)?'INICIO':$a?>-<?= $cap[$a]['titulo'] ?>">         
                                             <?php
                                             $subcapi = $Cap[$a][0];
                                             if (count($subcapi) > 0) {
                                                 for ($j = 0; $j < count($subcapi); $j++) {
                                                     ?>                                      
-                                                    <option value="<?= $subcapi[$j]['id']; ?>"  <?= ($subcapi[$j]['id'] == $find_key) ? "selected " : ""; ?> data-tokens="<?=$a ?>.<?=$j+1?>-<?= $subcapi[$j]['titulo'] ?> (<?=$cap[$a]["titulo"]?>)"><?=$a ?>.<?=$j+1?>-<?= $subcapi[$j]['titulo'] ?></option>                         
+                                                    <option value="<?= $subcapi[$j]['id']; ?>"  <?= ($subcapi[$j]['id'] == $find_key) ? "selected " : ""; ?> data-tokens="<?=($a==0)?'INICIO':$a  ?>.<?=$j+1?>-<?= $subcapi[$j]['titulo'] ?> (<?=$cap[$a]["titulo"]?>)"><?=($a==0)?'INICIO':$a ?>.<?=$j+1?>-<?= $subcapi[$j]['titulo'] ?></option>                         
                                                     <?php
                                                 }
                                             }

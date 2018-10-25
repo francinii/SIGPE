@@ -65,12 +65,12 @@ $capituloNumero = 0;
                     if (count($comb) > 0) {
                         for ($i = 0; $i < count($comb); $i++) {
                             ?>
-                            <option  <?= ($comb[$i]['id'] == $find_key) ? "selected " : ""; ?> value='<?= $comb[$i]['id'] ?>' ><?=$i?>-<?= $comb[$i]['titulo'] ?></option>
+                            <option  <?= ($comb[$i]['id'] == $find_key) ? "selected " : ""; ?> value='<?= $comb[$i]['id'] ?>' ><?=($i==0)? 'INICIO':$i?>-<?= $comb[$i]['titulo'] ?></option>
 
                             <?php
                             if ($comb[$i]['id'] == $find_key) {
                                 if ($i == 0) {
-                                    $capituloNumero = "inicio";
+                                    $capituloNumero = "INICIO";
                                 } else {
                                     $capituloNumero = $i;
                                 }
