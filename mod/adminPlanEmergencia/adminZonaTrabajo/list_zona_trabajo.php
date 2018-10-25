@@ -22,7 +22,7 @@ $comb = seleccion($sql);
 
 
 /* * ************************Selecciona las zonas o centros de trabajo ******************************************** */
-$sql = "SELECT  id, nombreZonaTrabajo FROM ZonaTrabajo";
+$sql = "SELECT  id, nombreZonaTrabajo,version FROM ZonaTrabajo";
 
 $find_key='0';
 if ((isset($_GET['find_key'])) ){
@@ -77,7 +77,8 @@ $res = seleccion($sql);
         <thead>
             <tr>
                 <th width="10%"><?= $vocab["list_zona_trabajo_id"] ?></th>
-                <th width="50%"><?= $vocab["list_zona_trabajo_descripcion"] ?></th>              
+                <th width="50%"><?= $vocab["list_zona_trabajo_descripcion"] ?></th>  
+                <th width="10%"><?= $vocab["zona_trabajo_version"] ?></th>   
                 <?php if (check_permiso($mod4, $act1, $user_rol)) { ?>
                     <th width="5%"><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
                 <?php } ?>
@@ -96,7 +97,8 @@ $res = seleccion($sql);
                     ?>
                     <tr id="fila<?= $i ?>"  align='center'>                                           
                             <td><?= $res[$i]['id'] ?></td>
-                            <td><?= $res[$i]['nombreZonaTrabajo'] ?></td>                       
+                            <td><?= $res[$i]['nombreZonaTrabajo'] ?></td>
+                            <td><?= $res[$i]['version'] ?></td> 
                         <?php if (check_permiso($mod4, $act1, $user_rol)) { ?>
                             <td>
                                 <a class="puntero" onClick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/edit_zona_trabajo.php?', 'id=<?= $res[$i]["id"] ?>&view_mode=0');">                                     
@@ -123,6 +125,7 @@ $res = seleccion($sql);
             <tr>
                 <th><?= $vocab["list_zona_trabajo_id"] ?></th>
                 <th><?= $vocab["list_zona_trabajo_descripcion"] ?></th>
+                <th width="10%"><?= $vocab["zona_trabajo_version"] ?></th> 
                 <?php if (check_permiso($mod4, $act1, $user_rol)) { ?>
                     <th><div class="text-center"><i class="fa fa-eye fa-2x text-primary puntero" title="<?= $vocab["symbol_view"] ?>"></i></div></th>
                 <?php } ?>

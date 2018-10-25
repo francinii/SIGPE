@@ -168,6 +168,7 @@ $vocab["zona_trabajo_usuario_desc"]    = "Seleccione los usuarios que desea asoc
 $vocab["zona_trabajo_usuario_cedula"]    = "Cédula";
 $vocab["zona_trabajo_usuario_nombre"]    = "Nombre de usuario";
 $vocab["zona_trabajo_usuario_lista"]    = "Lista de usuarios asociados al centro de trabajo";
+$vocab["zona_trabajo_version"]    = "Versión actual";
 
 //***************************** Modulo Sedes******************************//
 $vocab["sede_title"]               = "Sedes";
