@@ -75,7 +75,7 @@ foreach ($res as $value) {
                     <div class="col-sm-9">
                     <select id="selectIniciosede" class="form-control" onchange="javascript: cambiarCentroInicio();">
                         <?php
-                        if (count($sede) > 0) {
+                        if (count($sedes) > 0) {
                             for ($i = 0; $i < count($sedes); $i++) {
                                 ?>
 
