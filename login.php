@@ -55,6 +55,7 @@
                 <img id="bottom" class="img_fix_full" src="img/bottom.png" alt="">
             </div>
         </div>
+        
         <footer class="footer">
             <div class="container">
                 <p class="text-muted text-center"><?= $footer_title ?></p>
