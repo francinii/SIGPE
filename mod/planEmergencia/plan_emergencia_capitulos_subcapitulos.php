@@ -192,7 +192,7 @@ function subcapitulos($id) {
  * @returns {Array} lista de formularios
  */
 function listaFormularios($id) {
-    $sql = "SELECT `id`, `titulo` FROM `Formulario` WHERE `FKidSubcapitulos`=" . $id;
+    $sql = "SELECT `id`, `titulo` FROM `Formulario` WHERE id!=13 and `FKidSubcapitulos`=" . $id ;
     return seleccion($sql);
 }
 ?>
