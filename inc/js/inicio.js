@@ -104,7 +104,7 @@ function imprimirPlanVistazo(centro,id){
             if (data == 'Generado') {
                  nombreDoc = 'planEmergencias' + version + '.pdf';
                 
-                window.open('mod/versionesPDF/' + nombreDoc, '_blank');
+               // window.open('mod/versionesPDF/' + nombreDoc, '_blank');
             }
 
         },

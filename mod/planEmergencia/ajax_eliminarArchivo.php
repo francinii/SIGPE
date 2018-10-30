@@ -5,6 +5,9 @@ include("../login/check.php");
 include("../../inc/db/db.php");
 /* @var $ruta type */
 $ruta = $_GET['ruta'];
-$elminado= unlink('../versionesPDF/'.$ruta);
+
+$gestor = fopen('../versionesPDF/'.$ruta, "r");
+
+//$elminado= unlink('../versionesPDF/'.$ruta);
 echo $elminado;
 
