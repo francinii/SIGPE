@@ -37,7 +37,7 @@ if (count($res) <= 0) {
 <div style="padding-right:0.5%;" align="right">
     <?php if ($editar) { ?>
     <span class="text-center">
-        <a class="btn btn-success" onclick="javascript: agregarFilaIdentificacionPeligro('Eliminar');"><i class=" fa fa-plus text-success"></i> Agregar</a>
+        <a class="btn btn-success" onclick="javascript: agregarFilaIdentificacionPeligro('Eliminar');"><i class=" fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_fila"] ?></a>
     </span>
     <?php } ?>
 </div>

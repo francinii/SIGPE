@@ -104,7 +104,9 @@ function imprimirPlanVistazo(centro,id){
             if (data == 'Generado') {
                  nombreDoc = 'planEmergencias' + version + '.pdf';
                 
-                window.open('mod/versionesPDF/' + nombreDoc, '_blank');
+                 window.open('visualizarPDF.php?ruta='+nombreDoc);
+                
+               // window.open('mod/versionesPDF/' + nombreDoc, '_blank');
             }
 
         },
@@ -115,7 +117,7 @@ function imprimirPlanVistazo(centro,id){
         complete: function (data) {
             //alert("completo"+data);
             jQuery('#CargandoModal').modal('hide');
-          EliminarPlanVistazo(nombreDoc);
+         
         }
 
     });
@@ -129,8 +131,7 @@ function imprimirPlanVistazo(centro,id){
  * @returns {undefined} abre un pdf
  */
 function EliminarPlanVistazo(ruta){
-     var loading = document.getElementById('loading_container');
-    loading.innerHTML = cargando_bar;
+   
     //Obtener Valores
 
     var ajax = NuevoAjax();
@@ -155,5 +156,7 @@ function EliminarPlanVistazo(ruta){
     };
   
     ajax.send(null);
-    loading.innerHTML = "";    
+      
 }
+
+"<br />\n<font size='1'><table class='xdebug-error xe-warning' dir='ltr' border='1' cellspacing='0' cellpadding='1'>\n<tr><th align='left' bgcolor='#f57900' colspan=\"5\"><span style='background-color: #cc0000; color: #fce94f; font-size: x-large;'>( ! )</span> Warning: fopen(file://C:/wamp64/www/mod/versionesPDF/planEmergencias227.pdf): failed to open stream: No such file or directory in C:\\wamp64\\www\\SIGPE\\lib\\tcpdf\\include\\tcpdf_static.php on line <i>1854</i></th></tr>\n<tr><th align='left' bgcolor='#e9b96e' colspan='5'>Call Stack</th></tr>\n<tr><th align='center' bgcolor='#eeeeec'>#</th><th align='left' bgcolor='#eeeeec'>Time</th><th align='left' bgcolor='#eeeeec'>Memory</th><th align='left' bgcolor='#eeeeec'>Function</th><th align='left' bgcolor='#eeeeec'>Location</th></tr>\n<tr><td bgcolor='#eeeeec' align='center'>1</td><td bgcolor='#eeeeec' align='center'>0.0000</td><td bgcolor='#eeeeec' align='right'>549512</td><td bgcolor='#eeeeec'>{main}( )</td><td title='C:\\wamp64\\www\\SIGPE\\mod\\planEmergenciaPDF\\planEmergenciaPDF.php' bgcolor='#eeeeec'>...\\planEmergenciaPDF.php<b>:</b>0</td></tr>\n<tr><td bgcolor='#eeeeec' align='center'>2</td><td bgcolor='#eeeeec' align='center'>4.3388</td><td bgcolor='#eeeeec' align='right'>22233648</td><td bgcolor='#eeeeec'>TCPDF->Output( )</td><td title='C:\\wamp64\\www\\SIGPE\\mod\\planEmergenciaPDF\\planEmergenciaPDF.php' bgcolor='#eeeeec'>...\\planEmergenciaPDF.php<b>:</b>1288</td></tr>\n<tr><td bgcolor='#eeeeec' align='center'>3</td><td bgcolor='#eeeeec' align='center'>4.3856</td><td bgcolor='#eeeeec' align='right'>21218480</td><td bgcolor='#eeeeec'>TCPDF_STATIC::fopenLocal( )</td><td title='C:\\wamp64\\www\\SIGPE\\lib\\tcpdf\\tcpdf.php' bgcolor='#eeeeec'>...\\tcpdf.php<b>:</b>7673</td></tr>\n<tr><td bgcolor='#eeeeec' align='center'>4</td><td bgcolor='#eeeeec' align='center'>4.3856</td><td bgcolor='#eeeeec' align='right'>21218656</td><td bgcolor='#eeeeec'><a href='http://www.php.net/function.fopen' target='_new'>fopen</a>\n( )</td><td title='C:\\wamp64\\www\\SIGPE\\lib\\tcpdf\\include\\tcpdf_static.php' bgcolor='#eeeeec'>...\\tcpdf_static.php<b>:</b>1854</td></tr>\n</table></font>\n<strong>TCPDF ERROR: </strong>Unable to create output file: C:/wamp64/www/mod/versionesPDF/planEmergencias227.pdf"
