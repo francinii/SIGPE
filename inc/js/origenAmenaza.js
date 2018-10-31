@@ -103,8 +103,8 @@ function delete_origen_action(id) {
  *  llamado en  list_origen_amenaza.php
  * @returns {undefined} delete_origen_action() o cancela
  */
-function delete_origen_amenaza(id_origen_amenaza) {
-    jConfirm("Desea eliminar el origen:" + id_origen_amenaza, "Eliminar origen de amenaza", function (r) {
+function delete_origen_amenaza(id_origen_amenaza, descripcion) {
+    jConfirm("Desea eliminar el origen:" + descripcion, "Eliminar origen de amenaza", function (r) {
         if (r) {
             delete_origen_action(id_origen_amenaza);
         }
