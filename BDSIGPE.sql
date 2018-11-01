@@ -1227,14 +1227,14 @@ INSERT INTO `sis_user` VALUES ('402340420', 'DANNY VALERIO RAMIREZ', 'danny.vale
 -- View structure for vis_user
 -- ----------------------------
 DROP VIEW IF EXISTS `vis_user`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vis_user` AS select `a`.`id` AS `id`,`b`.`nombre` AS `nombre`,(select `sis_rolls`.`roll_name` from `sis_rolls` where (`sis_rolls`.`id_roll` = `a`.`id_roll`)) AS `roll` from (`sis_login` `a` join `sis_user` `b`) where (`a`.`id` = `b`.`id`) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`remoto`@`localhost` SQL SECURITY DEFINER VIEW `vis_user` AS select `a`.`id` AS `id`,`b`.`nombre` AS `nombre`,(select `sis_rolls`.`roll_name` from `sis_rolls` where (`sis_rolls`.`id_roll` = `a`.`id_roll`)) AS `roll` from (`sis_login` `a` join `sis_user` `b`) where (`a`.`id` = `b`.`id`) ;
 
 -- ----------------------------
 -- Procedure structure for delete_mod
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `delete_mod`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_mod`(IN `p_id_mod` int,OUT `respuesta` int)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `delete_mod`(IN `p_id_mod` int,OUT `respuesta` int)
 BEGIN
 
 
@@ -1312,7 +1312,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `delete_roll`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_roll`(IN `p_id_roll` int)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `delete_roll`(IN `p_id_roll` int)
 BEGIN
 
 
@@ -1346,7 +1346,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `delete_roll_permits`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_roll_permits`(IN `p_id_roll` int)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `delete_roll_permits`(IN `p_id_roll` int)
 BEGIN
 
 
@@ -1376,7 +1376,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `delete_user`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_user`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `delete_user`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
 BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -1407,7 +1407,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `exploit`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `exploit`(INOUT `pcadena` varchar(1500),IN `separador` varchar(1),OUT `vtexto` varchar(1500))
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `exploit`(INOUT `pcadena` varchar(1500),IN `separador` varchar(1),OUT `vtexto` varchar(1500))
 BEGIN
 
 
@@ -1429,7 +1429,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_log`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_log`(IN `p_id_user` int,IN `p_detail` blob,OUT `res` tinyint)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insert_log`(IN `p_id_user` int,IN `p_detail` blob,OUT `res` tinyint)
 BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -1460,7 +1460,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_mod`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_mod`(IN `p_name_mod` varchar(100),IN `p_desc_mod` varchar(500),OUT `respuesta` int)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insert_mod`(IN `p_name_mod` varchar(100),IN `p_desc_mod` varchar(500),OUT `respuesta` int)
 BEGIN
 
 
@@ -1538,7 +1538,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_roll_permits`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_roll_permits`(IN `p_id_roll` int,IN `p_cadena` varchar(500))
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insert_roll_permits`(IN `p_id_roll` int,IN `p_cadena` varchar(500))
 BEGIN
 
 
@@ -1620,7 +1620,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_user`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_user`(IN `p_id` varchar(50),IN `p_nombre` varchar(150),IN `p_email` varchar(100),IN `p_telefono` varchar(15),IN `p_id_tipo_tel` varchar(1),IN `p_id_roll` int,IN `p_pass` varchar(50),OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insert_user`(IN `p_id` varchar(50),IN `p_nombre` varchar(150),IN `p_email` varchar(100),IN `p_telefono` varchar(15),IN `p_id_tipo_tel` varchar(1),IN `p_id_roll` int,IN `p_pass` varchar(50),OUT `res` TINYINT  UNSIGNED)
 BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -1657,7 +1657,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_mod`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_mod`(IN `p_id_mod` int,IN `p_mod_name` varchar(100),IN `p_mod_desc` varchar(500),OUT `respuesta` int)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `update_mod`(IN `p_id_mod` int,IN `p_mod_name` varchar(100),IN `p_mod_desc` varchar(500),OUT `respuesta` int)
 BEGIN
 
 
@@ -1739,7 +1739,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_perfil`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_perfil`(IN `p_id` varchar(50),IN `p_email` varchar(100),IN `p_telefono` varchar(15),IN `p_id_tipo_tel` varchar(1),IN `p_pass` varchar(50),OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `update_perfil`(IN `p_id` varchar(50),IN `p_email` varchar(100),IN `p_telefono` varchar(15),IN `p_id_tipo_tel` varchar(1),IN `p_pass` varchar(50),OUT `res` TINYINT  UNSIGNED)
 BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -1775,7 +1775,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_roll`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_roll`(IN `p_id_roll` int,IN `p_roll_name` varchar(100),IN `p_roll_desc` varchar(500),OUT `respuesta` int)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `update_roll`(IN `p_id_roll` int,IN `p_roll_name` varchar(100),IN `p_roll_desc` varchar(500),OUT `respuesta` int)
 BEGIN
 
 
@@ -1857,7 +1857,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_user`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_user`(IN `p_id` varchar(50),IN `p_nombre` varchar(150),IN `p_email` varchar(100),IN `p_telefono` varchar(15),IN `p_id_tipo_tel` varchar(1),IN `p_id_roll` int,OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `update_user`(IN `p_id` varchar(50),IN `p_nombre` varchar(150),IN `p_email` varchar(100),IN `p_telefono` varchar(15),IN `p_id_tipo_tel` varchar(1),IN `p_id_roll` int,OUT `res` TINYINT  UNSIGNED)
 BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -1894,7 +1894,7 @@ DELIMITER ;
 -- ----------------------------
 DROP FUNCTION IF EXISTS `check_permits`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` FUNCTION `check_permits`(`p_id_mod` int,`p_id_action` int,`p_id_roll` int) RETURNS int(1)
+CREATE DEFINER=`remoto`@`localhost` FUNCTION `check_permits`(`p_id_mod` int,`p_id_action` int,`p_id_roll` int) RETURNS int(1)
 BEGIN
 
 	DECLARE 
@@ -1930,7 +1930,7 @@ DELIMITER ;
 -- ----------------------------
 DROP FUNCTION IF EXISTS `checklogin`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` FUNCTION `checklogin`(`p_id` varchar(50),`p_pass` varchar(50)) RETURNS int(1)
+CREATE DEFINER=`remoto`@`localhost` FUNCTION `checklogin`(`p_id` varchar(50),`p_pass` varchar(50)) RETURNS int(1)
 BEGIN
 	DECLARE
 		li_out int(1);
@@ -1968,7 +1968,7 @@ DELIMITER ;
 -- ----------------------------
 DROP FUNCTION IF EXISTS `insert_roll`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` FUNCTION `insert_roll`(`p_roll_name` varchar(100),`p_roll_desc` varchar(500)) RETURNS int(11)
+CREATE DEFINER=`remoto`@`localhost` FUNCTION `insert_roll`(`p_roll_name` varchar(100),`p_roll_desc` varchar(500)) RETURNS int(11)
 BEGIN
 
 
@@ -2546,16 +2546,16 @@ create table IdentificacionPeligro(
 -- INSERT INTO `BDSIGPE`.`ZonaTrabajo` (`FKidSede`,`version`,`isActivo`,`nombreZonaTrabajo`,`descripcion`) VALUES (1,1,1,'Sede Cartago','Zona ubicada en la region de Cartago');
 
 -- ****************************** insert de prueba para la base ********************************
-INSERT INTO `BDSIGPE`.`OrigenAmenaza` (`descripcion`,`isActivo`) VALUES ('Natural',1);
-INSERT INTO `BDSIGPE`.`OrigenAmenaza` (`descripcion`,`isActivo`) VALUES ('Socio-Natural',1);
-INSERT INTO `BDSIGPE`.`OrigenAmenaza` (`descripcion`,`isActivo`) VALUES ('Antrópica',1);
+INSERT INTO `OrigenAmenaza` (`descripcion`,`isActivo`) VALUES ('Natural',1);
+INSERT INTO `OrigenAmenaza` (`descripcion`,`isActivo`) VALUES ('Socio-Natural',1);
+INSERT INTO `OrigenAmenaza` (`descripcion`,`isActivo`) VALUES ('Antrópica',1);
 
-INSERT INTO `BDSIGPE`.`TipoAmenaza` (`descripcion`,`isActivo`,FkidOrigen) VALUES ('Geodinámica interna',1,1);
-INSERT INTO `BDSIGPE`.`TipoAmenaza` (`descripcion`,`isActivo`,FkidOrigen) VALUES ('Hidrometereológicas',1,1);
-INSERT INTO `BDSIGPE`.`TipoAmenaza` (`descripcion`,`isActivo`,FkidOrigen) VALUES ('Geodinámica externa',1,1);
-INSERT INTO `BDSIGPE`.`TipoAmenaza` (`descripcion`,`isActivo`,FkidOrigen) VALUES ('Biológicas',1,1);
-INSERT INTO `BDSIGPE`.`TipoAmenaza` (`descripcion`,`isActivo`,FkidOrigen) VALUES ('Socio-natural',1,2);
-INSERT INTO `BDSIGPE`.`TipoAmenaza` (`descripcion`,`isActivo`,FkidOrigen) VALUES ('Antrópica',1,3);
+INSERT INTO `TipoAmenaza` (`descripcion`,`isActivo`,FkidOrigen) VALUES ('Geodinámica interna',1,1);
+INSERT INTO `TipoAmenaza` (`descripcion`,`isActivo`,FkidOrigen) VALUES ('Hidrometereológicas',1,1);
+INSERT INTO `TipoAmenaza` (`descripcion`,`isActivo`,FkidOrigen) VALUES ('Geodinámica externa',1,1);
+INSERT INTO `TipoAmenaza` (`descripcion`,`isActivo`,FkidOrigen) VALUES ('Biológicas',1,1);
+INSERT INTO `TipoAmenaza` (`descripcion`,`isActivo`,FkidOrigen) VALUES ('Socio-natural',1,2);
+INSERT INTO `TipoAmenaza` (`descripcion`,`isActivo`,FkidOrigen) VALUES ('Antrópica',1,3);
 
 
 INSERT INTO `Capitulo`(`descripcion`, `descripcionParaUsuario`, `isDescripcionParaUsuario`, `isActivo`, `titulo`, `orden`) VALUES ('','',1,1,'PRESENTACIÓN',1);
@@ -2603,7 +2603,7 @@ INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (13,'Informac
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_sede`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_sede`(IN `p_nombre` varchar(500),IN `p_activo` int, IN `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insert_sede`(IN `p_nombre` varchar(500),IN `p_activo` int, IN `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
 BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -2632,7 +2632,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_zona_trabajo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_zona_trabajo`(IN `p_nombre` varchar(500),IN `p_FKidSede` int,IN `p_activo` int,IN `p_logo` varchar(500), IN `p_ubicacion` varchar(500), IN `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insert_zona_trabajo`(IN `p_nombre` varchar(500),IN `p_FKidSede` int,IN `p_activo` int,IN `p_logo` varchar(500), IN `p_ubicacion` varchar(500), IN `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
 BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -2664,7 +2664,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_usuario_zona_trabajo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_usuario_zona_trabajo`(IN `p_FKidUsuario` varchar(50),IN `p_FKidZona` int, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insert_usuario_zona_trabajo`(IN `p_FKidUsuario` varchar(50),IN `p_FKidZona` int, OUT `res` TINYINT  UNSIGNED)
 BEGIN   
          declare existe Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -2699,7 +2699,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `delete_usuario_zona_trabajo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_usuario_zona_trabajo`(IN `p_FKidZona` int, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `delete_usuario_zona_trabajo`(IN `p_FKidZona` int, OUT `res` TINYINT  UNSIGNED)
 BEGIN  
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -2731,7 +2731,7 @@ DELIMITER ;
 -- --------------------------------------------- 
 DROP PROCEDURE IF EXISTS `delete_identificacion_peligros`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_identificacion_peligros`(IN `p_idPeligro` int, IN `p_idPlan` int, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `delete_identificacion_peligros`(IN `p_idPeligro` int, IN `p_idPlan` int, OUT `res` TINYINT  UNSIGNED)
 BEGIN  
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -2765,7 +2765,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_origen_amenaza`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_origen_amenaza`(IN `p_nombre` varchar(500),IN `p_activo` int, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insert_origen_amenaza`(IN `p_nombre` varchar(500),IN `p_activo` int, OUT `res` TINYINT  UNSIGNED)
 BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -2796,7 +2796,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_categoria_amenaza`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_categoria_amenaza`(IN `p_nombre` varchar(500),IN `p_activo` int, IN  `p_fkTipoAmenaza` int,  OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insert_categoria_amenaza`(IN `p_nombre` varchar(500),IN `p_activo` int, IN  `p_fkTipoAmenaza` int,  OUT `res` TINYINT  UNSIGNED)
 BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -2828,7 +2828,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_tipo_amenaza`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_tipo_amenaza`(IN `p_nombre` varchar(500),IN `p_activo` int, IN  `p_fkOrigenAmenaza` int,  OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insert_tipo_amenaza`(IN `p_nombre` varchar(500),IN `p_activo` int, IN  `p_fkOrigenAmenaza` int,  OUT `res` TINYINT  UNSIGNED)
 BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -2859,7 +2859,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `delete_sede`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_sede`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `delete_sede`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
 BEGIN
 
         DECLARE EXIT HANDLER FOR 1451
@@ -2900,7 +2900,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `delete_zona_trabajo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_zona_trabajo`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `delete_zona_trabajo`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
 BEGIN
 
     DECLARE EXIT HANDLER FOR 1451
@@ -2939,7 +2939,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `delete_origen_amenaza`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_origen_amenaza`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `delete_origen_amenaza`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
 BEGIN
         DECLARE EXIT HANDLER FOR 1451
         BEGIN
@@ -2979,7 +2979,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `delete_tipo_amenaza`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_tipo_amenaza`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `delete_tipo_amenaza`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
 BEGIN
 
         DECLARE EXIT HANDLER FOR 1451
@@ -3019,7 +3019,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `delete_categoria_amenaza`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_categoria_amenaza`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `delete_categoria_amenaza`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
 BEGIN
         DECLARE EXIT HANDLER FOR 1451
         BEGIN
@@ -3057,7 +3057,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `active_tipo_amenaza`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `active_tipo_amenaza`(IN `p_id` int,IN `p_activo` int,OUT `respuesta` int)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `active_tipo_amenaza`(IN `p_id` int,IN `p_activo` int,OUT `respuesta` int)
 BEGIN
     DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET respuesta=0;
     START TRANSACTION;
@@ -3078,7 +3078,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `active_categoria_amenaza`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `active_categoria_amenaza`(IN `p_id` int,IN `p_activo` int,OUT `respuesta` int)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `active_categoria_amenaza`(IN `p_id` int,IN `p_activo` int,OUT `respuesta` int)
 BEGIN
     DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET respuesta=0;
     START TRANSACTION;
@@ -3099,7 +3099,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `active_origen_amenaza`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `active_origen_amenaza`(IN `p_id` int,IN `p_activo` int,OUT `respuesta` int)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `active_origen_amenaza`(IN `p_id` int,IN `p_activo` int,OUT `respuesta` int)
 BEGIN
     DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET respuesta=0;
     START TRANSACTION;
@@ -3121,7 +3121,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `insert_capitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_capitulo`(IN `p_titulo` varchar(500),IN `p_activo` int, IN  `p_descripcion` MEDIUMTEXT,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` MEDIUMTEXT,  OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insert_capitulo`(IN `p_titulo` varchar(500),IN `p_activo` int, IN  `p_descripcion` MEDIUMTEXT,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` MEDIUMTEXT,  OUT `res` TINYINT  UNSIGNED)
 BEGIN
 declare ordenar Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION     
@@ -3162,7 +3162,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `insert_subcapitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_subcapitulo`(IN `p_titulo` varchar(500),IN `p_activo` int, IN  `p_fkcapitulo` int,IN  `p_descripcion` MEDIUMTEXT,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` MEDIUMTEXT,  OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insert_subcapitulo`(IN `p_titulo` varchar(500),IN `p_activo` int, IN  `p_fkcapitulo` int,IN  `p_descripcion` MEDIUMTEXT,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` MEDIUMTEXT,  OUT `res` TINYINT  UNSIGNED)
 BEGIN
 declare ordenar Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -3201,7 +3201,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_capitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_capitulo`(IN `p_id` int,IN `p_titulo` varchar(500), IN  `p_descripcion` MEDIUMTEXT,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` MEDIUMTEXT, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `update_capitulo`(IN `p_id` int,IN `p_titulo` varchar(500), IN  `p_descripcion` MEDIUMTEXT,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` MEDIUMTEXT, OUT `res` TINYINT  UNSIGNED)
 BEGIN
         
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -3235,7 +3235,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_subcapitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_subcapitulo`(IN `p_id` int,IN `p_titulo` varchar(500),IN `p_fkcapitulo` int, IN  `p_descripcion` MEDIUMTEXT,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` MEDIUMTEXT, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `update_subcapitulo`(IN `p_id` int,IN `p_titulo` varchar(500),IN `p_fkcapitulo` int, IN  `p_descripcion` MEDIUMTEXT,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` MEDIUMTEXT, OUT `res` TINYINT  UNSIGNED)
 BEGIN   
         declare ordenar Integer;
         declare FKAntigua Integer;
@@ -3284,7 +3284,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `ordenar_capitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ordenar_capitulo`(IN `p_id` int,IN `p_orden` int, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `ordenar_capitulo`(IN `p_id` int,IN `p_orden` int, OUT `res` TINYINT  UNSIGNED)
 BEGIN      
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -3315,7 +3315,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_zona_trabajo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_zona_trabajo`(IN `p_id` int, IN `p_FKidSede` int,IN `p_nombre` varchar(500),IN `p_activo` int,IN `p_logo` varchar(500),IN `p_ubicacion` varchar(500), IN `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `update_zona_trabajo`(IN `p_id` int, IN `p_FKidSede` int,IN `p_nombre` varchar(500),IN `p_activo` int,IN `p_logo` varchar(500),IN `p_ubicacion` varchar(500), IN `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
 BEGIN            
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -3346,7 +3346,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_sede`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_sede`(IN `p_id` int, IN `p_nombre` varchar(500),IN `p_activo` int, IN `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `update_sede`(IN `p_id` int, IN `p_nombre` varchar(500),IN `p_activo` int, IN `p_descripcion` text, OUT `res` TINYINT  UNSIGNED)
 BEGIN   
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -3375,7 +3375,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `ordenar_subcapitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ordenar_subcapitulo`(IN `p_id` int,IN `p_orden` int,OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `ordenar_subcapitulo`(IN `p_id` int,IN `p_orden` int,OUT `res` TINYINT  UNSIGNED)
 BEGIN      
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -3407,7 +3407,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `active_capitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `active_capitulo`(IN `p_id` int,IN `p_activo` int,OUT `respuesta` int)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `active_capitulo`(IN `p_id` int,IN `p_activo` int,OUT `respuesta` int)
 BEGIN
     DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET respuesta=0;
     START TRANSACTION;
@@ -3429,7 +3429,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `active_subcapitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `active_subcapitulo`(IN `p_id` int,IN `p_activo` int,OUT `respuesta` int)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `active_subcapitulo`(IN `p_id` int,IN `p_activo` int,OUT `respuesta` int)
 BEGIN
     DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET respuesta=0;
     START TRANSACTION;
@@ -3450,7 +3450,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `delete_capitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_capitulo`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `delete_capitulo`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
 BEGIN
         DECLARE EXIT HANDLER FOR 1451
         BEGIN
@@ -3488,7 +3488,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `delete_subcapitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_subcapitulo`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `delete_subcapitulo`(IN `p_id` varchar(50),OUT `res` tinyint unsigned)
 BEGIN
 
     
@@ -3525,7 +3525,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_origen_amenaza`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_origen_amenaza`(IN `p_id` int, IN `p_nombre` varchar(500),IN `p_activo` int, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `update_origen_amenaza`(IN `p_id` int, IN `p_nombre` varchar(500),IN `p_activo` int, OUT `res` TINYINT  UNSIGNED)
 BEGIN   
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -3559,7 +3559,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_tipo_amenaza`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_tipo_amenaza`(IN `p_id` int, IN `p_nombre` varchar(500),IN `p_activo` int, IN `p_FkidOrigen` int, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `update_tipo_amenaza`(IN `p_id` int, IN `p_nombre` varchar(500),IN `p_activo` int, IN `p_FkidOrigen` int, OUT `res` TINYINT  UNSIGNED)
 BEGIN   
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -3590,7 +3590,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_categoria_amenaza`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_categoria_amenaza`(IN `p_id` int, IN `p_nombre` varchar(500),IN `p_activo` int, IN `p_FKidTipoAmenaza` int, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `update_categoria_amenaza`(IN `p_id` int, IN `p_nombre` varchar(500),IN `p_activo` int, IN `p_FKidTipoAmenaza` int, OUT `res` TINYINT  UNSIGNED)
 BEGIN   
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -3622,7 +3622,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `ordenar_formulario`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ordenar_formulario`(IN `p_id` int, IN `p_subcapitulo` int, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `ordenar_formulario`(IN `p_id` int, IN `p_subcapitulo` int, OUT `res` TINYINT  UNSIGNED)
 BEGIN   
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -3654,7 +3654,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_datos_generales`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_datos_generales`(IN `p_id` int, IN `p_actividad` varchar(500),
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `update_datos_generales`(IN `p_id` int, IN `p_actividad` varchar(500),
  IN `p_direccion` varchar(500), IN `p_personaContactoGeneral` varchar(500),IN `p_numeroTelefono` varchar(500),
  IN `p_numeroFax` varchar(500),IN `p_correo` varchar(500),
  IN `p_categoriaNFPA` varchar(500),IN `p_usoInstalaciones` varchar(500),
@@ -3698,7 +3698,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_tipo_poblacion`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_tipo_poblacion`(IN `p_FKidZonaTrabajo` int, IN `p_tipoPoblacion` varchar(500),
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `update_tipo_poblacion`(IN `p_FKidZonaTrabajo` int, IN `p_tipoPoblacion` varchar(500),
  IN `p_descripcion` text, IN `p_total` int, IN `p_representacionDe` text,
 OUT `res` TINYINT  UNSIGNED)
 BEGIN   
@@ -3742,7 +3742,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_identificacion_peligro`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_identificacion_peligro`(IN `p_FKidZonaTrabajo` int,IN `p_id` int,  IN `p_peligro` text,
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insert_identificacion_peligro`(IN `p_FKidZonaTrabajo` int,IN `p_id` int,  IN `p_peligro` text,
  IN `p_presente` int, IN `p_ubicacion` varchar(1500), IN `p_recomendacion` text,IN `p_fecha` date, IN `p_responsable` varchar(500),  IN `p_priorizacion` int,
 OUT `res` TINYINT  UNSIGNED)
 BEGIN   
@@ -3787,7 +3787,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_datos_Instalaciones`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_datos_Instalaciones`(
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `update_datos_Instalaciones`(
  IN `p_FKidZonaTrabajo` int, IN `p_instalacionesDensidadOcupacion` varchar(500),
  IN `p_instalacionesAreaConstruccion` varchar(500), IN `p_instalacionesInstalaciones` varchar(500),
  IN `p_instalacionesCaracteristicasZona` varchar(500), IN `p_instalacionesTopografia` varchar(500),
@@ -3846,7 +3846,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_matriz`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_matriz`(IN `p_id` int,IN `p_idZona` int, IN `p_fuente` varchar(500), IN `p_probabilidad` int, IN `p_gravedad` int, IN `p_consecuencia` int, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `update_matriz`(IN `p_id` int,IN `p_idZona` int, IN `p_fuente` varchar(500), IN `p_probabilidad` int, IN `p_gravedad` int, IN `p_consecuencia` int, OUT `res` TINYINT  UNSIGNED)
 BEGIN
 	declare existe Integer;
    
@@ -3888,7 +3888,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_equipoMovil`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_equipoMovil`(IN `p_FKidZonaTrabajo` int,IN `p_cantidad` int,
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insert_equipoMovil`(IN `p_FKidZonaTrabajo` int,IN `p_cantidad` int,
 IN `p_capacidad` int, IN `p_tipo` varchar(500),
 IN `p_caracteristicas` text, IN `p_contacto` varchar(500),
 IN `p_ubicacion` varchar(500),IN `p_categoria` varchar(500),
@@ -3924,7 +3924,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `delete_equipoMovil`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_equipoMovil`(IN `p_FKidZonaTrabajo` int,OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `delete_equipoMovil`(IN `p_FKidZonaTrabajo` int,OUT `res` TINYINT  UNSIGNED)
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
@@ -3958,7 +3958,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_RecursoHumano`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_RecursoHumano`(IN `p_FKidZonaTrabajo` int,IN `p_cantidad` int,
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insert_RecursoHumano`(IN `p_FKidZonaTrabajo` int,IN `p_cantidad` int,
 IN `p_profesion` varchar(500),IN `p_categorias` varchar(500),
 IN `p_localizacion` varchar(500),IN `p_contacto` varchar(500),
 OUT `res` TINYINT  UNSIGNED)
@@ -3993,7 +3993,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `delete_RecursoHumano`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_RecursoHumano`(IN `p_FKidZonaTrabajo` int,OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `delete_RecursoHumano`(IN `p_FKidZonaTrabajo` int,OUT `res` TINYINT  UNSIGNED)
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
@@ -4027,7 +4027,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `insert_RecursoInstalaciones`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_RecursoInstalaciones`(IN `p_FKidZonaTrabajo` int,
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insert_RecursoInstalaciones`(IN `p_FKidZonaTrabajo` int,
 IN `p_tipo` varchar(500),
 IN `p_cantidad` int,IN `p_tamaño` int,
 IN `p_distribucion` varchar(500),IN `p_contacto` text,
@@ -4063,7 +4063,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `delete_RecursoInstalaciones`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_RecursoInstalaciones`(IN `p_FKidZonaTrabajo` int,OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `delete_RecursoInstalaciones`(IN `p_FKidZonaTrabajo` int,OUT `res` TINYINT  UNSIGNED)
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
@@ -4093,7 +4093,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_InventarioOtros`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_InventarioOtros`(IN `p_FKidZonaTrabajo` int,IN `p_cantidad` int,
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insert_InventarioOtros`(IN `p_FKidZonaTrabajo` int,IN `p_cantidad` int,
 IN `p_tipo` varchar(500),IN `p_caracteristicas` text,
 IN `p_contacto` varchar(500),IN `p_ubicacion` varchar(500),
 IN `p_categoria` varchar(500),IN `p_observaciones` text,OUT `res` TINYINT  UNSIGNED)
@@ -4128,7 +4128,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `delete_InventarioOtros`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_InventarioOtros`(IN `p_FKidZonaTrabajo` int,IN `p_categoria` varchar(500),OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `delete_InventarioOtros`(IN `p_FKidZonaTrabajo` int,IN `p_categoria` varchar(500),OUT `res` TINYINT  UNSIGNED)
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
@@ -4159,7 +4159,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_zona_seguridad`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_zona_seguridad`(IN `p_FKidZonaTrabajo` int,IN `p_nombre` varchar(1500),
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insert_zona_seguridad`(IN `p_FKidZonaTrabajo` int,IN `p_nombre` varchar(1500),
 IN `p_ubicacion` varchar(1500), IN `p_capacidad` int,
 IN `p_observaciones` text, IN `p_sector` varchar(1500),OUT `res` TINYINT  UNSIGNED)
 BEGIN
@@ -4192,7 +4192,7 @@ DELIMITER ;
 -- ---------------------- ELIMINAR ZONA DE SEGURIDAD
 DROP PROCEDURE IF EXISTS `delete_zona_seguridad`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_zona_seguridad`(IN `p_FKidZonaTrabajo` int,OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `delete_zona_seguridad`(IN `p_FKidZonaTrabajo` int,OUT `res` TINYINT  UNSIGNED)
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
@@ -4221,7 +4221,7 @@ DELIMITER ;
 -- ----------------------- ELIMINAR RUTAS DE EVACUACION
 DROP PROCEDURE IF EXISTS `delete_rutas_evacuacion`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_rutas_evacuacion`(IN `p_FKidZonaTrabajo` int,OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `delete_rutas_evacuacion`(IN `p_FKidZonaTrabajo` int,OUT `res` TINYINT  UNSIGNED)
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
@@ -4251,7 +4251,7 @@ DELIMITER ;
 -- ----------------------- ELIMINAR brigadistas
 DROP PROCEDURE IF EXISTS `delete_brigadistas`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_brigadistas`(IN `p_FKidZonaTrabajo` int,OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `delete_brigadistas`(IN `p_FKidZonaTrabajo` int,OUT `res` TINYINT  UNSIGNED)
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
@@ -4282,7 +4282,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_formularioPoblacion`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_formularioPoblacion`(IN p_FKidZonaTrabajo int ,IN p_nombreOficina varchar(500),
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insert_formularioPoblacion`(IN p_FKidZonaTrabajo int ,IN p_nombreOficina varchar(500),
 IN p_capacidadPermanente int,IN p_capacidadTemporal int ,IN p_representanteComite varchar(500),IN p_representanteBrigadaEfectiva varchar(500),
    IN p_representantePrimerosAuxilios varchar(500) ,IN p_telefonoOficina varchar(500),IN p_contactoEmergencia varchar(500) ,
 IN p_telefonoPersonal varchar(500),IN p_correoElectronico varchar(500),IN sector varchar(500),OUT `res` TINYINT  UNSIGNED)
@@ -4319,7 +4319,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `delete_formularioPoblacion`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_formularioPoblacion`(IN `p_FKidZonaTrabajo` int,OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `delete_formularioPoblacion`(IN `p_FKidZonaTrabajo` int,OUT `res` TINYINT  UNSIGNED)
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
@@ -4350,7 +4350,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_CuerposScorro`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_CuerposScorro`(IN p_FKidZonaTrabajo int,
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insert_CuerposScorro`(IN p_FKidZonaTrabajo int,
 IN p_tipo varchar(500), IN p_ubicacion  varchar(500),IN  p_Distancia  float,
  IN p_Tiempo  float ,OUT `res` TINYINT  UNSIGNED)
 BEGIN
@@ -4384,7 +4384,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `delete_CuerposScorro`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_CuerposScorro`(IN `p_FKidZonaTrabajo` int,OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `delete_CuerposScorro`(IN `p_FKidZonaTrabajo` int,OUT `res` TINYINT  UNSIGNED)
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
@@ -4415,7 +4415,7 @@ DELIMITER ;
 -- --------------------------
  DROP PROCEDURE IF EXISTS `insert_rutas_evacuacion`;
  DELIMITER ;;
- CREATE DEFINER=`root`@`localhost` PROCEDURE 
+ CREATE DEFINER=`remoto`@`localhost` PROCEDURE 
  `insert_rutas_evacuacion`(IN `p_FKidZonaTrabajo` int,IN `p_nombreArea` varchar(1500),
  IN `p_personaPermanente` varchar(1500),IN `p_personaFlotante` varchar(1500),
  IN `p_ruta1` varchar(1500),IN `p_distancia1` float, IN `p_tiempo1` float,
@@ -4454,7 +4454,7 @@ DELIMITER ;
 -- --------------------------
  DROP PROCEDURE IF EXISTS `insert_brigadistas`;
  DELIMITER ;;
- CREATE DEFINER=`root`@`localhost` 
+ CREATE DEFINER=`remoto`@`localhost` 
 PROCEDURE `insert_brigadistas`(IN `p_FKidZonaTrabajo` int,IN `p_brigadista` varchar(1500),
  IN `p_punto_partida` varchar(1500),IN `p_zona_evacuar` varchar(1500),
  IN `p_num_personas` int,IN `p_distancia` float, IN `p_tiempo` float,
@@ -4495,7 +4495,7 @@ PROCEDURE `insert_brigadistas`(IN `p_FKidZonaTrabajo` int,IN `p_brigadista` varc
 -- 
 DROP PROCEDURE IF EXISTS `insert_IngresoCuerpoSocorro`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_IngresoCuerpoSocorro`(IN `p_FKidZonaTrabajo` int, IN `p_dimensionAreaAcceso` varchar(500),
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insert_IngresoCuerpoSocorro`(IN `p_FKidZonaTrabajo` int, IN `p_dimensionAreaAcceso` varchar(500),
  IN `p_radioGiro` varchar(500), IN `p_caseta` varchar(500), IN `p_plumas` varchar(500), IN `p_anchoLibre` varchar(500),
 OUT `res` TINYINT  UNSIGNED)
 BEGIN   
@@ -4540,7 +4540,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_puestoBrigada`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_puestoBrigada`(IN p_FKidZonaTrabajo int,
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insert_puestoBrigada`(IN p_FKidZonaTrabajo int,
 IN p_puesto varchar(500), IN p_funcion text,
 IN  p_plazoEjecucion  text,OUT `res` TINYINT  UNSIGNED)
 BEGIN
@@ -4574,7 +4574,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `delete_puestoBrigada`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_puestoBrigada`(IN `p_FKidZonaTrabajo` int,OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `delete_puestoBrigada`(IN `p_FKidZonaTrabajo` int,OUT `res` TINYINT  UNSIGNED)
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
@@ -4606,7 +4606,7 @@ DELIMITER ;
 -- ------------------------------
 DROP PROCEDURE IF EXISTS `insertar_info_usuario_capitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertar_info_usuario_capitulo`(IN `p_FKidZonaTrabajo` int, IN `p_FKidCapitulo` int,
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insertar_info_usuario_capitulo`(IN `p_FKidZonaTrabajo` int, IN `p_FKidCapitulo` int,
  IN `p_descripcion` MEDIUMTEXT,OUT `res` TINYINT  UNSIGNED)
 BEGIN   
     declare existe Integer;
@@ -4648,7 +4648,7 @@ DELIMITER ;
 -- ------------------------------
 DROP PROCEDURE IF EXISTS `insertar_info_usuario_subcapitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertar_info_usuario_subcapitulo`(IN `p_FKidZonaTrabajo` int, IN `p_FKidSubCapitulo` int,
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insertar_info_usuario_subcapitulo`(IN `p_FKidZonaTrabajo` int, IN `p_FKidSubCapitulo` int,
  IN `p_descripcion` MEDIUMTEXT,OUT `res` TINYINT  UNSIGNED)
 BEGIN   
     declare existe Integer;
@@ -4690,7 +4690,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_formulario`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_formulario`(IN `p_id` int,IN `p_titulo` text, IN  `p_descripcionArriba` MEDIUMTEXT, IN  `p_descripcionAbajo` MEDIUMTEXT,OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `update_formulario`(IN `p_id` int,IN `p_titulo` text, IN  `p_descripcionArriba` MEDIUMTEXT, IN  `p_descripcionAbajo` MEDIUMTEXT,OUT `res` TINYINT  UNSIGNED)
 BEGIN
         
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -4721,7 +4721,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_aprobacion`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_aprobacion`(IN `p_id` int,IN `p_aprobado` varchar(500),IN `p_codigoZonaTrabajo` varchar(500), OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `update_aprobacion`(IN `p_id` int,IN `p_aprobado` varchar(500),IN `p_codigoZonaTrabajo` varchar(500), OUT `res` TINYINT  UNSIGNED)
 BEGIN   
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -4751,7 +4751,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `delete_historial`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_historial`(IN `p_id` int, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `delete_historial`(IN `p_id` int, OUT `res` TINYINT  UNSIGNED)
 BEGIN  
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -4781,7 +4781,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `new_version`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `new_version`(OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `new_version`(OUT `res` TINYINT  UNSIGNED)
 BEGIN  
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
@@ -4812,7 +4812,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `insert_historial`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_historial`(IN `p_FKidZona` int,IN `p_version` varchar(500), IN `p_direccion` varchar(500),OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`remoto`@`localhost` PROCEDURE `insert_historial`(IN `p_FKidZona` int,IN `p_version` varchar(500), IN `p_direccion` varchar(500),OUT `res` TINYINT  UNSIGNED)
 BEGIN  
         declare existe Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
