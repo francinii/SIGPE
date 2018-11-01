@@ -58,7 +58,7 @@ $find_key = $res[0]['FKidSede'];
                 <?php } else { ?>
                     <input disabled id="type-file" name="type-file" class="form-control" type="text" value="<?= $res[0]["logo"] ?>" /> 
                 <?php } ?>
-                <p class="help-block"><?= $vocab["zona_trabajo_logo_desc"] ?></p>
+                <p class="help-block"><small><?= $vocab["zona_trabajo_logo_desc"] ?></small></p>
             </div>
             <div class="form-group" id="logo">
                 <img src="mod/planEmergenciaPDF/img/imgPlanes/<?= $res[0]['logo'] ?>?time=<?= time() ?>" style="max-width:100%" class="img-rounded" alt="Sin logo"> 
@@ -71,7 +71,7 @@ $find_key = $res[0]['FKidSede'];
                 <?php } else { ?>
                     <input disabled id="type-file" name="type-file" class="form-control" type="text" value="<?= $res[0]["ubicacion"] ?>" /> 
                 <?php } ?>
-                <p class="help-block"><?= $vocab["zona_trabajo_Ubicacion_desc"] ?></p>
+                <p class="help-block"><small><?= $vocab["zona_trabajo_Ubicacion_desc"] ?></small></p>
             </div>
             <div class="form-group" id="ubicacion">
                 <img src="mod/planEmergenciaPDF/img/imgPlanes/<?= $res[0]['ubicacion'] ?>?time=<?= time() ?>"  style="max-width:100%" class="img-rounded" alt="Sin ubicación"> 

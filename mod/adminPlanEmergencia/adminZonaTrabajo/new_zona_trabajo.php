@@ -53,7 +53,7 @@ if ((isset($_GET['find_key']))) {
                 <label for="type-file"><?= $vocab["zona_trabajo_logo"] ?></label>
                 <input id="type-file" accept="image/*" name="type-file" class="form-control filestyle" type="file" placeholder="propiedad placeholder" title="propiedad title"/>
 
-                <p class="help-block"><?= $vocab["zona_trabajo_logo_desc"] ?></p>
+                <p class="help-block"><small><?= $vocab["zona_trabajo_logo_desc"] ?></small></p>
             </div>
             <div class="form-group" id="logo">
 
@@ -62,7 +62,7 @@ if ((isset($_GET['find_key']))) {
                 <label for="type-file-ubicacion"><?= $vocab["zona_trabajo_Ubicacion"] ?></label>
                 <input id="type-file-ubicacion" accept="image/*" name="type-file" class="form-control filestyle" type="file" placeholder="propiedad placeholder" title="propiedad title"/>
 
-                <p class="help-block"><?= $vocab["zona_trabajo_Ubicacion_desc"] ?></p>
+                <p class="help-block"><small><?= $vocab["zona_trabajo_Ubicacion_desc"] ?></small></p>
             </div>
             <div class="form-group" id="ubicacion">
 
