@@ -25,7 +25,7 @@ require 'functions.php';
 
             <ul class="nav navbar-nav">                 
                 <!-- INICIO -->
-                <li><a  class="Menuprincipal"  onclick="javascript:OpcionMenu('mod/inicio.php?', '');"><span><i class="fa fa-home fa-inverse"> <?= $vocab["menu_home"] ?></i> </span></a></li>
+                <li><a href='#' class="Menuprincipal"  onclick="javascript:OpcionMenu('mod/inicio.php?', '');"><span><i class="fa fa-home fa-inverse"></i><?= $vocab["menu_home"] ?> </span></a></li>
                 <!-- MODULOS DEL SISTEMA -->
                 <!-- ESPACIO -->
                 <li><a href="" style="width: 150px;"></a></li>
