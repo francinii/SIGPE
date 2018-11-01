@@ -2234,8 +2234,8 @@ create table Matriz (
 
 create table Capitulo(
 id int NOT NULL AUTO_INCREMENT,
-descripcion text,
-descripcionParaUsuario text,
+descripcion MEDIUMTEXT,
+descripcionParaUsuario MEDIUMTEXT,
 isDescripcionParaUsuario int,
 isActivo int,
 titulo varchar(500),
@@ -2249,8 +2249,8 @@ orden int,
 
 create table SubCapitulo(
 id int NOT NULL AUTO_INCREMENT,
-descripcion text,
-descripcionParaUsuario text,
+descripcion MEDIUMTEXT,
+descripcionParaUsuario MEDIUMTEXT,
 isDescripcionParaUsuario int,
 titulo varchar(500),
 isActivo int,
@@ -2269,8 +2269,8 @@ create table Formulario(
 id int NOT NULL AUTO_INCREMENT,
 FKidSubcapitulos int,
 titulo text,
-descripcionArriba text,
-descripcionAbajo text,
+descripcionArriba MEDIUMTEXT,
+descripcionAbajo MEDIUMTEXT,
 PRIMARY KEY(id),
 FOREIGN KEY (FKidSubcapitulos) REFERENCES SubCapitulo(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2283,7 +2283,7 @@ FOREIGN KEY (FKidSubcapitulos) REFERENCES SubCapitulo(id)
 create table CapituloPlan(
     FKidCapitulo int NOT NULL,
     FKidZonaTrabajo int NOT NULL,
-descripcion text,
+descripcion MEDIUMTEXT,
     FOREIGN KEY (FKidCapitulo) REFERENCES Capitulo(id),
     FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 
@@ -2297,7 +2297,7 @@ descripcion text,
 create table SubCapituloPlan(
     FKidSubCapitulo int NOT NULL,
     FKidZonaTrabajo int NOT NULL,
-    descripcion text,
+    descripcion MEDIUMTEXT,
     FOREIGN KEY (FKidSubCapitulo) REFERENCES SubCapitulo(id),
     FOREIGN KEY(FKidZonaTrabajo) REFERENCES ZonaTrabajo(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2590,7 +2590,7 @@ INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (9,'Brigadist
 INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (10,'Ingreso cuerpos de socorro',1); 
 INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (11,'Puestos de la brigada',1);
 INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (12,'Zona de seguridad',1);
-INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (13,'informacion extra de los capitulos y subcapitulos',1);
+INSERT INTO `Formulario`(`id`,`titulo`, `FKidSubcapitulos`) VALUES (13,'Información extra de los capítulos y subcapítulos',1);
 
 -- INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',1);
 -- INSERT INTO `UsuarioZona`(`FKidUsuario`, `FKidZona`) VALUES ('402340420',2);
@@ -3121,7 +3121,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `insert_capitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_capitulo`(IN `p_titulo` varchar(500),IN `p_activo` int, IN  `p_descripcion` text,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` text,  OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_capitulo`(IN `p_titulo` varchar(500),IN `p_activo` int, IN  `p_descripcion` MEDIUMTEXT,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` MEDIUMTEXT,  OUT `res` TINYINT  UNSIGNED)
 BEGIN
 declare ordenar Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION     
@@ -3162,7 +3162,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `insert_subcapitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_subcapitulo`(IN `p_titulo` varchar(500),IN `p_activo` int, IN  `p_fkcapitulo` int,IN  `p_descripcion` text,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` text,  OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_subcapitulo`(IN `p_titulo` varchar(500),IN `p_activo` int, IN  `p_fkcapitulo` int,IN  `p_descripcion` MEDIUMTEXT,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` MEDIUMTEXT,  OUT `res` TINYINT  UNSIGNED)
 BEGIN
 declare ordenar Integer;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -3201,7 +3201,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_capitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_capitulo`(IN `p_id` int,IN `p_titulo` varchar(500), IN  `p_descripcion` text,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` text, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_capitulo`(IN `p_id` int,IN `p_titulo` varchar(500), IN  `p_descripcion` MEDIUMTEXT,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` MEDIUMTEXT, OUT `res` TINYINT  UNSIGNED)
 BEGIN
         
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -3235,7 +3235,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_subcapitulo`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_subcapitulo`(IN `p_id` int,IN `p_titulo` varchar(500),IN `p_fkcapitulo` int, IN  `p_descripcion` text,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` text, OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_subcapitulo`(IN `p_id` int,IN `p_titulo` varchar(500),IN `p_fkcapitulo` int, IN  `p_descripcion` MEDIUMTEXT,IN `p_isDescripcionParaUsuario` int,IN `p_descripcionParaUsuario` MEDIUMTEXT, OUT `res` TINYINT  UNSIGNED)
 BEGIN   
         declare ordenar Integer;
         declare FKAntigua Integer;
@@ -4607,7 +4607,7 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS `insertar_info_usuario_capitulo`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insertar_info_usuario_capitulo`(IN `p_FKidZonaTrabajo` int, IN `p_FKidCapitulo` int,
- IN `p_descripcion` text,OUT `res` TINYINT  UNSIGNED)
+ IN `p_descripcion` MEDIUMTEXT,OUT `res` TINYINT  UNSIGNED)
 BEGIN   
     declare existe Integer;
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -4649,7 +4649,7 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS `insertar_info_usuario_subcapitulo`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insertar_info_usuario_subcapitulo`(IN `p_FKidZonaTrabajo` int, IN `p_FKidSubCapitulo` int,
- IN `p_descripcion` text,OUT `res` TINYINT  UNSIGNED)
+ IN `p_descripcion` MEDIUMTEXT,OUT `res` TINYINT  UNSIGNED)
 BEGIN   
     declare existe Integer;
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -4690,7 +4690,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `update_formulario`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_formulario`(IN `p_id` int,IN `p_titulo` varchar(500), IN  `p_descripcionArriba` text, IN  `p_descripcionAbajo` text,OUT `res` TINYINT  UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_formulario`(IN `p_id` int,IN `p_titulo` text, IN  `p_descripcionArriba` MEDIUMTEXT, IN  `p_descripcionAbajo` MEDIUMTEXT,OUT `res` TINYINT  UNSIGNED)
 BEGIN
         
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION

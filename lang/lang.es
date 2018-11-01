@@ -264,7 +264,7 @@ $vocab["tipo_alerta_total"]                = "Amenaza identificada";
 //***********    Incio plan de emergencia    ***********************//
 $vocab["inicio_Bienvenido"]                  ="Bienvenidos";
 $vocab["inicio_Titulo"]                      = "SIGPE";
-$vocab["inicio_Titulo_Sistema"]              = "Sistema Gestor de planes de emergencia";
+$vocab["inicio_Titulo_Sistema"]              = "Sistema Gestor de Planes de Emergencia";
 $vocab["inicio_Subtitulo"]                   = "CIEUNA";
 $vocab["inicio_Titulo_Desc"]                 = "seleccione el plan de emergencia que desea trabajar";
 $vocab["inicio_Empezar"]                     = "Empezar";
@@ -593,6 +593,13 @@ $vocab["historial_titulo_desc"]  ="Planes de emergencia antiguos por centro de t
 $vocab["historial_sede"]         ="Sede";
 $vocab["historial_centro"]       ="Centro de trabajo";
 $vocab["historial_version"]      ="Versión";
+
+//********************** Plan de emergencia PDF ****************************
+$vocab['portada_reglamento'] = "Este documento tiene como objeto cumplir con los requisitos y contenidos que debe
+            cumplir un plan de preparativos y respuesta ante emergencias en centros laborales y 
+            de ocupación pública. Se basa en la Norma <br> CNE-NA- INTE-DN-01:2014, la cual se sustenta 
+            en el artículo 12 de la Ley Nacional de Emergencias y Prevención del Riesgo Nº 8488 y 
+            el artículo 4 de la Ley del Benemérito Cuerpo de Bomberos de Costa Rica Nº 8228";
 
 
 ?>
