@@ -12,9 +12,9 @@ include("plan_emergencia_menu.php");
  * select identificacion de peligros
  */
 $sql = "SELECT  `id`, `peligro`, `presente`,`ubicacion`,`recomendacion`, `fecha`, `responsable`, `priorizacion` FROM `IdentificacionPeligro`  WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
-$res = seleccion($sql);
+$resBase = seleccion($sql);
 
-if (count($res) <= 0) {
+
     $res = array(
         $vocab["peligro_1"], $vocab["peligro_2"], $vocab["peligro_3"],
         $vocab["peligro_4"], $vocab["peligro_6"], $vocab["peligro_7"],
@@ -26,7 +26,16 @@ if (count($res) <= 0) {
         $vocab["peligro_28"], $vocab["peligro_29"], $vocab["peligro_30"], $vocab["peligro_31"],
         $vocab["peligro_32"], $vocab["peligro_33"], $vocab["peligro_34"], $vocab["peligro_35"],
         $vocab["peligro_36"], $vocab["peligro_37"]);
-}
+
+    for ($i = 0; $i < count($resBase); $i++) { 
+        $ubicacion=array_search($resBase[$i]['peligro'], $res);
+        if($ubicacion!==false){
+           $res[$ubicacion]=$resBase[$i];
+        }else{
+          $res[]=$resBase[$i];  
+        }        
+    }
+    
 ?>
 
 
