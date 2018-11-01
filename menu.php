@@ -144,10 +144,10 @@ require 'functions.php';
                                     </ul>
                                 </li>
                             <?php } ?>
-                              <!-- ADMINISTRAR  formulario-->
+                            <!-- ADMINISTRAR  formulario-->
                             <?php if (check_permiso($mod4, $act1, $user_rol)) { ?>
-                            <li><a class="Menuprincipal" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminFormularios/list_formulario.php?', '');"><span><i class="fa fa-file-text text-success"></i> <?= $vocab["menu_admin_formulario"] ?></span></a></li>
-                            
+                                <li><a class="Menuprincipal" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminFormularios/list_formulario.php?', '');"><span><i class="fa fa-file-text text-success"></i> <?= $vocab["menu_admin_formulario"] ?></span></a></li>
+
                             <?php } ?>
                             <!-- ADMINISTRAR MATRIZ DE RIESGOS -->
                             <?php if (check_permiso($mod4, $act1, $user_rol)) { ?>
@@ -165,7 +165,7 @@ require 'functions.php';
                                         <?php } ?>
                                     </ul>
                                 <?php } ?>
-                                     <!--admin historial-->
+                                <!--admin historial-->
                                 <?php if (check_permiso($mod4, $act1, $user_rol)) { ?>
 
                                 <li><a class="Menuprincipal" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminHistorial/list_historial.php?', '');"><span><i class="fa fa-file text-primary"></i> <?= $vocab["menu_admin_historial"] ?></span></a></li>
@@ -173,10 +173,15 @@ require 'functions.php';
                             <?php } ?>
                         </ul>
                     </li>
-                    
+
                 <?php } ?>
-                <li><a  class="Menuprincipal"  onclick="javascript:OpcionMenu('home.php?', '');"><span><i class="fa fa-question fa-inverse"></i> <?= $vocab["menu_help"] ?></span></a></li>
-            <!--<li><a href="http://www.soporteinf.una.ac.cr" target="_blank"><span><i class="fa fa-question fa-inverse"></i> <?= $vocab["menu_help"] ?></span></a></li>-->
+                <?php if (check_permiso($mod4, $act1, $user_rol)) { ?>    
+                    <li><a  class="Menuprincipal"  onclick="javascript:  window.open('files/manuales/manualCIEUNA.pdf','_blank');"><span><i class="fa fa-question fa-inverse"></i> <?= $vocab["menu_help"] ?></span></a></li>
+                <?php } else { ?>
+                    <li><a  class="Menuprincipal"  onclick="javascript:window.open('files/manuales/manualUsuario.pdf','_blank');"><span><i class="fa fa-question fa-inverse"></i> <?= $vocab["menu_help"] ?></span></a></li>
+
+                <?php } ?>
+<!--<li><a href="http://www.soporteinf.una.ac.cr" target="_blank"><span><i class="fa fa-question fa-inverse"></i> <?= $vocab["menu_help"] ?></span></a></li>-->
                 <li><a  class="Menuprincipal" href='#' onclick="window.location = document.getElementById('cds_domain_locate').value + 'mod/login/logout.php'"><span><i class="fa fa-sign-out fa-inverse"></i> <?= $vocab["menu_logout"] ?></span></a></li>
             </ul>
 
