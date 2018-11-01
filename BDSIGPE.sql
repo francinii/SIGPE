@@ -4852,6 +4852,7 @@ INSERT INTO `sis_mod` VALUES ('4', 'Administración Planes', 'Administración de
 INSERT INTO `sis_mod` VALUES ('5', 'Planes de emergencia', 'permite la edición de los planes de emergencia', '1');
 INSERT INTO `sis_mod` VALUES ('6', 'Módulo', 'Administración de los módulos del sistema', '1');
 
+
 INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('5','1','2');
 INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('5','2','2');
 INSERT INTO `sis_permits`( `id_mod`, `id_action`, `id_roll`) VALUES ('5','3','2');
