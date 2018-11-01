@@ -594,5 +594,12 @@ $vocab["historial_sede"]         ="Sede";
 $vocab["historial_centro"]       ="Centro de trabajo";
 $vocab["historial_version"]      ="Versión";
 
+//********************** Plan de emergencia PDF ****************************
+$vocab['portada_reglamento'] = "Este documento tiene como objeto cumplir con los requisitos y contenidos que debe
+            cumplir un plan de preparativos y respuesta ante emergencias en centros laborales y 
+            de ocupación pública. Se basa en la Norma <br> CNE-NA- INTE-DN-01:2014, la cual se sustenta 
+            en el artículo 12 de la Ley Nacional de Emergencias y Prevención del Riesgo Nº 8488 y 
+            el artículo 4 de la Ley del Benemérito Cuerpo de Bomberos de Costa Rica Nº 8228";
+
 
 ?>

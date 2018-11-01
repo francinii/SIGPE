@@ -57,9 +57,9 @@ $logoCentro = $dirImages . "imgPlanes/" . $zonas[0]["logo"];
 $logoCIEUNA = $dirImages . "logo_cieuna.png";
 $codigo = "";
 $revisadoPor = "";
-if (check_permiso($mod4, $act2, $user_rol) && !isset($_GET['visualizarpdf'])) { 
-$codigo = $resPlan[0]['codigoZonaTrabajo'];
-$revisadoPor = $resPlan[0]['revisadoPor'];
+if (check_permiso($mod4, $act2, $user_rol) && !isset($_GET['visualizarpdf'])) {
+    $codigo = $resPlan[0]['codigoZonaTrabajo'];
+    $revisadoPor = $resPlan[0]['revisadoPor'];
 }
 $datosCabecera = array(
     "centroTrabajo" => $centroTrabajo,
@@ -151,7 +151,7 @@ $pdf->setPageUnit(PDF_UNIT);
 /*
  * Llamada de las funciones que crean el pdf: portada, capitulos y tabla de contenidos
  *  */
-portada($pdf);
+portada($pdf, $vocab);
 capitulos($pdf, $rescapitulos, $resPlan, $resTipoPoblacion, $formularios, $vocab, $idPlanEmergencia);
 tablaContenidos($pdf);
 
@@ -288,7 +288,7 @@ function subCapitulos($pdf, $id, $ordenCapitulo, $resPlan, $resTipoPoblacion, $f
  * @returns {Undefined}
  */
 
-function portada($pdf) {
+function portada($pdf, $vocab) {
     $pdf->setPrintHeader(false);
     $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
     global $datosCabecera;
@@ -308,11 +308,7 @@ function portada($pdf) {
             <h3>   Fecha:  ' . $hoy . ' </h3><br>
             <div>
             <h6 style="border: 1px solid black; padding: 10px 20px 30px 40px; text-align: center;">
-            Este documento tiene como objeto cumplir con los requisitos y contenidos que debe
-            cumplir un plan de preparativos y respuesta ante emergencias en centros laborales y 
-            de ocupación pública. Se basa en la Norma <br> CNE-NA- INTE-DN-01:2014, la cual se sustenta 
-            en el artículo 12 de la Ley Nacional de Emergencias y Prevención del Riesgo Nº 8488 y 
-            el artículo 4 de la Ley del Benemérito Cuerpo de Bomberos de Costa Rica Nº 8228
+            ' . $vocab['portada_reglamento'] . '
             </h6>
         </div>';
     $pdf->writeHTML($html, true, false, true, false, '');
