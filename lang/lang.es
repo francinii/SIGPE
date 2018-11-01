@@ -264,7 +264,7 @@ $vocab["tipo_alerta_total"]                = "Amenaza identificada";
 //***********    Incio plan de emergencia    ***********************//
 $vocab["inicio_Bienvenido"]                  ="Bienvenidos";
 $vocab["inicio_Titulo"]                      = "SIGPE";
-$vocab["inicio_Titulo_Sistema"]              = "Sistema Gestor de planes de emergencia";
+$vocab["inicio_Titulo_Sistema"]              = "Sistema Gestor de Planes de Emergencia";
 $vocab["inicio_Subtitulo"]                   = "CIEUNA";
 $vocab["inicio_Titulo_Desc"]                 = "seleccione el plan de emergencia que desea trabajar";
 $vocab["inicio_Empezar"]                     = "Empezar";
