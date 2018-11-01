@@ -117,7 +117,7 @@ $res = seleccion($sql);
                 <?php } ?>                 
             <?php } else { ?>
                 <tr id="fila0" align='center'>
-                    <td colspan="5"><?= $vocab["symbol_no_data"] ?></td>
+                    <td colspan="6"><?= $vocab["symbol_no_data"] ?></td>
                 </tr>   
             <?php } ?>
         </tbody>
@@ -142,7 +142,7 @@ $res = seleccion($sql);
     <br/>
     <!--************************agregar zonas o centros de trabajo*************-->
     <?php if (check_permiso($mod4, $act3, $user_rol)) { ?>
-        <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/new_zona_trabajo.php?', '');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["zona_trabajo_title"] ?></a></div>
+        <div class="text-center"><a class="btn btn-success" name="submit" onclick="javascript:OpcionMenu('mod/adminPlanEmergencia/adminZonaTrabajo/new_zona_trabajo.php?', 'find_key=<?= $find_key ?>');"><i class='fa fa-plus fa-inverse'></i> <?= $vocab["symbol_add"] ?> <?= $vocab["zona_trabajo_title"] ?></a></div>
     <?php } ?>
 </div>
 

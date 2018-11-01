@@ -12,6 +12,10 @@ $comb = seleccion($sql);
 
 $sql = "SELECT id, nombreSede FROM Sede where isActivo=1";
 $sede = seleccion($sql);
+$find_key = '';
+if ((isset($_GET['find_key']))) {
+    $find_key = $_GET['find_key'];
+}
 ?>
 <div class="container">
     <div class="well well-sm">
@@ -27,11 +31,11 @@ $sede = seleccion($sql);
             <div class="form-group">
                 <div><label  for=""><?= $vocab["zona_trabajo_sede"] ?> </label></div> 
                 <select class="form-control" id = "select_sede">
-<?php
-if (count($sede) > 0) {
-    for ($i = 0; $i < count($sede); $i++) {
-        ?>
-                            <option value='<?= $sede[$i]['id'] ?>' selected><?= $sede[$i]['nombreSede'] ?></option>
+                    <?php
+                    if (count($sede) > 0) {
+                        for ($i = 0; $i < count($sede); $i++) {
+                            ?>
+                            <option value='<?= $sede[$i]['id'] ?>' <?=($find_key==$sede[$i]['id'])? 'selected': '' ?>><?= $sede[$i]['nombreSede'] ?></option>
                             <?php
                         }
                     } else {
@@ -39,9 +43,9 @@ if (count($sede) > 0) {
                         <script>
                             jAlert("No hay sedes en el sistema, debe agregar una", "Dato Requerido");
                         </script>
-    <?php
-}
-?>
+                        <?php
+                    }
+                    ?>
                 </select>
                 <p class="help-block"><small><?= $vocab["zona_trabajo_sede_Desc"] ?></small></p> 
             </div>
@@ -74,11 +78,11 @@ if (count($sede) > 0) {
                 <div class="radio radio_efect">
                     <label class="radio-inline">
                         <input id="inlineCheckbox1" name="inlineCheckbox" type="radio" value="1" checked> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-<?= $vocab["isActivo"] ?>  
+                        <?= $vocab["isActivo"] ?>  
                     </label>
                     <label class="radio-inline">
                         <input id="inlineCheckbox2" name="inlineCheckbox" type="radio" value="0"> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 
-<?= $vocab["isInactivo"] ?> 
+                        <?= $vocab["isInactivo"] ?> 
                     </label>
                 </div> 
                 <p class="help-block"><small><?= $vocab["desc_zona_trabajo_isActivo"] ?></small></p> 
@@ -86,7 +90,7 @@ if (count($sede) > 0) {
             <div class="form-group"> 
                 <div><label  for=""><?= $vocab["symbol_desc"] ?> </label></div> 
                 <select  id = "select_usuario">
-<?php for ($i = 0; $i < count($comb); $i++) { ?>
+                    <?php for ($i = 0; $i < count($comb); $i++) { ?>
                         <option value='<?= $comb[$i]['id'] ?>' selected><?= $comb[$i]['nombre'] ?></option>
                     <?php } ?>
                 </select>
@@ -105,7 +109,7 @@ if (count($sede) > 0) {
                     </tbody>
                 </table>
             </div>  
-<?php if (check_permiso($mod4, $act3, $user_rol)) { ?>
+            <?php if (check_permiso($mod4, $act3, $user_rol)) { ?>
                 <div class="text-center"><a class="btn btn-success"  name="submit" onclick="new_zona_trabajo();"><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] . " " . $vocab["zona_trabajo_title"] ?>  </a></div>
             <?php } ?>            
         </form>

@@ -41,10 +41,10 @@ if (count($res) <= 0) {
                 <th  width="5%"><?= $vocab["poblacion_contactoEmergencia"] ?></th>  
                 <th  width="5%"><?= $vocab["poblacion_telefono_personal"] ?></th>
                 <th  width="5%"><?= $vocab["poblacion_correo"] ?></th>                     
-                <?php if ($editar) { ?>
+                
                     <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
                     <th width="2%"><div class="text-center"><i class="fa fa-plus  fa-2x text-success puntero" title="<?= $vocab["symbol_add"] ?>"></i></div></th>
-                <?php } ?>
+                
 
             </tr>
         </thead>
@@ -69,7 +69,7 @@ if (count($res) <= 0) {
                             </td>                                
 
                             <td  style="background-color:lightblue">  
-                                <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
+                                <?php if ($editar && check_permiso($mod5, $act5, $user_rol)) { ?>
                                     <a class="puntero cambios"  onClick="javascript:eliminarFilaPoblacion(this);">                                 
                                         <div class="text-center"><i class="fa fa-close  text-danger " title="<?= $vocab["symbol_delete"] ?>"></i></div>                                       
                                     </a>  
@@ -79,10 +79,12 @@ if (count($res) <= 0) {
                                 ?>
                             </td>
 
-                            <td  style="background-color:lightblue">                                        
+                            <td  style="background-color:lightblue">
+                                <?php if ($editar ) { ?>
                                 <a class="puntero cambios"  onclick="javascript: agregarFilaPoblacion('<?= $vocab["symbol_delete"] ?>', '<?= $vocab["Menu_Datos_sin_guardar"] ?>', 'Sec-<?= $id ?>');">                                 
                                     <div class="text-center"><i class="fa fa-plus  text-success " title="<?= $vocab["symbol_add"] ?>"></i></div>                                       
-                                </a> 
+                                </a>
+                                <?php } ?>
                             </td> 
 
                         </tr>
@@ -103,14 +105,16 @@ if (count($res) <= 0) {
                         <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control requerido cambios" id="telefonoPersonal<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['telefonoPersonal'] : ""; ?>" ></td>                            
                         <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="correoElectronico<?= $id ?>" value="<?= (is_array($res[$i])) ? $res[$i]['correoElectronico'] : ""; ?>" ></td>
 
-                        <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
-                            <td>              
+                        
+                            <td> 
+                                <?php if ($editar && check_permiso($mod5, $act5, $user_rol)) { ?>
                                 <a class="puntero cambios"  onClick="javascript:eliminarFila(this);">                                 
                                     <div class="text-center"><i class="fa fa-close  text-danger " title="<?= $vocab["symbol_delete"] ?>"></i></div>                                       
-                                </a>                             
+                                </a>
+                                 <?php } ?>
                             </td>
                             <td></td>
-                        <?php } ?>
+                       
                     </tr>   
                     <?php
                 }

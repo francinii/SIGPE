@@ -41,9 +41,9 @@ if (count($res) <= 0) {
                     <th  width="5%"><?= $vocab["brigadista_numero_personas"] ?></th>   
                     <th  width="5%"><?= $vocab["brigadista_distancia_total"] ?></th> 
                     <th  width="5%"><?= $vocab["brigadista_tiempo_evacuacion"] ?></th> 
-                    <?php if ($editar) { ?>
+                    
                         <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
-                    <?php } ?>
+                   
                 </tr>
             </thead>
             <tbody>
@@ -65,13 +65,15 @@ if (count($res) <= 0) {
                             <td> <input  type="number"  min="0"<?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="distancia<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['distancia'] : "0"; ?>" ></td>
                             <td> <input  type="number"  min="0"<?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="tiempo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tiempo'] : "0"; ?>" ></td>
 
-                            <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
-                                <td>              
+                            
+                                <td>  
+                                    <?php if ($editar && check_permiso($mod5, $act5, $user_rol)) { ?>
                                     <a class="puntero cambios"  onClick="javascript:eliminarFilaBrigadistas(this);">                                 
                                         <div class="text-center"><i class="fa fa-close  text-danger " title="<?= $vocab["symbol_delete"] ?>"></i></div>                                       
-                                    </a>                             
+                                    </a>
+                                    <?php } ?>
                                 </td>
-                            <?php } ?>
+                            
                         </tr>   
                         <?php
                     }

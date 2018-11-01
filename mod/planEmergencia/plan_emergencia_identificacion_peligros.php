@@ -61,9 +61,9 @@ $resBase = seleccion($sql);
                 <th style= "width:15%"><?= $vocab["identifica_peligro_fecha"] ?></th> 
                 <th  style= "width:15%"><?= $vocab["identifica_peligro_responsable"] ?></th>
                 <th style= "width:2%"><?= $vocab["identifica_peligro_priorizacion"] ?></th> 
-                <?php if ($editar) { ?>
+              
                     <th style= "width:5%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
-                <?php } ?>
+                
             </tr>
         </thead>
         <tbody>
@@ -141,9 +141,12 @@ $resBase = seleccion($sql);
                     </a>
                 </td>
             <?php } else  { ?>
-                <td><a class="puntero" onclick="javascript:eliminarFilaPeligros(this,'<?= $idPlanEmergencia ?>');">
+                <td>
+                     <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
+                    <a class="puntero" onclick="javascript:eliminarFilaPeligros(this,'<?= $idPlanEmergencia ?>');">
                         <div class="text-center"><i class="fa fa-close  text-danger" title="Eliminar fila"></i></div>
                     </a>
+                      <?php } ?>
                 </td>
             <?php } ?>
             </tr>   

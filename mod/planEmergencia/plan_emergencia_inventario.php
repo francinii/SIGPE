@@ -21,7 +21,7 @@ if (count($res) <= 0) {
     <div align="right" style = "padding-right:0.5%;">
         <?php if ($editar) { ?>
             <span class="text-center" >
-                <a class="btn btn-success" onclick="javascript:agregarFilaRecursoHumano('<?= $vocab["symbol_delete"] ?>','<?= $vocab["Menu_Datos_sin_guardar"] ?>');"><i class=" fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_fila"] ?>  </a>
+                <a class="btn btn-success" onclick="javascript:agregarFilaRecursoHumano('<?= $vocab["symbol_delete"] ?>', '<?= $vocab["Menu_Datos_sin_guardar"] ?>');"><i class=" fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_fila"] ?>  </a>
             </span>
         <?php } ?>
     </div>
@@ -34,9 +34,9 @@ if (count($res) <= 0) {
                     <th  width="2%"><?= $vocab["recurso_humano_categoria"] ?></th>                
                     <th  width="5%"><?= $vocab["recurso_humano_Localizacion"] ?></th>   
                     <th  width="5%"><?= $vocab["recurso_humano_Contacto"] ?></th>                    
-                    <?php if ($editar) { ?>
-                        <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
-                    <?php } ?>
+
+                    <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
+
 
                 </tr>
             </thead>
@@ -52,13 +52,17 @@ if (count($res) <= 0) {
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control requerido cambios" id="H-localizacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['localizacion'] : ""; ?>" ></td>                            
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="H-contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>
 
-                            <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
-                                <td>              
+
+                            <td>  
+                                <?php if ($editar && check_permiso($mod5, $act5, $user_rol)) { ?>
                                     <a class="puntero cambios"  onClick="javascript:eliminarFila(this);">                                 
                                         <div class="text-center"><i class="fa fa-close  text-danger " title="<?= $vocab["symbol_delete"] ?>"></i></div>                                       
-                                    </a>                             
-                                </td>
-                            <?php } ?>
+                                    </a>
+                                <?php }
+                                ?>
+                            </td>
+
+
                         </tr>   
                         <?php
                     }
@@ -96,11 +100,11 @@ if (count($res) <= 0) {
     <p><b><?= $vocab["equipo_moviles_titulo"] ?></b></p>
     <p><?= $vocab["equipo_moviles_titulo_desc"] ?></p>
     <div align="right" style = "padding-right:0.5%;">
-          <?php if ($editar) { ?>
-        <span class="text-center" >
-            <a class="btn btn-success" onclick="javascript: agregarFilaEquipo('<?= $vocab["symbol_delete"] ?>', combo,'<?= $vocab["Menu_Datos_sin_guardar"] ?>');"><i class=" fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_fila"] ?></a>
-        </span>
-  <?php } ?>
+        <?php if ($editar) { ?>
+            <span class="text-center" >
+                <a class="btn btn-success" onclick="javascript: agregarFilaEquipo('<?= $vocab["symbol_delete"] ?>', combo, '<?= $vocab["Menu_Datos_sin_guardar"] ?>');"><i class=" fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_fila"] ?></a>
+            </span>
+        <?php } ?>
     </div>
     <div   class="dataTables_wrapper   dt-bootstrap" style = "overflow-x:auto;">
         <table  style = "width: 99%;" id="lista_equipos" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
@@ -113,9 +117,9 @@ if (count($res) <= 0) {
                     <th  width="5%"><?= $vocab["equipo_moviles_contacto"] ?></th>
                     <th  width="5%"><?= $vocab["equipo_moviles_ubicacion"] ?></th>                
                     <th  width="5%"><?= $vocab["equipo_moviles_categoria"] ?></th>
-                    <?php if ($editar) { ?>
-                        <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
-                    <?php } ?>
+
+                    <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
+
                 </tr>
             </thead>
             <tbody>
@@ -134,13 +138,15 @@ if (count($res) <= 0) {
                     <script>
                         selectEquipos(<?= $i ?>, combo, '<?= (is_array($res[$i])) ? $res[$i]['categoria'] : 'nada'; ?>');
                     </script>                                                      
-                    <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
-                        <td>              
+
+                    <td> 
+                        <?php if ($editar && check_permiso($mod5, $act5, $user_rol)) { ?>
                             <a class="puntero cambios"  onClick="javascript:eliminarFila(this);">                                 
                                 <div class="text-center"><i class="fa fa-close  text-danger " title="<?= $vocab["symbol_delete"] ?>"></i></div>                                       
-                            </a>                             
-                        </td>
-                    <?php } ?>
+                            </a> 
+                        <?php } ?>                            
+                    </td>
+
                     </tr>   
                     <?php
                 }
@@ -175,10 +181,10 @@ if (count($res) <= 0) {
     <p><?= $vocab["instalaciones_titulo_desc"] ?></p>
     <div align="right" style = "padding-right:0.5%;">
         <?php if ($editar) { ?>
-        <span class="text-center" >
-            <a class="btn btn-success" onclick="javascript: agregarFilaRecursoInstalaciones('<?= $vocab["symbol_delete"] ?>','<?= $vocab["Menu_Datos_sin_guardar"] ?>');"><i class=" fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_fila"] ?></a>
-        </span>
-<?php } ?>
+            <span class="text-center" >
+                <a class="btn btn-success" onclick="javascript: agregarFilaRecursoInstalaciones('<?= $vocab["symbol_delete"] ?>', '<?= $vocab["Menu_Datos_sin_guardar"] ?>');"><i class=" fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_fila"] ?></a>
+            </span>
+        <?php } ?>
     </div>
     <div   class="dataTables_wrapper  dt-bootstrap" style = "overflow-x:auto;">
         <table  style = "width: 99%;" id="lista_Instalaciones" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
@@ -190,9 +196,9 @@ if (count($res) <= 0) {
                     <th  width="5%"><?= $vocab["instalaciones_distribucion"] ?></th>   
                     <th  width="5%"><?= $vocab["instalaciones_encargada"] ?></th>
                     <th  width="5%"><?= $vocab["instalaciones_ubicacion"] ?></th>                                
-                    <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
-                        <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
-                    <?php } ?>
+
+                    <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
+
 
                 </tr>
             </thead>
@@ -205,22 +211,24 @@ if (count($res) <= 0) {
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="I-tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
                             <td> <input  type="number"  <?= (!$editar) ? "disabled" : ""; ?>  min="0" class="form-control requerido  cambios" id="I-cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
                             <td> <input  type="number"  <?= (!$editar) ? "disabled" : ""; ?>  min="0" class="form-control requerido cambios" id="I-tamano<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tamaño'] : "0"; ?>" ></td>                                                      
-                           <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control  requerido cambios" id="I-distribucion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['distribucion'] : ""; ?>" ></td>
+                            <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control  requerido cambios" id="I-distribucion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['distribucion'] : ""; ?>" ></td>
                             <td><textarea rows="1" style ="width: 100%;"  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="I-contacto<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?></textarea></td>
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?> class="form-control  requerido cambios" id="I-ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
-                                                                                  
-                    <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
-                        <td>              
-                            <a class="puntero cambios"  onClick="javascript:eliminarFila(this);">                                 
-                                <div class="text-center"><i class="fa fa-close  text-danger " title="<?= $vocab["symbol_delete"] ?>"></i></div>                                       
-                            </a>                             
-                        </td>
-                    <?php } ?>
-                    </tr>   
-                    <?php
+
+
+                            <td>
+                                <?php if ($editar && check_permiso($mod5, $act5, $user_rol)) { ?>
+                                    <a class="puntero cambios"  onClick="javascript:eliminarFila(this);">                                 
+                                        <div class="text-center"><i class="fa fa-close  text-danger " title="<?= $vocab["symbol_delete"] ?>"></i></div>                                       
+                                    </a>
+                                <?php } ?>
+                            </td>
+
+                        </tr>   
+                        <?php
+                    }
                 }
-            }
-            ?>
+                ?>
             </tbody>
         </table>
     </div>  
@@ -235,9 +243,9 @@ if (count($res) <= 0) {
 
 <!------------------------------------  Recurso telecomunicaciones ----------------------------------- ------------------- ----------->
 <?php
-$categoria='telecomunicaciones';
-$prefijo='T-';
-$tablaID="lista_telecomunicaciones";
+$categoria = 'telecomunicaciones';
+$prefijo = 'T-';
+$tablaID = "lista_telecomunicaciones";
 $sql = "SELECT  `cantidad`, `tipo`, `caracteristicas`, `contacto`,"
         . " `ubicacion`,`categoria`,`observaciones` FROM `InventarioOtros` WHERE `FKidZonaTrabajo`=$idPlanEmergencia and `categoria`='$categoria' ";
 $res = seleccion($sql);
@@ -252,12 +260,12 @@ if (count($res) <= 0) {
     <div align="right" style = "padding-right:0.5%;">
         <?php if ($editar) { ?>
             <span class="text-center" >
-                <a class="btn btn-success" onclick="javascript: agregarOtrosInventario('<?= $vocab["symbol_delete"] ?>','<?= $prefijo ?>','#<?=$tablaID?>','<?= $vocab["Menu_Datos_sin_guardar"] ?>');"><i class=" fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_fila"] ?>  </a>
+                <a class="btn btn-success" onclick="javascript: agregarOtrosInventario('<?= $vocab["symbol_delete"] ?>', '<?= $prefijo ?>', '#<?= $tablaID ?>', '<?= $vocab["Menu_Datos_sin_guardar"] ?>');"><i class=" fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_fila"] ?>  </a>
             </span>
         <?php } ?>
     </div>
     <div   class="dataTables_wrapper dt-bootstrap" style = "overflow-x:auto;">
-        <table  style = "width: 99%;" id="<?=$tablaID?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
+        <table  style = "width: 99%;" id="<?= $tablaID ?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
             <thead style="background-color: lightblue;">
                 <tr>
                     <th  width="5%"><?= $vocab["otros_recursos_tipo"] ?></th>
@@ -266,9 +274,9 @@ if (count($res) <= 0) {
                     <th  width="5%"><?= $vocab["otros_recursos_contacto"] ?></th>   
                     <th  width="5%"><?= $vocab["otros_recursos_ubicacion"] ?></th> 
                     <th  width="5%"><?= $vocab["otros_recursos_observaciones"] ?></th> 
-                    <?php if ($editar) { ?>
-                        <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
-                    <?php } ?>
+
+                    <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
+
 
                 </tr>
             </thead>
@@ -277,21 +285,23 @@ if (count($res) <= 0) {
                 if (count($res) > 0) {
                     for ($i = 0; $i < count($res); $i++) {
                         ?>
-                        <tr id="<?= $prefijo.$i ?>">
+                        <tr id="<?= $prefijo . $i ?>">
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
                             <td> <input  type="number"  <?= (!$editar) ? "disabled" : ""; ?>  min="0" class="form-control requerido  cambios" id="<?= $prefijo ?>cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
-                             <td><textarea rows="1"   type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
+                            <td><textarea rows="1"   type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control requerido cambios" id="<?= $prefijo ?>contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>                            
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
-                             <td><textarea rows="1"  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
+                            <td><textarea rows="1"  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
 
-                            <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
-                                <td>              
+
+                            <td> 
+                                <?php if ($editar && check_permiso($mod5, $act5, $user_rol)) { ?>
                                     <a class="puntero cambios"  onClick="javascript:eliminarFila(this);">                                 
                                         <div class="text-center"><i class="fa fa-close  text-danger " title="<?= $vocab["symbol_delete"] ?>"></i></div>                                       
-                                    </a>                             
-                                </td>
-                            <?php } ?>
+                                    </a>
+                                <?php } ?>
+                            </td>
+
                         </tr>   
                         <?php
                     }
@@ -303,7 +313,7 @@ if (count($res) <= 0) {
     <div class="text-center">
         <?php if ($editar) { ?>
             <span class="text-center">
-                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0,'<?= $prefijo ?>','<?=$categoria?>','<?=$tablaID?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_datos"] ?></a>
+                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0, '<?= $prefijo ?>', '<?= $categoria ?>', '<?= $tablaID ?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_datos"] ?></a>
             </span>         
         <?php } ?>
     </div>
@@ -311,9 +321,9 @@ if (count($res) <= 0) {
 
 <!------------------------------------  Recurso para repuestos ----------------------------------- ------------------- ----------->
 <?php
-$categoria='repuestos';
-$prefijo='R-';
-$tablaID="lista_repuestos";
+$categoria = 'repuestos';
+$prefijo = 'R-';
+$tablaID = "lista_repuestos";
 $sql = "SELECT  `cantidad`, `tipo`, `caracteristicas`, `contacto`,"
         . " `ubicacion`,`categoria`,`observaciones` FROM `InventarioOtros` WHERE `FKidZonaTrabajo`=$idPlanEmergencia and `categoria`='$categoria' ";
 $res = seleccion($sql);
@@ -328,12 +338,12 @@ if (count($res) <= 0) {
     <div align="right" style = "padding-right:0.5%;">
         <?php if ($editar) { ?>
             <span class="text-center" >
-                <a class="btn btn-success" onclick="javascript: agregarOtrosInventario('<?= $vocab["symbol_delete"] ?>','<?= $prefijo ?>','#<?=$tablaID?>','<?= $vocab["Menu_Datos_sin_guardar"] ?>');"><i class=" fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_fila"] ?>  </a>
+                <a class="btn btn-success" onclick="javascript: agregarOtrosInventario('<?= $vocab["symbol_delete"] ?>', '<?= $prefijo ?>', '#<?= $tablaID ?>', '<?= $vocab["Menu_Datos_sin_guardar"] ?>');"><i class=" fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_fila"] ?>  </a>
             </span>
         <?php } ?>
     </div>
     <div   class="dataTables_wrapper dt-bootstrap" style = "overflow-x:auto;">
-        <table  style = "width: 99%;" id="<?=$tablaID?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
+        <table  style = "width: 99%;" id="<?= $tablaID ?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
             <thead style="background-color: lightblue;">
                 <tr>
                     <th  width="5%"><?= $vocab["otros_recursos_tipo"] ?></th>
@@ -342,9 +352,9 @@ if (count($res) <= 0) {
                     <th  width="5%"><?= $vocab["otros_recursos_contacto"] ?></th>   
                     <th  width="5%"><?= $vocab["otros_recursos_ubicacion"] ?></th> 
                     <th  width="5%"><?= $vocab["otros_recursos_observaciones"] ?></th> 
-                    <?php if ($editar) { ?>
-                        <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
-                    <?php } ?>
+
+                    <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
+
 
                 </tr>
             </thead>
@@ -353,21 +363,23 @@ if (count($res) <= 0) {
                 if (count($res) > 0) {
                     for ($i = 0; $i < count($res); $i++) {
                         ?>
-                        <tr id="<?= $prefijo.$i ?>">
+                        <tr id="<?= $prefijo . $i ?>">
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
                             <td> <input  type="number"  <?= (!$editar) ? "disabled" : ""; ?>  min="0" class="form-control requerido  cambios" id="<?= $prefijo ?>cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
-                             <td><textarea rows="1"   type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
+                            <td><textarea rows="1"   type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control requerido cambios" id="<?= $prefijo ?>contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>                            
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
-                             <td><textarea rows="1"  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
+                            <td><textarea rows="1"  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
 
-                            <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
-                                <td>              
+
+                            <td>
+                                <?php if ($editar && check_permiso($mod5, $act5, $user_rol)) { ?>
                                     <a class="puntero cambios"  onClick="javascript:eliminarFila(this);">                                 
                                         <div class="text-center"><i class="fa fa-close  text-danger " title="<?= $vocab["symbol_delete"] ?>"></i></div>                                       
-                                    </a>                             
-                                </td>
-                            <?php } ?>
+                                    </a> 
+                                <?php } ?>
+                            </td>
+
                         </tr>   
                         <?php
                     }
@@ -379,16 +391,16 @@ if (count($res) <= 0) {
     <div class="text-center">
         <?php if ($editar) { ?>
             <span class="text-center">
-                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0,'<?= $prefijo ?>','<?=$categoria?>','<?=$tablaID?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_datos"] ?></a>
+                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0, '<?= $prefijo ?>', '<?= $categoria ?>', '<?= $tablaID ?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_datos"] ?></a>
             </span>         
         <?php } ?>
     </div>
 </div>
 <!------------------------------------  Recurso para repuestos almacenaniento de agua ----------------------------------- ------------------- ----------->
 <?php
-$categoria='recursosAgua';
-$prefijo='RA-';
-$tablaID="lista_repuestosAgua";
+$categoria = 'recursosAgua';
+$prefijo = 'RA-';
+$tablaID = "lista_repuestosAgua";
 $sql = "SELECT  `cantidad`, `tipo`, `caracteristicas`, `contacto`,"
         . " `ubicacion`,`categoria`,`observaciones` FROM `InventarioOtros` WHERE `FKidZonaTrabajo`=$idPlanEmergencia and `categoria`='$categoria' ";
 $res = seleccion($sql);
@@ -403,12 +415,12 @@ if (count($res) <= 0) {
     <div align="right" style = "padding-right:0.5%;">
         <?php if ($editar) { ?>
             <span class="text-center" >
-                <a class="btn btn-success" onclick="javascript: agregarOtrosInventario('<?= $vocab["symbol_delete"] ?>','<?= $prefijo ?>','#<?=$tablaID?>','<?= $vocab["Menu_Datos_sin_guardar"] ?>');"><i class=" fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_fila"] ?>  </a>
+                <a class="btn btn-success" onclick="javascript: agregarOtrosInventario('<?= $vocab["symbol_delete"] ?>', '<?= $prefijo ?>', '#<?= $tablaID ?>', '<?= $vocab["Menu_Datos_sin_guardar"] ?>');"><i class=" fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_fila"] ?>  </a>
             </span>
         <?php } ?>
     </div>
     <div   class="dataTables_wrapper dt-bootstrap" style = "overflow-x:auto;">
-        <table  style = "width: 99%;" id="<?=$tablaID?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
+        <table  style = "width: 99%;" id="<?= $tablaID ?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
             <thead style="background-color: lightblue;">
                 <tr>
                     <th  width="5%"><?= $vocab["otros_recursos_tipo"] ?></th>
@@ -417,9 +429,9 @@ if (count($res) <= 0) {
                     <th  width="5%"><?= $vocab["otros_recursos_contacto"] ?></th>   
                     <th  width="5%"><?= $vocab["otros_recursos_ubicacion"] ?></th> 
                     <th  width="5%"><?= $vocab["otros_recursos_observaciones"] ?></th> 
-                    <?php if ($editar) { ?>
-                        <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
-                    <?php } ?>
+
+                    <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
+
 
                 </tr>
             </thead>
@@ -428,21 +440,23 @@ if (count($res) <= 0) {
                 if (count($res) > 0) {
                     for ($i = 0; $i < count($res); $i++) {
                         ?>
-                        <tr id="<?= $prefijo.$i ?>">
+                        <tr id="<?= $prefijo . $i ?>">
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
                             <td> <input  type="number"  <?= (!$editar) ? "disabled" : ""; ?>  min="0" class="form-control requerido  cambios" id="<?= $prefijo ?>cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
-                             <td><textarea rows="1"   type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
+                            <td><textarea rows="1"   type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control requerido cambios" id="<?= $prefijo ?>contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>                            
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
-                             <td><textarea rows="1"  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
+                            <td><textarea rows="1"  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
 
-                            <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
-                                <td>              
+
+                            <td> 
+                                <?php if ($editar && check_permiso($mod5, $act5, $user_rol)) { ?>
                                     <a class="puntero cambios"  onClick="javascript:eliminarFila(this);">                                 
                                         <div class="text-center"><i class="fa fa-close  text-danger " title="<?= $vocab["symbol_delete"] ?>"></i></div>                                       
-                                    </a>                             
-                                </td>
-                            <?php } ?>
+                                    </a>
+                                <?php } ?>
+                            </td>
+
                         </tr>   
                         <?php
                     }
@@ -454,16 +468,16 @@ if (count($res) <= 0) {
     <div class="text-center">
         <?php if ($editar) { ?>
             <span class="text-center">
-                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0,'<?= $prefijo ?>','<?=$categoria?>','<?=$tablaID?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_datos"] ?></a>
+                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0, '<?= $prefijo ?>', '<?= $categoria ?>', '<?= $tablaID ?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_datos"] ?></a>
             </span>         
         <?php } ?>
     </div>
 </div>
 <!------------------------------------  Recurso para repuestos energia----------------------------------- ------------------- ----------->
 <?php
-$categoria='recursosEnergia';
-$prefijo='RE-';
-$tablaID="lista_recursosEnergia";
+$categoria = 'recursosEnergia';
+$prefijo = 'RE-';
+$tablaID = "lista_recursosEnergia";
 $sql = "SELECT  `cantidad`, `tipo`, `caracteristicas`, `contacto`,"
         . " `ubicacion`,`categoria`,`observaciones` FROM `InventarioOtros` WHERE `FKidZonaTrabajo`=$idPlanEmergencia and `categoria`='$categoria' ";
 $res = seleccion($sql);
@@ -478,12 +492,12 @@ if (count($res) <= 0) {
     <div align="right" style = "padding-right:0.5%;">
         <?php if ($editar) { ?>
             <span class="text-center" >
-                <a class="btn btn-success" onclick="javascript: agregarOtrosInventario('<?= $vocab["symbol_delete"] ?>','<?= $prefijo ?>','#<?=$tablaID?>','<?= $vocab["Menu_Datos_sin_guardar"] ?>');"><i class=" fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_fila"] ?>  </a>
+                <a class="btn btn-success" onclick="javascript: agregarOtrosInventario('<?= $vocab["symbol_delete"] ?>', '<?= $prefijo ?>', '#<?= $tablaID ?>', '<?= $vocab["Menu_Datos_sin_guardar"] ?>');"><i class=" fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_fila"] ?>  </a>
             </span>
         <?php } ?>
     </div>
     <div   class="dataTables_wrapper dt-bootstrap" style = "overflow-x:auto;">
-        <table  style = "width: 99%;" id="<?=$tablaID?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
+        <table  style = "width: 99%;" id="<?= $tablaID ?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
             <thead style="background-color: lightblue;">
                 <tr>
                     <th  width="5%"><?= $vocab["otros_recursos_tipo"] ?></th>
@@ -492,9 +506,9 @@ if (count($res) <= 0) {
                     <th  width="5%"><?= $vocab["otros_recursos_contacto"] ?></th>   
                     <th  width="5%"><?= $vocab["otros_recursos_ubicacion"] ?></th> 
                     <th  width="5%"><?= $vocab["otros_recursos_observaciones"] ?></th> 
-                    <?php if ($editar) { ?>
-                        <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
-                    <?php } ?>
+
+                    <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
+
 
                 </tr>
             </thead>
@@ -503,21 +517,23 @@ if (count($res) <= 0) {
                 if (count($res) > 0) {
                     for ($i = 0; $i < count($res); $i++) {
                         ?>
-                        <tr id="<?= $prefijo.$i ?>">
+                        <tr id="<?= $prefijo . $i ?>">
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
                             <td> <input  type="number"  <?= (!$editar) ? "disabled" : ""; ?>  min="0" class="form-control requerido  cambios" id="<?= $prefijo ?>cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
-                             <td><textarea rows="1"   type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
+                            <td><textarea rows="1"   type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control requerido cambios" id="<?= $prefijo ?>contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>                            
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
-                             <td><textarea rows="1"  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
+                            <td><textarea rows="1"  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
 
-                            <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
-                                <td>              
+
+                            <td> 
+                                <?php if ($editar && check_permiso($mod5, $act5, $user_rol)) { ?>
                                     <a class="puntero cambios"  onClick="javascript:eliminarFila(this);">                                 
                                         <div class="text-center"><i class="fa fa-close  text-danger " title="<?= $vocab["symbol_delete"] ?>"></i></div>                                       
-                                    </a>                             
-                                </td>
-                            <?php } ?>
+                                    </a> 
+                                <?php } ?>
+                            </td>
+
                         </tr>   
                         <?php
                     }
@@ -529,16 +545,16 @@ if (count($res) <= 0) {
     <div class="text-center">
         <?php if ($editar) { ?>
             <span class="text-center">
-                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0,'<?= $prefijo ?>','<?=$categoria?>','<?=$tablaID?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_datos"] ?></a>
+                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0, '<?= $prefijo ?>', '<?= $categoria ?>', '<?= $tablaID ?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_datos"] ?></a>
             </span>         
         <?php } ?>
     </div>
 </div>
 <!------------------------------------   SISTEMAS FIJOS CONTRA INCENDIO----------------------------------- ------------------- ----------->
 <?php
-$categoria='sistemasIncendios';
-$prefijo='SI-';
-$tablaID="lista_sistemasIncendios";
+$categoria = 'sistemasIncendios';
+$prefijo = 'SI-';
+$tablaID = "lista_sistemasIncendios";
 $sql = "SELECT  `cantidad`, `tipo`, `caracteristicas`, `contacto`,"
         . " `ubicacion`,`categoria`,`observaciones` FROM `InventarioOtros` WHERE `FKidZonaTrabajo`=$idPlanEmergencia and `categoria`='$categoria' ";
 $res = seleccion($sql);
@@ -553,12 +569,12 @@ if (count($res) <= 0) {
     <div align="right" style = "padding-right:0.5%;">
         <?php if ($editar) { ?>
             <span class="text-center" >
-                <a class="btn btn-success" onclick="javascript: agregarOtrosInventario('<?= $vocab["symbol_delete"] ?>','<?= $prefijo ?>','#<?=$tablaID?>','<?= $vocab["Menu_Datos_sin_guardar"] ?>');"><i class=" fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_fila"] ?>  </a>
+                <a class="btn btn-success" onclick="javascript: agregarOtrosInventario('<?= $vocab["symbol_delete"] ?>', '<?= $prefijo ?>', '#<?= $tablaID ?>', '<?= $vocab["Menu_Datos_sin_guardar"] ?>');"><i class=" fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_fila"] ?>  </a>
             </span>
         <?php } ?>
     </div>
     <div   class="dataTables_wrapper dt-bootstrap" style = "overflow-x:auto;">
-        <table  style = "width: 99%;" id="<?=$tablaID?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
+        <table  style = "width: 99%;" id="<?= $tablaID ?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
             <thead style="background-color: lightblue;">
                 <tr>
                     <th  width="5%"><?= $vocab["otros_recursos_tipo"] ?></th>
@@ -567,9 +583,9 @@ if (count($res) <= 0) {
                     <th  width="5%"><?= $vocab["otros_recursos_contacto"] ?></th>   
                     <th  width="5%"><?= $vocab["otros_recursos_ubicacion"] ?></th> 
                     <th  width="5%"><?= $vocab["otros_recursos_observaciones"] ?></th> 
-                    <?php if ($editar) { ?>
-                        <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
-                    <?php } ?>
+
+                    <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
+
 
                 </tr>
             </thead>
@@ -578,21 +594,23 @@ if (count($res) <= 0) {
                 if (count($res) > 0) {
                     for ($i = 0; $i < count($res); $i++) {
                         ?>
-                        <tr id="<?= $prefijo.$i ?>">
+                        <tr id="<?= $prefijo . $i ?>">
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
                             <td> <input  type="number"  <?= (!$editar) ? "disabled" : ""; ?>  min="0" class="form-control requerido  cambios" id="<?= $prefijo ?>cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
-                             <td><textarea rows="1"   type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
+                            <td><textarea rows="1"   type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control requerido cambios" id="<?= $prefijo ?>contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>                            
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
-                             <td><textarea rows="1"  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
+                            <td><textarea rows="1"  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
 
-                            <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
-                                <td>              
+
+                            <td> 
+                                <?php if ($editar && check_permiso($mod5, $act5, $user_rol)) { ?>
                                     <a class="puntero cambios"  onClick="javascript:eliminarFila(this);">                                 
                                         <div class="text-center"><i class="fa fa-close  text-danger " title="<?= $vocab["symbol_delete"] ?>"></i></div>                                       
-                                    </a>                             
-                                </td>
-                            <?php } ?>
+                                    </a>
+                                <?php } ?>
+                            </td>
+
                         </tr>   
                         <?php
                     }
@@ -604,16 +622,16 @@ if (count($res) <= 0) {
     <div class="text-center">
         <?php if ($editar) { ?>
             <span class="text-center">
-                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0,'<?= $prefijo ?>','<?=$categoria?>','<?=$tablaID?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_datos"] ?></a>
+                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0, '<?= $prefijo ?>', '<?= $categoria ?>', '<?= $tablaID ?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_datos"] ?></a>
             </span>         
         <?php } ?>
     </div>
 </div>
 <!------------------------------------   EQUIPAMIENTO DE PRIMERA RESPUESTA----------------------------------- ------------------- ----------->
 <?php
-$categoria='EquipoPrimeraRespuesta';
-$prefijo='EPR-';
-$tablaID="lista_EquipoPrimeraRespuesta";
+$categoria = 'EquipoPrimeraRespuesta';
+$prefijo = 'EPR-';
+$tablaID = "lista_EquipoPrimeraRespuesta";
 $sql = "SELECT  `cantidad`, `tipo`, `caracteristicas`, `contacto`,"
         . " `ubicacion`,`categoria`,`observaciones` FROM `InventarioOtros` WHERE `FKidZonaTrabajo`=$idPlanEmergencia and `categoria`='$categoria' ";
 $res = seleccion($sql);
@@ -628,12 +646,12 @@ if (count($res) <= 0) {
     <div align="right" style = "padding-right:0.5%;">
         <?php if ($editar) { ?>
             <span class="text-center" >
-                <a class="btn btn-success" onclick="javascript: agregarOtrosInventario('<?= $vocab["symbol_delete"] ?>','<?= $prefijo ?>','#<?=$tablaID?>','<?= $vocab["Menu_Datos_sin_guardar"] ?>');"><i class=" fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_fila"] ?>  </a>
+                <a class="btn btn-success" onclick="javascript: agregarOtrosInventario('<?= $vocab["symbol_delete"] ?>', '<?= $prefijo ?>', '#<?= $tablaID ?>', '<?= $vocab["Menu_Datos_sin_guardar"] ?>');"><i class=" fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_fila"] ?>  </a>
             </span>
         <?php } ?>
     </div>
     <div   class="dataTables_wrapper dt-bootstrap" style = "overflow-x:auto;">
-        <table  style = "width: 99%;" id="<?=$tablaID?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
+        <table  style = "width: 99%;" id="<?= $tablaID ?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
             <thead style="background-color: lightblue;">
                 <tr>
                     <th  width="5%"><?= $vocab["otros_recursos_tipo"] ?></th>
@@ -642,9 +660,9 @@ if (count($res) <= 0) {
                     <th  width="5%"><?= $vocab["otros_recursos_contacto"] ?></th>   
                     <th  width="5%"><?= $vocab["otros_recursos_ubicacion"] ?></th> 
                     <th  width="5%"><?= $vocab["otros_recursos_observaciones"] ?></th> 
-                    <?php if ($editar) { ?>
-                        <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
-                    <?php } ?>
+
+                    <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
+
 
                 </tr>
             </thead>
@@ -653,21 +671,23 @@ if (count($res) <= 0) {
                 if (count($res) > 0) {
                     for ($i = 0; $i < count($res); $i++) {
                         ?>
-                        <tr id="<?= $prefijo.$i ?>">
+                        <tr id="<?= $prefijo . $i ?>">
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
                             <td> <input  type="number"  <?= (!$editar) ? "disabled" : ""; ?>  min="0" class="form-control requerido  cambios" id="<?= $prefijo ?>cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
-                             <td><textarea rows="1"   type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
+                            <td><textarea rows="1"   type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control requerido cambios" id="<?= $prefijo ?>contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>                            
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
-                             <td><textarea rows="1"  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
+                            <td><textarea rows="1"  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
 
-                            <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
-                                <td>              
+
+                            <td>
+                                <?php if ($editar && check_permiso($mod5, $act5, $user_rol)) { ?>
                                     <a class="puntero cambios"  onClick="javascript:eliminarFila(this);">                                 
                                         <div class="text-center"><i class="fa fa-close  text-danger " title="<?= $vocab["symbol_delete"] ?>"></i></div>                                       
-                                    </a>                             
-                                </td>
-                            <?php } ?>
+                                    </a>
+                                <?php } ?>
+                            </td>
+
                         </tr>   
                         <?php
                     }
@@ -679,16 +699,16 @@ if (count($res) <= 0) {
     <div class="text-center">
         <?php if ($editar) { ?>
             <span class="text-center">
-                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0,'<?= $prefijo ?>','<?=$categoria?>','<?=$tablaID?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_datos"] ?></a>
+                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0, '<?= $prefijo ?>', '<?= $categoria ?>', '<?= $tablaID ?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_datos"] ?></a>
             </span>         
         <?php } ?>
     </div>
 </div>
 <!------------------------------------   SEÑALIZACIÓN ----------------------------------- ------------------- ----------->
 <?php
-$categoria='señalizacion';
-$prefijo='S-';
-$tablaID="lista_señalizacion";
+$categoria = 'señalizacion';
+$prefijo = 'S-';
+$tablaID = "lista_señalizacion";
 $sql = "SELECT  `cantidad`, `tipo`, `caracteristicas`, `contacto`,"
         . " `ubicacion`,`categoria`,`observaciones` FROM `InventarioOtros` WHERE `FKidZonaTrabajo`=$idPlanEmergencia and `categoria`='$categoria' ";
 $res = seleccion($sql);
@@ -703,12 +723,12 @@ if (count($res) <= 0) {
     <div align="right" style = "padding-right:0.5%;">
         <?php if ($editar) { ?>
             <span class="text-center" >
-                <a class="btn btn-success" onclick="javascript: agregarOtrosInventario('<?= $vocab["symbol_delete"] ?>','<?= $prefijo ?>','#<?=$tablaID?>','<?= $vocab["Menu_Datos_sin_guardar"] ?>');"><i class=" fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_fila"] ?>  </a>
+                <a class="btn btn-success" onclick="javascript: agregarOtrosInventario('<?= $vocab["symbol_delete"] ?>', '<?= $prefijo ?>', '#<?= $tablaID ?>', '<?= $vocab["Menu_Datos_sin_guardar"] ?>');"><i class=" fa fa-plus text-success"></i> <?= $vocab["menu_add"] ?> <?= $vocab["inventario_fila"] ?>  </a>
             </span>
         <?php } ?>
     </div>
     <div   class="dataTables_wrapper dt-bootstrap" style = "overflow-x:auto;">
-        <table  style = "width: 99%;" id="<?=$tablaID?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
+        <table  style = "width: 99%;" id="<?= $tablaID ?>" cellpadding="0" cellspacing="0" border="0" class=" table table-striped table-bordered dataTable text-center formulario" >
             <thead style="background-color: lightblue;">
                 <tr>
                     <th  width="5%"><?= $vocab["otros_recursos_tipo"] ?></th>
@@ -717,9 +737,9 @@ if (count($res) <= 0) {
                     <th  width="5%"><?= $vocab["otros_recursos_contacto"] ?></th>   
                     <th  width="5%"><?= $vocab["otros_recursos_ubicacion"] ?></th> 
                     <th  width="5%"><?= $vocab["otros_recursos_observaciones"] ?></th> 
-                    <?php if ($editar) { ?>
-                        <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
-                    <?php } ?>
+
+                    <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
+
 
                 </tr>
             </thead>
@@ -728,21 +748,23 @@ if (count($res) <= 0) {
                 if (count($res) > 0) {
                     for ($i = 0; $i < count($res); $i++) {
                         ?>
-                        <tr id="<?= $prefijo.$i ?>">
+                        <tr id="<?= $prefijo . $i ?>">
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>tipo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tipo'] : ""; ?>" ></td>
                             <td> <input  type="number"  <?= (!$editar) ? "disabled" : ""; ?>  min="0" class="form-control requerido  cambios" id="<?= $prefijo ?>cantidad<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['cantidad'] : "0"; ?>" ></td>
-                             <td><textarea rows="1"   type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
+                            <td><textarea rows="1"   type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>caracteristicas<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['caracteristicas'] : ""; ?></textarea></td>
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>   class="form-control requerido cambios" id="<?= $prefijo ?>contacto<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['contacto'] : ""; ?>" ></td>                            
                             <td> <input  type="text"  <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>ubicacion<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['ubicacion'] : ""; ?>" ></td>
-                             <td><textarea rows="1"  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
+                            <td><textarea rows="1"  type="text" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="<?= $prefijo ?>observaciones<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['observaciones'] : ""; ?></textarea></td>
 
-                            <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
-                                <td>              
+
+                            <td> 
+                                <?php if ($editar && check_permiso($mod5, $act5, $user_rol)) { ?>
                                     <a class="puntero cambios"  onClick="javascript:eliminarFila(this);">                                 
                                         <div class="text-center"><i class="fa fa-close  text-danger " title="<?= $vocab["symbol_delete"] ?>"></i></div>                                       
-                                    </a>                             
-                                </td>
-                            <?php } ?>
+                                    </a>
+                                <?php } ?>
+                            </td>
+
                         </tr>   
                         <?php
                     }
@@ -754,10 +776,10 @@ if (count($res) <= 0) {
     <div class="text-center">
         <?php if ($editar) { ?>
             <span class="text-center">
-                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0,'<?= $prefijo ?>','<?=$categoria?>','<?=$tablaID?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_datos"] ?></a>
+                <a class="btn btn-warning"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 0, '<?= $prefijo ?>', '<?= $categoria ?>', '<?= $tablaID ?>')" name="submit" ><i class="fa fa-save fa-inverse"></i> <?= $vocab["symbol_save"] ?> <?= $vocab["datos_generares_datos"] ?></a>
             </span>
             <span class="text-center">
-                <a class="btn btn-success"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 1,'<?= $prefijo ?>','<?=$categoria?>','<?=$tablaID?>')" name="submit"><i class="fa fa-rotate-right"></i> <?= $vocab["symbol_save"] . " " . $vocab["datos_generares_siguente"] ?></a>
+                <a class="btn btn-success"  onclick="javascript:guardarOtrosInventario('<?= $idPlanEmergencia ?>', 1, '<?= $prefijo ?>', '<?= $categoria ?>', '<?= $tablaID ?>')" name="submit"><i class="fa fa-rotate-right"></i> <?= $vocab["symbol_save"] . " " . $vocab["datos_generares_siguente"] ?></a>
             </span>
         <?php } ?>
     </div>

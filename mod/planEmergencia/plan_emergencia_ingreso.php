@@ -8,19 +8,28 @@ $vocab = $mySessionController->getVar("vocab");
 $user_rol = $mySessionController->getVar("rol");
 include("plan_emergencia_menu.php");
 
-/*  ********************************  select de los datos del formulario ingreso cuerpos de socorro**********/
+/* * *******************************  select de los datos del formulario ingreso cuerpos de socorro********* */
 $sql = "SELECT  `tipo`, `ubicacion`, `Distancia`, `Tiempo`"
         . " FROM `CuerposScorro` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
-$res = seleccion($sql);
+$resBase = seleccion($sql);
 
-if (count($res) <= 0) {
+
     $res = array($vocab["ingreso_cruzRoja"], $vocab["ingreso_Bomberos"], $vocab["ingreso_transito"]);
-}
+
+
+ for ($i = 0; $i < count($resBase); $i++) { 
+        $ubicacion=array_search($resBase[$i]['tipo'], $res);
+        if($ubicacion!==false){
+           $res[$ubicacion]=$resBase[$i];
+         }else{
+          $res[]=$resBase[$i];  
+        }       
+    }
 ?>
 <div class="well well-sm">
     <h2><?= $vocab["ingreso_titulo"] ?></h2>
     <p><?= $vocab["ingreso_titulo_desc"] ?></p>
-    
+
 
     <div align="right" style = "padding-right:0.5%;">
         <?php if ($editar) { ?>
@@ -37,9 +46,9 @@ if (count($res) <= 0) {
                     <th  width="5%"><?= $vocab["ingreso_ubicación"] ?></th>
                     <th  width="5%"><?= $vocab["ingreso_recorrido"] ?></th>                                
                     <th  width="5%"><?= $vocab["ingreso_tiempoRespuesta"] ?></th>                    
-                    <?php if ($editar) { ?>
+                  
                         <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
-                    <?php } ?>
+                   
 
                 </tr>
             </thead>
@@ -71,14 +80,16 @@ if (count($res) <= 0) {
                             <td> <input  type="number"  min="0" <?= (!$editar) ? "disabled" : ""; ?>   class="form-control requerido cambios" id="Distancia<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['Distancia'] : "0"; ?>" ></td>                            
                             <td> <input  type="number"  min="0" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="Tiempo<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['Tiempo'] : "0"; ?>" ></td>
 
-                            <?php if (check_permiso($mod5, $act5, $user_rol)) {
-                                ?>
-                                <td>              
+                            <td>  
+
+                                <?php if ($editar && check_permiso($mod5, $act5, $user_rol)) {
+                                    ?>
                                     <a class="puntero cambios" <?= $style ?> <?= $onclick ?> >                                 
                                         <div class="text-center"><i class="fa fa-close  text-danger " title="<?= $vocab["symbol_delete"] ?>"></i></div>                                       
-                                    </a>                             
-                                </td>
-                            <?php } ?>
+                                    </a>
+                                <?php } ?>
+                            </td>
+
                         </tr>   
                         <?php
                     }
@@ -97,7 +108,7 @@ if (count($res) <= 0) {
     </div>
 </div>
 
- <!--********** Tabla increso cuerpos de socorro**************************************-->
+<!--********** Tabla increso cuerpos de socorro**************************************-->
 <?php
 $sql = "SELECT `dimensionAreaAcceso`, `radioGiro`, `caseta`, `plumas`, `anchoLibre` FROM `IngresoCuerpoSocorro` WHERE `FKidZonaTrabajo`=" . $idPlanEmergencia;
 $res = seleccion($sql);
@@ -144,7 +155,7 @@ $res = seleccion($sql);
         <h4><?= $vocab["ingreso_protocolo"] ?></h4>
 
 
- <!--/*  ********************************  Guarda datos del formulario descripcion del ingreso **********/-->
+        <!--/*  ********************************  Guarda datos del formulario descripcion del ingreso **********/-->
         <?php if ($editar) { ?>
             <div class="text-center">
                 <?php if ($editar) { ?>

@@ -44,9 +44,9 @@ if (count($res) <= 0) {
                     <th  width="5%"><?= $vocab["rutas_evacuacion_ruta2"] ?></th>   
                     <th  width="5%"><?= $vocab["rutas_evacuacion_distancia2"] ?></th> 
                     <th  width="5%"><?= $vocab["rutas_evacuacion_tiempo2"] ?></th> 
-                    <?php if ($editar) { ?>
+                    
                         <th width="2%"><div class="text-center"><i class="fa fa-close fa-2x text-danger puntero" title="<?= $vocab["symbol_delete"] ?>"></i></div></th>
-                    <?php } ?>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -74,13 +74,15 @@ if (count($res) <= 0) {
                             </td>  
                             <td> <input  type="number"  min="0" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="distanciaS<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['distancia2'] : 0; ?>" ></td>
                             <td> <input  type="number"  min="0" <?= (!$editar) ? "disabled" : ""; ?>  class="form-control requerido cambios" id="tiempoS<?= $i ?>" value="<?= (is_array($res[$i])) ? $res[$i]['tiempo2'] : 0; ?>" ></td>
-                            <?php if (check_permiso($mod5, $act5, $user_rol)) { ?>
-                                <td>              
+                            
+                                <td>  
+                                    <?php if ($editar && check_permiso($mod5, $act5, $user_rol)) { ?>
                                     <a class="puntero cambios"  onClick="javascript:eliminarFilaRutasEvacuacion(this);">                                 
                                         <div class="text-center"><i class="fa fa-close  text-danger " title="<?= $vocab["symbol_delete"] ?>"></i></div>                                       
-                                    </a>                             
+                                    </a> 
+                                    <?php } ?>
                                 </td>
-                            <?php } ?>
+                            
                         </tr>   
                         <?php
                     }
