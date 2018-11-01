@@ -88,21 +88,21 @@ if ((isset($_GET['find_key']))) {
                 <p class="help-block"><small><?= $vocab["desc_zona_trabajo_isActivo"] ?></small></p> 
             </div>   
             <div class="form-group"> 
-                <div><label  for=""><?= $vocab["symbol_desc"] ?> </label></div> 
+                <div><label  for=""><?= $vocab["zona_trabajo_usuario"] ?> </label></div> 
                 <select  id = "select_usuario">
                     <?php for ($i = 0; $i < count($comb); $i++) { ?>
                         <option value='<?= $comb[$i]['id'] ?>' selected><?= $comb[$i]['nombre'] ?></option>
                     <?php } ?>
                 </select>
                 <span class="text-center"><a class="btn btn-success" onclick="asociar_usuario_zona_trabajo();"><i class="fa fa-save fa-inverse"></i>Add</a></span>
-                <p class="help-block"><small><?= $vocab["zona_trabajo_Descripcion"] ?></small></p> 
+                <p class="help-block"><small><?= $vocab["zona_trabajo_usuario_desc"] ?></small></p> 
             </div> 
             <div class="form-group"> 
-                <div><label  for=""><?= $vocab["symbol_desc"] ?> </label></div> 
+                <div><label  for=""><?= $vocab["zona_trabajo_usuario_lista"] ?> </label></div> 
                 <table  id = "tabla_usuario_zona" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable">
                     <thead>
-                    <th><?= $vocab["symbol_desc"] ?> </th>
-                    <th><?= $vocab["symbol_desc"] ?> </th>
+                    <th><?= $vocab["zona_trabajo_usuario_cedula"] ?> </th>
+                    <th><?= $vocab["zona_trabajo_usuario_nombre"] ?> </th>
                     <th><i class="fa fa-close fa-2x text-danger" title="Eliminar"></i> </th>
                     </thead>
                     <tbody>
