@@ -12,12 +12,20 @@ include("plan_emergencia_menu.php");
 /************************* select datos tipo de poblacion de actividades ****************** */
     $sql = "SELECT  `tipoPoblacion`, `descripcion`, `total`, `representacionDe` FROM 
     `TipoPoblacion` WHERE  `FKidZonaTrabajo`=" . $idPlanEmergencia;
-    $res = seleccion($sql);
+    $resBase = seleccion($sql);
+    
 
-if (count($res) <= 0) {
-    $res = array($vocab["actividades_administrativo"], $vocab["actividades_académico"],
+    $res= array($vocab["actividades_administrativo"], $vocab["actividades_académico"],
         $vocab["actividades_Estudiantes"], $vocab["actividades_Visitantes"]);
-}
+    
+    for ($i = 0; $i < count($resBase); $i++) { 
+        $ubicacion=array_search($resBase[$i]['tipoPoblacion'], $res);
+        if($ubicacion!==false){
+           $res[$ubicacion]=$resBase[$i];
+        }        
+    }
+    
+
 ?>
 
 
@@ -40,8 +48,9 @@ if (count($res) <= 0) {
         </thead>
         <tbody>
             <?php
+            $count=0;
             if (count($res) > 0) {
-                for ($i = 0; $i < count($res); $i++) {
+                for ($i = 0; $i < count($res); $i++) {                    
                     ?>
                     <tr>
                         <td id="tipo<?= $i ?>"><?= (is_array($res[$i])) ? $res[$i]['tipoPoblacion'] : "$res[$i]"; ?></td>
